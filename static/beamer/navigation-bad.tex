@@ -1,0 +1,28 @@
+% Anti-pattern: the default Beamer title slide still shows the navigation
+% symbols at the bottom right. Here we draw a TikZ box around them (baked into
+% the image) to point them out.
+\documentclass{beamer}
+\usepackage{tikz}
+
+\definecolor{hl}{HTML}{E64173}
+
+\title{A Typical Beamer Talk}
+\subtitle{Default Theme, Default Everything}
+\author{Your Name}
+\institute{Your University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+  % Box the bottom-right navigation symbols. Coordinates are measured from the
+  % slide's south-east corner (default frame is 12.8cm x 9.6cm).
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[hl, line width=1.2pt, rounded corners=3pt]
+      ([shift={(-4.88cm,0.00cm)}]current page.south east) rectangle
+      ([shift={(-0.06cm,0.58cm)}]current page.south east);
+  \end{tikzpicture}
+\end{frame}
+
+\end{document}

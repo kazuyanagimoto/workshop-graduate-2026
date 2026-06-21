@@ -1,0 +1,11 @@
+% Fix: a 16:9 frame (aspectratio=169) is wide enough that the same sentence
+% fits on a single line. Compare with aspect-bad.tex (4:3).
+\documentclass[aspectratio=169]{beamer}
+
+\begin{document}
+
+\begin{frame}{Aspect Ratio}
+  We estimate the model $y_{it} = \alpha_i + \beta x_{it} + \gamma z_{it} + \varepsilon_{it}$ by ordinary least squares.
+\end{frame}
+
+\end{document}

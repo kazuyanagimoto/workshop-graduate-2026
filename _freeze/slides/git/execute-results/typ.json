@@ -1,0 +1,17 @@
+{
+  "hash": "dc3588e53cb002808fc62624b1354324",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: A title\nsubtitle: グループX\nformat:\n  touying-typst:\n    theme: clean\nauthor:\n  - name: Member 1\n  - name: Member 2\n  - name: Member 3\n  - name: Member 4\n  - name: Member 5\n  - name: Member 6\ndate: today\ndate-format: \"YYYY年M月D日\"\nbrand:\n  typography:\n    base: Noto Sans JP\n    headings: Noto Sans JP\nexecute:\n  echo: false\n  warning: false\n  error: false\nfreeze: true\nknitr:\n  opts_chunk:\n    fig.align: center\n    fig.retina: 3\n    fig.width: 6\n    fig.height: 3.708\n    out.width: 80%\n---",
+    "supporting": [
+      "git_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

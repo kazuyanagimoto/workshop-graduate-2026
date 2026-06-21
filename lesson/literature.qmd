@@ -1,0 +1,11 @@
+---
+title: 文献管理
+---
+
+## Zoteroによる文献管理
+
+### WebDAV
+
+## AIと文献管理
+
+### Zotero MCP Server

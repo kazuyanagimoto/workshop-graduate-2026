@@ -1,0 +1,52 @@
+project:
+  type: website
+  render:
+    # Website pages only. Files under static/ are inputs to the targets
+    # pipeline (CeTZ .typ, Beamer .qmd), not site pages, so exclude them.
+    - "*.qmd"
+    - "**/*.qmd"
+    - "!static/**"
+    - "!refs/**"
+
+website:
+  title: 大学院生のためのワークショップ
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - text: "Lessons"
+        file: lesson/index.qmd
+  sidebar:
+    - title: "Classes and readings"
+      contents:
+        - section: "Overview"
+          contents:
+            - lesson/index.qmd
+    - section: "Foundations"
+      contents:
+        - lesson/git.qmd
+        - lesson/literature.qmd
+        - lesson/visualization.qmd
+        - lesson/slides.qmd
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+author:
+  - name: Kazuharu Yanagimoto
+    email: yanagimoto@econ.kobe-u.ac.jp
+    orcid: 0009-0007-1967-8304
+    affiliations:
+    - name: Kobe University
+
+lang: ja
+
+freeze: auto

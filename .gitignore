@@ -1,0 +1,9 @@
+/.quarto/
+**/*.quarto_ipynb
+_site/
+_targets/
+
+# Other
+refs/
+.DS_Store
+*.pdf

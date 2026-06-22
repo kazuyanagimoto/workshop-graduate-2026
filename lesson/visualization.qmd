@@ -2,3 +2,503 @@
 title: 可視化の技術
 ---
 
+この章では, データ可視化に関するいくつかのTipsを紹介します. しかし, これらのテクニックは次の一つの原則に基づいているに過ぎません.
+
+::: {.callout-tip}
+
+## 可視化の原則
+
+図は主張をもち, その主張を最短時間で伝えられるようにデザインされなければならない.
+
+:::
+
+これから紹介するテクニックは図の見た目を改善するためのものですが, それらは単に最短時間で図の主張を伝えるために手段であると言うことを忘れないでください.
+
+```{r}
+#| label: setup
+library(dplyr)
+library(ggplot2)
+```
+
+
+## 最少の要素
+
+最短時間で図を伝えるためには, 過剰な情報を削ぎ落とすことが重要です. これを表した @tufte2001 の有名な原則があります.
+
+::: {.callout-tip}
+
+## データインク比の原則 [@tufte2001]
+
+図においては次のデータインク比を最大化しなければならない:
+
+$$
+\text{データインク比} := \frac{\text{データインク}}{\text{図に使用されたインクの総量}}.
+$$
+
+:::
+
+ここでいうデータインクとは, 図の中でデータを表すために使われているインクの量のことであり, 基本的には図を構成するために最低限必要な要素のことを指します. ここから, 次のような規則も見出すことができます:
+
+::: {.callout-tip}
+
+## データインク比の原則の系
+
+削除しても図の主張を損なわない要素は削除しなければならない.
+
+:::
+
+この原則を, R に標準で付属する `penguins` データセットで確かめてみましょう.
+ここではペンギンの種 (`species`) ごとに, 性別 (`sex`) 別の個体数を数えた棒グラフを描きます.
+まずは何の工夫もしていない, デフォルトのグラフです.
+
+```{r}
+#| label: plot-penguins-bar-default
+penguins_bar <- penguins |>
+    filter(!is.na(sex))
+
+penguins_bar |>
+    ggplot(aes(x = species, fill = sex)) +
+    geom_bar(position = "dodge")
+```
+
+このグラフには
+
+- グレーの背景
+- 縦横のグリッド線
+- 自明な軸ラベル
+
+など, データを表していないインクが多く含まれています. データインク比の原則に従って, これらの要素を削ぎ落とします.
+
+```{r}
+#| label: plot-penguins-bar-minimal
+penguins_bar |>
+    ggplot(aes(x = species, fill = sex)) +
+    geom_bar(position = "dodge") +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "Number of Penguins by Species and Sex"
+    ) +
+    theme_minimal() +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank()
+    )
+```
+
+さらに可読性を高めるために, 棒を横向きにして凡例をパネル内の空白に移します. 横向きにするとカテゴリ名が水平に並ぶので, ラベルが長くなっても読みやすくなります. また, 凡例をパネル内の空白に移すことで, グラフ全体のバランスが良くなります.
+
+```{r}
+#| label: plot-penguins-bar-flip
+penguins_bar |>
+    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+    geom_bar(position = "dodge") +
+    coord_flip() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "Number of Penguins by Species and Sex"
+    ) +
+    theme_minimal() +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.9, 0.15),
+        plot.title.position = "plot"
+    ) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
+
+なお, 横向きに変えたことに伴って見づらくなってしまった点があるので
+
+- `forcats::fct_rev()` 関数を使ってカテゴリの順番を逆にしています
+- `guides(fill = guide_legend(reverse = TRUE))` を使って, 凡例の順番も逆にしています
+
+## 色の選び方
+
+色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します.
+
+### R Color Brewer's Palettes
+
+現代的なカラーパレット集として有名な [Color Brewer](https://colorbrewer2.org/) のパッケージとして, RColorBrewerが提供されています.
+
+![](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png)
+
+```{r}
+#| label: plot-color-brewer
+penguins_bar |>
+    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+    geom_bar(position = "dodge") +
+    coord_flip() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "Number of Penguins by Species and Sex"
+    ) +
+    scale_fill_brewer(palette = "Set2") +
+    theme_minimal() +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.9, 0.15),
+        plot.title.position = "plot"
+    ) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
+
+### カラー・セーフティ: Okabe-Ito パレット
+
+色選択の一つの方針として, 色覚異常の人でも見分けやすい色を使う, という考え方があります. カラー・セーフティなパレットとして提案された中でも有名なカラーパレットがOkabe-Itoカラーパレットです.
+
+```{r}
+#| label: plot-okabe-ito
+penguins_bar |>
+    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+    geom_bar(position = "dodge") +
+    coord_flip() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "Number of Penguins by Species and Sex"
+    ) +
+    see::scale_fill_okabeito() +
+    theme_minimal() +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.9, 0.15),
+        plot.title.position = "plot"
+    ) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
+
+### MetBrewer パレット
+
+[MetBrewer](https://github.com/BlakeRMills/MetBrewer) は, アメリカのメトロポリタン美術館のコレクションからインスピレーションを得たカラーパレットを提供するパッケージです.
+
+```{r}
+#| label: install-metbrewer
+# install.packages("MetBrewer")
+library(MetBrewer)
+```
+
+ここでは [Kandinsky](https://www.metmuseum.org/art/collection/search/369093?sortBy=Relevance&ft=Vasily+Kandinsky&offset=0&rpp=40&pos=12) のパレットを使ってみましょう.
+
+![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true)
+
+```{r}
+#| label: plot-metbrewer
+penguins_bar |>
+    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+    geom_bar(position = "dodge") +
+    coord_flip() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "Number of Penguins by Species and Sex"
+    ) +
+    scale_fill_manual(values = met.brewer("Kandinsky")) +
+    theme_minimal() +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.9, 0.15),
+        plot.title.position = "plot"
+    ) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
+
+## フォント
+
+### フォントの種類
+
+フォントには大きく分けて, セリフ体 (serif) とサンセリフ体 (sans-serif) の二種類があります. セリフ体は文字の端に装飾があるフォントで, サンセリフ体は装飾のないフォントです. 下の左の図で赤く示された, 文字の端の突起や飾りが「セリフ」です.
+
+::: {layout-ncol=2}
+![セリフ体 (serif)](https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg)
+
+![サンセリフ体 (sans-serif)](https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg)
+:::
+
+日本語でも明朝体がセリフ体でゴシック体がサンセリフ体に相当します. 英語では, セリフ体は Times New Roman や Garamond などが有名で, サンセリフ体は Arial や Helvetica などが有名です.
+
+### フォントの選び方
+
+基本的に図表はサンセリフ体を使うことが推奨されます. これは, サンセリフ体の方が小さいサイズでも読みやすいからです. `ggplot2` では, デフォルトでサンセリフ体 (多くの場合のシステムに入っている Helvetica か Arial) が使われています. 
+
+ただし, 日本語でラベルを追加しようと思うと, Helvetica や Arial には日本語が含まれていないため, 日本語が豆腐化 (□) してしまいます. 日本語を表示するためには, 日本語が含まれているフォントを指定する必要があります. 例えば, Windows では Meiryo, Mac では Hiragino Kaku Gothic ProN などが日本語を含むサンセリフ体のフォントとしてよく使われます.
+
+### 日本語フォントの解決法
+
+一つの問題として, PC間でコードを共有した場合に, フォントが入っていないと言う問題が起きます. 特にMacのヒラギノ系は有料フォントであるため, Macユーザ以外が持っていることは想定しないほうが良いです. これらの問題をシンプルに解決するのが, `showtext` パッケージです. `showtext` を使うことでフォント周りの問題をコード上で完結させることができます.
+
+```{r}
+#| label: install-showtext
+library(showtext)
+
+font_add_google("Noto Sans JP")
+showtext_auto()
+```
+
+```{r}
+#| label: plot-showtext
+penguins_bar |>
+    mutate(
+        species = recode(
+            species,
+            "Adelie" = "アデリー",
+            "Chinstrap" = "ヒゲ",
+            "Gentoo" = "ジェンツー"
+        ),
+        sex = recode(
+            sex,
+            "male" = "オス",
+            "female" = "メス"
+        )
+    ) |>
+    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+    geom_bar(position = "dodge") +
+    coord_flip() +
+    labs(
+        x = NULL,
+        y = NULL,
+        fill = NULL,
+        title = "ペンギンの種と性別ごとの個体数"
+    ) +
+    scale_fill_manual(values = met.brewer("Kandinsky")) +
+    theme_minimal(base_family = "Noto Sans JP") +
+    theme(
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.9, 0.15),
+        plot.title.position = "plot"
+    ) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
+
+## 画像形式
+
+レポートやスライドに図を載せる場合, 画像形式の選択が見栄えに影響を与えます. ここでは画像形式について最低限知っておくべきことを紹介します.
+
+### ラスターとベクター
+
+画像形式は, 大きく分けてラスター (raster) 形式とベクター (vector) 形式の2種類があります.
+ラスター形式はビットマップ (bitmap) とも呼ばれ, 画像を色のついたピクセル (画素) の格子として記録します.
+一方, ベクター形式は画像を点・線・曲線・塗りといった図形の数式として記録します.
+この記録方法の違いが, 拡大したときの見え方とファイルサイズを大きく左右します.
+
+同じ「1992」という文字を, ビットマップ (ラスター) とベクターのそれぞれで表してみましょう.
+左はピクセルの格子, 右は輪郭を点とパスで定義したものです.
+
+```{r}
+#| label: fig-bitmap-vector
+#| fig-cap: "The number 1992 as a bitmap (pixels) versus a vector (points and paths)."
+#| layout-ncol: 2
+#| fig-subcap:
+#|   - "Bitmap (raster)"
+#|   - "Vector"
+#| fig-width: 5
+#| fig-height: 2.2
+library(systemfonts)
+library(textshaping)
+library(magick)
+
+txt <- "1992"
+sz <- 300
+shape <- shape_text(txt, family = "sans", weight = "bold", size = sz)$shape
+
+# 各グリフの輪郭 (アウトライン) を取り出し, ペン位置 x_offset だけ右にずらす.
+# tolerance を大きくするほど曲線を粗い直線で近似する.
+outline <- function(tolerance) {
+    parts <- lapply(seq_len(nrow(shape)), function(i) {
+        o <- glyph_outline(
+            shape$index[i],
+            path = shape$font_path[i], index = shape$font_index[i],
+            size = sz, tolerance = tolerance
+        )
+        o$x <- o$x + shape$x_offset[i]
+        o$gid <- i
+        o
+    })
+    out <- dplyr::bind_rows(parts)
+    out$sub <- interaction(out$gid, out$contour)
+    out
+}
+
+fill_df <- outline(0.2) # 細かく分割: 滑らかな塗り
+node_df <- outline(25) # 粗く分割: アンカーポイントとして表示
+
+# 塗りつぶした字形 (穴は subgroup で抜く)
+glyph_fill <- ggplot(fill_df, aes(x, y, group = gid, subgroup = sub)) +
+    geom_polygon(fill = "black") +
+    coord_equal() +
+    theme_void()
+
+# ビットマップ: 同じ字形を低解像度に縮小し, 補間なしで引き伸ばす
+tmp <- tempfile(fileext = ".png")
+ggsave(tmp, glyph_fill, width = 5, height = 2.2, dpi = 200, bg = "white")
+bitmap <- image_read(tmp) |>
+    image_trim() |>
+    image_background("white", flatten = TRUE) |>
+    image_resize("60x", filter = "point") |>
+    image_threshold("white", "55%") |>
+    image_resize("720x", filter = "point")
+
+# ベクター: 字形を塗り, 輪郭のアンカーポイントを重ねる
+vector_plot <- glyph_fill +
+    geom_path(
+        data = node_df, aes(x, y, group = sub),
+        color = "#3b6cff", linewidth = 0.3, inherit.aes = FALSE
+    ) +
+    geom_point(
+        data = node_df, aes(x, y),
+        shape = 22, fill = "white", color = "#3b6cff",
+        size = 2.2, stroke = 0.8, inherit.aes = FALSE
+    )
+
+bitmap
+vector_plot
+```
+
+左のビットマップは, 拡大するとピクセルのギザギザ (ジャギー) が目立ちます.
+きれいに見せるにはピクセル数を増やすしかなく, その分ファイルサイズも大きくなります.
+一方, 右のベクターは輪郭を点 (アンカーポイント) とパスで定義しているので, どれだけ拡大しても滑らかなままで, ファイルサイズも解像度に依存しません.
+
+### JPEG は不可逆圧縮でノイズが出る
+
+写真は本質的にラスター形式です.
+そして, ラスター形式のファイル形式のうち, JPEG は非可逆圧縮 (lossy compression) を採用しています.
+ファイルサイズを大きく減らせる代わりに, 圧縮を強めると輪郭のまわりにノイズ (アーティファクト) が生じます.
+1枚の写真を `static/img/raster-photo.jpg` に置いておき, 高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
+
+```{r}
+#| label: load-photo
+photo <- image_read("../static/img/raster-photo.jpg")
+info <- image_info(photo)
+```
+
+```{r}
+#| label: fig-jpeg-artifacts
+#| fig-cap: "The same photo saved as high- and low-quality JPEG, magnified."
+#| layout-ncol: 2
+#| fig-subcap:
+#|   - "JPEG quality 90"
+#|   - "JPEG quality 5"
+crop_geom <- sprintf(
+    "%dx%d+%d+%d",
+    round(info$width * 0.25), round(info$height * 0.25),
+    round(info$width * 0.37), round(info$height * 0.37)
+)
+
+show_jpeg <- function(quality) {
+    tmp <- tempfile(fileext = ".jpg")
+    image_write(photo, tmp, format = "jpeg", quality = quality)
+    image_read(tmp) |>
+        image_crop(crop_geom) |>
+        image_resize("360x", filter = "point")
+}
+
+show_jpeg(90)
+show_jpeg(5)
+```
+
+低品質の JPEG では, 8x8 ピクセルのブロック状のムラや, 輪郭の周りのにじみがはっきり見えます.
+一方で, ファイルサイズは大きく変わります.
+同じ写真を PNG (可逆圧縮) と2種類の JPEG で保存し, サイズを比べてみましょう.
+
+```{r}
+#| label: tbl-image-size
+#| tbl-cap: "同じ写真を各形式で保存したときのファイルサイズ"
+library(tinytable)
+
+save_size_kb <- function(format, quality = NULL) {
+    tmp <- tempfile()
+    if (is.null(quality)) {
+        image_write(photo, tmp, format = format)
+    } else {
+        image_write(photo, tmp, format = format, quality = quality)
+    }
+    file.size(tmp) / 1024
+}
+
+tibble::tibble(
+    Format = c("PNG", "JPEG (quality 90)", "JPEG (quality 5)"),
+    `Size (KB)` = round(c(
+        save_size_kb("png"),
+        save_size_kb("jpeg", 90),
+        save_size_kb("jpeg", 5)
+    ))
+) |>
+    tt()
+```
+
+JPEG は, 写真のように色がなめらかに変化する画像にはとても効果的です.
+しかし, 輪郭のはっきりしたグラフや文字, ロゴでは, 線の周りに同じノイズが乗ってしまいます.
+そのため, グラフをラスター形式で保存するなら JPEG ではなく PNG を使い, 可能ならベクター形式を選びます.
+
+### ベクターは拡大しても劣化しない
+
+ベクター形式は図形を数式で記録するので, どれだけ拡大しても輪郭は滑らかなままで, ファイルサイズも解像度に依存しません.
+グラフは点・線・文字でできているので, ベクター形式と非常に相性が良いです.
+ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
+
+```{r}
+#| label: fig-vector-graph
+#| fig-cap: "A vector graphic stays sharp at any zoom level."
+#| fig-format: svg
+#| fig-width: 5
+#| fig-height: 3
+tibble::tibble(
+    x = seq(-4, 4, length.out = 200),
+    y = dnorm(x)
+) |>
+    ggplot(aes(x = x, y = y)) +
+    geom_area(fill = "#0072B2", alpha = 0.3) +
+    geom_line(color = "#0072B2", linewidth = 1) +
+    labs(x = "x", y = "Density") +
+    theme_minimal() +
+    theme(panel.grid.minor = element_blank())
+```
+
+この図は SVG (ベクター形式) で埋め込まれているので, ブラウザで拡大しても曲線も文字も滑らかなまま保たれます.
+
+### 画像形式の選び方
+
+知っておくべきベクター形式は SVG と PDF です.
+
+**SVG (Scalable Vector Graphics)** は Web 上で使われるベクター形式です.
+Web ブラウザでそのまま表示でき, 拡大しても画質が劣化しません.
+XML 形式のテキストなので, エディタやプログラムで後から編集できます.
+
+**PDF (Portable Document Format)** は, 印刷や論文の図でよく使われるベクター形式です.
+拡大しても劣化せず, LaTeX をはじめ多くのアプリケーションがそのまま扱えます.
+
+知っておくべきラスター形式は PNG と JPEG です.
+
+**PNG (Portable Network Graphics)** は, 可逆圧縮のラスター形式です.
+圧縮で画質が劣化せず, 透明な背景もサポートするので, ベクターが使えない場面でのグラフ出力に向いています.
+
+**JPEG (Joint Photographic Experts Group)** は, 非可逆圧縮のラスター形式です.
+写真のような複雑な画像を小さなファイルサイズで保存できますが, グラフや文字のような単純な画像には不向きです.
+
+これらを踏まえると, 図の用途ごとの選び方は次のようにまとめられます.
+
+| 用途 | 推奨形式 |
+|------|----------|
+| 統計グラフ (Web) | SVG |
+| 統計グラフ (印刷・論文) | PDF |
+| ベクターが使えない場面のグラフ | PNG |
+| 写真 | JPEG |
+
+統計グラフはほとんどの場合ベクター形式が適しています.
+ただし, データ点が非常に多い散布図など, ベクターだとファイルが重くなりすぎる場合は, 高解像度の PNG を使う方が実用的なこともあります.

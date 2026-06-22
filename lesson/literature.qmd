@@ -151,7 +151,3 @@ QuartoのYAMLヘッダで `bibliography` にBibTeXファイルのパスを指定
 
 
 ### WebDAV
-
-## AIと文献管理
-
-### Zotero MCP Server

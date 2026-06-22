@@ -8,3 +8,6 @@ _targets/
 refs/
 .DS_Store
 *.pdf
+
+# Downloaded datasets (produced by the targets pipeline)
+/data/

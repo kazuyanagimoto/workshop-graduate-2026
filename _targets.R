@@ -15,7 +15,7 @@
 library(targets)
 library(tarchetypes)
 
-tar_option_set(packages = c("processx", "tinytex", "xfun"))
+tar_option_set(packages = c("processx", "tinytex", "xfun", "curl"))
 
 # --- CeTZ: one .typ -> one .svg --------------------------------------------
 
@@ -76,7 +76,33 @@ beamer_tex_paths <- function() {
   list.files("static/beamer", pattern = "\\.tex$", full.names = TRUE)
 }
 
+# --- Data: download the NYC taxi parquet -----------------------------------
+
+# Download one month of NYC TLC Yellow Taxi trip records (Parquet) into data/.
+# Used by lesson/computation-data.qmd. The file is gitignored; this target
+# fetches it on demand and skips the download if it is already present.
+# Source: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+download_taxi <- function(path) {
+  if (!file.exists(path)) {
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+    url <- paste0(
+      "https://d37ci6vzurychx.cloudfront.net/trip-data/",
+      "yellow_tripdata_2024-01.parquet"
+    )
+    curl::curl_download(url, path, mode = "wb")
+  }
+  path
+}
+
 list(
+  # --- Data ---
+  # NYC taxi parquet, downloaded into data/ (gitignored) on first build.
+  tar_target(
+    taxi_parquet,
+    download_taxi("data/yellow_tripdata_2024-01.parquet"),
+    format = "file"
+  ),
+
   # --- CeTZ ---
   # Shared helpers module, tracked as a file so edits invalidate every SVG.
   tar_target(cetz_helpers, "static/cetz/helpers.typ", format = "file"),

@@ -4,6 +4,152 @@ title: 文献管理
 
 ## Zoteroによる文献管理
 
+
+Zoteroを使うと, 文献情報 (著者, 年, タイトル, DOI など) を整理して, BibTeX形式として書き出せます.
+
+::: {.callout-note}
+
+## BibTeXとは
+
+BibTeXは, 文献情報を管理するためのフォーマットの一つです. 文献ごとに `@article` や `@book` などのエントリータイプを指定し, キーと値のペアで書誌情報を記述します. 例えば, Knuthの論文をBibTeXで表すと次のようになります.
+
+```{.bibtex}
+@article{hamermesh1994,
+  author = {Knuth, Donald E.},
+  title = {Literate Programming},
+  year = {1984},
+  issue_date = {May 1984},
+  publisher = {Oxford University Press, Inc.},
+  address = {USA},
+  volume = {27},
+  number = {2},
+  issn = {0010-4620},
+  url = {https://doi.org/10.1093/comjnl/27.2.97},
+  doi = {10.1093/comjnl/27.2.97},
+  journal = {Comput. J.},
+  month = may,
+  pages = {97–111},
+  numpages = {15}
+}
+```
+
+元々はLaTeXで文献管理するためのフォーマットですが, QuartoでもBibTeX形式のファイルを読み込んで引用に利用できます.
+
+:::
+
+ZoteroからBibTeXファイルを作る手順は次の通りです.
+
+::: {.callout-tip}
+
+## Zotero → BiBTeX
+
+1. コレクションを好きな名前で作る
+1. Zotero に文献を入れる (ブラウザ拡張, ドラッグ&ドロップ, DOIなど)
+1. メタデータを確認・修正する (著者名の表記ゆれ, 年, 雑誌名など)
+1. `references.bib` にエクスポートする (BibTeX形式)
+
+なお, Zotero拡張の[Better BibTeX](https://retorque.re/zotero-better-bibtex/) を導入することで, BiBTeXファイルを自動で更新するなどの便利な機能が使えるようになります.
+
+:::
+
+### 1. コレクションを作る
+
+![](/static/img/literature/1_create_collection.gif)
+
+Zoteroでは全ての文献は「ライブラリ」に属します. ライブラリには複数の「コレクション」を作ることができ, 基本的には文献を管理したいプロジェクト (レポート, 論文) ごとに作成します. コレクションはフォルダのようなもので, 同じ文献を複数のコレクションに入れることもできます.
+
+### 2. Zoteroに文献を入れる
+
+::: {.panel-tabset}
+
+## ブラウザ拡張
+
+![](/static/img/literature/2_import_extension.gif)
+
+## ドラッグ & ドロップ
+
+![](/static/img/literature/2_import_drag.gif)
+
+## DOI
+
+![](/static/img/literature/2_import_doi.gif)
+
+:::
+
+::: {.callout-tip}
+
+## メタデータの取得
+
+ZoteroはDOIやURLから自動で書誌情報 (メタデータ) を取得しますが, 全ての情報が正確に入るわけではありません. 基本的には DOI という論文ごとのユニークな識別子が発見できた場合, [CrossRef](https://www.crossref.org) などのデータベースから情報を取得しています. しかし, これでも間違いがあったり, DOIがない資料があったりするため, メタデータは必ず確認して修正する必要があります.
+
+:::
+
+### 3. メタデータを確認・修正する
+
+![](/static/img/literature/3_meta_zotero.png)
+
+ドラッグ & ドロップで入れた "Beauty and Labor Market" は, タイトルと著者名は正しく入っていますが, その他の情報が空欄になっています. 書誌情報のところを見ると "Zotero" となっているので, これはZoteroがDOIなどの情報を自動で取得できなかったことを示しています.
+
+![](/static/img/literature/3_meta_doi.png)
+
+上の例は, CrossRefから取得したデータでも間違いがあったケースです. 著者名に "University of Maryland, USA" という著者の所属する機関名が入ってしまっています. ここでは, RISファイルによる修正方法と, Zotero上で直接修正する方法の両方を紹介します.
+
+::: {.panel-tabset}
+
+## RISファイル
+
+![](/static/img/literature/3_import_ris.gif)
+
+RISファイルとは, 文献情報を管理するためのファイル形式の一つです. 多くの出版社やデータベースが, 文献情報をRIS形式でエクスポートする機能を提供しています. 本来は
+
+1. RISファイルをダウンロード
+1. Zoteroにインポート
+
+という手順で書誌情報を取り込むのですが, Zoteroのブラウザ拡張では, RISのダウンロードの際に自動でZoteroにインポートする機能もあります. 
+
+
+## 手動
+
+![](/static/img/literature/3_fix_meta.gif)
+
+Zoteroの画面上で直接書誌情報を修正することもできます. しかし, 手入力はミスが起こりやすいので, 可能な限り出版社やデータベースから正しい書誌情報を取得し, 最終手段として手入力で修正するのが望ましいです.
+
+:::
+
+### 4. `references.bib` にエクスポートする
+
+![](/static/img/literature/4_install_betterbibtex.gif)
+
+Better BibTeXは, Zoteroの拡張機能で, BiBTeX形式でのエクスポートを強化するものです. これを入れると, ZoteroのコレクションをBiBTeXファイルにエクスポートする際に, ファイルを自動で更新するなどの便利な機能が使えるようになります. インストールは, GitHubの[リリースページ](https://github.com/retorquere/zotero-better-bibtex/releases/latest)からダウンロードした `.xpi` ファイルを, Zoteroの「ツール」→「プラグイン」→「Install Plugin from File」からインストールするだけです.
+
+![](/static/img/literature/4_citekey.png)
+
+Better BibTeXを入れると, Zoteroの文献ごとに "citekey" という識別子が自動で割り当てられます. これが, Quartoの `[@...]` で引用するときのキーになります. 個人的には, `auth.lower + year` 形式 (例: `knuth1984`) が分かりやすいと思いますが, 好みに合わせて変更することもできます.
+
+![](/static/img/literature/4_regenerate_citekey.png)
+
+Better BibTeXが設定されていると, 自動的にcitekeyが生成されるようになりますが, 既に文献を入れてしまった後にBetter BibTeXを入れた場合は, Zoteroの「ツール」→「Better BibTeX」→「Regenerate BibTeX keys」で既存の文献にもcitekeyを割り当てることができます.
+
+![](/static/img/literature/4_export_bib.gif)
+
+コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は "Better BibTeX" を選び, ファイル名は `references.bib` として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに `references.bib` が自動で更新されるようになります.
+
+
+## Quartoによる引用
+
+### 引用スタイルの指定
+
+```yaml
+---
+title: レポートタイトル
+bibliography: references.bib
+bibliographystyle: chicago-author-date
+---
+```
+
+QuartoのYAMLヘッダで `bibliography` にBibTeXファイルのパスを指定し, `bibliographystyle` で引用スタイルを指定します. これで, Quartoの `[@...]` 形式で文中引用ができるようになります. その他のスタイルもCSLファイルという形式で指定できますが, 詳細は[Quartoのドキュメント](https://quarto.org/docs/authoring/citations.html) を参照してください.
+
+
 ### WebDAV
 
 ## AIと文献管理

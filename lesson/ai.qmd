@@ -1,0 +1,12 @@
+---
+title: AIでできること
+---
+
+## MCP Server
+
+### Zotero MCP Server
+
+
+## データ分析
+
+### e-Stat API

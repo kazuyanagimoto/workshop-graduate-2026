@@ -1,0 +1,273 @@
+---
+title: 大規模データ
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(nanoparquet)
+library(polars)
+library(tidypolars)
+library(duckplyr)
+library(DBI)
+library(bench)
+library(tinytable)
+library(here)
+options(tinytable_html_mathjax = TRUE)
+
+# Format a byte count with a human-readable unit (B / KB / MB / GB).
+fmt_bytes <- function(b) {
+  units <- c("B", "KB", "MB", "GB", "TB")
+  k <- pmin(floor(log(b, 1024)), length(units) - 1)
+  sprintf("%.1f %s", b / 1024^k, units[k + 1])
+}
+
+path_pq <- here("data", "yellow_tripdata_2024-01.parquet")
+info <- nanoparquet::read_parquet_info(path_pq)
+```
+
+## 大規模データとメモリ
+
+`dplyr` や `data.frame` のような R の標準的な道具は, データ全体をメモリ (RAM) に読み込んでから処理します. @sec-computation-theory のメモリのヒエラルキーで見たように, RAM の容量には限りがあります. データが RAM に収まらなくなると, 処理は途端に遅くなり, やがて止まってしまいます.
+
+しかし, よく考えると, 分析のたびにデータ全体が必要になることはめったにありません. たいていのクエリは, 一部の列と一部の行しか使わないからです. そこで鍵になるのが, データ全体を RAM に載せるのではなく **必要な分だけ読む** という発想です. クエリに必要な列・行だけを読み込んで処理すれば, RAM を超えるデータも扱えます.
+
+これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが @fig-data-stack です.
+
+![Parquet・Polars・DuckDB の関係](../static/cetz/data-stack.svg){#fig-data-stack fig-align="center" width="80%"}
+
+- Parquet は保存形式. データをディスクにどう並べるかを決めるだけで, それ自体は計算しません.
+- Polars と DuckDB は処理エンジン. ディスク上のデータを読み込み, 絞り込みや集計を実行します. 役割はほぼ同じで, 互いに置き換えられる選択肢です. Polars は Rust 製のデータフレームライブラリ, DuckDB は分析に特化した組み込み型のデータベースです.
+- R からの書き方は共通です. どちらのエンジンも, dplyr とほぼ同じ構文で操作できます (Polars は `tidypolars`, DuckDB は `duckplyr` を通します).
+
+エンジンが「必要な分だけ読む」には, それを許す保存形式が要ります. 列指向フォーマット (Parquet) は, まさにそのための基礎技術です. データを Parquet で保存し, それを Polars か DuckDB で読んで処理する, というのが基本の形になります.
+
+### NYC タクシーデータ
+
+データとしてニューヨーク市タクシー・リムジン委員会 (TLC) が公開している [タクシー乗車記録](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) を使います. 乗車1回ごとに乗車・降車時刻, 距離, 料金, チップ額などが記録された, 取引レベルの実データです. ここでは2024年1月のイエロータクシー分 (`r format(info$num_rows, big.mark = ",")` 行, `r info$num_columns` 列) を使います.^[このデータは元から Parquet 形式で配布されており, 1か月分でも約 `r round(file.size(path_pq) / 1024^2)` MB あります. 全期間 (2009年〜) を合わせると数十 GB・十数億行になり, RAM には到底収まりません. まさに大規模データの練習にうってつけです.]
+
+このノートは, データが `data/` 以下に置かれている前提で進めます. ダウンロードは `targets` パイプラインに組み込んであるので, 手元に無ければ次で取得できます.^[`data/` は `.gitignore` の対象です. `taxi_parquet` ターゲットが TLC のサーバーから Parquet を取得し, `data/yellow_tripdata_2024-01.parquet` に保存します.]
+
+```bash
+Rscript -e 'targets::tar_make(taxi_parquet)'
+```
+
+ファイルのパスは, プロジェクトのどこから実行しても解決できるよう [`here`](https://here.r-lib.org/) で組み立てます.
+
+```{r}
+#| label: data-path
+path_pq <- here::here("data", "yellow_tripdata_2024-01.parquet")
+```
+
+## 列指向フォーマット {#sec-parquet}
+
+大規模データを「必要な分だけ読む」ための鍵が, この **列指向フォーマット** です. CSV は **行指向** のテキストファイルで, 1行ずつ順に値がカンマ区切りで並びます. そのため, 一部の列だけが欲しいときでも, 結局すべての行・すべての列を読む必要があります.
+
+[Parquet](https://parquet.apache.org/) は **列指向** のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます (@fig-row-vs-column).
+
+![行指向と列指向](../static/cetz/row-vs-column.svg){#fig-row-vs-column}
+
+同じ列の値が連続して並ぶことから, 次のような利点が生まれます.
+
+- **必要な列だけ読める**: 19列のうち3列しか使わないなら, その3列だけをディスクから読めます (projection pushdown).
+- **行グループをスキップできる**: ファイルは行グループ (row group) に分かれており, 各グループの統計量 (最小値・最大値など) がメタデータに記録されています. 条件に合わない行グループは丸ごと読み飛ばせます (predicate pushdown).
+- **小さい**: 列ごとに型がそろっているため圧縮が効きます.
+- **型が保たれる**: CSV と違い, 数値・日付・文字列などの型情報がファイルに含まれます.
+
+実際にどのくらい小さいのか, 同じデータを CSV に書き出して比べてみましょう. ここでは変換に DuckDB を使います.
+
+```{r}
+#| label: format-compare
+path_csv <- file.path(tempdir(), "taxi.csv")
+con <- dbConnect(duckdb::duckdb())
+dbExecute(
+  con,
+  sprintf(
+    "COPY (SELECT * FROM read_parquet('%s')) TO '%s' (FORMAT CSV, HEADER)",
+    path_pq,
+    path_csv
+  )
+)
+dbDisconnect(con)
+```
+
+```{r}
+#| label: tbl-format
+#| tbl-cap: "CSV と Parquet のファイルサイズ"
+#| echo: false
+tibble::tibble(
+  `形式` = c("CSV", "Parquet"),
+  `ファイルサイズ` = fmt_bytes(c(file.size(path_csv), file.size(path_pq)))
+) |>
+  tt()
+```
+
+```{r}
+#| label: format-ratios
+#| include: false
+size_ratio <- file.size(path_csv) / file.size(path_pq)
+```
+
+Parquet は CSV のおよそ `r round(size_ratio, 1)` 分の1のサイズに収まっています. Rからだと [`nanoparquet`](https://nanoparquet.r-lib.org/) (軽量) や [`arrow`](https://arrow.apache.org/docs/r/) で Parquet を読み書きできます. 分析用のデータは, できるだけ Parquet で保存しておくのがよいでしょう.
+
+### Arrow との関係
+
+Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です (@fig-parquet-arrow).
+
+![Parquet と Arrow](/static/cetz/parquet-arrow.svg){#fig-parquet-arrow}
+
+Arrowは標準的な形式になっているので, Arrow を使うツール同士 (Polars, DuckDB, さらに Python のツールなど) は, データをコピーせずに (zero-copy) 受け渡せます. 逆に, RのデータフレームはArrow形式ではないため, 変換のため `collect()` / `as_tibble()` などのステップが必要になります.^[
+  ややこしいことにRには [`arrow`](https://arrow.apache.org/docs/r/) というパッケージもありますが, これもArrow形式を扱うため, Polars や DuckDB と同様に Parquet を遅延読み込みして集計するエンジンとしても使えます.
+]
+
+::: {.callout-note collapse="true"}
+
+## 他の列指向フォーマット
+
+Parquet はデファクトスタンダードですが, 他にも列指向フォーマットはあります.
+
+- **ORC**: Hadoop / Hive / Spark 系でよく使われる, Parquet と似たディスク列指向形式.
+- **Feather** (Arrow IPC): Arrow のメモリ上の形をほぼそのままディスクに書いた形式. 圧縮をほとんどかけず読み書きが非常に速い反面ファイルは大きく, 長期保存より一時ファイルや R ↔ Python の高速な受け渡しに向きます (小さく圧縮して保存・大規模クエリ向けに最適化する Parquet とは設計の方向が逆です).
+- クラウドのデータウェアハウス (BigQuery, Redshift, Snowflake など) も, 内部は列指向です.
+
+:::
+
+## ![](/static/img/logo/polars-icon.svg){height="1em" fig-alt="Polars"} Polars {#sec-polars}
+
+[Polars](https://pola.rs/) は Rust で書かれた高速なデータフレームライブラリです.
+マルチスレッドで動き (@sec-computation-theory の並列化を思い出してください), **遅延評価** (lazy evaluation) によってクエリを最適化します.
+
+::: {.callout-note}
+
+## tidypolars のインストール
+
+ここでは Polars を `tidypolars` (dplyr 構文) 経由で使います. tidypolars は polars に依存しますが, どちらも CRAN では配布されていない (polars は2024年に削除) ため, [R-multiverse](https://r-multiverse.org/) からまとめてインストールします.
+
+```r
+install.packages(c("polars", "tidypolars"), repos = "https://community.r-multiverse.org")
+```
+:::
+
+ここでは [`tidypolars`](https://tidypolars.etiennebacher.com/) を通して, **dplyr とほぼ同じ構文** で Polars を使います.^[Polars には Python 版に合わせた独自の構文 (`pl$col(...)$agg(...)`) もあります. Python も使う人にはそちらが便利でしょう.]
+例として, 料金が正の乗車について, 支払い方法 (`payment_type`) ごとの平均チップ額を求めてみます.^[`payment_type` は支払い方法のコードで, 1 がクレジットカード, 2 が現金です. カード払いではチップが記録される一方, 現金のチップは記録されないことが多い, という現実が結果に表れます.]
+
+```{r}
+#| label: tidypolars
+q <- scan_parquet_polars(path_pq) |>
+  filter(fare_amount > 0) |>
+  summarise(tip = mean(tip_amount), .by = payment_type)
+
+q |>
+  arrange(payment_type) |>
+  as_tibble()
+```
+
+`scan_parquet_polars()` はファイルを開くだけで, データはまだ読み込みません.
+**遅延評価** (lazy evaluation) とは, コマンドを書いた時点ではすぐに計算せず, 「何をするか」という計画 (プラン) だけを組み立てておく方式です.
+`as_tibble()` (や `collect()`) を呼んで初めて, 最適化されたプランが実行されます.
+
+その最適化された計画は `explain()` で確認できます.
+
+```{r}
+#| label: polars-explain
+cat(explain(q))
+```
+
+`PROJECT 3/19 COLUMNS` は, 19列のうち必要な3列 (`payment_type`, `fare_amount`, `tip_amount`) だけを読むこと (列の刈り込み) を表します.
+`SELECTION: [(col("fare_amount")) > 0.0]` は, `filter` の条件が Parquet の読み込み段階まで押し下げられていること (述語の押し下げ) を表します.
+このように Polars は, こちらが書いた順序にとらわれず, 「必要なデータだけを最小限読む」ように勝手に並べ替えてくれます.
+
+## ![](/static/img/logo/duckdb-icon.svg){height="1em" fig-alt="DuckDB"} DuckDB {#sec-duckdb}
+
+[DuckDB](https://duckdb.org/) は, 分析用途に特化した組み込み型のデータベースです.
+SQLite が「手軽なトランザクション用 DB」なら, DuckDB は「手軽な分析用 DB」だと考えるとよいでしょう.
+マルチスレッドで動き, RAM に収まらないデータ (larger-than-memory) も扱えます.
+先ほど CSV への変換に使ったのも, この DuckDB です.
+
+R からは [`duckplyr`](https://duckplyr.tidyverse.org/) を使うのが手軽です.
+これは **dplyr のドロップイン置換** で, 既存の dplyr コードをほぼそのまま, バックエンドだけ DuckDB に差し替えて高速化できます.^[`duckplyr` は2025年に tidyverse の一員となり, CRAN で配布されています (`install.packages("duckplyr")`). Polars と違い, 追加のリポジトリ設定なしに入ります.]
+
+```{r}
+#| label: duckplyr
+read_parquet_duckdb(path_pq) |>
+  filter(fare_amount > 0) |>
+  summarise(tip = mean(tip_amount), .by = payment_type) |>
+  arrange(payment_type) |>
+  collect()
+```
+
+`read_parquet_duckdb()` で遅延的に Parquet を開き, dplyr の動詞を並べ, `collect()` で結果を取り出します.
+Polars (tidypolars) と書き方がほとんど同じであることに注目してください.
+どちらも内部では遅延評価とクエリ最適化を行っています.
+
+## ベンチマーク
+
+では, 同じ集計を `dplyr`, `tidypolars`, `duckplyr` の3通りで実行し, 速度とメモリを比べてみましょう.
+`dplyr` 版は, Parquet をいったん全部メモリに読み込んでから処理します.
+
+```{r}
+#| label: benchmark-data
+bm <- bench::mark(
+  dplyr = nanoparquet::read_parquet(path_pq) |>
+    filter(fare_amount > 0) |>
+    summarise(tip = mean(tip_amount), .by = payment_type) |>
+    arrange(payment_type),
+  tidypolars = scan_parquet_polars(path_pq) |>
+    filter(fare_amount > 0) |>
+    summarise(tip = mean(tip_amount), .by = payment_type) |>
+    arrange(payment_type) |>
+    as_tibble(),
+  duckplyr = read_parquet_duckdb(path_pq) |>
+    filter(fare_amount > 0) |>
+    summarise(tip = mean(tip_amount), .by = payment_type) |>
+    arrange(payment_type) |>
+    collect(),
+  check = FALSE,
+  iterations = 5,
+  filter_gc = FALSE
+)
+```
+
+```{r}
+#| label: tbl-benchmark-data
+#| tbl-cap: "集計の計算時間とメモリ"
+#| echo: false
+tibble::tibble(
+  `手法` = as.character(bm$expression),
+  `中央値 (ms)` = as.numeric(bm$median) * 1000,
+  `メモリ割り当て` = fmt_bytes(as.numeric(bm$mem_alloc))
+) |>
+  tt() |>
+  format_tt(j = 2, digits = 1)
+```
+
+```{r}
+#| label: data-ratios
+#| include: false
+med <- setNames(as.numeric(bm$median), as.character(bm$expression))
+spd <- med[["dplyr"]] / med[["tidypolars"]]
+```
+
+集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 `r round(spd)` 倍速いですが, より目を引くのは **R が確保するメモリ** の差です.
+@tbl-benchmark-data のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
+
+理由は2つあります.
+第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは `payment_type`, `fare_amount`, `tip_amount` の列と `fare_amount > 0` の行だけ」と見抜いて, その分しか読み込みません (@sec-polars の `explain()` で見た列の刈り込みと述語の押し下げです).
+第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します.
+そのため R のヒープにはほとんど何も積まれません.
+一方 `dplyr` は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.
+
+この違いは, データが RAM を超えるようになると「動くか動かないか」を分けます.
+DuckDB は必要に応じて中間結果をディスクに退避できるため, RAM に収まらないデータも処理できます.
+
+### どれを使えばよいか
+
+実証家として皆さんに覚えておいて欲しいのは次の三つです.
+
+1. Parquetで保存する
+2. データ処理のエンジンとしては, `duckplyr` を使う
+
+特に理由がなければ, parquet形式でデータを保存しておくのが高速化かつ軽量という点でおすすめです. Polars はPythonで扱う分にはとても便利ですが, CRANから外されたりなどRでのサポートが不安定であるため, `duckplyr` を使うのが便利かなと思っています.
+
+なお, R のオブジェクトをそのまま高速に保存したいだけなら, [`fst`](https://www.fstpackage.org/) や [`qs2`](https://github.com/qsbase/qs2) も便利です. これらは `saveRDS()` の高速な代替として使えます.

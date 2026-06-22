@@ -16,8 +16,12 @@ book:
     - index.qmd
     - part: 基礎
       chapters:
+        - lesson/shell.qmd
         - lesson/git.qmd
-        - lesson/computation.qmd
+    - part: 計算理論
+      chapters:
+        - lesson/computation-fast.qmd
+        - lesson/computation-data.qmd
     - part: 可視化
       chapters:
         - lesson/visualization.qmd
@@ -41,6 +45,7 @@ format:
       - brand
     css: styles.css
     toc: true
+    number-depth: 2
 
 freeze: auto
 execute:

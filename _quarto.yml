@@ -14,26 +14,20 @@ book:
   date-format: "最終更新: YYYY年MM月DD日"
   chapters:
     - index.qmd
-    - part: 基礎
-      chapters:
-        - lesson/shell.qmd
-        - lesson/git.qmd
-    - part: 計算理論
-      chapters:
-        - lesson/computation-fast.qmd
-        - lesson/computation-data.qmd
-    - part: 可視化
-      chapters:
-        - lesson/visualization.qmd
-        - lesson/slides.qmd
-    - part: プロジェクト管理
-      chapters:
-        - lesson/literature.qmd
-        - lesson/targets.qmd
-    - part: AI
-      chapters:
-        - lesson/ai.qmd
-  appendices: 
+    - lesson/shell.qmd
+    - lesson/git.qmd
+    - lesson/computation-fast.qmd
+    - lesson/computation-data.qmd
+    - lesson/scraping.qmd
+    - lesson/visualization.qmd
+    - lesson/regression.qmd
+    - lesson/slides.qmd
+    - lesson/literature.qmd
+    - lesson/quarto.qmd
+    - lesson/targets.qmd
+    - lesson/ai.qmd
+  appendices:
+    - lesson/dictionary.qmd
     - references.qmd
 
 
@@ -46,6 +40,7 @@ format:
     css: styles.css
     toc: true
     number-depth: 2
+    lightbox: true
 
 freeze: auto
 execute:
@@ -55,3 +50,13 @@ execute:
 
 bibliography: references.bib
 bibliography-style: chicago-author-date
+
+knitr:
+  opts_chunk: 
+    fig.align: center
+    fig.retina: 3
+    fig.width: 8
+    fig.height: 3.708
+    out.width: 90%
+    collapse: true
+    dev: svg

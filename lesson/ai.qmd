@@ -1,12 +1,11 @@
 ---
-title: AIでできること
+title: AIと研究する
 ---
 
-## MCP Server
+## 文献調査
 
 ### Zotero MCP Server
 
+## データ分析と可視化
 
-## データ分析
-
-### e-Stat API
+## ワークフロー

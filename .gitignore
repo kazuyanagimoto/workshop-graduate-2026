@@ -9,6 +9,9 @@ refs/
 .DS_Store
 *.pdf
 
+# Local R environment (machine-specific PATH, never commit)
+.Renviron
+
 # Downloaded datasets (produced by the targets pipeline)
 /data/
 

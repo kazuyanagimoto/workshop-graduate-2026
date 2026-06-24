@@ -1,195 +1,254 @@
 ---
-title: Git & GitHub 入門
+title: Git & GitHub
 ---
 
 ## なぜ Git を使うのか
 
-### Git を使う 4 つの理由
+研究の分析コードは, 一度書いて終わり, ということはまずありません. データの前処理をやり直したり, 推定の仕様を変えたり, 図を作り直したりと, 何度も書き換えていきます. その過程で「昨日まで動いていたのに今日は動かない」「論文のあの数字を出したのはどの版だったか」といった事態は, 誰しも一度は経験します. Git は, こうしたコードの変更履歴を管理するための道具です.
 
-研究のコードを書くうえで, Git は次の 4 つの力を与えてくれる.
+Git を使うと, 主に次の4つのことができるようになります.
 
-- **記録する (Recording)** 自分と共同研究者のコーディングの履歴をすべて残す.
-- **元に戻せる (Restorable)** 過去の任意のバージョンに戻れる.
-- **比較できる (Comparable)** コードの変更点に注目し, バグを見つけやすくする.
-- **枝分かれできる (Branch)** 完成した部分と開発中の部分を切り分ける.
+- **Recording**: 自分と共同研究者の変更履歴を, すべて残せます.
+- **Restore**: 過去の任意の時点の状態に, いつでも戻れます.
+- **Compare**: 2つの時点の違いだけを取り出して, バグの原因を絞り込めます.
+- **Branch**: 完成した部分と作業中の部分を, 分けて進められます.
 
-### Git は簡単ですか?
+### AI時代のバージョン管理
 
-いいえ. ごめんなさい. Git は最初から簡単なツールではない.
+経済学では個人で全体像がギリギリ把握できるサイズのプロジェクトが多いので, Gitは十分普及してきませんでした. しかし, AIにコードを書かせられる今, 人間の直感よりも高速にコードを書き換えられるようになりました. そうなると, 変更履歴の管理の重要性はむしろ増しています.
 
-- Git にはオプションの多いコマンドがたくさんある.
-- トラブルから復旧するには少し知識が要る.
-- 使い方のスタイルは人や組織によってバラバラで, 一つの正解があるわけではない.
+また, Git自体の複雑さも, AIに操作させることで解消できるようになりました. Gitはトラブル解決時に必要となるコマンドや知識が多く, 初心者にとっては大きなハードルでした. しかし, そうした面倒はAIに任せて仕舞えば, 人間はGitの恩恵だけを受けられるようになりました.
 
-そこで, このワークショップでは次の進め方を提案する.
 
-- まずは最小限の知識で済む私のワークフローをそのまま真似る.
-- 慣れてきたら, 細かい仕組みを少しずつ学ぶ.
+### Git と GitHub
 
-### GitHub は Git なのか?
+Git と GitHub は名前が似ているため混同されがちですが, 別のものです. Git は手元のマシンで動くバージョン管理ツール (コマンドラインのアプリ) で, GitHub はそのコミット履歴を公開・共有し, 共同作業をするための Web サービスです(@fig-git-vs-github).^[
+    そのため, GitLabといった同種のWebサービスもあります.
+]
 
-Git と GitHub はよく混同されるが, 別のものである.
+![GitHub を介した履歴の共有と公開](../static/cetz/git-vs-github.svg){#fig-git-vs-github}
 
-- **Git はバージョン管理ツール** コマンドラインのアプリで, 自分の手元のマシンで動く.
-- **GitHub は Web サービス** コードを公開し, 共同作業をするための場である.
 
-![Git はツール, GitHub はそのツールで作った履歴を共有する Web サービス](../static/cetz/git-vs-github.svg){fig-align="center" width="35%"}
+### コマンドライン
 
-### CUI と GUI, どちらを使う?
+Git を操作するGUIアプリは数多くありますが (VSCodeやRStudioにも), 私は学習の段階ではコマンドライン操作で学ぶことをお勧めしています. Gitの仕組みがそもそも非直感的なので, GUIといった直感的なツールでは裏で起こっていることをマスクしてしまって, 帰って仕組みの理解を妨げるからです. また, トラブルが起きた時もGUIからは解決できないことが多く, コマンドライン操作の知識が結局必要です. コマンドライン操作を理解することがGitを理解することと同義なので, AI時代であってもコマンドラインから学ぶことをお勧めします.
 
-Git を操作する GUI アプリはいくつもある. このワークショップでは [VSCode](https://code.visualstudio.com/) を使う. 他の選択肢として [GitHub Desktop](https://desktop.github.com/), [Fork](https://git-fork.com/), [RStudio](https://www.rstudio.com/) などがある.
 
-ただし, まずは CUI (コマンドライン) を学ぶことを勧める.
+## Git の基礎概念
 
-- GUI を使うにも, 裏側で何が起きているかという CUI の知識が前提になる.
-- トラブルの中には, コマンドラインでしか解決できないものがある.
+### レポジトリ
 
-## Git の基礎
+Gitによるバージョン管理は, レポジトリ (repository) という単位で行われます. Gitが一塊として管理していく単位のことなので, ほぼプロジェクトフォルダと考えてもらって構いません.
 
-### コミットはセーブポイント
-
-Git を使ううえで最も大切な概念が **コミット (commit)** である. コミットとは, プロジェクトフォルダのある時点の状態を丸ごと保存したセーブポイントである. 「Git を使う」とは, 突き詰めればこのコミットを積み重ねていくことに他ならない.
-
-![コミットを積み重ねると, プロジェクトの履歴ができあがる](../static/cetz/commit-savepoint.svg){fig-align="center" width="55%"}
-
-### どのコミットにも _戻れる_
-
-**HEAD** はいま自分が見ているコミットを指す目印である. HEAD を過去のコミットに移せば, フォルダの中身はその時点の状態に戻る. 一度作ったコミットは消えないので, 思い切って実験しても怖くない.
-
-![HEAD を過去のコミットに移すと, その時点の状態が手元に戻る](../static/cetz/commit-back.svg){fig-align="center" width="55%"}
-
-### どの 2 つのコミットも _比較_ できる
-
-任意の 2 つのコミットの差分 (diff) を取れば, 「何がどう変わったか」だけに集中できる. これはバグの発見やレビューで大きな助けになる.
-
-![2 つのコミットの差分 (diff) を見れば, 変更点だけを追える](../static/cetz/commit-compare.svg){fig-align="center" width="55%"}
-
-### コミットの実体は何か?
-
-フォルダで Git を初期化すると, そのフォルダの中に隠しフォルダ `.git` が作られる. コミットを作るたびに, その時点のフォルダの状態が `.git` の中に保存されていく. 個々のコミットの名前は, 人間が付けるのではなくランダムなハッシュ文字列になる.
-
-![コミットの実体は `.git` フォルダの中に保存された状態のスナップショット](../static/cetz/commit-internal.svg){fig-align="center" width="70%"}
-
-### ローカルリポジトリとリモートリポジトリ
-
-手元のマシンにある `.git` フォルダを **ローカルリポジトリ** と呼ぶ. コードを共有するためには, GitHub などの **リモートリポジトリ** を使う. ローカルとリモートは, **Push** (送る) と **Pull** (取り込む) によって同期する.
-
-![ローカルとリモートを push / pull で同期する](../static/cetz/local-remote.svg){fig-align="center" width="60%"}
-
-## CUI と GUI の操作
-
-### ステージング (Stage)
-
-ファイルを変更したとき, その中から特定の変更だけを選んでコミットできる. この「選ぶ」作業を **ステージング** と呼ぶ. ステージしたファイルだけが, 次のコミットに含まれる.
-
-![`git add` で変更を選び, `git commit` で保存する](../static/cetz/staging.svg){fig-align="center" width="70%"}
+Gitのプロジェクトを始めるにはプロジェクトフォルダ内で次のようにします.
 
 ```bash
-git add foo1.txt              # 1 つのファイルをステージ
-git add foo1.txt foo2.txt     # 複数ファイルをまとめてステージ
-git add .                     # 変更したファイルをすべてステージ
+git init
 ```
 
-### コミット (Commit)
+![リポジトリ](/static/cetz/repo-tree.svg){#fig-repo-tree width=60%}
 
-ステージしたら, メッセージを付けてコミットする. メッセージは必須で, 後から履歴を読むときの手がかりになる.
+この時, `.git` という隠しフォルダが作られます. 以降, Gitはこのフォルダの中に, プロジェクトフォルダの状態を記録していきます. つまり, Gitはプロジェクトフォルダの中身を丸ごと保存する仕組みです. なお, 競技にはこの `.git` フォルダのことを「リポジトリ」と呼ぶこともありますが, ここではプロジェクトフォルダ全体を指す意味で使います.
+
+### コミット
+
+Git でもっとも大切な概念がコミット (commit) です. コミットとは, プロジェクトフォルダのある時点の状態を丸ごと保存したセーブポイントだと考えてください. 「Git を使う」とは, 突き詰めればこのコミットを一つずつ積み重ねていく作業にほかなりません (@fig-commit-savepoint).
+
+![コミット](../static/cetz/commit-savepoint.svg){#fig-commit-savepoint fig-align="center" width="55%"}
+
+デフォルトでは `main` という名前のブランチ (後述) に1つ目のコミットが作られます.
+
+**HEAD**
+
+いま自分がどのコミットを見ているかを指す目印を HEAD と呼びます. HEAD を過去のコミットに移すと, フォルダの中身はその時点の状態に戻ります (@fig-commit-back). 一度作ったコミットは消えないので, 失敗を恐れずに思い切って実験できます. この「いつでも戻れる」という安心感こそ, セーブポイントを積む意味です.
+
+![過去のコミットに戻る](../static/cetz/commit-back.svg){#fig-commit-back fig-align="center" width="55%"}
+
+**コミットの比較**
+
+任意の2つのコミットの差分 (diff) を取れば, 「どこが, どう変わったか」だけに注目できます (@fig-commit-compare). これはバグの発見やコードレビューで大きな助けになります. 例えば, 昨日まで出ていた数字が今日は変わってしまったとき, その間のコミットの差分を見れば, 原因の見当がつきます.
+
+![コミット間の差分 (diff)](../static/cetz/commit-compare.svg){#fig-commit-compare fig-align="center" width="55%"}
+
+
+::: {.callout-note collapse="true"}
+
+## コミットの実体
+
+私たちは「コミットは変更点 (差分) を記録している」と思いがちですが, 実際は違います. コミットが保存しているのは, その時点で Git が追跡しているファイル全体の状態, つまり丸ごとのスナップショットです (@fig-commit-snapshot).^[とはいえ, 変わっていないファイルまで毎回コピーするわけではありません. Git は内部で同じ中身のファイルを使い回す (重複排除する) ため, スナップショット方式でも容量はそれほど膨らみません.] @fig-commit-back で見た「どの時点にも戻れる」性質は, 各コミットが完全なスナップショットだからこそ成り立ちます.
+
+![スナップショットとハッシュ名](../static/cetz/commit-snapshot.svg){#fig-commit-snapshot fig-align="center" width="85%"}
+
+図でオレンジに塗られた行は, そのコミットで変更されたファイルを表します. 変更の有無にかかわらず, コミットは毎回すべてのファイルの状態を丸ごと記録します. そして個々のコミットには, 人間が付ける連番ではなく, その中身から計算されたハッシュ値^[@sec-hash を参照] (例: `a84d0e9...`) が名前として割り当てられます. 中身が少しでも違えば異なるハッシュになるため, 名前が一意に定まり, 「このコミット」を確実に指し示せます. ふだんは, 図の各スナップショットの下に並ぶように, 先頭の7文字ほど (`a84d0e9`) だけを使ってコミットを指定することが多いです.
+
+:::
+
+### ローカルとリモート
+
+手元のマシンにある, `.git` を含むフォルダをローカルリポジトリ (local repository) と呼びます. @fig-repo-tree のように, `data/` や `code/` といった普段のプロジェクトフォルダの直下に `.git` フォルダが置かれた状態が, ひとつのリポジトリです.
+
+コードを共有したりバックアップしたりするには, GitHub 上のリモートリポジトリ (remote repository) を使います. この2つは, ローカルからリモートへ送る push と, リモートからローカルへ取り込む pull によって同期します (@fig-local-remote).
+
+![ローカルとリモートの同期](../static/cetz/local-remote.svg){#fig-local-remote fig-align="center" width="60%"}
+
+なお, Dropbox や Google Drive などと違って, 自分で明示的に push しない限り, ローカルの変更がリモートに反映されることはありません. つまり, ローカルでいくらコミットを積んでも, push しない限りリモートには何も変化が起きません. 逆も同様で, リモートの変更は pull しない限りローカルには反映されません.
+
+## 基本の操作
+
+### ステージング
+
+ファイルをいくつ変更しても, それが自動でコミットされるわけではありません. コミットの前に「次のコミットに含める変更」を選び, ステージングエリア (staging area) と呼ばれる場所に載せます. この載せる操作が `git add` で, 載せる作業をステージング (staging) と呼びます (@fig-staging). 「次のコミットという舞台 (stage) に, 必要な変更だけを上げる」イメージだと考えてください.
+
+ステージングエリアに載せた変更だけが, 続く `git commit` でコミットになります. 図の `draft.txt` のように, 変更してあっても `git add` しなければコミットには含まれません. こうして, 関係する変更だけをひとまとめにした, 意味のあるコミットを作れます.
+
+![ステージングとコミット](../static/cetz/staging.svg){#fig-staging fig-align="center" width="45%"}
 
 ```bash
-git commit -m "コミットメッセージ"
+git add foo1.txt              # stage one file
+git add foo1.txt foo2.txt     # stage several files at once
+git add .                     # stage all changed files
 ```
 
-VSCode では, ステージしたファイルにメッセージを書いて「Commit」を押すだけでよい.
+### コミット
+
+ステージしたら, メッセージを付けてコミットします. メッセージは必須で, あとから履歴を読み返すときの手がかりになります. 「何を」変更したのかが一目で分かる短い説明を書きましょう.
+
+```bash
+git commit -m "MESSAGE"
+```
+
+### ログ {#sec-git-log}
+
+積み重ねたコミットの履歴は `git log` で確認できます. ただし標準の `git log` は, コミットごとにハッシュ・著者・日時・メッセージを数行ずつ表示するため, コミットが増えると一覧性が下がります. 普段は `--oneline` を付けて, 1コミットを1行で表示するのがおすすめです.
+
+```bash
+git log --oneline
+```
+
+出力はたとえば次のようになります (上が新しいコミット).
+
+```text
+a84d0e9 add computation-data
+9d04011 migrate to quarto book
+6761acb add high-speed
+```
+
+各行は, 先頭がコミットのハッシュ (短縮形), 続いてコミットメッセージです. メッセージを「何をしたか」が分かる短文にしておくと, この一覧がそのまま変更の目次になります. 先頭のハッシュは, あとで「どのコミットに戻るか」「どの2つを比較するか」を指定するときの目印になります.
 
 ### Push と Pull
 
-ローカルの変更をリモートへ送るのが **Push**, リモートの変更をローカルへ取り込むのが **Pull** である.
+ローカルの変更をリモートへ送るのが push, リモートの変更をローカルへ取り込むのが pull です.
 
 ```bash
-git push origin main    # ローカルの変更をリモートへ
-git pull origin main    # リモートの変更をローカルへ
+git push origin main    # send local commits to the remote
+git pull origin main    # bring remote changes into local
 ```
 
-いまの段階では, `origin main` の意味は気にしなくてよい.
+`main` はブランチ名で, ここではデフォルトの main ブランチを指します. `origin` はリモートリポジトリの名前で, GitHub 上の自分のリポジトリを指します.
 
-### Handson 1: 最初のコミットと Push
+::: {.callout-tip}
 
-**1. [GitHub](https://github.com/) でリポジトリを作る**
+## Handson 1: コミットとプッシュ
 
-1. 研究用なら private リポジトリを選ぶ.
-1. 使う言語に合わせて `.gitignore` を選ぶ.
-1. README を追加する.
-1. ライセンスは選ばなくてよい (private なので).
+1. [GitHub](https://github.com/) でリポジトリを作ります
+1. 研究用なら private リポジトリを選びます.
+1. gitignore, README, License は選ばなくて構いません (後から追加できます).
+1. `git clone REPO_URL` で, リモートレポジトリをローカルにコピーします.
+1. 適当なテキストファイル (例: `foo1.txt`) を作り, 適当な一文 (例: "Hello Git!") を書きます.
+1. ステージを忘れずに, コミットを作ります.
+1. リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.
 
-**2. 手元のマシンに clone する**
+:::
 
-1. 一番簡単なのは, VSCode の新しいウィンドウで「Clone a repository」を選ぶ方法.
-1. コマンドなら `git clone リポジトリのURL`.
+## ブランチとマージ
 
-**3. コミットを作って Push する**
+### ブランチと HEAD
 
-1. 適当なテキストファイル (例: `foo1.txt`) を作り, 適当な文 (例: "Hello Git!") を書く.
-1. コミットを作る (ステージを忘れずに).
-1. リモートリポジトリへ Push する.
+ブランチ (branch) は, あるコミットに付けたラベルのようなものです. よくある誤解として, ブランチは「変更の流れ」を表すものだと思われがちですが, 実際は「コミットの位置」を指すものです. そして HEAD は, いま自分がどのブランチ (どのコミット) にいるかを指します. 例えば, 安定版の main から枝分かれさせた dev のように, 複数のブランチを同時に持てます (@fig-branch-head).
 
-## ブランチ・マージ・コンフリクト
-
-### HEAD とブランチ
-
-**ブランチ** はコミットに付けたラベルであり, **HEAD** はいま見ているブランチを指す. main から枝分かれした dev のように, 複数のブランチを同時に持てる.
-
-![ブランチはコミットのラベル, HEAD はいま見ているブランチ](../static/cetz/branch-head.svg){fig-align="center" width="45%"}
+![ブランチと HEAD](../static/cetz/branch-head.svg){#fig-branch-head fig-align="center" width="55%"}
 
 ```bash
-git branch ブランチ名    # ブランチを作る
-git switch ブランチ名    # HEAD を移す
+git branch BRANCH_NAME    # create a branch
+git switch BRANCH_NAME    # move HEAD to a branch
 ```
 
-### マージ (Merge)
+### マージ
 
-あるブランチの変更を, いま HEAD のあるブランチに取り込む操作が **マージ** である. マージすると, 両方の変更を併せ持つ新しいコミット (図の M) ができる.
+あるブランチの変更を, いま HEAD のあるブランチへ取り込む操作をマージ (merge) と呼びます. dev を main にマージすると, 両方の変更を併せ持つ新しいコミット (@fig-merge の M) ができます.
 
-![dev を main にマージすると, 両者を併せ持つコミット M ができる](../static/cetz/merge.svg){fig-align="center" width="55%"}
+![ブランチのマージ](../static/cetz/merge.svg){#fig-merge fig-align="center" width="55%"}
 
 ```bash
-git merge ブランチ名
+git merge BRANCH_NAME
 ```
 
-### 1. ローカルでマージする
+### なぜブランチを使うのか
 
-ローカルで dev を main にマージし, そのローカル main をリモートの main へ Push する方法. 一人で進めるプロジェクトに向く.
+ブランチを使う最大の目的は, main ブランチをいつでもきれいに動く状態に保つことです. main が常に動くと分かっていれば, 新しく入れた変更がバグの原因かどうかを切り分けやすくなります. 共同研究者も, それぞれ main からブランチを切って作業します.
 
-![ローカルでマージしてから push する](../static/cetz/local-merge.svg){fig-align="center" width="70%"}
+::: {.callout-note}
 
-### 2. リモートでマージする
+## main-dev ワークフロー
 
-dev をリモートへ Push し, GitHub 上で **Pull Request** を作って, main に取り込むかどうかを判断する方法. 共同作業に向く (私は一人のときも使う).
+私が勧めるのは, シンプルな main-dev ワークフローです.
 
-![Push してから GitHub 上で Pull Request としてマージする](../static/cetz/remote-merge.svg){fig-align="center" width="55%"}
+- 作業は dev ブランチでのみ行います (共同研究者がいる場合は, 自分の名前をブランチ名にします).
+- 意味のあるまとまりが完成したら, 不要なファイルを片付けてから dev を main にマージします.
 
-### ブランチに関する疑問
+:::
 
-**なぜブランチを使うのか?**
+### 2種類のマージ
 
-- **main** ブランチを常にきれいで動く状態に保つため.
-- main が完璧に動くので, バグを見つけやすい.
-- 共同研究者は main からブランチを切って作業する.
+まず, 次のような状況を考えます (@fig-merge-setup). 手元 (Local) では, main の C2 から dev ブランチを切って D1 というコミットを作りました. 一方リモート (Remote) はまだ C1-C2 のままで, dev も D1 も持っていません. この D1 の変更を main に取り込み, @fig-merge の M のようなマージコミットをリモートに作ることが目的です.
 
-**いつブランチを作るのか?**
+![マージ前の Local と Remote](../static/cetz/merge-setup.svg){#fig-merge-setup fig-align="center" width="90%"}
 
-シンプルな指針は _main-dev ワークフロー_ である.
+この dev を main に取り込む方法は, 大きく2つあります. 1つ目は, ローカルでマージする方法です. ローカルで dev を main にマージし, その main をリモートへ push します (@fig-local-merge). 手数が少なく, 一人で進めるプロジェクトに向いています.
 
-- 作業は **dev** ブランチでだけ行う (共同研究者がいるときは, 自分の名前を開発ブランチ名にする).
-- 意味のあるまとまりが完成したら, 不要なファイルを片付けて dev を main にマージする.
+![ローカルマージ](../static/cetz/local-merge.svg){#fig-local-merge fig-align="center" width="100%"}
 
-### コンフリクト (Conflict)
+2つ目は, リモートでマージする方法です. dev をリモートへ push し, GitHub 上で Pull Request を作って main に取り込みます (@fig-remote-merge). 変更をレビューしてから取り込めるので, 共同作業に向いています (私は一人のときもこちらを使います).
 
-2 つのブランチが同じファイルの同じ行に別々の内容を書いた状態でマージすると, **コンフリクト** が起きる. Git はどちらを残すべきか判断できないので, 人間に解決を委ねる.
+![リモートマージ (Pull Request)](../static/cetz/remote-merge.svg){#fig-remote-merge fig-align="center" width="100%"}
 
-![同じ行を別々に編集した状態でマージするとコンフリクトになる](../static/cetz/conflict.svg){fig-align="center" width="40%"}
+::: {.callout-tip}
 
-コンフリクトが起きると, ファイルの中に両者の変更が並べて書き込まれる.
+## Handson 2: 2種類のマージ
 
-```text
+**ローカルマージ**
+
+1. 新しいブランチ `dev` を作ります
+1. HEAD を `dev` に移します
+1. いくつかコミットを作ります
+1. HEAD を `main` に戻します
+1. `dev` を `main` にマージします
+1. `origin/main` へ push します
+1. (ローカルの) `dev` ブランチを消します (`git branch -d dev`)
+
+**リモートマージ**
+
+1. `dev` ブランチを作ります
+1. `dev` に移ります
+1. いくつかコミットを作ります
+1. `origin/dev` へ push します
+1. GitHub で Pull Request を作ります
+1. `dev` を `main` にマージし, リモートの `dev` を消します
+1. ローカルに戻り `main` に移ります
+1. main を pull し, ローカルの `dev` を消します (`git branch -d dev`)
+
+:::
+
+
+## コンフリクト
+
+Gitを使っていると, 2つのブランチをマージしたときに, Git がどちらの変更を採用すべきか判断できない場合があります. その状態をコンフリクト (conflict) と呼びます (@fig-conflict). Git はどちらを採用すべきか判断できないので, 解決を人間に委ねます.
+
+![コンフリクト](../static/cetz/conflict.svg){#fig-conflict fig-align="center" width="55%"}
+
+コンフリクトが起きると, 該当するファイルの中に, 両方の変更が次のように並べて書き込まれます.
+
+```{.markdown filename=foo.txt}
 aaaaa
 bbbbb
 <<<<<<< HEAD
@@ -200,129 +259,107 @@ zzzzzz
 ddddd
 ```
 
-同じファイルを複数人で同時に編集しない, というルールでほとんどのコンフリクトは防げる.
+解決するには, 残したい方を選び, 不要な行とマーカー (`<<<<<<<` `=======` `>>>>>>>`) を消してファイルを保存し, 解決のためのコミットを作ります. 例えば dev 側の `zzzzz` を残すなら, 次のように整えます.
 
-### コンフリクトを解決する
-
-1. 要らない行 (とマーカー `<<<<<<<` `=======` `>>>>>>>`) を消して, ファイルを保存する.
-1. このマージとコンフリクト解決のためのコミットを作る.
-
-たとえば dev 側の `zzzzz` を残すなら, 次のように整える.
-
-```text
+```{.markdown filename=foo.txt}
 aaaaa
 bbbbb
 zzzzz
 ddddd
 ```
 
-VSCode では, 「Accept Current Change」「Accept Incoming Change」などのボタンでどちらの変更を残すか選び, 保存してからコミットすればよい.
+VSCode では, 「Accept Current Change」「Accept Incoming Change」などのボタンでどちらの変更を残すか選び, 保存してからコミットすれば済みます. なお, 同じファイルを複数人で同時に編集しないというルールを守るだけで, コンフリクトのほとんどは防げます.
 
-### Pull = Fetch + Merge
+### Pull {#sec-pull}
 
-**Pull** は, 実は 2 つの操作に分けられる.
+実は pull は, 2つの操作を続けて行っています (@fig-pull-fetch-merge).
 
-- **Fetch** リモートのブランチをローカルへ取得し, `origin/ブランチ名` と名付ける.
-- **Merge** その `origin/ブランチ名` を, いまのブランチにマージする.
+![pull = fetch + merge](../static/cetz/pull-fetch-merge.svg){#fig-pull-fetch-merge fig-align="center" width="50%"}
 
-![`git pull` は fetch と merge をまとめて行う](../static/cetz/pull-fetch-merge.svg){fig-align="center" width="70%"}
+
+1. **fetch**: リモートのブランチをローカルへ取得して `origin/BRANCH_NAME` と名付ける
+2. **merge**: `origin/BRANCH_NAME` をいまのブランチへ取り込む
+
 
 ```bash
 git pull origin main
-# 上は次の 2 つと同じ
+# shorthand for the two commands below
 git fetch origin main
 git merge origin/main
 ```
 
-`git pull` の中身はマージなので, **コンフリクトが起きることもある** 点に注意.
+中身がマージである以上, pull でもコンフリクトが起こりうる点には注意してください.
 
-### Handson 2: 2 種類のマージ
+::: {.callout-tip}
 
-**1. ローカルマージ**
+## Handson 3: 3種類のコンフリクト
 
-1. 新しいブランチ `dev` を作る.
-1. HEAD を _dev_ に移す.
-1. いくつかコミットを作る.
-1. HEAD を _main_ に戻す.
-1. _dev_ を _main_ にマージする.
-1. _origin/main_ へ Push する.
-1. (ローカルの) _dev_ ブランチを消す.
+**ローカルコンフリクト**
 
-**2. リモートマージ**
+1. `dev` に移り `foo1.txt` を作って一行 (例: "Tortilla sin Cebolla") を書き, コミットします.
+1. `main` に移り `foo1.txt` を作って別の一行 (例: "Tortilla con Cebolla") を書き, コミットします.
+1. `dev` を `main` にマージしてコンフリクトを起こします.
+1. どちらかの行を選んで解決します.
 
-1. _dev_ ブランチを作る.
-1. _dev_ に移る.
-1. いくつかコミットを作る.
-1. _origin/dev_ へ Push する.
-1. GitHub で Pull Request を作る.
-1. _dev_ を _main_ にマージし, リモートの _dev_ を消す.
-1. ローカルに戻り _main_ に移る.
-1. main を Pull し, ローカルの _dev_ を消す.
+**リモートコンフリクト**
 
-### Handson 3: 3 種類のコンフリクト
+1. `dev` に移り `foo2.txt` を作って一行 (例: "But the Emperor has nothing at all on!") を書き, `origin/dev` へ push します.
+1. `main` に移り `foo2.txt` を作って別の一行 (例: "Oh! How beautiful are our Emperor's new clothes!") を書き, `origin/main` へ push します.
+1. GitHub で Pull Request を作り, コンフリクトを起こします.
+    - 軽微なコンフリクトなら, GitHub 上で解決できます
+    - 複雑なコンフリクトの場合, ローカルで `origin/main` を `dev` にマージし,  コンフリクトを解決してから `origin/dev` へ push します.
 
-**1. ローカルコンフリクト**
+**Pullとコンフリクト**
 
-1. _dev_ に移り `foo1.txt` を作って一行 (例: "Tortilla sin Cebolla") を書き, コミットする.
-1. _main_ に移り `foo1.txt` を作って別の一行 (例: "Tortilla con Cebolla") を書き, コミットする.
-1. _dev_ を _main_ にマージしてコンフリクトを起こす.
-1. どちらかの行を選んでコンフリクトを解決する.
+1. `dev` に移り `foo3.txt` を作って一行 (例: "Mountain of Mushroom") を書き, コミットして `origin/dev` へ push します.
+1. GitHub で `dev` を `main` にマージします.
+1. ローカルに戻り `main` に移って `foo3.txt` に別の一行 (例: "Village of Bamboo Shoot") を書き, コミットします.
+1. `origin/main` から pull してコンフリクトを起こし, それを解決します.
 
-**2. Pull Request コンフリクト**
+:::
 
-1. _dev_ に移り `foo2.txt` を作って一行 (例: "But the Emperor has nothing at all on!") を書き, _origin/dev_ へ Push する.
-1. _main_ に移り `foo2.txt` を作って別の一行 (例: "Oh! How beautiful are our Emperor's new clothes!") を書き, _origin/main_ へ Push する.
-1. GitHub で Pull Request を作り, GitHub 上でコンフリクトを解決する.
+## 研究のワークフロー {#sec-workflow}
 
-**3. Pull コンフリクト**
+ここまでの道具を, 日々の研究で繰り返す一連の流れにまとめます. 私はだいたい次の6ステップを回しています. 最初はこの流れをそのまま真似るだけで十分です.
 
-1. _dev_ に移り `foo3.txt` を作って一行 (例: "Mountain of Mushroom") を書き, コミットして _origin/dev_ へ Push する.
-1. GitHub で _dev_ を _main_ にマージする.
-1. ローカルに戻り _main_ に移って `foo3.txt` に別の一行 (例: "Village of Bamboo Shoot") を書き, コミットする.
-1. _origin/main_ から Pull してコンフリクトを起こし, それを解決する.
+### 1. ローカルを同期する
 
-## Git & GitHub ワークフロー
+作業を始める前に, まず main を最新の状態にしておきます (@fig-wf-pull).
 
-ここまでの道具を, 日々の研究で使う一連の流れにまとめる.
-
-### 1. ローカルリポジトリを同期する
-
-作業を始める前に, まず main を最新の状態にしておく.
-
-![作業前に main を pull して最新化する](../static/cetz/wf-pull.svg){fig-align="center" width="55%"}
+![main を最新化](../static/cetz/wf-pull.svg){#fig-wf-pull fig-align="center" width="22%"}
 
 ```bash
 git switch main
 git pull origin main
 ```
 
-### 2. dev ブランチでコードを書く
+### 2. dev ブランチで書く
 
-main から dev を切り, そこで作業する.
+main から dev を切り, そこで作業します (@fig-wf-branch).
 
-![main から dev を切って作業する](../static/cetz/wf-branch.svg){fig-align="center" width="45%"}
+![dev ブランチで作業](../static/cetz/wf-branch.svg){#fig-wf-branch fig-align="center" width="50%"}
 
 ```bash
-git switch -c dev    # dev を作って移る (git branch dev && git switch dev と同じ)
-# ... コードを書く ...
+git switch -c dev    # create dev and switch to it (same as: git branch dev && git switch dev)
+# ... write code ...
 ```
 
 ### 3. コミットする
 
-意味のあるまとまりごとに, ステージしてコミットする.
+意味のあるまとまりごとに, ステージしてコミットします (@fig-wf-commit).
 
-![dev 上にコミットを積む](../static/cetz/wf-commit.svg){fig-align="center" width="40%"}
+![コミットを積む](../static/cetz/wf-commit.svg){#fig-wf-commit fig-align="center" width="50%"}
 
 ```bash
-git add foo1.txt foo2.txt    # コミットしたいファイルをステージ (git add . で全部)
-git commit -m "コミットメッセージ"
+git add foo1.txt foo2.txt    # stage files to commit (git add . for all)
+git commit -m "MESSAGE"
 ```
 
 ### 4. リモートへ Push する
 
-dev をリモートへ送る.
+dev をリモートへ送ります (@fig-wf-push).
 
-![dev を origin/dev へ push する](../static/cetz/wf-push.svg){fig-align="center" width="55%"}
+![dev を push](../static/cetz/wf-push.svg){#fig-wf-push fig-align="center" width="100%"}
 
 ```bash
 git push origin dev
@@ -330,41 +367,130 @@ git push origin dev
 
 ### 5. Pull Request とマージ
 
-GitHub 上で Pull Request を作り, dev を main にマージする.
+GitHub 上で Pull Request を作り, dev を main にマージします (@fig-wf-pr). マージが終わったら, リモートの dev ブランチを消しておくことを勧めます.
 
-![Pull Request で dev を main に取り込む](../static/cetz/wf-pr.svg){fig-align="center" width="55%"}
+![Pull Request でマージ](../static/cetz/wf-pr.svg){#fig-wf-pr fig-align="center" width="75%"}
 
-マージが終わったら, リモートとローカルの dev ブランチを消すことを勧める.
+### 6. ローカルの main を最新化する
 
-### Handson 4: 私のワークフローを真似る
+Pull Request でマージが済んだら, ローカルの main に戻って pull し, 役目を終えた dev を消します (@fig-wf-sync). これで手元の main にもマージ結果 (M) が反映され, 次の作業に備えられます.
 
-- ワークフロー 1〜5 を, いくつかコミットを作りながらたどる.
-- コマンドラインと VSCode の両方を試す.
+![ローカルの main を最新化](../static/cetz/wf-sync.svg){#fig-wf-sync fig-align="center" width="100%"}
+
+```bash
+git switch main
+git pull origin main
+git branch -d dev    # delete local dev branch
+```
+
+
+::: {.callout-tip}
+
+## Handson 4: ワークフローを真似る
+
+- 上のステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.
+
+:::
 
 ## 困ったときは
 
-### トラブルシュート
+git を使う最大の強みは, トラブルが起きた時に過去に戻って再開できることです. 
 
-**Git の操作履歴を見る** すべての操作 (commit, merge, rebase, ...) を確認できる.
+### 履歴をたどる
+
+まずは `git log --oneline` で, これまでのコミットを一覧します (@sec-git-log).
+
+```bash
+git log --oneline
+```
+
+```text
+a84d0e9 add computation-data
+9d04011 migrate to quarto book
+6761acb add high-speed
+```
+
+この一覧を図にすると @fig-commit-chain のようになります. 各コミットはハッシュ名で識別され, いまの作業位置を指す HEAD は, 最新コミット `a84d0e9` の main 上にあります. この一覧から, どのコミットのあたりで問題が起きたか, どの2つを見比べればよいかの見当をつけます.
+
+![コミット列と HEAD](../static/cetz/commit-chain.svg){#fig-commit-chain fig-align="center" width="55%"}
+
+### 変更を見比べる
+
+怪しいコミットの見当がついたら, `git diff` で中身を見比べます. @fig-commit-compare で見たように, 差分 (diff) を取れば「どこが, どう変わったか」だけに注目できます.
+
+```bash
+git diff                  # uncommitted changes vs the last commit
+git diff 9d04011 a84d0e9  # differences between two commits
+```
+
+出力では, 取り除かれた行が `-`, 加わった行が `+` で示されます.
+
+```text
+- tip <- mean(tip_amount)
++ tip <- mean(tip_amount, na.rm = TRUE)
+```
+
+この例なら, `na.rm = TRUE` を足したことが変化の原因だと分かります. ここまで切り分けられれば, あとはその場で直すか, 前の状態に戻すかです.
+
+### 操作を取り消す
+
+戻りたいコミットが分かったら, `git reset` で HEAD をそこへ移します. 行き先は `git log` で調べたハッシュで指定します. `--soft` は変更内容を手元に残したまま HEAD の位置だけを戻し, `--hard` は作業ディレクトリごとその状態に戻します (`--hard` は未コミットの変更を捨てるので注意してください).
+
+```bash
+git reset --soft HEAD~1    # undo the last commit, keep its changes
+git reset --hard 9d04011   # discard everything back to commit 9d04011
+```
+
+### 最終兵器: git reflog
+
+`git reset --hard` で戻りすぎたり, コミットを消してしまったりして, `git log` を見ても目当てのコミットが見つからない. そんなときの最終兵器が `git reflog` です. `git log` がいまの HEAD からたどれるコミット (プロジェクトの公式の歴史) しか見せないのに対し, `git reflog` は HEAD がこれまで指してきた位置の足あとを, 操作の種類ごとにすべて見せます.
 
 ```bash
 git reflog
 ```
 
-**操作を取り消す** 任意の操作まで巻き戻せる.
+出力はたとえば次のようになります.
 
-```bash
-git reset --soft コミットID または reflogのID
+```text
+a84d0e9 HEAD@{0}: commit: add computation-data
+9d04011 HEAD@{1}: reset: moving to HEAD~1
+1f2e3c4 HEAD@{2}: commit: experimental change
+9d04011 HEAD@{3}: commit: migrate to quarto book
 ```
 
-### 心に留めておくこと
+各行は, コミットのハッシュ, `HEAD@{N}` (N が何手前の状態か. 0 が最新), そして操作の種類と内容です. 注目してほしいのは `HEAD@{2}` の `1f2e3c4` です. これは一度コミットしたものの, その後の `reset` で main の履歴から外れたコミットで, `git log` にはもう現れません. それでも reflog には足あととして残っているので,
 
-Git で悪いことは起きない. Git はセーブポイントを保存しているだけだからである.
+```bash
+git reset --hard 1f2e3c4
+```
 
-- 実際にコミットからファイルを復元する場面はめったにない.
-- それでも, 「いつでも戻れる」という安心と自由が, 思い切った作業を支えてくれる.
+とすれば復元できます. このように reflog は, 他の方法で見失ったコミットまで救い出せる, 最後の安全網です.
 
-### もっと学ぶ
+::: {.callout-tip}
 
-- [Introduction to Git](https://learn.microsoft.com/en-us/training/modules/intro-to-git/)
-- [Introduction to GitHub](https://learn.microsoft.com/en-us/training/modules/introduction-to-github/)
+## Handson 5: reset と reflog で巻き戻す
+
+まず, 練習用のコミットをいくつか作ります.
+
+1. `foo.txt` を作り, "line 1" と書いてコミットします.
+1. "line 2" を追記してコミットします.
+1. "line 3" を追記してコミットします.
+1. `git log --oneline` で, 3つのコミットが積まれたことを確認します.
+
+次に, `reset` で1つ前に戻します.
+
+1. 最新の "line 3" を取り消したいので, `git reset --hard HEAD~1` を実行します.
+1. `git log --oneline` と `foo.txt` を見て, "line 3" のコミットと行が消えたことを確認します.
+
+最後に, 戻りすぎたぶんを `reflog` で元に戻します.
+
+1. やはり "line 3" が必要でした. `git reflog` を実行し, reset する前の状態 (`HEAD@{1}` の "line 3" のコミット) を探します.
+1. `git reset --hard HEAD@{1}` で, その状態に戻します.
+1. `git log --oneline` と `foo.txt` で, "line 3" が復活したことを確認します.
+
+:::
+
+### Git で悪いことは起きない
+
+最後に覚えておいてほしいのは, Git はセーブポイントを保存しているだけなので, 悪いことは起きない, ということです. 実際にコミットから古いファイルを復元する場面はめったにありません. それでも「いつでも戻れる」という安心感が, 思い切ってコードを書き換える自由を支えてくれます.
+

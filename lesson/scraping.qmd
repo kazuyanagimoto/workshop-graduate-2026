@@ -1,0 +1,284 @@
+---
+title: Web スクレイピング
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(rvest)
+library(httr2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(purrr)
+library(ggplot2)
+```
+
+## Client-Server Model {#sec-client-server}
+
+私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています (@fig-client-server).
+
+![クライアントとサーバー](../static/cetz/client-server.svg){#fig-client-server}
+
+- **クライアント** (client) は Web ブラウザやスマホのアプリなど, ユーザーが直接操作する側のソフトウェアです
+- **サーバー** (server) は Web サイトを運営する側のコンピュータで, クライアントからのリクエストに応じてデータを返す役割を担います
+
+このやり取りは HTTP (Hypertext Transfer Protocol) という共通のルールに従います. 中身は大きく2つに分かれます.
+
+- **リクエスト** (request): 「どの URL の何が欲しいか」をサーバーに伝えます. 例えば `GET /page` は「このページをください」という意味です (`GET` は取得, `POST` は送信を表す HTTP メソッドです).
+- **レスポンス** (response): サーバーからの返事です. 成否を表すステータスコード (`200 OK`, `404 Not Found` など) と, 本文 (body) から成ります. 本文は, Web ページなら HTML, API なら JSON であることが多いです.
+
+スクレイピングとは, 要するにあなたのプログラムがクライアント役になり, リクエストを送って, 返ってきた本文から欲しいデータを取り出す作業です. ブラウザで手作業のクリックやコピーをする代わりに, 同じやり取りをコードで再現するイメージだと考えてください.
+
+あとは, 返ってくる本文の形式によってやることが変わります. 本文が HTML ならそこから必要な要素を抜き出し, JSON なら構造化されたデータとしてそのまま扱えます. 以下では, この2つのケースを順に見ていきます.
+
+## HTML
+
+本文が HTML の場合, そこから欲しいデータを取り出すのがこの節の目標です. Web ページの HTML を取得し, 必要な要素を選んで, 表形式のデータに整える, という一連の流れを R の [`rvest`](https://rvest.tidyverse.org/) パッケージで実践します.
+
+### HTML の構造
+
+HTML (HyperText Markup Language) は, Web ページの中身を **タグ** で囲んで意味づけしたテキストです. 次は, 計量経済学の教科書を2冊並べた架空のページの HTML です.
+
+```html
+<html>
+  <body>
+    <h1>書籍一覧</h1>
+    <div class="book" data-id="1">
+      <span class="title">Mostly Harmless Econometrics</span>
+      <span class="price">4500</span>
+      <a href="/book/1">詳細</a>
+    </div>
+    <div class="book" data-id="2">
+      <span class="title">Causal Inference: The Mixtape</span>
+      <span class="price">3200</span>
+      <a href="/book/2">詳細</a>
+    </div>
+  </body>
+</html>
+```
+
+ここに出てくる用語を整理します.
+
+- 要素 (element): `<span class="title">Mostly Harmless Econometrics</span>` のように, 開始タグと終了タグ, そしてその間のテキストをまとめたものです. `<span>` がタグ名, 挟まれた `Mostly Harmless Econometrics` がテキストにあたります.
+- 属性 (attribute): タグの中に `name="value"` の形で書かれた付加情報です. 上の例では `class="book"`, `data-id="1"`, `href="/book/1"` が属性です. とりわけ `class` と `id` は要素を指し示す目印としてよく使います.
+- 入れ子 (nesting): 要素は要素を含みます. `<div class="book">` の中に `<span class="title">` があるように, HTML 全体は要素が入れ子になった木構造 (DOM ツリー) になっています.
+
+スクレイピングとは, この木構造から「`class` が `title` の `span` のテキスト」のように条件で要素を選び, テキストや属性を抜き出す作業にほかなりません.
+
+### 目印を見つける: 開発者ツール
+
+実際のページで「どの要素を選べばよいか」を調べるには, ブラウザの開発者ツール (developer tools) を使います. Chrome や Firefox で対象の箇所を右クリックし, 「検証」(Inspect) を選ぶと, その要素の HTML が表示されます. そこで `class` や `id`, タグ名を確認し, 次に説明する CSS セレクタとして書き写すのが基本の流れです.
+
+### CSS セレクタ
+
+要素を選ぶための記法を CSS セレクタ (CSS selector) といいます. もともとは見た目を整える CSS のためのものですが, スクレイピングでは「どの要素か」を指定する言語として使います. よく使うものは次のとおりです.
+
+| セレクタ | 意味 | 例 |
+|---|---|---|
+| `タグ名` | そのタグの要素 | `h1`, `a`, `span` |
+| `.クラス名` | その `class` を持つ要素 | `.title`, `.book` |
+| `#id名` | その `id` を持つ要素 | `#main` |
+| `祖先 子孫` | ある要素の中にある要素 | `.book .title` |
+| `親 > 子` | 直接の子だけ | `div > span` |
+| `[属性]` | その属性を持つ要素 | `a[href]` |
+
+: 主な CSS セレクタ {#tbl-css-selector}
+
+例えば `.book .title` は「`class="book"` の要素の中にある `class="title"` の要素」を意味し, さきほどの HTML では2冊ぶんの書名を指します.
+
+### rvest の基本
+
+`rvest` でのスクレイピングは, おおむね次の4ステップです.
+
+1. `read_html()` で HTML を読み込む
+2. `html_element()` / `html_elements()` で CSS セレクタを使って要素を選ぶ
+3. `html_text2()` でテキストを, `html_attr()` で属性を取り出す
+4. データフレームに整える
+
+`read_html()` は URL のほか, ファイルパスや HTML 文字列も受け取ります. まずは仕組みを確かめるために, さきほどの HTML を文字列としてそのまま読み込んでみましょう.^[本番では `read_html("https://...")` のように URL を渡します. 文字列やローカルファイルを読めるおかげで, ネットワークに接続せずに動作を確認できるので, セレクタの練習に便利です.]
+
+```{r}
+#| label: html-inline
+page <- minimal_html(
+  '
+  <h1>書籍一覧</h1>
+  <div class="book" data-id="1">
+    <span class="title">Mostly Harmless Econometrics</span>
+    <span class="price">4500</span>
+    <a href="/book/1">詳細</a>
+  </div>
+  <div class="book" data-id="2">
+    <span class="title">Causal Inference: The Mixtape</span>
+    <span class="price">3200</span>
+    <a href="/book/2">詳細</a>
+  </div>'
+)
+```
+
+ここで `html_element()` と `html_elements()` の違いが重要です. `html_elements()` (複数形) は条件に合う要素を **すべて** 返すのに対し, `html_element()` (単数形) は入力ごとに **最初の1つ** を返します.
+
+```{r}
+#| label: html-element-vs-elements
+page |> html_elements(".title") |> html_text2()
+page |> html_element(".title") |> html_text2()
+```
+
+この性質を組み合わせると, 表形式のデータをきれいに作れます. まず `html_elements(".book")` で「1冊 = 1行」となる単位を取り出し, その各要素に対して `html_element()` で列の値を1つずつ抜き出すのです. `html_element()` は要素が無いときに欠損値 `NA` を返すので, 行と列の対応がずれません.
+
+```{r}
+#| label: html-to-tibble
+books <- page |> html_elements(".book")
+
+tibble(
+  title = books |> html_element(".title") |> html_text2(),
+  price = books |> html_element(".price") |> html_text2() |> as.integer(),
+  link = books |> html_element("a") |> html_attr("href"),
+  id = books |> html_attr("data-id")
+)
+```
+
+テキストは `html_text2()` で取り出します.^[よく似た `html_text()` もありますが, こちらは HTML の生のテキストをそのまま返すため, 余分な空白や改行が混じりがちです. ブラウザでの見た目に近い `html_text2()` の方がたいてい扱いやすいです.] `href` や `data-id` のような属性は `html_attr("属性名")` で取り出します. なお, ページ全体が `<table>` で組まれた表なら, `html_table()` を使うと一発でデータフレームに変換できます.
+
+### 実例: 名言サイトをスクレイピングする
+
+仕組みがわかったところで, 実際の Web サイトに対して試してみましょう. ここでは, スクレイピングの練習用に公開されている [quotes.toscrape.com](https://quotes.toscrape.com/) を使います.^[現実のサイトを相手にする前に, このような練習用サイトで手を慣らすのがおすすめです. 構造が安定していて, アクセスしても迷惑がかからないよう作られています.] このサイトには, 名言とその著者が並んでいます.
+
+開発者ツールで確認すると, 1つの名言が `class="quote"` の `<div>` にまとまっており, その中に名言本文 (`.text`) と著者 (`.author`) が入っています. さきほどと同じ要領で, 1ページぶんを取り出す関数を書きます.
+
+```{r}
+#| label: scrape-page-fn
+scrape_page <- function(url) {
+  quotes <- read_html(url) |> html_elements(".quote")
+  tibble(
+    text = quotes |>
+      html_element(".text") |>
+      html_text2() |>
+      str_remove_all("[“”]"),
+    author = quotes |> html_element(".author") |> html_text2()
+  )
+}
+
+scrape_page("https://quotes.toscrape.com/")
+```
+
+`str_remove_all("[“”]")` は, 名言を囲んでいる引用符を取り除くための後処理です. このように, 取り出した直後のテキストはたいてい少し汚れているので, `stringr` で整える一手間が入ります.
+
+### ページ送りを処理する
+
+実際のサイトは複数ページに分かれていることがほとんどです. このサイトでは, 2ページ目が `https://quotes.toscrape.com/page/2/` のように URL の末尾に番号が付く形になっています. 規則がわかれば, さきほどの関数を各ページに適用してつなげるだけです.
+
+```{r}
+#| label: scrape-pages
+base <- "https://quotes.toscrape.com/page/"
+quotes <- map(1:3, \(i) scrape_page(paste0(base, i, "/"))) |>
+  list_rbind()
+
+count(quotes, author, sort = TRUE) |> head(5)
+```
+
+`purrr::map()` で1〜3ページ目をそれぞれスクレイピングし, `list_rbind()` で縦に積み重ねています. あとは集めた `quotes` を, 普段のデータフレームと同じように分析できます. 上では著者ごとの名言数を数えました.
+
+::: {.callout-warning}
+
+## スクレイピングのマナーと作法
+
+スクレイピングは便利ですが, 相手のサーバーに負荷をかけたり, 利用規約に反したりしうる行為です. 次の点に気をつけてください.
+
+- 利用規約と `robots.txt` (`https://サイト名/robots.txt`) を確認し, スクレイピングが許可されているか確かめます.
+- 公式の API (次節) が用意されているなら, そちらを優先します. API の方が安定していて, 相手にも優しいやり方です.
+- 短時間に大量のリクエストを送らないよう, ループの中で `Sys.sleep(1)` などを挟んで間隔をあけます.
+- ログインが必要なページや個人情報, 著作物の扱いには特に慎重になります.
+
+:::
+
+## API
+
+HTML のスクレイピングは, 本来「人が読むためのページ」から無理やりデータを取り出す作業でした. そのため, ページの見た目が変わるとセレクタが壊れますし, 相手のサーバーにとっても歓迎される使い方ではありません. 一方で, 多くのサービスは「プログラムがデータを取りに来るための窓口」をはじめから用意しています. これが API (Application Programming Interface) です. API があるなら, スクレイピングより API を使うのが第一の選択です. 返ってくるのは整形済みの構造化データなので, HTML をパースする手間がいらず, 仕様も安定しています.
+
+### REST API の基本
+
+Web の API の多くは REST という様式に従っており, 普段ブラウザがページを取りに行くのと同じ HTTP のやり取り (@sec-client-server で見たリクエストとレスポンス) でデータを受け渡します. 押さえるべきは次の3つです.
+
+- エンドポイント (endpoint): リクエストの宛先となる URL です. 「どのデータが欲しいか」が URL のパスに対応します.
+- クエリパラメータ (query parameter): URL の末尾に `?key=value&key2=value2` の形でくっつける絞り込み条件です. 期間や対象, 出力形式などを指定します.
+- レスポンス: 多くの場合 JSON 形式のテキストです. ステータスコード (`200` なら成功) もあわせて返ってきます.
+
+JSON (JavaScript Object Notation) は, データ交換でもっとも広く使われる形式です. `{"country": "Japan", "year": 2022}` のような「キーと値の組」と, `[...]` で囲まれた配列を入れ子にして表現します. R では `httr2` がこれを自動でリストに変換してくれるので, あとはそこから必要な値を取り出して整えるだけです.
+
+### httr2 でリクエストする
+
+R で API を叩くには [`httr2`](https://httr2.r-lib.org/) を使います. リクエストを少しずつ組み立て (`req_*`), 最後に送信して (`req_perform`), レスポンスから中身を取り出す (`resp_*`), という流れです.
+
+例として, 世界銀行の [World Bank Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392) を使い, 日本・アメリカ・韓国の1人あたり GDP (現在価格, USD) の時系列を取得します.^[世界銀行 API は認証なしで使え, 経済データの宝庫なので練習に向いています. 指標コード `NY.GDP.PCAP.CD` が1人あたり GDP, 国は ISO3 コード (`JPN`, `USA`, `KOR`) で指定します.] この API のエンドポイントは `https://api.worldbank.org/v2/country/{国コード}/indicator/{指標コード}` という形です.
+
+```{r}
+#| label: api-request
+resp <- request("https://api.worldbank.org/v2") |>
+  req_url_path_append(
+    "country",
+    "JPN;USA;KOR",
+    "indicator",
+    "NY.GDP.PCAP.CD"
+  ) |>
+  req_url_query(format = "json", date = "2000:2022", per_page = 20000) |>
+  req_perform()
+
+resp_status(resp)
+```
+
+`request()` でベース URL からリクエストを作り, `req_url_path_append()` でパスを, `req_url_query()` でクエリパラメータを付け足しています.^[パイプで組み立てるので, パラメータの追加や差し替えが読みやすいのが `httr2` の利点です. 古い `httr` パッケージの後継にあたります.] ここでは出力形式を JSON に, 期間を2000〜2022年に, 1ページあたりの件数を十分大きく指定しています. `req_perform()` で実際にリクエストを送り, `resp_status()` が `200` なら成功です.
+
+### JSON を tibble に整える
+
+レスポンスの本文は `resp_body_json()` でリストに変換します. 世界銀行 API の場合, 返ってくる JSON は2要素の配列で, 1つ目がページ情報 (総件数など) のメタデータ, 2つ目が実データの配列です.^[この「メタデータ + データ」という二段構えは世界銀行 API 固有の作りです. API ごとに JSON の構造は異なるので, 最初は `str(body, max.level = 2)` などで形を確かめるのが近道です.]
+
+```{r}
+#| label: api-parse
+body <- resp_body_json(resp)
+records <- body[[2]]
+
+length(records)
+str(records[[1]], max.level = 1)
+```
+
+各レコードは, 国・年・値などをキーに持つリストになっています. ここから欲しいキーだけを `purrr::map_*()` で抜き出して `tibble` に組み立てます. 値が欠損している年は `value` が `NULL` になっているので, `%||%` で `NA` に置き換えておきます.
+
+```{r}
+#| label: api-tibble
+gdp <- tibble(
+  country = map_chr(records, \(r) r$country$value),
+  year = as.integer(map_chr(records, \(r) r$date)),
+  gdp_pc = map_dbl(records, \(r) r$value %||% NA_real_)
+)
+
+gdp |> arrange(country, year)
+```
+
+これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます (@fig-gdp-pc).
+
+```{r}
+#| label: fig-gdp-pc
+#| fig-cap: "GDP per capita, 2000-2022 (World Bank)"
+ggplot(gdp, aes(year, gdp_pc, color = country, linetype = country)) +
+  geom_line(linewidth = 0.8) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  scale_color_discrete(name = NULL) +
+  scale_linetype_discrete(name = NULL) +
+  labs(x = NULL, y = "GDP per capita (current US$)") +
+  theme_minimal() +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.18, 0.85)
+  )
+```
+
+::: {.callout-note}
+
+## 認証とラッパーパッケージ
+
+実用的な API の多くは, 利用にあたって API キー (api key) の登録を求めます. キーはコードに直接書かず, `.Renviron` などの環境変数に置いて `Sys.getenv("MY_API_KEY")` で読み込みます (誤って GitHub に公開するのを防ぐためです). また, API には単位時間あたりのリクエスト数の上限 (rate limit) があるので, `req_throttle()` で送信間隔を, `req_retry()` で失敗時の再試行を設定しておくと安全です.
+
+なお, 有名なデータソースには, API 呼び出しを R の関数で包んだラッパーパッケージが用意されていることがよくあります. 世界銀行なら [`WDI`](https://github.com/vincentarelbundock/WDI), FRED なら [`fredr`](https://sboysel.github.io/fredr/), 政府統計 e-Stat なら [`estatapi`](https://github.com/yutannihilation/estatapi) などです. URL を自分で組み立てる前に, まずこうしたパッケージが無いか探すのが賢明です.
+
+:::

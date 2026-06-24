@@ -3,6 +3,8 @@
 #
 #   1. CeTZ diagrams   static/cetz/*.typ    -> static/cetz/*.svg
 #   2. Beamer decks    static/beamer/*.tex  -> static/beamer/<stem>-<page>.svg
+#   3. LaTeX figures   static/tex/*.tex     -> static/tex/<stem>.svg
+#   4. Quarto figures  static/quarto/_*.qmd -> static/quarto/<stem>.svg
 #
 # The Beamer sources are raw .tex compiled by TinyTeX (NOT through Quarto), so
 # the output is the genuine default Beamer look, navigation symbols and all.
@@ -15,7 +17,7 @@
 library(targets)
 library(tarchetypes)
 
-tar_option_set(packages = c("processx", "tinytex", "xfun"))
+tar_option_set(packages = c("processx", "tinytex", "xfun", "curl"))
 
 # --- CeTZ: one .typ -> one .svg --------------------------------------------
 
@@ -76,7 +78,91 @@ beamer_tex_paths <- function() {
   list.files("static/beamer", pattern = "\\.tex$", full.names = TRUE)
 }
 
+# --- LaTeX figures: one .tex -> one .svg ------------------------------------
+
+# Compile a standalone LaTeX figure with TinyTeX (latexmk runs bibtex, so
+# natbib + BibTeX citations resolve) and convert page 1 to an SVG. The page is
+# sized by the document's own geometry, so no cropping is needed. `refs` only
+# registers the .bib dependency, so editing the bibliography rebuilds the SVG.
+# The intermediate PDF is discarded; only the SVG is kept (and committed).
+compile_tex_to_svg <- function(tex, refs) {
+  stem <- tools::file_path_sans_ext(basename(tex))
+  outdir <- dirname(tex)
+
+  # biblatex documents need the Biber backend; plain BibTeX otherwise.
+  src <- readLines(tex, warn = FALSE)
+  bib_engine <- if (any(grepl("biblatex", src))) "biber" else "bibtex"
+
+  xfun::in_dir(outdir, {
+    tinytex::latexmk(basename(tex), engine = "pdflatex",
+      bib_engine = bib_engine, clean = TRUE)
+  })
+  pdf_out <- file.path(outdir, paste0(stem, ".pdf"))
+  svg_out <- file.path(outdir, paste0(stem, ".svg"))
+
+  processx::run("pdf2svg", c(pdf_out, svg_out, "1"))
+  file.remove(pdf_out)
+  svg_out
+}
+
+tex_paths <- function() {
+  list.files("static/tex", pattern = "\\.tex$", full.names = TRUE)
+}
+
+# --- Quarto figures: one .qmd -> one .svg -----------------------------------
+
+# Render a standalone Quarto document to PDF (Quarto resolves citations with
+# Pandoc citeproc) and convert page 1 to an SVG. Sources are prefixed with `_`
+# so the book project ignores them; the SVG is named without the prefix. `refs`
+# only registers the .bib dependency. The intermediate PDF is discarded.
+compile_qmd_to_svg <- function(qmd, refs) {
+  stem <- tools::file_path_sans_ext(basename(qmd))
+  outdir <- dirname(qmd)
+
+  # Render the format declared in the .qmd (pdf via LaTeX, or typst); both
+  # write a sibling <stem>.pdf.
+  xfun::in_dir(outdir, {
+    processx::run("quarto", c("render", basename(qmd)))
+  })
+  pdf_out <- file.path(outdir, paste0(stem, ".pdf"))
+  svg_out <- file.path(outdir, paste0(sub("^_", "", stem), ".svg"))
+
+  processx::run("pdf2svg", c(pdf_out, svg_out, "1"))
+  file.remove(pdf_out)
+  svg_out
+}
+
+qmd_paths <- function() {
+  list.files("static/quarto", pattern = "\\.qmd$", full.names = TRUE)
+}
+
+# --- Data: download the NYC taxi parquet -----------------------------------
+
+# Download one month of NYC TLC Yellow Taxi trip records (Parquet) into data/.
+# Used by lesson/computation-data.qmd. The file is gitignored; this target
+# fetches it on demand and skips the download if it is already present.
+# Source: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+download_taxi <- function(path) {
+  if (!file.exists(path)) {
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+    url <- paste0(
+      "https://d37ci6vzurychx.cloudfront.net/trip-data/",
+      "yellow_tripdata_2024-01.parquet"
+    )
+    curl::curl_download(url, path, mode = "wb")
+  }
+  path
+}
+
 list(
+  # --- Data ---
+  # NYC taxi parquet, downloaded into data/ (gitignored) on first build.
+  tar_target(
+    taxi_parquet,
+    download_taxi("data/yellow_tripdata_2024-01.parquet"),
+    format = "file"
+  ),
+
   # --- CeTZ ---
   # Shared helpers module, tracked as a file so edits invalidate every SVG.
   tar_target(cetz_helpers, "static/cetz/helpers.typ", format = "file"),
@@ -102,6 +188,37 @@ list(
     beamer_svg,
     compile_beamer_to_svg(beamer_tex),
     pattern = map(beamer_tex),
+    format = "file"
+  ),
+
+  # --- LaTeX figures (static/tex) ---
+  # Shared bibliography, tracked as a file so edits invalidate the figures.
+  tar_target(tex_refs, "static/tex/references.bib", format = "file"),
+
+  # One file-target per LaTeX figure source.
+  tar_files_input(tex_src, tex_paths()),
+
+  # Compile each .tex to a single SVG; depends on tex_refs so a bibliography
+  # edit rebuilds every figure.
+  tar_target(
+    tex_svg,
+    compile_tex_to_svg(tex_src, tex_refs),
+    pattern = map(tex_src),
+    format = "file"
+  ),
+
+  # --- Quarto figures (static/quarto) ---
+  # Shared bibliography, tracked as a file so edits invalidate the figures.
+  tar_target(quarto_refs, "static/quarto/references.bib", format = "file"),
+
+  # One file-target per Quarto source.
+  tar_files_input(quarto_qmd, qmd_paths()),
+
+  # Render each .qmd to a single SVG; depends on quarto_refs.
+  tar_target(
+    quarto_svg,
+    compile_qmd_to_svg(quarto_qmd, quarto_refs),
+    pattern = map(quarto_qmd),
     format = "file"
   )
 )

@@ -1,9 +1,15 @@
-/.quarto/
+.quarto/
 **/*.quarto_ipynb
 _site/
+_book/
 _targets/
 
 # Other
 refs/
 .DS_Store
 *.pdf
+
+# Downloaded datasets (produced by the targets pipeline)
+/data/
+
+/.quarto/

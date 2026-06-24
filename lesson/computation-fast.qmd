@@ -1,0 +1,608 @@
+---
+title: 高速化
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(bench)
+library(dplyr)
+library(tinytable)
+options(tinytable_html_mathjax = TRUE)
+
+# Format a byte count with a human-readable unit (B / KB / MB / GB / TB).
+fmt_bytes <- function(b) {
+  units <- c("B", "KB", "MB", "GB", "TB")
+  k <- pmin(floor(log(b, 1024)), length(units) - 1)
+  sprintf("%.1f %s", b / 1024^k, units[k + 1])
+}
+
+# Space used by matching: two covariate vectors (double) plus matched (integer).
+mem_match <- function(n) {
+  2 * as.numeric(object.size(numeric(n))) + as.numeric(object.size(integer(n)))
+}
+```
+
+## 計算量 {#sec-computation-theory}
+
+アルゴリズムの効率性を評価する尺度として, 計算時間とメモリ使用量があります.
+ここでいう計算時間とは, アルゴリズムが終了するまでにかかるステップ数 (**時間計算量**, time complexity) のことをいい, 実際のPC上での実行時間とは異なります.
+より高いスペックのPCを使えば, 同じアルゴリズムでも実行時間は短くなる一方で, ステップ数の次元が異なるアルゴリズムはマシンの性能に関わらず効率的と言えます.
+また, メモリ使用量とはアルゴリズムが終了するまでに必要なメモリの量 (**領域計算量**, space complexity) のことをいいます.
+
+### 時間計算量
+
+時間計算量は, 入力の大きさ $n$ に対するステップ数 $T(n)$ の関数として表されます.
+例えば, 配列の要素数が $n$ のときに, すべての要素を1回ずつ見るアルゴリズムは, $T(n) = n$ となります.
+また, 2重ループで配列のすべての組み合わせを調べるアルゴリズムは, $T(n) = n^2$ となります.
+このように, アルゴリズムの時間計算量は, 入力の大きさに対するステップ数の増加率によって特徴づけられます.
+
+時間計算量を評価する際, 重要なのは支配的な項の次元数になります.
+例えば, $T(n) = 3n^2 + 2n + 1$ の場合, $n$ が大きくなると $3n^2$ の項が支配的になるため, $n^2$ に着目すれば十分です.
+この考え方に従ったとき, 計算量を $O(n^2)$ と表記します.
+より厳密に表現すると以下のようになります.
+
+::: {.callout-note}
+
+## $O$-記法
+
+$f(n)$ が $O(g(n))$ とは, 任意の $n \ge 0$ に対して, ある定数 $C > 0$ が存在して, 以下の不等式が成り立つことをいう.
+
+$$
+|f(n)| \le C |g(n)|.
+$$
+
+:::
+
+定量モデルで気にする必要があるのは, ほとんどの場合, グリッド数によるオーダーです.
+例えば, $V(k, z)$ のような2次元の価値関数をグリッド上で計算する場合, $k$ のグリッド数 $n_k$ と $z$ のグリッド数 $n_z$ に対して, 計算量は $n_k n_z$ の関数となります.
+
+### 領域計算量
+
+領域計算量は, アルゴリズムが終了するまでに必要なメモリの量を, 入力の大きさ $n$ に対する関数として表します.
+例えば, 配列の要素数が $n$ のときに, すべての要素を保存するアルゴリズムは, 領域計算量が $O(n)$ となります.
+また, 2次元配列を保存するアルゴリズムは, 領域計算量が $O(n^2)$ となります.
+
+**メモリのヒエラルキー**
+
+なぜメモリの使用量が重要なのでしょうか.
+近年のPCは何百GBもの容量があるし, いくら使おうと問題ではないのではないか, と思うかもしれません.
+しかし, 実際には, メモリのヒエラルキー (memory hierarchy) によって, メモリの速度と容量が大きく異なります.
+
+一般に, 高速なメモリは高価であるため搭載量が少なく, 低速なメモリは安価であるため搭載量が多いです.
+それらを合わせると, @fig-memory-hierarchy のようなピラミッド型のヒエラルキーが形成されます.
+
+![メモリのヒエラルキー. 上にいくほど高速だが容量は小さい.](../static/cetz/memory-hierarchy.svg){#fig-memory-hierarchy}
+
+- レジスタ (Registers): CPU内部にある最も高速なメモリ
+- キャッシュ (Cache): (近年では) CPU内部にある高速なメモリ. L1, L2, L3 などのレベルがある. ここまでCPU内部にある.
+- 主記憶 (Main Memory): RAM (Random Access Memory)
+- 補助記憶 (Auxiliary Storage): SSD (Solid State Drive) やHDD (Hard Disk Drive)
+
+たとえば, AMDの [Ryzen 5 9600](https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html) (Zen 5世代) の場合, L1キャッシュは480KB, L2キャッシュは6MB, L3キャッシュは32MBです.
+レジスタはサイズで表現することはあまりありませんが, ざっくり数百B程度と考えてください.
+一方で, 一般にメモリと呼ばれる RAM は8GBから64GB 程度が一般的です.
+さらに, 一般にストレージとよばれるSSDやHDDは数百GBから数TBの容量があります.
+
+## 計算量の実践
+
+実際の推定を例に, 計算量を測定してみましょう.
+ここでは処置効果の推定で広く使われる**最近傍マッチング** (nearest-neighbor matching) を考えます.
+処置群の各個体について, 共変量 $x$ (傾向スコアなど) が最も近い対照群の個体を1人見つけ, その個体を対応させることで ATT を推定する方法です.
+
+**最近傍マッチング**
+
+処置群を $n_t$ 人, 対照群を $n_c$ 人とします.
+ナイーブに実装すると, 処置群の各個体について対照群の全員との距離を計算し, 最も近い個体を探すことになります.
+コードで表すと次の `match_nn` 関数のようになります.
+
+```{r}
+#| label: model-matching
+match_nn <- function(n_t, n_c, seed = 42L) {
+  set.seed(seed)
+  x_t <- rnorm(n_t) # covariate of treated units
+  x_c <- rnorm(n_c) # covariate of control units
+
+  matched <- integer(n_t)
+  for (i in 1:n_t) {
+    best_dist <- Inf
+    best_j <- 0L
+    for (j in 1:n_c) {
+      d <- abs(x_t[i] - x_c[j])
+
+      if (d < best_dist) {
+        best_dist <- d
+        best_j <- j
+      }
+    }
+
+    matched[i] <- best_j
+  }
+
+  matched
+}
+```
+
+時間計算量の数え方として, 四則演算, 比較 (`<` など), 代入, 配列へのアクセスは $O(1)$ とします.
+すると, 計算回数の主要部は二重ループ, つまり $O(n_t n_c)$ です.
+以下では簡単のため $n_t = n_c = n$ とするので, 時間計算量は $O(n^2)$ になります.
+一方で保存しているのはマッチング結果 `matched` (長さ $n_t$) と共変量ベクトルだけなので, 領域計算量は $O(n)$ です.
+では, $n$ を変化させたときの計算時間を測定してみましょう.
+
+**bench パッケージ**
+
+Rでは, `bench` パッケージを使うと実際の計算時間を測定できます.^[
+    `system.time()` でも簡易的に測定できますが, 1回の実行時間しか測れず, OSのスケジューリングなどの影響でばらつきます. `bench::mark()` は実行時間に応じて試行回数を自動で調整し, 実行時間の分布とメモリ割り当て量を返してくれるため, 関数の実行速度を正確に測定するのに適しています.
+]
+```{r}
+#| label: benchmark-match
+bm <- bench::mark(
+  "n = 100" = match_nn(100L, 100L),
+  "n = 1000" = match_nn(1000L, 1000L),
+  check = FALSE,
+  filter_gc = FALSE
+)
+```
+
+```{r}
+#| label: tbl-complexity
+#| tbl-cap: "観測数を変えたときのマッチングの計算時間とメモリ使用量"
+#| echo: false
+ns <- c(100L, 1000L)
+tibble(
+  `$n$` = ns,
+  `中央値 (ms)` = as.numeric(bm$median) * 1000,
+  `メモリ` = fmt_bytes(vapply(ns, mem_match, numeric(1)))
+) |>
+  tt() |>
+  format_tt(j = 2, digits = 1)
+```
+
+```{r}
+#| label: complexity-ratios
+#| include: false
+med <- as.numeric(bm$median)
+ratio_time <- med[2] / med[1]
+ratio_mem <- mem_match(ns[2]) / mem_match(ns[1])
+```
+
+$n$ を 100 から 1000 へ 10 倍にすると, 計算時間は約 `r round(ratio_time)` 倍になる一方で, メモリ使用量は約 `r round(ratio_mem)` 倍にしかなっていないことがわかります. これは, 計算時間が $O(n^2)$, 領域計算量が $O(n)$ であることと一致しています.
+
+## 高速化
+
+### プログラミング言語の選択
+
+プログラミング言語には, 明確に計算速度の壁があります. 経済学の分野で使われている言語だと, 次のような関係にあります.
+
+$$
+\text{C/C++, Fortran, Julia} \gg \text{Python, Matlab} > \text{R}
+$$
+
+![[Julia Micro Benchmarks](https://julialang.org/benchmarks/)](/static/img/benchmarks.svg){#fig-julia-benchmark}
+
+おおむね, C/C++, Fortran, Juliaは10-100倍ほどPython, Matlab, Rより速く計算が可能です. なおベクトル化というテクニックやPythonの[Numba](https://numba.pydata.org)を用いることで, Python, Matlab, Rでも同様の速度も出すことが可能ですが, C/C++, Fortran, Juliaなどの言語とはそもそも質的に異なるという事実は頭に入れておいた方が良いでしょう.
+
+### ベクトル化
+
+Python, Matlab, Rなどの言語ではベクトル化することで計算速度が改善されます. しかし, これは @sec-computation-theory から考えると矛盾しています. ベクトル化そのものは計算回数は変えませんし, ベクトル化することで確保されるメモリの量は増えるはずです. この矛盾はどこからくるのでしょう.
+
+これは主には型推定の問題です. Pythonなどのスクリプト言語は変数の型を実行時に確定させるため,^[
+    Juliaでは関数を定義する際に型を推定するため, 関数を実行時にはすでに型が確定しているため, スクリプト言語ではあるものの計算速度はC/C++やFortranに匹敵するほど速いです.
+] forループの中で型推定を行う必要があります. ベクトル化とは, 型が定まったベクトル同士の計算を行うという性質上, この型推定にかかる時間を削減しています.
+
+先ほどの `match_nn` を題材に, ベクトル化で実際に速くなるかを確かめてみましょう.
+`match_nn` のボトルネックは, 処置群の各個体について対照群すべてとの距離を1つずつ計算する内側ループでした.
+共変量の生成は計測から外したいので, 以下では共変量ベクトル `x_t`, `x_c` を引数に取る3通りの実装を比較します.
+
+まずは, 内側も外側も `for` で回す二重ループ版です.
+
+```{r}
+#| label: match-nn-loop
+match_nn_loop <- function(x_t, x_c) {
+  matched <- integer(length(x_t))
+  for (i in seq_along(x_t)) {
+    best_dist <- Inf
+    best_j <- 0L
+    for (j in seq_along(x_c)) {
+      d <- abs(x_t[i] - x_c[j])
+
+      if (d < best_dist) {
+        best_dist <- d
+        best_j <- j
+      }
+    }
+
+    matched[i] <- best_j
+  }
+
+  matched
+}
+```
+
+次に, 内側ループだけをベクトル化します.
+対照群すべてとの距離 `abs(xi - x_c)` を一度に計算し, `which.min()` で最も近い個体を選びます.
+処置群についての外側ループは, `for` の代わりに `purrr::map_int()` を使うと簡潔に書けます.^[`purrr::map_int()` は各要素に関数を適用して整数ベクトルを返す関数で, `for` ループとほぼ同じ速度です. 後の並列化でこの形がそのまま活きてきます.]
+
+```{r}
+#| label: match-nn-map
+match_nn_map <- function(x_t, x_c) {
+  purrr::map_int(x_t, \(xi) which.min(abs(xi - x_c)))
+}
+```
+
+最後に, 外側ループも消した完全ベクトル化版です.
+`outer()` で全ペアの距離を $n_t \times n_c$ の行列に一度に計算し, 各行の最小値の位置を `max.col()` で取り出します.
+
+```{r}
+#| label: match-nn-outer
+match_nn_outer <- function(x_t, x_c) {
+  d <- abs(outer(x_t, x_c, "-"))
+  max.col(-d, ties.method = "first")
+}
+```
+
+3通りの実装を比較してみましょう.
+`bench::mark()` はデフォルトで返り値の一致を確認するので, 3つが同じ結果を返すことも同時に検証されます.
+
+```{r}
+#| label: benchmark-vectorize
+set.seed(42)
+n <- 1000L
+x_t <- rnorm(n) # covariate of treated units
+x_c <- rnorm(n) # covariate of control units
+
+mb_vec <- bench::mark(
+  loop = match_nn_loop(x_t, x_c),
+  map = match_nn_map(x_t, x_c),
+  outer = match_nn_outer(x_t, x_c),
+  filter_gc = FALSE
+)
+```
+
+```{r}
+#| label: tbl-vectorize
+#| tbl-cap: "match_nn の実装による実行時間とメモリ割り当て ($n = 1000$)"
+#| echo: false
+labs <- c(
+  loop = "二重ループ",
+  map = "内側ベクトル化 (purrr::map)",
+  outer = "完全ベクトル化"
+)
+tibble(
+  `手法` = labs[as.character(mb_vec$expression)],
+  `中央値 (ms)` = as.numeric(mb_vec$median) * 1000,
+  `メモリ割り当て` = fmt_bytes(as.numeric(mb_vec$mem_alloc))
+) |>
+  tt() |>
+  format_tt(j = 2, digits = 2)
+```
+
+```{r}
+#| label: speedups-vec
+#| include: false
+med_vec <- setNames(as.numeric(mb_vec$median), as.character(mb_vec$expression))
+spd_inner <- med_vec[["loop"]] / med_vec[["map"]]
+```
+
+内側ループをベクトル化するだけで, 二重ループの約 `r round(spd_inner)` 倍高速になりました.
+`abs(xi - x_c)` のように型が定まったベクトル同士の演算にまとめることで, 対照群1人ずつに対して行っていた型推定のオーバーヘッドを取り除けるためです.
+外側ループを `purrr::map_int()` に変えても速度はほとんど変わりません. 速くなったのはあくまで内側のベクトル化によるものです.
+
+一方で, 完全ベクトル化はさらに速くなるわけではありません. むしろ @tbl-vectorize のとおり, メモリ割り当てが桁違いに大きくなっています. これは `outer()` が $n \times n$ の距離行列 ($8 n^2$ バイト) を一度に確保するためで, @sec-computation-theory でみた領域計算量そのものです. 内側ベクトル化も延べの割り当て量は大きいですが, 同時に保持するのは長さ $n$ の距離ベクトル1本だけ ($O(n)$) なのに対し, 完全ベクトル化は行列全体を保持し続ける ($O(n^2)$) ため, $n$ が大きいと RAM に収まらなくなります.
+
+### Rcpp
+
+Rcppは, RからC++のコードを呼び出すためのパッケージです. C++で書いた関数をRから呼び出すことができるため, 計算速度を大幅に改善することができます. 例えば, 先ほどの `match_nn` 関数のボトルネックである二重ループを, C++で書き直すと次のようになります.
+
+```{Rcpp}
+//| label: match-nn-cpp
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+IntegerVector match_nn_cpp(NumericVector x_t, NumericVector x_c) {
+  int n_t = x_t.size();
+  int n_c = x_c.size();
+  IntegerVector matched(n_t);
+
+  for (int i = 0; i < n_t; i++) {
+    double best_dist = R_PosInf;
+    int best_j = 0;
+    for (int j = 0; j < n_c; j++) {
+      double d = std::abs(x_t[i] - x_c[j]);
+
+      if (d < best_dist) {
+        best_dist = d;
+        best_j = j + 1;  // 1-based index for R
+      }
+    }
+    matched[i] = best_j;
+  }
+
+  return matched;
+}
+```
+
+`// [[Rcpp::export]]` を付けた関数は, コンパイル後にRから呼び出せるようになります.
+比較対象のR実装には, ベクトル化の節で定義した二重ループ版 `match_nn_loop` をそのまま使います.
+
+では, R版とRcpp版で実行時間を比較してみましょう.
+ここでは共変量の生成 (`rnorm`) を計測の外で行い, 二重ループそのものだけを測ります.^[`rnorm` によるデータ生成は $O(n)$ なので, 二重ループ ($O(n^2)$) と一緒に計測すると, 特に $n$ が小さいときに純粋なアルゴリズムの比較になりません. `bench::press()` はパラメータごとにブロックを評価し, 内側の `bench::mark()` の式だけを計測するため, 生成部分を計測から除外できます.]
+`bench::mark()` はデフォルトで両者の返り値が一致するかも確認するので, 書き直しても結果が変わっていないことを同時に検証できます.
+
+```{r}
+#| label: benchmark-rcpp
+bm_cpp <- bench::press(
+  n = c(100L, 1000L),
+  {
+    set.seed(42)
+    x_t <- rnorm(n) # covariate of treated units
+    x_c <- rnorm(n) # covariate of control units
+    bench::mark(
+      R = match_nn_loop(x_t, x_c),
+      Rcpp = match_nn_cpp(x_t, x_c),
+      filter_gc = FALSE
+    )
+  }
+)
+```
+
+```{r}
+#| label: tbl-rcpp
+#| tbl-cap: "R と Rcpp によるマッチングの計算時間と領域計算量"
+#| echo: false
+ms <- function(nn, impl) {
+  as.numeric(bm_cpp$median[
+    bm_cpp$n == nn & as.character(bm_cpp$expression) == impl
+  ]) *
+    1000
+}
+ns_cpp <- c(100L, 1000L)
+df_cpp <- data.frame(
+  ns_cpp,
+  vapply(ns_cpp, \(x) ms(x, "R"), numeric(1)),
+  fmt_bytes(vapply(ns_cpp, mem_match, numeric(1))),
+  vapply(ns_cpp, \(x) ms(x, "Rcpp"), numeric(1)),
+  fmt_bytes(vapply(ns_cpp, mem_match, numeric(1)))
+)
+colnames(df_cpp) <- c("$n$", "中央値 (ms)", "メモリ", "中央値 (ms)", "メモリ")
+df_cpp |>
+  tt() |>
+  format_tt(j = c(2, 4), digits = 2) |>
+  group_tt(j = list("R" = 2:3, "Rcpp" = 4:5))
+```
+
+```{r}
+#| label: speedup-rcpp
+#| include: false
+spd_100 <- ms(100L, "R") / ms(100L, "Rcpp")
+spd_1k <- ms(1000L, "R") / ms(1000L, "Rcpp")
+```
+
+同じ $O(n^2)$ のアルゴリズムでも, C++で書き直すことで $n = 100$ で約 `r round(spd_100)` 倍, $n = 1000$ で約 `r round(spd_1k)` 倍高速になりました.
+速度向上の倍率が $n$ によらずほぼ一定であることに注目してください.
+これは, Rcppが計算量のオーダー ($O(n^2)$) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです.
+@sec-computation-theory のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです.
+オーダーが同じである以上, $n$ を10倍にすれば計算時間はやはり約100倍になります.
+アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.
+
+一方で領域計算量に注目すると, RでもRcppでも保存するのはマッチング結果と共変量だけなので $O(n)$ のまま変わりません.
+完全ベクトル化が距離行列で $O(n^2)$ のメモリを消費したのとは対照的に, Rcppは自然な二重ループのまま, メモリを増やさずに速度だけを引き上げられるのです.
+
+## 並列化
+
+現代のCPUは複数のコアを持っており, 独立な計算を同時に走らせることで実時間を短縮できます.
+これを並列化 (parallelization) といいます.
+`match_nn` の外側ループ, つまり処置群の各個体について最も近い対照群を探す処理は, 個体ごとに独立しています.
+このように各反復が互いに依存しない計算は並列化と相性がよく, embarrassingly parallel と呼ばれます.
+
+### コア数の確認
+
+まず, 自分のPCが何コア使えるかを確認します.
+`future::availableCores()` が, 実際に利用可能なコア数を返してくれます.^[`parallel::detectCores()` でも取得できますが, こちらは論理コア数 (ハイパースレッディングを含む) を返すだけで, コンテナやHPCのジョブスケジューラによるCPU制限を無視します. `future::availableCores()` はそうした制限を反映した「本当に使える数」を返し, `plan()` の既定のワーカー数にもこの値が使われるため, 並列化ではこちらを見るのが安全です.]
+
+```{r}
+#| label: detect-cores
+future::availableCores()
+```
+
+以下では `future` と `furrr` を使って並列化します.
+`furrr::future_map()` は `purrr::map()` の並列版で, ほぼ同じ書き方のまま処理を複数コアに分散できます.
+
+### 並列化とベンチマーク
+
+逐次版には, ベクトル化の節で定義した `match_nn_map` をそのまま使います.
+並列版は, `purrr::map_int()` を `furrr::future_map_int()` に置き換えるだけです.
+
+```{r}
+#| label: parallel-funs
+library(future)
+library(furrr)
+
+match_nn_future <- function(x_t, x_c) {
+  furrr::future_map_int(x_t, \(xi) which.min(abs(xi - x_c)))
+}
+```
+
+並列化のバックエンドは `future::plan()` で指定します.
+`multisession` は複数のRプロセスを立ち上げ, それぞれにタスクを割り当てます.
+ここでは4コアを使い, $n = 1000$ と $n = 30000$ で逐次版と比較します.
+
+```{r}
+#| label: parallel-benchmark
+plan(multisession, workers = 4)
+
+bm_par <- bench::press(
+  n = c(1000L, 30000L),
+  {
+    set.seed(42)
+    x_t <- rnorm(n) # covariate of treated units
+    x_c <- rnorm(n) # covariate of control units
+    bench::mark(
+      serial = match_nn_map(x_t, x_c),
+      parallel = match_nn_future(x_t, x_c),
+      filter_gc = FALSE
+    )
+  }
+)
+
+plan(sequential)
+```
+
+```{r}
+#| label: tbl-parallel
+#| tbl-cap: "逐次処理と4コア並列処理の計算時間"
+#| echo: false
+ms_par <- function(nn, impl) {
+  as.numeric(bm_par$median[
+    bm_par$n == nn & as.character(bm_par$expression) == impl
+  ]) *
+    1000
+}
+ns_par <- c(1000L, 30000L)
+tibble(
+  `$n$` = ns_par,
+  `逐次 (ms)` = vapply(ns_par, \(x) ms_par(x, "serial"), numeric(1)),
+  `並列 (ms)` = vapply(ns_par, \(x) ms_par(x, "parallel"), numeric(1)),
+  `速度向上 (倍)` = vapply(
+    ns_par,
+    \(x) ms_par(x, "serial") / ms_par(x, "parallel"),
+    numeric(1)
+  )
+) |>
+  tt() |>
+  format_tt(j = 2:3, digits = 1) |>
+  format_tt(j = 4, digits = 2)
+```
+
+```{r}
+#| label: parallel-ratios
+#| include: false
+spd_par_small <- ms_par(1000L, "serial") / ms_par(1000L, "parallel")
+spd_par_big <- ms_par(30000L, "serial") / ms_par(30000L, "parallel")
+```
+
+$n = 1000$ では, 並列版の方がむしろ約 `r round(1 / spd_par_small)` 倍遅くなっています.
+各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです.
+一方 $n = 30000$ では, 並列版が約 `r round(spd_par_big, 1)` 倍速くなりました.
+
+ここで重要なのは2点です.
+第一に, 並列化はタダではありません.
+タスクの分配と結果の集約にオーバーヘッドがかかるため, 1つ1つの計算が軽い場合や問題が小さい場合には, かえって遅くなります.
+第二に, 速度向上のおおよその目安はコア数 (ここでは4) で, データの分配や集約のオーバーヘッドのぶん前後します.
+それでも, 各反復が独立で計算が十分重い場合には, 並列化はコア数に近い高速化をもたらす有効な手段です.
+
+### C++コードの並列化
+
+Rcppで書いたコードも並列化できます.
+先ほどの `furrr` は独立したRプロセスを複数立ち上げる方式でしたが, ここでは [`RcppParallel`](https://rcppcore.github.io/RcppParallel/) を使い, 1つのプロセス内で軽量なスレッドを並列に走らせます.^[macOSの標準コンパイラ (Apple clang) はOpenMPを標準では使えないため, ここでは移植性の高い `RcppParallel` を使います. なお, スレッドはメモリを共有するため, ワーカー内ではRのオブジェクトを直接触らず, スレッドセーフな `RVector` / `RMatrix` 経由でアクセスする必要があります.]
+
+並列化したい処理を `Worker` を継承した構造体の `operator()` に書き, `parallelFor()` で範囲を分割して各スレッドに割り当てます.
+中身は逐次版 `match_nn_cpp` の二重ループと同じで, 処置群についての外側ループを `begin` から `end` までに区切って担当します.
+
+```{Rcpp}
+//| label: match-nn-cpp-par
+#include <Rcpp.h>
+#include <RcppParallel.h>
+using namespace Rcpp;
+using namespace RcppParallel;
+
+// [[Rcpp::depends(RcppParallel)]]
+
+struct MatchWorker : public Worker {
+  const RVector<double> x_t;
+  const RVector<double> x_c;
+  RVector<int> matched;
+
+  MatchWorker(const NumericVector x_t, const NumericVector x_c, IntegerVector matched)
+    : x_t(x_t), x_c(x_c), matched(matched) {}
+
+  void operator()(std::size_t begin, std::size_t end) {
+    std::size_t n_c = x_c.length();
+    for (std::size_t i = begin; i < end; i++) {
+      double best_dist = R_PosInf;
+      int best_j = 0;
+      for (std::size_t j = 0; j < n_c; j++) {
+        double d = std::abs(x_t[i] - x_c[j]);
+
+        if (d < best_dist) {
+          best_dist = d;
+          best_j = j + 1;  // 1-based index for R
+        }
+      }
+      matched[i] = best_j;
+    }
+  }
+};
+
+// [[Rcpp::export]]
+IntegerVector match_nn_cpp_par(NumericVector x_t, NumericVector x_c) {
+  IntegerVector matched(x_t.size());
+  MatchWorker worker(x_t, x_c, matched);
+  parallelFor(0, x_t.size(), worker);
+  return matched;
+}
+```
+
+`RcppParallel::setThreadOptions()` でスレッド数を指定できます (既定では利用可能なすべてのコアを使います).
+`furrr` と揃えて4スレッドにし, 逐次版 `match_nn_cpp` と比較します.
+
+```{r}
+#| label: benchmark-rcpp-par
+library(RcppParallel)
+setThreadOptions(numThreads = 4)
+
+bm_cpp_par <- bench::press(
+  n = c(1000L, 30000L),
+  {
+    set.seed(42)
+    x_t <- rnorm(n) # covariate of treated units
+    x_c <- rnorm(n) # covariate of control units
+    bench::mark(
+      serial = match_nn_cpp(x_t, x_c),
+      parallel = match_nn_cpp_par(x_t, x_c),
+      filter_gc = FALSE
+    )
+  }
+)
+```
+
+```{r}
+#| label: tbl-rcpp-par
+#| tbl-cap: "逐次Rcppと4スレッド並列Rcppの計算時間"
+#| echo: false
+ms_cp <- function(nn, impl) {
+  as.numeric(bm_cpp_par$median[
+    bm_cpp_par$n == nn & as.character(bm_cpp_par$expression) == impl
+  ]) *
+    1000
+}
+ns_cp <- c(1000L, 30000L)
+tibble(
+  `$n$` = ns_cp,
+  `逐次 (ms)` = vapply(ns_cp, \(x) ms_cp(x, "serial"), numeric(1)),
+  `並列 (ms)` = vapply(ns_cp, \(x) ms_cp(x, "parallel"), numeric(1)),
+  `速度向上 (倍)` = vapply(
+    ns_cp,
+    \(x) ms_cp(x, "serial") / ms_cp(x, "parallel"),
+    numeric(1)
+  )
+) |>
+  tt() |>
+  format_tt(j = 2:3, digits = 1) |>
+  format_tt(j = 4, digits = 2)
+```
+
+```{r}
+#| label: rcpp-par-ratios
+#| include: false
+spd_cp_small <- ms_cp(1000L, "serial") / ms_cp(1000L, "parallel")
+spd_cp_big <- ms_cp(30000L, "serial") / ms_cp(30000L, "parallel")
+```
+
+同じ4コアでも, `furrr` が $n = 1000$ で逆に遅くなったのとは対照的に, `RcppParallel` は $n = 1000$ でも約 `r round(spd_cp_small, 1)` 倍, $n = 30000$ で約 `r round(spd_cp_big, 1)` 倍速くなりました.
+スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです.
+このように, Rcppで定数項を削り (オーダーは $O(n^2)$ のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.
+
+なお, すべての計算が並列化できるわけではありません.
+例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.

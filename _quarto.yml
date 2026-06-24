@@ -1,34 +1,35 @@
 project:
-  type: website
-  render:
-    # Website pages only. Files under static/ are inputs to the targets
-    # pipeline (CeTZ .typ, Beamer .qmd), not site pages, so exclude them.
-    - "*.qmd"
-    - "**/*.qmd"
-    - "!static/**"
-    - "!refs/**"
+  type: book
 
-website:
-  title: 大学院生のためのワークショップ
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-    right:
-      - text: "Lessons"
-        file: lesson/index.qmd
-  sidebar:
-    - title: "Classes and readings"
-      contents:
-        - section: "Overview"
-          contents:
-            - lesson/index.qmd
-    - section: "Foundations"
-      contents:
-        - lesson/git.qmd
-        - lesson/literature.qmd
-        - lesson/visualization.qmd
-        - lesson/slides.qmd
+book:
+  title: Best Practices
+  subtitle: 大学院生のためのワークショップ
+  author:
+    - name: 柳本和春
+      email: yanagimoto@econ.kobe-u.ac.jp
+      orcid: 0009-0007-1967-8304
+      affiliations:
+        - name: 神戸大学
+  date: last-modified
+  date-format: "最終更新: YYYY年MM月DD日"
+  chapters:
+    - index.qmd
+    - lesson/shell.qmd
+    - lesson/git.qmd
+    - lesson/computation-fast.qmd
+    - lesson/computation-data.qmd
+    - lesson/api.qmd
+    - lesson/visualization.qmd
+    - lesson/regression.qmd
+    - lesson/slides.qmd
+    - lesson/quarto.qmd
+    - lesson/literature.qmd
+    - lesson/targets.qmd
+    - lesson/ai.qmd
+  appendices:
+    - lesson/dictionary.qmd
+    - references.qmd
+
 
 
 format:
@@ -38,15 +39,25 @@ format:
       - brand
     css: styles.css
     toc: true
-
-
-author:
-  - name: Kazuharu Yanagimoto
-    email: yanagimoto@econ.kobe-u.ac.jp
-    orcid: 0009-0007-1967-8304
-    affiliations:
-    - name: Kobe University
-
-lang: ja
+    number-depth: 2
+    lightbox: true
 
 freeze: auto
+execute:
+  warning: false
+  message: false
+  error: false
+
+bibliography: references.bib
+bibliography-style: chicago-author-date
+link-citations: true
+
+knitr:
+  opts_chunk: 
+    fig.align: center
+    fig.retina: 3
+    fig.width: 8
+    fig.height: 3.708
+    out.width: 90%
+    collapse: true
+    dev: svg

@@ -2,10 +2,354 @@
 title: 回帰分析
 ---
 
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(tidyr)
+library(tinytable)
+library(fixest)
+library(modelsummary)
+library(marginaleffects)
+library(ggfixest)
+library(ggplot2)
+options(tinytable_html_mathjax = TRUE)
+```
+
 ## 表
+
+論文や資料に載せる表は, 長らく `kableExtra` や `gt` で作るのが定番でした. しかし近年は, それらより軽量で扱いやすい [`tinytable`](https://vincentarelbundock.github.io/tinytable/) が標準になりつつあります. `tinytable` は base R だけで動く依存ゼロのパッケージでありながら, セルの結合や色付け, 数式の埋め込みといった凝った表現にも対応し, HTML・LaTeX・PDF・Typst のどの形式にも同じコードから書き出せます. 後で紹介する `modelsummary` の回帰表もそのまま `tinytable` のオブジェクトとして返ってくるため, 一度使い方を覚えれば表まわりはこれ一つで完結します.
+
+ここでは R にに同包されている `penguins` データセットを使って, `tinytable` の基本的な使い方を紹介します.
+
+### 基本: `tt()`
+
+`tinytable` の出発点は `tt()` です. データフレーム (`data.frame`, `tibble`) を渡すだけで表になります. まずは種ごとの個体数と, くちばしの長さ・体重の平均をまとめてみましょう.
+
+```{r}
+#| label: tbl-penguins-basic
+#| tbl-cap: ペンギンの種別の要約統計量
+penguins_summary <- penguins |>
+  summarize(
+    n = n(),
+    bill_len = mean(bill_len, na.rm = TRUE),
+    body_mass = mean(body_mass, na.rm = TRUE),
+    .by = species
+  )
+
+penguins_summary |>
+  tt()
+```
+
+### 数値の整形: `format_tt()`
+
+@tbl-penguins-basic は平均値の桁数がばらばらで読みにくいです. `format_tt()` を使うと, 列を指定して桁数や区切り文字をそろえられます. `j` で対象の列を, `digits` で小数点以下の桁数を, `num_mark_big` で 3 桁ごとの区切り文字を指定します.
+
+```{r}
+#| label: tbl-penguins-format
+#| tbl-cap: 桁数をそろえた要約統計量
+penguins_summary |>
+  tt() |>
+  format_tt(j = "bill_len", digits = 1, num_fmt = "decimal") |>
+  format_tt(
+    j = "body_mass",
+    digits = 0,
+    num_fmt = "decimal",
+    num_mark_big = ","
+  )
+```
+
+欠損値の扱いも `format_tt()` の仕事です. 集計の途中で生じた `NA` は, 表の上では空白やハイフンに置き換えたいことがほとんどです. その場合は `replace` 引数を使います. 例えば種ごと・島ごとの個体数をクロス集計すると, ペンギンの生息分布には偏りがあるため (Gentoo は Biscoe 島, Chinstrap は Dream 島にしかいません), 観測のない組み合わせが `NA` になります.
+
+```{r}
+#| label: tbl-penguins-na
+#| tbl-cap: 種と島ごとの個体数
+penguins |>
+  summarize(n = n(), .by = c(species, island)) |>
+  pivot_wider(names_from = island, values_from = n) |>
+  tt() |>
+  format_tt(replace = "-")
+```
+
+### スタイル: `style_tt()`
+
+見出しを太字にする, 特定の行を強調する, セルに色を付けるといった装飾は `style_tt()` がまとめて引き受けます. 行は `i`, 列は `j` で指定し (`i = 0` はヘッダ行を指します), `bold`・`italic`・`color`・`background` などを組み合わせます. ここでは, 体重が 4000g を超える行に背景色を付けて目立たせてみます. 条件は R 側で計算して `i` に渡すのがポイントです.
+
+```{r}
+#| label: tbl-penguins-style
+#| tbl-cap: 平均体重が大きい種を強調
+penguins_summary |>
+  tt() |>
+  format_tt(j = "bill_len", digits = 1, num_fmt = "decimal") |>
+  format_tt(
+    j = "body_mass",
+    digits = 0,
+    num_fmt = "decimal",
+    num_mark_big = ","
+  ) |>
+  style_tt(i = 0, bold = TRUE) |>
+  style_tt(i = which(penguins_summary$body_mass > 4000), background = "#ffe9b3")
+```
+
+### 行と列のグループ化: `group_tt()`
+
+複数の列を一つの見出しでまとめたり (LaTeX の `multicolumn` に相当), 行をカテゴリごとに束ねたり (`multirow` に相当) するのが `group_tt()` です. 列方向のグループは `j` に, 行方向のグループは `i` に, それぞれ名前付きリストで「見出し = 範囲」を渡します.
+
+まず列をまとめてみます. くちばし関連の指標と体格関連の指標を, それぞれ一つの見出しの下に置きます.
+
+```{r}
+#| label: tbl-penguins-group-col
+#| tbl-cap: 指標をグループ化した要約統計量
+penguins |>
+  summarize(
+    bill_len = mean(bill_len, na.rm = TRUE),
+    bill_dep = mean(bill_dep, na.rm = TRUE),
+    flipper_len = mean(flipper_len, na.rm = TRUE),
+    body_mass = mean(body_mass, na.rm = TRUE),
+    .by = species
+  ) |>
+  tt() |>
+  format_tt(j = 2:5, digits = 1, num_fmt = "decimal") |>
+  group_tt(j = list("Bill (mm)" = 2:3, "Body" = 4:5))
+```
+
+次に行をまとめます. 性別ごとに種別の平均を並べ, 性別を行の見出しにします. `i` に渡す数値は「その行の直前に見出しを挿入する」位置を表すので, 雌が 1–3 行目, 雄が 4–6 行目なら `list("Female" = 1, "Male" = 4)` とします.
+
+```{r}
+#| label: tbl-penguins-group-row
+#| tbl-cap: 性別で行をまとめた平均値
+penguins |>
+  filter(!is.na(sex)) |>
+  summarize(
+    bill_len = mean(bill_len),
+    body_mass = mean(body_mass),
+    .by = c(sex, species)
+  ) |>
+  arrange(sex, species) |>
+  select(-sex) |>
+  tt() |>
+  format_tt(j = "bill_len", digits = 1, num_fmt = "decimal") |>
+  format_tt(
+    j = "body_mass",
+    digits = 0,
+    num_fmt = "decimal",
+    num_mark_big = ","
+  ) |>
+  group_tt(i = list("Female" = 1, "Male" = 4))
+```
+
+### キャプションと脚注
+
+これまでの表ではキャプションを Quarto のチャンクオプション `#| tbl-cap:` で与えていました. こうしておくと番号付けと相互参照 (`@tbl-penguins-basic` のような書き方) が効くので, 文章中から表を参照する場合はこちらを使います. 一方で, 出典や注記を表の下に添えたいときは `tt()` の `notes` 引数を使います.
+
+```{r}
+#| label: tbl-penguins-notes
+#| tbl-cap: 注を付けた表
+penguins_summary |>
+  tt(notes = "Source: Palmer Station LTER. body_mass の単位はグラム.") |>
+  format_tt(j = "bill_len", digits = 1, num_fmt = "decimal") |>
+  format_tt(
+    j = "body_mass",
+    digits = 0,
+    num_fmt = "decimal",
+    num_mark_big = ","
+  )
+```
+
+### セル内の数式
+
+列見出しやセルに数式を入れたいことはよくあります. `tinytable` ではセルの中に LaTeX を `$...$` で書けます. HTML 出力では MathJax で描画されるので, セットアップチャンクで `options(tinytable_html_mathjax = TRUE)` を有効にしておきます (この章の冒頭で設定済みです). 列名を後から付け替えるには `setNames()` を使うのが手軽です.
+
+```{r}
+#| label: tbl-penguins-math
+#| tbl-cap: 列見出しに数式を使った表
+penguins_summary |>
+  setNames(c(
+    "Species",
+    "$n$",
+    "$\\bar{x}_{\\mathrm{bill}}$",
+    "$\\bar{x}_{\\mathrm{mass}}$"
+  )) |>
+  tt() |>
+  format_tt(j = 3, digits = 1, num_fmt = "decimal") |>
+  format_tt(j = 4, digits = 0, num_fmt = "decimal", num_mark_big = ",")
+```
+
+### 出力形式とエクスポート
+
+ここまで作った表は, Quarto上でレンダリングする文書の形式 (HTML / PDF / Typst) に合わせて `tinytable` が自動的に適切な出力へ変換してくれます. 同じコードがどの形式でも通用するのが `tinytable` の大きな利点です. 表を単体のファイルとして書き出したいときは `save_tt()` を使い, 拡張子から形式を判断させます (例: `save_tt("table.tex")` で LaTeX, `save_tt("table.png")` で画像). LaTeX 文書に貼り付けるためにスタイルを落とした素の `tabular` が欲しい場合は, 保存前に `theme_tt("tabular")` を挟みます.
 
 ## 回帰分析
 
-### Standard Errors
+R で回帰分析を行う方法は数えきれないほどあります. 標準誤差の頑健化には `sandwich` や `estimatr`, 高次元固定効果には `lfe`, 操作変数法には `AER`, 限界効果には `margins` や `mfx`, と用途ごとに別々のパッケージを覚えるのが従来の常識でした. しかし結論から言えば, いまや applied micro の実証で必要になる推定のほとんどは `fixest` ひとつでまかなえます. この節では `lm()` を出発点に, なぜ `fixest` だけ覚えればよいのか, そしてその使い方を見ていきます. 引き続き `penguins` データセットを使い, ペンギンの体重 (`body_mass`) を体格から説明する回帰を例にします.
 
-### 固定効果回帰
+### `lm()` による回帰
+
+最も基本的な回帰は `lm()` です. 第一引数に `y ~ x1 + x2` という formula を, `data` に元データを渡します. 皆さんの多くはすでに使ったことがあるはずなので, ここでは formula 記法だけ手短に復習します.
+
+```{r}
+#| label: lm-basic
+fit_lm <- lm(body_mass ~ flipper_len + bill_len + species, data = penguins)
+summary(fit_lm)
+```
+
+formula の中ではいくつかの演算子が特別な意味を持ちます. 押さえておきたいのは次の 4 つです.
+
+- `x1:x2` は交互作用項だけを, `x1 * x2` は主効果と交互作用項の両方 (`x1 + x2 + x1:x2`) を展開します.
+- `as.factor(x)` や文字列・factor 型の変数は, 自動的にダミー変数に展開されます (上の例の `species` がそれです).
+- `log(x)` や `poly(x, 2)` のように, formula の中で関数変換をそのまま書けます.
+- `I(x^2)` のように, 算術演算をそのまま使いたいときは `I()` で囲みます.
+
+例えば「フリッパー長の効果が種によって異なる」モデルは `flipper_len * species` と書けます.
+
+```{r}
+#| label: lm-interaction
+lm(body_mass ~ flipper_len * species, data = penguins) |>
+  coef()
+```
+
+### パッケージは `fixest` だけでよい
+
+`lm()` は手軽ですが, 実証で必要になる頑健標準誤差・クラスター標準誤差・高次元固定効果・操作変数法・非線形モデルには対応していません. これらを補うために従来は用途ごとのパッケージを使い分けていましたが, [`fixest`](https://lrberge.github.io/fixest/) はそのすべてを単一の統一的なインターフェースで提供します. 対応関係を整理すると次のようになります.
+
+| やりたいこと | 従来のパッケージ | `fixest` での書き方 |
+|---|---|---|
+| Robust SE | `estimatr`, `sandwich` | `feols(..., vcov = "hetero")` |
+| Clustered SE | `estimatr`, `sandwich` | `feols(..., vcov = ~ id)` |
+| 高次元固定効果 | `lfe::felm` | `feols(y ~ x \| fe1 + fe2)` |
+| 操作変数法 (2SLS) | `AER::ivreg` | `feols(y ~ x \| fe \| d ~ z)` |
+| ロジット・ポアソン | `glm` | `feglm()`, `fepois()` |
+| イベントスタディ | (専用実装が必要) | `feols(y ~ i(t, treat))` + `iplot()` |
+
+機能が豊富なだけではありません. `fixest` は固定効果の吸収アルゴリズムが非常に高速で, 同じ高次元固定効果モデルを `lfe` や Stata の `reghdfe` より速く推定できることがベンチマークで示されています[^fixest-bench]. 数千万行規模のパネルでもストレスなく回せるため, 速度の面でも `fixest` を選ばない理由はほとんどありません.
+
+[^fixest-bench]: ベンチマークは `fixest` の公式ドキュメント ([Benchmarking](https://lrberge.github.io/fixest/articles/fixest_walkthrough.html)) と @berge2026 を参照してください.
+
+### `fixest` の使い方
+
+中心となる関数は `feols()` (線形回帰) です. 基本の書き方は `lm()` とほぼ同じで, formula に縦棒 `|` を加えると, その後ろに書いた変数を固定効果として吸収します. ここでは種 (`species`) と島 (`island`) を固定効果に入れてみます.
+
+```{r}
+#| label: feols-fe
+m_fe <- feols(
+  body_mass ~ flipper_len + bill_len | species + island,
+  data = penguins
+)
+m_fe
+```
+
+出力の標準誤差に注目してください. `fixest` は固定効果モデルでは, 既定で最初の固定効果 (ここでは `species`) でクラスタリングした標準誤差を返します. 標準誤差の種類は `vcov` 引数で明示的に切り替えられます. 推定し直さずに `summary()` で変えることもできます.
+
+```{r}
+#| label: feols-vcov
+# Heteroskedasticity-robust (HC1)
+feols(body_mass ~ flipper_len | species, data = penguins, vcov = "hetero")
+
+# Clustered on island
+feols(body_mass ~ flipper_len | species, data = penguins, vcov = ~island)
+```
+
+操作変数法も同じ関数で書けます. formula の末尾に `| 内生変数 ~ 操作変数` を足すだけです (固定効果と併用する場合は `y ~ 外生変数 | 固定効果 | 内生変数 ~ 操作変数` の順). 非線形モデルは `feglm()` (一般化線形モデル) と `fepois()` (ポアソン回帰) が担当し, 引数は `glm()` とほぼ同じです.
+
+```{r}
+#| label: feols-glm
+# Logit: probability of being male
+pen <- penguins |>
+  filter(!is.na(sex)) |>
+  mutate(is_male = as.integer(sex == "male"))
+
+feglm(is_male ~ body_mass + bill_len | species, data = pen, family = binomial)
+```
+
+推定したモデルをコンソールで手早く見比べたいだけなら, `fixest` 組み込みの `etable()` が便利です. 論文や資料に載せるきれいな回帰表は, 次の節で `modelsummary` を使って作ります.
+
+### 回帰表を整える: `modelsummary`
+
+複数のモデルを並べた回帰表は, 前節の `tinytable` がバックエンドの [`modelsummary`](https://modelsummary.com/) で作ります. 推定結果のリストを渡すだけで表になり, `output = "tinytable"` を指定すれば「表」の節で紹介したスタイリングがそのまま使えます. まずは何の加工もしていない既定の出力です.
+
+```{r}
+#| label: tbl-ms-default
+#| tbl-cap: modelsummary の既定の出力
+models <- list(
+  "(1)" = feols(body_mass ~ flipper_len + bill_len, data = penguins),
+  "(2)" = feols(
+    body_mass ~ flipper_len + bill_len,
+    data = penguins,
+    vcov = "hetero"
+  ),
+  "(3)" = feols(
+    body_mass ~ flipper_len + bill_len | species,
+    data = penguins
+  ),
+  "(4)" = feols(
+    body_mass ~ flipper_len + bill_len | species + island,
+    data = penguins
+  )
+)
+
+modelsummary(models)
+```
+
+既定の表は変数名がそのまま並び, 統計量も載りすぎて雑然としています. 論文用に仕上げるには, 主に次の 3 つの引数を使います.
+
+- `coef_map`: 表示する係数の選択・並べ替え・改名を, 名前付きベクトルで一度に行います. ここに挙げた係数だけが, 指定した順で表示されます.
+- `gof_map`: 表の下部に並ぶ適合度統計量 (goodness-of-fit) を選んで改名します. `raw` (内部名)・`clean` (表示名)・`fmt` (小数桁数) の 3 列を持つ `tibble` で渡すのが柔軟です. 固定効果の有無を示す行 (`FE: species` など) もここで改名できます.
+- `stars`: 有意水準のアスタリスクを定義します.
+
+これらを適用したのが次の表です. さらに `modelsummary` の返り値は `tinytable` オブジェクトなので, `group_tt()` を継ぎ足してモデルをグループ分けする見出し (column spanner) を付けられます.
+
+```{r}
+#| label: tbl-ms-polished
+#| tbl-cap: 標準誤差と固定効果を変えた回帰の比較
+cm <- c(
+  "flipper_len" = "Flipper length",
+  "bill_len" = "Bill length"
+)
+
+gm <- tibble(
+  raw = c("FE: species", "FE: island", "nobs", "r2.within"),
+  clean = c("FE: Species", "FE: Island", "Observations", "Within R2"),
+  fmt = c(0, 0, 0, 3)
+)
+
+modelsummary(
+  models,
+  output = "tinytable",
+  stars = c("*" = .1, "**" = .05, "***" = .01),
+  coef_map = cm,
+  gof_map = gm
+) |>
+  group_tt(j = list("Pooled OLS" = 2:3, "Fixed effects" = 4:5))
+```
+
+LaTeX 文書に貼り付けたい場合は, 「表」の節で触れたように `theme_tt("tabular")` を挟んでから `save_tt("table_reg.tex")` で書き出します. 同じ回帰表のコードから HTML でも PDF でも同じ表が得られるのが, `tinytable` ベースで作ることの利点です.
+
+### 係数のプロット: `ggfixest`
+
+回帰係数を点と区間で並べた係数プロットは, 表よりも一目で大小と有意性が伝わります. `fixest` には `coefplot()` / `iplot()` という作図関数が組み込まれていますが, これらは base R グラフィックスを使うため `ggplot2` との相性がよくありません. そこで [`ggfixest`](https://grantmcdermott.com/ggfixest/) を使うと, 同じものを `ggplot` オブジェクトとして描けます (`ggcoefplot()` と `ggiplot()`).
+
+```{r}
+#| label: fig-coefplot
+#| fig-cap: "Coefficient plot for the two-way fixed-effects model."
+ggcoefplot(m_fe) +
+  theme_minimal()
+```
+
+`ggfixest` が特に活躍するのがイベントスタディです. `fixest` では formula の中に `i(time, treat, ref)` と書くと, 処置群について時点ごとの交互作用項 (= イベントスタディの係数) が一括で作られます. `ref` で基準時点を指定します. ここでは `fixest` に同梱されている擬似的な差分の差分 (difference-in-differences) データ `base_did` を使います.
+
+```{r}
+#| label: fig-event-study
+#| fig-cap: "Event-study estimates around treatment (reference period = 5)."
+data(base_did, package = "fixest")
+
+est_did <- feols(
+  y ~ x1 + i(period, treat, ref = 5) | id + period,
+  data = base_did
+)
+
+ggiplot(est_did) +
+  labs(x = "Period", y = "Estimate and 95% CI", title = NULL) +
+  theme_minimal()
+```
+
+処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています [@sun2021]. その場合は `i()` の代わりに `sunab()` を使うと, @sun2021 の補正済み推定量がそのまま得られ, `ggiplot()` で同じように描けます.

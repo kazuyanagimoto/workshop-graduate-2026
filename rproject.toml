@@ -44,4 +44,11 @@ dependencies = [
     "here",
     "targets",
     "tarchetypes",
+    "modelsummary",
+    "marginaleffects",
+    "ggfixest",
+    "rvest",
+    "httr2",
+    "stringr",
+    "purrr",
 ]

@@ -1,0 +1,14 @@
+---
+bibliography: references.bib
+reference-section-title: References
+link-citations: true
+format:
+  pdf:
+    documentclass: article
+    pagestyle: empty
+    geometry: [paperwidth=17cm, paperheight=8cm, margin=1cm]
+---
+
+@acemoglu2012 argue that institutions are a fundamental cause of
+long-run growth. This view builds on earlier work [@halljones1999],
+and is developed in detail elsewhere [see @acemoglu2012, chap. 2].

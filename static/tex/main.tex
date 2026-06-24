@@ -1,0 +1,20 @@
+% Minimal natbib + BibTeX example for lesson/literature.qmd.
+% Compiled by the targets pipeline (TinyTeX latexmk -> pdf2svg).
+% The page is sized to the content so the SVG needs no cropping.
+\documentclass[11pt]{article}
+\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}
+\usepackage[round]{natbib}      % round -> parentheses are ( )
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\citet{acemoglu2012} argue that institutions are a fundamental cause
+of long-run growth. This view builds on earlier work
+\citep{halljones1999}, and is developed in detail elsewhere
+\citep[see][chap.~2]{acemoglu2012}.
+
+\bibliographystyle{econ-aea}    % AEA style provided by econ-bst
+\bibliography{references}       % read references.bib
+
+\end{document}

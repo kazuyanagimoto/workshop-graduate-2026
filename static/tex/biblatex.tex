@@ -1,0 +1,20 @@
+% Minimal biblatex + Biber example for lesson/literature.qmd.
+% Compiled by the targets pipeline (TinyTeX latexmk -> pdf2svg); latexmk runs
+% biber automatically. The page is sized to the content so no cropping is needed.
+\documentclass[11pt]{article}
+\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}
+\usepackage[authordate, backend=biber]{biblatex-chicago}
+\addbibresource{references.bib} % include the extension
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textcite{acemoglu2012} argue that institutions are a fundamental cause
+of long-run growth. This view builds on earlier work
+\parencite{halljones1999}, and is developed in detail elsewhere
+\parencite[see][chap.~2]{acemoglu2012}.
+
+\printbibliography              % print the reference list
+
+\end{document}

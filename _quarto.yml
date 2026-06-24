@@ -18,12 +18,12 @@ book:
     - lesson/git.qmd
     - lesson/computation-fast.qmd
     - lesson/computation-data.qmd
-    - lesson/scraping.qmd
+    - lesson/api.qmd
     - lesson/visualization.qmd
     - lesson/regression.qmd
     - lesson/slides.qmd
-    - lesson/literature.qmd
     - lesson/quarto.qmd
+    - lesson/literature.qmd
     - lesson/targets.qmd
     - lesson/ai.qmd
   appendices:
@@ -50,6 +50,7 @@ execute:
 
 bibliography: references.bib
 bibliography-style: chicago-author-date
+link-citations: true
 
 knitr:
   opts_chunk: 

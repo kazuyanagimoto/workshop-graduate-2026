@@ -51,4 +51,6 @@ dependencies = [
     "httr2",
     "stringr",
     "purrr",
+    "WDI",
+    "estatapi",
 ]

@@ -1,5 +1,6 @@
 ---
 title: AIと研究する
+draft: true
 ---
 
 ## 文献調査

@@ -8,6 +8,7 @@ _targets/
 refs/
 .DS_Store
 *.pdf
+.vscode/
 
 # Local R environment (machine-specific PATH, never commit)
 .Renviron

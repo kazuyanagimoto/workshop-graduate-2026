@@ -1,6 +1,5 @@
 ---
 title: 可視化の技術
-draft: true
 ---
 
 この章では, データ可視化に関するいくつかのTipsを紹介します. しかし, これらのテクニックは次の一つの原則に基づいているに過ぎません.
@@ -238,9 +237,16 @@ penguins_bar |>
 
 ただし, 日本語でラベルを追加しようと思うと, Helvetica や Arial には日本語が含まれていないため, 日本語が豆腐化 (□) してしまいます. 日本語を表示するためには, 日本語が含まれているフォントを指定する必要があります. 例えば, Windows では Meiryo, Mac では Hiragino Kaku Gothic ProN などが日本語を含むサンセリフ体のフォントとしてよく使われます.
 
-### 日本語フォントの解決法
+### フォントの指定方法
 
-一つの問題として, PC間でコードを共有した場合に, フォントが入っていないと言う問題が起きます. 特にMacのヒラギノ系は有料フォントであるため, Macユーザ以外が持っていることは想定しないほうが良いです. これらの問題をシンプルに解決するのが, `showtext` パッケージです. `showtext` を使うことでフォント周りの問題をコード上で完結させることができます.
+グラフのフォントを指定するには大きく2つの問題があります:
+
+1. **システムにフォントが入っているか**. コードを共有する相手のPCに, そのフォントが入っていないと, そのフォントは使えない場合があります. 例えば, Mac のヒラギノ系は有料フォントであるため, Mac ユーザ以外が持っていることは想定しないほうが良いです.
+1. **R がそのフォントを使えるか**. R の図はグラフィックデバイスとよばれる仕組みを通じて描かれており, フォントを見つけて出力に反映できるかどうかはデバイスごとに異なります (詳しくは @sec-graphics-device を参照). 例えば, PDF デバイスではシステムのフォントを自動では参照せず, デバイスに登録された Type 1 フォントしか使えません. さらにデフォルトではフォントを埋め込まず, PDF にはフォント名だけが書き込まれるため, 閲覧環境に同じフォントがなければ表示が崩れます. 埋め込むには Ghostscript 経由の `embedFonts()` が別途必要です.
+
+これらの問題をシンプルに解決するのが, `showtext` パッケージです.^[
+  論文に適した図を作成する, 用途に応じて適切なグラフィックデバイスを選択する, といった観点では, `showtext` は厳密に言えば最適な解決策ではありません (@sec-graphics-device 参照). しかし, フォントのインストールや埋め込みの手間を考えると, まずは `showtext` を使うのが最も簡単です.
+] `showtext` は, 文字をフォントとしてではなくグリフのアウトライン (曲線) として描画することで, この問題をデバイスや閲覧環境によらず回避します. さらに `font_add_google()` を使えば, Google Fonts からフォントをダウンロードして登録できるため, フォントのインストール自体も不要になります.
 
 ```{r}
 #| label: install-showtext
@@ -249,6 +255,8 @@ library(showtext)
 font_add_google("Noto Sans JP")
 showtext_auto()
 ```
+
+`showtext_auto()` は, この描画方法を以後に開かれるすべての描画デバイスで自動的に有効にするスイッチです. Quarto (knitr) はチャンクごとに新しいデバイスを開くため, これを最初に一度呼んでおかないと, チャンクごとに `showtext_begin()` と `showtext_end()` で囲む必要が出てきます.
 
 ```{r}
 #| label: plot-showtext
@@ -303,6 +311,7 @@ penguins_bar |>
 
 ```{r}
 #| label: fig-bitmap-vector
+#| echo: false
 #| fig-cap: "The number 1992 as a bitmap (pixels) versus a vector (points and paths)."
 #| layout-ncol: 2
 #| fig-subcap:
@@ -318,8 +327,8 @@ txt <- "1992"
 sz <- 300
 shape <- shape_text(txt, family = "sans", weight = "bold", size = sz)$shape
 
-# 各グリフの輪郭 (アウトライン) を取り出し, ペン位置 x_offset だけ右にずらす.
-# tolerance を大きくするほど曲線を粗い直線で近似する.
+# Extract each glyph outline and shift it right by the pen position x_offset.
+# Larger tolerance approximates curves with coarser line segments.
 outline <- function(tolerance) {
   parts <- lapply(seq_len(nrow(shape)), function(i) {
     o <- glyph_outline(
@@ -338,16 +347,16 @@ outline <- function(tolerance) {
   out
 }
 
-fill_df <- outline(0.2) # 細かく分割: 滑らかな塗り
-node_df <- outline(25) # 粗く分割: アンカーポイントとして表示
+fill_df <- outline(0.2) # fine segments: smooth fill
+node_df <- outline(25) # coarse segments: shown as anchor points
 
-# 塗りつぶした字形 (穴は subgroup で抜く)
+# Filled glyphs (holes are cut out via subgroup)
 glyph_fill <- ggplot(fill_df, aes(x, y, group = gid, subgroup = sub)) +
   geom_polygon(fill = "black") +
   coord_equal() +
   theme_void()
 
-# ビットマップ: 同じ字形を低解像度に縮小し, 補間なしで引き伸ばす
+# Bitmap: downscale the same glyphs to a low resolution, then upscale without interpolation
 tmp <- tempfile(fileext = ".png")
 ggsave(tmp, glyph_fill, width = 5, height = 2.2, dpi = 200, bg = "white")
 bitmap <- image_read(tmp) |>
@@ -357,7 +366,7 @@ bitmap <- image_read(tmp) |>
   image_threshold("white", "55%") |>
   image_resize("720x", filter = "point")
 
-# ベクター: 字形を塗り, 輪郭のアンカーポイントを重ねる
+# Vector: fill the glyphs and overlay the outline anchor points
 vector_plot <- glyph_fill +
   geom_path(
     data = node_df,
@@ -385,21 +394,23 @@ vector_plot
 きれいに見せるにはピクセル数を増やすしかなく, その分ファイルサイズも大きくなります.
 一方, 右のベクターは輪郭を点 (アンカーポイント) とパスで定義しているので, どれだけ拡大しても滑らかなままで, ファイルサイズも解像度に依存しません.
 
-### JPEG は不可逆圧縮でノイズが出る
+### JPEG の非可逆圧縮
 
 写真は本質的にラスター形式です.
 そして, ラスター形式のファイル形式のうち, JPEG は非可逆圧縮 (lossy compression) を採用しています.
 ファイルサイズを大きく減らせる代わりに, 圧縮を強めると輪郭のまわりにノイズ (アーティファクト) が生じます.
-1枚の写真を `static/img/raster-photo.jpg` に置いておき, 高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
+1枚の写真^[Kodak True Color Image Suite ([kodim23](https://r0k.us/graphics/kodak/kodim23.html)). 画像圧縮のベンチマークに広く使われている, 利用制限なしで公開されたテスト画像です.] を高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
 
 ```{r}
 #| label: load-photo
-photo <- image_read("../static/img/raster-photo.jpg")
+#| include: false
+photo <- image_read("../static/img/raster-photo.png")
 info <- image_info(photo)
 ```
 
 ```{r}
 #| label: fig-jpeg-artifacts
+#| echo: false
 #| fig-cap: "The same photo saved as high- and low-quality JPEG, magnified."
 #| layout-ncol: 2
 #| fig-subcap:
@@ -409,8 +420,8 @@ crop_geom <- sprintf(
   "%dx%d+%d+%d",
   round(info$width * 0.25),
   round(info$height * 0.25),
-  round(info$width * 0.37),
-  round(info$height * 0.37)
+  round(info$width * 0.17),
+  round(info$height * 0.38)
 )
 
 show_jpeg <- function(quality) {
@@ -431,6 +442,7 @@ show_jpeg(5)
 
 ```{r}
 #| label: tbl-image-size
+#| echo: false
 #| tbl-cap: "同じ写真を各形式で保存したときのファイルサイズ"
 library(tinytable)
 
@@ -459,7 +471,7 @@ JPEG は, 写真のように色がなめらかに変化する画像にはとて�
 しかし, 輪郭のはっきりしたグラフや文字, ロゴでは, 線の周りに同じノイズが乗ってしまいます.
 そのため, グラフをラスター形式で保存するなら JPEG ではなく PNG を使い, 可能ならベクター形式を選びます.
 
-### ベクターは拡大しても劣化しない
+### ベクター形式の利点
 
 ベクター形式は図形を数式で記録するので, どれだけ拡大しても輪郭は滑らかなままで, ファイルサイズも解像度に依存しません.
 グラフは点・線・文字でできているので, ベクター形式と非常に相性が良いです.
@@ -467,6 +479,7 @@ ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
 
 ```{r}
 #| label: fig-vector-graph
+#| echo: false
 #| fig-cap: "A vector graphic stays sharp at any zoom level."
 #| fig-format: svg
 #| fig-width: 5

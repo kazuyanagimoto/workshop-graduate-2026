@@ -2,6 +2,7 @@ project:
   type: book
 
 book:
+  search: false
   title: Best Practices
   subtitle: 大学院生のためのワークショップ
   author:

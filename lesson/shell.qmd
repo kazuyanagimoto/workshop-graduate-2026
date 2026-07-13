@@ -1,12 +1,11 @@
 ---
 title: Shell
-draft: true
 ---
 
 ## Shell とは
 ### Unix 哲学
 
-これから使うシェルという道具は1970年代に Bell 研究所で生まれた [Unix](https://ja.wikipedia.org/wiki/UNIX) という OS の系譜を引いています. その背景にあるのが Unix 哲学 (Unix philosophy) です.
+これから使うシェルという道具は, 前章の Unix の系譜 (@sec-unix-family) で見た OS, [Unix](https://ja.wikipedia.org/wiki/UNIX) とともに Bell 研究所で生まれました. macOS と Linux でコマンドや開発ツールがほぼ共通なのは同じ Unix の流れを汲むためで, これから学ぶシェルの操作もこの系譜の上にあります. その設計の背景にあるのが Unix 哲学 (Unix philosophy) です.
 
 > Do One Thing and Do It Well
 
@@ -15,7 +14,7 @@ draft: true
 
 ### Shell, Terminal, CLI
 
-シェル (shell) やターミナル (terminal) といった言葉は, いずれも **コマンドラインインターフェース** (CLI, command line interface) を指しています. シェルにはいくつか種類がありますが, ここでは最も標準的な [**Bash**](https://www.gnu.org/software/bash/) (Bourne again shell) を中心に扱います. 書くOSの標準的なシェルは次のとおりです.
+前章で見たように, アプリケーションは OS が用意した窓口 (システムコール) を通じてその機能を利用するのでした (@sec-os). シェルもその一つで, OS への指示を人間がキーボードから直接打ち込むためのプログラムです. シェル (shell) やターミナル (terminal) といった言葉は, いずれも **コマンドラインインターフェース** (CLI, command line interface) を指しています. シェルにはいくつか種類がありますが, ここでは最も標準的な [**Bash**](https://www.gnu.org/software/bash/) (Bourne again shell) を中心に扱います. 各OSの標準的なシェルは次のとおりです.
 
 - Linux: Bash
 - macOS: zsh (Bash 互換)
@@ -175,7 +174,7 @@ ls -lh examples
 出力の各行は, 次のような情報を持っています.
 
 ```bash
-drwxr-xr-x 2 grant users 4.0K Jan 12 22:12 ABC
+drwxr-xr-x 2 kazuharu users 4.0K Jan 12 22:12 ABC
 ```
 
 これを左から順に読み解くと, 次のようになります.
@@ -183,11 +182,11 @@ drwxr-xr-x 2 grant users 4.0K Jan 12 22:12 ABC
 - 先頭1文字はオブジェクトの種類です. `d` (ディレクトリ), `l` (リンク), `-` (ファイル).
 - 続く9文字はパーミッション (権限) です. 3文字ずつ, **所有者**, **所有者のグループ**, **その他のユーザー** の順に並びます.
     - 各文字は `r` (読み取り), `w` (書き込み), `x` (実行) の可否を表します. `-` はその権限が無いことを示します.
-- 次の数字はハードリンクの数です.
-- その後に, オブジェクトの **所有者** と **グループ** が続きます.
+- 次の数字はハードリンクの数ですが, あまり重要ではありません.
+- その後に, オブジェクトの **所有者** と **グループ** が続きます. グループの名前は環境によって変わり, この例の `users` の位置が, macOS では `staff`, Ubuntu (WSL) ではユーザー名と同名のグループになります.
 - 最後に, サイズ, 作成日時, 名前が並びます.
 
-パーミッションと所有者については, この章の最後でもう一度詳しく扱います.
+パーミッションと所有者については, 後の節で詳しく説明します (@sec-permission).
 
 ### 作る・消す
 
@@ -476,7 +475,7 @@ done
 
 たとえば次のような短いスクリプト `hello.sh` を考えます.
 
-```bash
+```{.bash filename="hello.sh"}
 #!/bin/sh
 echo -e "\nHello World!\n"
 ```
@@ -504,7 +503,7 @@ Rscript -e "cat('Hello World, from R!')"
 このとき, シェルから R へ追加の引数を渡せると便利な場面が多いです.
 R 側では, スクリプトの冒頭で次のように引数を受け取ります.
 
-```r
+```{.r filename="hello.R"}
 args <- commandArgs(trailingOnly = TRUE)
 i <- args[1]
 j <- args[2]
@@ -518,20 +517,7 @@ Rscript hello.R 12 9
 
 引数を渡すかどうかは任意ですが, 大きなジョブをまとめて回す (バッチ処理) ようなときに役立ちます.
 
-### スクリプトを編集する
-
-スクリプトの細かい編集には, シェル上のエディタを使うのがよいでしょう.
-
-- [**Vim**](https://www.vim.org/): 非常に強力ですが, 習得には時間がかかります.
-- [**nano**](https://www.nano-editor.org/): より入門向けです. `nano hello.sh` で開き, 編集後は {{< kbd Ctrl-X >}}, {{< kbd y >}}, {{< kbd Enter >}} で保存して終了します.
-
-## ユーザー権限とファイルパーミッション
-
-::: {.callout-note}
-この節は Linux や macOS などの Unix 系 OS を前提にしています.
-Windows ユーザーは一部のコマンドが動かなくても驚かないでください.
-ただし, 後でリモートの Linux サーバーや Docker コンテナを扱うようになると, 誰にとっても関係してくる内容です.
-:::
+## 権限とパーミッション {#sec-permission}
 
 ### スーパーユーザー: root と sudo
 
@@ -561,7 +547,7 @@ root として常時ログインすることも一応できますが, 安全装�
 先ほど `ls -lh` で見た `ABC` ディレクトリを思い出しましょう.
 
 ```bash
-drwxr-xr-x 2 grant users 4.0K Jan 12 22:12 ABC
+drwxr-xr-x 2 kazuharu users 4.0K Jan 12 22:12 ABC
 ```
 
 このパーミッションを変えるのが `chmod` です.

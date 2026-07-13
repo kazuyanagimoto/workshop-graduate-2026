@@ -21,3 +21,9 @@ Reserve bold for at most one of these per passage:
 Do NOT bold technical terms, concept names, tool/package names, or numbers just to make them stand out. Terminology is not emphasis; readers will notice it anyway. When in doubt, leave it plain.
 
 This applies to all prose (`.qmd`, `.md`); it generalises the `quarto-r` skill's "bold sparingly" slide rule to the whole repository.
+
+## Code: write all comments in English
+
+Write every comment and docstring in code in English. This applies to all languages (R, Python, shell, and others), to code chunks in `.qmd` files, and to both new and existing code.
+
+Exception: Japanese is allowed only when it is intrinsic to the operation itself — for example, when the source data is in Japanese and a keyword, column name, or literal used for filtering or matching must be Japanese, and a short note explaining that literal is warranted. String literals and data values in Japanese are of course fine; this rule governs human-facing explanatory comments, not data.

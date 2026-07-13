@@ -1,5 +1,6 @@
 ---
 title: 可視化の技術
+draft: true
 ---
 
 この章では, データ可視化に関するいくつかのTipsを紹介します. しかし, これらのテクニックは次の一つの原則に基づいているに過ぎません.
@@ -54,11 +55,11 @@ $$
 ```{r}
 #| label: plot-penguins-bar-default
 penguins_bar <- penguins |>
-    filter(!is.na(sex))
+  filter(!is.na(sex))
 
 penguins_bar |>
-    ggplot(aes(x = species, fill = sex)) +
-    geom_bar(position = "dodge")
+  ggplot(aes(x = species, fill = sex)) +
+  geom_bar(position = "dodge")
 ```
 
 このグラフには
@@ -72,19 +73,19 @@ penguins_bar |>
 ```{r}
 #| label: plot-penguins-bar-minimal
 penguins_bar |>
-    ggplot(aes(x = species, fill = sex)) +
-    geom_bar(position = "dodge") +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "Number of Penguins by Species and Sex"
-    ) +
-    theme_minimal() +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.x = element_blank()
-    )
+  ggplot(aes(x = species, fill = sex)) +
+  geom_bar(position = "dodge") +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Penguins by Species and Sex"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank()
+  )
 ```
 
 さらに可読性を高めるために, 棒を横向きにして凡例をパネル内の空白に移します. 横向きにするとカテゴリ名が水平に並ぶので, ラベルが長くなっても読みやすくなります. また, 凡例をパネル内の空白に移すことで, グラフ全体のバランスが良くなります.
@@ -92,24 +93,24 @@ penguins_bar |>
 ```{r}
 #| label: plot-penguins-bar-flip
 penguins_bar |>
-    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
-    geom_bar(position = "dodge") +
-    coord_flip() +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "Number of Penguins by Species and Sex"
-    ) +
-    theme_minimal() +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.9, 0.15),
-        plot.title.position = "plot"
-    ) +
-    guides(fill = guide_legend(reverse = TRUE))
+  ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Penguins by Species and Sex"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.9, 0.15),
+    plot.title.position = "plot"
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 なお, 横向きに変えたことに伴って見づらくなってしまった点があるので
@@ -130,25 +131,25 @@ penguins_bar |>
 ```{r}
 #| label: plot-color-brewer
 penguins_bar |>
-    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
-    geom_bar(position = "dodge") +
-    coord_flip() +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "Number of Penguins by Species and Sex"
-    ) +
-    scale_fill_brewer(palette = "Set2") +
-    theme_minimal() +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.9, 0.15),
-        plot.title.position = "plot"
-    ) +
-    guides(fill = guide_legend(reverse = TRUE))
+  ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Penguins by Species and Sex"
+  ) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.9, 0.15),
+    plot.title.position = "plot"
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 ### カラー・セーフティ: Okabe-Ito パレット
@@ -158,25 +159,25 @@ penguins_bar |>
 ```{r}
 #| label: plot-okabe-ito
 penguins_bar |>
-    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
-    geom_bar(position = "dodge") +
-    coord_flip() +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "Number of Penguins by Species and Sex"
-    ) +
-    see::scale_fill_okabeito() +
-    theme_minimal() +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.9, 0.15),
-        plot.title.position = "plot"
-    ) +
-    guides(fill = guide_legend(reverse = TRUE))
+  ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Penguins by Species and Sex"
+  ) +
+  see::scale_fill_okabeito() +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.9, 0.15),
+    plot.title.position = "plot"
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 ### MetBrewer パレット
@@ -196,25 +197,25 @@ library(MetBrewer)
 ```{r}
 #| label: plot-metbrewer
 penguins_bar |>
-    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
-    geom_bar(position = "dodge") +
-    coord_flip() +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "Number of Penguins by Species and Sex"
-    ) +
-    scale_fill_manual(values = met.brewer("Kandinsky")) +
-    theme_minimal() +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.9, 0.15),
-        plot.title.position = "plot"
-    ) +
-    guides(fill = guide_legend(reverse = TRUE))
+  ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Penguins by Species and Sex"
+  ) +
+  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.9, 0.15),
+    plot.title.position = "plot"
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 ## フォント
@@ -252,38 +253,38 @@ showtext_auto()
 ```{r}
 #| label: plot-showtext
 penguins_bar |>
-    mutate(
-        species = recode(
-            species,
-            "Adelie" = "アデリー",
-            "Chinstrap" = "ヒゲ",
-            "Gentoo" = "ジェンツー"
-        ),
-        sex = recode(
-            sex,
-            "male" = "オス",
-            "female" = "メス"
-        )
-    ) |>
-    ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
-    geom_bar(position = "dodge") +
-    coord_flip() +
-    labs(
-        x = NULL,
-        y = NULL,
-        fill = NULL,
-        title = "ペンギンの種と性別ごとの個体数"
-    ) +
-    scale_fill_manual(values = met.brewer("Kandinsky")) +
-    theme_minimal(base_family = "Noto Sans JP") +
-    theme(
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.9, 0.15),
-        plot.title.position = "plot"
-    ) +
-    guides(fill = guide_legend(reverse = TRUE))
+  mutate(
+    species = recode(
+      species,
+      "Adelie" = "アデリー",
+      "Chinstrap" = "ヒゲ",
+      "Gentoo" = "ジェンツー"
+    ),
+    sex = recode(
+      sex,
+      "male" = "オス",
+      "female" = "メス"
+    )
+  ) |>
+  ggplot(aes(x = forcats::fct_rev(species), fill = sex)) +
+  geom_bar(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "ペンギンの種と性別ごとの個体数"
+  ) +
+  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  theme_minimal(base_family = "Noto Sans JP") +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.9, 0.15),
+    plot.title.position = "plot"
+  ) +
+  guides(fill = guide_legend(reverse = TRUE))
 ```
 
 ## 画像形式
@@ -320,19 +321,21 @@ shape <- shape_text(txt, family = "sans", weight = "bold", size = sz)$shape
 # 各グリフの輪郭 (アウトライン) を取り出し, ペン位置 x_offset だけ右にずらす.
 # tolerance を大きくするほど曲線を粗い直線で近似する.
 outline <- function(tolerance) {
-    parts <- lapply(seq_len(nrow(shape)), function(i) {
-        o <- glyph_outline(
-            shape$index[i],
-            path = shape$font_path[i], index = shape$font_index[i],
-            size = sz, tolerance = tolerance
-        )
-        o$x <- o$x + shape$x_offset[i]
-        o$gid <- i
-        o
-    })
-    out <- dplyr::bind_rows(parts)
-    out$sub <- interaction(out$gid, out$contour)
-    out
+  parts <- lapply(seq_len(nrow(shape)), function(i) {
+    o <- glyph_outline(
+      shape$index[i],
+      path = shape$font_path[i],
+      index = shape$font_index[i],
+      size = sz,
+      tolerance = tolerance
+    )
+    o$x <- o$x + shape$x_offset[i]
+    o$gid <- i
+    o
+  })
+  out <- dplyr::bind_rows(parts)
+  out$sub <- interaction(out$gid, out$contour)
+  out
 }
 
 fill_df <- outline(0.2) # 細かく分割: 滑らかな塗り
@@ -340,31 +343,39 @@ node_df <- outline(25) # 粗く分割: アンカーポイントとして表示
 
 # 塗りつぶした字形 (穴は subgroup で抜く)
 glyph_fill <- ggplot(fill_df, aes(x, y, group = gid, subgroup = sub)) +
-    geom_polygon(fill = "black") +
-    coord_equal() +
-    theme_void()
+  geom_polygon(fill = "black") +
+  coord_equal() +
+  theme_void()
 
 # ビットマップ: 同じ字形を低解像度に縮小し, 補間なしで引き伸ばす
 tmp <- tempfile(fileext = ".png")
 ggsave(tmp, glyph_fill, width = 5, height = 2.2, dpi = 200, bg = "white")
 bitmap <- image_read(tmp) |>
-    image_trim() |>
-    image_background("white", flatten = TRUE) |>
-    image_resize("60x", filter = "point") |>
-    image_threshold("white", "55%") |>
-    image_resize("720x", filter = "point")
+  image_trim() |>
+  image_background("white", flatten = TRUE) |>
+  image_resize("60x", filter = "point") |>
+  image_threshold("white", "55%") |>
+  image_resize("720x", filter = "point")
 
 # ベクター: 字形を塗り, 輪郭のアンカーポイントを重ねる
 vector_plot <- glyph_fill +
-    geom_path(
-        data = node_df, aes(x, y, group = sub),
-        color = "#3b6cff", linewidth = 0.3, inherit.aes = FALSE
-    ) +
-    geom_point(
-        data = node_df, aes(x, y),
-        shape = 22, fill = "white", color = "#3b6cff",
-        size = 2.2, stroke = 0.8, inherit.aes = FALSE
-    )
+  geom_path(
+    data = node_df,
+    aes(x, y, group = sub),
+    color = "#3b6cff",
+    linewidth = 0.3,
+    inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = node_df,
+    aes(x, y),
+    shape = 22,
+    fill = "white",
+    color = "#3b6cff",
+    size = 2.2,
+    stroke = 0.8,
+    inherit.aes = FALSE
+  )
 
 bitmap
 vector_plot
@@ -395,17 +406,19 @@ info <- image_info(photo)
 #|   - "JPEG quality 90"
 #|   - "JPEG quality 5"
 crop_geom <- sprintf(
-    "%dx%d+%d+%d",
-    round(info$width * 0.25), round(info$height * 0.25),
-    round(info$width * 0.37), round(info$height * 0.37)
+  "%dx%d+%d+%d",
+  round(info$width * 0.25),
+  round(info$height * 0.25),
+  round(info$width * 0.37),
+  round(info$height * 0.37)
 )
 
 show_jpeg <- function(quality) {
-    tmp <- tempfile(fileext = ".jpg")
-    image_write(photo, tmp, format = "jpeg", quality = quality)
-    image_read(tmp) |>
-        image_crop(crop_geom) |>
-        image_resize("360x", filter = "point")
+  tmp <- tempfile(fileext = ".jpg")
+  image_write(photo, tmp, format = "jpeg", quality = quality)
+  image_read(tmp) |>
+    image_crop(crop_geom) |>
+    image_resize("360x", filter = "point")
 }
 
 show_jpeg(90)
@@ -422,24 +435,24 @@ show_jpeg(5)
 library(tinytable)
 
 save_size_kb <- function(format, quality = NULL) {
-    tmp <- tempfile()
-    if (is.null(quality)) {
-        image_write(photo, tmp, format = format)
-    } else {
-        image_write(photo, tmp, format = format, quality = quality)
-    }
-    file.size(tmp) / 1024
+  tmp <- tempfile()
+  if (is.null(quality)) {
+    image_write(photo, tmp, format = format)
+  } else {
+    image_write(photo, tmp, format = format, quality = quality)
+  }
+  file.size(tmp) / 1024
 }
 
 tibble::tibble(
-    Format = c("PNG", "JPEG (quality 90)", "JPEG (quality 5)"),
-    `Size (KB)` = round(c(
-        save_size_kb("png"),
-        save_size_kb("jpeg", 90),
-        save_size_kb("jpeg", 5)
-    ))
+  Format = c("PNG", "JPEG (quality 90)", "JPEG (quality 5)"),
+  `Size (KB)` = round(c(
+    save_size_kb("png"),
+    save_size_kb("jpeg", 90),
+    save_size_kb("jpeg", 5)
+  ))
 ) |>
-    tt()
+  tt()
 ```
 
 JPEG は, 写真のように色がなめらかに変化する画像にはとても効果的です.
@@ -459,15 +472,15 @@ ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
 #| fig-width: 5
 #| fig-height: 3
 tibble::tibble(
-    x = seq(-4, 4, length.out = 200),
-    y = dnorm(x)
+  x = seq(-4, 4, length.out = 200),
+  y = dnorm(x)
 ) |>
-    ggplot(aes(x = x, y = y)) +
-    geom_area(fill = "#0072B2", alpha = 0.3) +
-    geom_line(color = "#0072B2", linewidth = 1) +
-    labs(x = "x", y = "Density") +
-    theme_minimal() +
-    theme(panel.grid.minor = element_blank())
+  ggplot(aes(x = x, y = y)) +
+  geom_area(fill = "#0072B2", alpha = 0.3) +
+  geom_line(color = "#0072B2", linewidth = 1) +
+  labs(x = "x", y = "Density") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
 ```
 
 この図は SVG (ベクター形式) で埋め込まれているので, ブラウザで拡大しても曲線も文字も滑らかなまま保たれます.

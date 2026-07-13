@@ -14,6 +14,7 @@ book:
   date-format: "最終更新: YYYY年MM月DD日"
   chapters:
     - index.qmd
+    - lesson/architecture.qmd
     - lesson/shell.qmd
     - lesson/git.qmd
     - lesson/quarto.qmd

@@ -2,3 +2,13 @@
 
 ::: {#refs}
 :::
+
+## 図版クレジット {.unnumbered}
+
+本書で使用している部品写真は, いずれも Wikimedia Commons で公開されているものです.
+
+- @fig-photo-cpu (CPU): 撮影 Fritzchens Fritz, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AMD_Ryzen_5_2600_(39851733273).jpg), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- @fig-photo-ram (メモリ): 撮影 PantheraLeo1359531, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- @fig-photo-storage (SSD): 撮影 D-Kuru, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- @fig-photo-storage (HDD): 撮影 Mk2010, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hard_disk_drive_platter,_Western_Digital_Caviar_250Gb_WD2500AAKS.jpg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- @fig-photo-gpu (GPU): 撮影 FreeMediaKid!, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nvidia_GeForce_RTX_5060_Ti_16GB,_PNY_Overclocked_Dual_Fan,_front.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

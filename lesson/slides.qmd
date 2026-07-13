@@ -1,5 +1,6 @@
 ---
 title: スライド
+draft: true
 ---
 
 ## 技術要件

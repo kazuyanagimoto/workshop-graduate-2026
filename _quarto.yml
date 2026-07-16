@@ -44,6 +44,7 @@ format:
       - brand
     highlight-style: atom-one
     css: styles.css
+    include-after-body: static/include/quiz.html
     toc: true
     number-depth: 2
     lightbox: true

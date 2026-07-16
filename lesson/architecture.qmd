@@ -10,9 +10,15 @@ library(tinytable)
 library(checkdown)
 options(tinytable_html_mathjax = TRUE)
 
-# Shared feedback labels for the self-check quizzes
-quiz_right <- "正解!"
-quiz_wrong <- "残念, もう一度考えてみましょう."
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0("<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>", msg)
+}
 quiz_button <- "答え合わせ"
 ```
 
@@ -33,7 +39,7 @@ CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの�
 - **クロック周波数** (clock speed): 1秒間に刻む動作の回数で, GHz ($10^9$ 回/秒) で表されます. おおまかには1コアあたりの処理の速さの目安です.
 - **コア数** (cores): 独立して命令を実行できる演算ユニットの数です. 近年の CPU は4から16程度のコアを持つのが一般的です.
 
-かつては世代ごとにクロック周波数が上がり, 何もしなくてもプログラムが速くなる時代がありました. しかし発熱の限界から2000年代半ばにクロック周波数は頭打ちになり, 以降の CPU はコア数を増やす方向に進化しています. 複数のコアを活かすには, プログラムの側で計算を分担させる並列化が必要になります (@sec-parallelization).
+かつては世代ごとにクロック周波数が上がり, 何もしなくてもプログラムが速くなる時代がありました. しかし発熱の限界から2000年代半ばにクロック周波数の伸びは急減速し,^[1994年から2004年の10年でクロック周波数は約40倍になりましたが (Pentium の 100 MHz から Pentium 4 の 3.8 GHz), その後の20年では 6 GHz 前後までしか伸びていません. 最近の CPU が謳う 5-6 GHz という数字も, 1コア・短時間のブースト時のものです.] 以降の CPU はコア数を増やす方向に進化しています. 複数のコアを活かすには, プログラムの側で計算を分担させる並列化が必要になります (@sec-parallelization).
 
 ### メモリとストレージ
 
@@ -216,9 +222,10 @@ Windows は Unix の系譜から外れているため, シェルもコマンド�
 
 ## 演習問題
 
-この章の理解度を確認しましょう. 選択肢を選んで「答え合わせ」を押すと, その場で正誤が表示されます.
+この章の理解度を確認しましょう. 選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).
 
-**Q1.** R で大きなデータセットを読み込もうとしたら, `Error: cannot allocate vector of size 8.0 Gb` というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.
+::: {.quiz}
+R で大きなデータセットを読み込もうとしたら, `Error: cannot allocate vector of size 8.0 Gb` というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.
 
 ```{r}
 #| label: quiz-ram
@@ -227,14 +234,39 @@ check_question(
   "RAM",
   options = c("RAM", "SSD", "CPU", "GPU"),
   type = "radio",
-  right = paste(quiz_right, "実行中のプログラムとデータが置かれる作業スペースは RAM です."),
-  wrong = paste(quiz_wrong, "机と本棚の例えを思い出してください."),
+  right = quiz_right("実行中のプログラムとデータが置かれる作業スペースは RAM です."),
+  wrong = quiz_wrong("机と本棚の例えを思い出してください."),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
 ```
+:::
 
-**Q2.** 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.
+::: {.quiz}
+何年も前に書いた分析コードを最新の PC でそのまま実行しても, 昔の「PC を買い替えたらコードが劇的に速くなった」という体験は得にくくなっています. 主な理由はどれでしょうか.
+
+```{r}
+#| label: quiz-cpu
+#| echo: false
+check_question(
+  "CPU の進化がクロック周波数の向上からコア数の増加に移ったから",
+  options = c(
+    "CPU の進化がクロック周波数の向上からコア数の増加に移ったから",
+    "CPU が性能よりも省電力を優先するようになったから",
+    "OS が年々重くなり, 性能向上を打ち消しているから",
+    "ストレージの読み書き速度が頭打ちになったから"
+  ),
+  type = "radio",
+  right = quiz_right("発熱の限界から2000年代半ば以降クロック周波数の伸びは大きく鈍化し, 性能向上の主軸はコア数に移りました. 増えたコアを活かすには, プログラム側の並列化が必要です."),
+  wrong = quiz_wrong("CPU の性能を表す2つの指標と, その一方に起きた「伸びの鈍化」を思い出してください."),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.
 
 ```{r}
 #| label: quiz-bit-width
@@ -243,34 +275,16 @@ check_question(
   "4GB",
   options = c("2GB", "4GB", "16GB", "積んだ RAM の分だけ"),
   type = "radio",
-  right = paste(quiz_right, "32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."),
-  wrong = paste(quiz_wrong, "2^32 バイトは何 GB でしょうか?"),
+  right = quiz_right("32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."),
+  wrong = quiz_wrong("2^32 バイトは何 GB でしょうか?"),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
 ```
+:::
 
-**Q3.** R の整数型 (integer) で上限の約21億 (`.Machine$integer.max`) を超える計算をすると, 何が起こるでしょうか.
-
-```{r}
-#| label: quiz-integer
-#| echo: false
-check_question(
-  "オーバーフローして NA になる",
-  options = c(
-    "オーバーフローして NA になる",
-    "自動的に double に変換される",
-    "常にエラーで実行が止まる"
-  ),
-  type = "radio",
-  right = paste(quiz_right, "警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう."),
-  wrong = paste(quiz_wrong, "「64-bit 時代の 32-bit 整数」のコード例を実行してみてください."),
-  button_label = quiz_button,
-  random_answer_order = TRUE
-)
-```
-
-**Q4.** Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.
+::: {.quiz}
+Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.
 
 ```{r}
 #| label: quiz-binary
@@ -280,17 +294,20 @@ check_question(
   options = c(
     "動かない",
     "問題なく動く",
-    "遅くなるが動く"
+    "遅くなるが動く",
+    "サーバーに Rosetta 2 を入れれば動く"
   ),
   type = "radio",
-  right = paste(quiz_right, "OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います."),
-  wrong = paste(quiz_wrong, "バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."),
+  right = quiz_right("OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. Rosetta 2 は macOS 側の仕組みなので助けになりません. サーバー上でインストールし直すかコンテナを使います."),
+  wrong = quiz_wrong("バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
 ```
+:::
 
-**Q5.** 次のうち, CPU が ARM64 のマシンをすべて選んでください.
+::: {.quiz}
+次のうち, CPU が ARM64 のマシンをすべて選んでください.
 
 ```{r}
 #| label: quiz-arm64
@@ -304,13 +321,15 @@ check_question(
     "大半の Windows デスクトップ PC"
   ),
   type = "checkbox",
-  right = paste(quiz_right, "Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."),
-  wrong = paste(quiz_wrong, "「身近な機種の OS とアーキテクチャ」の表を見直しましょう."),
+  right = quiz_right("Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."),
+  wrong = quiz_wrong("「身近な機種の OS とアーキテクチャ」の表を見直しましょう."),
   button_label = quiz_button
 )
 ```
+:::
 
-**Q6.** 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.
+::: {.quiz}
+次の OS のうち, Unix の系譜に属さないものはどれでしょうか.
 
 ```{r}
 #| label: quiz-unix
@@ -319,9 +338,10 @@ check_question(
   "Windows",
   options = c("macOS", "Ubuntu", "iOS", "Windows"),
   type = "radio",
-  right = paste(quiz_right, "Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."),
-  wrong = paste(quiz_wrong, "OS の系譜の図を見直しましょう."),
+  right = quiz_right("Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."),
+  wrong = quiz_wrong("OS の系譜の図を見直しましょう."),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
 ```
+:::

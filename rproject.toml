@@ -53,4 +53,5 @@ dependencies = [
     "purrr",
     "WDI",
     "estatapi",
+    "checkdown",
 ]

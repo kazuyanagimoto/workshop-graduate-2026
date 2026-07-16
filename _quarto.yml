@@ -38,9 +38,11 @@ book:
 
 format:
   html:
+    code-tools: true
     theme:
       - cosmo
       - brand
+    highlight-style: atom-one
     css: styles.css
     toc: true
     number-depth: 2

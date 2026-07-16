@@ -1,0 +1,28 @@
+% Anti-pattern: the Warsaw theme covers the slide with saturated primary blue
+% (gradient headline, shadowed blocks, ball bullets), which competes with the
+% content for the audience's attention. Compare with color-good.tex.
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{}
+
+\title{A Typical Beamer Talk}
+\author{Your Name}
+\institute{Your University}
+\date{\today}
+
+\begin{document}
+
+\section{Empirical Strategy}
+
+\begin{frame}{Empirical Strategy}
+  \begin{block}{Identification Assumption}
+    Absent the reform, treated and control municipalities would have followed parallel trends.
+  \end{block}
+  \begin{itemize}
+    \item Staggered rollout of the childcare subsidy (2008--2015)
+    \item Event-study specification with municipality and year fixed effects
+    \item Standard errors clustered at the municipality level
+  \end{itemize}
+\end{frame}
+
+\end{document}

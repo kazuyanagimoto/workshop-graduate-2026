@@ -1,1 +1,12 @@
 /* css styles */
+
+/* Lightbox: scale up SVG figures.
+   SVGs converted from PDFs (pdf2svg) and knitr's svg device have small
+   intrinsic sizes in pt, so GLightbox would otherwise display them at that
+   tiny natural size. Vector images can be upscaled without quality loss. */
+.gslide-image img[src$=".svg"] {
+  width: min(90vw, 1600px);
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+}

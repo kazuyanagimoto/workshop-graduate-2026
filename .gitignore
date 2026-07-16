@@ -3,6 +3,7 @@
 _site/
 _book/
 _targets/
+*_files/
 
 # Other
 refs/

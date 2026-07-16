@@ -41,7 +41,7 @@ https://kazuyanagimoto.com/quarto-touying-typst/
 
 スライドからは聴衆の注意をそらす要素はできるだけ排除すべきです. しかし, Beamer のデフォルトの設定ではスライドの右下にナビゲーション記号を表示します. これをクリックしてスライドを操作する人はおらず, 不必要です.
 
-![不必要なナビゲーション](/static/beamer/navigation-bad-1.svg)
+![不必要なナビゲーション](/static/beamer/navigation-bad-1.svg){#fig-navigation-bad-1}
 
 ナビゲーション記号は, プリアンブルに次の一行を加えれば消せます.
 
@@ -49,7 +49,7 @@ https://kazuyanagimoto.com/quarto-touying-typst/
 \setbeamertemplate{navigation symbols}{}
 ```
 
-![ナビゲーションを消したスライド](/static/beamer/navigation-good-1.svg)
+![ナビゲーションを消したスライド](/static/beamer/navigation-good-1.svg){#fig-navigation-good-1}
 
 ### 4:3 vs. 16:9
 
@@ -65,13 +65,35 @@ Beamerのデフォルトのアスペクト比は4:3ですが, モニターでプ
 
 16:9にするメリットは画面を大きく使えるだけでなく, 改行によるデザインの崩れを防ぐこともできます. 下の例では, 4:3だと幅が足りず一文が2行に折り返されてしまいますが, 16:9なら同じ一文が1行に収まります.
 
+
 ::: {layout-ncol=2}
+
 ![4:3: 幅が足りず折り返される](/static/beamer/aspect-bad-1.svg)
 
 ![16:9: 同じ一文が1行に収まる](/static/beamer/aspect-good-1.svg)
 :::
 
-### 原色
+### 高すぎる彩度
+
+Warsaw や Madrid といった Beamer の定番テーマは, 彩度の高い青がヘッダーやフッター, ブロックなど画面の広い面積を占めます. 色は聴衆の注意を誘導するための手段ですが, テーマ自体が強い色を使っていると, 本来注目してほしい図や数式よりも装飾に目が行ってしまいます.
+
+対策はシンプルで, 彩度を抑えたアクセントカラーを1色決め, それ以外は白と黒 (グレー) だけで構成することです. 下の例では, 同じ内容のスライドを Warsaw テーマと, デフォルトテーマ + 落ち着いたアクセントカラーで作っています.
+
+::: {layout-ncol=2}
+![Warsaw テーマ](/static/beamer/color-bad-1.svg)
+
+![落ち着いた配色](/static/beamer/color-good-1.svg)
+:::
+
+右のスライドは, プリアンブルで次のように設定しています. `structure` の色を変えると, フレームタイトルや箇条書きのマーカーなどの色がまとめて変わります.
+
+```latex
+\usetheme{default}
+\definecolor{accent}{HTML}{2B4162}
+\usecolortheme[named=accent]{structure}
+\setbeamercolor{block title}{fg=accent, bg=accent!8}
+\setbeamercolor{block body}{bg=accent!4}
+```
 
 ### 文字サイズが小さい
 

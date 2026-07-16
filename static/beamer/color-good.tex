@@ -1,0 +1,26 @@
+% Fix: same frame as color-bad.tex, but with the default theme and a single
+% muted accent color for structure elements. The content, not the theme,
+% attracts the audience's attention.
+\documentclass[aspectratio=169]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{accent}{HTML}{2B4162}
+\usecolortheme[named=accent]{structure}
+\setbeamercolor{block title}{fg=accent, bg=accent!8}
+\setbeamercolor{block body}{bg=accent!4}
+
+\begin{document}
+
+\begin{frame}{Empirical Strategy}
+  \begin{block}{Identification Assumption}
+    Absent the reform, treated and control municipalities would have followed parallel trends.
+  \end{block}
+  \begin{itemize}
+    \item Staggered rollout of the childcare subsidy (2008--2015)
+    \item Event-study specification with municipality and year fixed effects
+    \item Standard errors clustered at the municipality level
+  \end{itemize}
+\end{frame}
+
+\end{document}

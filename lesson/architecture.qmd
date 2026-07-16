@@ -7,7 +7,13 @@ title: アーキテクチャ
 #| include: false
 library(dplyr)
 library(tinytable)
+library(checkdown)
 options(tinytable_html_mathjax = TRUE)
+
+# Shared feedback labels for the self-check quizzes
+quiz_right <- "正解!"
+quiz_wrong <- "残念, もう一度考えてみましょう."
+quiz_button <- "答え合わせ"
 ```
 
 この章では, コンピュータがどのような部品からできていて, その上でソフトウェアがどのように動いているのかを学びます. 普段の分析ではあまり意識しない話題ですが, 研究生活では意外なほど頻繁に顔を出します. 新しい PC を買うとき, ソフトウェアのインストーラを選ぶとき, 大学の計算サーバーやクラウドを使うとき, そして AI に環境構築を指示するとき, この章の語彙が判断の基礎になります.
@@ -207,3 +213,115 @@ Windows は Unix の系譜から外れているため, シェルもコマンド�
 - エラーメッセージの解読: `wrong architecture` や `cannot execute binary file` といったエラーを見たら, ISA か OS の不一致を疑いましょう.
 - サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.^[Docker などのコンテナは OS (ディストリビューション) の差を吸収してくれますが, ISA の差は吸収しません. Apple Silicon 上で x86-64 用のイメージを動かすとエミュレーションになり, 大幅に遅くなります.]
 - AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.
+
+## 演習問題
+
+この章の理解度を確認しましょう. 選択肢を選んで「答え合わせ」を押すと, その場で正誤が表示されます.
+
+**Q1.** R で大きなデータセットを読み込もうとしたら, `Error: cannot allocate vector of size 8.0 Gb` というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.
+
+```{r}
+#| label: quiz-ram
+#| echo: false
+check_question(
+  "RAM",
+  options = c("RAM", "SSD", "CPU", "GPU"),
+  type = "radio",
+  right = paste(quiz_right, "実行中のプログラムとデータが置かれる作業スペースは RAM です."),
+  wrong = paste(quiz_wrong, "机と本棚の例えを思い出してください."),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+
+**Q2.** 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.
+
+```{r}
+#| label: quiz-bit-width
+#| echo: false
+check_question(
+  "4GB",
+  options = c("2GB", "4GB", "16GB", "積んだ RAM の分だけ"),
+  type = "radio",
+  right = paste(quiz_right, "32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."),
+  wrong = paste(quiz_wrong, "2^32 バイトは何 GB でしょうか?"),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+
+**Q3.** R の整数型 (integer) で上限の約21億 (`.Machine$integer.max`) を超える計算をすると, 何が起こるでしょうか.
+
+```{r}
+#| label: quiz-integer
+#| echo: false
+check_question(
+  "オーバーフローして NA になる",
+  options = c(
+    "オーバーフローして NA になる",
+    "自動的に double に変換される",
+    "常にエラーで実行が止まる"
+  ),
+  type = "radio",
+  right = paste(quiz_right, "警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう."),
+  wrong = paste(quiz_wrong, "「64-bit 時代の 32-bit 整数」のコード例を実行してみてください."),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+
+**Q4.** Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.
+
+```{r}
+#| label: quiz-binary
+#| echo: false
+check_question(
+  "動かない",
+  options = c(
+    "動かない",
+    "問題なく動く",
+    "遅くなるが動く"
+  ),
+  type = "radio",
+  right = paste(quiz_right, "OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います."),
+  wrong = paste(quiz_wrong, "バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+
+**Q5.** 次のうち, CPU が ARM64 のマシンをすべて選んでください.
+
+```{r}
+#| label: quiz-arm64
+#| echo: false
+check_question(
+  c("Apple Silicon の Mac", "Copilot+ PC (Snapdragon 搭載)"),
+  options = c(
+    "Apple Silicon の Mac",
+    "Copilot+ PC (Snapdragon 搭載)",
+    "Intel の Mac",
+    "大半の Windows デスクトップ PC"
+  ),
+  type = "checkbox",
+  right = paste(quiz_right, "Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."),
+  wrong = paste(quiz_wrong, "「身近な機種の OS とアーキテクチャ」の表を見直しましょう."),
+  button_label = quiz_button
+)
+```
+
+**Q6.** 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.
+
+```{r}
+#| label: quiz-unix
+#| echo: false
+check_question(
+  "Windows",
+  options = c("macOS", "Ubuntu", "iOS", "Windows"),
+  type = "radio",
+  right = paste(quiz_right, "Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."),
+  wrong = paste(quiz_wrong, "OS の系譜の図を見直しましょう."),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```

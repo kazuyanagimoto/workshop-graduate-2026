@@ -1,4 +1,4 @@
-# Overview
+# はじめに {.unnumbered}
 
 ## AI時代のプログラミング知識
 
@@ -8,6 +8,94 @@
 
 ## 環境構築
 
-このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 
+このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto のインストール手順をOS別にまとめます.
+
+### Mac
+
+まず, パッケージマネージャの [Homebrew](https://brew.sh/ja/) を導入します. ターミナルで以下を実行し, 画面の指示に従ってください (インストール後に表示される `brew shellenv` の設定コマンドも忘れずに実行します).
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Homebrewが入れば, 必要なソフトウェアはすべて `brew` でインストールできます.
+
+```sh
+brew install --cask visual-studio-code zotero
+
+# rig is distributed as a cask in the r-lib/rig tap
+brew tap r-lib/rig
+brew install --cask rig
+
+brew install quarto
+```
+
+R本体は rig を通じてインストールします. `rig add release` で最新の安定版が入ります.
+
+```sh
+rig add release
+```
+
+アップデートも Homebrew 経由で行います. 以下のコマンドで, brew でインストールしたソフトウェア (VSCode, Zotero, Quarto など) がまとめて最新版になります.
+
+```sh
+brew update && brew upgrade
+```
+
+Rの新しいバージョンがリリースされたときは, `rig add release` を再実行すれば追加されます. インストール済みのバージョンは `rig list` で確認でき, `rig default 4.5.1` のように切り替えられます (不要になった古いバージョンは `rig rm` で削除できます).
+
+### Windows
+
+VSCodeとZoteroはWindows側にインストールします. Windows標準のパッケージマネージャ [winget](https://learn.microsoft.com/ja-jp/windows/package-manager/winget/) を使い, PowerShellで以下を実行してください.
+
+```powershell
+winget install Microsoft.VisualStudioCode
+winget install DigitalScholar.Zotero
+```
+
+次に, WSLを導入します. 管理者権限のPowerShellで以下を実行し, 再起動後にUbuntuのユーザー名とパスワードを設定してください.
+
+```powershell
+wsl --install
+```
+
+VSCodeには拡張機能 [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) をインストールしておくと, WSL内のファイルをVSCodeから直接編集できます.
+
+WSLのUbuntuでは, ソフトウェアの管理に標準のパッケージマネージャ [apt](https://ubuntu.com/server/docs/package-management) を使います. Macにおける Homebrew に相当するもので, 基本のコマンドは次の3つです.
+
+```sh
+# refresh the package catalog and upgrade all installed packages
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl # install a package (here: curl)
+```
+
+先頭の `sudo` は, システムを変更する操作を管理者権限で実行するための命令で, 実行時にはWSLセットアップ時に設定したパスワードを聞かれます (詳しくは @sec-permission で説明します). `apt update` はパッケージの「カタログ」を最新にするだけで, 何もインストールしません. インストールやアップグレードの前には, まず `apt update` を実行するのが作法です. `-y` は, インストールやアップグレードの途中で聞かれる「続行しますか?」という質問に自動で「はい」と答えるオプションです.
+
+この後の手順で使うダウンロードツール (curl, wget) と, Rのパッケージをソースコードからビルドするときに必要になるコンパイラ類 (build-essential) を, ここでまとめて入れておきます.
+
+```sh
+sudo apt update
+sudo apt install -y build-essential
+```
+
+rigとQuartoは, apt ではなく公式の配布物からWSL (Ubuntu) 側にインストールします. WSLのターミナルで以下を実行してください.
+
+```sh
+# rig (R installation manager)
+curl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-$(arch)-latest.tar.gz |
+  sudo tar xz -C /usr/local
+rig add release
+```
+
+Quartoは, バージョン番号を変数に入れて .deb パッケージをダウンロードし, インストールします.
+
+```sh
+# Check https://quarto.org/docs/download/ for the latest version number
+QUARTO_VERSION=1.9.38
+wget "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb"
+sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
+```
+
+アップデートするときは, `QUARTO_VERSION` を新しいバージョン番号に変えて同じコマンドを再実行するだけです. Rのアップデートは Mac と同様で, `rig add release` を再実行します. apt で入れたソフトウェアは `sudo apt update && sudo apt upgrade` で, Windows側のソフトウェアは `winget upgrade --all` でまとめて更新できます.
 
 

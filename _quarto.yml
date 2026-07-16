@@ -13,6 +13,8 @@ book:
         - name: 神戸大学
   date: last-modified
   date-format: "最終更新: YYYY年MM月DD日"
+  site-url: https://kazuyanagimoto.com/workshop-graduate-2026
+  repo-url: https://github.com/kazuyanagimoto/workshop-graduate-2026
   chapters:
     - index.qmd
     - lesson/architecture.qmd
@@ -43,6 +45,7 @@ format:
     toc: true
     number-depth: 2
     lightbox: true
+
 
 freeze: auto
 execute:

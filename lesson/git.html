@@ -944,6 +944,25 @@ Figure&nbsp;3.22: コミット列と HEAD
 </section>
 
 </main> <!-- /main -->
+<script>
+// Instant checking for checkdown quizzes inside .quiz cards: radio questions
+// are validated as soon as an option is clicked and their submit button is
+// hidden. Checkbox (multi-select) questions keep the button, since partial
+// selections would otherwise flash a wrong answer on every click.
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.quiz form[name^="form_"]').forEach(function (form) {
+    var radios = form.querySelectorAll('input[type="radio"]');
+    if (radios.length === 0) return;
+    var submit = form.querySelector('input[type="submit"]');
+    if (submit) submit.style.display = "none";
+    radios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        if (typeof form.onsubmit === "function") form.onsubmit();
+      });
+    });
+  });
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; 回帰分析 – Best Practices</title>
+<title>9&nbsp; 回帰分析 – Best Practices</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -91,14 +91,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d102713e0a15c87e67d60c9a26d24b47.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2c872af6924e1f6c02c0cc195d6bfbcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -131,7 +131,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/regression.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -154,73 +154,73 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+ <span class="menu-text">はじめに</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -256,7 +256,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#表" id="toc-表" class="nav-link active" data-scroll-target="#表"><span class="header-section-number">10.1</span> 表</a>
+  <li><a href="#表" id="toc-表" class="nav-link active" data-scroll-target="#表"><span class="header-section-number">9.1</span> 表</a>
   <ul class="collapse">
   <li><a href="#基本-tt" id="toc-基本-tt" class="nav-link" data-scroll-target="#基本-tt">基本: <code>tt()</code></a></li>
   <li><a href="#数値の整形-format_tt" id="toc-数値の整形-format_tt" class="nav-link" data-scroll-target="#数値の整形-format_tt">数値の整形: <code>format_tt()</code></a></li>
@@ -266,7 +266,7 @@ div.csl-indent {
   <li><a href="#セル内の数式" id="toc-セル内の数式" class="nav-link" data-scroll-target="#セル内の数式">セル内の数式</a></li>
   <li><a href="#出力形式とエクスポート" id="toc-出力形式とエクスポート" class="nav-link" data-scroll-target="#出力形式とエクスポート">出力形式とエクスポート</a></li>
   </ul></li>
-  <li><a href="#回帰分析" id="toc-回帰分析" class="nav-link" data-scroll-target="#回帰分析"><span class="header-section-number">10.2</span> 回帰分析</a>
+  <li><a href="#回帰分析" id="toc-回帰分析" class="nav-link" data-scroll-target="#回帰分析"><span class="header-section-number">9.2</span> 回帰分析</a>
   <ul class="collapse">
   <li><a href="#lm-による回帰" id="toc-lm-による回帰" class="nav-link" data-scroll-target="#lm-による回帰"><code>lm()</code> による回帰</a></li>
   <li><a href="#パッケージは-fixest-だけでよい" id="toc-パッケージは-fixest-だけでよい" class="nav-link" data-scroll-target="#パッケージは-fixest-だけでよい">パッケージは <code>fixest</code> だけでよい</a></li>
@@ -282,7 +282,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -299,8 +299,8 @@ div.csl-indent {
 </header>
 
 
-<section id="表" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="表"><span class="header-section-number">10.1</span> 表</h2>
+<section id="表" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="表"><span class="header-section-number">9.1</span> 表</h2>
 <p>論文や資料に載せる表は, 長らく <code>kableExtra</code> や <code>gt</code> で作るのが定番でした. しかし近年は, それらより軽量で扱いやすい <a href="https://vincentarelbundock.github.io/tinytable/"><code>tinytable</code></a> が標準になりつつあります. <code>tinytable</code> は base R だけで動く依存ゼロのパッケージでありながら, セルの結合や色付け, 数式の埋め込みといった凝った表現にも対応し, HTML・LaTeX・PDF・Typst のどの形式にも同じコードから書き出せます. 後で紹介する <code>modelsummary</code> の回帰表もそのまま <code>tinytable</code> のオブジェクトとして返ってくるため, 一度使い方を覚えれば表まわりはこれ一つで完結します.</p>
 <p>ここでは R にに同包されている <code>penguins</code> データセットを使って, <code>tinytable</code> の基本的な使い方を紹介します.</p>
 <section id="基本-tt" class="level3">
@@ -320,7 +320,7 @@ div.csl-indent {
 <div id="tbl-penguins-basic" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.1: ペンギンの種別の要約統計量
+Table&nbsp;9.1: ペンギンの種別の要約統計量
 </figcaption>
 <div aria-describedby="tbl-penguins-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -411,7 +411,7 @@ Table&nbsp;10.1: ペンギンの種別の要約統計量
 </section>
 <section id="数値の整形-format_tt" class="level3">
 <h3 class="anchored" data-anchor-id="数値の整形-format_tt">数値の整形: <code>format_tt()</code></h3>
-<p><a href="#tbl-penguins-basic" class="quarto-xref">Table&nbsp;<span>10.1</span></a> は平均値の桁数がばらばらで読みにくいです. <code>format_tt()</code> を使うと, 列を指定して桁数や区切り文字をそろえられます. <code>j</code> で対象の列を, <code>digits</code> で小数点以下の桁数を, <code>num_mark_big</code> で 3 桁ごとの区切り文字を指定します.</p>
+<p><a href="#tbl-penguins-basic" class="quarto-xref">Table&nbsp;<span>9.1</span></a> は平均値の桁数がばらばらで読みにくいです. <code>format_tt()</code> を使うと, 列を指定して桁数や区切り文字をそろえられます. <code>j</code> で対象の列を, <code>digits</code> で小数点以下の桁数を, <code>num_mark_big</code> で 3 桁ごとの区切り文字を指定します.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
@@ -425,7 +425,7 @@ Table&nbsp;10.1: ペンギンの種別の要約統計量
 <div id="tbl-penguins-format" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.2: 桁数をそろえた要約統計量
+Table&nbsp;9.2: 桁数をそろえた要約統計量
 </figcaption>
 <div aria-describedby="tbl-penguins-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -523,7 +523,7 @@ Table&nbsp;10.2: 桁数をそろえた要約統計量
 <div id="tbl-penguins-na" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.3: 種と島ごとの個体数
+Table&nbsp;9.3: 種と島ごとの個体数
 </figcaption>
 <div aria-describedby="tbl-penguins-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -630,7 +630,7 @@ Table&nbsp;10.3: 種と島ごとの個体数
 <div id="tbl-penguins-style" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.4: 平均体重が大きい種を強調
+Table&nbsp;9.4: 平均体重が大きい種を強調
 </figcaption>
 <div aria-describedby="tbl-penguins-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -740,7 +740,7 @@ Table&nbsp;10.4: 平均体重が大きい種を強調
 <div id="tbl-penguins-group-col" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-group-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.5: 指標をグループ化した要約統計量
+Table&nbsp;9.5: 指標をグループ化した要約統計量
 </figcaption>
 <div aria-describedby="tbl-penguins-group-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -868,7 +868,7 @@ Table&nbsp;10.5: 指標をグループ化した要約統計量
 <div id="tbl-penguins-group-row" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-group-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.6: 性別で行をまとめた平均値
+Table&nbsp;9.6: 性別で行をまとめた平均値
 </figcaption>
 <div aria-describedby="tbl-penguins-group-row-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -996,7 +996,7 @@ Table&nbsp;10.6: 性別で行をまとめた平均値
 <div id="tbl-penguins-notes" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-notes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.7: 注を付けた表
+Table&nbsp;9.7: 注を付けた表
 </figcaption>
 <div aria-describedby="tbl-penguins-notes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1102,7 +1102,7 @@ Table&nbsp;10.7: 注を付けた表
 <div id="tbl-penguins-math" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-math-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.8: 列見出しに数式を使った表
+Table&nbsp;9.8: 列見出しに数式を使った表
 </figcaption>
 <div aria-describedby="tbl-penguins-math-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1196,8 +1196,8 @@ Table&nbsp;10.8: 列見出しに数式を使った表
 <p>ここまで作った表は, Quarto上でレンダリングする文書の形式 (HTML / PDF / Typst) に合わせて <code>tinytable</code> が自動的に適切な出力へ変換してくれます. 同じコードがどの形式でも通用するのが <code>tinytable</code> の大きな利点です. 表を単体のファイルとして書き出したいときは <code>save_tt()</code> を使い, 拡張子から形式を判断させます (例: <code>save_tt("table.tex")</code> で LaTeX, <code>save_tt("table.png")</code> で画像). LaTeX 文書に貼り付けるためにスタイルを落とした素の <code>tabular</code> が欲しい場合は, 保存前に <code>theme_tt("tabular")</code> を挟みます.</p>
 </section>
 </section>
-<section id="回帰分析" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="回帰分析"><span class="header-section-number">10.2</span> 回帰分析</h2>
+<section id="回帰分析" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="回帰分析"><span class="header-section-number">9.2</span> 回帰分析</h2>
 <p>R で回帰分析を行う方法は数えきれないほどあります. 標準誤差の頑健化には <code>sandwich</code> や <code>estimatr</code>, 高次元固定効果には <code>lfe</code>, 操作変数法には <code>AER</code>, 限界効果には <code>margins</code> や <code>mfx</code>, と用途ごとに別々のパッケージを覚えるのが従来の常識でした. しかし結論から言えば, いまや applied micro の実証で必要になる推定のほとんどは <code>fixest</code> ひとつでまかなえます. この節では <code>lm()</code> を出発点に, なぜ <code>fixest</code> だけ覚えればよいのか, そしてその使い方を見ていきます. 引き続き <code>penguins</code> データセットを使い, ペンギンの体重 (<code>body_mass</code>) を体格から説明する回帰を例にします.</p>
 <section id="lm-による回帰" class="level3">
 <h3 class="anchored" data-anchor-id="lm-による回帰"><code>lm()</code> による回帰</h3>
@@ -1394,7 +1394,7 @@ Table&nbsp;10.8: 列見出しに数式を使った表
 <div id="tbl-ms-default" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ms-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.9: modelsummary の既定の出力
+Table&nbsp;9.9: modelsummary の既定の出力
 </figcaption>
 <div aria-describedby="tbl-ms-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1619,7 +1619,7 @@ Table&nbsp;10.9: modelsummary の既定の出力
 <div id="tbl-ms-polished" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ms-polished-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;10.10: 標準誤差と固定効果を変えた回帰の比較
+Table&nbsp;9.10: 標準誤差と固定効果を変えた回帰の比較
 </figcaption>
 <div aria-describedby="tbl-ms-polished-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1779,10 +1779,10 @@ Table&nbsp;10.10: 標準誤差と固定効果を変えた回帰の比較
 <div id="fig-coefplot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-coefplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="regression_files/figure-html/fig-coefplot-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;10.1: Coefficient plot for the two-way fixed-effects model."><img src="regression_files/figure-html/fig-coefplot-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="regression_files/figure-html/fig-coefplot-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;9.1: Coefficient plot for the two-way fixed-effects model."><img src="regression_files/figure-html/fig-coefplot-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coefplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.1: Coefficient plot for the two-way fixed-effects model.
+Figure&nbsp;9.1: Coefficient plot for the two-way fixed-effects model.
 </figcaption>
 </figure>
 </div>
@@ -1804,10 +1804,10 @@ Figure&nbsp;10.1: Coefficient plot for the two-way fixed-effects model.
 <div id="fig-event-study" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-event-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="regression_files/figure-html/fig-event-study-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;10.2: Event-study estimates around treatment (reference period = 5)."><img src="regression_files/figure-html/fig-event-study-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="regression_files/figure-html/fig-event-study-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;9.2: Event-study estimates around treatment (reference period = 5)."><img src="regression_files/figure-html/fig-event-study-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-event-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.2: Event-study estimates around treatment (reference period = 5).
+Figure&nbsp;9.2: Event-study estimates around treatment (reference period = 5).
 </figcaption>
 </figure>
 </div>
@@ -1815,6 +1815,8 @@ Figure&nbsp;10.2: Event-study estimates around treatment (reference period = 5).
 </div>
 <p>処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています <span class="citation" data-cites="sun2021">(<a href="../references.html#ref-sun2021" role="doc-biblioref">Sun and Abraham 2021</a>)</span>. その場合は <code>i()</code> の代わりに <code>sunab()</code> を使うと, <span class="citation" data-cites="sun2021">Sun and Abraham (<a href="../references.html#ref-sun2021" role="doc-biblioref">2021</a>)</span> の補正済み推定量がそのまま得られ, <code>ggiplot()</code> で同じように描けます.</p>
 
+
+<!-- -->
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-berge2026" class="csl-entry" role="listitem">
@@ -1904,6 +1906,57 @@ Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effe
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -2237,15 +2290,372 @@ Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effe
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lesson/visualization.html" class="pagination-link" aria-label="可視化の技術">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lesson/slides.html" class="pagination-link" aria-label="スライド">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">スライド</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">スライド</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 回帰分析</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfixest)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytable_html_mathjax =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 表</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>論文や資料に載せる表は, 長らく <span class="in">`kableExtra`</span> や <span class="in">`gt`</span> で作るのが定番でした. しかし近年は, それらより軽量で扱いやすい <span class="co">[</span><span class="ot">`tinytable`</span><span class="co">](https://vincentarelbundock.github.io/tinytable/)</span> が標準になりつつあります. <span class="in">`tinytable`</span> は base R だけで動く依存ゼロのパッケージでありながら, セルの結合や色付け, 数式の埋め込みといった凝った表現にも対応し, HTML・LaTeX・PDF・Typst のどの形式にも同じコードから書き出せます. 後で紹介する <span class="in">`modelsummary`</span> の回帰表もそのまま <span class="in">`tinytable`</span> のオブジェクトとして返ってくるため, 一度使い方を覚えれば表まわりはこれ一つで完結します.</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>ここでは R にに同包されている <span class="in">`penguins`</span> データセットを使って, <span class="in">`tinytable`</span> の基本的な使い方を紹介します.</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 基本: `tt()`</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="in">`tinytable`</span> の出発点は <span class="in">`tt()`</span> です. データフレーム (<span class="in">`data.frame`</span>, <span class="in">`tibble`</span>) を渡すだけで表になります. まずは種ごとの個体数と, くちばしの長さ・体重の平均をまとめてみましょう.</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-basic</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: ペンギンの種別の要約統計量</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass =</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### 数値の整形: `format_tt()`</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>@tbl-penguins-basic は平均値の桁数がばらばらで読みにくいです. <span class="in">`format_tt()`</span> を使うと, 列を指定して桁数や区切り文字をそろえられます. <span class="in">`j`</span> で対象の列を, <span class="in">`digits`</span> で小数点以下の桁数を, <span class="in">`num_mark_big`</span> で 3 桁ごとの区切り文字を指定します.</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-format</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 桁数をそろえた要約統計量</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="st">"bill_len"</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">j =</span> <span class="st">"body_mass"</span>,</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_fmt =</span> <span class="st">"decimal"</span>,</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_mark_big =</span> <span class="st">","</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>欠損値の扱いも <span class="in">`format_tt()`</span> の仕事です. 集計の途中で生じた <span class="in">`NA`</span> は, 表の上では空白やハイフンに置き換えたいことがほとんどです. その場合は <span class="in">`replace`</span> 引数を使います. 例えば種ごと・島ごとの個体数をクロス集計すると, ペンギンの生息分布には偏りがあるため (Gentoo は Biscoe 島, Chinstrap は Dream 島にしかいません), 観測のない組み合わせが <span class="in">`NA`</span> になります.</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-na</span></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 種と島ごとの個体数</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by =</span> <span class="fu">c</span>(species, island)) <span class="sc">|&gt;</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> island, <span class="at">values_from =</span> n) <span class="sc">|&gt;</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">replace =</span> <span class="st">"-"</span>)</span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### スタイル: `style_tt()`</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>見出しを太字にする, 特定の行を強調する, セルに色を付けるといった装飾は <span class="in">`style_tt()`</span> がまとめて引き受けます. 行は <span class="in">`i`</span>, 列は <span class="in">`j`</span> で指定し (<span class="in">`i = 0`</span> はヘッダ行を指します), <span class="in">`bold`</span>・<span class="in">`italic`</span>・<span class="in">`color`</span>・<span class="in">`background`</span> などを組み合わせます. ここでは, 体重が 4000g を超える行に背景色を付けて目立たせてみます. 条件は R 側で計算して <span class="in">`i`</span> に渡すのがポイントです.</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-style</span></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 平均体重が大きい種を強調</span></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="st">"bill_len"</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">j =</span> <span class="st">"body_mass"</span>,</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_fmt =</span> <span class="st">"decimal"</span>,</span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_mark_big =</span> <span class="st">","</span></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="fu">which</span>(penguins_summary<span class="sc">$</span>body_mass <span class="sc">&gt;</span> <span class="dv">4000</span>), <span class="at">background =</span> <span class="st">"#ffe9b3"</span>)</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### 行と列のグループ化: `group_tt()`</span></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>複数の列を一つの見出しでまとめたり (LaTeX の <span class="in">`multicolumn`</span> に相当), 行をカテゴリごとに束ねたり (<span class="in">`multirow`</span> に相当) するのが <span class="in">`group_tt()`</span> です. 列方向のグループは <span class="in">`j`</span> に, 行方向のグループは <span class="in">`i`</span> に, それぞれ名前付きリストで「見出し = 範囲」を渡します.</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>まず列をまとめてみます. くちばし関連の指標と体格関連の指標を, それぞれ一つの見出しの下に置きます.</span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-group-col</span></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 指標をグループ化した要約統計量</span></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_dep =</span> <span class="fu">mean</span>(bill_dep, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass =</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_tt</span>(<span class="at">j =</span> <span class="fu">list</span>(<span class="st">"Bill (mm)"</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"Body"</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>))</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>次に行をまとめます. 性別ごとに種別の平均を並べ, 性別を行の見出しにします. <span class="in">`i`</span> に渡す数値は「その行の直前に見出しを挿入する」位置を表すので, 雌が 1–3 行目, 雄が 4–6 行目なら <span class="in">`list("Female" = 1, "Male" = 4)`</span> とします.</span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-group-row</span></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 性別で行をまとめた平均値</span></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">|&gt;</span></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len),</span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_mass =</span> <span class="fu">mean</span>(body_mass),</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="fu">c</span>(sex, species)</span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sex, species) <span class="sc">|&gt;</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sex) <span class="sc">|&gt;</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="st">"bill_len"</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">j =</span> <span class="st">"body_mass"</span>,</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_fmt =</span> <span class="st">"decimal"</span>,</span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_mark_big =</span> <span class="st">","</span></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_tt</span>(<span class="at">i =</span> <span class="fu">list</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="dv">4</span>))</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="fu">### キャプションと脚注</span></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>これまでの表ではキャプションを Quarto のチャンクオプション <span class="in">`#| tbl-cap:`</span> で与えていました. こうしておくと番号付けと相互参照 (<span class="in">`@tbl-penguins-basic`</span> のような書き方) が効くので, 文章中から表を参照する場合はこちらを使います. 一方で, 出典や注記を表の下に添えたいときは <span class="in">`tt()`</span> の <span class="in">`notes`</span> 引数を使います.</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-notes</span></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 注を付けた表</span></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>(<span class="at">notes =</span> <span class="st">"Source: Palmer Station LTER. body_mass の単位はグラム."</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="st">"bill_len"</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(</span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">j =</span> <span class="st">"body_mass"</span>,</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_fmt =</span> <span class="st">"decimal"</span>,</span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_mark_big =</span> <span class="st">","</span></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### セル内の数式</span></span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>列見出しやセルに数式を入れたいことはよくあります. <span class="in">`tinytable`</span> ではセルの中に LaTeX を <span class="in">`$...$`</span> で書けます. HTML 出力では MathJax で描画されるので, セットアップチャンクで <span class="in">`options(tinytable_html_mathjax = TRUE)`</span> を有効にしておきます (この章の冒頭で設定済みです). 列名を後から付け替えるには <span class="in">`setNames()`</span> を使うのが手軽です.</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-math</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 列見出しに数式を使った表</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a>penguins_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Species"</span>,</span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$n$"</span>,</span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$</span><span class="sc">\\</span><span class="st">bar{x}_{</span><span class="sc">\\</span><span class="st">mathrm{bill}}$"</span>,</span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$</span><span class="sc">\\</span><span class="st">bar{x}_{</span><span class="sc">\\</span><span class="st">mathrm{mass}}$"</span></span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="dv">3</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="dv">4</span>, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">num_fmt =</span> <span class="st">"decimal"</span>, <span class="at">num_mark_big =</span> <span class="st">","</span>)</span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### 出力形式とエクスポート</span></span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>ここまで作った表は, Quarto上でレンダリングする文書の形式 (HTML / PDF / Typst) に合わせて <span class="in">`tinytable`</span> が自動的に適切な出力へ変換してくれます. 同じコードがどの形式でも通用するのが <span class="in">`tinytable`</span> の大きな利点です. 表を単体のファイルとして書き出したいときは <span class="in">`save_tt()`</span> を使い, 拡張子から形式を判断させます (例: <span class="in">`save_tt("table.tex")`</span> で LaTeX, <span class="in">`save_tt("table.png")`</span> で画像). LaTeX 文書に貼り付けるためにスタイルを落とした素の <span class="in">`tabular`</span> が欲しい場合は, 保存前に <span class="in">`theme_tt("tabular")`</span> を挟みます.</span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## 回帰分析</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>R で回帰分析を行う方法は数えきれないほどあります. 標準誤差の頑健化には <span class="in">`sandwich`</span> や <span class="in">`estimatr`</span>, 高次元固定効果には <span class="in">`lfe`</span>, 操作変数法には <span class="in">`AER`</span>, 限界効果には <span class="in">`margins`</span> や <span class="in">`mfx`</span>, と用途ごとに別々のパッケージを覚えるのが従来の常識でした. しかし結論から言えば, いまや applied micro の実証で必要になる推定のほとんどは <span class="in">`fixest`</span> ひとつでまかなえます. この節では <span class="in">`lm()`</span> を出発点に, なぜ <span class="in">`fixest`</span> だけ覚えればよいのか, そしてその使い方を見ていきます. 引き続き <span class="in">`penguins`</span> データセットを使い, ペンギンの体重 (<span class="in">`body_mass`</span>) を体格から説明する回帰を例にします.</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### `lm()` による回帰</span></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>最も基本的な回帰は <span class="in">`lm()`</span> です. 第一引数に <span class="in">`y ~ x1 + x2`</span> という formula を, <span class="in">`data`</span> に元データを渡します. 皆さんの多くはすでに使ったことがあるはずなので, ここでは formula 記法だけ手短に復習します.</span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: lm-basic</span></span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len <span class="sc">+</span> species, <span class="at">data =</span> penguins)</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lm)</span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>formula の中ではいくつかの演算子が特別な意味を持ちます. 押さえておきたいのは次の 4 つです.</span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`x1:x2`</span> は交互作用項だけを, <span class="in">`x1 * x2`</span> は主効果と交互作用項の両方 (<span class="in">`x1 + x2 + x1:x2`</span>) を展開します.</span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`as.factor(x)`</span> や文字列・factor 型の変数は, 自動的にダミー変数に展開されます (上の例の <span class="in">`species`</span> がそれです).</span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`log(x)`</span> や <span class="in">`poly(x, 2)`</span> のように, formula の中で関数変換をそのまま書けます.</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`I(x^2)`</span> のように, 算術演算をそのまま使いたいときは <span class="in">`I()`</span> で囲みます.</span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>例えば「フリッパー長の効果が種によって異なる」モデルは <span class="in">`flipper_len * species`</span> と書けます.</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: lm-interaction</span></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(body_mass <span class="sc">~</span> flipper_len <span class="sc">*</span> species, <span class="at">data =</span> penguins) <span class="sc">|&gt;</span></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>()</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="fu">### パッケージは `fixest` だけでよい</span></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="in">`lm()`</span> は手軽ですが, 実証で必要になる頑健標準誤差・クラスター標準誤差・高次元固定効果・操作変数法・非線形モデルには対応していません. これらを補うために従来は用途ごとのパッケージを使い分けていましたが, <span class="co">[</span><span class="ot">`fixest`</span><span class="co">](https://lrberge.github.io/fixest/)</span> はそのすべてを単一の統一的なインターフェースで提供します. 対応関係を整理すると次のようになります.</span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> やりたいこと <span class="pp">|</span> 従来のパッケージ <span class="pp">|</span> <span class="in">`fixest`</span> での書き方 <span class="pp">|</span></span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Robust SE <span class="pp">|</span> <span class="in">`estimatr`</span>, <span class="in">`sandwich`</span> <span class="pp">|</span> <span class="in">`feols(..., vcov = "hetero")`</span> <span class="pp">|</span></span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Clustered SE <span class="pp">|</span> <span class="in">`estimatr`</span>, <span class="in">`sandwich`</span> <span class="pp">|</span> <span class="in">`feols(..., vcov = ~ id)`</span> <span class="pp">|</span></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 高次元固定効果 <span class="pp">|</span> <span class="in">`lfe::felm`</span> <span class="pp">|</span> <span class="in">`feols(y ~ x \| fe1 + fe2)`</span> <span class="pp">|</span></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 操作変数法 (2SLS) <span class="pp">|</span> <span class="in">`AER::ivreg`</span> <span class="pp">|</span> <span class="in">`feols(y ~ x \| fe \| d ~ z)`</span> <span class="pp">|</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ロジット・ポアソン <span class="pp">|</span> <span class="in">`glm`</span> <span class="pp">|</span> <span class="in">`feglm()`</span>, <span class="in">`fepois()`</span> <span class="pp">|</span></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> イベントスタディ <span class="pp">|</span> (専用実装が必要) <span class="pp">|</span> <span class="in">`feols(y ~ i(t, treat))`</span> + <span class="in">`iplot()`</span> <span class="pp">|</span></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>機能が豊富なだけではありません. <span class="in">`fixest`</span> は固定効果の吸収アルゴリズムが非常に高速で, 同じ高次元固定効果モデルを <span class="in">`lfe`</span> や Stata の <span class="in">`reghdfe`</span> より速く推定できることがベンチマークで示されています<span class="ot">[^fixest-bench]</span>. 数千万行規模のパネルでもストレスなく回せるため, 速度の面でも <span class="in">`fixest`</span> を選ばない理由はほとんどありません.</span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a><span class="ot">[^fixest-bench]: </span>ベンチマークは <span class="in">`fixest`</span> の公式ドキュメント (<span class="co">[</span><span class="ot">Benchmarking</span><span class="co">](https://lrberge.github.io/fixest/articles/fixest_walkthrough.html)</span>) と @berge2026 を参照してください.</span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a><span class="fu">### `fixest` の使い方</span></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>中心となる関数は <span class="in">`feols()`</span> (線形回帰) です. 基本の書き方は <span class="in">`lm()`</span> とほぼ同じで, formula に縦棒 <span class="in">`|`</span> を加えると, その後ろに書いた変数を固定効果として吸収します. ここでは種 (<span class="in">`species`</span>) と島 (<span class="in">`island`</span>) を固定効果に入れてみます.</span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: feols-fe</span></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>m_fe <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>  body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len <span class="sc">|</span> species <span class="sc">+</span> island,</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> penguins</span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>m_fe</span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>出力の標準誤差に注目してください. <span class="in">`fixest`</span> は固定効果モデルでは, 既定で最初の固定効果 (ここでは <span class="in">`species`</span>) でクラスタリングした標準誤差を返します. 標準誤差の種類は <span class="in">`vcov`</span> 引数で明示的に切り替えられます. 推定し直さずに <span class="in">`summary()`</span> で変えることもできます.</span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: feols-vcov</span></span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a><span class="co"># Heteroskedasticity-robust (HC1)</span></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(body_mass <span class="sc">~</span> flipper_len <span class="sc">|</span> species, <span class="at">data =</span> penguins, <span class="at">vcov =</span> <span class="st">"hetero"</span>)</span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="co"># Clustered on island</span></span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(body_mass <span class="sc">~</span> flipper_len <span class="sc">|</span> species, <span class="at">data =</span> penguins, <span class="at">vcov =</span> <span class="sc">~</span>island)</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>操作変数法も同じ関数で書けます. formula の末尾に <span class="in">`| 内生変数 ~ 操作変数`</span> を足すだけです (固定効果と併用する場合は <span class="in">`y ~ 外生変数 | 固定効果 | 内生変数 ~ 操作変数`</span> の順). 非線形モデルは <span class="in">`feglm()`</span> (一般化線形モデル) と <span class="in">`fepois()`</span> (ポアソン回帰) が担当し, 引数は <span class="in">`glm()`</span> とほぼ同じです.</span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: feols-glm</span></span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a><span class="co"># Logit: probability of being male</span></span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>pen <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">|&gt;</span></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_male =</span> <span class="fu">as.integer</span>(sex <span class="sc">==</span> <span class="st">"male"</span>))</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a><span class="fu">feglm</span>(is_male <span class="sc">~</span> body_mass <span class="sc">+</span> bill_len <span class="sc">|</span> species, <span class="at">data =</span> pen, <span class="at">family =</span> binomial)</span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>推定したモデルをコンソールで手早く見比べたいだけなら, <span class="in">`fixest`</span> 組み込みの <span class="in">`etable()`</span> が便利です. 論文や資料に載せるきれいな回帰表は, 次の節で <span class="in">`modelsummary`</span> を使って作ります.</span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="fu">### 回帰表を整える: `modelsummary`</span></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>複数のモデルを並べた回帰表は, 前節の <span class="in">`tinytable`</span> がバックエンドの <span class="co">[</span><span class="ot">`modelsummary`</span><span class="co">](https://modelsummary.com/)</span> で作ります. 推定結果のリストを渡すだけで表になり, <span class="in">`output = "tinytable"`</span> を指定すれば「表」の節で紹介したスタイリングがそのまま使えます. まずは何の加工もしていない既定の出力です.</span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-ms-default</span></span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: modelsummary の既定の出力</span></span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(1)"</span> <span class="ot">=</span> <span class="fu">feols</span>(body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len, <span class="at">data =</span> penguins),</span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(2)"</span> <span class="ot">=</span> <span class="fu">feols</span>(</span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>    body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len,</span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> penguins,</span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">vcov =</span> <span class="st">"hetero"</span></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(3)"</span> <span class="ot">=</span> <span class="fu">feols</span>(</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a>    body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len <span class="sc">|</span> species,</span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> penguins</span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>  <span class="st">"(4)"</span> <span class="ot">=</span> <span class="fu">feols</span>(</span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>    body_mass <span class="sc">~</span> flipper_len <span class="sc">+</span> bill_len <span class="sc">|</span> species <span class="sc">+</span> island,</span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> penguins</span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models)</span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a>既定の表は変数名がそのまま並び, 統計量も載りすぎて雑然としています. 論文用に仕上げるには, 主に次の 3 つの引数を使います.</span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`coef_map`</span>: 表示する係数の選択・並べ替え・改名を, 名前付きベクトルで一度に行います. ここに挙げた係数だけが, 指定した順で表示されます.</span>
+<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`gof_map`</span>: 表の下部に並ぶ適合度統計量 (goodness-of-fit) を選んで改名します. <span class="in">`raw`</span> (内部名)・<span class="in">`clean`</span> (表示名)・<span class="in">`fmt`</span> (小数桁数) の 3 列を持つ <span class="in">`tibble`</span> で渡すのが柔軟です. 固定効果の有無を示す行 (<span class="in">`FE: species`</span> など) もここで改名できます.</span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`stars`</span>: 有意水準のアスタリスクを定義します.</span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a>これらを適用したのが次の表です. さらに <span class="in">`modelsummary`</span> の返り値は <span class="in">`tinytable`</span> オブジェクトなので, <span class="in">`group_tt()`</span> を継ぎ足してモデルをグループ分けする見出し (column spanner) を付けられます.</span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-ms-polished</span></span>
+<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: 標準誤差と固定効果を変えた回帰の比較</span></span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>  <span class="st">"flipper_len"</span> <span class="ot">=</span> <span class="st">"Flipper length"</span>,</span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bill_len"</span> <span class="ot">=</span> <span class="st">"Bill length"</span></span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>  <span class="at">raw =</span> <span class="fu">c</span>(<span class="st">"FE: species"</span>, <span class="st">"FE: island"</span>, <span class="st">"nobs"</span>, <span class="st">"r2.within"</span>),</span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>  <span class="at">clean =</span> <span class="fu">c</span>(<span class="st">"FE: Species"</span>, <span class="st">"FE: Island"</span>, <span class="st">"Observations"</span>, <span class="st">"Within R2"</span>),</span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a>  <span class="at">fmt =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a>  models,</span>
+<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="st">"tinytable"</span>,</span>
+<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">"*"</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">"**"</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">"***"</span> <span class="ot">=</span> .<span class="dv">01</span>),</span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_map =</span> cm,</span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_map =</span> gm</span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_tt</span>(<span class="at">j =</span> <span class="fu">list</span>(<span class="st">"Pooled OLS"</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"Fixed effects"</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>))</span>
+<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>LaTeX 文書に貼り付けたい場合は, 「表」の節で触れたように <span class="in">`theme_tt("tabular")`</span> を挟んでから <span class="in">`save_tt("table_reg.tex")`</span> で書き出します. 同じ回帰表のコードから HTML でも PDF でも同じ表が得られるのが, <span class="in">`tinytable`</span> ベースで作ることの利点です.</span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a><span class="fu">### 係数のプロット: `ggfixest`</span></span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>回帰係数を点と区間で並べた係数プロットは, 表よりも一目で大小と有意性が伝わります. <span class="in">`fixest`</span> には <span class="in">`coefplot()`</span> / <span class="in">`iplot()`</span> という作図関数が組み込まれていますが, これらは base R グラフィックスを使うため <span class="in">`ggplot2`</span> との相性がよくありません. そこで <span class="co">[</span><span class="ot">`ggfixest`</span><span class="co">](https://grantmcdermott.com/ggfixest/)</span> を使うと, 同じものを <span class="in">`ggplot`</span> オブジェクトとして描けます (<span class="in">`ggcoefplot()`</span> と <span class="in">`ggiplot()`</span>).</span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-coefplot</span></span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Coefficient plot for the two-way fixed-effects model."</span></span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefplot</span>(m_fe) <span class="sc">+</span></span>
+<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a><span class="in">`ggfixest`</span> が特に活躍するのがイベントスタディです. <span class="in">`fixest`</span> では formula の中に <span class="in">`i(time, treat, ref)`</span> と書くと, 処置群について時点ごとの交互作用項 (= イベントスタディの係数) が一括で作られます. <span class="in">`ref`</span> で基準時点を指定します. ここでは <span class="in">`fixest`</span> に同梱されている擬似的な差分の差分 (difference-in-differences) データ <span class="in">`base_did`</span> を使います.</span>
+<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-event-study</span></span>
+<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Event-study estimates around treatment (reference period = 5)."</span></span>
+<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(base_did, <span class="at">package =</span> <span class="st">"fixest"</span>)</span>
+<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a>est_did <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a>  y <span class="sc">~</span> x1 <span class="sc">+</span> <span class="fu">i</span>(period, treat, <span class="at">ref =</span> <span class="dv">5</span>) <span class="sc">|</span> id <span class="sc">+</span> period,</span>
+<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> base_did</span>
+<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a><span class="fu">ggiplot</span>(est_did) <span class="sc">+</span></span>
+<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Period"</span>, <span class="at">y =</span> <span class="st">"Estimate and 95% CI"</span>, <span class="at">title =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています <span class="co">[</span><span class="ot">@sun2021</span><span class="co">]</span>. その場合は <span class="in">`i()`</span> の代わりに <span class="in">`sunab()`</span> を使うと, @sun2021 の補正済み推定量がそのまま得られ, <span class="in">`ggiplot()`</span> で同じように描けます.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; API – Best Practices</title>
+<title>7&nbsp; API – Best Practices</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,14 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d102713e0a15c87e67d60c9a26d24b47.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2c872af6924e1f6c02c0cc195d6bfbcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/api.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/api.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -135,73 +135,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+ <span class="menu-text">はじめに</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/api.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -237,14 +237,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-client-server" id="toc-sec-client-server" class="nav-link active" data-scroll-target="#sec-client-server"><span class="header-section-number">8.1</span> Client-Server Model</a></li>
-  <li><a href="#rest-api-の基本" id="toc-rest-api-の基本" class="nav-link" data-scroll-target="#rest-api-の基本"><span class="header-section-number">8.2</span> REST API の基本</a></li>
-  <li><a href="#application-世界銀行" id="toc-application-世界銀行" class="nav-link" data-scroll-target="#application-世界銀行"><span class="header-section-number">8.3</span> Application: 世界銀行</a>
+  <li><a href="#sec-client-server" id="toc-sec-client-server" class="nav-link active" data-scroll-target="#sec-client-server"><span class="header-section-number">7.1</span> Client-Server Model</a></li>
+  <li><a href="#rest-api-の基本" id="toc-rest-api-の基本" class="nav-link" data-scroll-target="#rest-api-の基本"><span class="header-section-number">7.2</span> REST API の基本</a></li>
+  <li><a href="#application-世界銀行" id="toc-application-世界銀行" class="nav-link" data-scroll-target="#application-世界銀行"><span class="header-section-number">7.3</span> Application: 世界銀行</a>
   <ul class="collapse">
   <li><a href="#json-を-tibble-に整える" id="toc-json-を-tibble-に整える" class="nav-link" data-scroll-target="#json-を-tibble-に整える">JSON を tibble に整える</a></li>
   <li><a href="#ラッパーパッケージ-wdi" id="toc-ラッパーパッケージ-wdi" class="nav-link" data-scroll-target="#ラッパーパッケージ-wdi">ラッパーパッケージ: WDI</a></li>
   </ul></li>
-  <li><a href="#application-e-stat" id="toc-application-e-stat" class="nav-link" data-scroll-target="#application-e-stat"><span class="header-section-number">8.4</span> Application: e-Stat</a>
+  <li><a href="#application-e-stat" id="toc-application-e-stat" class="nav-link" data-scroll-target="#application-e-stat"><span class="header-section-number">7.4</span> Application: e-Stat</a>
   <ul class="collapse">
   <li><a href="#api-キーを安全に扱う" id="toc-api-キーを安全に扱う" class="nav-link" data-scroll-target="#api-キーを安全に扱う">API キーを安全に扱う</a></li>
   <li><a href="#統計表を探す" id="toc-統計表を探す" class="nav-link" data-scroll-target="#統計表を探す">統計表を探す</a></li>
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -276,16 +276,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="sec-client-server" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="sec-client-server"><span class="header-section-number">8.1</span> Client-Server Model</h2>
-<p>私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています (<a href="#fig-client-server" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>).</p>
+<section id="sec-client-server" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-client-server"><span class="header-section-number">7.1</span> Client-Server Model</h2>
+<p>私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています (<a href="#fig-client-server" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>).</p>
 <div id="fig-client-server" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-client-server-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/client-server.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;8.1: クライアントとサーバー"><img src="../static/cetz/client-server.svg" class="img-fluid figure-img"></a>
+<a href="../static/cetz/client-server.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;7.1: クライアントとサーバー"><img src="../static/cetz/client-server.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-client-server-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: クライアントとサーバー
+Figure&nbsp;7.1: クライアントとサーバー
 </figcaption>
 </figure>
 </div>
@@ -316,10 +316,10 @@ Figure&nbsp;8.1: クライアントとサーバー
 </div>
 <p>私たちが普段ブラウザで見ているページは, この HTML をブラウザが解釈して描画したものです. ブラウザは, ここで R がやったのと同じリクエストを送り, 返ってきた HTML を画面に整形して表示しているにすぎません.</p>
 </section>
-<section id="rest-api-の基本" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="rest-api-の基本"><span class="header-section-number">8.2</span> REST API の基本</h2>
+<section id="rest-api-の基本" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="rest-api-の基本"><span class="header-section-number">7.2</span> REST API の基本</h2>
 <p>人間向けの HTML を解析してデータを取り出す方法 (スクレイピング) もありますが, 多くのサービスは「プログラムがデータを取りに来るための窓口」をはじめから用意しています. これが API (Application Programming Interface) です. API にリクエストを送ると, 本文は HTML ではなく JSON のような構造化データで返ってきます. 整形済みのデータがそのまま手に入り, ページの見た目に左右されず仕様も安定しているので, データを取得するなら API が第一の選択です.</p>
-<p>Web の API の多くは REST という様式に従っており, 普段ブラウザがページを取りに行くのと同じ HTTP のやり取り (<a href="#sec-client-server" class="quarto-xref"><span>Section 8.1</span></a> で見たリクエストとレスポンス) でデータを受け渡します. 押さえるべきは次の3つです.</p>
+<p>Web の API の多くは REST という様式に従っており, 普段ブラウザがページを取りに行くのと同じ HTTP のやり取り (<a href="#sec-client-server" class="quarto-xref"><span>Section 7.1</span></a> で見たリクエストとレスポンス) でデータを受け渡します. 押さえるべきは次の3つです.</p>
 <ul>
 <li><strong>エンドポイント</strong> (endpoint): リクエストの宛先となる URL です. 「どのデータが欲しいか」が URL のパスに対応します.</li>
 <li><strong>クエリパラメータ</strong> (query parameter): URL の末尾に <code>?key=value&amp;key2=value2</code> の形でくっつける絞り込み条件です. 期間や対象, 出力形式などを指定します.</li>
@@ -332,8 +332,8 @@ Figure&nbsp;8.1: クライアントとサーバー
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>R では <code>httr2</code> がこの JSON を自動でリスト (<code>list</code>) に変換してくれるので, あとはそこから必要な値を取り出して整えるだけです.</p>
 </section>
-<section id="application-世界銀行" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="application-世界銀行"><span class="header-section-number">8.3</span> Application: 世界銀行</h2>
+<section id="application-世界銀行" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="application-世界銀行"><span class="header-section-number">7.3</span> Application: 世界銀行</h2>
 <p>R で API を叩くには <a href="https://httr2.r-lib.org/"><code>httr2</code></a> を使います. リクエストを少しずつ組み立て (<code>req_*</code>), 最後に送信して (<code>req_perform</code>), レスポンスから中身を取り出す (<code>resp_*</code>), という流れです.</p>
 <p>例として, 世界銀行の <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392">World Bank Indicators API</a> を使い, 日本・アメリカ・韓国の1人あたり GDP (現在価格, USD) の時系列を取得します.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> この API のエンドポイントは <code>https://api.worldbank.org/v2/country/{国コード}/indicator/{指標コード}</code> という形です.</p>
 <div class="cell" data-layout-align="center">
@@ -395,7 +395,7 @@ Figure&nbsp;8.1: クライアントとサーバー
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Japan    2009 41309.</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## # ℹ 59 more rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます (<a href="#fig-gdp-pc" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>).</p>
+<p>これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます (<a href="#fig-gdp-pc" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gdp, <span class="fu">aes</span>(year, gdp_pc, <span class="at">color =</span> country, <span class="at">linetype =</span> country)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
@@ -412,10 +412,10 @@ Figure&nbsp;8.1: クライアントとサーバー
 <div id="fig-gdp-pc" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gdp-pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="api_files/figure-html/fig-gdp-pc-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;8.2: GDP per capita, 2000-2022 (World Bank)"><img src="api_files/figure-html/fig-gdp-pc-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="api_files/figure-html/fig-gdp-pc-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;7.2: GDP per capita, 2000-2022 (World Bank)"><img src="api_files/figure-html/fig-gdp-pc-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-pc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.2: GDP per capita, 2000-2022 (World Bank)
+Figure&nbsp;7.2: GDP per capita, 2000-2022 (World Bank)
 </figcaption>
 </figure>
 </div>
@@ -452,8 +452,8 @@ Figure&nbsp;8.2: GDP per capita, 2000-2022 (World Bank)
 <p>国コード・指標コード・期間を渡すだけで, さきほど手作業で組み立てたのと同じ整然データが返ってきます. <code>indicator</code> に名前付きベクトルを渡すと, 値の列名 (<code>gdp_pc</code>) もその場で指定できます. ラッパーがある API では, まずこちらを使うのが近道です.</p>
 </section>
 </section>
-<section id="application-e-stat" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="application-e-stat"><span class="header-section-number">8.4</span> Application: e-Stat</h2>
+<section id="application-e-stat" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="application-e-stat"><span class="header-section-number">7.4</span> Application: e-Stat</h2>
 <p>実用的な API の多くは, 誰がどれだけ使ったかを管理するために, 利用登録と API キー (api key) を求めます. 日本の官庁統計を横断的に提供する <a href="https://www.e-stat.go.jp/">e-Stat</a> (政府統計の総合窓口) もその一つです. ここでは, キーの安全な扱い方とあわせて, 都道府県別の1人当たり県民所得を取得してみます.</p>
 <section id="api-キーを安全に扱う" class="level3">
 <h3 class="anchored" data-anchor-id="api-キーを安全に扱う">API キーを安全に扱う</h3>
@@ -529,7 +529,7 @@ Figure&nbsp;8.2: GDP per capita, 2000-2022 (World Bank)
 </section>
 <section id="可視化" class="level3">
 <h3 class="anchored" data-anchor-id="可視化">可視化</h3>
-<p>単位は千円です. 県名を英語ラベルに直して, 1人当たり県民所得の推移を描きます (<a href="#fig-estat-income" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>).</p>
+<p>単位は千円です. 県名を英語ラベルに直して, 1人当たり県民所得の推移を描きます (<a href="#fig-estat-income" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>income <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -556,10 +556,10 @@ Figure&nbsp;8.2: GDP per capita, 2000-2022 (World Bank)
 <div id="fig-estat-income" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-estat-income-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="api_files/figure-html/fig-estat-income-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;8.3: 1人当たり県民所得の推移 (e-Stat)"><img src="api_files/figure-html/fig-estat-income-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="api_files/figure-html/fig-estat-income-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;7.3: 1人当たり県民所得の推移 (e-Stat)"><img src="api_files/figure-html/fig-estat-income-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estat-income-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.3: 1人当たり県民所得の推移 (e-Stat)
+Figure&nbsp;7.3: 1人当たり県民所得の推移 (e-Stat)
 </figcaption>
 </figure>
 </div>
@@ -580,6 +580,8 @@ Figure&nbsp;8.3: 1人当たり県民所得の推移 (e-Stat)
 </div>
 </div>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -664,6 +666,57 @@ Figure&nbsp;8.3: 1人当たり県民所得の推移 (e-Stat)
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -997,15 +1050,280 @@ Figure&nbsp;8.3: 1人当たり県民所得の推移 (e-Stat)
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lesson/computation-data.html" class="pagination-link" aria-label="大規模データ">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lesson/visualization.html" class="pagination-link" aria-label="可視化の技術">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> API</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr2)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estatapi)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Client-Server Model {#sec-client-server}</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています (@fig-client-server).</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="al">![クライアントとサーバー](../static/cetz/client-server.svg)</span>{#fig-client-server}</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**クライアント** (client) は Web ブラウザやスマホのアプリなど, ユーザーが直接操作する側のソフトウェアです</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**サーバー** (server) は Web サイトを運営する側のコンピュータで, クライアントからのリクエストに応じてデータを返す役割を担います</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>このやり取りは HTTP (Hypertext Transfer Protocol) という共通のルールに従います. 中身は大きく2つに分かれます.</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**リクエスト** (request): 「どの URL の何が欲しいか」をサーバーに伝えます. 例えば <span class="in">`GET /page`</span> は「このページをください」という意味です (<span class="in">`GET`</span> は取得, <span class="in">`POST`</span> は送信を表す HTTP メソッドです).</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**レスポンス** (response): サーバーからの返事です. 成否を表すステータスコード (<span class="in">`200 OK`</span>, <span class="in">`404 Not Found`</span> など) と, 本文 (body) から成ります. 本文は, Web ページなら HTML, API なら JSON であることが多いです.</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>この request と response のやり取りは, R からもそのまま再現できます. <span class="in">`httr2`</span> パッケージで, シンプルな Web ページ <span class="ot">&lt;https://example.com&gt;</span> に GET リクエストを送ってみましょう.</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: http-get</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://example.com"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_perform</span>()</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="fu">resp_status</span>(resp)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>ステータスコードが <span class="in">`200`</span> なら成功です. 続けてレスポンスの本文を取り出すと, ブラウザが受け取るのと同じ HTML がそのまま返ってきます (長いので先頭だけ表示します).</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: http-body</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>resp <span class="sc">|&gt;</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">resp_body_string</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substr</span>(<span class="dv">1</span>, <span class="dv">320</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>私たちが普段ブラウザで見ているページは, この HTML をブラウザが解釈して描画したものです. ブラウザは, ここで R がやったのと同じリクエストを送り, 返ってきた HTML を画面に整形して表示しているにすぎません.</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## REST API の基本</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>人間向けの HTML を解析してデータを取り出す方法 (スクレイピング) もありますが, 多くのサービスは「プログラムがデータを取りに来るための窓口」をはじめから用意しています. これが API (Application Programming Interface) です. API にリクエストを送ると, 本文は HTML ではなく JSON のような構造化データで返ってきます. 整形済みのデータがそのまま手に入り, ページの見た目に左右されず仕様も安定しているので, データを取得するなら API が第一の選択です.</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>Web の API の多くは REST という様式に従っており, 普段ブラウザがページを取りに行くのと同じ HTTP のやり取り (@sec-client-server で見たリクエストとレスポンス) でデータを受け渡します. 押さえるべきは次の3つです.</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**エンドポイント** (endpoint): リクエストの宛先となる URL です. 「どのデータが欲しいか」が URL のパスに対応します.</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**クエリパラメータ** (query parameter): URL の末尾に <span class="in">`?key=value&amp;key2=value2`</span> の形でくっつける絞り込み条件です. 期間や対象, 出力形式などを指定します.</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**レスポンス** (response): 多くの場合 JSON 形式のテキストです. ステータスコード (<span class="in">`200`</span> なら成功) もあわせて返ってきます.</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>**JSON** (JavaScript Object Notation) は, データ交換でもっとも広く使われる形式です. 「キーと値の組」を <span class="in">`{...}`</span> で, その並びを <span class="in">`[...]`</span> の配列で表し, これらを入れ子にしてデータを記述します. 例えば, 国ごとの1人あたり GDP を並べると次のようになります.</span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="in">```json</span></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>[</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"country"</span><span class="op">:</span> <span class="st">"Japan"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">:</span> <span class="dv">2022</span><span class="op">,</span> <span class="st">"gdp_pc"</span><span class="op">:</span> <span class="dv">33834</span>}<span class="op">,</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"country"</span><span class="op">:</span> <span class="st">"Korea"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">:</span> <span class="dv">2022</span><span class="op">,</span> <span class="st">"gdp_pc"</span><span class="op">:</span> <span class="dv">32423</span>}</span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a>R では <span class="in">`httr2`</span> がこの JSON を自動でリスト (<span class="in">`list`</span>) に変換してくれるので, あとはそこから必要な値を取り出して整えるだけです.</span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Application: 世界銀行</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>R で API を叩くには <span class="co">[</span><span class="ot">`httr2`</span><span class="co">](https://httr2.r-lib.org/)</span> を使います. リクエストを少しずつ組み立て (<span class="in">`req_*`</span>), 最後に送信して (<span class="in">`req_perform`</span>), レスポンスから中身を取り出す (<span class="in">`resp_*`</span>), という流れです.</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>例として, 世界銀行の <span class="co">[</span><span class="ot">World Bank Indicators API</span><span class="co">](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392)</span> を使い, 日本・アメリカ・韓国の1人あたり GDP (現在価格, USD) の時系列を取得します.^<span class="co">[</span><span class="ot">世界銀行 API は認証なしで使え, 経済データの宝庫なので練習に向いています. 指標コード `NY.GDP.PCAP.CD` が1人あたり GDP, 国は ISO3 コード (`JPN`, `USA`, `KOR`) で指定します.</span><span class="co">]</span> この API のエンドポイントは <span class="in">`https://api.worldbank.org/v2/country/{国コード}/indicator/{指標コード}`</span> という形です.</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: api-request</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>resp <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://api.worldbank.org/v2"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_url_path_append</span>(</span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"country"</span>,</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"JPN;USA;KOR"</span>,</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">"indicator"</span>,</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"NY.GDP.PCAP.CD"</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_url_query</span>(<span class="at">format =</span> <span class="st">"json"</span>, <span class="at">date =</span> <span class="st">"2000:2022"</span>, <span class="at">per_page =</span> <span class="dv">20000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_perform</span>()</span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="fu">resp_status</span>(resp)</span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="in">`request()`</span> でベース URL からリクエストを作り, <span class="in">`req_url_path_append()`</span> でパスを, <span class="in">`req_url_query()`</span> でクエリパラメータを付け足しています.^<span class="co">[</span><span class="ot">パイプで組み立てるので, パラメータの追加や差し替えが読みやすいのが `httr2` の利点です. 古い `httr` パッケージの後継にあたります.</span><span class="co">]</span> ここでは出力形式を JSON に, 期間を2000〜2022年に, 1ページあたりの件数を十分大きく指定しています. <span class="in">`req_perform()`</span> で実際にリクエストを送り, <span class="in">`resp_status()`</span> が <span class="in">`200`</span> なら成功です.</span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="fu">### JSON を tibble に整える</span></span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a>レスポンスの本文は <span class="in">`resp_body_json()`</span> でリストに変換します. 世界銀行 API の場合, 返ってくる JSON は2要素の配列で, 1つ目がページ情報 (総件数など) のメタデータ, 2つ目が実データの配列です.^<span class="co">[</span><span class="ot">この「メタデータ + データ」という二段構えは世界銀行 API 固有の作りです. API ごとに JSON の構造は異なるので, 最初は `str(body, max.level = 2)` などで形を確かめるのが近道です.</span><span class="co">]</span></span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: api-parse</span></span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>body <span class="ot">&lt;-</span> <span class="fu">resp_body_json</span>(resp)</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a>records <span class="ot">&lt;-</span> body[[<span class="dv">2</span>]]</span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(records)</span>
+<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(records[[<span class="dv">1</span>]], <span class="at">max.level =</span> <span class="dv">1</span>)</span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a>各レコードは, 国・年・値などをキーに持つリストになっています. ここから欲しいキーだけを <span class="in">`purrr::map_*()`</span> で抜き出して <span class="in">`tibble`</span> に組み立てます. 値が欠損している年は <span class="in">`value`</span> が <span class="in">`NULL`</span> になっているので, <span class="in">`%||%`</span> で <span class="in">`NA`</span> に置き換えておきます.</span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: api-tibble</span></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>gdp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="fu">map_chr</span>(records, \(r) r<span class="sc">$</span>country<span class="sc">$</span>value),</span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">as.integer</span>(<span class="fu">map_chr</span>(records, \(r) r<span class="sc">$</span>date)),</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">gdp_pc =</span> <span class="fu">map_dbl</span>(records, \(r) r<span class="sc">$</span>value <span class="sc">%||%</span> <span class="cn">NA_real_</span>)</span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>gdp <span class="sc">|&gt;</span> <span class="fu">arrange</span>(country, year)</span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a>これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます (@fig-gdp-pc).</span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-gdp-pc</span></span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "GDP per capita, 2000-2022 (World Bank)"</span></span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gdp, <span class="fu">aes</span>(year, gdp_pc, <span class="at">color =</span> country, <span class="at">linetype =</span> country)) <span class="sc">+</span></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_dollar</span>()) <span class="sc">+</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"GDP per capita (current US$)"</span>) <span class="sc">+</span></span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.18</span>, <span class="fl">0.85</span>)</span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="fu">### ラッパーパッケージ: WDI</span></span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a>ここまで <span class="in">`httr2`</span> で URL を組み立て, JSON を手でほどいてきました. 仕組みを理解するには大切な作業ですが, 世界銀行のような主要なデータソースには, この一連の流れを1つの関数に包んだラッパーパッケージが用意されていることがよくあります. 世界銀行なら <span class="co">[</span><span class="ot">`WDI`</span><span class="co">](https://github.com/vincentarelbundock/WDI)</span> です. さきほどと同じデータが, 次の数行で手に入ります.</span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: wdi</span></span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a>gdp_wdi <span class="ot">&lt;-</span> <span class="fu">WDI</span>(</span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"JP"</span>, <span class="st">"US"</span>, <span class="st">"KR"</span>),</span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="fu">c</span>(<span class="at">gdp_pc =</span> <span class="st">"NY.GDP.PCAP.CD"</span>),</span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="dv">2000</span>,</span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">end =</span> <span class="dv">2022</span></span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a>gdp_wdi <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">arrange</span>(country, year)</span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a>国コード・指標コード・期間を渡すだけで, さきほど手作業で組み立てたのと同じ整然データが返ってきます. <span class="in">`indicator`</span> に名前付きベクトルを渡すと, 値の列名 (<span class="in">`gdp_pc`</span>) もその場で指定できます. ラッパーがある API では, まずこちらを使うのが近道です.</span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Application: e-Stat</span></span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a>実用的な API の多くは, 誰がどれだけ使ったかを管理するために, 利用登録と API キー (api key) を求めます. 日本の官庁統計を横断的に提供する <span class="co">[</span><span class="ot">e-Stat</span><span class="co">](https://www.e-stat.go.jp/)</span> (政府統計の総合窓口) もその一つです. ここでは, キーの安全な扱い方とあわせて, 都道府県別の1人当たり県民所得を取得してみます.</span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### API キーを安全に扱う</span></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a>e-Stat の API を使うには, まず <span class="ot">&lt;https://www.e-stat.go.jp/api/&gt;</span> で無料のユーザー登録をして, アプリケーションID (appId) を発行します. このキーをコードに直接書くと, 誤って GitHub に公開したときにそのまま流出してしまいます. そこで, プロジェクト直下の <span class="in">`.Renviron`</span> に次の1行を置き, 環境変数として読み込みます.</span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{.sh filename=".Renviron"}</span></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="va">ESTAT_APP_ID</span><span class="op">=</span>your_application_id_here</span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="in">`.Renviron`</span> は必ず <span class="in">`.gitignore`</span> に加えて, Git の管理対象から外しておきます. R を起動すると <span class="in">`.Renviron`</span> が自動で読み込まれるので, あとは <span class="in">`Sys.getenv()`</span> でキーを取り出せます. キーの値そのものはコードにもログにも残りません.</span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: estat-key</span></span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a>app_id <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">"ESTAT_APP_ID"</span>)</span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="fu">### 統計表を探す</span></span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a>世界銀行では仕組みを理解するために手で組み立てましたが, e-Stat にも専用のラッパー <span class="co">[</span><span class="ot">`estatapi`</span><span class="co">](https://github.com/yutannihilation/estatapi)</span> があるので, ここでは最初からそれを使います. まず, どの統計表を使うかを探します. <span class="in">`estat_getStatsList()`</span> に検索語を渡すと, 条件に合う統計表の一覧が tibble で返ってきます.</span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: estat-list</span></span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> <span class="fu">estat_getStatsList</span>(</span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a>  <span class="at">appId =</span> app_id,</span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a>  <span class="at">searchWord =</span> <span class="st">"都道府県データ 経済基盤"</span></span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a>tables <span class="sc">|&gt;</span> <span class="fu">distinct</span>(<span class="st">`</span><span class="at">@id</span><span class="st">`</span>, STATISTICS_NAME, TITLE)</span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a><span class="in">`@id`</span> の列が, それぞれの統計表の ID (<span class="in">`statsDataId`</span>) です. ここでは「都道府県データ 基礎データ」の経済基盤の表, <span class="in">`0000010103`</span> を使います.^<span class="co">[</span><span class="ot">統計表に含まれる指標や地域のコード (`cat01`, `area` など) の一覧は `estat_getMetaInfo()` で調べられます. これも estatapi の関数です. 1人当たり県民所得の指標コードは `C122101` です.</span><span class="co">]</span></span>
+<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a><span class="fu">### データを取得する</span></span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a>統計表の ID が分かったら, <span class="in">`estat_getStatsData()`</span> に <span class="in">`appId`</span>, <span class="in">`statsDataId`</span>, そして絞り込み条件を渡します. 1人当たり県民所得 (<span class="in">`cdCat01 = "C122101"`</span>) を, 東京・愛知・大阪・沖縄の4都府県 (<span class="in">`cdArea`</span>) について取得します. 都道府県は5桁のコード (東京都なら <span class="in">`13000`</span>) で指定します.</span>
+<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-222"><a href="#cb15-222" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: estat-fetch</span></span>
+<span id="cb15-223"><a href="#cb15-223" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">estat_getStatsData</span>(</span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">appId =</span> app_id,</span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">statsDataId =</span> <span class="st">"0000010103"</span>,</span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a>  <span class="at">cdCat01 =</span> <span class="st">"C122101"</span>,</span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a>  <span class="at">cdArea =</span> <span class="fu">c</span>(<span class="st">"13000"</span>, <span class="st">"23000"</span>, <span class="st">"27000"</span>, <span class="st">"47000"</span>)</span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(raw)</span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a>整然データの tibble が直接返ってくるので, <span class="in">`httr2`</span> のときのような JSON のパースは要りません. <span class="in">`raw`</span> には, コード列 (<span class="in">`area_code`</span>, <span class="in">`time_code`</span> など) と日本語ラベルの列, そして値 <span class="in">`value`</span> が並んでいます. 必要な列だけ取り出して整えます. 時点コード <span class="in">`"2011100000"`</span> は先頭4桁が年度なので, <span class="in">`str_sub()`</span> でそこを取り出します.</span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: estat-tidy</span></span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a>income <span class="ot">&lt;-</span> raw <span class="sc">|&gt;</span></span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(</span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">area =</span> area_code,</span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.integer</span>(<span class="fu">str_sub</span>(time_code, <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">income =</span> value</span>
+<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a>income</span>
+<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a><span class="fu">### 可視化</span></span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a>単位は千円です. 県名を英語ラベルに直して, 1人当たり県民所得の推移を描きます (@fig-estat-income).</span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-estat-income</span></span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "1人当たり県民所得の推移 (e-Stat)"</span></span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a>income <span class="sc">|&gt;</span></span>
+<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">prefecture =</span> <span class="fu">recode</span>(</span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a>      area,</span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a>      <span class="st">"13000"</span> <span class="ot">=</span> <span class="st">"Tokyo"</span>,</span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a>      <span class="st">"23000"</span> <span class="ot">=</span> <span class="st">"Aichi"</span>,</span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a>      <span class="st">"27000"</span> <span class="ot">=</span> <span class="st">"Osaka"</span>,</span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a>      <span class="st">"47000"</span> <span class="ot">=</span> <span class="st">"Okinawa"</span></span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, income, <span class="at">color =</span> prefecture, <span class="at">linetype =</span> prefecture)) <span class="sc">+</span></span>
+<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_comma</span>()) <span class="sc">+</span></span>
+<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_discrete</span>(<span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Income per capita (1,000 yen)"</span>) <span class="sc">+</span></span>
+<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"inside"</span>,</span>
+<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.18</span>, <span class="fl">0.85</span>)</span>
+<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a><span class="fu">## ラッパーパッケージとリクエストの作法</span></span>
+<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a>有名なデータソースには, 本章で使った <span class="in">`WDI`</span> や <span class="in">`estatapi`</span> のように, API 呼び出しを R の関数で包んだラッパーパッケージが用意されていることがよくあります. FRED なら <span class="co">[</span><span class="ot">`fredr`</span><span class="co">](https://sboysel.github.io/fredr/)</span> など, ほかにも数多くあります. 新しいデータソースを使うときは, まずこうしたパッケージが無いか探すのが近道です. 一方で, ラッパーの無い API に出会ったら, 世界銀行の例で見たように <span class="in">`httr2`</span> で自分でリクエストを組み立てることになります. 手で組み立てる方法とラッパーの両方を知っておくと心強いです.</span>
+<span id="cb15-286"><a href="#cb15-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-287"><a href="#cb15-287" aria-hidden="true" tabindex="-1"></a>また, API には単位時間あたりのリクエスト数の上限 (rate limit) があります. <span class="in">`httr2`</span> で多数のリクエストを送るときは, <span class="in">`req_throttle()`</span> で送信間隔をあけ, <span class="in">`req_retry()`</span> で失敗時の再試行を設定しておくと安全です.</span>
+<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {

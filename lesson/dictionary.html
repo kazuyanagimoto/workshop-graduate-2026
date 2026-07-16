@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -56,14 +91,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d102713e0a15c87e67d60c9a26d24b47.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2c872af6924e1f6c02c0cc195d6bfbcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -145,73 +180,73 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+ <span class="menu-text">はじめに</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -272,7 +307,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/dictionary.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/dictionary.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix A — 用語解説</h1>
+<div class="quarto-title-block"><div><h1 class="title">Appendix A — 用語解説</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -386,6 +421,8 @@ k \approx \sqrt{2 \ln 2}\, \sqrt{N} \approx 1.18 \times 2^{n/2}
 <p>この方針の弱点は, レンダリングするマシンに目的のフォントがインストールされていることが前提になる点で, コードを共有したときの再現性の問題は残ります. <code>showtext</code> が本領を発揮するのは, まさにこの前提を外したい場合です. すなわち, <code>font_add_google()</code> でフォントのインストール自体をコードに閉じ込めたい場合や, <code>pdf()</code> を含むあらゆるデバイスで同じ見た目を保証したい場合には <code>showtext</code> を, 文字をテキストとして残すことが重要な場合には上記のデバイスを選ぶ, という使い分けになります.</p>
 
 
+<!-- -->
+
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-stevens2017" class="csl-entry" role="listitem">
 Stevens, Marc, Elie Bursztein, Pierre Karpman, Ange Albertini, and Yarik Markov. 2017. <span>“The <span>First Collision</span> for <span>Full SHA-1</span>.”</span> In <em>Advances in <span>Cryptology</span> – <span>CRYPTO</span> 2017</em>, edited by Jonathan Katz and Hovav Shacham, vol. 10401. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-63688-7_19">https://doi.org/10.1007/978-3-319-63688-7_19</a>.
@@ -477,6 +514,57 @@ Wang, Xiaoyun, Yiqun Lisa Yin, and Hongbo Yu. 2005. <span>“Finding <span>Colli
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -810,7 +898,7 @@ Wang, Xiaoyun, Yiqun Lisa Yin, and Hongbo Yu. 2005. <span>“Finding <span>Colli
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lesson/ai.html" class="pagination-link" aria-label="AIと研究する">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">AIと研究する</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -818,7 +906,118 @@ Wang, Xiaoyun, Yiqun Lisa Yin, and Hongbo Yu. 2005. <span>“Finding <span>Colli
         <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 用語解説</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 環境変数 {#sec-env-var}</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### 環境変数とは</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### パスを通すとは</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## ハッシュ {#sec-hash}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### ハッシュ関数</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ハッシュ関数 (hash function) とは, 任意の長さのデータを受け取り, 決まった長さの値へと変換する関数のことをいいます. 入力は何バイトでも構いませんが, 出力の長さは入力によらず常に一定です. この出力をハッシュ値とよびます (@sec-hash-value).</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>データをビット列とみなすと, ハッシュ関数は次のように書けます.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## ハッシュ関数</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>ハッシュ関数とは, 任意長のビット列の集合 $<span class="sc">\{</span>0,1<span class="sc">\}</span>^*$ から, 固定長 $n$ ビットの集合 $<span class="sc">\{</span>0,1<span class="sc">\}</span>^n$ への写像</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>h\colon <span class="sc">\{</span>0,1<span class="sc">\}</span>^* \to <span class="sc">\{</span>0,1<span class="sc">\}</span>^n</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>のことをいう.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>定義域 $<span class="sc">\{</span>0,1<span class="sc">\}</span>^*$ は長さに上限のないビット列全体からなる無限集合であるのに対し, 値域 $<span class="sc">\{</span>0,1<span class="sc">\}</span>^n$ の要素数は $2^n$ 個と有限です. たとえば Git が標準で用いる SHA-1 では $n = 160$ で, 取りうるハッシュ値は $2^{160}$ 通りあります.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>良いハッシュ関数, とくに Git のように改ざん検知を目的とする暗号学的ハッシュ関数 (cryptographic hash function) には, 次のような性質が求められます.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**決定性** (deterministic): 同じ入力に対しては必ず同じハッシュ値を返します. $x = y$ ならば $h(x) = h(y)$ です.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**高速性**: 入力 $x$ からハッシュ値 $h(x)$ を計算するのは高速です.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**なだれ効果** (avalanche effect): 入力をわずかに変えただけで, 出力が予測不能なほど大きく変化します. 1ビットの違いでも, 出力のおよそ半分のビットが入れ替わるのが理想です.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**原像計算困難性** (preimage resistance): ハッシュ値 $y$ が与えられたとき, $h(x) = y$ となる入力 $x$ を求めるのが計算量的に困難です. すなわち $h$ は事実上一方向の関数です.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**衝突困難性** (collision resistance): $h(x) = h(y)$ となる相異なる入力の組 $x \ne y$ を見つけるのが計算量的に困難です.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ここで一点注意が必要です. 定義域が無限で値域が有限である以上, 鳩の巣原理 (pigeonhole principle) により, 異なる入力が同じハッシュ値に写る組 $x \ne y,\ h(x) = h(y)$ は必ず存在します. これを衝突 (collision) とよびます. 衝突困難性とは, 衝突が存在しないという主張ではなく, 衝突を意図的に見つけ出すのが現実的な計算時間では不可能だ, という主張です.</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>では, 衝突はどれくらい起こりにくいのでしょうか. ハッシュ値が $N = 2^n$ 通りの値を一様に取ると仮定し, $k$ 個の入力を順番にハッシュ化していくことを考えます. これは, $N$ 個の箱に $k$ 個のボールを無作為に投げ入れたとき, どの箱にも2個以上入らない確率を求める問題, すなわち誕生日のパラドックス (birthday problem) と同じ設定です. 入力を1つずつ追加していくとき, それまでに現れたどの値ともぶつからない確率を順にかけ合わせれば, $k$ 個すべてが相異なる確率が求まります. 最初の入力はどの値でもよいので確率 $1$, 2番目はすでに埋まった $1$ 個の値を避ければよいので確率 $1 - 1/N$, 一般に $i+1$ 番目 ($i = 0, 1, \dots, k-1$) はすでに埋まった $i$ 個を避ければよいので確率 $1 - i/N$ です. したがって, どの2つも衝突しない確率は次の積で書けます.</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>P(\text{衝突なし}) = \prod_{i=0}^{k-1} \left( 1 - \frac{i}{N} \right).</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>このままでは扱いにくいので, $x$ が小さいときの近似 $1 - x \approx e^{-x}$ を使って積を指数の和に直します.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>\prod_{i=0}^{k-1} \left( 1 - \frac{i}{N} \right) \approx \prod_{i=0}^{k-1} e^{-i/N} = \exp\left( -\frac{1}{N} \sum_{i=0}^{k-1} i \right) = \exp\left( -\frac{k(k-1)}{2N} \right).</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>最後の等号では $\sum_{i=0}^{k-1} i = \frac{k(k-1)}{2}$ を用いました.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>衝突するかどうかが五分五分になる, すなわち $P(\text{衝突なし}) = \frac{1}{2}$ となる入力数 $k$ を求めてみましょう. 両辺の対数をとると $\frac{k(k-1)}{2N} = \ln 2$ となり, $k$ が大きいところでは $k(k-1) \approx k^2$ と近似できるので,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>k \approx \sqrt{2 \ln 2}\, \sqrt{N} \approx 1.18 \times 2^{n/2}</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>と評価できます. つまり, ハッシュ値が $2^n$ 通りあっても, その平方根である $2^{n/2}$ 程度の個数を集めただけで衝突が起こり始めるのです. とはいえ SHA-1 ($n = 160$) なら $2^{80} \approx 10^{24}$ 個ものデータを集めて初めてその水準に達する計算なので, ふだん Git を使っている限り, 偶然ハッシュが衝突してコミットが取り違えられる心配はまずありません.</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>ただし, ここで「心配ない」と言えるのは, ハッシュ値が一様ランダムに散らばると仮定したときの, 偶然による衝突に限った話です. これとは別に, ハッシュ関数の内部構造の弱点を突いて, 同じハッシュ値をもつデータを意図的に作り出す攻撃があります. こうした攻撃では, 上で見積もった $2^{n/2}$ という壁を大きく下回る計算量で衝突を作れてしまうことがあり, 実際 SHA-1 はこの意味ですでに破られています^[</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>   王小云 (Wang Xiaoyun) のグループは, まず 2004 年に, SHA-1 より古い MD5 などについて, 実際に同じハッシュ値となる具体的な入力対 (数値例) を構成してみせました <span class="co">[</span><span class="ot">@wang2004</span><span class="co">]</span>. 続く 2005 年には, 同グループが SHA-1 についても, 衝突探索の計算量を総当たりの $2^{80}$ より小さい $2^{69}$ 程度まで下げられることを理論的に示します <span class="co">[</span><span class="ot">@wang2005</span><span class="co">]</span> そして 2017 年, Google と CWI のグループが, 実際に同じ SHA-1 ハッシュをもつ2つの PDF を構成してみせ, 初めて現実の SHA-1 衝突を実証しました (SHAttered と呼ばれます) <span class="co">[</span><span class="ot">@stevens2017</span><span class="co">]</span>.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>]. そのため, 悪意ある改ざんまで防ぎたい用途では SHA-1 はもはや安全とは言えず, Git でも後継の SHA-256 ($n = 256$) への移行が進められています.</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### ハッシュ値 {#sec-hash-value}</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>ハッシュ値 (hash value) とは, ハッシュ関数がデータに対して返す固定長の出力のことです. 上の定義でいえば $h(x) \in <span class="sc">\{</span>0,1<span class="sc">\}</span>^n$ にあたります. 同じデータからは必ず同じハッシュ値が得られ, 中身が少しでも違えばまったく異なるハッシュ値になるため, ハッシュ値はデータの中身そのものから決まる一意な「指紋」として使えます.</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>実際の表示では, $n$ ビットの値をそのまま 0 と 1 の羅列で見せても扱いにくいので, 4ビットを1文字に対応させた16進数 (<span class="in">`0`</span>-<span class="in">`9`</span>, <span class="in">`a`</span>-<span class="in">`f`</span>) で書くのが一般的です. SHA-1 の 160 ビットは $160 / 4 = 40$ 桁の16進数になります. Git のコミットに割り当てられる <span class="in">`a84d0e9...`</span> のような名前は, まさにこのハッシュ値で, 普段はその先頭の7文字ほどを取り出して使います.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## グラフィックデバイス {#sec-graphics-device}</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### グラフィックデバイスとは</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>R で <span class="in">`plot()`</span> や <span class="in">`ggplot2`</span> の図を描くとき, 点や線, 文字を実際の画面やファイルに変換しているのは, グラフィックデバイス (graphics device) とよばれる仕組みです. R 本体は「この座標に文字列を書く」「ここからここまで線を引く」といった抽象的な描画命令を発行するだけで, それをピクセルや PDF のオブジェクトとして書き出すのは各デバイスの仕事です. そのため, 同じコードでも, どのデバイスで描くかによって出力の性質が変わります.</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>デバイスは大きく分けて2種類あります.</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**スクリーンデバイス**: ウィンドウに直接描画するデバイスです. macOS の <span class="in">`quartz`</span>, Windows の <span class="in">`windows`</span>, Linux の <span class="in">`x11`</span> などがあり, RStudio の Plots ペーンに表示される図もこの一種が描いています.</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ファイルデバイス**: 図をファイルとして書き出すデバイスです. ラスタ形式の <span class="in">`png()`</span> や <span class="in">`jpeg()`</span>, ベクタ形式の <span class="in">`pdf()`</span>, <span class="in">`cairo_pdf()`</span>, <span class="in">`svg()`</span> のほか, パッケージが提供する <span class="in">`ragg::agg_png()`</span> や <span class="in">`svglite::svglite()`</span> などがあります.</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>Quarto (knitr) で文書をレンダリングするときは, チャンクごとにファイルデバイスが開かれ, 図が一度ファイルとして書き出されてから文書に埋め込まれます. どのデバイスを使うかはチャンクオプション <span class="in">`dev`</span> で指定でき, この資料では SVG デバイス (<span class="in">`dev: svg`</span>) を使っています.</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### デバイスとフォント</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>文字の描画もデバイスの仕事であるため, 指定されたフォント名を実際のフォントファイルにどう対応づけるかは, デバイスごとに異なります. 代表的なデバイスの挙動は次のとおりです.</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**`pdf()`**: R 標準の PDF デバイスですが, フォントの扱いは最も原始的です. システムのフォントを自動では参照せず, デバイスに登録された Type 1 フォント (日本語は <span class="in">`Japan1`</span> などの CID フォント) しか使えません. さらにデフォルトではフォントを埋め込まず, PDF にはフォント名だけが書き込まれるため, 閲覧環境に同じフォントがなければ表示が崩れます. 埋め込むには Ghostscript 経由の <span class="in">`embedFonts()`</span> が別途必要です.</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**cairo 系 (`cairo_pdf()`, `svg()` など)**: fontconfig というライブラリを通じてシステムフォントを検索します. <span class="in">`cairo_pdf()`</span> は使用したフォントをサブセット化して埋め込むため <span class="in">`pdf()`</span> よりずっと扱いやすいですが, フォントの解決は OS 側の設定に依存します.</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**quartz (macOS)**: macOS のフォント機構をそのまま使うため, Mac 上ではヒラギノなども問題なく使えますが, 他の OS では動きません.</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ragg (`agg_png()` など)**: <span class="in">`systemfonts`</span> パッケージ経由でシステムフォントを解決する現代的なラスタデバイスです. インストール済みフォントの検索が最も堅牢で, ウェイトの指定などにも対応します.</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>つまり, システムに目的のフォントが入っていることと, いま使っているデバイスがそのフォントを見つけて出力に反映できることは, 別の問題です. 「フォントを指定したのに豆腐化する」「手元では正しく表示されるのに, 共有した PDF では崩れる」といった現象は, ほとんどがこのデバイス側のフォント解決と埋め込みの問題に由来します.</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### showtext の仕組み</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="in">`showtext`</span> パッケージは, このデバイス依存性を根本から回避します. テキストの描画命令をフックし, <span class="in">`sysfonts`</span> で登録されたフォントファイルから各文字のグリフ (字形) を取り出して, 文字をアウトライン (曲線) として描画します. 出力ファイルには文字ではなく図形が書き込まれるため, デバイスがフォントを解決できるかどうかも, 閲覧環境にフォントがあるかどうかも, 一切関係なくなります.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>副作用もあります. 文字が図形化されるため, PDF や SVG の中でテキストの選択・検索ができなくなり, ファイルサイズも増えます. また, ラスタデバイスでは DPI の解釈が R 本体とずれるため, <span class="in">`showtext_opts(dpi = ...)`</span> を出力の解像度 (Quarto の <span class="in">`fig-dpi`</span>) に合わせる必要があります.</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="in">`showtext_auto()`</span> は, このフックを以後に開かれるすべてのデバイスで自動的に有効化する関数です. knitr はチャンクごとに新しいデバイスを開くため, これを最初に一度呼んでおかないと, 図ごとに <span class="in">`showtext_begin()`</span> と <span class="in">`showtext_end()`</span> で囲むことになります.</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="fu">### showtext を使わない選択肢</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="in">`showtext`</span> の対極にあるのは, 文字をアウトライン化せず, フォントを正しく解決できるデバイスを出力形式ごとに選ぶ, という方針です.</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**PDF**: <span class="in">`cairo_pdf()`</span> を使います. システムフォントを解決し, サブセット化して埋め込むため, 文字はテキストとして残り, 検索・コピーもできます. 論文に載せる図はこれが標準的な選択です.</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**SVG**: <span class="in">`svglite::svglite()`</span> は文字を <span class="in">`&lt;text&gt;`</span> 要素のまま残します. ただし SVG 自体はフォントを埋め込まないため, 表示には閲覧環境側に同じフォントが必要です (ウェブサイトなら CSS で Web フォントを読み込んで補います). 一方, cairo ベースの <span class="in">`svg()`</span> は文字をパスに変換するため, 検索できない代わりに閲覧環境へのフォント要求がなく, この点では showtext と似た性質になります.</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ラスタ (PNG など)**: <span class="in">`ragg::agg_png()`</span> が <span class="in">`systemfonts`</span> 経由でシステムフォントを堅牢に解決します. ラスタ画像では文字はピクセルになるので, 選択・検索の概念はそもそもありません.</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>この方針の弱点は, レンダリングするマシンに目的のフォントがインストールされていることが前提になる点で, コードを共有したときの再現性の問題は残ります. <span class="in">`showtext`</span> が本領を発揮するのは, まさにこの前提を外したい場合です. すなわち, <span class="in">`font_add_google()`</span> でフォントのインストール自体をコードに閉じ込めたい場合や, <span class="in">`pdf()`</span> を含むあらゆるデバイスで同じ見た目を保証したい場合には <span class="in">`showtext`</span> を, 文字をテキストとして残すことが重要な場合には上記のデバイスを選ぶ, という使い分けになります. </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

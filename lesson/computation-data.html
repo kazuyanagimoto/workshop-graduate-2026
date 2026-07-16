@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; 大規模データ – Best Practices</title>
+<title>6&nbsp; 大規模データ – Best Practices</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,14 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d102713e0a15c87e67d60c9a26d24b47.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-c8d6de1286da824e9b87aab358e7691e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2c872af6924e1f6c02c0cc195d6bfbcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/computation-data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/computation-data.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -135,73 +135,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+ <span class="menu-text">はじめに</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -237,17 +237,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#大規模データとメモリ" id="toc-大規模データとメモリ" class="nav-link active" data-scroll-target="#大規模データとメモリ"><span class="header-section-number">7.1</span> 大規模データとメモリ</a>
+  <li><a href="#大規模データとメモリ" id="toc-大規模データとメモリ" class="nav-link active" data-scroll-target="#大規模データとメモリ"><span class="header-section-number">6.1</span> 大規模データとメモリ</a>
   <ul class="collapse">
   <li><a href="#nyc-タクシーデータ" id="toc-nyc-タクシーデータ" class="nav-link" data-scroll-target="#nyc-タクシーデータ">NYC タクシーデータ</a></li>
   </ul></li>
-  <li><a href="#sec-parquet" id="toc-sec-parquet" class="nav-link" data-scroll-target="#sec-parquet"><span class="header-section-number">7.2</span> 列指向フォーマット</a>
+  <li><a href="#sec-parquet" id="toc-sec-parquet" class="nav-link" data-scroll-target="#sec-parquet"><span class="header-section-number">6.2</span> 列指向フォーマット</a>
   <ul class="collapse">
   <li><a href="#arrow-との関係" id="toc-arrow-との関係" class="nav-link" data-scroll-target="#arrow-との関係">Arrow との関係</a></li>
   </ul></li>
-  <li><a href="#sec-polars" id="toc-sec-polars" class="nav-link" data-scroll-target="#sec-polars"><span class="header-section-number">7.3</span> <img src="../static/img/logo/polars-icon.svg" style="height:1em" alt="Polars"> Polars</a></li>
-  <li><a href="#sec-duckdb" id="toc-sec-duckdb" class="nav-link" data-scroll-target="#sec-duckdb"><span class="header-section-number">7.4</span> <img src="../static/img/logo/duckdb-icon.svg" style="height:1em" alt="DuckDB"> DuckDB</a></li>
-  <li><a href="#ベンチマーク" id="toc-ベンチマーク" class="nav-link" data-scroll-target="#ベンチマーク"><span class="header-section-number">7.5</span> ベンチマーク</a>
+  <li><a href="#sec-polars" id="toc-sec-polars" class="nav-link" data-scroll-target="#sec-polars"><span class="header-section-number">6.3</span> <img src="../static/img/logo/polars-icon.svg" style="height:1em" alt="Polars"> Polars</a></li>
+  <li><a href="#sec-duckdb" id="toc-sec-duckdb" class="nav-link" data-scroll-target="#sec-duckdb"><span class="header-section-number">6.4</span> <img src="../static/img/logo/duckdb-icon.svg" style="height:1em" alt="DuckDB"> DuckDB</a></li>
+  <li><a href="#ベンチマーク" id="toc-ベンチマーク" class="nav-link" data-scroll-target="#ベンチマーク"><span class="header-section-number">6.5</span> ベンチマーク</a>
   <ul class="collapse">
   <li><a href="#どれを使えばよいか" id="toc-どれを使えばよいか" class="nav-link" data-scroll-target="#どれを使えばよいか">どれを使えばよいか</a></li>
   </ul></li>
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -276,18 +276,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="大規模データとメモリ" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="大規模データとメモリ"><span class="header-section-number">7.1</span> 大規模データとメモリ</h2>
-<p><code>dplyr</code> や <code>data.frame</code> のような R の標準的な道具は, データ全体をメモリ (RAM) に読み込んでから処理します. <a href="computation-fast.html#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a> のメモリのヒエラルキーで見たように, RAM の容量には限りがあります. データが RAM に収まらなくなると, 処理は途端に遅くなり, やがて止まってしまいます.</p>
+<section id="大規模データとメモリ" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="大規模データとメモリ"><span class="header-section-number">6.1</span> 大規模データとメモリ</h2>
+<p><code>dplyr</code> や <code>data.frame</code> のような R の標準的な道具は, データ全体をメモリ (RAM) に読み込んでから処理します. <a href="computation-fast.html#sec-computation-theory" class="quarto-xref"><span>Section 5.1</span></a> のメモリのヒエラルキーで見たように, RAM の容量には限りがあります. データが RAM に収まらなくなると, 処理は途端に遅くなり, やがて止まってしまいます.</p>
 <p>しかし, よく考えると, 分析のたびにデータ全体が必要になることはめったにありません. たいていのクエリは, 一部の列と一部の行しか使わないからです. そこで鍵になるのが, データ全体を RAM に載せるのではなく <strong>必要な分だけ読む</strong> という発想です. クエリに必要な列・行だけを読み込んで処理すれば, RAM を超えるデータも扱えます.</p>
-<p>これを実現するには, 役割の違う2つの道具を組み合わせます. データの <strong>保存形式</strong> と, それを処理する <strong>エンジン</strong> です. この関係を整理したのが <a href="#fig-data-stack" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> です.</p>
+<p>これを実現するには, 役割の違う2つの道具を組み合わせます. データの <strong>保存形式</strong> と, それを処理する <strong>エンジン</strong> です. この関係を整理したのが <a href="#fig-data-stack" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> です.</p>
 <div id="fig-data-stack" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/data-stack.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;7.1: Parquet・Polars・DuckDB の関係"><img src="../static/cetz/data-stack.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="../static/cetz/data-stack.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;6.1: Parquet・Polars・DuckDB の関係"><img src="../static/cetz/data-stack.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: Parquet・Polars・DuckDB の関係
+Figure&nbsp;6.1: Parquet・Polars・DuckDB の関係
 </figcaption>
 </figure>
 </div>
@@ -308,17 +308,17 @@ Figure&nbsp;7.1: Parquet・Polars・DuckDB の関係
 </div>
 </section>
 </section>
-<section id="sec-parquet" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="sec-parquet"><span class="header-section-number">7.2</span> 列指向フォーマット</h2>
+<section id="sec-parquet" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-parquet"><span class="header-section-number">6.2</span> 列指向フォーマット</h2>
 <p>大規模データを「必要な分だけ読む」ための鍵が, この <strong>列指向フォーマット</strong> です. CSV は <strong>行指向</strong> のテキストファイルで, 1行ずつ順に値がカンマ区切りで並びます. そのため, 一部の列だけが欲しいときでも, 結局すべての行・すべての列を読む必要があります.</p>
-<p><a href="https://parquet.apache.org/">Parquet</a> は <strong>列指向</strong> のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます (<a href="#fig-row-vs-column" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>).</p>
+<p><a href="https://parquet.apache.org/">Parquet</a> は <strong>列指向</strong> のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます (<a href="#fig-row-vs-column" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>).</p>
 <div id="fig-row-vs-column" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-row-vs-column-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/row-vs-column.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;7.2: 行指向と列指向"><img src="../static/cetz/row-vs-column.svg" class="img-fluid figure-img"></a>
+<a href="../static/cetz/row-vs-column.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;6.2: 行指向と列指向"><img src="../static/cetz/row-vs-column.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-row-vs-column-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.2: 行指向と列指向
+Figure&nbsp;6.2: 行指向と列指向
 </figcaption>
 </figure>
 </div>
@@ -350,7 +350,7 @@ Figure&nbsp;7.2: 行指向と列指向
 <div id="tbl-format" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.1: CSV と Parquet のファイルサイズ
+Table&nbsp;6.1: CSV と Parquet のファイルサイズ
 </figcaption>
 <div aria-describedby="tbl-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -429,14 +429,14 @@ Table&nbsp;7.1: CSV と Parquet のファイルサイズ
 <p>Parquet は CSV のおよそ 6 分の1のサイズに収まっています. Rからだと <a href="https://nanoparquet.r-lib.org/"><code>nanoparquet</code></a> (軽量) や <a href="https://arrow.apache.org/docs/r/"><code>arrow</code></a> で Parquet を読み書きできます. 分析用のデータは, できるだけ Parquet で保存しておくのがよいでしょう.</p>
 <section id="arrow-との関係" class="level3">
 <h3 class="anchored" data-anchor-id="arrow-との関係">Arrow との関係</h3>
-<p>Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です (<a href="#fig-parquet-arrow" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>).</p>
+<p>Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です (<a href="#fig-parquet-arrow" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>).</p>
 <div id="fig-parquet-arrow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-parquet-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/parquet-arrow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;7.3: Parquet と Arrow"><img src="../static/cetz/parquet-arrow.svg" class="img-fluid figure-img"></a>
+<a href="../static/cetz/parquet-arrow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;6.3: Parquet と Arrow"><img src="../static/cetz/parquet-arrow.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parquet-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.3: Parquet と Arrow
+Figure&nbsp;6.3: Parquet と Arrow
 </figcaption>
 </figure>
 </div>
@@ -464,9 +464,9 @@ Figure&nbsp;7.3: Parquet と Arrow
 </div>
 </section>
 </section>
-<section id="sec-polars" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="sec-polars"><span class="header-section-number">7.3</span> <img src="../static/img/logo/polars-icon.svg" style="height:1em" alt="Polars"> Polars</h2>
-<p><a href="https://pola.rs/">Polars</a> は Rust で書かれた高速なデータフレームライブラリです. マルチスレッドで動き (<a href="computation-fast.html#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a> の並列化を思い出してください), <strong>遅延評価</strong> (lazy evaluation) によってクエリを最適化します.</p>
+<section id="sec-polars" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-polars"><span class="header-section-number">6.3</span> <img src="../static/img/logo/polars-icon.svg" style="height:1em" alt="Polars"> Polars</h2>
+<p><a href="https://pola.rs/">Polars</a> は Rust で書かれた高速なデータフレームライブラリです. マルチスレッドで動き (<a href="computation-fast.html#sec-computation-theory" class="quarto-xref"><span>Section 5.1</span></a> の並列化を思い出してください), <strong>遅延評価</strong> (lazy evaluation) によってクエリを最適化します.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -518,8 +518,8 @@ Figure&nbsp;7.3: Parquet と Arrow
 </div>
 <p><code>PROJECT 3/19 COLUMNS</code> は, 19列のうち必要な3列 (<code>payment_type</code>, <code>fare_amount</code>, <code>tip_amount</code>) だけを読むこと (列の刈り込み) を表します. <code>SELECTION: [(col("fare_amount")) &gt; 0.0]</code> は, <code>filter</code> の条件が Parquet の読み込み段階まで押し下げられていること (述語の押し下げ) を表します. このように Polars は, こちらが書いた順序にとらわれず, 「必要なデータだけを最小限読む」ように勝手に並べ替えてくれます.</p>
 </section>
-<section id="sec-duckdb" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="sec-duckdb"><span class="header-section-number">7.4</span> <img src="../static/img/logo/duckdb-icon.svg" style="height:1em" alt="DuckDB"> DuckDB</h2>
+<section id="sec-duckdb" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-duckdb"><span class="header-section-number">6.4</span> <img src="../static/img/logo/duckdb-icon.svg" style="height:1em" alt="DuckDB"> DuckDB</h2>
 <p><a href="https://duckdb.org/">DuckDB</a> は, 分析用途に特化した組み込み型のデータベースです. SQLite が「手軽なトランザクション用 DB」なら, DuckDB は「手軽な分析用 DB」だと考えるとよいでしょう. マルチスレッドで動き, RAM に収まらないデータ (larger-than-memory) も扱えます. 先ほど CSV への変換に使ったのも, この DuckDB です.</p>
 <p>R からは <a href="https://duckplyr.tidyverse.org/"><code>duckplyr</code></a> を使うのが手軽です. これは <strong>dplyr のドロップイン置換</strong> で, 既存の dplyr コードをほぼそのまま, バックエンドだけ DuckDB に差し替えて高速化できます.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <div class="cell">
@@ -541,8 +541,8 @@ Figure&nbsp;7.3: Parquet と Arrow
 </div>
 <p><code>read_parquet_duckdb()</code> で遅延的に Parquet を開き, dplyr の動詞を並べ, <code>collect()</code> で結果を取り出します. Polars (tidypolars) と書き方がほとんど同じであることに注目してください. どちらも内部では遅延評価とクエリ最適化を行っています.</p>
 </section>
-<section id="ベンチマーク" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="ベンチマーク"><span class="header-section-number">7.5</span> ベンチマーク</h2>
+<section id="ベンチマーク" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="ベンチマーク"><span class="header-section-number">6.5</span> ベンチマーク</h2>
 <p>では, 同じ集計を <code>dplyr</code>, <code>tidypolars</code>, <code>duckplyr</code> の3通りで実行し, 速度とメモリを比べてみましょう. <code>dplyr</code> 版は, Parquet をいったん全部メモリに読み込んでから処理します.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bm <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
@@ -569,7 +569,7 @@ Figure&nbsp;7.3: Parquet と Arrow
 <div id="tbl-benchmark-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-benchmark-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;7.2: 集計の計算時間とメモリ
+Table&nbsp;6.2: 集計の計算時間とメモリ
 </figcaption>
 <div aria-describedby="tbl-benchmark-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -653,8 +653,8 @@ Table&nbsp;7.2: 集計の計算時間とメモリ
 </figure>
 </div>
 </div>
-<p>集計そのものも <code>tidypolars</code> と <code>duckplyr</code> の方が <code>dplyr</code> より約 10 倍速いですが, より目を引くのは <strong>R が確保するメモリ</strong> の差です. <a href="#tbl-benchmark-data" class="quarto-xref">Table&nbsp;<span>7.2</span></a> のとおり, <code>dplyr</code> が数百 MB を確保するのに対し, <code>tidypolars</code> と <code>duckplyr</code> のそれは桁違いに小さくなっています.</p>
-<p>理由は2つあります. 第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは <code>payment_type</code>, <code>fare_amount</code>, <code>tip_amount</code> の列と <code>fare_amount &gt; 0</code> の行だけ」と見抜いて, その分しか読み込みません (<a href="#sec-polars" class="quarto-xref"><span>Section 7.3</span></a> の <code>explain()</code> で見た列の刈り込みと述語の押し下げです). 第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します. そのため R のヒープにはほとんど何も積まれません. 一方 <code>dplyr</code> は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.</p>
+<p>集計そのものも <code>tidypolars</code> と <code>duckplyr</code> の方が <code>dplyr</code> より約 10 倍速いですが, より目を引くのは <strong>R が確保するメモリ</strong> の差です. <a href="#tbl-benchmark-data" class="quarto-xref">Table&nbsp;<span>6.2</span></a> のとおり, <code>dplyr</code> が数百 MB を確保するのに対し, <code>tidypolars</code> と <code>duckplyr</code> のそれは桁違いに小さくなっています.</p>
+<p>理由は2つあります. 第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは <code>payment_type</code>, <code>fare_amount</code>, <code>tip_amount</code> の列と <code>fare_amount &gt; 0</code> の行だけ」と見抜いて, その分しか読み込みません (<a href="#sec-polars" class="quarto-xref"><span>Section 6.3</span></a> の <code>explain()</code> で見た列の刈り込みと述語の押し下げです). 第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します. そのため R のヒープにはほとんど何も積まれません. 一方 <code>dplyr</code> は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.</p>
 <p>この違いは, データが RAM を超えるようになると「動くか動かないか」を分けます. DuckDB は必要に応じて中間結果をディスクに退避できるため, RAM に収まらないデータも処理できます.</p>
 <section id="どれを使えばよいか" class="level3">
 <h3 class="anchored" data-anchor-id="どれを使えばよいか">どれを使えばよいか</h3>
@@ -666,6 +666,8 @@ Table&nbsp;7.2: 集計の計算時間とメモリ
 <p>特に理由がなければ, parquet形式でデータを保存しておくのが高速化かつ軽量という点でおすすめです. Polars はPythonで扱う分にはとても便利ですが, CRANから外されたりなどRでのサポートが不安定であるため, <code>duckplyr</code> を使うのが便利かなと思っています.</p>
 <p>なお, R のオブジェクトをそのまま高速に保存したいだけなら, <a href="https://www.fstpackage.org/"><code>fst</code></a> や <a href="https://github.com/qsbase/qs2"><code>qs2</code></a> も便利です. これらは <code>saveRDS()</code> の高速な代替として使えます.</p>
 
+
+<!-- -->
 
 </section>
 </section>
@@ -752,6 +754,57 @@ Table&nbsp;7.2: 集計の計算時間とメモリ
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1085,15 +1138,290 @@ Table&nbsp;7.2: 集計の計算時間とメモリ
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lesson/computation-fast.html" class="pagination-link" aria-label="高速化">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lesson/api.html" class="pagination-link" aria-label="API">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 大規模データ</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nanoparquet)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(polars)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidypolars)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckplyr)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bench)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytable_html_mathjax =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Format a byte count with a human-readable unit (B / KB / MB / GB).</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>fmt_bytes <span class="ot">&lt;-</span> <span class="cf">function</span>(b) {</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  units <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"KB"</span>, <span class="st">"MB"</span>, <span class="st">"GB"</span>, <span class="st">"TB"</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="fu">floor</span>(<span class="fu">log</span>(b, <span class="dv">1024</span>)), <span class="fu">length</span>(units) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"%.1f %s"</span>, b <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span>k, units[k <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>path_pq <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"yellow_tripdata_2024-01.parquet"</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> nanoparquet<span class="sc">::</span><span class="fu">read_parquet_info</span>(path_pq)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 大規模データとメモリ</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="in">`dplyr`</span> や <span class="in">`data.frame`</span> のような R の標準的な道具は, データ全体をメモリ (RAM) に読み込んでから処理します. @sec-computation-theory のメモリのヒエラルキーで見たように, RAM の容量には限りがあります. データが RAM に収まらなくなると, 処理は途端に遅くなり, やがて止まってしまいます.</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>しかし, よく考えると, 分析のたびにデータ全体が必要になることはめったにありません. たいていのクエリは, 一部の列と一部の行しか使わないからです. そこで鍵になるのが, データ全体を RAM に載せるのではなく **必要な分だけ読む** という発想です. クエリに必要な列・行だけを読み込んで処理すれば, RAM を超えるデータも扱えます.</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが @fig-data-stack です.</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="al">![Parquet・Polars・DuckDB の関係](../static/cetz/data-stack.svg)</span>{#fig-data-stack fig-align="center" width="80%"}</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Parquet は保存形式. データをディスクにどう並べるかを決めるだけで, それ自体は計算しません.</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Polars と DuckDB は処理エンジン. ディスク上のデータを読み込み, 絞り込みや集計を実行します. 役割はほぼ同じで, 互いに置き換えられる選択肢です. Polars は Rust 製のデータフレームライブラリ, DuckDB は分析に特化した組み込み型のデータベースです.</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R からの書き方は共通です. どちらのエンジンも, dplyr とほぼ同じ構文で操作できます (Polars は <span class="in">`tidypolars`</span>, DuckDB は <span class="in">`duckplyr`</span> を通します).</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>エンジンが「必要な分だけ読む」には, それを許す保存形式が要ります. 列指向フォーマット (Parquet) は, まさにそのための基礎技術です. データを Parquet で保存し, それを Polars か DuckDB で読んで処理する, というのが基本の形になります.</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### NYC タクシーデータ</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>データとしてニューヨーク市タクシー・リムジン委員会 (TLC) が公開している <span class="co">[</span><span class="ot">タクシー乗車記録</span><span class="co">](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)</span> を使います. 乗車1回ごとに乗車・降車時刻, 距離, 料金, チップ額などが記録された, 取引レベルの実データです. ここでは2024年1月のイエロータクシー分 (<span class="in">`r format(info$num_rows, big.mark = ",")`</span> 行, <span class="in">`r info$num_columns`</span> 列) を使います.^<span class="co">[</span><span class="ot">このデータは元から Parquet 形式で配布されており, 1か月分でも約 `r round(file.size(path_pq) / 1024^2)` MB あります. 全期間 (2009年〜) を合わせると数十 GB・十数億行になり, RAM には到底収まりません. まさに大規模データの練習にうってつけです.</span><span class="co">]</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>このノートは, データが <span class="in">`data/`</span> 以下に置かれている前提で進めます. ダウンロードは <span class="in">`targets`</span> パイプラインに組み込んであるので, 手元に無ければ次で取得できます.^<span class="co">[</span><span class="ot">`data/` は `.gitignore` の対象です. `taxi_parquet` ターゲットが TLC のサーバーから Parquet を取得し, `data/yellow_tripdata_2024-01.parquet` に保存します.</span><span class="co">]</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'targets::tar_make(taxi_parquet)'</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>ファイルのパスは, プロジェクトのどこから実行しても解決できるよう <span class="co">[</span><span class="ot">`here`</span><span class="co">](https://here.r-lib.org/)</span> で組み立てます.</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: data-path</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>path_pq <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"yellow_tripdata_2024-01.parquet"</span>)</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 列指向フォーマット {#sec-parquet}</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>大規模データを「必要な分だけ読む」ための鍵が, この **列指向フォーマット** です. CSV は **行指向** のテキストファイルで, 1行ずつ順に値がカンマ区切りで並びます. そのため, 一部の列だけが欲しいときでも, 結局すべての行・すべての列を読む必要があります.</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Parquet</span><span class="co">](https://parquet.apache.org/)</span> は **列指向** のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます (@fig-row-vs-column).</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="al">![行指向と列指向](../static/cetz/row-vs-column.svg)</span>{#fig-row-vs-column}</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>同じ列の値が連続して並ぶことから, 次のような利点が生まれます.</span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**必要な列だけ読める**: 19列のうち3列しか使わないなら, その3列だけをディスクから読めます (projection pushdown).</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**行グループをスキップできる**: ファイルは行グループ (row group) に分かれており, 各グループの統計量 (最小値・最大値など) がメタデータに記録されています. 条件に合わない行グループは丸ごと読み飛ばせます (predicate pushdown).</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**小さい**: 列ごとに型がそろっているため圧縮が効きます.</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**型が保たれる**: CSV と違い, 数値・日付・文字列などの型情報がファイルに含まれます.</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>実際にどのくらい小さいのか, 同じデータを CSV に書き出して比べてみましょう. ここでは変換に DuckDB を使います.</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: format-compare</span></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>path_csv <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">"taxi.csv"</span>)</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(duckdb<span class="sc">::</span><span class="fu">duckdb</span>())</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="fu">dbExecute</span>(</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>  con,</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"COPY (SELECT * FROM read_parquet('%s')) TO '%s' (FORMAT CSV, HEADER)"</span>,</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>    path_pq,</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>    path_csv</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-format</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "CSV と Parquet のファイルサイズ"</span></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">形式</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"CSV"</span>, <span class="st">"Parquet"</span>),</span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">ファイルサイズ</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fmt_bytes</span>(<span class="fu">c</span>(<span class="fu">file.size</span>(path_csv), <span class="fu">file.size</span>(path_pq)))</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: format-ratios</span></span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>size_ratio <span class="ot">&lt;-</span> <span class="fu">file.size</span>(path_csv) <span class="sc">/</span> <span class="fu">file.size</span>(path_pq)</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>Parquet は CSV のおよそ <span class="in">`r round(size_ratio, 1)`</span> 分の1のサイズに収まっています. Rからだと <span class="co">[</span><span class="ot">`nanoparquet`</span><span class="co">](https://nanoparquet.r-lib.org/)</span> (軽量) や <span class="co">[</span><span class="ot">`arrow`</span><span class="co">](https://arrow.apache.org/docs/r/)</span> で Parquet を読み書きできます. 分析用のデータは, できるだけ Parquet で保存しておくのがよいでしょう.</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### Arrow との関係</span></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です (@fig-parquet-arrow).</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="al">![Parquet と Arrow](/static/cetz/parquet-arrow.svg)</span>{#fig-parquet-arrow}</span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>Arrowは標準的な形式になっているので, Arrow を使うツール同士 (Polars, DuckDB, さらに Python のツールなど) は, データをコピーせずに (zero-copy) 受け渡せます. 逆に, RのデータフレームはArrow形式ではないため, 変換のため <span class="in">`collect()`</span> / <span class="in">`as_tibble()`</span> などのステップが必要になります.^[</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>  ややこしいことにRには <span class="co">[</span><span class="ot">`arrow`</span><span class="co">](https://arrow.apache.org/docs/r/)</span> というパッケージもありますが, これもArrow形式を扱うため, Polars や DuckDB と同様に Parquet を遅延読み込みして集計するエンジンとしても使えます.</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## 他の列指向フォーマット</span></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>Parquet はデファクトスタンダードですが, 他にも列指向フォーマットはあります.</span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ORC**: Hadoop / Hive / Spark 系でよく使われる, Parquet と似たディスク列指向形式.</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Feather** (Arrow IPC): Arrow のメモリ上の形をほぼそのままディスクに書いた形式. 圧縮をほとんどかけず読み書きが非常に速い反面ファイルは大きく, 長期保存より一時ファイルや R ↔ Python の高速な受け渡しに向きます (小さく圧縮して保存・大規模クエリ向けに最適化する Parquet とは設計の方向が逆です).</span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>クラウドのデータウェアハウス (BigQuery, Redshift, Snowflake など) も, 内部は列指向です.</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## ![](/static/img/logo/polars-icon.svg){height="1em" fig-alt="Polars"} Polars {#sec-polars}</span></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Polars</span><span class="co">](https://pola.rs/)</span> は Rust で書かれた高速なデータフレームライブラリです.</span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>マルチスレッドで動き (@sec-computation-theory の並列化を思い出してください), **遅延評価** (lazy evaluation) によってクエリを最適化します.</span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## tidypolars のインストール</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>ここでは Polars を <span class="in">`tidypolars`</span> (dplyr 構文) 経由で使います. tidypolars は polars に依存しますが, どちらも CRAN では配布されていない (polars は2024年に削除) ため, <span class="co">[</span><span class="ot">R-multiverse</span><span class="co">](https://r-multiverse.org/)</span> からまとめてインストールします.</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"polars"</span>, <span class="st">"tidypolars"</span>), <span class="at">repos =</span> <span class="st">"https://community.r-multiverse.org"</span>)</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a>ここでは <span class="co">[</span><span class="ot">`tidypolars`</span><span class="co">](https://tidypolars.etiennebacher.com/)</span> を通して, **dplyr とほぼ同じ構文** で Polars を使います.^<span class="co">[</span><span class="ot">Polars には Python 版に合わせた独自の構文 (`pl$col(...)$agg(...)`) もあります. Python も使う人にはそちらが便利でしょう.</span><span class="co">]</span></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>例として, 料金が正の乗車について, 支払い方法 (<span class="in">`payment_type`</span>) ごとの平均チップ額を求めてみます.^<span class="co">[</span><span class="ot">`payment_type` は支払い方法のコードで, 1 がクレジットカード, 2 が現金です. カード払いではチップが記録される一方, 現金のチップは記録されないことが多い, という現実が結果に表れます.</span><span class="co">]</span></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tidypolars</span></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">scan_parquet_polars</span>(path_pq) <span class="sc">|&gt;</span></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fare_amount <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tip =</span> <span class="fu">mean</span>(tip_amount), <span class="at">.by =</span> payment_type)</span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>q <span class="sc">|&gt;</span></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="in">`scan_parquet_polars()`</span> はファイルを開くだけで, データはまだ読み込みません.</span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>**遅延評価** (lazy evaluation) とは, コマンドを書いた時点ではすぐに計算せず, 「何をするか」という計画 (プラン) だけを組み立てておく方式です.</span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="in">`as_tibble()`</span> (や <span class="in">`collect()`</span>) を呼んで初めて, 最適化されたプランが実行されます.</span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>その最適化された計画は <span class="in">`explain()`</span> で確認できます.</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: polars-explain</span></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">explain</span>(q))</span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a><span class="in">`PROJECT 3/19 COLUMNS`</span> は, 19列のうち必要な3列 (<span class="in">`payment_type`</span>, <span class="in">`fare_amount`</span>, <span class="in">`tip_amount`</span>) だけを読むこと (列の刈り込み) を表します.</span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a><span class="in">`SELECTION: [(col("fare_amount")) &gt; 0.0]`</span> は, <span class="in">`filter`</span> の条件が Parquet の読み込み段階まで押し下げられていること (述語の押し下げ) を表します.</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>このように Polars は, こちらが書いた順序にとらわれず, 「必要なデータだけを最小限読む」ように勝手に並べ替えてくれます.</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## ![](/static/img/logo/duckdb-icon.svg){height="1em" fig-alt="DuckDB"} DuckDB {#sec-duckdb}</span></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">DuckDB</span><span class="co">](https://duckdb.org/)</span> は, 分析用途に特化した組み込み型のデータベースです.</span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>SQLite が「手軽なトランザクション用 DB」なら, DuckDB は「手軽な分析用 DB」だと考えるとよいでしょう.</span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>マルチスレッドで動き, RAM に収まらないデータ (larger-than-memory) も扱えます.</span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>先ほど CSV への変換に使ったのも, この DuckDB です.</span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>R からは <span class="co">[</span><span class="ot">`duckplyr`</span><span class="co">](https://duckplyr.tidyverse.org/)</span> を使うのが手軽です.</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>これは **dplyr のドロップイン置換** で, 既存の dplyr コードをほぼそのまま, バックエンドだけ DuckDB に差し替えて高速化できます.^<span class="co">[</span><span class="ot">`duckplyr` は2025年に tidyverse の一員となり, CRAN で配布されています (`install.packages("duckplyr")`). Polars と違い, 追加のリポジトリ設定なしに入ります.</span><span class="co">]</span></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: duckplyr</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a><span class="fu">read_parquet_duckdb</span>(path_pq) <span class="sc">|&gt;</span></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fare_amount <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tip =</span> <span class="fu">mean</span>(tip_amount), <span class="at">.by =</span> payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a><span class="in">`read_parquet_duckdb()`</span> で遅延的に Parquet を開き, dplyr の動詞を並べ, <span class="in">`collect()`</span> で結果を取り出します.</span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>Polars (tidypolars) と書き方がほとんど同じであることに注目してください.</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a>どちらも内部では遅延評価とクエリ最適化を行っています.</span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## ベンチマーク</span></span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>では, 同じ集計を <span class="in">`dplyr`</span>, <span class="in">`tidypolars`</span>, <span class="in">`duckplyr`</span> の3通りで実行し, 速度とメモリを比べてみましょう.</span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a><span class="in">`dplyr`</span> 版は, Parquet をいったん全部メモリに読み込んでから処理します.</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: benchmark-data</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>bm <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>  <span class="at">dplyr =</span> nanoparquet<span class="sc">::</span><span class="fu">read_parquet</span>(path_pq) <span class="sc">|&gt;</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fare_amount <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">tip =</span> <span class="fu">mean</span>(tip_amount), <span class="at">.by =</span> payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(payment_type),</span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidypolars =</span> <span class="fu">scan_parquet_polars</span>(path_pq) <span class="sc">|&gt;</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fare_amount <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">tip =</span> <span class="fu">mean</span>(tip_amount), <span class="at">.by =</span> payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(),</span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>  <span class="at">duckplyr =</span> <span class="fu">read_parquet_duckdb</span>(path_pq) <span class="sc">|&gt;</span></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fare_amount <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">tip =</span> <span class="fu">mean</span>(tip_amount), <span class="at">.by =</span> payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(payment_type) <span class="sc">|&gt;</span></span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a>    <span class="fu">collect</span>(),</span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">5</span>,</span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-benchmark-data</span></span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "集計の計算時間とメモリ"</span></span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">手法</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.character</span>(bm<span class="sc">$</span>expression),</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">中央値 (ms)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(bm<span class="sc">$</span>median) <span class="sc">*</span> <span class="dv">1000</span>,</span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">メモリ割り当て</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fmt_bytes</span>(<span class="fu">as.numeric</span>(bm<span class="sc">$</span>mem_alloc))</span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_tt</span>(<span class="at">j =</span> <span class="dv">2</span>, <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: data-ratios</span></span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.numeric</span>(bm<span class="sc">$</span>median), <span class="fu">as.character</span>(bm<span class="sc">$</span>expression))</span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>spd <span class="ot">&lt;-</span> med[[<span class="st">"dplyr"</span>]] <span class="sc">/</span> med[[<span class="st">"tidypolars"</span>]]</span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>集計そのものも <span class="in">`tidypolars`</span> と <span class="in">`duckplyr`</span> の方が <span class="in">`dplyr`</span> より約 <span class="in">`r round(spd)`</span> 倍速いですが, より目を引くのは **R が確保するメモリ** の差です.</span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>@tbl-benchmark-data のとおり, <span class="in">`dplyr`</span> が数百 MB を確保するのに対し, <span class="in">`tidypolars`</span> と <span class="in">`duckplyr`</span> のそれは桁違いに小さくなっています.</span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a>理由は2つあります.</span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a>第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは <span class="in">`payment_type`</span>, <span class="in">`fare_amount`</span>, <span class="in">`tip_amount`</span> の列と <span class="in">`fare_amount &gt; 0`</span> の行だけ」と見抜いて, その分しか読み込みません (@sec-polars の <span class="in">`explain()`</span> で見た列の刈り込みと述語の押し下げです).</span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a>第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します.</span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>そのため R のヒープにはほとんど何も積まれません.</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a>一方 <span class="in">`dplyr`</span> は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.</span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>この違いは, データが RAM を超えるようになると「動くか動かないか」を分けます.</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a>DuckDB は必要に応じて中間結果をディスクに退避できるため, RAM に収まらないデータも処理できます.</span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a><span class="fu">### どれを使えばよいか</span></span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a>実証家として皆さんに覚えておいて欲しいのは次の三つです.</span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Parquetで保存する</span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>データ処理のエンジンとしては, <span class="in">`duckplyr`</span> を使う</span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>特に理由がなければ, parquet形式でデータを保存しておくのが高速化かつ軽量という点でおすすめです. Polars はPythonで扱う分にはとても便利ですが, CRANから外されたりなどRでのサポートが不安定であるため, <span class="in">`duckplyr`</span> を使うのが便利かなと思っています.</span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a>なお, R のオブジェクトをそのまま高速に保存したいだけなら, <span class="co">[</span><span class="ot">`fst`</span><span class="co">](https://www.fstpackage.org/)</span> や <span class="co">[</span><span class="ot">`qs2`</span><span class="co">](https://github.com/qsbase/qs2)</span> も便利です. これらは <span class="in">`saveRDS()`</span> の高速な代替として使えます.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {

@@ -27,7 +27,7 @@
 
   let zone(x0, x1, label) = {
     rect((x0, -0.7), (x1, 2.6), stroke: (dash: "dashed", paint: cgray), radius: 6pt)
-    content((x0 + 0.25, 2.3), anchor: "west", text(size: 10pt, weight: "bold", fill: cgray, label))
+    content((x0 + 0.25, 2.3), anchor: "west", text(size: 12pt, weight: "bold", fill: cgray, label))
   }
 
   // Local: dev is merged into main here (M is created locally).
@@ -40,5 +40,5 @@
 
   // push the merged main to the remote
   arr((5.1, 0.85), (6.8, 0.85))
-  content((5.95, 1.2), text(size: 9pt, weight: "bold", fill: cdark, raw("git push")))
+  content((5.95, 1.2), text(size: 11pt, weight: "bold", fill: cdark, raw("git push")))
 })

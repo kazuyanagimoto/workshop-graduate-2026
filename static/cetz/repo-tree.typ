@@ -9,7 +9,7 @@
   // One tree row: an icon followed by a label, left-anchored at (x, y).
   let row(x, y, icon, label, col: cdark, w: "regular") = {
     content((x, y), anchor: "west",
-      text(size: 11pt, fill: col)[#icon #h(4pt) #text(weight: w, label)])
+      text(size: 13pt, fill: col)[#icon #h(4pt) #text(weight: w, label)])
   }
 
   // Elbow connector: vertical guide under a parent + horizontal tick to a child.
@@ -40,5 +40,5 @@
   // Note: the .git folder is created by Git, not by you.
   arr((3.15, 1.8), (2.45, 1.8), lc: cgray)
   content((3.3, 1.8), anchor: "west",
-    text(size: 8pt, fill: cgray)[created by #raw("git init")])
+    text(size: 10pt, fill: cgray)[created by #raw("git init")])
 })

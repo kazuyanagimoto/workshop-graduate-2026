@@ -8,7 +8,7 @@
   // A git tree: C1-C2 on main, with D1-D2 on dev branched up from C2.
   // `hot` highlights the dev commits (used on the remote, freshly pushed).
   let graph(ox, hot) = {
-    let dbg = if hot { rgb("#fbe3da") } else { cnode }
+    let dbg = if hot { chot } else { cnode }
     cm(ox, 0, "C1"); cm(ox + 1.5, 0, "C2")
     arr((ox + 0.45, 0), (ox + 1.05, 0))
     cm(ox + 3.0, 1.1, "D1", bg: dbg); cm(ox + 4.5, 1.1, "D2", bg: dbg)
@@ -20,7 +20,7 @@
 
   let zone(x0, x1, label) = {
     rect((x0, -0.7), (x1, 2.65), stroke: (dash: "dashed", paint: cgray), radius: 6pt)
-    content((x0 + 0.25, 2.35), anchor: "west", text(size: 10pt, weight: "bold", fill: cgray, label))
+    content((x0 + 0.25, 2.35), anchor: "west", text(size: 12pt, weight: "bold", fill: cgray, label))
   }
 
   // Local: built main (C1-C2) and dev (D1-D2).
@@ -33,5 +33,5 @@
 
   // push the dev branch from local to remote
   arr((5.3, 1.1), (6.9, 1.1))
-  content((6.1, 1.5), text(size: 9pt, weight: "bold", fill: cdark)[git push dev])
+  content((6.1, 1.5), text(size: 11pt, weight: "bold", fill: cdark)[git push dev])
 })

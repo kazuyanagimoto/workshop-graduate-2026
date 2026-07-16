@@ -1,0 +1,12 @@
+# Default palette of kazuyanagimoto/quarto-clean-typst
+color:
+  palette:
+    jet: "#131516"
+    accent: "#107895"
+    accent2: "#9a2515"
+    pink: "#e64173"
+  foreground: jet
+  background: "#ffffff"
+  primary: accent
+  secondary: accent2
+  danger: accent2

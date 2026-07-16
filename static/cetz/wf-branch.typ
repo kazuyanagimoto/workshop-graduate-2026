@@ -7,7 +7,7 @@
 
   let otag(x, y, lab, lc: cdark) = {
     content((x, y), box(fill: white, inset: (x: 5pt, y: 3pt), radius: 3pt,
-      stroke: 1pt + lc, text(size: 8pt, fill: lc, weight: "bold", lab)))
+      stroke: 1pt + lc, text(size: 10pt, fill: lc, weight: "bold", lab)))
   }
 
   // main line; dev is just created at C2 and HEAD moves onto it.
@@ -18,6 +18,6 @@
   seg((2.3, 0.28), (3.0, 0.82), lc: cdev); tag(3.35, 1.05, "dev", col: cdev)
 
   // HEAD points to dev (the current branch).
-  otag(4.55, 1.05, "HEAD")
-  line((4.05, 1.2), (4.05, 0.9), (3.7, 1.05), close: true, fill: cdark, stroke: none)
+  otag(5.05, 1.05, "HEAD")
+  line((4.3, 1.2), (4.3, 0.9), (3.95, 1.05), close: true, fill: cdark, stroke: none)
 })

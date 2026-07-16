@@ -9,7 +9,7 @@
   // so it is drawn unfilled to set it apart from the solid branch labels.
   let otag(x, y, lab, lc: cdark) = {
     content((x, y), box(fill: white, inset: (x: 5pt, y: 3pt), radius: 3pt,
-      stroke: 1pt + lc, text(size: 8pt, fill: lc, weight: "bold", lab)))
+      stroke: 1pt + lc, text(size: 10pt, fill: lc, weight: "bold", lab)))
   }
 
   // main line, with dev branching diagonally up to its first commit D1.
@@ -22,6 +22,6 @@
   seg((4, 1.82), (4, 2.15), lc: cdev); tag(4, 2.4, "dev", col: cdev)
 
   // HEAD: hollow tag to the right of dev, with a triangle pointing to it.
-  otag(5.4, 2.4, "HEAD")
+  otag(5.7, 2.4, "HEAD")
   line((4.95, 2.55), (4.95, 2.25), (4.6, 2.4), close: true, fill: cdark, stroke: none)
 })

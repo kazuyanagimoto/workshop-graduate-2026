@@ -11,14 +11,14 @@
   let box(cx, cy, w, h, title, sub, fill) = {
     rect((cx - w / 2, cy - h / 2), (cx + w / 2, cy + h / 2),
       fill: fill, stroke: 1pt + cdark, radius: 4pt)
-    content((cx, cy + 0.14), text(size: 11pt, weight: "bold", fill: cdark, title))
-    content((cx, cy - 0.24), text(size: 7.5pt, fill: cgray, sub))
+    content((cx, cy + 0.14), text(size: 13pt, weight: "bold", fill: cdark, title))
+    content((cx, cy - 0.24), text(size: 9.5pt, fill: cgray, sub))
   }
 
   // A small engine box (centred title, no subtitle).
   let ebox(cx, title) = {
     rect((cx - 1.0, 1.55), (cx + 1.0, 2.45), fill: cnode, stroke: 1pt + cdark, radius: 4pt)
-    content((cx, 2.0), text(size: 10pt, weight: "bold", fill: cdark, title))
+    content((cx, 2.0), text(size: 12pt, weight: "bold", fill: cdark, title))
   }
 
   // --- Engines that share Arrow (top) ----------------------------------------
@@ -27,7 +27,7 @@
   // They hand data to each other without copying.
   arr((3.0, 2.0), (4.0, 2.0), lc: cmain)
   arr((4.0, 2.0), (3.0, 2.0), lc: cmain)
-  content((mid, 2.62), text(size: 8pt, weight: "bold", fill: cmain, "コピーなしで受け渡し"))
+  content((mid, 2.62), text(size: 10pt, weight: "bold", fill: cmain, "コピーなしで受け渡し"))
 
   // --- Memory: Arrow ---------------------------------------------------------
   box(mid, 0.2, 7.0, 1.0, "Arrow", "列指向・メモリ (RAM) — エンジン共通の形式", cnode)
@@ -37,5 +37,5 @@
   // --- Disk: Parquet ---------------------------------------------------------
   box(mid, -1.6, 7.0, 1.0, "Parquet", "列指向・ディスク", cbox)
   arr((mid, -1.1), (mid, -0.3), lc: cdev)
-  content((mid + 0.6, -0.7), anchor: "west", text(size: 8pt, fill: cdev, "読み込み"))
+  content((mid + 0.6, -0.7), anchor: "west", text(size: 10pt, fill: cdev, "読み込み"))
 })

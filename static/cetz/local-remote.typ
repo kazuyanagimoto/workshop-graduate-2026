@@ -10,7 +10,7 @@
   let gitchip(cx, cy) = {
     rect((cx - 0.62, cy - 0.22), (cx + 0.62, cy + 0.22),
       fill: white, stroke: 0.8pt + cdev, radius: 3pt)
-    content((cx, cy), text(size: 9pt, weight: "bold", fill: cdev)[#fa-folder() #h(2pt) .git])
+    content((cx, cy), text(size: 11pt, weight: "bold", fill: cdev)[#fa-folder() #h(2pt) .git])
   }
 
   // A local machine: a monitor holding its own .git, labelled below.
@@ -24,9 +24,9 @@
 
   // GitHub: the remote, holding the shared .git.
   rect((-1.6, 1.9), (1.6, 3.15), fill: cmain, stroke: 1pt + cdark, radius: 4pt)
-  content((0, 2.82), text(size: 11pt, fill: white)[#fa-github() #h(4pt) GitHub])
+  content((0, 2.82), text(size: 13pt, fill: white)[#fa-github() #h(4pt) GitHub])
   gitchip(0, 2.3)
-  cap(0, 1.6, "remote repository", col: cgray)
+  cap(0, 1.3, "remote repository", col: cgray)
 
   computer(-2.8, -0.6)
   computer(2.8, -0.6)
@@ -36,8 +36,8 @@
   arr((-1.6, 1.85), (-2.85, 0.6), lc: cmain)
   arr((2.55, 0.6), (1.3, 1.85), lc: cdev)
   arr((1.6, 1.85), (2.85, 0.6), lc: cmain)
-  content((-1.4, 0.95), text(size: 8pt, weight: "bold", fill: cdev)[push])
-  content((-2.95, 1.55), text(size: 8pt, weight: "bold", fill: cmain)[pull])
-  content((1.4, 0.95), text(size: 8pt, weight: "bold", fill: cdev)[push])
-  content((2.95, 1.55), text(size: 8pt, weight: "bold", fill: cmain)[pull])
+  content((-1.4, 0.95), text(size: 10pt, weight: "bold", fill: cdev)[push])
+  content((-2.95, 1.55), text(size: 10pt, weight: "bold", fill: cmain)[pull])
+  content((1.4, 0.95), text(size: 10pt, weight: "bold", fill: cdev)[push])
+  content((2.95, 1.55), text(size: 10pt, weight: "bold", fill: cmain)[pull])
 })

@@ -7,5 +7,5 @@
   cm(0, 0, "C1"); cm(2, 0, "C2"); cm(4, 0, "C3"); cm(6, 0, "C4")
   arr((0.5, 0), (1.5, 0)); arr((2.5, 0), (3.5, 0)); arr((4.5, 0), (5.5, 0))
   rect((1.4, -0.7), (4.6, 0.7), stroke: (dash: "dashed", paint: cdev, thickness: 1.2pt))
-  cap(3, -1.1, "diff", col: cdev, sz: 10pt)
+  cap(3, -1.1, "diff", col: cdev, sz: 12pt)
 })

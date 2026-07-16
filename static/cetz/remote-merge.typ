@@ -27,7 +27,7 @@
 
   let zone(x0, x1, label) = {
     rect((x0, -0.7), (x1, 2.6), stroke: (dash: "dashed", paint: cgray), radius: 6pt)
-    content((x0 + 0.25, 2.3), anchor: "west", text(size: 10pt, weight: "bold", fill: cgray, label))
+    content((x0 + 0.25, 2.3), anchor: "west", text(size: 12pt, weight: "bold", fill: cgray, label))
   }
 
   // Local: dev (D1) is built here; main is still at C2 (no merge locally).
@@ -35,11 +35,11 @@
   graph(0, false, true)
 
   // Remote: dev is pushed, then a Pull Request merges it into main (M created here).
-  zone(6.0, 11.6, "Remote")
-  graph(6.6, true, true)
+  zone(6.8, 12.4, "Remote")
+  graph(7.4, true, true)
 
   // push dev, then open a Pull Request to merge it on the remote
-  arr((3.7, 0.85), (5.9, 0.85))
-  content((4.8, 1.45), text(size: 9pt, weight: "bold", fill: cdark)[1. push dev])
-  content((4.8, 1.08), text(size: 9pt, weight: "bold", fill: cdark)[2. Pull Request])
+  arr((3.7, 0.85), (6.7, 0.85))
+  content((5.2, 1.45), text(size: 11pt, weight: "bold", fill: cdark)[1. push dev])
+  content((5.2, 1.08), text(size: 11pt, weight: "bold", fill: cdark)[2. Pull Request])
 })

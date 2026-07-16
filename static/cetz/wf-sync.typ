@@ -28,7 +28,7 @@
 
   let zone(x0, x1, label) = {
     rect((x0, -0.7), (x1, 2.3), stroke: (dash: "dashed", paint: cgray), radius: 6pt)
-    content((x0 + 0.25, 2.05), anchor: "west", text(size: 10pt, weight: "bold", fill: cgray, label))
+    content((x0 + 0.25, 2.05), anchor: "west", text(size: 12pt, weight: "bold", fill: cgray, label))
   }
 
   // Local: main still at C2, with the now-merged dev left over.
@@ -41,5 +41,5 @@
 
   // pull the merged main down to the local repo
   arr((5.9, 0.35), (4.7, 0.35))
-  content((5.3, 0.72), text(size: 9pt, weight: "bold", fill: cdark)[git pull])
+  content((5.3, 0.72), text(size: 11pt, weight: "bold", fill: cdark)[git pull])
 })

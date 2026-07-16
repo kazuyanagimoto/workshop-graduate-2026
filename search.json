@@ -80,6 +80,16 @@
     ]
   },
   {
+    "objectID": "lesson/architecture.html#演習問題",
+    "href": "lesson/architecture.html#演習問題",
+    "title": "1  アーキテクチャ",
+    "section": "1.5 演習問題",
+    "text": "1.5 演習問題\nこの章の理解度を確認しましょう. 選択肢を選んで「答え合わせ」を押すと, その場で正誤が表示されます.\nQ1. R で大きなデータセットを読み込もうとしたら, Error: cannot allocate vector of size 8.0 Gb というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.\n\n\n\n\n\nCPU\n\n\n\n\nGPU\n\n\n\n\nSSD\n\n\n\n\nRAM\n\n\n\n\n\n\n\n\nQ2. 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.\n\n\n\n\n\n4GB\n\n\n\n\n2GB\n\n\n\n\n積んだ RAM の分だけ\n\n\n\n\n16GB\n\n\n\n\n\n\n\n\nQ3. R の整数型 (integer) で上限の約21億 (.Machine$integer.max) を超える計算をすると, 何が起こるでしょうか.\n\n\n\n\n\n常にエラーで実行が止まる\n\n\n\n\n自動的に double に変換される\n\n\n\n\nオーバーフローして NA になる\n\n\n\n\n\n\n\n\nQ4. Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.\n\n\n\n\n\n問題なく動く\n\n\n\n\n動かない\n\n\n\n\n遅くなるが動く\n\n\n\n\n\n\n\n\nQ5. 次のうち, CPU が ARM64 のマシンをすべて選んでください.\n\n\n\n\n\nApple Silicon の Mac\n\n\n\n\nCopilot+ PC (Snapdragon 搭載)\n\n\n\n\nIntel の Mac\n\n\n\n\n大半の Windows デスクトップ PC\n\n\n\n\n\n\n\n\nQ6. 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.\n\n\n\n\n\nmacOS\n\n\n\n\nUbuntu\n\n\n\n\niOS\n\n\n\n\nWindows",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>アーキテクチャ</span>"
+    ]
+  },
+  {
     "objectID": "lesson/architecture.html#footnotes",
     "href": "lesson/architecture.html#footnotes",
     "title": "1  アーキテクチャ",

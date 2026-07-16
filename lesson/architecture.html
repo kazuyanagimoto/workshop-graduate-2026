@@ -77,9 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2c872af6924e1f6c02c0cc195d6bfbcf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-a7906c7f6c42be4c5b03eb33f8414dc2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a6dab10a52faaac4b3286df81cc8bdbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2cc38e102e7a8b2af81dc809a8bbb635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a6dab10a52faaac4b3286df81cc8bdbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -285,6 +285,7 @@ window.Quarto = {
   <li><a href="#windows-と-wsl" id="toc-windows-と-wsl" class="nav-link" data-scroll-target="#windows-と-wsl">Windows と WSL</a></li>
   </ul></li>
   <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways"><span class="header-section-number">1.4</span> Takeaways</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">1.5</span> 演習問題</a></li>
   </ul>
 </nav>
     </div>
@@ -461,19 +462,19 @@ Table&nbsp;1.1: 主要な CPU アーキテクチャ
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_ii1xyk2xfy28gkay93l4 = TinyTable.createTableFunctions("tinytable_ii1xyk2xfy28gkay93l4");
+      const tableFns_7itlph0gcsyquxf1ofw9 = TinyTable.createTableFunctions("tinytable_7itlph0gcsyquxf1ofw9");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_xtdyouc1zlquwrxwcgbm',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ob91b4spgki5ah1lxv1u',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_ozg97lrmkexf2wjlqxky',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ohh5e3x9ozfda9zhletu',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_ii1xyk2xfy28gkay93l4.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_7itlph0gcsyquxf1ofw9.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -482,11 +483,11 @@ Table&nbsp;1.1: 主要な CPU アーキテクチャ
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_ii1xyk2xfy28gkay93l4 td.tinytable_css_xtdyouc1zlquwrxwcgbm, #tinytable_ii1xyk2xfy28gkay93l4 th.tinytable_css_xtdyouc1zlquwrxwcgbm {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_ii1xyk2xfy28gkay93l4 td.tinytable_css_ob91b4spgki5ah1lxv1u, #tinytable_ii1xyk2xfy28gkay93l4 th.tinytable_css_ob91b4spgki5ah1lxv1u {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
+    #tinytable_7itlph0gcsyquxf1ofw9 td.tinytable_css_ozg97lrmkexf2wjlqxky, #tinytable_7itlph0gcsyquxf1ofw9 th.tinytable_css_ozg97lrmkexf2wjlqxky {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_7itlph0gcsyquxf1ofw9 td.tinytable_css_ohh5e3x9ozfda9zhletu, #tinytable_7itlph0gcsyquxf1ofw9 th.tinytable_css_ohh5e3x9ozfda9zhletu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_ii1xyk2xfy28gkay93l4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_7itlph0gcsyquxf1ofw9" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -625,19 +626,19 @@ Table&nbsp;1.2: 身近な機種の OS とアーキテクチャ
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_h2mqpcg1s0mzugnw6sx5 = TinyTable.createTableFunctions("tinytable_h2mqpcg1s0mzugnw6sx5");
+      const tableFns_cj8oh2pucce7mbyqknjc = TinyTable.createTableFunctions("tinytable_cj8oh2pucce7mbyqknjc");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '6', j: 1 }, { i: '6', j: 2 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_sq686uvrd94jkdmcrkpr',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_1fsenuh3e2e3hs7rh1c4',}, 
+          { positions: [ { i: '6', j: 1 }, { i: '6', j: 2 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_z9fyw88cgds36dsbad4v',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_6xirz46tibb05gwxcqlf',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_h2mqpcg1s0mzugnw6sx5.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_cj8oh2pucce7mbyqknjc.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -646,11 +647,11 @@ Table&nbsp;1.2: 身近な機種の OS とアーキテクチャ
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_h2mqpcg1s0mzugnw6sx5 td.tinytable_css_sq686uvrd94jkdmcrkpr, #tinytable_h2mqpcg1s0mzugnw6sx5 th.tinytable_css_sq686uvrd94jkdmcrkpr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_h2mqpcg1s0mzugnw6sx5 td.tinytable_css_1fsenuh3e2e3hs7rh1c4, #tinytable_h2mqpcg1s0mzugnw6sx5 th.tinytable_css_1fsenuh3e2e3hs7rh1c4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_cj8oh2pucce7mbyqknjc td.tinytable_css_z9fyw88cgds36dsbad4v, #tinytable_cj8oh2pucce7mbyqknjc th.tinytable_css_z9fyw88cgds36dsbad4v {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_cj8oh2pucce7mbyqknjc td.tinytable_css_6xirz46tibb05gwxcqlf, #tinytable_cj8oh2pucce7mbyqknjc th.tinytable_css_6xirz46tibb05gwxcqlf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_h2mqpcg1s0mzugnw6sx5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_cj8oh2pucce7mbyqknjc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -749,6 +750,204 @@ Figure&nbsp;1.8: OS の系譜
 <li>サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
 <li>AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.</li>
 </ul>
+</section>
+<section id="演習問題" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">1.5</span> 演習問題</h2>
+<p>この章の理解度を確認しましょう. 選択肢を選んで「答え合わせ」を押すと, その場で正誤が表示されます.</p>
+<p><strong>Q1.</strong> R で大きなデータセットを読み込もうとしたら, <code>Error: cannot allocate vector of size 8.0 Gb</code> というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_29424" onsubmit="return validate_form_29424()" method="post">
+<label>
+<input type="radio" name="answer_29424" id="answer_29424_1" value="CPU">
+CPU
+</label>
+<br>
+<label>
+<input type="radio" name="answer_29424" id="answer_29424_2" value="GPU">
+GPU
+</label>
+<br>
+<label>
+<input type="radio" name="answer_29424" id="answer_29424_3" value="SSD">
+SSD
+</label>
+<br>
+<label>
+<input type="radio" name="answer_29424" id="answer_29424_4" value="RAM">
+RAM
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_29424"></div>
+</form>
+<script>function validate_form_29424() {var x, text; var x = document.forms['form_29424']['answer_29424'].value;if (x == 'RAM'){text = '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.';} else {text = '残念, もう一度考えてみましょう. 机と本棚の例えを思い出してください.';} document.getElementById('result_29424').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.';text = res1;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+<p><strong>Q2.</strong> 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_55934" onsubmit="return validate_form_55934()" method="post">
+<label>
+<input type="radio" name="answer_55934" id="answer_55934_1" value="4GB">
+4GB
+</label>
+<br>
+<label>
+<input type="radio" name="answer_55934" id="answer_55934_2" value="2GB">
+2GB
+</label>
+<br>
+<label>
+<input type="radio" name="answer_55934" id="answer_55934_3" value="積んだ RAM の分だけ">
+積んだ RAM の分だけ
+</label>
+<br>
+<label>
+<input type="radio" name="answer_55934" id="answer_55934_4" value="16GB">
+16GB
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_55934"></div>
+</form>
+<script>function validate_form_55934() {var x, text; var x = document.forms['form_55934']['answer_55934'].value;if (x == '4GB'){text = '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.';} else {text = '残念, もう一度考えてみましょう. 2^32 バイトは何 GB でしょうか?';} document.getElementById('result_55934').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.'; res2 = document.getElementById('result_55934').innerText == '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.';text = res1 + res2;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+<p><strong>Q3.</strong> R の整数型 (integer) で上限の約21億 (<code>.Machine$integer.max</code>) を超える計算をすると, 何が起こるでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_45101" onsubmit="return validate_form_45101()" method="post">
+<label>
+<input type="radio" name="answer_45101" id="answer_45101_1" value="常にエラーで実行が止まる">
+常にエラーで実行が止まる
+</label>
+<br>
+<label>
+<input type="radio" name="answer_45101" id="answer_45101_2" value="自動的に double に変換される">
+自動的に double に変換される
+</label>
+<br>
+<label>
+<input type="radio" name="answer_45101" id="answer_45101_3" value="オーバーフローして NA になる">
+オーバーフローして NA になる
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_45101"></div>
+</form>
+<script>function validate_form_45101() {var x, text; var x = document.forms['form_45101']['answer_45101'].value;if (x == 'オーバーフローして NA になる'){text = '正解! 警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう.';} else {text = '残念, もう一度考えてみましょう. 「64-bit 時代の 32-bit 整数」のコード例を実行してみてください.';} document.getElementById('result_45101').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.'; res2 = document.getElementById('result_55934').innerText == '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.'; res3 = document.getElementById('result_45101').innerText == '正解! 警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう.';text = res1 + res2 + res3;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+<p><strong>Q4.</strong> Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_73588" onsubmit="return validate_form_73588()" method="post">
+<label>
+<input type="radio" name="answer_73588" id="answer_73588_1" value="問題なく動く">
+問題なく動く
+</label>
+<br>
+<label>
+<input type="radio" name="answer_73588" id="answer_73588_2" value="動かない">
+動かない
+</label>
+<br>
+<label>
+<input type="radio" name="answer_73588" id="answer_73588_3" value="遅くなるが動く">
+遅くなるが動く
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_73588"></div>
+</form>
+<script>function validate_form_73588() {var x, text; var x = document.forms['form_73588']['answer_73588'].value;if (x == '動かない'){text = '正解! OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います.';} else {text = '残念, もう一度考えてみましょう. バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした.';} document.getElementById('result_73588').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.'; res2 = document.getElementById('result_55934').innerText == '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.'; res3 = document.getElementById('result_45101').innerText == '正解! 警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう.'; res4 = document.getElementById('result_73588').innerText == '正解! OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+<p><strong>Q5.</strong> 次のうち, CPU が ARM64 のマシンをすべて選んでください.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_61348" onsubmit="return validate_form_61348()" method="post">
+<label>
+<input type="checkbox" id="answer_61348_1" value="Apple Silicon の Mac">
+Apple Silicon の Mac
+</label>
+<br>
+<label>
+<input type="checkbox" id="answer_61348_2" value="Copilot+ PC (Snapdragon 搭載)">
+Copilot+ PC (Snapdragon 搭載)
+</label>
+<br>
+<label>
+<input type="checkbox" id="answer_61348_3" value="Intel の Mac">
+Intel の Mac
+</label>
+<br>
+<label>
+<input type="checkbox" id="answer_61348_4" value="大半の Windows デスクトップ PC">
+大半の Windows デスクトップ PC
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_61348"></div>
+</form>
+<script>function validate_form_61348() {var text; var x1 = document.getElementById('answer_61348_1'); var x2 = document.getElementById('answer_61348_2'); var x3 = document.getElementById('answer_61348_3'); var x4 = document.getElementById('answer_61348_4'); if (x1.checked == true&x2.checked == true&x3.checked == false&x4.checked == false){text = '正解! Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です.';} else {text = '残念, もう一度考えてみましょう. 「身近な機種の OS とアーキテクチャ」の表を見直しましょう.';} document.getElementById('result_61348').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.'; res2 = document.getElementById('result_55934').innerText == '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.'; res3 = document.getElementById('result_45101').innerText == '正解! 警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう.'; res4 = document.getElementById('result_73588').innerText == '正解! OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います.'; res5 = document.getElementById('result_61348').innerText == '正解! Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です.';text = res1 + res2 + res3 + res4 + res5;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+<p><strong>Q6.</strong> 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_46000" onsubmit="return validate_form_46000()" method="post">
+<label>
+<input type="radio" name="answer_46000" id="answer_46000_1" value="macOS">
+macOS
+</label>
+<br>
+<label>
+<input type="radio" name="answer_46000" id="answer_46000_2" value="Ubuntu">
+Ubuntu
+</label>
+<br>
+<label>
+<input type="radio" name="answer_46000" id="answer_46000_3" value="iOS">
+iOS
+</label>
+<br>
+<label>
+<input type="radio" name="answer_46000" id="answer_46000_4" value="Windows">
+Windows
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_46000"></div>
+</form>
+<script>function validate_form_46000() {var x, text; var x = document.forms['form_46000']['answer_46000'].value;if (x == 'Windows'){text = '正解! Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります.';} else {text = '残念, もう一度考えてみましょう. OS の系譜の図を見直しましょう.';} document.getElementById('result_46000').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5, res6;res1 = document.getElementById('result_29424').innerText == '正解! 実行中のプログラムとデータが置かれる作業スペースは RAM です.'; res2 = document.getElementById('result_55934').innerText == '正解! 32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です.'; res3 = document.getElementById('result_45101').innerText == '正解! 警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう.'; res4 = document.getElementById('result_73588').innerText == '正解! OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います.'; res5 = document.getElementById('result_61348').innerText == '正解! Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です.'; res6 = document.getElementById('result_46000').innerText == '正解! Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります.';text = res1 + res2 + res3 + res4 + res5 + res6;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
 
 
 <!-- -->
@@ -1238,206 +1437,324 @@ Figure&nbsp;1.8: OS の系譜
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytable_html_mathjax =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(checkdown)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytable_html_mathjax =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>この章では, コンピュータがどのような部品からできていて, その上でソフトウェアがどのように動いているのかを学びます. 普段の分析ではあまり意識しない話題ですが, 研究生活では意外なほど頻繁に顔を出します. 新しい PC を買うとき, ソフトウェアのインストーラを選ぶとき, 大学の計算サーバーやクラウドを使うとき, そして AI に環境構築を指示するとき, この章の語彙が判断の基礎になります.</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## コンピュータの基本構成</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>デスクトップ PC もノート PC も, そしてスマートフォンも, 基本的な構成は同じです. @fig-computer-components のように, CPU, メモリ, ストレージ, GPU といった部品が, マザーボード (motherboard) と呼ばれる基板の上で, バス (bus) というデータの通り道によって結ばれています.</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared feedback labels for the self-check quizzes</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>quiz_right <span class="ot">&lt;-</span> <span class="st">"正解!"</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>quiz_wrong <span class="ot">&lt;-</span> <span class="st">"残念, もう一度考えてみましょう."</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>quiz_button <span class="ot">&lt;-</span> <span class="st">"答え合わせ"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="al">![コンピュータの基本構成](../static/cetz/computer-components.svg)</span>{#fig-computer-components}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>この章では, コンピュータがどのような部品からできていて, その上でソフトウェアがどのように動いているのかを学びます. 普段の分析ではあまり意識しない話題ですが, 研究生活では意外なほど頻繁に顔を出します. 新しい PC を買うとき, ソフトウェアのインストーラを選ぶとき, 大学の計算サーバーやクラウドを使うとき, そして AI に環境構築を指示するとき, この章の語彙が判断の基礎になります.</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### CPU</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## コンピュータの基本構成</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="al">![CPU (AMD Ryzen 5 2600)](../static/img/hardware/cpu.jpg)</span>{#fig-photo-cpu group="hardware" width="65%"}</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>デスクトップ PC もノート PC も, そしてスマートフォンも, 基本的な構成は同じです. @fig-computer-components のように, CPU, メモリ, ストレージ, GPU といった部品が, マザーボード (motherboard) と呼ばれる基板の上で, バス (bus) というデータの通り道によって結ばれています.</span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です (@fig-photo-cpu). 性能を表す代表的な指標が2つあります.</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="al">![コンピュータの基本構成](../static/cetz/computer-components.svg)</span>{#fig-computer-components}</span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**クロック周波数** (clock speed): 1秒間に刻む動作の回数で, GHz ($10^9$ 回/秒) で表されます. おおまかには1コアあたりの処理の速さの目安です.</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**コア数** (cores): 独立して命令を実行できる演算ユニットの数です. 近年の CPU は4から16程度のコアを持つのが一般的です.</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>かつては世代ごとにクロック周波数が上がり, 何もしなくてもプログラムが速くなる時代がありました. しかし発熱の限界から2000年代半ばにクロック周波数は頭打ちになり, 以降の CPU はコア数を増やす方向に進化しています. 複数のコアを活かすには, プログラムの側で計算を分担させる並列化が必要になります (@sec-parallelization).</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### メモリとストレージ</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="al">![メモリ (DDR4 DIMM)](../static/img/hardware/ram.jpg)</span>{#fig-photo-ram group="hardware"}</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### CPU</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="al">![CPU (AMD Ryzen 5 2600)](../static/img/hardware/cpu.jpg)</span>{#fig-photo-cpu group="hardware" width="65%"}</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です (@fig-photo-cpu). 性能を表す代表的な指標が2つあります.</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**クロック周波数** (clock speed): 1秒間に刻む動作の回数で, GHz ($10^9$ 回/秒) で表されます. おおまかには1コアあたりの処理の速さの目安です.</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**コア数** (cores): 独立して命令を実行できる演算ユニットの数です. 近年の CPU は4から16程度のコアを持つのが一般的です.</span>
 <span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで (@fig-photo-ram), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>かつては世代ごとにクロック周波数が上がり, 何もしなくてもプログラムが速くなる時代がありました. しかし発熱の限界から2000年代半ばにクロック周波数は頭打ちになり, 以降の CPU はコア数を増やす方向に進化しています. 複数のコアを活かすには, プログラムの側で計算を分担させる並列化が必要になります (@sec-parallelization).</span>
 <span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>::: {#fig-photo-storage layout-ncol="2"}</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### メモリとストレージ</span></span>
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="al">![SSD (NVMe M.2)](../static/img/hardware/ssd.jpg)</span>{group="hardware"}</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="al">![メモリ (DDR4 DIMM)](../static/img/hardware/ram.jpg)</span>{#fig-photo-ram group="hardware"}</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="al">![HDD (カバーを開けた内部)](../static/img/hardware/hdd.jpg)</span>{group="hardware"}</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで (@fig-photo-ram), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).</span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>ストレージ</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>::: {#fig-photo-storage layout-ncol="2"}</span>
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="al">![SSD (NVMe M.2)](../static/img/hardware/ssd.jpg)</span>{group="hardware"}</span>
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります (@fig-photo-storage). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="al">![HDD (カバーを開けた内部)](../static/img/hardware/hdd.jpg)</span>{group="hardware"}</span>
 <span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります (@sec-computation-theory). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>ストレージ</span>
 <span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### GPU</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="al">![GPU (GeForce RTX 5060 Ti)](../static/img/hardware/gpu.jpg)</span>{#fig-photo-gpu group="hardware" width="70%"}</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります (@fig-photo-storage). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.</span>
 <span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>GPU (Graphics Processing Unit) は, もともと画面描画のための部品です (@fig-photo-gpu). 画面上の何百万というピクセルを同時に計算する必要があるため, @fig-computer-components に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります (@sec-computation-theory). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.</span>
 <span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>この「単純な計算の大規模並列」は行列演算と相性が良いため, GPU は深層学習をはじめとする機械学習の計算基盤になりました.^<span class="co">[</span><span class="ot">機械学習で事実上の標準となっているのが, NVIDIA 製 GPU 向けの計算基盤 CUDA です. 深層学習ライブラリの多くが CUDA を前提に開発されてきたため, 「GPU 計算といえば NVIDIA」という状況が長く続いています.</span><span class="co">]</span> 経済学でも, 深層学習や大規模なシミュレーションを使う研究では GPU が登場しますが, 回帰分析が中心であれば必須ではありません.</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### GPU</span></span>
 <span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="al">![GPU (GeForce RTX 5060 Ti)](../static/img/hardware/gpu.jpg)</span>{#fig-photo-gpu group="hardware" width="70%"}</span>
 <span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究用 PC を選ぶときの優先順位</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>GPU (Graphics Processing Unit) は, もともと画面描画のための部品です (@fig-photo-gpu). 画面上の何百万というピクセルを同時に計算する必要があるため, @fig-computer-components に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.</span>
 <span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>RAM: 最優先です. 16GB を最低ラインとし, 大きめのデータを扱うなら 32GB 以上を勧めます.</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>CPU: コア数が多いほど並列化の恩恵を受けられます.</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>ストレージ: SSD で 512GB 以上が目安です. HDD は避けましょう.</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>GPU: 深層学習をしないなら不要です. 必要になったらクラウドで借りるという選択肢もあります.</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## CPU アーキテクチャ</span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>ここからは, 同じ「CPU」の中にも互換性のない種類があるという話をします. まず, 自分の環境を R で確認してみましょう.</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>この「単純な計算の大規模並列」は行列演算と相性が良いため, GPU は深層学習をはじめとする機械学習の計算基盤になりました.^<span class="co">[</span><span class="ot">機械学習で事実上の標準となっているのが, NVIDIA 製 GPU 向けの計算基盤 CUDA です. 深層学習ライブラリの多くが CUDA を前提に開発されてきたため, 「GPU 計算といえば NVIDIA」という状況が長く続いています.</span><span class="co">]</span> 経済学でも, 深層学習や大規模なシミュレーションを使う研究では GPU が登場しますが, 回帰分析が中心であれば必須ではありません.</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究用 PC を選ぶときの優先順位</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>RAM: 最優先です. 16GB を最低ラインとし, 大きめのデータを扱うなら 32GB 以上を勧めます.</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>CPU: コア数が多いほど並列化の恩恵を受けられます.</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>ストレージ: SSD で 512GB 以上が目安です. HDD は避けましょう.</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>GPU: 深層学習をしないなら不要です. 必要になったらクラウドで借りるという選択肢もあります.</span>
 <span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: sys-info</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.info</span>()[<span class="fu">c</span>(<span class="st">"sysname"</span>, <span class="st">"release"</span>, <span class="st">"machine"</span>)]</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="in">`machine`</span> に表示されているのが CPU アーキテクチャです. 筆者の環境は Apple Silicon 搭載の Mac なので <span class="in">`arm64`</span> と表示されています. Intel や AMD 製 CPU の PC なら <span class="in">`x86_64`</span> になるはずです. この違いが何を意味するのかを見ていきましょう (<span class="in">`sysname`</span> の Darwin については OS の節で説明します).</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### 機械語と命令セット</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>CPU が直接理解できるのは, 機械語 (machine code) と呼ばれる 0 と 1 の列だけです. R のコードを実行するときも, R のインタープリタ (それ自体が機械語のプログラム) がコードを解釈し, 最終的にはすべて機械語の命令となって CPU に届いています.</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## CPU アーキテクチャ</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>ここからは, 同じ「CPU」の中にも互換性のない種類があるという話をします. まず, 自分の環境を R で確認してみましょう.</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: sys-info</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.info</span>()[<span class="fu">c</span>(<span class="st">"sysname"</span>, <span class="st">"release"</span>, <span class="st">"machine"</span>)]</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>どのような機械語の命令が使えるかという「語彙」の仕様を, **命令セットアーキテクチャ** (ISA, Instruction Set Architecture) といいます. 現在の主流は @tbl-isa の2系統です.</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="in">`machine`</span> に表示されているのが CPU アーキテクチャです. 筆者の環境は Apple Silicon 搭載の Mac なので <span class="in">`arm64`</span> と表示されています. Intel や AMD 製 CPU の PC なら <span class="in">`x86_64`</span> になるはずです. この違いが何を意味するのかを見ていきましょう (<span class="in">`sysname`</span> の Darwin については OS の節で説明します).</span>
 <span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-isa</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "主要な CPU アーキテクチャ"</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="st">`</span><span class="at"> </span><span class="st">`</span>  , <span class="sc">~</span><span class="st">`</span><span class="at">x86-64 (AMD64)</span><span class="st">`</span>                 , <span class="sc">~</span><span class="st">`</span><span class="at">ARM64 (AArch64)</span><span class="st">`</span>                         ,</span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  <span class="st">"設計"</span>  , <span class="st">"Intel, AMD"</span>                      , <span class="st">"Arm 社が設計し各社へライセンス"</span>                        ,</span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  <span class="st">"採用例"</span> , <span class="st">"Windows PC の大半, Intel Mac, サーバー"</span> , <span class="st">"スマートフォン, Apple Silicon Mac, AWS Graviton"</span> ,</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="st">"特徴"</span>  , <span class="st">"高性能重視, 長い後方互換性"</span>                  , <span class="st">"省電力重視"</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフトウェアとの互換性を保ちながら拡張されてきました.^<span class="co">[</span><span class="ot">64-bit への拡張を設計したのは Intel ではなく後発の AMD だったため, x86-64 は AMD64 とも呼ばれます.</span><span class="co">]</span> 一方 ARM は省電力を重視した設計で, スマートフォンのほぼすべてに採用されています.</span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>長らく「PC とサーバーは x86, スマートフォンは ARM」という住み分けでしたが, 2020年に Apple が Mac の CPU を自社設計の ARM チップ (Apple Silicon, M1 など) に切り替えたのを機に, この境界は崩れつつあります. クラウドでは AWS の Graviton など ARM サーバーが増えており, スーパーコンピュータ富岳の CPU も ARM 系です.</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="fu">### 機械語と命令セット</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>CPU が直接理解できるのは, 機械語 (machine code) と呼ばれる 0 と 1 の列だけです. R のコードを実行するときも, R のインタープリタ (それ自体が機械語のプログラム) がコードを解釈し, 最終的にはすべて機械語の命令となって CPU に届いています.</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>どのような機械語の命令が使えるかという「語彙」の仕様を, **命令セットアーキテクチャ** (ISA, Instruction Set Architecture) といいます. 現在の主流は @tbl-isa の2系統です.</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-isa</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "主要な CPU アーキテクチャ"</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="st">`</span><span class="at"> </span><span class="st">`</span>  , <span class="sc">~</span><span class="st">`</span><span class="at">x86-64 (AMD64)</span><span class="st">`</span>                 , <span class="sc">~</span><span class="st">`</span><span class="at">ARM64 (AArch64)</span><span class="st">`</span>                         ,</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  <span class="st">"設計"</span>  , <span class="st">"Intel, AMD"</span>                      , <span class="st">"Arm 社が設計し各社へライセンス"</span>                        ,</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  <span class="st">"採用例"</span> , <span class="st">"Windows PC の大半, Intel Mac, サーバー"</span> , <span class="st">"スマートフォン, Apple Silicon Mac, AWS Graviton"</span> ,</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  <span class="st">"特徴"</span>  , <span class="st">"高性能重視, 長い後方互換性"</span>                  , <span class="st">"省電力重視"</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intel と AMD, 型番と世代の読み方</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフトウェアとの互換性を保ちながら拡張されてきました.^<span class="co">[</span><span class="ot">64-bit への拡張を設計したのは Intel ではなく後発の AMD だったため, x86-64 は AMD64 とも呼ばれます.</span><span class="co">]</span> 一方 ARM は省電力を重視した設計で, スマートフォンのほぼすべてに採用されています.</span>
 <span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>x86-64 の CPU を作っているのは Intel と AMD の2社で, どちらを選んでもソフトウェアの互換性は変わりません. PC を買うときに見るべきは, 型番に埋め込まれたグレードと世代です.</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>長らく「PC とサーバーは x86, スマートフォンは ARM」という住み分けでしたが, 2020年に Apple が Mac の CPU を自社設計の ARM チップ (Apple Silicon, M1 など) に切り替えたのを機に, この境界は崩れつつあります. クラウドでは AWS の Graviton など ARM サーバーが増えており, スーパーコンピュータ富岳の CPU も ARM 系です.</span>
 <span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>Intel の Core i7-13700 という型番なら, i7 がグレード (i3 &lt; i5 &lt; i7 &lt; i9) を, 続く 13 が第13世代であることを表します. AMD の Ryzen 7 7700 なら, Ryzen 7 がグレード (3 &lt; 5 &lt; 7 &lt; 9) を, 数字の先頭の 7 が 7000 シリーズという世代を表します. ノート PC 向けでは型番の末尾に文字が付き, U は省電力型, H は高性能型を意味します.</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
 <span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>注意したいのは, グレードはあくまで同世代内での序列だという点です. 世代が新しい i5 が数世代前の i7 を上回ることは珍しくないため, セール品や中古品で「i7 搭載」とだけ書かれていたら, 必ず世代も確認しましょう.</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intel と AMD, 型番と世代の読み方</span></span>
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>なお Intel は2023年末から, 新しい製品を Core Ultra (Core Ultra 5/7/9) というブランドに切り替えつつあります. 名前は変わりましたが, グレードと世代 (Core Ultra 7 155H なら先頭の 1 が第1世代) を確認するという読み方は同じです.</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>x86-64 の CPU を作っているのは Intel と AMD の2社で, どちらを選んでもソフトウェアの互換性は変わりません. PC を買うときに見るべきは, 型番に埋め込まれたグレードと世代です.</span>
 <span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>Intel の Core i7-13700 という型番なら, i7 がグレード (i3 &lt; i5 &lt; i7 &lt; i9) を, 続く 13 が第13世代であることを表します. AMD の Ryzen 7 7700 なら, Ryzen 7 がグレード (3 &lt; 5 &lt; 7 &lt; 9) を, 数字の先頭の 7 が 7000 シリーズという世代を表します. ノート PC 向けでは型番の末尾に文字が付き, U は省電力型, H は高性能型を意味します.</span>
 <span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### 32-bit と 64-bit</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>注意したいのは, グレードはあくまで同世代内での序列だという点です. 世代が新しい i5 が数世代前の i7 を上回ることは珍しくないため, セール品や中古品で「i7 搭載」とだけ書かれていたら, 必ず世代も確認しましょう.</span>
 <span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです (@fig-bit-width). 32-bit の CPU が区別できるメモリアドレスは $2^{32}$ 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が $2^{64}$ バイト (約1600万 TB) となり, 事実上無制限になりました.</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>なお Intel は2023年末から, 新しい製品を Core Ultra (Core Ultra 5/7/9) というブランドに切り替えつつあります. 名前は変わりましたが, グレードと世代 (Core Ultra 7 155H なら先頭の 1 が第1世代) を確認するという読み方は同じです.</span>
 <span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="al">![アドレス幅と扱えるメモリの上限](../static/cetz/bit-width.svg)</span>{#fig-bit-width}</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>現在の PC とスマートフォンは, ほぼすべて 64-bit (x86-64 か ARM64) です. ただし名残はあちこちに残っていて, ダウンロードページの <span class="in">`i386`</span> や <span class="in">`x86`</span> は 32-bit 版を, <span class="in">`x86_64`</span> や <span class="in">`x64`</span> は 64-bit 版を指しています.</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### 32-bit と 64-bit</span></span>
 <span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです (@fig-bit-width). 32-bit の CPU が区別できるメモリアドレスは $2^{32}$ 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が $2^{64}$ バイト (約1600万 TB) となり, 事実上無制限になりました.</span>
 <span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## 64-bit 時代の 32-bit 整数</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="al">![アドレス幅と扱えるメモリの上限](../static/cetz/bit-width.svg)</span>{#fig-bit-width}</span>
 <span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>64-bit CPU の上でも, R の整数型 (integer) は 32-bit のままです.</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>現在の PC とスマートフォンは, ほぼすべて 64-bit (x86-64 か ARM64) です. ただし名残はあちこちに残っていて, ダウンロードページの <span class="in">`i386`</span> や <span class="in">`x86`</span> は 32-bit 版を, <span class="in">`x86_64`</span> や <span class="in">`x64`</span> は 64-bit 版を指しています.</span>
 <span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: integer-overflow</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max <span class="sc">+</span> <span class="dv">1</span>L</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>この上限 ($2^{31} - 1$, 約21億) を超える整数はオーバーフローして <span class="in">`NA`</span> になります. 大規模な行政データでは ID や人数の合計が21億を超えることがあり, その場合は double (64-bit 浮動小数点) や文字列として扱うのが安全です.</span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### バイナリと互換性</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## 64-bit 時代の 32-bit 整数</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>64-bit CPU の上でも, R の整数型 (integer) は 32-bit のままです.</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: integer-overflow</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max <span class="sc">+</span> <span class="dv">1</span>L</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>ソースコードを機械語に翻訳することをコンパイル (compile) といい, できあがった実行ファイルをバイナリ (binary) と呼びます. ここで重要なのは, バイナリは特定の ISA の機械語で書かれているという点です. x86-64 向けにコンパイルされたバイナリは, そのままでは ARM64 の CPU で動きません. 語彙の違う言語で書かれた指示書のようなものだからです.</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>この上限 ($2^{31} - 1$, 約21億) を超える整数はオーバーフローして <span class="in">`NA`</span> になります. 大規模な行政データでは ID や人数の合計が21億を超えることがあり, その場合は double (64-bit 浮動小数点) や文字列として扱うのが安全です.</span>
 <span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>そのため, 同じソフトウェアでもアーキテクチャごとに別のバイナリが配布されます. たとえば R の macOS 向けインストーラには, Apple Silicon 用 (arm64) と Intel Mac 用 (x86_64) の2種類があります. 自分の機種に合わない方を選ぶと, 動かないか, 動いても遅くなります.^<span class="co">[</span><span class="ot">macOS には Rosetta 2 という変換レイヤーがあり, x86-64 のバイナリを ARM64 の命令に翻訳しながら実行できます. Intel Mac 用のソフトが Apple Silicon でも「一応動く」のはこのおかげですが, ネイティブなバイナリより遅くなります.</span><span class="co">]</span></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## OS {#sec-os}</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="fu">### バイナリと互換性</span></span>
 <span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### OS の役割</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>ソースコードを機械語に翻訳することをコンパイル (compile) といい, できあがった実行ファイルをバイナリ (binary) と呼びます. ここで重要なのは, バイナリは特定の ISA の機械語で書かれているという点です. x86-64 向けにコンパイルされたバイナリは, そのままでは ARM64 の CPU で動きません. 語彙の違う言語で書かれた指示書のようなものだからです.</span>
 <span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです (@fig-software-stack). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>そのため, 同じソフトウェアでもアーキテクチャごとに別のバイナリが配布されます. たとえば R の macOS 向けインストーラには, Apple Silicon 用 (arm64) と Intel Mac 用 (x86_64) の2種類があります. 自分の機種に合わない方を選ぶと, 動かないか, 動いても遅くなります.^<span class="co">[</span><span class="ot">macOS には Rosetta 2 という変換レイヤーがあり, x86-64 のバイナリを ARM64 の命令に翻訳しながら実行できます. Intel Mac 用のソフトが Apple Silicon でも「一応動く」のはこのおかげですが, ネイティブなバイナリより遅くなります.</span><span class="co">]</span></span>
 <span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="al">![ハードウェア, OS, アプリケーションの階層](../static/cetz/software-stack.svg)</span>{#fig-software-stack}</span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## OS {#sec-os}</span></span>
 <span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは @tbl-os-arch のとおりです.</span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="fu">### OS の役割</span></span>
 <span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-os-arch</span></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "身近な機種の OS とアーキテクチャ"</span></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="st">`</span><span class="at">機種</span><span class="st">`</span>                          , <span class="sc">~</span>OS             , <span class="sc">~</span><span class="st">`</span><span class="at">アーキテクチャ</span><span class="st">`</span>            ,</span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mac (Apple Silicon, 2020年以降)"</span> , <span class="st">"macOS"</span>         , <span class="st">"ARM64"</span>               ,</span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mac (Intel, 2020年以前)"</span>         , <span class="st">"macOS"</span>         , <span class="st">"x86-64"</span>              ,</span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Windows PC の大半"</span>               , <span class="st">"Windows"</span>       , <span class="st">"x86-64"</span>              ,</span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Copilot+ PC (Snapdragon 搭載)"</span>  , <span class="st">"Windows"</span>       , <span class="st">"ARM64"</span>               ,</span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>  <span class="st">"計算サーバー・クラウド・スパコン"</span>             , <span class="st">"Linux"</span>         , <span class="st">"x86-64 (ARM64 も増加中)"</span> ,</span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>  <span class="st">"iPhone / Android スマートフォン"</span>     , <span class="st">"iOS / Android"</span> , <span class="st">"ARM64"</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Surface にはご用心</span></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>「Windows PC ならば x86-64」という経験則には例外が増えています. Microsoft の Surface シリーズは, 同じ製品ラインの中に Intel 製 CPU (x86-64) のモデルと Snapdragon 搭載 (ARM64) のモデルが混在しており, 見た目からは区別がつきません. 特に2024年以降の Copilot+ PC を名乗る Surface (Surface Pro 11 や Surface Laptop 7 など) は ARM64 です.</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです (@fig-software-stack). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="al">![ハードウェア, OS, アプリケーションの階層](../static/cetz/software-stack.svg)</span>{#fig-software-stack}</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a>アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは @tbl-os-arch のとおりです.</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-os-arch</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "身近な機種の OS とアーキテクチャ"</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="st">`</span><span class="at">機種</span><span class="st">`</span>                          , <span class="sc">~</span>OS             , <span class="sc">~</span><span class="st">`</span><span class="at">アーキテクチャ</span><span class="st">`</span>            ,</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mac (Apple Silicon, 2020年以降)"</span> , <span class="st">"macOS"</span>         , <span class="st">"ARM64"</span>               ,</span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mac (Intel, 2020年以前)"</span>         , <span class="st">"macOS"</span>         , <span class="st">"x86-64"</span>              ,</span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Windows PC の大半"</span>               , <span class="st">"Windows"</span>       , <span class="st">"x86-64"</span>              ,</span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Copilot+ PC (Snapdragon 搭載)"</span>  , <span class="st">"Windows"</span>       , <span class="st">"ARM64"</span>               ,</span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>  <span class="st">"計算サーバー・クラウド・スパコン"</span>             , <span class="st">"Linux"</span>         , <span class="st">"x86-64 (ARM64 も増加中)"</span> ,</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>  <span class="st">"iPhone / Android スマートフォン"</span>     , <span class="st">"iOS / Android"</span> , <span class="st">"ARM64"</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>ARM64 の Windows でも x86-64 用のソフトはエミュレーションで一応動きますが, 速度は落ち, ドライバや一部のソフトはそもそも動きません. 研究用ソフトは ARM64 版 Windows への対応が遅れがちで, たとえば本書の執筆時点では, CRAN が配布する Windows 版 R のバイナリは x86-64 用のみです. Windows 機の購入時には, CPU が Intel / AMD (x86-64) か Snapdragon (ARM64) かを必ず確認しましょう. 手元の Windows 機で確かめるには, 「設定 &gt; システム &gt; バージョン情報」のシステムの種類に ARM と書かれていないかを見ます.</span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
 <span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## Surface にはご用心</span></span>
 <span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unix の系譜 {#sec-unix-family}</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>「Windows PC ならば x86-64」という経験則には例外が増えています. Microsoft の Surface シリーズは, 同じ製品ラインの中に Intel 製 CPU (x86-64) のモデルと Snapdragon 搭載 (ARM64) のモデルが混在しており, 見た目からは区別がつきません. 特に2024年以降の Copilot+ PC を名乗る Surface (Surface Pro 11 や Surface Laptop 7 など) は ARM64 です.</span>
 <span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です (@fig-os-family).</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>ARM64 の Windows でも x86-64 用のソフトはエミュレーションで一応動きますが, 速度は落ち, ドライバや一部のソフトはそもそも動きません. 研究用ソフトは ARM64 版 Windows への対応が遅れがちで, たとえば本書の執筆時点では, CRAN が配布する Windows 版 R のバイナリは x86-64 用のみです. Windows 機の購入時には, CPU が Intel / AMD (x86-64) か Snapdragon (ARM64) かを必ず確認しましょう. 手元の Windows 機で確かめるには, 「設定 &gt; システム &gt; バージョン情報」のシステムの種類に ARM と書かれていないかを見ます.</span>
 <span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="al">![OS の系譜](../static/cetz/os-family.svg)</span>{#fig-os-family}</span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**macOS**: Unix の直系の子孫である BSD を土台にしています. その中核部分の名前が Darwin で, 先ほど <span class="in">`Sys.info()`</span> の <span class="in">`sysname`</span> に表示されていたものです. iOS も同じ土台の上に作られています.</span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Linux**: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.</span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Windows**: MS-DOS から Windows NT へと続く, Unix とは独立した系譜です.</span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unix の系譜 {#sec-unix-family}</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です (@fig-os-family).</span>
 <span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>この系譜は歴史の豆知識ではなく, そのまま実務に効いてきます. macOS と Linux は同じ Unix の流れを汲むため, コマンド, ディレクトリ構造, 開発ツールがほぼ共通です. そして研究計算の世界では Linux が標準です. 大学の計算サーバー, スーパーコンピュータ, クラウドは, ほぼすべて Linux で動いています.^<span class="co">[</span><span class="ot">スーパーコンピュータの性能ランキング [TOP500](https://www.top500.org) に載る計算機の OS は, 2017年以降すべて Linux です.</span><span class="co">]</span> 手元の Mac で書いた解析コードが計算サーバーでもほぼそのまま動くのは, この共通性のおかげです.</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="al">![OS の系譜](../static/cetz/os-family.svg)</span>{#fig-os-family}</span>
 <span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Windows と WSL</span></span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>Windows は Unix の系譜から外れているため, シェルもコマンドも互換性がありません. この溝を埋めるのが WSL (Windows Subsystem for Linux) です. 現行の WSL2 は, Windows 上の軽量な仮想マシンで本物の Linux カーネルを動かす仕組みで, Windows のデスクトップを使いながら完全な Linux 環境 (通常は Ubuntu) を手に入れられます. VS Code は WSL 内のファイルをシームレスに開けるため, 編集は Windows 側, 実行は Linux 側という開発スタイルが自然に実現します. 本コースで Windows ユーザーに WSL を推奨しているのはこのためです.</span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**macOS**: Unix の直系の子孫である BSD を土台にしています. その中核部分の名前が Darwin で, 先ほど <span class="in">`Sys.info()`</span> の <span class="in">`sysname`</span> に表示されていたものです. iOS も同じ土台の上に作られています.</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Linux**: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.</span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Windows**: MS-DOS から Windows NT へと続く, Unix とは独立した系譜です.</span>
 <span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaways</span></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>この系譜は歴史の豆知識ではなく, そのまま実務に効いてきます. macOS と Linux は同じ Unix の流れを汲むため, コマンド, ディレクトリ構造, 開発ツールがほぼ共通です. そして研究計算の世界では Linux が標準です. 大学の計算サーバー, スーパーコンピュータ, クラウドは, ほぼすべて Linux で動いています.^<span class="co">[</span><span class="ot">スーパーコンピュータの性能ランキング [TOP500](https://www.top500.org) に載る計算機の OS は, 2017年以降すべて Linux です.</span><span class="co">]</span> 手元の Mac で書いた解析コードが計算サーバーでもほぼそのまま動くのは, この共通性のおかげです.</span>
 <span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>最後に, この章の知識が役立つ場面をまとめます.</span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### Windows と WSL</span></span>
 <span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ソフトウェアのインストール: ダウンロードページでは「OS × アーキテクチャ」で選びます. Apple Silicon の Mac なら <span class="in">`arm64`</span> / <span class="in">`aarch64`</span>, それ以外の PC ならたいてい <span class="in">`x86_64`</span> / <span class="in">`x64`</span> / <span class="in">`amd64`</span> です.</span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>エラーメッセージの解読: <span class="in">`wrong architecture`</span> や <span class="in">`cannot execute binary file`</span> といったエラーを見たら, ISA か OS の不一致を疑いましょう.</span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.^<span class="co">[</span><span class="ot">Docker などのコンテナは OS (ディストリビューション) の差を吸収してくれますが, ISA の差は吸収しません. Apple Silicon 上で x86-64 用のイメージを動かすとエミュレーションになり, 大幅に遅くなります.</span><span class="co">]</span></span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.</span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a>Windows は Unix の系譜から外れているため, シェルもコマンドも互換性がありません. この溝を埋めるのが WSL (Windows Subsystem for Linux) です. 現行の WSL2 は, Windows 上の軽量な仮想マシンで本物の Linux カーネルを動かす仕組みで, Windows のデスクトップを使いながら完全な Linux 環境 (通常は Ubuntu) を手に入れられます. VS Code は WSL 内のファイルをシームレスに開けるため, 編集は Windows 側, 実行は Linux 側という開発スタイルが自然に実現します. 本コースで Windows ユーザーに WSL を推奨しているのはこのためです.</span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Takeaways</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>最後に, この章の知識が役立つ場面をまとめます.</span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ソフトウェアのインストール: ダウンロードページでは「OS × アーキテクチャ」で選びます. Apple Silicon の Mac なら <span class="in">`arm64`</span> / <span class="in">`aarch64`</span>, それ以外の PC ならたいてい <span class="in">`x86_64`</span> / <span class="in">`x64`</span> / <span class="in">`amd64`</span> です.</span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>エラーメッセージの解読: <span class="in">`wrong architecture`</span> や <span class="in">`cannot execute binary file`</span> といったエラーを見たら, ISA か OS の不一致を疑いましょう.</span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.^<span class="co">[</span><span class="ot">Docker などのコンテナは OS (ディストリビューション) の差を吸収してくれますが, ISA の差は吸収しません. Apple Silicon 上で x86-64 用のイメージを動かすとエミュレーションになり, 大幅に遅くなります.</span><span class="co">]</span></span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.</span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a>この章の理解度を確認しましょう. 選択肢を選んで「答え合わせ」を押すと, その場で正誤が表示されます.</span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a>**Q1.** R で大きなデータセットを読み込もうとしたら, <span class="in">`Error: cannot allocate vector of size 8.0 Gb`</span> というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.</span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-ram</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RAM"</span>,</span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"RAM"</span>, <span class="st">"SSD"</span>, <span class="st">"CPU"</span>, <span class="st">"GPU"</span>),</span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"実行中のプログラムとデータが置かれる作業スペースは RAM です."</span>),</span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"机と本棚の例えを思い出してください."</span>),</span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>**Q2.** 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.</span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-bit-width</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a>  <span class="st">"4GB"</span>,</span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"2GB"</span>, <span class="st">"4GB"</span>, <span class="st">"16GB"</span>, <span class="st">"積んだ RAM の分だけ"</span>),</span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."</span>),</span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"2^32 バイトは何 GB でしょうか?"</span>),</span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>**Q3.** R の整数型 (integer) で上限の約21億 (<span class="in">`.Machine$integer.max`</span>) を超える計算をすると, 何が起こるでしょうか.</span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-integer</span></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>  <span class="st">"オーバーフローして NA になる"</span>,</span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a>    <span class="st">"オーバーフローして NA になる"</span>,</span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>    <span class="st">"自動的に double に変換される"</span>,</span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>    <span class="st">"常にエラーで実行が止まる"</span></span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"警告付きで NA になります. 大きな ID や合計値は double や文字列で扱いましょう."</span>),</span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"「64-bit 時代の 32-bit 整数」のコード例を実行してみてください."</span>),</span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a>**Q4.** Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.</span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-binary</span></span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a>  <span class="st">"動かない"</span>,</span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a>    <span class="st">"動かない"</span>,</span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a>    <span class="st">"問題なく動く"</span>,</span>
+<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a>    <span class="st">"遅くなるが動く"</span></span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. サーバー上でインストールし直すかコンテナを使います."</span>),</span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."</span>),</span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a>**Q5.** 次のうち, CPU が ARM64 のマシンをすべて選んでください.</span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-arm64</span></span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Apple Silicon の Mac"</span>, <span class="st">"Copilot+ PC (Snapdragon 搭載)"</span>),</span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Apple Silicon の Mac"</span>,</span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Copilot+ PC (Snapdragon 搭載)"</span>,</span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intel の Mac"</span>,</span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>    <span class="st">"大半の Windows デスクトップ PC"</span></span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"checkbox"</span>,</span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."</span>),</span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"「身近な機種の OS とアーキテクチャ」の表を見直しましょう."</span>),</span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button</span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>**Q6.** 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.</span>
+<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-unix</span></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Windows"</span>,</span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"macOS"</span>, <span class="st">"Ubuntu"</span>, <span class="st">"iOS"</span>, <span class="st">"Windows"</span>),</span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">paste</span>(quiz_right, <span class="st">"Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."</span>),</span>
+<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">paste</span>(quiz_wrong, <span class="st">"OS の系譜の図を見直しましょう."</span>),</span>
+<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

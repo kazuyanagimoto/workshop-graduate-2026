@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; アーキテクチャ – Best Practices</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../lesson/shell.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/architecture.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Best Practices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#コンピュータの基本構成" id="toc-コンピュータの基本構成" class="nav-link active" data-scroll-target="#コンピュータの基本構成"><span class="header-section-number">2.1</span> コンピュータの基本構成</a>
+  <ul class="collapse">
+  <li><a href="#cpu" id="toc-cpu" class="nav-link" data-scroll-target="#cpu">CPU</a></li>
+  <li><a href="#メモリとストレージ" id="toc-メモリとストレージ" class="nav-link" data-scroll-target="#メモリとストレージ">メモリとストレージ</a></li>
+  <li><a href="#gpu" id="toc-gpu" class="nav-link" data-scroll-target="#gpu">GPU</a></li>
+  </ul></li>
+  <li><a href="#cpu-アーキテクチャ" id="toc-cpu-アーキテクチャ" class="nav-link" data-scroll-target="#cpu-アーキテクチャ"><span class="header-section-number">2.2</span> CPU アーキテクチャ</a>
+  <ul class="collapse">
+  <li><a href="#機械語と命令セット" id="toc-機械語と命令セット" class="nav-link" data-scroll-target="#機械語と命令セット">機械語と命令セット</a></li>
+  <li><a href="#bit-と-64-bit" id="toc-bit-と-64-bit" class="nav-link" data-scroll-target="#bit-と-64-bit">32-bit と 64-bit</a></li>
+  <li><a href="#バイナリと互換性" id="toc-バイナリと互換性" class="nav-link" data-scroll-target="#バイナリと互換性">バイナリと互換性</a></li>
+  </ul></li>
+  <li><a href="#sec-os" id="toc-sec-os" class="nav-link" data-scroll-target="#sec-os"><span class="header-section-number">2.3</span> OS</a>
+  <ul class="collapse">
+  <li><a href="#os-の役割" id="toc-os-の役割" class="nav-link" data-scroll-target="#os-の役割">OS の役割</a></li>
+  <li><a href="#sec-unix-family" id="toc-sec-unix-family" class="nav-link" data-scroll-target="#sec-unix-family">Unix の系譜</a></li>
+  <li><a href="#windows-と-wsl" id="toc-windows-と-wsl" class="nav-link" data-scroll-target="#windows-と-wsl">Windows と WSL</a></li>
+  </ul></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways"><span class="header-section-number">2.4</span> Takeaways</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>この章では, コンピュータがどのような部品からできていて, その上でソフトウェアがどのように動いているのかを学びます. 普段の分析ではあまり意識しない話題ですが, 研究生活では意外なほど頻繁に顔を出します. 新しい PC を買うとき, ソフトウェアのインストーラを選ぶとき, 大学の計算サーバーやクラウドを使うとき, そして AI に環境構築を指示するとき, この章の語彙が判断の基礎になります.</p>
+<section id="コンピュータの基本構成" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="コンピュータの基本構成"><span class="header-section-number">2.1</span> コンピュータの基本構成</h2>
+<p>デスクトップ PC もノート PC も, そしてスマートフォンも, 基本的な構成は同じです. <a href="#fig-computer-components" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> のように, CPU, メモリ, ストレージ, GPU といった部品が, マザーボード (motherboard) と呼ばれる基板の上で, バス (bus) というデータの通り道によって結ばれています.</p>
+<div id="fig-computer-components" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-computer-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/computer-components.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;2.1: コンピュータの基本構成"><img src="../static/cetz/computer-components.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-computer-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: コンピュータの基本構成
+</figcaption>
+</figure>
+</div>
+<section id="cpu" class="level3">
+<h3 class="anchored" data-anchor-id="cpu">CPU</h3>
+<div id="fig-photo-cpu" class="quarto-float quarto-figure quarto-figure-center anchored" data-group="hardware">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-photo-cpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/hardware/cpu.jpg" class="lightbox" data-gallery="hardware" title="Figure&nbsp;2.2: CPU (AMD Ryzen 5 2600)"><img src="../static/img/hardware/cpu.jpg" class="img-fluid figure-img" style="width:65.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-photo-cpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: CPU (AMD Ryzen 5 2600)
+</figcaption>
+</figure>
+</div>
+<p>CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です (<a href="#fig-photo-cpu" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>). 性能を表す代表的な指標が2つあります.</p>
+<ul>
+<li><strong>クロック周波数</strong> (clock speed): 1秒間に刻む動作の回数で, GHz (<span class="math inline">\(10^9\)</span> 回/秒) で表されます. おおまかには1コアあたりの処理の速さの目安です.</li>
+<li><strong>コア数</strong> (cores): 独立して命令を実行できる演算ユニットの数です. 近年の CPU は4から16程度のコアを持つのが一般的です.</li>
+</ul>
+<p>かつては世代ごとにクロック周波数が上がり, 何もしなくてもプログラムが速くなる時代がありました. しかし発熱の限界から2000年代半ばにクロック周波数は頭打ちになり, 以降の CPU はコア数を増やす方向に進化しています. 複数のコアを活かすには, プログラムの側で計算を分担させる並列化が必要になります (<a href="computation-fast.html#sec-parallelization" class="quarto-xref"><span>Section 6.4</span></a>).</p>
+</section>
+<section id="メモリとストレージ" class="level3">
+<h3 class="anchored" data-anchor-id="メモリとストレージ">メモリとストレージ</h3>
+<div id="fig-photo-ram" class="quarto-float quarto-figure quarto-figure-center anchored" data-group="hardware">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-photo-ram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/hardware/ram.jpg" class="lightbox" data-gallery="hardware" title="Figure&nbsp;2.3: メモリ (DDR4 DIMM)"><img src="../static/img/hardware/ram.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-photo-ram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: メモリ (DDR4 DIMM)
+</figcaption>
+</figure>
+</div>
+<p>メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで (<a href="#fig-photo-ram" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).</p>
+<div id="fig-photo-storage" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-photo-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/img/hardware/ssd.jpg" class="lightbox" data-gallery="hardware" title="SSD (NVMe M.2)"><img src="../static/img/hardware/ssd.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>SSD (NVMe M.2)</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/img/hardware/hdd.jpg" class="lightbox" data-gallery="hardware" title="HDD (カバーを開けた内部)"><img src="../static/img/hardware/hdd.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>HDD (カバーを開けた内部)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-photo-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: ストレージ
+</figcaption>
+</figure>
+</div>
+<p>ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります (<a href="#fig-photo-storage" class="quarto-xref">Figure&nbsp;<span>2.4</span></a>). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.</p>
+<p>「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります (<a href="computation-fast.html#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a>). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.</p>
+</section>
+<section id="gpu" class="level3">
+<h3 class="anchored" data-anchor-id="gpu">GPU</h3>
+<div id="fig-photo-gpu" class="quarto-float quarto-figure quarto-figure-center anchored" data-group="hardware">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-photo-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/hardware/gpu.jpg" class="lightbox" data-gallery="hardware" title="Figure&nbsp;2.5: GPU (GeForce RTX 5060 Ti)"><img src="../static/img/hardware/gpu.jpg" class="img-fluid figure-img" style="width:70.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-photo-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: GPU (GeForce RTX 5060 Ti)
+</figcaption>
+</figure>
+</div>
+<p>GPU (Graphics Processing Unit) は, もともと画面描画のための部品です (<a href="#fig-photo-gpu" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>). 画面上の何百万というピクセルを同時に計算する必要があるため, <a href="#fig-computer-components" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.</p>
+<p>この「単純な計算の大規模並列」は行列演算と相性が良いため, GPU は深層学習をはじめとする機械学習の計算基盤になりました.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 経済学でも, 深層学習や大規模なシミュレーションを使う研究では GPU が登場しますが, 回帰分析が中心であれば必須ではありません.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>研究用 PC を選ぶときの優先順位
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>RAM: 最優先です. 16GB を最低ラインとし, 大きめのデータを扱うなら 32GB 以上を勧めます.</li>
+<li>CPU: コア数が多いほど並列化の恩恵を受けられます.</li>
+<li>ストレージ: SSD で 512GB 以上が目安です. HDD は避けましょう.</li>
+<li>GPU: 深層学習をしないなら不要です. 必要になったらクラウドで借りるという選択肢もあります.</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="cpu-アーキテクチャ" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="cpu-アーキテクチャ"><span class="header-section-number">2.2</span> CPU アーキテクチャ</h2>
+<p>ここからは, 同じ「CPU」の中にも互換性のない種類があるという話をします. まず, 自分の環境を R で確認してみましょう.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.info</span>()[<span class="fu">c</span>(<span class="st">"sysname"</span>, <span class="st">"release"</span>, <span class="st">"machine"</span>)]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  sysname  release  machine </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## "Darwin" "25.5.0"  "arm64"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>machine</code> に表示されているのが CPU アーキテクチャです. 筆者の環境は Apple Silicon 搭載の Mac なので <code>arm64</code> と表示されています. Intel や AMD 製 CPU の PC なら <code>x86_64</code> になるはずです. この違いが何を意味するのかを見ていきましょう (<code>sysname</code> の Darwin については OS の節で説明します).</p>
+<section id="機械語と命令セット" class="level3">
+<h3 class="anchored" data-anchor-id="機械語と命令セット">機械語と命令セット</h3>
+<p>CPU が直接理解できるのは, 機械語 (machine code) と呼ばれる 0 と 1 の列だけです. R のコードを実行するときも, R のインタープリタ (それ自体が機械語のプログラム) がコードを解釈し, 最終的にはすべて機械語の命令となって CPU に届いています.</p>
+<p>どのような機械語の命令が使えるかという「語彙」の仕様を, <strong>命令セットアーキテクチャ</strong> (ISA, Instruction Set Architecture) といいます. 現在の主流は <a href="#tbl-isa" class="quarto-xref">Table&nbsp;<span>2.1</span></a> の2系統です.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-isa" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-isa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: 主要な CPU アーキテクチャ
+</figcaption>
+<div aria-describedby="tbl-isa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_qlv77jms2v9hs18cq1sx = TinyTable.createTableFunctions("tinytable_qlv77jms2v9hs18cq1sx");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_ncjxfl960thftqwge530',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_fdffypxnfcbw4uc1preq',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_qlv77jms2v9hs18cq1sx.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_qlv77jms2v9hs18cq1sx td.tinytable_css_ncjxfl960thftqwge530, #tinytable_qlv77jms2v9hs18cq1sx th.tinytable_css_ncjxfl960thftqwge530 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_qlv77jms2v9hs18cq1sx td.tinytable_css_fdffypxnfcbw4uc1preq, #tinytable_qlv77jms2v9hs18cq1sx th.tinytable_css_fdffypxnfcbw4uc1preq {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_qlv77jms2v9hs18cq1sx" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">x86-64 (AMD64)</th>
+                <th scope="col" data-row="0" data-col="3">ARM64 (AArch64)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">設計</td>
+                  <td data-row="1" data-col="2">Intel, AMD</td>
+                  <td data-row="1" data-col="3">Arm 社が設計し各社へライセンス</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">採用例</td>
+                  <td data-row="2" data-col="2">Windows PC の大半, Intel Mac, サーバー</td>
+                  <td data-row="2" data-col="3">スマートフォン, Apple Silicon Mac, AWS Graviton</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">特徴</td>
+                  <td data-row="3" data-col="2">高性能重視, 長い後方互換性</td>
+                  <td data-row="3" data-col="3">省電力重視</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフトウェアとの互換性を保ちながら拡張されてきました.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 一方 ARM は省電力を重視した設計で, スマートフォンのほぼすべてに採用されています.</p>
+<p>長らく「PC とサーバーは x86, スマートフォンは ARM」という住み分けでしたが, 2020年に Apple が Mac の CPU を自社設計の ARM チップ (Apple Silicon, M1 など) に切り替えたのを機に, この境界は崩れつつあります. クラウドでは AWS の Graviton など ARM サーバーが増えており, スーパーコンピュータ富岳の CPU も ARM 系です.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Intel と AMD, 型番と世代の読み方
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>x86-64 の CPU を作っているのは Intel と AMD の2社で, どちらを選んでもソフトウェアの互換性は変わりません. PC を買うときに見るべきは, 型番に埋め込まれたグレードと世代です.</p>
+<p>Intel の Core i7-13700 という型番なら, i7 がグレード (i3 &lt; i5 &lt; i7 &lt; i9) を, 続く 13 が第13世代であることを表します. AMD の Ryzen 7 7700 なら, Ryzen 7 がグレード (3 &lt; 5 &lt; 7 &lt; 9) を, 数字の先頭の 7 が 7000 シリーズという世代を表します. ノート PC 向けでは型番の末尾に文字が付き, U は省電力型, H は高性能型を意味します.</p>
+<p>注意したいのは, グレードはあくまで同世代内での序列だという点です. 世代が新しい i5 が数世代前の i7 を上回ることは珍しくないため, セール品や中古品で「i7 搭載」とだけ書かれていたら, 必ず世代も確認しましょう.</p>
+<p>なお Intel は2023年末から, 新しい製品を Core Ultra (Core Ultra 5/7/9) というブランドに切り替えつつあります. 名前は変わりましたが, グレードと世代 (Core Ultra 7 155H なら先頭の 1 が第1世代) を確認するという読み方は同じです.</p>
+</div>
+</div>
+</section>
+<section id="bit-と-64-bit" class="level3">
+<h3 class="anchored" data-anchor-id="bit-と-64-bit">32-bit と 64-bit</h3>
+<p>アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです (<a href="#fig-bit-width" class="quarto-xref">Figure&nbsp;<span>2.6</span></a>). 32-bit の CPU が区別できるメモリアドレスは <span class="math inline">\(2^{32}\)</span> 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が <span class="math inline">\(2^{64}\)</span> バイト (約1600万 TB) となり, 事実上無制限になりました.</p>
+<div id="fig-bit-width" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bit-width-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/bit-width.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;2.6: アドレス幅と扱えるメモリの上限"><img src="../static/cetz/bit-width.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bit-width-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: アドレス幅と扱えるメモリの上限
+</figcaption>
+</figure>
+</div>
+<p>現在の PC とスマートフォンは, ほぼすべて 64-bit (x86-64 か ARM64) です. ただし名残はあちこちに残っていて, ダウンロードページの <code>i386</code> や <code>x86</code> は 32-bit 版を, <code>x86_64</code> や <code>x64</code> は 64-bit 版を指しています.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>64-bit 時代の 32-bit 整数
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>64-bit CPU の上でも, R の整数型 (integer) は 32-bit のままです.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2147483647</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>.Machine<span class="sc">$</span>integer.max <span class="sc">+</span> <span class="dv">1</span>L</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>この上限 (<span class="math inline">\(2^{31} - 1\)</span>, 約21億) を超える整数はオーバーフローして <code>NA</code> になります. 大規模な行政データでは ID や人数の合計が21億を超えることがあり, その場合は double (64-bit 浮動小数点) や文字列として扱うのが安全です.</p>
+</div>
+</div>
+</section>
+<section id="バイナリと互換性" class="level3">
+<h3 class="anchored" data-anchor-id="バイナリと互換性">バイナリと互換性</h3>
+<p>ソースコードを機械語に翻訳することをコンパイル (compile) といい, できあがった実行ファイルをバイナリ (binary) と呼びます. ここで重要なのは, バイナリは特定の ISA の機械語で書かれているという点です. x86-64 向けにコンパイルされたバイナリは, そのままでは ARM64 の CPU で動きません. 語彙の違う言語で書かれた指示書のようなものだからです.</p>
+<p>そのため, 同じソフトウェアでもアーキテクチャごとに別のバイナリが配布されます. たとえば R の macOS 向けインストーラには, Apple Silicon 用 (arm64) と Intel Mac 用 (x86_64) の2種類があります. 自分の機種に合わない方を選ぶと, 動かないか, 動いても遅くなります.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section>
+</section>
+<section id="sec-os" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-os"><span class="header-section-number">2.3</span> OS</h2>
+<section id="os-の役割" class="level3">
+<h3 class="anchored" data-anchor-id="os-の役割">OS の役割</h3>
+<p>オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです (<a href="#fig-software-stack" class="quarto-xref">Figure&nbsp;<span>2.7</span></a>). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.</p>
+<div id="fig-software-stack" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-software-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/software-stack.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;2.7: ハードウェア, OS, アプリケーションの階層"><img src="../static/cetz/software-stack.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-software-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: ハードウェア, OS, アプリケーションの階層
+</figcaption>
+</figure>
+</div>
+<p>アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは <a href="#tbl-os-arch" class="quarto-xref">Table&nbsp;<span>2.2</span></a> のとおりです.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-os-arch" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-os-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: 身近な機種の OS とアーキテクチャ
+</figcaption>
+<div aria-describedby="tbl-os-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_s9jb41uo2zbladz4d9cb = TinyTable.createTableFunctions("tinytable_s9jb41uo2zbladz4d9cb");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '6', j: 1 }, { i: '6', j: 2 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_h2tncjlz1syp346t4908',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_hj6mxphxy1svm9u5fyzx',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_s9jb41uo2zbladz4d9cb.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_s9jb41uo2zbladz4d9cb td.tinytable_css_h2tncjlz1syp346t4908, #tinytable_s9jb41uo2zbladz4d9cb th.tinytable_css_h2tncjlz1syp346t4908 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_s9jb41uo2zbladz4d9cb td.tinytable_css_hj6mxphxy1svm9u5fyzx, #tinytable_s9jb41uo2zbladz4d9cb th.tinytable_css_hj6mxphxy1svm9u5fyzx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_s9jb41uo2zbladz4d9cb" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">機種</th>
+                <th scope="col" data-row="0" data-col="2">OS</th>
+                <th scope="col" data-row="0" data-col="3">アーキテクチャ</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">Mac (Apple Silicon, 2020年以降)</td>
+                  <td data-row="1" data-col="2">macOS</td>
+                  <td data-row="1" data-col="3">ARM64</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">Mac (Intel, 2020年以前)</td>
+                  <td data-row="2" data-col="2">macOS</td>
+                  <td data-row="2" data-col="3">x86-64</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">Windows PC の大半</td>
+                  <td data-row="3" data-col="2">Windows</td>
+                  <td data-row="3" data-col="3">x86-64</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1">Copilot+ PC (Snapdragon 搭載)</td>
+                  <td data-row="4" data-col="2">Windows</td>
+                  <td data-row="4" data-col="3">ARM64</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">計算サーバー・クラウド・スパコン</td>
+                  <td data-row="5" data-col="2">Linux</td>
+                  <td data-row="5" data-col="3">x86-64 (ARM64 も増加中)</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1">iPhone / Android スマートフォン</td>
+                  <td data-row="6" data-col="2">iOS / Android</td>
+                  <td data-row="6" data-col="3">ARM64</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Surface にはご用心
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>「Windows PC ならば x86-64」という経験則には例外が増えています. Microsoft の Surface シリーズは, 同じ製品ラインの中に Intel 製 CPU (x86-64) のモデルと Snapdragon 搭載 (ARM64) のモデルが混在しており, 見た目からは区別がつきません. 特に2024年以降の Copilot+ PC を名乗る Surface (Surface Pro 11 や Surface Laptop 7 など) は ARM64 です.</p>
+<p>ARM64 の Windows でも x86-64 用のソフトはエミュレーションで一応動きますが, 速度は落ち, ドライバや一部のソフトはそもそも動きません. 研究用ソフトは ARM64 版 Windows への対応が遅れがちで, たとえば本書の執筆時点では, CRAN が配布する Windows 版 R のバイナリは x86-64 用のみです. Windows 機の購入時には, CPU が Intel / AMD (x86-64) か Snapdragon (ARM64) かを必ず確認しましょう. 手元の Windows 機で確かめるには, 「設定 &gt; システム &gt; バージョン情報」のシステムの種類に ARM と書かれていないかを見ます.</p>
+</div>
+</div>
+</section>
+<section id="sec-unix-family" class="level3">
+<h3 class="anchored" data-anchor-id="sec-unix-family">Unix の系譜</h3>
+<p>現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です (<a href="#fig-os-family" class="quarto-xref">Figure&nbsp;<span>2.8</span></a>).</p>
+<div id="fig-os-family" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-os-family-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/os-family.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;2.8: OS の系譜"><img src="../static/cetz/os-family.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-os-family-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.8: OS の系譜
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>macOS</strong>: Unix の直系の子孫である BSD を土台にしています. その中核部分の名前が Darwin で, 先ほど <code>Sys.info()</code> の <code>sysname</code> に表示されていたものです. iOS も同じ土台の上に作られています.</li>
+<li><strong>Linux</strong>: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.</li>
+<li><strong>Windows</strong>: MS-DOS から Windows NT へと続く, Unix とは独立した系譜です.</li>
+</ul>
+<p>この系譜は歴史の豆知識ではなく, そのまま実務に効いてきます. macOS と Linux は同じ Unix の流れを汲むため, コマンド, ディレクトリ構造, 開発ツールがほぼ共通です. そして研究計算の世界では Linux が標準です. 大学の計算サーバー, スーパーコンピュータ, クラウドは, ほぼすべて Linux で動いています.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 手元の Mac で書いた解析コードが計算サーバーでもほぼそのまま動くのは, この共通性のおかげです.</p>
+</section>
+<section id="windows-と-wsl" class="level3">
+<h3 class="anchored" data-anchor-id="windows-と-wsl">Windows と WSL</h3>
+<p>Windows は Unix の系譜から外れているため, シェルもコマンドも互換性がありません. この溝を埋めるのが WSL (Windows Subsystem for Linux) です. 現行の WSL2 は, Windows 上の軽量な仮想マシンで本物の Linux カーネルを動かす仕組みで, Windows のデスクトップを使いながら完全な Linux 環境 (通常は Ubuntu) を手に入れられます. VS Code は WSL 内のファイルをシームレスに開けるため, 編集は Windows 側, 実行は Linux 側という開発スタイルが自然に実現します. 本コースで Windows ユーザーに WSL を推奨しているのはこのためです.</p>
+</section>
+</section>
+<section id="takeaways" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="takeaways"><span class="header-section-number">2.4</span> Takeaways</h2>
+<p>最後に, この章の知識が役立つ場面をまとめます.</p>
+<ul>
+<li>ソフトウェアのインストール: ダウンロードページでは「OS × アーキテクチャ」で選びます. Apple Silicon の Mac なら <code>arm64</code> / <code>aarch64</code>, それ以外の PC ならたいてい <code>x86_64</code> / <code>x64</code> / <code>amd64</code> です.</li>
+<li>エラーメッセージの解読: <code>wrong architecture</code> や <code>cannot execute binary file</code> といったエラーを見たら, ISA か OS の不一致を疑いましょう.</li>
+<li>サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
+<li>AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>機械学習で事実上の標準となっているのが, NVIDIA 製 GPU 向けの計算基盤 CUDA です. 深層学習ライブラリの多くが CUDA を前提に開発されてきたため, 「GPU 計算といえば NVIDIA」という状況が長く続いています.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>64-bit への拡張を設計したのは Intel ではなく後発の AMD だったため, x86-64 は AMD64 とも呼ばれます.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>macOS には Rosetta 2 という変換レイヤーがあり, x86-64 のバイナリを ARM64 の命令に翻訳しながら実行できます. Intel Mac 用のソフトが Apple Silicon でも「一応動く」のはこのおかげですが, ネイティブなバイナリより遅くなります.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>スーパーコンピュータの性能ランキング <a href="https://www.top500.org">TOP500</a> に載る計算機の OS は, 2017年以降すべて Linux です.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Docker などのコンテナは OS (ディストリビューション) の差を吸収してくれますが, ISA の差は吸収しません. Apple Silicon 上で x86-64 用のイメージを動かすとエミュレーションになり, 大幅に遅くなります.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lesson/shell.html" class="pagination-link" aria-label="Shell">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

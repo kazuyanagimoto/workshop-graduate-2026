@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; 高速化 – Best Practices</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../lesson/computation-data.html" rel="next">
+<link href="../lesson/quarto.html" rel="prev">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/computation-fast.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Best Practices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-computation-theory" id="toc-sec-computation-theory" class="nav-link active" data-scroll-target="#sec-computation-theory"><span class="header-section-number">6.1</span> 計算量</a>
+  <ul class="collapse">
+  <li><a href="#時間計算量" id="toc-時間計算量" class="nav-link" data-scroll-target="#時間計算量">時間計算量</a></li>
+  <li><a href="#領域計算量" id="toc-領域計算量" class="nav-link" data-scroll-target="#領域計算量">領域計算量</a></li>
+  </ul></li>
+  <li><a href="#計算量の実践" id="toc-計算量の実践" class="nav-link" data-scroll-target="#計算量の実践"><span class="header-section-number">6.2</span> 計算量の実践</a></li>
+  <li><a href="#高速化" id="toc-高速化" class="nav-link" data-scroll-target="#高速化"><span class="header-section-number">6.3</span> 高速化</a>
+  <ul class="collapse">
+  <li><a href="#プログラミング言語の選択" id="toc-プログラミング言語の選択" class="nav-link" data-scroll-target="#プログラミング言語の選択">プログラミング言語の選択</a></li>
+  <li><a href="#ベクトル化" id="toc-ベクトル化" class="nav-link" data-scroll-target="#ベクトル化">ベクトル化</a></li>
+  <li><a href="#rcpp" id="toc-rcpp" class="nav-link" data-scroll-target="#rcpp">Rcpp</a></li>
+  </ul></li>
+  <li><a href="#sec-parallelization" id="toc-sec-parallelization" class="nav-link" data-scroll-target="#sec-parallelization"><span class="header-section-number">6.4</span> 並列化</a>
+  <ul class="collapse">
+  <li><a href="#コア数の確認" id="toc-コア数の確認" class="nav-link" data-scroll-target="#コア数の確認">コア数の確認</a></li>
+  <li><a href="#並列化とベンチマーク" id="toc-並列化とベンチマーク" class="nav-link" data-scroll-target="#並列化とベンチマーク">並列化とベンチマーク</a></li>
+  <li><a href="#cコードの並列化" id="toc-cコードの並列化" class="nav-link" data-scroll-target="#cコードの並列化">C++コードの並列化</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-computation-theory" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-computation-theory"><span class="header-section-number">6.1</span> 計算量</h2>
+<p>アルゴリズムの効率性を評価する尺度として, 計算時間とメモリ使用量があります. ここでいう計算時間とは, アルゴリズムが終了するまでにかかるステップ数 (<strong>時間計算量</strong>, time complexity) のことをいい, 実際のPC上での実行時間とは異なります. より高いスペックのPCを使えば, 同じアルゴリズムでも実行時間は短くなる一方で, ステップ数の次元が異なるアルゴリズムはマシンの性能に関わらず効率的と言えます. また, メモリ使用量とはアルゴリズムが終了するまでに必要なメモリの量 (<strong>領域計算量</strong>, space complexity) のことをいいます.</p>
+<section id="時間計算量" class="level3">
+<h3 class="anchored" data-anchor-id="時間計算量">時間計算量</h3>
+<p>時間計算量は, 入力の大きさ <span class="math inline">\(n\)</span> に対するステップ数 <span class="math inline">\(T(n)\)</span> の関数として表されます. 例えば, 配列の要素数が <span class="math inline">\(n\)</span> のときに, すべての要素を1回ずつ見るアルゴリズムは, <span class="math inline">\(T(n) = n\)</span> となります. また, 2重ループで配列のすべての組み合わせを調べるアルゴリズムは, <span class="math inline">\(T(n) = n^2\)</span> となります. このように, アルゴリズムの時間計算量は, 入力の大きさに対するステップ数の増加率によって特徴づけられます.</p>
+<p>時間計算量を評価する際, 重要なのは支配的な項の次元数になります. 例えば, <span class="math inline">\(T(n) = 3n^2 + 2n + 1\)</span> の場合, <span class="math inline">\(n\)</span> が大きくなると <span class="math inline">\(3n^2\)</span> の項が支配的になるため, <span class="math inline">\(n^2\)</span> に着目すれば十分です. この考え方に従ったとき, 計算量を <span class="math inline">\(O(n^2)\)</span> と表記します. より厳密に表現すると以下のようになります.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><span class="math inline">\(O\)</span>-記法
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(f(n)\)</span> が <span class="math inline">\(O(g(n))\)</span> とは, 任意の <span class="math inline">\(n \ge 0\)</span> に対して, ある定数 <span class="math inline">\(C &gt; 0\)</span> が存在して, 以下の不等式が成り立つことをいう.</p>
+<p><span class="math display">\[
+|f(n)| \le C |g(n)|.
+\]</span></p>
+</div>
+</div>
+<p>定量モデルで気にする必要があるのは, ほとんどの場合, グリッド数によるオーダーです. 例えば, <span class="math inline">\(V(k, z)\)</span> のような2次元の価値関数をグリッド上で計算する場合, <span class="math inline">\(k\)</span> のグリッド数 <span class="math inline">\(n_k\)</span> と <span class="math inline">\(z\)</span> のグリッド数 <span class="math inline">\(n_z\)</span> に対して, 計算量は <span class="math inline">\(n_k n_z\)</span> の関数となります.</p>
+</section>
+<section id="領域計算量" class="level3">
+<h3 class="anchored" data-anchor-id="領域計算量">領域計算量</h3>
+<p>領域計算量は, アルゴリズムが終了するまでに必要なメモリの量を, 入力の大きさ <span class="math inline">\(n\)</span> に対する関数として表します. 例えば, 配列の要素数が <span class="math inline">\(n\)</span> のときに, すべての要素を保存するアルゴリズムは, 領域計算量が <span class="math inline">\(O(n)\)</span> となります. また, 2次元配列を保存するアルゴリズムは, 領域計算量が <span class="math inline">\(O(n^2)\)</span> となります.</p>
+<p><strong>メモリのヒエラルキー</strong></p>
+<p>なぜメモリの使用量が重要なのでしょうか. 近年のPCは何百GBもの容量があるし, いくら使おうと問題ではないのではないか, と思うかもしれません. しかし, 実際には, メモリのヒエラルキー (memory hierarchy) によって, メモリの速度と容量が大きく異なります.</p>
+<p>一般に, 高速なメモリは高価であるため搭載量が少なく, 低速なメモリは安価であるため搭載量が多いです. それらを合わせると, <a href="#fig-memory-hierarchy" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> のようなピラミッド型のヒエラルキーが形成されます.</p>
+<div id="fig-memory-hierarchy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-memory-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/memory-hierarchy.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;6.1: メモリのヒエラルキー. 上にいくほど高速だが容量は小さい."><img src="../static/cetz/memory-hierarchy.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-memory-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: メモリのヒエラルキー. 上にいくほど高速だが容量は小さい.
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>レジスタ (Registers): CPU内部にある最も高速なメモリ</li>
+<li>キャッシュ (Cache): (近年では) CPU内部にある高速なメモリ. L1, L2, L3 などのレベルがある. ここまでCPU内部にある.</li>
+<li>主記憶 (Main Memory): RAM (Random Access Memory)</li>
+<li>補助記憶 (Auxiliary Storage): SSD (Solid State Drive) やHDD (Hard Disk Drive)</li>
+</ul>
+<p>たとえば, AMDの <a href="https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600.html">Ryzen 5 9600</a> (Zen 5世代) の場合, L1キャッシュは480KB, L2キャッシュは6MB, L3キャッシュは32MBです. レジスタはサイズで表現することはあまりありませんが, ざっくり数百B程度と考えてください. 一方で, 一般にメモリと呼ばれる RAM は8GBから64GB 程度が一般的です. さらに, 一般にストレージとよばれるSSDやHDDは数百GBから数TBの容量があります.</p>
+<p>各層は容量だけでなく速度も桁違いに異なります. CPU がレジスタやキャッシュ上のデータを読むのは数クロックで済む一方, RAM へのアクセスはその数十倍から数百倍かかり, SSD ではさらに桁が変わります. そのため, アルゴリズムが繰り返し参照するデータ (作業セット) がキャッシュに収まるかどうかで, たとえ計算回数が同じでも実行時間は大きく変わります. とくに連続したアドレスを順にたどるアクセスは, CPU が先読みしてまとめてキャッシュに載せられるため高速で, 逆に飛び飛びのアクセスはキャッシュミスを頻発させ, そのたびに低速な RAM を待つことになります. この「メモリ上での近さ」を局所性 (locality) と呼び, 後のベクトル化が速い理由の一つも, データが連続したメモリに並んでこの局所性を活かせる点にあります.</p>
+</section>
+</section>
+<section id="計算量の実践" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="計算量の実践"><span class="header-section-number">6.2</span> 計算量の実践</h2>
+<p>実際の推定を例に, 計算量を測定してみましょう. ここでは処置効果の推定で広く使われる<strong>最近傍マッチング</strong> (nearest-neighbor matching) を考えます. 処置群の各個体について, 共変量 <span class="math inline">\(x\)</span> (傾向スコアなど) が最も近い対照群の個体を1人見つけ, その個体を対応させることで ATT を推定する方法です.</p>
+<p><strong>最近傍マッチング</strong></p>
+<p>処置群を <span class="math inline">\(n_t\)</span> 人, 対照群を <span class="math inline">\(n_c\)</span> 人とします. ナイーブに実装すると, 処置群の各個体について対照群の全員との距離を計算し, 最も近い個体を探すことになります. コードで表すと次の <code>match_nn</code> 関数のようになります.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>match_nn <span class="ot">&lt;-</span> <span class="cf">function</span>(n_t, n_c, <span class="at">seed =</span> <span class="dv">42</span>L) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  x_t <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_t) <span class="co"># covariate of treated units</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  x_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_c) <span class="co"># covariate of control units</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  matched <span class="ot">&lt;-</span> <span class="fu">integer</span>(n_t)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_t) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    best_dist <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    best_j <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_c) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">&lt;-</span> <span class="fu">abs</span>(x_t[i] <span class="sc">-</span> x_c[j])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (d <span class="sc">&lt;</span> best_dist) {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        best_dist <span class="ot">&lt;-</span> d</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        best_j <span class="ot">&lt;-</span> j</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    matched[i] <span class="ot">&lt;-</span> best_j</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  matched</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>時間計算量の数え方として, 四則演算, 比較 (<code>&lt;</code> など), 代入, 配列へのアクセスは <span class="math inline">\(O(1)\)</span> とします. すると, 計算回数の主要部は二重ループ, つまり <span class="math inline">\(O(n_t n_c)\)</span> です. 以下では簡単のため <span class="math inline">\(n_t = n_c = n\)</span> とするので, 時間計算量は <span class="math inline">\(O(n^2)\)</span> になります. 一方で保存しているのはマッチング結果 <code>matched</code> (長さ <span class="math inline">\(n_t\)</span>) と共変量ベクトルだけなので, 領域計算量は <span class="math inline">\(O(n)\)</span> です. では, <span class="math inline">\(n\)</span> を変化させたときの計算時間を測定してみましょう.</p>
+<p><strong>bench パッケージ</strong></p>
+<p>Rでは, <code>bench</code> パッケージを使うと実際の計算時間を測定できます.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bm <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 100"</span> <span class="ot">=</span> <span class="fu">match_nn</span>(<span class="dv">100</span>L, <span class="dv">100</span>L),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 1000"</span> <span class="ot">=</span> <span class="fu">match_nn</span>(<span class="dv">1000</span>L, <span class="dv">1000</span>L),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-complexity" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: 観測数を変えたときのマッチングの計算時間とメモリ使用量
+</figcaption>
+<div aria-describedby="tbl-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_vb93y7uoxqe3n70pjtmr = TinyTable.createTableFunctions("tinytable_vb93y7uoxqe3n70pjtmr");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 } ], css_id: 'tinytable_css_cjdxhvzz4bgmkm3dfzpp',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_kk5diwf0qj3915w2ro0e',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_vb93y7uoxqe3n70pjtmr.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_vb93y7uoxqe3n70pjtmr td.tinytable_css_cjdxhvzz4bgmkm3dfzpp, #tinytable_vb93y7uoxqe3n70pjtmr th.tinytable_css_cjdxhvzz4bgmkm3dfzpp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_vb93y7uoxqe3n70pjtmr td.tinytable_css_kk5diwf0qj3915w2ro0e, #tinytable_vb93y7uoxqe3n70pjtmr th.tinytable_css_kk5diwf0qj3915w2ro0e {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_vb93y7uoxqe3n70pjtmr" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">$n$</th>
+                <th scope="col" data-row="0" data-col="2">中央値 (ms)</th>
+                <th scope="col" data-row="0" data-col="3">メモリ</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">100</td>
+                  <td data-row="1" data-col="2">0.8</td>
+                  <td data-row="1" data-col="3">2.1 KB</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">1000</td>
+                  <td data-row="2" data-col="2">84.7</td>
+                  <td data-row="2" data-col="3">19.7 KB</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><span class="math inline">\(n\)</span> を 100 から 1000 へ 10 倍にすると, 計算時間は約 105 倍になる一方で, メモリ使用量は約 9 倍にしかなっていないことがわかります. これは, 計算時間が <span class="math inline">\(O(n^2)\)</span>, 領域計算量が <span class="math inline">\(O(n)\)</span> であることと一致しています.</p>
+</section>
+<section id="高速化" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="高速化"><span class="header-section-number">6.3</span> 高速化</h2>
+<section id="プログラミング言語の選択" class="level3">
+<h3 class="anchored" data-anchor-id="プログラミング言語の選択">プログラミング言語の選択</h3>
+<p>プログラミング言語には, 明確に計算速度の壁があります. 経済学の分野で使われている言語だと, 次のような関係にあります.</p>
+<p><span class="math display">\[
+\text{C/C++, Fortran, Julia} \gg \text{Python, Matlab} &gt; \text{R}
+\]</span></p>
+<div id="fig-julia-benchmark" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-julia-benchmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/benchmarks.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;6.2: Julia Micro Benchmarks"><img src="../static/img/benchmarks.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-julia-benchmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: <a href="https://julialang.org/benchmarks/">Julia Micro Benchmarks</a>
+</figcaption>
+</figure>
+</div>
+<p>おおむね, C/C++, Fortran, Juliaは10-100倍ほどPython, Matlab, Rより速く計算が可能です. なおベクトル化というテクニックやPythonの<a href="https://numba.pydata.org">Numba</a>を用いることで, Python, Matlab, Rでも同様の速度も出すことが可能ですが, C/C++, Fortran, Juliaなどの言語とはそもそも質的に異なるという事実は頭に入れておいた方が良いでしょう.</p>
+</section>
+<section id="ベクトル化" class="level3">
+<h3 class="anchored" data-anchor-id="ベクトル化">ベクトル化</h3>
+<p>Python, Matlab, Rなどの言語ではベクトル化することで計算速度が改善されます. しかし, これは <a href="#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a> から考えると矛盾しています. ベクトル化そのものは計算回数は変えませんし, ベクトル化することで確保されるメモリの量は増えるはずです. この矛盾はどこからくるのでしょう.</p>
+<p>これは主には型推定の問題です. Pythonなどのスクリプト言語は変数の型を実行時に確定させるため,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> forループの中で型推定を行う必要があります. ベクトル化とは, 型が定まったベクトル同士の計算を行うという性質上, この型推定にかかる時間を削減しています.</p>
+<p>先ほどの <code>match_nn</code> を題材に, ベクトル化で実際に速くなるかを確かめてみましょう. <code>match_nn</code> のボトルネックは, 処置群の各個体について対照群すべてとの距離を1つずつ計算する内側ループでした. 共変量の生成は計測から外したいので, 以下では共変量ベクトル <code>x_t</code>, <code>x_c</code> を引数に取る3通りの実装を比較します.</p>
+<p>まずは, 内側も外側も <code>for</code> で回す二重ループ版です.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>match_nn_loop <span class="ot">&lt;-</span> <span class="cf">function</span>(x_t, x_c) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  matched <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="fu">length</span>(x_t))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(x_t)) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    best_dist <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    best_j <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_along</span>(x_c)) {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">&lt;-</span> <span class="fu">abs</span>(x_t[i] <span class="sc">-</span> x_c[j])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (d <span class="sc">&lt;</span> best_dist) {</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        best_dist <span class="ot">&lt;-</span> d</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        best_j <span class="ot">&lt;-</span> j</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    matched[i] <span class="ot">&lt;-</span> best_j</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  matched</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>次に, 内側ループだけをベクトル化します. 対照群すべてとの距離 <code>abs(xi - x_c)</code> を一度に計算し, <code>which.min()</code> で最も近い個体を選びます. 処置群についての外側ループは, <code>for</code> の代わりに <code>purrr::map_int()</code> を使うと簡潔に書けます.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>match_nn_map <span class="ot">&lt;-</span> <span class="cf">function</span>(x_t, x_c) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_int</span>(x_t, \(xi) <span class="fu">which.min</span>(<span class="fu">abs</span>(xi <span class="sc">-</span> x_c)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>最後に, 外側ループも消した完全ベクトル化版です. <code>outer()</code> で全ペアの距離を <span class="math inline">\(n_t \times n_c\)</span> の行列に一度に計算し, 各行の最小値の位置を <code>max.col()</code> で取り出します.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>match_nn_outer <span class="ot">&lt;-</span> <span class="cf">function</span>(x_t, x_c) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">outer</span>(x_t, x_c, <span class="st">"-"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max.col</span>(<span class="sc">-</span>d, <span class="at">ties.method =</span> <span class="st">"first"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>3通りの実装を比較してみましょう. <code>bench::mark()</code> はデフォルトで返り値の一致を確認するので, 3つが同じ結果を返すことも同時に検証されます.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span>L</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of treated units</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of control units</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mb_vec <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">loop =</span> <span class="fu">match_nn_loop</span>(x_t, x_c),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> <span class="fu">match_nn_map</span>(x_t, x_c),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer =</span> <span class="fu">match_nn_outer</span>(x_t, x_c),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-vectorize" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vectorize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: match_nn の実装による実行時間とメモリ割り当て (<span class="math inline">\(n = 1000\)</span>)
+</figcaption>
+<div aria-describedby="tbl-vectorize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_e6hbkq0v7927dzdnq8b9 = TinyTable.createTableFunctions("tinytable_e6hbkq0v7927dzdnq8b9");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_py7cl39wqj5ihl6uljue',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_dsjztzirheanz7xcfycu',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_e6hbkq0v7927dzdnq8b9.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_e6hbkq0v7927dzdnq8b9 td.tinytable_css_py7cl39wqj5ihl6uljue, #tinytable_e6hbkq0v7927dzdnq8b9 th.tinytable_css_py7cl39wqj5ihl6uljue {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_e6hbkq0v7927dzdnq8b9 td.tinytable_css_dsjztzirheanz7xcfycu, #tinytable_e6hbkq0v7927dzdnq8b9 th.tinytable_css_dsjztzirheanz7xcfycu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_e6hbkq0v7927dzdnq8b9" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">手法</th>
+                <th scope="col" data-row="0" data-col="2">中央値 (ms)</th>
+                <th scope="col" data-row="0" data-col="3">メモリ割り当て</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">二重ループ</td>
+                  <td data-row="1" data-col="2">84.6</td>
+                  <td data-row="1" data-col="3">54.9 KB</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">内側ベクトル化 (purrr::map)</td>
+                  <td data-row="2" data-col="2">3.7</td>
+                  <td data-row="2" data-col="3">8.4 MB</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">完全ベクトル化</td>
+                  <td data-row="3" data-col="2">4.2</td>
+                  <td data-row="3" data-col="3">30.6 MB</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>内側ループをベクトル化するだけで, 二重ループの約 23 倍高速になりました. <code>abs(xi - x_c)</code> のように型が定まったベクトル同士の演算にまとめることで, 対照群1人ずつに対して行っていた型推定のオーバーヘッドを取り除けるためです. 外側ループを <code>purrr::map_int()</code> に変えても速度はほとんど変わりません. 速くなったのはあくまで内側のベクトル化によるものです.</p>
+<p>一方で, 完全ベクトル化はさらに速くなるわけではありません. むしろ <a href="#tbl-vectorize" class="quarto-xref">Table&nbsp;<span>6.2</span></a> のとおり, メモリ割り当てが桁違いに大きくなっています. これは <code>outer()</code> が <span class="math inline">\(n \times n\)</span> の距離行列 (<span class="math inline">\(8 n^2\)</span> バイト) を一度に確保するためで, <a href="#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a> でみた領域計算量そのものです. 内側ベクトル化も延べの割り当て量は大きいですが, 同時に保持するのは長さ <span class="math inline">\(n\)</span> の距離ベクトル1本だけ (<span class="math inline">\(O(n)\)</span>) なのに対し, 完全ベクトル化は行列全体を保持し続ける (<span class="math inline">\(O(n^2)\)</span>) ため, <span class="math inline">\(n\)</span> が大きいと RAM に収まらなくなります.</p>
+</section>
+<section id="rcpp" class="level3">
+<h3 class="anchored" data-anchor-id="rcpp">Rcpp</h3>
+<p>Rcppは, RからC++のコードを呼び出すためのパッケージです. C++で書いた関数をRから呼び出すことができるため, 計算速度を大幅に改善することができます. 例えば, 先ほどの <code>match_nn</code> 関数のボトルネックである二重ループを, C++で書き直すと次のようになります.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>IntegerVector match_nn_cpp<span class="op">(</span>NumericVector <span class="dt">x_t</span><span class="op">,</span> NumericVector x_c<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="dt">n_t</span> <span class="op">=</span> <span class="dt">x_t</span><span class="op">.</span>size<span class="op">();</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> n_c <span class="op">=</span> x_c<span class="op">.</span>size<span class="op">();</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  IntegerVector matched<span class="op">(</span><span class="dt">n_t</span><span class="op">);</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dt">n_t</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> best_dist <span class="op">=</span> R_PosInf<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> best_j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> n_c<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">double</span> d <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span><span class="dt">x_t</span><span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> x_c<span class="op">[</span>j<span class="op">]);</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>d <span class="op">&lt;</span> best_dist<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        best_dist <span class="op">=</span> d<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        best_j <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// 1-based index for R</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    matched<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> best_j<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> matched<span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>// [[Rcpp::export]]</code> を付けた関数は, コンパイル後にRから呼び出せるようになります. 比較対象のR実装には, ベクトル化の節で定義した二重ループ版 <code>match_nn_loop</code> をそのまま使います.</p>
+<p>では, R版とRcpp版で実行時間を比較してみましょう. ここでは共変量の生成 (<code>rnorm</code>) を計測の外で行い, 二重ループそのものだけを測ります.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <code>bench::mark()</code> はデフォルトで両者の返り値が一致するかも確認するので, 書き直しても結果が変わっていないことを同時に検証できます.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bm_cpp <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">press</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>L, <span class="dv">1000</span>L),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    x_t <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of treated units</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    x_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of control units</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">R =</span> <span class="fu">match_nn_loop</span>(x_t, x_c),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">Rcpp =</span> <span class="fu">match_nn_cpp</span>(x_t, x_c),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-rcpp" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rcpp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.3: R と Rcpp によるマッチングの計算時間と領域計算量
+</figcaption>
+<div aria-describedby="tbl-rcpp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_cmsccguc1zi88pazm8aq = TinyTable.createTableFunctions("tinytable_cmsccguc1zi88pazm8aq");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_b2diqmsj14snv543fi3j',}, 
+          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_8qd8fzq6x4nht5k0525m',}, 
+          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_plw36b69n9ojm1az5hck',}, 
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 }, { i: '2', j: 5 } ], css_id: 'tinytable_css_s83d96949e43y3ct0ijo',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_a8k731vhzhq62dqthhbw',}, 
+          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_dzynvfkcxt00zrppuwo4',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_cmsccguc1zi88pazm8aq.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_b2diqmsj14snv543fi3j, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_b2diqmsj14snv543fi3j {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_8qd8fzq6x4nht5k0525m, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_8qd8fzq6x4nht5k0525m {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_plw36b69n9ojm1az5hck, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_plw36b69n9ojm1az5hck {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_s83d96949e43y3ct0ijo, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_s83d96949e43y3ct0ijo {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_a8k731vhzhq62dqthhbw, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_a8k731vhzhq62dqthhbw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_cmsccguc1zi88pazm8aq td.tinytable_css_dzynvfkcxt00zrppuwo4, #tinytable_cmsccguc1zi88pazm8aq th.tinytable_css_dzynvfkcxt00zrppuwo4 {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_cmsccguc1zi88pazm8aq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+<tr>
+<th scope="col" align="center" colspan="1" data-row="-1" data-col="1"> </th>
+<th scope="col" align="center" colspan="2" data-row="-1" data-col="2">R</th>
+<th scope="col" align="center" colspan="2" data-row="-1" data-col="4">Rcpp</th>
+</tr>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">$n$</th>
+                <th scope="col" data-row="0" data-col="2">中央値 (ms)</th>
+                <th scope="col" data-row="0" data-col="3">メモリ</th>
+                <th scope="col" data-row="0" data-col="4">中央値 (ms)</th>
+                <th scope="col" data-row="0" data-col="5">メモリ</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">100</td>
+                  <td data-row="1" data-col="2">0.83</td>
+                  <td data-row="1" data-col="3">2.1 KB</td>
+                  <td data-row="1" data-col="4">0.0065</td>
+                  <td data-row="1" data-col="5">2.1 KB</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">1000</td>
+                  <td data-row="2" data-col="2">84.54</td>
+                  <td data-row="2" data-col="3">19.7 KB</td>
+                  <td data-row="2" data-col="4">0.5799</td>
+                  <td data-row="2" data-col="5">19.7 KB</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>同じ <span class="math inline">\(O(n^2)\)</span> のアルゴリズムでも, C++で書き直すことで <span class="math inline">\(n = 100\)</span> で約 128 倍, <span class="math inline">\(n = 1000\)</span> で約 146 倍高速になりました. 速度向上の倍率が <span class="math inline">\(n\)</span> によらずほぼ一定であることに注目してください. これは, Rcppが計算量のオーダー (<span class="math inline">\(O(n^2)\)</span>) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです. <a href="#sec-computation-theory" class="quarto-xref"><span>Section 6.1</span></a> のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです. オーダーが同じである以上, <span class="math inline">\(n\)</span> を10倍にすれば計算時間はやはり約100倍になります. アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.</p>
+<p>一方で領域計算量に注目すると, RでもRcppでも保存するのはマッチング結果と共変量だけなので <span class="math inline">\(O(n)\)</span> のまま変わりません. 完全ベクトル化が距離行列で <span class="math inline">\(O(n^2)\)</span> のメモリを消費したのとは対照的に, Rcppは自然な二重ループのまま, メモリを増やさずに速度だけを引き上げられるのです.</p>
+</section>
+</section>
+<section id="sec-parallelization" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-parallelization"><span class="header-section-number">6.4</span> 並列化</h2>
+<p>現代のCPUは複数のコアを持っており, 独立な計算を同時に走らせることで実時間を短縮できます. これを並列化 (parallelization) といいます. <code>match_nn</code> の外側ループ, つまり処置群の各個体について最も近い対照群を探す処理は, 個体ごとに独立しています. このように各反復が互いに依存しない計算は並列化と相性がよく, embarrassingly parallel と呼ばれます.</p>
+<section id="コア数の確認" class="level3">
+<h3 class="anchored" data-anchor-id="コア数の確認">コア数の確認</h3>
+<p>まず, 自分のPCが何コア使えるかを確認します. <code>future::availableCores()</code> が, 実際に利用可能なコア数を返してくれます.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>future<span class="sc">::</span><span class="fu">availableCores</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## system </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">##     16</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>コア数には物理コアと論理コアの2種類がある点にも注意しましょう. 物理コアは実際に搭載された演算ユニットの数で, 論理コアは OS から見かけ上使えるコアの数です. Intel や AMD の多くの CPU は, ハイパースレッディング (SMT, simultaneous multithreading) によって1つの物理コアを2つの論理コアに見せるため, 論理コア数は物理コア数の2倍になります. <code>parallel::detectCores()</code> が既定で返すのはこの論理コア数です. ただし論理コアは1つの物理コアを分け合っているだけなので, CPU をめいっぱい使う計算では, 論理コアの数だけワーカーを立てても物理コアの数ぶんほどの速度向上は得られないことが多いです. 一方, Apple Silicon の Mac は SMT を採用していないため物理コアと論理コアが一致し, どちらを数えても同じ値になります.</p>
+<p>以下では <code>future</code> と <code>furrr</code> を使って並列化します. <code>furrr::future_map()</code> は <code>purrr::map()</code> の並列版で, ほぼ同じ書き方のまま処理を複数コアに分散できます.</p>
+</section>
+<section id="並列化とベンチマーク" class="level3">
+<h3 class="anchored" data-anchor-id="並列化とベンチマーク">並列化とベンチマーク</h3>
+<p>逐次版には, ベクトル化の節で定義した <code>match_nn_map</code> をそのまま使います. 並列版は, <code>purrr::map_int()</code> を <code>furrr::future_map_int()</code> に置き換えるだけです.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>match_nn_future <span class="ot">&lt;-</span> <span class="cf">function</span>(x_t, x_c) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  furrr<span class="sc">::</span><span class="fu">future_map_int</span>(x_t, \(xi) <span class="fu">which.min</span>(<span class="fu">abs</span>(xi <span class="sc">-</span> x_c)))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>並列化のバックエンドは <code>future::plan()</code> で指定します. <code>multisession</code> は複数のRプロセスを立ち上げ, それぞれにタスクを割り当てます. ここでは4コアを使い, <span class="math inline">\(n = 1000\)</span> と <span class="math inline">\(n = 30000\)</span> で逐次版と比較します.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="dv">4</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bm_par <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">press</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1000</span>L, <span class="dv">30000</span>L),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    x_t <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of treated units</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    x_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of control units</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">serial =</span> <span class="fu">match_nn_map</span>(x_t, x_c),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">parallel =</span> <span class="fu">match_nn_future</span>(x_t, x_c),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(sequential)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-parallel" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-parallel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.4: 逐次処理と4コア並列処理の計算時間
+</figcaption>
+<div aria-describedby="tbl-parallel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_l1uq9r7m8i2jdufkplfi = TinyTable.createTableFunctions("tinytable_l1uq9r7m8i2jdufkplfi");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_ruzbrwf0h925utuisq53',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_ssxl6sn8wm44xkn2mwob',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_l1uq9r7m8i2jdufkplfi.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_l1uq9r7m8i2jdufkplfi td.tinytable_css_ruzbrwf0h925utuisq53, #tinytable_l1uq9r7m8i2jdufkplfi th.tinytable_css_ruzbrwf0h925utuisq53 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_l1uq9r7m8i2jdufkplfi td.tinytable_css_ssxl6sn8wm44xkn2mwob, #tinytable_l1uq9r7m8i2jdufkplfi th.tinytable_css_ssxl6sn8wm44xkn2mwob {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_l1uq9r7m8i2jdufkplfi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">$n$</th>
+                <th scope="col" data-row="0" data-col="2">逐次 (ms)</th>
+                <th scope="col" data-row="0" data-col="3">並列 (ms)</th>
+                <th scope="col" data-row="0" data-col="4">速度向上 (倍)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">1000</td>
+                  <td data-row="1" data-col="2">4</td>
+                  <td data-row="1" data-col="3">12</td>
+                  <td data-row="1" data-col="4">0.31</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">30000</td>
+                  <td data-row="2" data-col="2">3227</td>
+                  <td data-row="2" data-col="3">875</td>
+                  <td data-row="2" data-col="4">3.69</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><span class="math inline">\(n = 1000\)</span> では, 並列版の方がむしろ約 3 倍遅くなっています. 各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです. 一方 <span class="math inline">\(n = 30000\)</span> では, 並列版が約 3.7 倍速くなりました.</p>
+<p>ここで重要なのは2点です. 第一に, 並列化はタダではありません. タスクの分配と結果の集約にオーバーヘッドがかかるため, 1つ1つの計算が軽い場合や問題が小さい場合には, かえって遅くなります. 第二に, 速度向上のおおよその目安はコア数 (ここでは4) で, データの分配や集約のオーバーヘッドのぶん前後します. それでも, 各反復が独立で計算が十分重い場合には, 並列化はコア数に近い高速化をもたらす有効な手段です.</p>
+</section>
+<section id="cコードの並列化" class="level3">
+<h3 class="anchored" data-anchor-id="cコードの並列化">C++コードの並列化</h3>
+<p>Rcppで書いたコードも並列化できます. 先ほどの <code>furrr</code> は独立したRプロセスを複数立ち上げる方式でしたが, ここでは <a href="https://rcppcore.github.io/RcppParallel/"><code>RcppParallel</code></a> を使い, 1つのプロセス内で軽量なスレッドを並列に走らせます.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>並列化したい処理を <code>Worker</code> を継承した構造体の <code>operator()</code> に書き, <code>parallelFor()</code> で範囲を分割して各スレッドに割り当てます. 中身は逐次版 <code>match_nn_cpp</code> の二重ループと同じで, 処置群についての外側ループを <code>begin</code> から <code>end</code> までに区切って担当します.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppParallel.h&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> RcppParallel<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::depends(RcppParallel)]]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> MatchWorker <span class="op">:</span> <span class="kw">public</span> Worker <span class="op">{</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> RVector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> <span class="dt">x_t</span><span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> RVector<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> x_c<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  RVector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> matched<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  MatchWorker<span class="op">(</span><span class="at">const</span> NumericVector <span class="dt">x_t</span><span class="op">,</span> <span class="at">const</span> NumericVector x_c<span class="op">,</span> IntegerVector matched<span class="op">)</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> <span class="dt">x_t</span><span class="op">(</span><span class="dt">x_t</span><span class="op">),</span> x_c<span class="op">(</span>x_c<span class="op">),</span> matched<span class="op">(</span>matched<span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="kw">operator</span><span class="op">()(</span><span class="bu">std::</span>size_t begin<span class="op">,</span> <span class="bu">std::</span>size_t end<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>size_t n_c <span class="op">=</span> x_c<span class="op">.</span>length<span class="op">();</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="bu">std::</span>size_t i <span class="op">=</span> begin<span class="op">;</span> i <span class="op">&lt;</span> end<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">double</span> best_dist <span class="op">=</span> R_PosInf<span class="op">;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> best_j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> <span class="op">(</span><span class="bu">std::</span>size_t j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> n_c<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span> d <span class="op">=</span> <span class="bu">std::</span>abs<span class="op">(</span><span class="dt">x_t</span><span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> x_c<span class="op">[</span>j<span class="op">]);</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>d <span class="op">&lt;</span> best_dist<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>          best_dist <span class="op">=</span> d<span class="op">;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>          best_j <span class="op">=</span> j <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// 1-based index for R</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>      matched<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> best_j<span class="op">;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>IntegerVector match_nn_cpp_par<span class="op">(</span>NumericVector <span class="dt">x_t</span><span class="op">,</span> NumericVector x_c<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  IntegerVector matched<span class="op">(</span><span class="dt">x_t</span><span class="op">.</span>size<span class="op">());</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  MatchWorker worker<span class="op">(</span><span class="dt">x_t</span><span class="op">,</span> x_c<span class="op">,</span> matched<span class="op">);</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  parallelFor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dt">x_t</span><span class="op">.</span>size<span class="op">(),</span> worker<span class="op">);</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> matched<span class="op">;</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>RcppParallel::setThreadOptions()</code> でスレッド数を指定できます (既定では利用可能なすべてのコアを使います). <code>furrr</code> と揃えて4スレッドにし, 逐次版 <code>match_nn_cpp</code> と比較します.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RcppParallel)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setThreadOptions</span>(<span class="at">numThreads =</span> <span class="dv">4</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>bm_cpp_par <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">press</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">1000</span>L, <span class="dv">30000</span>L),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    x_t <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of treated units</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    x_c <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># covariate of control units</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">serial =</span> <span class="fu">match_nn_cpp</span>(x_t, x_c),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">parallel =</span> <span class="fu">match_nn_cpp_par</span>(x_t, x_c),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div id="tbl-rcpp-par" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rcpp-par-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.5: 逐次Rcppと4スレッド並列Rcppの計算時間
+</figcaption>
+<div aria-describedby="tbl-rcpp-par-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <!-- tinytable mathjax start -->
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <!-- tinytable mathjax end -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_klsej76vstxpotwkjqd4 = TinyTable.createTableFunctions("tinytable_klsej76vstxpotwkjqd4");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_3hdxapluvhu5cssmqu15',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_0xfwzdz8p9ij5vez5jbp',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_klsej76vstxpotwkjqd4.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_klsej76vstxpotwkjqd4 td.tinytable_css_3hdxapluvhu5cssmqu15, #tinytable_klsej76vstxpotwkjqd4 th.tinytable_css_3hdxapluvhu5cssmqu15 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_klsej76vstxpotwkjqd4 td.tinytable_css_0xfwzdz8p9ij5vez5jbp, #tinytable_klsej76vstxpotwkjqd4 th.tinytable_css_0xfwzdz8p9ij5vez5jbp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_klsej76vstxpotwkjqd4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1">$n$</th>
+                <th scope="col" data-row="0" data-col="2">逐次 (ms)</th>
+                <th scope="col" data-row="0" data-col="3">並列 (ms)</th>
+                <th scope="col" data-row="0" data-col="4">速度向上 (倍)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">1000</td>
+                  <td data-row="1" data-col="2">0.6</td>
+                  <td data-row="1" data-col="3">0.2</td>
+                  <td data-row="1" data-col="4">3</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1">30000</td>
+                  <td data-row="2" data-col="2">537.9</td>
+                  <td data-row="2" data-col="3">122.7</td>
+                  <td data-row="2" data-col="4">4.4</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>同じ4コアでも, <code>furrr</code> が <span class="math inline">\(n = 1000\)</span> で逆に遅くなったのとは対照的に, <code>RcppParallel</code> は <span class="math inline">\(n = 1000\)</span> でも約 3 倍, <span class="math inline">\(n = 30000\)</span> で約 4.4 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは <span class="math inline">\(O(n^2)\)</span> のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.</p>
+<p>なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><code>system.time()</code> でも簡易的に測定できますが, 1回の実行時間しか測れず, OSのスケジューリングなどの影響でばらつきます. <code>bench::mark()</code> は実行時間に応じて試行回数を自動で調整し, 実行時間の分布とメモリ割り当て量を返してくれるため, 関数の実行速度を正確に測定するのに適しています.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Juliaでは関数を定義する際に型を推定するため, 関数を実行時にはすでに型が確定しているため, スクリプト言語ではあるものの計算速度はC/C++やFortranに匹敵するほど速いです.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><code>purrr::map_int()</code> は各要素に関数を適用して整数ベクトルを返す関数で, <code>for</code> ループとほぼ同じ速度です. 後の並列化でこの形がそのまま活きてきます.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><code>rnorm</code> によるデータ生成は <span class="math inline">\(O(n)\)</span> なので, 二重ループ (<span class="math inline">\(O(n^2)\)</span>) と一緒に計測すると, 特に <span class="math inline">\(n\)</span> が小さいときに純粋なアルゴリズムの比較になりません. <code>bench::press()</code> はパラメータごとにブロックを評価し, 内側の <code>bench::mark()</code> の式だけを計測するため, 生成部分を計測から除外できます.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><code>parallel::detectCores()</code> でも取得できますが, こちらは論理コア数 (ハイパースレッディングを含む) を返すだけで, コンテナやHPCのジョブスケジューラによるCPU制限を無視します. <code>future::availableCores()</code> はそうした制限を反映した「本当に使える数」を返し, <code>plan()</code> の既定のワーカー数にもこの値が使われるため, 並列化ではこちらを見るのが安全です.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>macOSの標準コンパイラ (Apple clang) はOpenMPを標準では使えないため, ここでは移植性の高い <code>RcppParallel</code> を使います. なお, スレッドはメモリを共有するため, ワーカー内ではRのオブジェクトを直接触らず, スレッドセーフな <code>RVector</code> / <code>RMatrix</code> 経由でアクセスする必要があります.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lesson/quarto.html" class="pagination-link" aria-label="Quarto">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lesson/computation-data.html" class="pagination-link" aria-label="大規模データ">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

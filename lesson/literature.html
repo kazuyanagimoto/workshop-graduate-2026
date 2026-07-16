@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; 文献と引用 – Best Practices</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../lesson/targets.html" rel="next">
+<link href="../lesson/slides.html" rel="prev">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/literature.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Best Practices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#zoteroによる文献管理" id="toc-zoteroによる文献管理" class="nav-link active" data-scroll-target="#zoteroによる文献管理"><span class="header-section-number">12.1</span> Zoteroによる文献管理</a>
+  <ul class="collapse">
+  <li><a href="#bibtexとは" id="toc-bibtexとは" class="nav-link" data-scroll-target="#bibtexとは">BibTeXとは</a></li>
+  <li><a href="#zoteroによるbibtexファイルの作成" id="toc-zoteroによるbibtexファイルの作成" class="nav-link" data-scroll-target="#zoteroによるbibtexファイルの作成">ZoteroによるBibTeXファイルの作成</a></li>
+  </ul></li>
+  <li><a href="#latex-による引用" id="toc-latex-による引用" class="nav-link" data-scroll-target="#latex-による引用"><span class="header-section-number">12.2</span> LaTeX による引用</a>
+  <ul class="collapse">
+  <li><a href="#natbib-bibtex" id="toc-natbib-bibtex" class="nav-link" data-scroll-target="#natbib-bibtex"><code>natbib</code> + BibTeX</a></li>
+  <li><a href="#biblatex-biber" id="toc-biblatex-biber" class="nav-link" data-scroll-target="#biblatex-biber"><code>biblatex</code> + Biber</a></li>
+  <li><a href="#コマンドの対応" id="toc-コマンドの対応" class="nav-link" data-scroll-target="#コマンドの対応">コマンドの対応</a></li>
+  <li><a href="#どちらを使うべきか" id="toc-どちらを使うべきか" class="nav-link" data-scroll-target="#どちらを使うべきか">どちらを使うべきか</a></li>
+  </ul></li>
+  <li><a href="#quartoによる引用" id="toc-quartoによる引用" class="nav-link" data-scroll-target="#quartoによる引用"><span class="header-section-number">12.3</span> Quartoによる引用</a>
+  <ul class="collapse">
+  <li><a href="#typst-バックエンド" id="toc-typst-バックエンド" class="nav-link" data-scroll-target="#typst-バックエンド">Typst バックエンド</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="zoteroによる文献管理" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="zoteroによる文献管理"><span class="header-section-number">12.1</span> Zoteroによる文献管理</h2>
+<p>Zoteroを使うと, 文献情報 (著者, 年, タイトル, DOI など) を整理して, BibTeX形式として書き出せます.</p>
+<section id="bibtexとは" class="level3">
+<h3 class="anchored" data-anchor-id="bibtexとは">BibTeXとは</h3>
+<p>BibTeXは, 文献情報を管理するためのフォーマットの一つです. 文献ごとに <code>@article</code> や <code>@book</code> などのエントリータイプを指定し, キーと値のペアで書誌情報を記述します. 例えば, 本 1 冊 (<code>@book</code>) と論文 1 本 (<code>@article</code>) を BibTeX で表すと次のようになります. 以下ではこれを <code>references.bib</code> というファイル名で保存したものとして扱います.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>references.bib</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="references.bib"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">acemoglu2012</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>    = {Acemoglu, Daron and Robinson, James A.},</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>     = {Why Nations Fail: The Origins of Power, Prosperity, and Poverty},</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>      = {2012},</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span> = {Crown Publishers},</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">address</span>   = {New York}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">halljones1999</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>  = {Hall, Robert E. and Jones, Charles I.},</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>   = {Why Do Some Countries Produce So Much More Output Per Worker Than Others?},</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span> = {The Quarterly Journal of Economics},</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>    = {1999},</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">volume</span>  = {114},</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">number</span>  = {1},</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pages</span>   = {83--116}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>エントリータイプによって必要なフィールドが異なる点に注目してください. <code>@book</code> は <code>publisher</code> を, <code>@article</code> は <code>journal</code> や <code>volume</code> を持ちます. 元々はLaTeXで文献管理するためのフォーマットですが, Typst でもBibTeX形式のファイルを読み込んで引用に利用できます.</p>
+</section>
+<section id="zoteroによるbibtexファイルの作成" class="level3">
+<h3 class="anchored" data-anchor-id="zoteroによるbibtexファイルの作成">ZoteroによるBibTeXファイルの作成</h3>
+<p>ZoteroからBibTeXファイルを作る手順は次の通りです.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Zotero → BiBTeX
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>コレクションを好きな名前で作る</li>
+<li>Zotero に文献を入れる (ブラウザ拡張, ドラッグ&amp;ドロップ, DOIなど)</li>
+<li>メタデータを確認・修正する (著者名の表記ゆれ, 年, 雑誌名など)</li>
+<li><code>references.bib</code> にエクスポートする (BibTeX形式)</li>
+</ol>
+<p>なお, Zotero拡張の<a href="https://retorque.re/zotero-better-bibtex/">Better BibTeX</a> を導入することで, BiBTeXファイルを自動で更新するなどの便利な機能が使えるようになります.</p>
+</div>
+</div>
+<p><strong>Step 1. コレクションを作る</strong></p>
+<p><a href="../static/img/literature/1_create_collection.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../static/img/literature/1_create_collection.gif" class="img-fluid"></a></p>
+<p>Zoteroでは全ての文献は「ライブラリ」に属します. ライブラリには複数の「コレクション」を作ることができ, 基本的には文献を管理したいプロジェクト (レポート, 論文) ごとに作成します. コレクションはフォルダのようなもので, 同じ文献を複数のコレクションに入れることもできます.</p>
+<p><strong>Step 2. Zoteroに文献を入れる</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">ブラウザ拡張</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">ドラッグ &amp; ドロップ</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">DOI</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><a href="../static/img/literature/2_import_extension.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../static/img/literature/2_import_extension.gif" class="img-fluid"></a></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><a href="../static/img/literature/2_import_drag.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../static/img/literature/2_import_drag.gif" class="img-fluid"></a></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><a href="../static/img/literature/2_import_doi.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../static/img/literature/2_import_doi.gif" class="img-fluid"></a></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>メタデータの取得
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ZoteroはDOIやURLから自動で書誌情報 (メタデータ) を取得しますが, 全ての情報が正確に入るわけではありません. 基本的には DOI という論文ごとのユニークな識別子が発見できた場合, <a href="https://www.crossref.org">CrossRef</a> などのデータベースから情報を取得しています. しかし, これでも間違いがあったり, DOIがない資料があったりするため, メタデータは必ず確認して修正する必要があります.</p>
+</div>
+</div>
+<p><strong>Step 3. メタデータを確認・修正する</strong></p>
+<p><a href="../static/img/literature/3_meta_zotero.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../static/img/literature/3_meta_zotero.png" class="img-fluid"></a></p>
+<p>ドラッグ &amp; ドロップで入れた “Beauty and Labor Market” は, タイトルと著者名は正しく入っていますが, その他の情報が空欄になっています. 書誌情報のところを見ると “Zotero” となっているので, これはZoteroがDOIなどの情報を自動で取得できなかったことを示しています.</p>
+<p><a href="../static/img/literature/3_meta_doi.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../static/img/literature/3_meta_doi.png" class="img-fluid"></a></p>
+<p>上の例は, CrossRefから取得したデータでも間違いがあったケースです. 著者名に “University of Maryland, USA” という著者の所属する機関名が入ってしまっています. ここでは, RISファイルによる修正方法と, Zotero上で直接修正する方法の両方を紹介します.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">RISファイル</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">手動</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><a href="../static/img/literature/3_import_ris.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../static/img/literature/3_import_ris.gif" class="img-fluid"></a></p>
+<p>RISファイルとは, 文献情報を管理するためのファイル形式の一つです. 多くの出版社やデータベースが, 文献情報をRIS形式でエクスポートする機能を提供しています. 本来は</p>
+<ol type="1">
+<li>RISファイルをダウンロード</li>
+<li>Zoteroにインポート</li>
+</ol>
+<p>という手順で書誌情報を取り込むのですが, Zoteroのブラウザ拡張では, RISのダウンロードの際に自動でZoteroにインポートする機能もあります.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><a href="../static/img/literature/3_fix_meta.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../static/img/literature/3_fix_meta.gif" class="img-fluid"></a></p>
+<p>Zoteroの画面上で直接書誌情報を修正することもできます. しかし, 手入力はミスが起こりやすいので, 可能な限り出版社やデータベースから正しい書誌情報を取得し, 最終手段として手入力で修正するのが望ましいです.</p>
+</div>
+</div>
+</div>
+<p><strong>Step 4. <code>references.bib</code> にエクスポートする</strong></p>
+<p><a href="../static/img/literature/4_install_betterbibtex.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../static/img/literature/4_install_betterbibtex.gif" class="img-fluid"></a></p>
+<p>Better BibTeXは, Zoteroの拡張機能で, BiBTeX形式でのエクスポートを強化するものです. これを入れると, ZoteroのコレクションをBiBTeXファイルにエクスポートする際に, ファイルを自動で更新するなどの便利な機能が使えるようになります. インストールは, GitHubの<a href="https://github.com/retorquere/zotero-better-bibtex/releases/latest">リリースページ</a>からダウンロードした <code>.xpi</code> ファイルを, Zoteroの「ツール」→「プラグイン」→「Install Plugin from File」からインストールするだけです.</p>
+<p><a href="../static/img/literature/4_citekey.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="../static/img/literature/4_citekey.png" class="img-fluid"></a></p>
+<p>Better BibTeXを入れると, Zoteroの文献ごとに “citekey” という識別子が自動で割り当てられます. これが, Quartoの <code>[@...]</code> で引用するときのキーになります. 個人的には, <code>auth.lower + year</code> 形式 (例: <code>knuth1984</code>) が分かりやすいと思いますが, 好みに合わせて変更することもできます.</p>
+<p><a href="../static/img/literature/4_regenerate_citekey.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="../static/img/literature/4_regenerate_citekey.png" class="img-fluid"></a></p>
+<p>Better BibTeXが設定されていると, 自動的にcitekeyが生成されるようになりますが, 既に文献を入れてしまった後にBetter BibTeXを入れた場合は, Zoteroの「ツール」→「Better BibTeX」→「Regenerate BibTeX keys」で既存の文献にもcitekeyを割り当てることができます.</p>
+<p><a href="../static/img/literature/4_export_bib.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="../static/img/literature/4_export_bib.gif" class="img-fluid"></a></p>
+<p>コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は “Better BibTeX” を選び, ファイル名は <code>references.bib</code> として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに <code>references.bib</code> が自動で更新されるようになります.</p>
+</section>
+</section>
+<section id="latex-による引用" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="latex-による引用"><span class="header-section-number">12.2</span> LaTeX による引用</h2>
+<p><code>references.bib</code> を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>著者・年方式
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>著者・年方式とは, 引用を番号 ([1], [2] など) ではなく, 著者の姓と出版年で示す方式です. 使われ方は大きく 2 通りあります.</p>
+<ol type="1">
+<li>「Acemoglu and Robinson (2012) は …」</li>
+<li>「… が知られています (Acemoglu and Robinson 2012).」</li>
+</ol>
+<p>著者が 3 名以上のときは, 慣例として「Acemoglu et al.&nbsp;(2012)」のように筆頭著者と et al.&nbsp;に省略します.</p>
+</div>
+</div>
+<p>LaTeX で著者・年の引用を扱うには, 大きく 2 つの選択肢があります. 一つは古くから使われてきた <code>natbib</code> パッケージ (バックエンドは BibTeX), もう一つはより新しい <code>biblatex</code> パッケージ (バックエンドは Biber) です. どちらも <code>.bib</code> ファイルをそのまま読めますが, 引用コマンドの書き方が異なります.</p>
+<section id="natbib-bibtex" class="level3">
+<h3 class="anchored" data-anchor-id="natbib-bibtex"><code>natbib</code> + BibTeX</h3>
+<p><code>natbib</code> は経済学で最も広く使われている方式です. 多くの学術誌が <code>natbib</code> 用のスタイルファイル (<code>.bst</code>) を配布しており (例: AEA の <code>aea.bst</code>, Econometrica の <code>ecta.bst</code>), 投稿規定もこれを前提にしていることが多いためです. 手元で AEA スタイルを試すだけなら, TeX Live に含まれる <code>econ-bst</code> パッケージの <code>econ-aea.bst</code> が手軽です (<code>tlmgr install econ-bst</code> で入ります).</p>
+<p><code>natbib</code> の引用コマンドは, 著者名を文の主語として地の文に組み込む <code>\citet</code> (textual) と, 文末などで括弧に入れる <code>\citep</code> (parenthetical) の使い分けが基本です. このほか, 著者名だけの <code>\citeauthor</code>, 年だけの <code>\citeyear</code>, 括弧なしの <code>\citealt</code> などがあります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[round]{<span class="ex">natbib</span>}      <span class="co">% round -&gt; parentheses are ( )</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\citet</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliographystyle</span>{<span class="ex">econ-aea</span>}    <span class="co">% AEA style provided by econ-bst</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliography</span>{<span class="ex">references</span>}             <span class="co">% read references.bib</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-natbib-bibtex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-natbib-bibtex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/tex/main.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;12.1: natbib + BibTeX による引用と文献リスト"><img src="../static/tex/main.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-natbib-bibtex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: natbib + BibTeX による引用と文献リスト
+</figcaption>
+</figure>
+</div>
+<p>コンパイルした結果が <a href="#fig-natbib-bibtex" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> です. <code>\citet</code> が地の文の「Acemoglu and Robinson (2012)」に, <code>\citep</code> が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see …, chap.&nbsp;2)」になっている点に注目してください.</p>
+</section>
+<section id="biblatex-biber" class="level3">
+<h3 class="anchored" data-anchor-id="biblatex-biber"><code>biblatex</code> + Biber</h3>
+<p><code>biblatex</code> は, 引用スタイルを LaTeX マクロとして柔軟に設定できる新しい仕組みで, Unicode (日本語やアクセント付き文字) をそのまま扱えるのが大きな利点です. バックエンドの Biber が <code>.bib</code> を解釈します. 著者・年方式は組み込みの <code>style=authoryear</code> でも出せますが, 経済学では Chicago の著者・年スタイルを実装した <code>biblatex-chicago</code> パッケージ (<code>tlmgr install biblatex-chicago</code>) を使うと, AEA に近い体裁になります.</p>
+<p>ここで一点注意があります. biblatex には, natbib の <code>econ-aea.bst</code> のような AEA 専用スタイルが存在しません. もっとも近いのが Chicago の <code>biblatex-chicago</code> で, AEA のハウススタイル自体が Chicago 著者・年方式をベースにしているため見た目はほぼ揃いますが, 厳密に AEA の体裁が要求される投稿では結局 natbib + <code>.bst</code> のほうが確実です.</p>
+<p>引用コマンドは biblatex 共通で, <code>\textcite</code> が <code>natbib</code> の <code>\citet</code> に, <code>\parencite</code> が <code>\citep</code> に対応します (どちらのパッケージでも <code>natbib=true</code> オプションを足せば <code>\citet</code> / <code>\citep</code> という慣れた名前も使えます). 著者名の最大表示数 (<code>maxcitenames</code>) や同一著者・同一年の区別 (2012a, 2012b) なども細かく制御できます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[authordate, backend=biber]{<span class="ex">biblatex-chicago</span>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\addbibresource</span>{references.bib} <span class="co">% include the extension</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\textcite</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\printbibliography</span>              <span class="co">% print the reference list</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-biblatex-biber" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-biblatex-biber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/tex/biblatex.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;12.2: biblatex + Biber による引用と文献リスト"><img src="../static/tex/biblatex.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-biblatex-biber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: biblatex + Biber による引用と文献リスト
+</figcaption>
+</figure>
+</div>
+<p>コンパイルした結果が <a href="#fig-biblatex-biber" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> です (スタイルは <code>biblatex-chicago</code> の author-date). <code>natbib</code> + <code>econ-aea</code> 版とほぼ同じ出力になっているのが分かります.</p>
+</section>
+<section id="コマンドの対応" class="level3">
+<h3 class="anchored" data-anchor-id="コマンドの対応">コマンドの対応</h3>
+<p>両者の主な引用コマンドと出力の対応をまとめると次のようになります.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>やりたいこと</th>
+<th><code>natbib</code></th>
+<th><code>biblatex</code></th>
+<th>出力例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>地の文に組み込む</td>
+<td><code>\citet</code></td>
+<td><code>\textcite</code></td>
+<td>Acemoglu and Robinson (2012)</td>
+</tr>
+<tr class="even">
+<td>括弧に入れる</td>
+<td><code>\citep</code></td>
+<td><code>\parencite</code></td>
+<td>(Acemoglu and Robinson 2012)</td>
+</tr>
+<tr class="odd">
+<td>著者名だけ</td>
+<td><code>\citeauthor</code></td>
+<td><code>\citeauthor</code></td>
+<td>Acemoglu and Robinson</td>
+</tr>
+<tr class="even">
+<td>年だけ</td>
+<td><code>\citeyear</code></td>
+<td><code>\citeyear</code></td>
+<td>2012</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="どちらを使うべきか" class="level3">
+<h3 class="anchored" data-anchor-id="どちらを使うべきか">どちらを使うべきか</h3>
+<p>結論から言えば, 経済学では <code>natbib</code> + BibTeX を既定にしておくのが無難です. 多くのジャーナルが <code>natbib</code> 用の <code>.bst</code> を配布していること, そして投稿時にトラブルが起きにくいことが理由です. <code>biblatex</code> + Biber は Unicode 対応やスタイルの柔軟さで優れており, 凝った書式を組みたいときには魅力的ですが, その柔軟さが本当に必要になる場面は経済学の論文ではそう多くありません. 迷ったら <code>natbib</code> を選び, <code>biblatex</code> は明確な必要が出てから検討すれば十分です. いずれにせよ, 引用元の <code>references.bib</code> を Zotero で一元管理しておけば, あとからエンジンを乗り換えても問題は起きません.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>arXiv 投稿と <code>.bbl</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>natbib</code> を勧めるもう一つの理由が, <a href="https://arxiv.org">arXiv</a> への投稿です. arXiv は投稿された <code>.tex</code> をコンパイルしますが, bibtex も biber も実行しません. 代わりに, 一緒にアップロードした <code>.bbl</code> ファイル (文献リストを組版した中間ファイル) をそのまま使います. ここで両者に差が出ます. BibTeX が生成する <code>.bbl</code> は素朴なテキストでバージョンに依存しないため, arXiv 上でもそのまま通ります. 一方 <code>biblatex</code> の <code>.bbl</code> は biblatex/biber のバージョンと強く結合しており, arXiv 側の biblatex が手元と違うバージョンだと読めずにエラーになることがあります. どちらも <code>.bbl</code> を同梱すれば投稿自体は可能ですが, この一点でも <code>natbib</code> + BibTeX のほうが安全です.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="quartoによる引用" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="quartoによる引用"><span class="header-section-number">12.3</span> Quartoによる引用</h2>
+<p>Quarto では LaTeX のように <code>\citet</code> / <code>\citep</code> を使わず, Markdown の <code>@</code> 記法で引用します. <code>@key</code> が地の文に入る形 (<code>\citet</code> 相当), <code>[@key]</code> が括弧に入る形 (<code>\citep</code> 相当) で, ページや章は <code>[@key, chap. 2]</code> のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. <code>link-citations: true</code> を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.</p>
+<p><code>example.qmd</code> のフロントマター (設定) は次の通りです.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-section-title</span><span class="kw">:</span><span class="at"> References</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> article</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pagestyle</span><span class="kw">:</span><span class="at"> empty</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">geometry</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">paperwidth=17cm</span><span class="kw">,</span><span class="at"> paperheight=8cm</span><span class="kw">,</span><span class="at"> margin=1cm</span><span class="kw">]</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>続く本文では, <code>@</code> 記法で引用します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 argue that institutions are a fundamental cause of</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>long-run growth. This view builds on earlier work <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>and is developed in detail elsewhere <span class="co">[</span><span class="ot">see @acemoglu2012, chap. 2</span><span class="co">]</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-quarto-cite" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-cite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/quarto/example.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;12.3: Quartoによる引用と文献リスト"><img src="../static/quarto/example.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-cite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3: Quartoによる引用と文献リスト
+</figcaption>
+</figure>
+</div>
+<p>これをレンダリングした結果が <a href="#fig-quarto-cite" class="quarto-xref">Figure&nbsp;<span>12.3</span></a> です. natbib + <code>econ-aea</code> や biblatex-chicago の例とほぼ同じ出力が得られます. <code>link-citations: true</code> を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quartoのciteprocによる引用処理
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Quarto は引用の処理に <a href="https://citeproc-js.readthedocs.io/en/latest/">citeproc</a> を使っています. citeproc は, CSL (Citation Style Language) という XML 形式のスタイル定義を読み込み, 文献リストの整形や引用の組版を行う JavaScript ライブラリです. Quarto は citeproc を組み込んでおり, <code>.bib</code> ファイルを読み込んで引用を処理します. citeproc は LaTeX のように <code>.bbl</code> を生成するわけではなく, 文献リストも本文中の引用も, 組版済みの文字列として直接埋め込みます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Acemoglu and Robinson (<span class="fu">\citeproc</span>{ref-acemoglu2012}{2012}) argue that</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>institutions are a fundamental cause of long-run growth. This view</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>builds on earlier work (<span class="fu">\citeproc</span>{ref-halljones1999}{Hall and Jones</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>1999}), and is developed in detail elsewhere (see</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\citeproc</span>{ref-acemoglu2012}{Acemoglu and Robinson 2012, chap. 2}).</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\section*</span>{References}<span class="kw">\label</span>{<span class="ex">bibliography</span>}</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">CSLReferences</span>}{1}{1}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-acemoglu2012}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>Acemoglu, Daron, and James A. Robinson. 2012. <span class="fu">\emph</span>{Why Nations Fail:</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>The Origins of Power, Prosperity, and Poverty}. Crown Publishers.</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-halljones1999}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>Hall, Robert E., and Charles I. Jones. 1999. {``Why Do Some Countries</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>Produce so Much More Output Per Worker Than Others?''} <span class="fu">\emph</span>{The</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>Quarterly Journal of Economics} 114 (1): 83--116.</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">CSLReferences</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>\citet</code> や <code>\bibliography</code> といったコマンドは一切登場しません. 引用は <code>\citeproc{ref-acemoglu2012}{...}</code> の形で, 組版済みの文字列を埋め込みつつ, 対応する文献エントリ (<code>\bibitem[...]{ref-acemoglu2012}</code>) へのリンクを張っています (<code>link-citations: true</code> の効果です). 文献リストも citeproc が整形したテキストが並ぶだけです. したがって, <code>natbib</code> や <code>biblatex</code> が走る必要がなく, arXiv に投稿する際も <code>.bbl</code> を同包する必要はありません.</p>
+</div>
+</div>
+</div>
+<section id="typst-バックエンド" class="level3">
+<h3 class="anchored" data-anchor-id="typst-バックエンド">Typst バックエンド</h3>
+<p>Quarto は PDF を LaTeX ではなく <a href="https://typst.app/">Typst</a> で組むこともできます (<code>format: typst</code>). その既定スタイルは IEEE の番号引用 ([1], [2] …) なので, 経済学の著者・年方式にするには, <code>bibliographystyle</code> に Typst 組み込みのスタイル名 <code>chicago-author-date</code> を渡します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliographystyle</span><span class="kw">:</span><span class="at"> chicago-author-date</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-quarto-typst" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-typst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/quarto/example-typst.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;12.4: Typst バックエンドでの引用と文献リスト"><img src="../static/quarto/example-typst.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-typst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4: Typst バックエンドでの引用と文献リスト
+</figcaption>
+</figure>
+</div>
+<p>本文は <a href="#fig-quarto-cite" class="quarto-xref">Figure&nbsp;<span>12.3</span></a> の例と同じです. コンパイルした結果が <a href="#fig-quarto-typst" class="quarto-xref">Figure&nbsp;<span>12.4</span></a> で, LaTeX 経由の出力 (<a href="#fig-quarto-cite" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは “Bibliography” になります).</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>別のスタイルにしたいときは <code>csl</code> に CSL (Citation Style Language) ファイルを渡します (例: <code>econometrica.csl</code>, <code>the-quarterly-journal-of-economics.csl</code>; <a href="https://www.zotero.org/styles">Zotero Style Repository</a> から入手できます). なお AEA/AER 専用の CSL は公式リポジトリには無く, AEA のハウススタイル自体が Chicago 著者・年方式ベースなので, 既定のままで実質 AEA に近い体裁になります. LaTeX の <code>bibliographystyle</code> に当たる <code>bibliography-style</code> のようなキーは citeproc では使われません.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lesson/slides.html" class="pagination-link" aria-label="スライド">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">スライド</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lesson/targets.html" class="pagination-link" aria-label="targets による再現性">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

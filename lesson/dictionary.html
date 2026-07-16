@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix A — 用語解説 – Best Practices</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../references.html" rel="next">
+<link href="../lesson/ai.html" rel="prev">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/dictionary.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/dictionary.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Best Practices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-env-var" id="toc-sec-env-var" class="nav-link active" data-scroll-target="#sec-env-var"><span class="header-section-number">A.1</span> 環境変数</a>
+  <ul class="collapse">
+  <li><a href="#環境変数とは" id="toc-環境変数とは" class="nav-link" data-scroll-target="#環境変数とは">環境変数とは</a></li>
+  <li><a href="#パスを通すとは" id="toc-パスを通すとは" class="nav-link" data-scroll-target="#パスを通すとは">パスを通すとは</a></li>
+  </ul></li>
+  <li><a href="#sec-hash" id="toc-sec-hash" class="nav-link" data-scroll-target="#sec-hash"><span class="header-section-number">A.2</span> ハッシュ</a>
+  <ul class="collapse">
+  <li><a href="#ハッシュ関数" id="toc-ハッシュ関数" class="nav-link" data-scroll-target="#ハッシュ関数">ハッシュ関数</a></li>
+  <li><a href="#sec-hash-value" id="toc-sec-hash-value" class="nav-link" data-scroll-target="#sec-hash-value">ハッシュ値</a></li>
+  </ul></li>
+  <li><a href="#sec-graphics-device" id="toc-sec-graphics-device" class="nav-link" data-scroll-target="#sec-graphics-device"><span class="header-section-number">A.3</span> グラフィックデバイス</a>
+  <ul class="collapse">
+  <li><a href="#グラフィックデバイスとは" id="toc-グラフィックデバイスとは" class="nav-link" data-scroll-target="#グラフィックデバイスとは">グラフィックデバイスとは</a></li>
+  <li><a href="#デバイスとフォント" id="toc-デバイスとフォント" class="nav-link" data-scroll-target="#デバイスとフォント">デバイスとフォント</a></li>
+  <li><a href="#showtext-の仕組み" id="toc-showtext-の仕組み" class="nav-link" data-scroll-target="#showtext-の仕組み">showtext の仕組み</a></li>
+  <li><a href="#showtext-を使わない選択肢" id="toc-showtext-を使わない選択肢" class="nav-link" data-scroll-target="#showtext-を使わない選択肢">showtext を使わない選択肢</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/dictionary.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/dictionary.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Appendix A — 用語解説</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-env-var" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="sec-env-var"><span class="header-section-number">A.1</span> 環境変数</h2>
+<section id="環境変数とは" class="level3">
+<h3 class="anchored" data-anchor-id="環境変数とは">環境変数とは</h3>
+</section>
+<section id="パスを通すとは" class="level3">
+<h3 class="anchored" data-anchor-id="パスを通すとは">パスを通すとは</h3>
+</section>
+</section>
+<section id="sec-hash" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="sec-hash"><span class="header-section-number">A.2</span> ハッシュ</h2>
+<section id="ハッシュ関数" class="level3">
+<h3 class="anchored" data-anchor-id="ハッシュ関数">ハッシュ関数</h3>
+<p>ハッシュ関数 (hash function) とは, 任意の長さのデータを受け取り, 決まった長さの値へと変換する関数のことをいいます. 入力は何バイトでも構いませんが, 出力の長さは入力によらず常に一定です. この出力をハッシュ値とよびます (<a href="#sec-hash-value" class="quarto-xref"><span>Section A.2.2</span></a>).</p>
+<p>データをビット列とみなすと, ハッシュ関数は次のように書けます.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>ハッシュ関数
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ハッシュ関数とは, 任意長のビット列の集合 <span class="math inline">\(\{0,1\}^*\)</span> から, 固定長 <span class="math inline">\(n\)</span> ビットの集合 <span class="math inline">\(\{0,1\}^n\)</span> への写像 <span class="math display">\[
+h\colon \{0,1\}^* \to \{0,1\}^n
+\]</span> のことをいう.</p>
+</div>
+</div>
+<p>定義域 <span class="math inline">\(\{0,1\}^*\)</span> は長さに上限のないビット列全体からなる無限集合であるのに対し, 値域 <span class="math inline">\(\{0,1\}^n\)</span> の要素数は <span class="math inline">\(2^n\)</span> 個と有限です. たとえば Git が標準で用いる SHA-1 では <span class="math inline">\(n = 160\)</span> で, 取りうるハッシュ値は <span class="math inline">\(2^{160}\)</span> 通りあります.</p>
+<p>良いハッシュ関数, とくに Git のように改ざん検知を目的とする暗号学的ハッシュ関数 (cryptographic hash function) には, 次のような性質が求められます.</p>
+<ul>
+<li><strong>決定性</strong> (deterministic): 同じ入力に対しては必ず同じハッシュ値を返します. <span class="math inline">\(x = y\)</span> ならば <span class="math inline">\(h(x) = h(y)\)</span> です.</li>
+<li><strong>高速性</strong>: 入力 <span class="math inline">\(x\)</span> からハッシュ値 <span class="math inline">\(h(x)\)</span> を計算するのは高速です.</li>
+<li><strong>なだれ効果</strong> (avalanche effect): 入力をわずかに変えただけで, 出力が予測不能なほど大きく変化します. 1ビットの違いでも, 出力のおよそ半分のビットが入れ替わるのが理想です.</li>
+<li><strong>原像計算困難性</strong> (preimage resistance): ハッシュ値 <span class="math inline">\(y\)</span> が与えられたとき, <span class="math inline">\(h(x) = y\)</span> となる入力 <span class="math inline">\(x\)</span> を求めるのが計算量的に困難です. すなわち <span class="math inline">\(h\)</span> は事実上一方向の関数です.</li>
+<li><strong>衝突困難性</strong> (collision resistance): <span class="math inline">\(h(x) = h(y)\)</span> となる相異なる入力の組 <span class="math inline">\(x \ne y\)</span> を見つけるのが計算量的に困難です.</li>
+</ul>
+<p>ここで一点注意が必要です. 定義域が無限で値域が有限である以上, 鳩の巣原理 (pigeonhole principle) により, 異なる入力が同じハッシュ値に写る組 <span class="math inline">\(x \ne y,\ h(x) = h(y)\)</span> は必ず存在します. これを衝突 (collision) とよびます. 衝突困難性とは, 衝突が存在しないという主張ではなく, 衝突を意図的に見つけ出すのが現実的な計算時間では不可能だ, という主張です.</p>
+<p>では, 衝突はどれくらい起こりにくいのでしょうか. ハッシュ値が <span class="math inline">\(N = 2^n\)</span> 通りの値を一様に取ると仮定し, <span class="math inline">\(k\)</span> 個の入力を順番にハッシュ化していくことを考えます. これは, <span class="math inline">\(N\)</span> 個の箱に <span class="math inline">\(k\)</span> 個のボールを無作為に投げ入れたとき, どの箱にも2個以上入らない確率を求める問題, すなわち誕生日のパラドックス (birthday problem) と同じ設定です. 入力を1つずつ追加していくとき, それまでに現れたどの値ともぶつからない確率を順にかけ合わせれば, <span class="math inline">\(k\)</span> 個すべてが相異なる確率が求まります. 最初の入力はどの値でもよいので確率 <span class="math inline">\(1\)</span>, 2番目はすでに埋まった <span class="math inline">\(1\)</span> 個の値を避ければよいので確率 <span class="math inline">\(1 - 1/N\)</span>, 一般に <span class="math inline">\(i+1\)</span> 番目 (<span class="math inline">\(i = 0, 1, \dots, k-1\)</span>) はすでに埋まった <span class="math inline">\(i\)</span> 個を避ければよいので確率 <span class="math inline">\(1 - i/N\)</span> です. したがって, どの2つも衝突しない確率は次の積で書けます. <span class="math display">\[
+P(\text{衝突なし}) = \prod_{i=0}^{k-1} \left( 1 - \frac{i}{N} \right).
+\]</span></p>
+<p>このままでは扱いにくいので, <span class="math inline">\(x\)</span> が小さいときの近似 <span class="math inline">\(1 - x \approx e^{-x}\)</span> を使って積を指数の和に直します. <span class="math display">\[
+\prod_{i=0}^{k-1} \left( 1 - \frac{i}{N} \right) \approx \prod_{i=0}^{k-1} e^{-i/N} = \exp\left( -\frac{1}{N} \sum_{i=0}^{k-1} i \right) = \exp\left( -\frac{k(k-1)}{2N} \right).
+\]</span> 最後の等号では <span class="math inline">\(\sum_{i=0}^{k-1} i = \frac{k(k-1)}{2}\)</span> を用いました.</p>
+<p>衝突するかどうかが五分五分になる, すなわち <span class="math inline">\(P(\text{衝突なし}) = \frac{1}{2}\)</span> となる入力数 <span class="math inline">\(k\)</span> を求めてみましょう. 両辺の対数をとると <span class="math inline">\(\frac{k(k-1)}{2N} = \ln 2\)</span> となり, <span class="math inline">\(k\)</span> が大きいところでは <span class="math inline">\(k(k-1) \approx k^2\)</span> と近似できるので, <span class="math display">\[
+k \approx \sqrt{2 \ln 2}\, \sqrt{N} \approx 1.18 \times 2^{n/2}
+\]</span> と評価できます. つまり, ハッシュ値が <span class="math inline">\(2^n\)</span> 通りあっても, その平方根である <span class="math inline">\(2^{n/2}\)</span> 程度の個数を集めただけで衝突が起こり始めるのです. とはいえ SHA-1 (<span class="math inline">\(n = 160\)</span>) なら <span class="math inline">\(2^{80} \approx 10^{24}\)</span> 個ものデータを集めて初めてその水準に達する計算なので, ふだん Git を使っている限り, 偶然ハッシュが衝突してコミットが取り違えられる心配はまずありません.</p>
+<p>ただし, ここで「心配ない」と言えるのは, ハッシュ値が一様ランダムに散らばると仮定したときの, 偶然による衝突に限った話です. これとは別に, ハッシュ関数の内部構造の弱点を突いて, 同じハッシュ値をもつデータを意図的に作り出す攻撃があります. こうした攻撃では, 上で見積もった <span class="math inline">\(2^{n/2}\)</span> という壁を大きく下回る計算量で衝突を作れてしまうことがあり, 実際 SHA-1 はこの意味ですでに破られています<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. そのため, 悪意ある改ざんまで防ぎたい用途では SHA-1 はもはや安全とは言えず, Git でも後継の SHA-256 (<span class="math inline">\(n = 256\)</span>) への移行が進められています.</p>
+</section>
+<section id="sec-hash-value" class="level3">
+<h3 class="anchored" data-anchor-id="sec-hash-value">ハッシュ値</h3>
+<p>ハッシュ値 (hash value) とは, ハッシュ関数がデータに対して返す固定長の出力のことです. 上の定義でいえば <span class="math inline">\(h(x) \in \{0,1\}^n\)</span> にあたります. 同じデータからは必ず同じハッシュ値が得られ, 中身が少しでも違えばまったく異なるハッシュ値になるため, ハッシュ値はデータの中身そのものから決まる一意な「指紋」として使えます.</p>
+<p>実際の表示では, <span class="math inline">\(n\)</span> ビットの値をそのまま 0 と 1 の羅列で見せても扱いにくいので, 4ビットを1文字に対応させた16進数 (<code>0</code>-<code>9</code>, <code>a</code>-<code>f</code>) で書くのが一般的です. SHA-1 の 160 ビットは <span class="math inline">\(160 / 4 = 40\)</span> 桁の16進数になります. Git のコミットに割り当てられる <code>a84d0e9...</code> のような名前は, まさにこのハッシュ値で, 普段はその先頭の7文字ほどを取り出して使います.</p>
+</section>
+</section>
+<section id="sec-graphics-device" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="sec-graphics-device"><span class="header-section-number">A.3</span> グラフィックデバイス</h2>
+<section id="グラフィックデバイスとは" class="level3">
+<h3 class="anchored" data-anchor-id="グラフィックデバイスとは">グラフィックデバイスとは</h3>
+<p>R で <code>plot()</code> や <code>ggplot2</code> の図を描くとき, 点や線, 文字を実際の画面やファイルに変換しているのは, グラフィックデバイス (graphics device) とよばれる仕組みです. R 本体は「この座標に文字列を書く」「ここからここまで線を引く」といった抽象的な描画命令を発行するだけで, それをピクセルや PDF のオブジェクトとして書き出すのは各デバイスの仕事です. そのため, 同じコードでも, どのデバイスで描くかによって出力の性質が変わります.</p>
+<p>デバイスは大きく分けて2種類あります.</p>
+<ul>
+<li><strong>スクリーンデバイス</strong>: ウィンドウに直接描画するデバイスです. macOS の <code>quartz</code>, Windows の <code>windows</code>, Linux の <code>x11</code> などがあり, RStudio の Plots ペーンに表示される図もこの一種が描いています.</li>
+<li><strong>ファイルデバイス</strong>: 図をファイルとして書き出すデバイスです. ラスタ形式の <code>png()</code> や <code>jpeg()</code>, ベクタ形式の <code>pdf()</code>, <code>cairo_pdf()</code>, <code>svg()</code> のほか, パッケージが提供する <code>ragg::agg_png()</code> や <code>svglite::svglite()</code> などがあります.</li>
+</ul>
+<p>Quarto (knitr) で文書をレンダリングするときは, チャンクごとにファイルデバイスが開かれ, 図が一度ファイルとして書き出されてから文書に埋め込まれます. どのデバイスを使うかはチャンクオプション <code>dev</code> で指定でき, この資料では SVG デバイス (<code>dev: svg</code>) を使っています.</p>
+</section>
+<section id="デバイスとフォント" class="level3">
+<h3 class="anchored" data-anchor-id="デバイスとフォント">デバイスとフォント</h3>
+<p>文字の描画もデバイスの仕事であるため, 指定されたフォント名を実際のフォントファイルにどう対応づけるかは, デバイスごとに異なります. 代表的なデバイスの挙動は次のとおりです.</p>
+<ul>
+<li><strong><code>pdf()</code></strong>: R 標準の PDF デバイスですが, フォントの扱いは最も原始的です. システムのフォントを自動では参照せず, デバイスに登録された Type 1 フォント (日本語は <code>Japan1</code> などの CID フォント) しか使えません. さらにデフォルトではフォントを埋め込まず, PDF にはフォント名だけが書き込まれるため, 閲覧環境に同じフォントがなければ表示が崩れます. 埋め込むには Ghostscript 経由の <code>embedFonts()</code> が別途必要です.</li>
+<li><strong>cairo 系 (<code>cairo_pdf()</code>, <code>svg()</code> など)</strong>: fontconfig というライブラリを通じてシステムフォントを検索します. <code>cairo_pdf()</code> は使用したフォントをサブセット化して埋め込むため <code>pdf()</code> よりずっと扱いやすいですが, フォントの解決は OS 側の設定に依存します.</li>
+<li><strong>quartz (macOS)</strong>: macOS のフォント機構をそのまま使うため, Mac 上ではヒラギノなども問題なく使えますが, 他の OS では動きません.</li>
+<li><strong>ragg (<code>agg_png()</code> など)</strong>: <code>systemfonts</code> パッケージ経由でシステムフォントを解決する現代的なラスタデバイスです. インストール済みフォントの検索が最も堅牢で, ウェイトの指定などにも対応します.</li>
+</ul>
+<p>つまり, システムに目的のフォントが入っていることと, いま使っているデバイスがそのフォントを見つけて出力に反映できることは, 別の問題です. 「フォントを指定したのに豆腐化する」「手元では正しく表示されるのに, 共有した PDF では崩れる」といった現象は, ほとんどがこのデバイス側のフォント解決と埋め込みの問題に由来します.</p>
+</section>
+<section id="showtext-の仕組み" class="level3">
+<h3 class="anchored" data-anchor-id="showtext-の仕組み">showtext の仕組み</h3>
+<p><code>showtext</code> パッケージは, このデバイス依存性を根本から回避します. テキストの描画命令をフックし, <code>sysfonts</code> で登録されたフォントファイルから各文字のグリフ (字形) を取り出して, 文字をアウトライン (曲線) として描画します. 出力ファイルには文字ではなく図形が書き込まれるため, デバイスがフォントを解決できるかどうかも, 閲覧環境にフォントがあるかどうかも, 一切関係なくなります.</p>
+<p>副作用もあります. 文字が図形化されるため, PDF や SVG の中でテキストの選択・検索ができなくなり, ファイルサイズも増えます. また, ラスタデバイスでは DPI の解釈が R 本体とずれるため, <code>showtext_opts(dpi = ...)</code> を出力の解像度 (Quarto の <code>fig-dpi</code>) に合わせる必要があります.</p>
+<p><code>showtext_auto()</code> は, このフックを以後に開かれるすべてのデバイスで自動的に有効化する関数です. knitr はチャンクごとに新しいデバイスを開くため, これを最初に一度呼んでおかないと, 図ごとに <code>showtext_begin()</code> と <code>showtext_end()</code> で囲むことになります.</p>
+</section>
+<section id="showtext-を使わない選択肢" class="level3">
+<h3 class="anchored" data-anchor-id="showtext-を使わない選択肢">showtext を使わない選択肢</h3>
+<p><code>showtext</code> の対極にあるのは, 文字をアウトライン化せず, フォントを正しく解決できるデバイスを出力形式ごとに選ぶ, という方針です.</p>
+<ul>
+<li><strong>PDF</strong>: <code>cairo_pdf()</code> を使います. システムフォントを解決し, サブセット化して埋め込むため, 文字はテキストとして残り, 検索・コピーもできます. 論文に載せる図はこれが標準的な選択です.</li>
+<li><strong>SVG</strong>: <code>svglite::svglite()</code> は文字を <code>&lt;text&gt;</code> 要素のまま残します. ただし SVG 自体はフォントを埋め込まないため, 表示には閲覧環境側に同じフォントが必要です (ウェブサイトなら CSS で Web フォントを読み込んで補います). 一方, cairo ベースの <code>svg()</code> は文字をパスに変換するため, 検索できない代わりに閲覧環境へのフォント要求がなく, この点では showtext と似た性質になります.</li>
+<li><strong>ラスタ (PNG など)</strong>: <code>ragg::agg_png()</code> が <code>systemfonts</code> 経由でシステムフォントを堅牢に解決します. ラスタ画像では文字はピクセルになるので, 選択・検索の概念はそもそもありません.</li>
+</ul>
+<p>この方針の弱点は, レンダリングするマシンに目的のフォントがインストールされていることが前提になる点で, コードを共有したときの再現性の問題は残ります. <code>showtext</code> が本領を発揮するのは, まさにこの前提を外したい場合です. すなわち, <code>font_add_google()</code> でフォントのインストール自体をコードに閉じ込めたい場合や, <code>pdf()</code> を含むあらゆるデバイスで同じ見た目を保証したい場合には <code>showtext</code> を, 文字をテキストとして残すことが重要な場合には上記のデバイスを選ぶ, という使い分けになります.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-stevens2017" class="csl-entry" role="listitem">
+Stevens, Marc, Elie Bursztein, Pierre Karpman, Ange Albertini, and Yarik Markov. 2017. <span>“The <span>First Collision</span> for <span>Full SHA-1</span>.”</span> In <em>Advances in <span>Cryptology</span> – <span>CRYPTO</span> 2017</em>, edited by Jonathan Katz and Hovav Shacham, vol. 10401. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-63688-7_19">https://doi.org/10.1007/978-3-319-63688-7_19</a>.
+</div>
+<div id="ref-wang2004" class="csl-entry" role="listitem">
+Wang, Xiaoyun, Dengguo Feng, Xuejia Lai, and Hongbo Yu. 2004. <em>Collisions for <span>Hash Functions MD4</span>, <span>MD5</span>, <span>HAVAL-128</span> and <span>RIPEMD</span></em>. 2004/199.
+</div>
+<div id="ref-wang2005" class="csl-entry" role="listitem">
+Wang, Xiaoyun, Yiqun Lisa Yin, and Hongbo Yu. 2005. <span>“Finding <span>Collisions</span> in the <span>Full SHA-1</span>.”</span> In <em>Advances in <span>Cryptology</span> – <span>CRYPTO</span> 2005</em>, edited by David Hutchison, Takeo Kanade, Josef Kittler, et al., vol. 3621. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/11535218_2">https://doi.org/10.1007/11535218_2</a>.
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p> 王小云 (Wang Xiaoyun) のグループは, まず 2004 年に, SHA-1 より古い MD5 などについて, 実際に同じハッシュ値となる具体的な入力対 (数値例) を構成してみせました <span class="citation" data-cites="wang2004">(<a href="../references.html#ref-wang2004" role="doc-biblioref">Wang et al. 2004</a>)</span>. 続く 2005 年には, 同グループが SHA-1 についても, 衝突探索の計算量を総当たりの <span class="math inline">\(2^{80}\)</span> より小さい <span class="math inline">\(2^{69}\)</span> 程度まで下げられることを理論的に示します <span class="citation" data-cites="wang2005">(<a href="../references.html#ref-wang2005" role="doc-biblioref">Wang et al. 2005</a>)</span> そして 2017 年, Google と CWI のグループが, 実際に同じ SHA-1 ハッシュをもつ2つの PDF を構成してみせ, 初めて現実の SHA-1 衝突を実証しました (SHAttered と呼ばれます) <span class="citation" data-cites="stevens2017">(<a href="../references.html#ref-stevens2017" role="doc-biblioref">Stevens et al. 2017</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lesson/ai.html" class="pagination-link" aria-label="AIと研究する">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">AIと研究する</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

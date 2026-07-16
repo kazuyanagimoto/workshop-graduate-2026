@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Shell – Best Practices</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../lesson/git.html" rel="next">
+<link href="../lesson/architecture.html" rel="prev">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Best Practices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#shell-とは" id="toc-shell-とは" class="nav-link active" data-scroll-target="#shell-とは"><span class="header-section-number">3.1</span> Shell とは</a>
+  <ul class="collapse">
+  <li><a href="#unix-哲学" id="toc-unix-哲学" class="nav-link" data-scroll-target="#unix-哲学">Unix 哲学</a></li>
+  <li><a href="#shell-terminal-cli" id="toc-shell-terminal-cli" class="nav-link" data-scroll-target="#shell-terminal-cli">Shell, Terminal, CLI</a></li>
+  <li><a href="#なぜシェルを使うのか" id="toc-なぜシェルを使うのか" class="nav-link" data-scroll-target="#なぜシェルを使うのか">なぜシェルを使うのか</a></li>
+  </ul></li>
+  <li><a href="#シェルの基本" id="toc-シェルの基本" class="nav-link" data-scroll-target="#シェルの基本"><span class="header-section-number">3.2</span> シェルの基本</a>
+  <ul class="collapse">
+  <li><a href="#はじめてのシェル" id="toc-はじめてのシェル" class="nav-link" data-scroll-target="#はじめてのシェル">はじめてのシェル</a></li>
+  <li><a href="#キーボードショートカット" id="toc-キーボードショートカット" class="nav-link" data-scroll-target="#キーボードショートカット">キーボードショートカット</a></li>
+  <li><a href="#コマンドの構文" id="toc-コマンドの構文" class="nav-link" data-scroll-target="#コマンドの構文">コマンドの構文</a></li>
+  <li><a href="#ヘルプの引き方" id="toc-ヘルプの引き方" class="nav-link" data-scroll-target="#ヘルプの引き方">ヘルプの引き方</a></li>
+  </ul></li>
+  <li><a href="#ファイルとディレクトリ" id="toc-ファイルとディレクトリ" class="nav-link" data-scroll-target="#ファイルとディレクトリ"><span class="header-section-number">3.3</span> ファイルとディレクトリ</a>
+  <ul class="collapse">
+  <li><a href="#移動する" id="toc-移動する" class="nav-link" data-scroll-target="#移動する">移動する</a></li>
+  <li><a href="#一覧表示する" id="toc-一覧表示する" class="nav-link" data-scroll-target="#一覧表示する">一覧表示する</a></li>
+  <li><a href="#作る消す" id="toc-作る消す" class="nav-link" data-scroll-target="#作る消す">作る・消す</a></li>
+  <li><a href="#コピー移動名前変更" id="toc-コピー移動名前変更" class="nav-link" data-scroll-target="#コピー移動名前変更">コピー・移動・名前変更</a></li>
+  <li><a href="#ワイルドカード" id="toc-ワイルドカード" class="nav-link" data-scroll-target="#ワイルドカード">ワイルドカード</a></li>
+  <li><a href="#探す" id="toc-探す" class="nav-link" data-scroll-target="#探す">探す</a></li>
+  </ul></li>
+  <li><a href="#テキストファイルの操作" id="toc-テキストファイルの操作" class="nav-link" data-scroll-target="#テキストファイルの操作"><span class="header-section-number">3.4</span> テキストファイルの操作</a>
+  <ul class="collapse">
+  <li><a href="#数える" id="toc-数える" class="nav-link" data-scroll-target="#数える">数える</a></li>
+  <li><a href="#読む" id="toc-読む" class="nav-link" data-scroll-target="#読む">読む</a></li>
+  <li><a href="#探す-1" id="toc-探す-1" class="nav-link" data-scroll-target="#探す-1">探す</a></li>
+  <li><a href="#加工する" id="toc-加工する" class="nav-link" data-scroll-target="#加工する">加工する</a></li>
+  <li><a href="#並べ替え重複削除" id="toc-並べ替え重複削除" class="nav-link" data-scroll-target="#並べ替え重複削除">並べ替え・重複削除</a></li>
+  </ul></li>
+  <li><a href="#リダイレクトとパイプ" id="toc-リダイレクトとパイプ" class="nav-link" data-scroll-target="#リダイレクトとパイプ"><span class="header-section-number">3.5</span> リダイレクトとパイプ</a>
+  <ul class="collapse">
+  <li><a href="#リダイレクト" id="toc-リダイレクト" class="nav-link" data-scroll-target="#リダイレクト">リダイレクト</a></li>
+  <li><a href="#パイプ" id="toc-パイプ" class="nav-link" data-scroll-target="#パイプ">パイプ</a></li>
+  </ul></li>
+  <li><a href="#繰り返し-for-ループ" id="toc-繰り返し-for-ループ" class="nav-link" data-scroll-target="#繰り返し-for-ループ"><span class="header-section-number">3.6</span> 繰り返し (for ループ)</a>
+  <ul class="collapse">
+  <li><a href="#for-の構文" id="toc-for-の構文" class="nav-link" data-scroll-target="#for-の構文">for の構文</a></li>
+  <li><a href="#例-数列を表示する" id="toc-例-数列を表示する" class="nav-link" data-scroll-target="#例-数列を表示する">例: 数列を表示する</a></li>
+  <li><a href="#例-複数の-csv-を結合する" id="toc-例-複数の-csv-を結合する" class="nav-link" data-scroll-target="#例-複数の-csv-を結合する">例: 複数の CSV を結合する</a></li>
+  </ul></li>
+  <li><a href="#スクリプト" id="toc-スクリプト" class="nav-link" data-scroll-target="#スクリプト"><span class="header-section-number">3.7</span> スクリプト</a>
+  <ul class="collapse">
+  <li><a href="#hello-world" id="toc-hello-world" class="nav-link" data-scroll-target="#hello-world">Hello World</a></li>
+  <li><a href="#rscript" id="toc-rscript" class="nav-link" data-scroll-target="#rscript">Rscript</a></li>
+  </ul></li>
+  <li><a href="#sec-permission" id="toc-sec-permission" class="nav-link" data-scroll-target="#sec-permission"><span class="header-section-number">3.8</span> 権限とパーミッション</a>
+  <ul class="collapse">
+  <li><a href="#スーパーユーザー-root-と-sudo" id="toc-スーパーユーザー-root-と-sudo" class="nav-link" data-scroll-target="#スーパーユーザー-root-と-sudo">スーパーユーザー: root と sudo</a></li>
+  <li><a href="#パーミッションを変える-chmod" id="toc-パーミッションを変える-chmod" class="nav-link" data-scroll-target="#パーミッションを変える-chmod">パーミッションを変える: chmod</a></li>
+  <li><a href="#所有者を変える-chown" id="toc-所有者を変える-chown" class="nav-link" data-scroll-target="#所有者を変える-chown">所有者を変える: chown</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Shell</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="shell-とは" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="shell-とは"><span class="header-section-number">3.1</span> Shell とは</h2>
+<section id="unix-哲学" class="level3">
+<h3 class="anchored" data-anchor-id="unix-哲学">Unix 哲学</h3>
+<p>これから使うシェルという道具は, 前章の Unix の系譜 (<a href="architecture.html#sec-unix-family" class="quarto-xref"><span>Section 2.3.2</span></a>) で見た OS, <a href="https://ja.wikipedia.org/wiki/UNIX">Unix</a> とともに Bell 研究所で生まれました. macOS と Linux でコマンドや開発ツールがほぼ共通なのは同じ Unix の流れを汲むためで, これから学ぶシェルの操作もこの系譜の上にあります. その設計の背景にあるのが Unix 哲学 (Unix philosophy) です.</p>
+<blockquote class="blockquote">
+<p>Do One Thing and Do It Well</p>
+</blockquote>
+<p>小さくよく設計された部品を組み合わせ, つなぎ合わせることでより複雑で強力な処理を組み立てる, という思想です. 「ミニマルでモジュラー」とも言われるこの考え方は, シェルの設計そのものに色濃く表れています.</p>
+</section>
+<section id="shell-terminal-cli" class="level3">
+<h3 class="anchored" data-anchor-id="shell-terminal-cli">Shell, Terminal, CLI</h3>
+<p>前章で見たように, アプリケーションは OS が用意した窓口 (システムコール) を通じてその機能を利用するのでした (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 2.3</span></a>). シェルもその一つで, OS への指示を人間がキーボードから直接打ち込むためのプログラムです. シェル (shell) やターミナル (terminal) といった言葉は, いずれも <strong>コマンドラインインターフェース</strong> (CLI, command line interface) を指しています. シェルにはいくつか種類がありますが, ここでは最も標準的な <a href="https://www.gnu.org/software/bash/"><strong>Bash</strong></a> (Bourne again shell) を中心に扱います. 各OSの標準的なシェルは次のとおりです.</p>
+<ul>
+<li>Linux: Bash</li>
+<li>macOS: zsh (Bash 互換)</li>
+<li>Windows: PowerShell, cmd.exe, Git Bash</li>
+</ul>
+<p>Windowsの場合はBashと非互換なPowerShellが使われることが多いですが, この授業ではWSLを使うことを推奨しているため, Linuxと同じくBashを使ってもらいます.</p>
+</section>
+<section id="なぜシェルを使うのか" class="level3">
+<h3 class="anchored" data-anchor-id="なぜシェルを使うのか">なぜシェルを使うのか</h3>
+<p>GUI (マウス操作) で済むのに, なぜわざわざコマンドを打つのでしょうか. 理由は大きく4つあります.</p>
+<ul>
+<li><strong>力 (Power)</strong>: GUI ではそもそもできないことができます. トラブルの解決もコマンドラインでしかできないことが多いです.</li>
+<li><strong>再現性 (Reproducibility)</strong>: スクリプトに書いた操作は再現できますが, クリック操作は再現できません.</li>
+<li><strong>サーバーとの対話</strong>: リモートのサーバーやスーパーコンピューターを使うとき, シェルが唯一の窓口になることが多いです.</li>
+<li><strong>AI</strong>: AIはシェルを使ってコンピュータを操作します. シェルの仕組みがわかっていれば, AIに指示を出すときもより正確に伝えられます</li>
+</ul>
+</section>
+</section>
+<section id="シェルの基本" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="シェルの基本"><span class="header-section-number">3.2</span> シェルの基本</h2>
+<section id="はじめてのシェル" class="level3">
+<h3 class="anchored" data-anchor-id="はじめてのシェル">はじめてのシェル</h3>
+<p>まずはシェルを開いてみましょう. VSCode を使っているなら, <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd title="`" aria-hidden="true">`</kbd><span class="visually-hidden">`</span> で統合ターミナルが開きます. macOS のターミナルアプリや, WSL の Ubuntu などでも構いません.</p>
+<p>開くと, 次のようなプロンプトが表示されます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">username@hostname:~$</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>これはシェル流の「あなたは誰で, いまどこにいるのか」という表示です.</p>
+<ul>
+<li><code>username</code> は利用者の名前です (1台の計算機に複数いることもあります).</li>
+<li><code>@hostname</code> は計算機やサーバーの名前です.</li>
+<li><code>:~</code> はいまいるディレクトリです (<code>~</code> はホームディレクトリを表します).</li>
+<li><code>$</code> はコマンド入力の開始位置です. 管理者権限を持つ root のときはこれが <code>#</code> に変わります.</li>
+</ul>
+</section>
+<section id="キーボードショートカット" class="level3">
+<h3 class="anchored" data-anchor-id="キーボードショートカット">キーボードショートカット</h3>
+<p>シェルを快適に使うために, 最低限これだけは覚えておくとよいでしょう.</p>
+<ul>
+<li><kbd title="Tab" aria-hidden="true">Tab</kbd><span class="visually-hidden">Tab</span>: 入力の補完</li>
+<li><kbd title="↑" aria-hidden="true">↑</kbd><span class="visually-hidden">↑</span> / <kbd title="↓" aria-hidden="true">↓</kbd><span class="visually-hidden">↓</span>: 過去のコマンドをさかのぼる</li>
+</ul>
+</section>
+<section id="コマンドの構文" class="level3">
+<h3 class="anchored" data-anchor-id="コマンドの構文">コマンドの構文</h3>
+<p>Bash のコマンドは, すべて同じ基本構文を持っています.</p>
+<p><span class="math display">\[
+\texttt{command} \quad \texttt{option(s)} \quad \texttt{argument(s)}
+\]</span></p>
+<p>たとえば次のようになります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> ~/Documents/</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> myfile.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>コマンド</strong> (command) は何をするかを指定します.</p>
+<ul>
+<li>オプションや引数は無くても構いませんが, コマンドだけは必ず必要です.</li>
+<li><code>ls</code> はディレクトリの中身を一覧表示するコマンド, <code>sort</code> は行を並べ替えるコマンドです.</li>
+</ul>
+<p><strong>オプション</strong> (option) はフラグ (flag) とも呼ばれ, 動作を細かく指定します.</p>
+<ul>
+<li>ダッシュ <code>-</code> で始まり, たいてい1文字です.</li>
+<li><code>-l</code> は長い形式で表示する, <code>-h</code> は人間に読みやすい単位で表示する, <code>-u</code> は重複行を削除する, といった意味です.</li>
+<li>複数のオプションは1つのダッシュにまとめられます.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="at">-a</span> <span class="at">-h</span> /var/log    <span class="co"># これと</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /var/log        <span class="co"># これは同じ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>まれに, 2つのダッシュで始まる長い名前のオプションもあります.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">--group-directories-first</span> <span class="at">--human-readable</span> /var/log</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>引数</strong> (argument) は, 何に対して操作するかを指定します.</p>
+<ul>
+<li>たいていはファイルやパス, あるいはその集合です.</li>
+</ul>
+<p><strong>空白</strong></p>
+<p>シェルコマンドで大事なのは, 空白と順番によってoptionとargumentが区別されているということです. シェルはまず行を空白で区切ってトークンに分け, その先頭をコマンド名, 残りを引数とみなします. だからこそ空白の有無が意味を大きく変えます.</p>
+<p>たとえば環境変数の代入がそうです. 次の2つは, どちらも同じ <code>NAME</code>, <code>=</code>, <code>Alice</code> という語からできていますが, 空白の有無でまったく違う意味になります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">NAME</span><span class="op">=</span>Alice      <span class="co"># OK: assign "Alice" to the variable NAME</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span> = Alice    <span class="co"># error: run a command called "NAME" with args "=" and "Alice"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>NAME=Alice</code> は空白を含まない1つのトークンなので, シェルは「代入」と解釈します. 一方 <code>NAME = Alice</code> は <code>NAME</code> / <code>=</code> / <code>Alice</code> という3つのトークンに割れてしまうため, シェルは <code>NAME</code> をコマンド名だと思って実行しようとし, <code>NAME: command not found</code> になります. 代入では <code>=</code> の前後に空白を入れてはいけません.</p>
+</section>
+<section id="ヘルプの引き方" class="level3">
+<h3 class="anchored" data-anchor-id="ヘルプの引き方">ヘルプの引き方</h3>
+<p>コマンドの使い方に困ったら, <code>man</code> (manual pages) が助けになります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>スペースキーで1画面ずつ進みます.</li>
+<li><code>/パターン</code> でマニュアル内を検索でき, <code>n</code> で次の一致へ進みます.</li>
+<li><code>h</code> で <code>man</code> 自身のヘルプ, <code>q</code> で終了します.</li>
+</ul>
+<p><code>man</code> は網羅的ですが冗長なので, 最近ならAIに聞くのもよいでしょう.</p>
+</section>
+</section>
+<section id="ファイルとディレクトリ" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="ファイルとディレクトリ"><span class="header-section-number">3.3</span> ファイルとディレクトリ</h2>
+<section id="移動する" class="level3">
+<h3 class="anchored" data-anchor-id="移動する">移動する</h3>
+<p>ディレクトリ間の移動は, 次の2つが基本になります.</p>
+<ul>
+<li><code>pwd</code>: いまいるディレクトリ (working directory, current directory) を表示する.</li>
+<li><code>cd</code>: ディレクトリを移動する.</li>
+</ul>
+<p><strong>絶対パス</strong></p>
+<p>絶対パスとは, ルートディレクトリ <code>/</code> から始まるパスのことです. 例えば, この資料を作っているプロジェクトの絶対パスは, <code>/Users/kazuharu/github/workshop-graduate-2026</code> になります.</p>
+<p><strong>相対パス</strong></p>
+<p>相対パスとは, カレントディレクトリからの相対的な位置を表すパスです. たとえば, <code>examples</code> サブディレクトリに移動するには, 絶対パスでは <code>/Users/kazuharu/github/workshop-graduate-2026/examples</code> と書く必要がありますが, 相対パスなら単に <code>examples</code> と書くだけで済みます.</p>
+<p><strong>コマンド</strong></p>
+<p>絶対パスも使えますが, 相対パスと特殊記号を組み合わせる方が扱いやすいです. 特殊記号には, ホーム (<code>~</code>), カレントディレクトリ (<code>.</code>), 親ディレクトリ (<code>..</code>) があります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples    <span class="co"># examples サブディレクトリへ入る</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..       <span class="co"># 2つ上のディレクトリへ戻る</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>            <span class="co"># いまどこにいるか確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ここで一つ注意があり, ディレクトリ名に空白が含まれていると厄介です. たとえば <code>My Documents</code> というフォルダに <code>cd My Documents</code> としても動きません. Bash は空白を区切りとみなし, <code>My</code> と <code>Documents</code> を別々の引数だと解釈してしまうからです.</p>
+<ul>
+<li>対処法1: 引用符で囲む. <code>cd "My Documents"</code></li>
+<li>対処法2: 空白をエスケープする. <code>cd My\ Documents</code> (<code>Tab</code> 補完を使うと自動でこの形になります)</li>
+<li>一番よい対処法: そもそもファイル名・フォルダ名に空白を使わない</li>
+</ul>
+</section>
+<section id="一覧表示する" class="level3">
+<h3 class="anchored" data-anchor-id="一覧表示する">一覧表示する</h3>
+<p><code>ls</code> はディレクトリの中身を一覧表示します. <code>-lh</code> オプション (長い形式, 人間に読みやすい単位) を付けると, 各オブジェクトの属性まで見えます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> examples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>出力の各行は, 次のような情報を持っています.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 2 kazuharu users 4.0K Jan 12 22:12 ABC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>これを左から順に読み解くと, 次のようになります.</p>
+<ul>
+<li>先頭1文字はオブジェクトの種類です. <code>d</code> (ディレクトリ), <code>l</code> (リンク), <code>-</code> (ファイル).</li>
+<li>続く9文字はパーミッション (権限) です. 3文字ずつ, <strong>所有者</strong>, <strong>所有者のグループ</strong>, <strong>その他のユーザー</strong> の順に並びます.
+<ul>
+<li>各文字は <code>r</code> (読み取り), <code>w</code> (書き込み), <code>x</code> (実行) の可否を表します. <code>-</code> はその権限が無いことを示します.</li>
+</ul></li>
+<li>次の数字はハードリンクの数ですが, あまり重要ではありません.</li>
+<li>その後に, オブジェクトの <strong>所有者</strong> と <strong>グループ</strong> が続きます. グループの名前は環境によって変わり, この例の <code>users</code> の位置が, macOS では <code>staff</code>, Ubuntu (WSL) ではユーザー名と同名のグループになります.</li>
+<li>最後に, サイズ, 作成日時, 名前が並びます.</li>
+</ul>
+<p>パーミッションと所有者については, 後の節で詳しく説明します (<a href="#sec-permission" class="quarto-xref"><span>Section 3.8</span></a>).</p>
+</section>
+<section id="作る消す" class="level3">
+<h3 class="anchored" data-anchor-id="作る消す">作る・消す</h3>
+<p>シェルで最もよく行う作業の一つが, ファイルやディレクトリの作成です.</p>
+<ul>
+<li><code>mkdir</code>: ディレクトリを作る.</li>
+<li><code>touch</code>: 空のファイルを作る.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> testing</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> testing/test1.txt testing/test2.txt testing/test3.txt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> testing</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>消すときは次を使います.</p>
+<ul>
+<li><code>rm</code>: ファイルを消す.</li>
+<li><code>rmdir</code>: 空のディレクトリを消す.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testing/test1.txt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> testing       <span class="co"># 中身が残っているとエラーになる</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>rmdir</code> は中身の入ったディレクトリを消せません. そのときは <code>rm</code> に「再帰的」(<code>-r</code>) と「強制」(<code>-f</code>) のオプションを付けます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> testing      <span class="co"># 中身ごと消す</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>rm -rf</code> はゴミ箱を経由せず, 確認もなく即座に消します. パスを間違えると取り返しがつかないので, 実行前に必ずパスを見直してください.</p>
+</div>
+</div>
+</section>
+<section id="コピー移動名前変更" class="level3">
+<h3 class="anchored" data-anchor-id="コピー移動名前変更">コピー・移動・名前変更</h3>
+<p><code>cp</code> はコピー, <code>mv</code> は移動です.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> reps.txt copies/reps-copy.txt    <span class="co"># 新しい名前でコピー</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> meals/ copies/                <span class="co"># ディレクトリは -r で中身ごとコピー</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ABC/abc.txt examples             <span class="co"># abc.txt を examples へ移動</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>同じディレクトリ内で新しい名前を付けて「移動」すると, それは実質的にリネームになります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> reps-copy.txt reps2.txt          <span class="co"># 移動 = リネーム</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>多数のファイルをまとめてリネームしたいときは, <code>rename</code> が便利です. パターンと置換文字列, 対象ファイルを指定します. ワイルドカード (次節) と組み合わせると真価を発揮します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/monday.csv     <span class="co"># 1つのファイルの拡張子を変える</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/<span class="pp">*</span>              <span class="co"># meals 内のすべてに適用</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ワイルドカード" class="level3">
+<h3 class="anchored" data-anchor-id="ワイルドカード">ワイルドカード</h3>
+<p><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html">ワイルドカード</a> は, 他の文字の代わりになる特殊文字です. 重要なのは次の2つです.</p>
+<ul>
+<li><code>*</code>: 任意の長さの文字列にマッチします. ファイルをまとめて操作したいときに便利です.</li>
+<li><code>?</code>: 任意の1文字にマッチします. 似た名前のファイルを区別したいときに便利です.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.sh copies          <span class="co"># 拡張子が .sh のファイルをすべてコピー</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> copies/<span class="pp">*</span>             <span class="co"># copies の中身をすべて削除</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">??</span>nday.csv     <span class="co"># monday.csv, sunday.csv にマッチ</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">?</span>onday.csv     <span class="co"># monday.csv にマッチ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="探す" class="level3">
+<h3 class="anchored" data-anchor-id="探す">探す</h3>
+<p>ナビゲーション関連で最後に紹介するのが <code>find</code> です. 名前やサイズなど, さまざまな条件でファイルやディレクトリを探せます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> examples <span class="at">-iname</span> <span class="st">"monday.csv"</span>   <span class="co"># 名前で検索 (再帰的, 大文字小文字を無視)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*.txt"</span>               <span class="co"># カレント以下の .txt をすべて</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># 100 KB より大きいファイル</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="テキストファイルの操作" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="テキストファイルの操作"><span class="header-section-number">3.4</span> テキストファイルの操作</h2>
+<p>経済学を含むデータサイエンスでは, スクリプト, Markdown, CSV など, テキストファイルを扱う時間が長いです. シェルはテキスト処理がとても得意なので, ここで代表的な道具を紹介します.</p>
+<section id="数える" class="level3">
+<h3 class="anchored" data-anchor-id="数える">数える</h3>
+<p><code>wc</code> (word count) は, 行数・単語数・文字数を数えます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> sonnets.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>なお文字数は手で数えるより多くなります. <code>wc</code> は目に見えない改行文字 <code>\n</code> も1文字として数えるからです.</p>
+</section>
+<section id="読む" class="level3">
+<h3 class="anchored" data-anchor-id="読む">読む</h3>
+<p>最も単純にテキストを読むコマンドが <code>cat</code> (concatenate) です. ただし <code>cat</code> は全文を一気に表示するので, 長いファイルでは扱いにくいです.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt      <span class="co"># -n で行番号を付ける</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>長いファイルを1画面ずつ読むには <code>more</code> や <code>less</code> を使います. <code>f</code> / <code>b</code> で前後に移動し, <code>q</code> で終了します.</p>
+<p>先頭や末尾だけを覗くなら <code>head</code> と <code>tail</code> が便利です (既定では10行).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sonnets.txt       <span class="co"># 先頭3行</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 1 sonnets.txt       <span class="co"># 末尾1行</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +3024 sonnets.txt   <span class="co"># 3024行目以降をすべて</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="探す-1" class="level3">
+<h3 class="anchored" data-anchor-id="探す-1">探す</h3>
+<p>テキストの中からパターンを探すには <code>grep</code> を使います. 正規表現によるマッチングができます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Shall I compare thee"</span> sonnets.txt    <span class="co"># -n で一致した行番号も表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grep</code> はディレクトリ内の複数ファイルにまたがって探すこともできます. 関数名を含むファイルを探す, といった場面で特に役立ちます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"pasta"</span> meals    <span class="co"># -R 再帰的, -l 一致したファイル名だけを表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>-i</code> (大文字小文字を無視) など, 便利なオプションが他にもあります.</p>
+</section>
+<section id="加工する" class="level3">
+<h3 class="anchored" data-anchor-id="加工する">加工する</h3>
+<p>テキストを加工する代表的なコマンドが <code>sed</code> と <code>awk</code> です. どちらも強力で柔軟ですが (特に <code>awk</code> は CSV に強いです), ここでは基本だけ示します.</p>
+<p>ある文字列を別の文字列に置換するには, <code>sed</code> を使います.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Jack/Bill/g'</span> nursery.txt    <span class="co"># ファイル内の Jack をすべて Bill に</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>複数のコマンドをつなげれば, より複雑な処理もできます (パイプ <code>|</code> は次節で説明します). たとえば, シェイクスピアのソネットで最もよく使われる単語の上位10件は, 次のように求められます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-e</span> <span class="st">'s/\s/\n/g'</span> <span class="op">&lt;</span> sonnets.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="並べ替え重複削除" class="level3">
+<h3 class="anchored" data-anchor-id="並べ替え重複削除">並べ替え・重複削除</h3>
+<p><code>sort</code> は行を並べ替えます. <code>-u</code> (unique) を付けると, 重複行を取り除けます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> reps.txt        <span class="co"># 並べ替えつつ重複を削除</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r で逆順</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="リダイレクトとパイプ" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="リダイレクトとパイプ"><span class="header-section-number">3.5</span> リダイレクトとパイプ</h2>
+<section id="リダイレクト" class="level3">
+<h3 class="anchored" data-anchor-id="リダイレクト">リダイレクト</h3>
+<p><code>&gt;</code> を使うと, コマンドの出力を画面ではなくファイルへ送れます. これを <strong>リダイレクト</strong> (redirect) といいます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span>               <span class="co"># 画面に表示</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span> <span class="op">&gt;</span> note.txt    <span class="co"># note.txt に書き出す</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>既存のファイルに <strong>追記</strong> したいときは <code>&gt;&gt;</code> を使います. <code>&gt;</code> は上書きしてしまうので注意してください.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"second line"</span> <span class="op">&gt;&gt;</span> note.txt</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> note.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>私はこれを <code>.gitignore</code> への追記によく使います.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"*.csv"</span> <span class="op">&gt;&gt;</span> .gitignore</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="パイプ" class="level3">
+<h3 class="anchored" data-anchor-id="パイプ">パイプ</h3>
+<p><code>|</code> (パイプ) は Bash で最も強力な機能の一つです. あるコマンドの出力を, 次のコマンドの入力として渡します. 単純な操作を数珠つなぎにして, 複雑な処理を組み立てられます (まさに Unix 哲学です).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 100 <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 10    <span class="co"># 91-100行目を表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>たとえば「336行目から始まる14行のソネットだけを取り出す」なら, 次のように書けます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +336 sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 14</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>コマンド履歴の検索にも使えます. 入力したコマンドは <code>~/.bash_history</code> (zsh なら <code>~/.zsh_history</code>) に残るので, 次のようにたどれます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.bash_history <span class="kw">|</span> <span class="fu">grep</span> head</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="繰り返し-for-ループ" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="繰り返し-for-ループ"><span class="header-section-number">3.6</span> 繰り返し (for ループ)</h2>
+<section id="for-の構文" class="level3">
+<h3 class="anchored" data-anchor-id="for-の構文">for の構文</h3>
+<p>Bash の for ループは, 他の言語のものとよく似ています. 基本の構文は次のとおりです.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> LIST</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">OPERATION</span> <span class="va">$i</span>    <span class="co"># $ は変数を表す</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>セミコロン <code>;</code> を使えば1行にまとめられます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> LIST<span class="kw">;</span> <span class="cf">do</span> <span class="ex">OPERATION</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="例-数列を表示する" class="level3">
+<h3 class="anchored" data-anchor-id="例-数列を表示する">例: 数列を表示する</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 1 2 3 4 5<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>長い数列は, ブレース展開 <code>{1..n}</code> を使うと書かずに済みます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">5</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="例-複数の-csv-を結合する" class="level3">
+<h3 class="anchored" data-anchor-id="例-複数の-csv-を結合する">例: 複数の CSV を結合する</h3>
+<p>私が実際によく使う, より現実的な例を示します. <code>meals</code> ディレクトリにある曜日ごとの CSV を, 1つの <code>mealplan.csv</code> にまとめたいとします. 素朴にやると, 空のファイルを作り, 各ファイルの中身を追記していくことになります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> mealplan.csv</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="va">$(</span><span class="fu">ls</span> meals/<span class="pp">*</span>day.csv<span class="va">)</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span> <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ただしこれだと, 各ファイルの見出し行 (ヘッダー) が繰り返し入ってしまいます. そこで, 最初に1つのファイルからヘッダーだけを書き出し, 残りは2行目以降だけを追記するようにします.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> meals/monday.csv <span class="op">&gt;</span> mealplan.csv       <span class="co"># ヘッダーだけ書き出す</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="va">$(</span><span class="fu">ls</span> meals/<span class="pp">*</span>day.csv<span class="va">)</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv               <span class="co"># 2行目以降を追記</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>シェルで結合する利点は, <strong>効率の良さ</strong> にあります. すべてのファイルを同時にメモリ (RAM) に載せる必要がないので, ファイル数が多いとき, あるいは1つ1つが巨大なときに大きな差が出ます.</p>
+</section>
+</section>
+<section id="スクリプト" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="スクリプト"><span class="header-section-number">3.7</span> スクリプト</h2>
+<section id="hello-world" class="level3">
+<h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
+<p>データやファイル構造を探索するときは, シェルに対話的にコマンドを打つのが理にかなっています. 一方で, 一連のコマンドをまとめた <strong>シェルスクリプト</strong> を書いておくと, 再現可能になります. シェルスクリプトは <code>.sh</code> という拡張子で表します.</p>
+<p>たとえば次のような短いスクリプト <code>hello.sh</code> を考えます.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hello.sh</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38" data-filename="hello.sh"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"\nHello World!\n"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>1行目の <code>#!/bin/sh</code> は <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">シバン (shebang)</a> と呼ばれ, どのプログラムで実行するかを指定します.</li>
+<li>2行目が実際に実行したいコマンドです. <code>echo</code> の <code>-e</code> はエスケープ文字 (<code>\n</code> = 改行) を解釈させるオプションです.</li>
+</ul>
+<p>実行するには, ファイル名を打つか, <code>bash</code> に渡します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> hello.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rscript" class="level3">
+<h3 class="anchored" data-anchor-id="rscript">Rscript</h3>
+<p>シェルで実行できるのはシェルスクリプトだけではありません. 同じ仕組みは他のプログラムにも当てはまります. この授業で特に重要なのが, R スクリプトを実行する <code>Rscript</code> です.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"cat('Hello World, from R!')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>より典型的な使い方は, R スクリプトのファイルを丸ごと実行することです. このとき, シェルから R へ追加の引数を渡せると便利な場面が多いです. R 側では, スクリプトの冒頭で次のように引数を受け取ります.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hello.R</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41" data-filename="hello.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> args[<span class="dv">1</span>]</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> args[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>こうしておくと, シェルからファイル名の後ろに引数を並べて渡せます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> hello.R 12 9</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>引数を渡すかどうかは任意ですが, 大きなジョブをまとめて回す (バッチ処理) ようなときに役立ちます.</p>
+</section>
+</section>
+<section id="sec-permission" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-permission"><span class="header-section-number">3.8</span> 権限とパーミッション</h2>
+<section id="スーパーユーザー-root-と-sudo" class="level3">
+<h3 class="anchored" data-anchor-id="スーパーユーザー-root-と-sudo">スーパーユーザー: root と sudo</h3>
+<p>Linux には大きく2種類のユーザーがいます.</p>
+<ul>
+<li>通常のユーザー</li>
+<li>スーパーユーザー (root とも呼ばれます)</li>
+</ul>
+<p>違いは権限です. スーパーユーザーはシステムの変更, ソフトウェアのインストール, 他ユーザーのフォルダの閲覧などができます. 通常のユーザーにできることはずっと限られています. Unix 系 OS がウイルスなどの脅威に比較的強いのは, (悪意ある) ソフトウェアのインストールにスーパーユーザー権限が要るからです.</p>
+<p>では, 通常のユーザーはどうやってソフトのインストールのような操作をするのでしょうか. 答えは <code>sudo</code> (“superuser do”) を使うことです. 実行したいコマンドの前に <code>sudo</code> を付けると, 一時的にスーパーユーザーの権限で実行できます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root          <span class="co"># 失敗する</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ls /root     <span class="co"># 成功する</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>root として常時ログインすることも一応できますが, 安全装置も「元に戻す」機能も無いため, 一般に悪い習慣とされています.</p>
+</section>
+<section id="パーミッションを変える-chmod" class="level3">
+<h3 class="anchored" data-anchor-id="パーミッションを変える-chmod">パーミッションを変える: chmod</h3>
+<p>先ほど <code>ls -lh</code> で見た <code>ABC</code> ディレクトリを思い出しましょう.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 2 kazuharu users 4.0K Jan 12 22:12 ABC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>このパーミッションを変えるのが <code>chmod</code> です. パーミッションの表し方には2通りあります.</p>
+<p><strong>8進数表記</strong> (octal) は, <code>4</code> (読み取り), <code>2</code> (書き込み), <code>1</code> (実行) を足し合わせます.</p>
+<ul>
+<li>7 = 4 + 2 + 1 で, 読み・書き・実行のすべて.</li>
+<li>5 = 4 + 0 + 1 で, 読みと実行のみ (書き込み不可).</li>
+<li>所有者・グループ・その他の3者ぶんの数字を並べます.</li>
+</ul>
+<p><strong>記号表記</strong> (symbolic) は, 記号で指定します.</p>
+<ul>
+<li>対象: <code>u</code> (所有者), <code>g</code> (グループ), <code>o</code> (その他), <code>a</code> (全員)</li>
+<li>権限: <code>r</code> (読み), <code>w</code> (書き), <code>x</code> (実行)</li>
+<li>変更: <code>+</code> (追加), <code>-</code> (削除), <code>=</code> (設定)</li>
+</ul>
+<p>よく使う権限を並べると, 次のようになります.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 23%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">8進数</th>
+<th style="text-align: center;">記号</th>
+<th style="text-align: center;">パーミッション</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">777</td>
+<td style="text-align: center;">a=rwx</td>
+<td style="text-align: center;">rwxrwxrwx</td>
+<td>全員が読み・書き・実行</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">755</td>
+<td style="text-align: center;">u=rwx,go=rx</td>
+<td style="text-align: center;">rwxr-xr-x</td>
+<td>所有者は全権, 他は読みと実行</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">700</td>
+<td style="text-align: center;">u=rwx,go=</td>
+<td style="text-align: center;">rwx——</td>
+<td>所有者のみ全権</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">644</td>
+<td style="text-align: center;">u=rw,go=r</td>
+<td style="text-align: center;">rw-r–r–</td>
+<td>所有者は読み書き, 他は読みのみ</td>
+</tr>
+</tbody>
+</table>
+<p>たとえば <code>ABC</code> ディレクトリを全員フルアクセスにするなら, 次のいずれでも構いません (ディレクトリなので再帰的に <code>-R</code> を付けます).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 777 ABC        <span class="co"># 8進数表記</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> a=rwx ABC      <span class="co"># 記号表記</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="所有者を変える-chown" class="level3">
+<h3 class="anchored" data-anchor-id="所有者を変える-chown">所有者を変える: chown</h3>
+<p>所有者の変更は <code>chown</code> で行います. 8進数と記号の対応を覚える必要がない分, <code>chmod</code> より簡単です.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># ABC の所有者を alice にする</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lesson/architecture.html" class="pagination-link" aria-label="アーキテクチャ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lesson/git.html" class="pagination-link" aria-label="Git &amp; GitHub">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

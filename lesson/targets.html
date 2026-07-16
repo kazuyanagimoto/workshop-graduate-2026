@@ -124,6 +124,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Best Practices</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
     <div class="sidebar-menu-container"> 
@@ -738,7 +741,7 @@ Figure&nbsp;13.5: 関数の中身を変更しても, 依存部分だけが未実
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/kazuyanagimoto\.com\/workshop-graduate-2026");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

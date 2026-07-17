@@ -1,0 +1,30 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={+ p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]},
+hline{2}={1-4}{solid, black, 0.05em},
+hline{12}={1-4}{solid, black, 0.05em},
+hline{1}={1-4}{solid, black, 0.08em},
+hline{14}={1-4}{solid, black, 0.08em},
+column{2-4}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& (1) & (2) & (3) \\
+(Intercept) & 79.610*** & 84.080*** & 62.101*** \\
+& (2.104) & (5.782) & (9.605) \\
+Education & -0.862*** & -0.963*** & -0.980*** \\
+& (0.145) & (0.189) & (0.148) \\
+Agriculture &  & -0.066 & -0.155* \\
+&  & (0.080) & (0.068) \\
+Catholic &  &  & 0.125*** \\
+&  &  & (0.029) \\
+Infant.Mortality &  &  & 1.078** \\
+&  &  & (0.382) \\
+Num.Obs. & 47 & 47 & 47 \\
+R2 & 0.441 & 0.449 & 0.699 \\
+\end{talltblr}
+\end{table}

@@ -1,0 +1,20 @@
+---
+title: Emphasis
+format: touying-typst
+theme: metropolis
+shift-heading-level-by: 0
+---
+
+## Emphasis
+
+- Accent-colored emphasis with [alert]{.alert}
+- Custom-colored text with [fg]{.fg options='fill: rgb("#5D639E")'}
+- Highlighted background with [bg]{.bg}
+- Small, muted citation text [(Author, 2026)]{.small-cite}
+- A Beamer-style goto button: [[Appendix]{.button}](#sec-appendix)
+
+{{< appendix >}}
+
+## Appendix Slide {#sec-appendix}
+
+Details for Q&A.

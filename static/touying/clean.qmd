@@ -1,0 +1,21 @@
+---
+title: My Talk
+subtitle: A subtitle with the clean theme
+format:
+  touying-typst:
+    include-in-header:
+      text: |
+        #import "@preview/touying-quarto-clean:0.2.0": *
+    theme-typst: clean-theme
+author:
+  - name: Your Name
+    email: your.name@university.edu
+    orcid: 0000-0000-0000-0000
+    affiliations: Your University
+date: 2026-07-17
+shift-heading-level-by: 0
+---
+
+## A Clean Slide
+
+The clean theme renders structured authors with affiliation, email, and ORCID.

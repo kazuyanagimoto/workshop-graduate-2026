@@ -75,7 +75,9 @@ compile_beamer_to_svg <- function(tex) {
 }
 
 beamer_tex_paths <- function() {
-  list.files("static/beamer", pattern = "\\.tex$", full.names = TRUE)
+  # Skip underscore-prefixed files: they are \input fragments (e.g. the
+  # regression tables from highlight-tables.R), not standalone decks.
+  list.files("static/beamer", pattern = "^[^_].*\\.tex$", full.names = TRUE)
 }
 
 # --- LaTeX figures: one .tex -> one .svg ------------------------------------

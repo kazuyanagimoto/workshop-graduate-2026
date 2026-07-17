@@ -1,0 +1,27 @@
+---
+title: R Chunk
+format: touying-typst
+theme: metropolis
+shift-heading-level-by: 0
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(ggplot2)
+```
+
+## A Figure from an R Chunk
+
+```{r}
+#| label: plot-penguins
+#| fig-width: 10
+#| fig-height: 4.5
+ggplot(penguins, aes(bill_len, bill_dep, color = species, shape = species)) +
+  geom_point() +
+  theme_minimal(base_size = 20)
+```

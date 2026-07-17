@@ -1,0 +1,31 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.14)  17 JUL 2026 18:34
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**regression-plain.tex
+(./regression-plain.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-06-18>
+
+! LaTeX Error: Environment table undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \begin{table}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ 
+Here is how much of TeX's memory you used:
+ 15 strings out of 469097
+ 516 string characters out of 5457302
+ 435362 words of memory out of 5000000
+ 29136 multiletter control sequences out of 15000+600000
+ 627721 words of font info for 40 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 12i,0n,13p,65b,16s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!

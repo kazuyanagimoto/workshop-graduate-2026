@@ -17,7 +17,10 @@ quiz_right <- function(msg) {
   paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
 }
 quiz_wrong <- function(msg) {
-  paste0("<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>", msg)
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
 }
 quiz_button <- "答え合わせ"
 ```
@@ -205,7 +208,7 @@ ARM64 の Windows でも x86-64 用のソフトはエミュレーションで一
 - **Linux**: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.
 - **Windows**: MS-DOS から Windows NT へと続く, Unix とは独立した系譜です.
 
-この系譜は歴史の豆知識ではなく, そのまま実務に効いてきます. macOS と Linux は同じ Unix の流れを汲むため, コマンド, ディレクトリ構造, 開発ツールがほぼ共通です. そして研究計算の世界では Linux が標準です. 大学の計算サーバー, スーパーコンピュータ, クラウドは, ほぼすべて Linux で動いています.^[スーパーコンピュータの性能ランキング [TOP500](https://www.top500.org) に載る計算機の OS は, 2017年以降すべて Linux です.] 手元の Mac で書いた解析コードが計算サーバーでもほぼそのまま動くのは, この共通性のおかげです.
+この系譜は歴史の豆知識ではなく, そのまま実務に効いてきます. macOS と Linux は同じ Unix の流れを汲むため, コマンド, ディレクトリ構造, 開発ツールがほぼ共通です. そして研究計算の世界では Linux が標準です. 大学の計算サーバー, スーパーコンピュータ, クラウドは, ほぼすべて Linux で動いています.^[スーパーコンピュータの性能ランキング [TOP500](https://www.top500.org) に載る計算機の OS は, 2017年11月のリスト以降すべて Linux です ([Sublist Generator](https://www.top500.org/statistics/sublist/) で List と Operating System Family を指定すると確認できます).] 手元の Mac で書いた解析コードが計算サーバーでもほぼそのまま動くのは, この共通性のおかげです.
 
 ### Windows と WSL
 
@@ -234,7 +237,9 @@ check_question(
   "RAM",
   options = c("RAM", "SSD", "CPU", "GPU"),
   type = "radio",
-  right = quiz_right("実行中のプログラムとデータが置かれる作業スペースは RAM です."),
+  right = quiz_right(
+    "実行中のプログラムとデータが置かれる作業スペースは RAM です."
+  ),
   wrong = quiz_wrong("机と本棚の例えを思い出してください."),
   button_label = quiz_button,
   random_answer_order = TRUE
@@ -257,8 +262,12 @@ check_question(
     "ストレージの読み書き速度が頭打ちになったから"
   ),
   type = "radio",
-  right = quiz_right("発熱の限界から2000年代半ば以降クロック周波数の伸びは大きく鈍化し, 性能向上の主軸はコア数に移りました. 増えたコアを活かすには, プログラム側の並列化が必要です."),
-  wrong = quiz_wrong("CPU の性能を表す2つの指標と, その一方に起きた「伸びの鈍化」を思い出してください."),
+  right = quiz_right(
+    "発熱の限界から2000年代半ば以降クロック周波数の伸びは大きく鈍化し, 性能向上の主軸はコア数に移りました. 増えたコアを活かすには, プログラム側の並列化が必要です."
+  ),
+  wrong = quiz_wrong(
+    "CPU の性能を表す2つの指標と, その一方に起きた「伸びの鈍化」を思い出してください."
+  ),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
@@ -275,7 +284,9 @@ check_question(
   "4GB",
   options = c("2GB", "4GB", "16GB", "積んだ RAM の分だけ"),
   type = "radio",
-  right = quiz_right("32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."),
+  right = quiz_right(
+    "32-bit で区別できるアドレスは 2^32 通り, つまり 4GB 分です."
+  ),
   wrong = quiz_wrong("2^32 バイトは何 GB でしょうか?"),
   button_label = quiz_button,
   random_answer_order = TRUE
@@ -298,8 +309,12 @@ check_question(
     "サーバーに Rosetta 2 を入れれば動く"
   ),
   type = "radio",
-  right = quiz_right("OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. Rosetta 2 は macOS 側の仕組みなので助けになりません. サーバー上でインストールし直すかコンテナを使います."),
-  wrong = quiz_wrong("バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."),
+  right = quiz_right(
+    "OS (macOS と Linux) と ISA (ARM64 と x86-64) の両方が異なるため動きません. Rosetta 2 は macOS 側の仕組みなので助けになりません. サーバー上でインストールし直すかコンテナを使います."
+  ),
+  wrong = quiz_wrong(
+    "バイナリは「OS × アーキテクチャ」の組み合わせごとに作られるのでした."
+  ),
   button_label = quiz_button,
   random_answer_order = TRUE
 )
@@ -321,8 +336,12 @@ check_question(
     "大半の Windows デスクトップ PC"
   ),
   type = "checkbox",
-  right = quiz_right("Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."),
-  wrong = quiz_wrong("「身近な機種の OS とアーキテクチャ」の表を見直しましょう."),
+  right = quiz_right(
+    "Apple Silicon と Snapdragon は ARM64 です. Intel / AMD の CPU は x86-64 です."
+  ),
+  wrong = quiz_wrong(
+    "「身近な機種の OS とアーキテクチャ」の表を見直しましょう."
+  ),
   button_label = quiz_button
 )
 ```
@@ -338,7 +357,9 @@ check_question(
   "Windows",
   options = c("macOS", "Ubuntu", "iOS", "Windows"),
   type = "radio",
-  right = quiz_right("Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."),
+  right = quiz_right(
+    "Windows は MS-DOS から続く独立した系譜です. だからこそ WSL が必要になります."
+  ),
   wrong = quiz_wrong("OS の系譜の図を見直しましょう."),
   button_label = quiz_button,
   random_answer_order = TRUE

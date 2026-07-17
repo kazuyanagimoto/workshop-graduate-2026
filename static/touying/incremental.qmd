@@ -1,0 +1,22 @@
+---
+title: Incremental Content
+format: touying-typst
+theme: metropolis
+shift-heading-level-by: 0
+---
+
+## Pause
+
+First this shows.
+
+. . .
+
+Then this appears.
+
+## Incremental List
+
+::: {.incremental}
+- First
+- Then second
+- Then third
+:::

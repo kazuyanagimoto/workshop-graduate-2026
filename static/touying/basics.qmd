@@ -1,0 +1,17 @@
+---
+title: My Talk
+subtitle: A subtitle
+format: touying-typst
+theme: metropolis
+author:
+  - name: Your Name
+    affiliations: Your Institution
+date: 2026-07-17
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed

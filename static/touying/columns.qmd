@@ -1,0 +1,22 @@
+---
+title: Columns
+format: touying-typst
+theme: metropolis
+shift-heading-level-by: 0
+---
+
+## Two Columns
+
+:::: {.columns}
+::: {.column width="45%"}
+Left column:
+
+- A bullet point
+- Another bullet point
+:::
+::: {.column width="55%"}
+Right column, a little wider:
+
+$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
+:::
+::::

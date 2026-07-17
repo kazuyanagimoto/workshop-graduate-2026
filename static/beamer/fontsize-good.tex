@@ -1,0 +1,23 @@
+% Fix: the polished figure from the visualization chapter with
+% theme_minimal(base_size = 24), pasted at the same size as in
+% fontsize-bad.tex. The text stays readable on the slide.
+\documentclass[aspectratio=169]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{accent}{HTML}{107895}
+\usecolortheme[named=accent]{structure}
+
+\begin{document}
+
+\begin{frame}{Results}
+  \begin{center}
+    \includegraphics[width=0.72\textwidth]{plot-fontsize-polished.pdf}
+  \end{center}
+  \begin{itemize}
+    \item Adelie is the largest group, with roughly twice as many penguins as Chinstrap
+    \item Within every species, the numbers of males and females are almost identical
+  \end{itemize}
+\end{frame}
+
+\end{document}

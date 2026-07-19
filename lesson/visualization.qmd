@@ -384,7 +384,23 @@ vector_plot <- glyph_fill +
     inherit.aes = FALSE
   )
 
-bitmap
+# Draw the bitmap into the glyph bounding box so both panels share the same
+# coordinates and stay aligned (also keeps both outputs ggplots; a bare magick
+# print next to a ggplot makes knitr mismatch fig-subcap order)
+bitmap_plot <- ggplot(fill_df, aes(x, y)) +
+  geom_blank() +
+  annotation_raster(
+    as.raster(bitmap),
+    xmin = min(fill_df$x),
+    xmax = max(fill_df$x),
+    ymin = min(fill_df$y),
+    ymax = max(fill_df$y),
+    interpolate = FALSE
+  ) +
+  coord_equal() +
+  theme_void()
+
+bitmap_plot
 vector_plot
 ```
 
@@ -525,4 +541,280 @@ XML 形式のテキストなので, エディタやプログラムで後から�
 | 写真 | JPEG |
 
 統計グラフはほとんどの場合ベクター形式が適しています.
-ただし, データ点が非常に多い散布図など, ベクターだとファイルが重くなりすぎる場合は, 高解像度の PNG を使う方が実用的なこともあります.
+
+### ベクター形式が不向きな場合
+
+ただし, 例外もあります.
+ベクター形式は図形を1つずつ記録するので, 描く図形の数が増えるほどファイルが大きくなります.
+例として, ggplot2 に付属する `diamonds` データセットで, 53,940個のダイヤモンドの重さ (carat) と価格の散布図を描いてみます.
+
+```{r}
+#| label: fig-too-many-points
+#| echo: false
+#| fig-cap: "A scatter plot of 53,940 diamonds, embedded as a PNG."
+#| fig-format: png
+#| fig-dpi: 200
+#| fig-width: 5
+#| fig-height: 3
+scatter_many <- diamonds |>
+  ggplot(aes(x = carat, y = price)) +
+  geom_point(alpha = 0.1, size = 0.5, color = "#0072B2") +
+  labs(x = "Carat", y = "Price (USD)") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+
+scatter_many
+```
+
+この図を PNG, SVG, PDF のそれぞれで保存して, ファイルサイズを比べてみましょう.
+
+```{r}
+#| label: tbl-scatter-size
+#| echo: false
+#| tbl-cap: "点の多い散布図を各形式で保存したときのファイルサイズ"
+# Use the same cairo svg device as the book's figures (svglite is not installed)
+save_plot_size_mb <- function(ext, dpi = 200, device = NULL) {
+  tmp <- tempfile(fileext = ext)
+  ggsave(tmp, scatter_many, device = device, width = 5, height = 3, dpi = dpi)
+  file.size(tmp) / 1024^2
+}
+
+png_pixels <- function(dpi) sprintf("%d x %d", 5 * dpi, 3 * dpi)
+
+tibble::tibble(
+  Format = c("PNG (200 dpi)", "PNG (600 dpi)", "SVG", "PDF"),
+  Pixels = c(png_pixels(200), png_pixels(600), "-", "-"),
+  `Size (MB)` = round(
+    c(
+      save_plot_size_mb(".png", dpi = 200),
+      save_plot_size_mb(".png", dpi = 600),
+      save_plot_size_mb(".svg", device = grDevices::svg),
+      save_plot_size_mb(".pdf")
+    ),
+    2
+  )
+) |>
+  tt()
+```
+
+ラスター形式のファイルサイズは解像度に依存するので, 表には PNG のピクセル数を併記し, Web 表示には十分な 200 dpi と, 印刷にも耐える 600 dpi (このページに埋め込んだ図と同じ解像度) の2通りを載せています. SVG は約5.4万個の点を XML のテキストとして1つずつ記録するため, 高解像度の PNG と比べても1桁以上大きくなります. PDF は圧縮が効くため, ファイルサイズだけなら高解像度の PNG と同程度です. しかしベクター形式の問題はサイズだけではありません. ブラウザや PDF ビューアは表示のたびにすべての点を描画し直すので, 表示やスクロールが目に見えて遅くなります. 一方 PNG のファイルサイズと描画の重さは解像度だけで決まり, 点の数には依存しません. このように, データ点が非常に多い散布図では, ベクター形式ではなく高解像度の PNG を使う方が実用的です.
+
+## 演習問題
+
+```{r}
+#| label: setup-quiz
+#| include: false
+library(checkdown)
+
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
+}
+quiz_button <- "答え合わせ"
+```
+
+前半は画像形式に関するクイズ, 後半は実際にグラフを改善する演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).
+
+### 画像形式
+
+::: {.quiz}
+ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
+
+```{r}
+#| label: quiz-vector-smooth
+#| echo: false
+check_question(
+  "画像を図形の数式として記録しているから",
+  options = c(
+    "画像を図形の数式として記録しているから",
+    "ピクセルの数が十分に多いから",
+    "可逆圧縮を使っているから",
+    "ファイルサイズが大きいから"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです."
+  ),
+  wrong = quiz_wrong(
+    "「1992」の図を思い出してください. ベクターは何を記録していましたか?"
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+次のうち, ベクター形式をすべて選んでください.
+
+```{r}
+#| label: quiz-vector-formats
+#| echo: false
+check_question(
+  c("SVG", "PDF"),
+  options = c("SVG", "PDF", "PNG", "JPEG"),
+  type = "checkbox",
+  right = quiz_right(
+    "SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です."
+  ),
+  wrong = quiz_wrong("「画像形式の選び方」の表を見直しましょう."),
+  button_label = quiz_button
+)
+```
+:::
+
+::: {.quiz}
+LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
+
+```{r}
+#| label: quiz-paper-format
+#| echo: false
+check_question(
+  "PDF",
+  options = c("PDF", "SVG", "PNG", "JPEG"),
+  type = "radio",
+  right = quiz_right(
+    "印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません."
+  ),
+  wrong = quiz_wrong(
+    "統計グラフにはベクター形式が適しています. そのうち LaTeX がそのまま扱えるのはどちらでしたか?"
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
+
+```{r}
+#| label: quiz-jpeg-artifact
+#| echo: false
+check_question(
+  "グラフを JPEG で保存したことによる非可逆圧縮のノイズ",
+  options = c(
+    "グラフを JPEG で保存したことによる非可逆圧縮のノイズ",
+    "グラフを PNG で保存したことによる圧縮の劣化",
+    "SVG の解像度が足りていない",
+    "フォントが埋め込まれていない"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません."
+  ),
+  wrong = quiz_wrong(
+    "輪郭のまわりのにじみは, どの圧縮方式に典型的な現象でしたか?"
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
+
+```{r}
+#| label: quiz-many-points
+#| echo: false
+check_question(
+  "高解像度の PNG で保存する",
+  options = c(
+    "高解像度の PNG で保存する",
+    "JPEG (quality 5) で保存する",
+    "PDF に切り替える",
+    "SVG の解像度を下げる"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます."
+  ),
+  wrong = quiz_wrong(
+    "ベクター形式のファイルサイズは何に応じて増えるでしょうか. また, SVG に「解像度」はあるでしょうか."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+### 見た目の悪いグラフの改善
+
+次のグラフは, ggplot2 に付属する `mpg` データセット (アメリカで販売された自動車の燃費データ) を使って, メーカーごとの車種数を駆動方式 (`drv`: 4 = 四輪駆動, f = 前輪駆動, r = 後輪駆動) 別に数えたものです. お世辞にも見やすいとは言えません.
+
+```{r}
+#| label: plot-ugly
+mpg |>
+  ggplot(aes(x = manufacturer, fill = drv)) +
+  geom_bar() +
+  scale_fill_manual(values = c("red", "green", "blue")) +
+  labs(
+    x = "manufacturer of the car",
+    y = "count of the cars",
+    title = "Bar Chart of Manufacturer and drv"
+  )
+```
+
+:::: {.quiz}
+このグラフの問題点をできるだけ多く列挙してください (少なくとも4つは見つかるはずです). そのうえで, この章で学んだテクニックを使って改善したグラフを描いてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+問題点の例:
+
+- x 軸のメーカー名が重なっていて読めない
+- 赤と緑の組み合わせは色覚異常の人に区別しづらい
+- グレーの背景やグリッド線など, データを表さないインクが多い
+- 軸ラベルが自明な内容の繰り返しで, タイトルも図の内容を説明しているだけ
+- 凡例の 4 / f / r が何を意味するのか, 図だけを見てもわからない
+- メーカーがアルファベット順に並んでいて, 数の大小が比較しづらい
+
+これらを踏まえた改善例です.
+
+```{r}
+#| label: plot-ugly-improved
+#| fig-height: 4.5
+mpg |>
+  mutate(drv = recode(drv, "4" = "4WD", "f" = "Front", "r" = "Rear")) |>
+  ggplot(aes(
+    x = forcats::fct_rev(forcats::fct_infreq(manufacturer)),
+    fill = drv
+  )) +
+  geom_bar() +
+  coord_flip() +
+  see::scale_fill_okabeito() +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Number of Car Models by Manufacturer and Drive Type"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.85, 0.2),
+    plot.title.position = "plot"
+  )
+```
+
+- 棒を横向きにしてメーカー名を水平に読めるようにし, `forcats::fct_infreq()` で車種数の多い順に並べ替えました
+- 色覚異常の人にも区別しやすい Okabe-Ito パレットに変えました
+- `theme_minimal()` と `theme()` で背景と不要なグリッド線を消しました
+- 自明な軸ラベルを消し, 凡例をパネル内の空白に移しました
+- `drv` の値を 4WD / Front / Rear と読めるラベルに変えました
+
+これはあくまで一例です. 大事なのは, まず図の主張を決め, その主張が最短時間で伝わるかどうかを基準にデザインを判断することです.
+:::
+::::

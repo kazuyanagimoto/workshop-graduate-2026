@@ -27,15 +27,15 @@
   // They hand data to each other without copying.
   arr((3.0, 2.0), (4.0, 2.0), lc: cmain)
   arr((4.0, 2.0), (3.0, 2.0), lc: cmain)
-  content((mid, 2.62), text(size: 10pt, weight: "bold", fill: cmain, "コピーなしで受け渡し"))
+  content((mid, 2.62), text(size: 10pt, weight: "bold", fill: cmain, "zero-copy exchange"))
 
   // --- Memory: Arrow ---------------------------------------------------------
-  box(mid, 0.2, 7.0, 1.0, "Arrow", "列指向・メモリ (RAM) — エンジン共通の形式", cnode)
+  box(mid, 0.2, 7.0, 1.0, "Arrow", "columnar, in memory (RAM)", cnode)
   line((2.0, 1.55), (2.0, 0.7), stroke: 1pt + cgray)
   line((5.0, 1.55), (5.0, 0.7), stroke: 1pt + cgray)
 
   // --- Disk: Parquet ---------------------------------------------------------
-  box(mid, -1.6, 7.0, 1.0, "Parquet", "列指向・ディスク", cbox)
+  box(mid, -1.6, 7.0, 1.0, "Parquet", "columnar, on disk", cbox)
   arr((mid, -1.1), (mid, -0.3), lc: cdev)
-  content((mid + 0.6, -0.7), anchor: "west", text(size: 10pt, fill: cdev, "読み込み"))
+  content((mid + 0.6, -0.7), anchor: "west", text(size: 10pt, fill: cdev, "read"))
 })

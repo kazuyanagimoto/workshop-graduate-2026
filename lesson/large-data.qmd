@@ -271,3 +271,230 @@ DuckDB は必要に応じて中間結果をディスクに退避できるため,
 特に理由がなければ, parquet形式でデータを保存しておくのが高速化かつ軽量という点でおすすめです. Polars はPythonで扱う分にはとても便利ですが, CRANから外されたりなどRでのサポートが不安定であるため, `duckplyr` を使うのが便利かなと思っています.
 
 なお, R のオブジェクトをそのまま高速に保存したいだけなら, [`fst`](https://www.fstpackage.org/) や [`qs2`](https://github.com/qsbase/qs2) も便利です. これらは `saveRDS()` の高速な代替として使えます.
+
+## 演習問題
+
+```{r}
+#| label: setup-quiz
+#| include: false
+library(checkdown)
+
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
+}
+quiz_button <- "答え合わせ"
+```
+
+前半は保存形式とエンジンの考え方に関するクイズ, 後半はタクシーデータを使った演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.
+
+### クイズ
+
+::: {.quiz}
+19列のテーブルから3列だけを使って集計するとき, Parquet + Polars が CSV + dplyr より圧倒的に速い最大の理由はどれでしょうか.
+
+```{r}
+#| label: quiz-columnar
+#| echo: false
+check_question(
+  "列指向なので, 必要な3列だけをディスクから読める",
+  options = c(
+    "列指向なので, 必要な3列だけをディスクから読める",
+    "Parquet はテキストではなくバイナリだから",
+    "CSV は型情報を持たないから",
+    "Polars が R より新しい言語で書かれているから"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです."
+  ),
+  wrong = quiz_wrong(
+    "行指向と列指向の図を思い出しましょう. ディスクから読む量が根本的に違います."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+```{.r}
+q <- scan_parquet_polars(path) |>
+  filter(fare_amount > 0) |>
+  summarise(tip = mean(tip_amount), .by = payment_type)
+```
+を実行した直後, どういう状態になっているでしょうか.
+
+```{r}
+#| label: quiz-lazy
+#| echo: false
+check_question(
+  "データはまだ読まれておらず, 何をするかの計画だけができている",
+  options = c(
+    "データはまだ読まれておらず, 何をするかの計画だけができている",
+    "filter までは実行済みで, summarise だけが残っている",
+    "ファイル全体がメモリに読み込まれている",
+    "集計結果まですでに計算されている"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます."
+  ),
+  wrong = quiz_wrong(
+    "遅延評価では「書いた時点」と「実行される時点」が分離されているのでした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+Parquet と Arrow の関係として正しいものはどれでしょうか.
+
+```{r}
+#| label: quiz-parquet-arrow
+#| echo: false
+check_question(
+  "Parquet はディスク上の保存形式で, Arrow はメモリ上の形式",
+  options = c(
+    "Parquet はディスク上の保存形式で, Arrow はメモリ上の形式",
+    "Arrow がディスク上の保存形式で, Parquet はメモリ上の形式",
+    "どちらもディスク上の保存形式で, 圧縮率が違うだけ",
+    "Arrow は Parquet の新しいバージョン"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy)."
+  ),
+  wrong = quiz_wrong(
+    "2つが担う層 (ディスクかメモリか) が違うのでした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+RAM が 8GB のノート PC で, 20GB のデータを集計する必要があります. どうするのがよいでしょうか.
+
+```{r}
+#| label: quiz-larger-than-memory
+#| echo: false
+check_question(
+  "Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する",
+  options = c(
+    "Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する",
+    "データ全体をメモリに読み込んでから, 不要な列を落とす",
+    "RAM を超えるデータは, メモリを増設しない限り R では扱えない",
+    "乱数で 1% に間引いてから dplyr で集計する"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "クエリに必要な列と行だけを読めば, RAM を超えるデータも扱えます. DuckDB は中間結果をディスクに退避できるので larger-than-memory でも動きます. 全体を読み込む方法は読み込みの時点で破綻し, 間引きは推定精度を不必要に捨てます."
+  ),
+  wrong = quiz_wrong(
+    "「必要な分だけ読む」という, この章の出発点を思い出しましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+### 時間帯別のチップ率と explain
+
+:::: {.quiz}
+タクシーデータで, カード払い (`payment_type == 1`) かつ `fare_amount > 0` の乗車について, 乗車時刻の時間帯 (0〜23時) ごとのチップ率を調べます. 時間帯は `lubridate::hour(tpep_pickup_datetime)` で, チップ率は `sum(tip_amount) / sum(fare_amount)` で計算します.
+
+1. `tidypolars` で, 時間帯ごとの乗車数とチップ率を求める遅延クエリ `q` を書いてください (まだ実行はしません).
+1. `explain(q)` で最適化された計画を確認してください. 19列のうち何列が読まれるでしょうか. また `filter` の条件はどこで処理されているでしょうか.
+1. クエリを実行し, 時間帯ごとのチップ率を折れ線グラフに描いてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{r}
+#| label: exercise-polars-query
+q <- scan_parquet_polars(path_pq) |>
+  filter(payment_type == 1, fare_amount > 0) |>
+  mutate(hour = lubridate::hour(tpep_pickup_datetime)) |>
+  summarise(
+    n = n(),
+    tip_rate = sum(tip_amount) / sum(fare_amount),
+    .by = hour
+  ) |>
+  arrange(hour)
+
+cat(explain(q))
+```
+
+`PROJECT 4/19 COLUMNS` とあるとおり, 読まれるのは `payment_type`, `fare_amount`, `tpep_pickup_datetime`, `tip_amount` の4列だけです. また `SELECTION` に `filter` の2条件が入っており, 述語の押し下げによって Parquet の読み込み段階で行が絞り込まれることがわかります.
+
+```{r}
+#| label: fig-exercise-tip-hour
+#| fig-cap: "Tip rate by pickup hour (credit-card trips, January 2024)"
+library(ggplot2)
+
+q |>
+  as_tibble() |>
+  ggplot(aes(hour, tip_rate)) +
+  geom_line(linewidth = 0.8, color = "#0072B2") +
+  geom_point(size = 1.8, color = "#0072B2") +
+  scale_x_continuous(breaks = seq(0, 23, 3)) +
+  scale_y_continuous(labels = scales::label_percent()) +
+  labs(x = "Pickup hour", y = "Tip rate (tips / fares)") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
+300万行のデータですが, 遅延評価と列の刈り込みのおかげで, 集計は一瞬で終わります.
+:::
+::::
+
+### 自分のクエリでベンチマーク
+
+:::: {.quiz}
+`fare_amount > 0` の乗車について, 乗客数 (`passenger_count`) ごとの乗車数と平均運賃を求めるクエリを考えます.
+
+1. この集計を, (a) `nanoparquet::read_parquet()` で全体を読み込んでから `dplyr` で処理する方法と, (b) `duckplyr` の遅延クエリの2通りで書いてください.
+1. `bench::mark()` (`iterations = 5`, `check = FALSE`, `filter_gc = FALSE`) で計算時間とメモリ割り当てを比較してください.
+1. メモリ割り当ての差がなぜ生まれるのか, 説明してください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{r}
+#| label: exercise-duck-benchmark
+bm_ex <- bench::mark(
+  dplyr = nanoparquet::read_parquet(path_pq) |>
+    filter(fare_amount > 0) |>
+    summarise(n = n(), fare = mean(fare_amount), .by = passenger_count) |>
+    arrange(passenger_count),
+  duckplyr = read_parquet_duckdb(path_pq) |>
+    filter(fare_amount > 0) |>
+    summarise(n = n(), fare = mean(fare_amount), .by = passenger_count) |>
+    arrange(passenger_count) |>
+    collect(),
+  check = FALSE,
+  iterations = 5,
+  filter_gc = FALSE
+)
+
+bm_ex |>
+  mutate(expression = as.character(expression)) |>
+  select(expression, median, mem_alloc)
+```
+
+このクエリで本当に必要なのは `passenger_count` と `fare_amount` の2列だけです. `duckplyr` は遅延評価によってそれを見抜き, 2列分しか読みません. さらに集計は DuckDB 側 (C++) のメモリで行われ, R に渡ってくるのは数行の集計結果だけなので, R のメモリ割り当てはごくわずかです. 一方 `dplyr` 版は, まず19列すべてを R のメモリに読み込み, filter の中間結果も R オブジェクトとして抱えるため, 数百 MB を確保します. データが RAM を超えると, この差は「遅い」ではなく「動かない」に変わります.
+:::
+::::

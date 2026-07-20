@@ -7,6 +7,4 @@ draft: true
 
 ### Zotero MCP Server
 
-## データ分析と可視化
-
 ## ワークフロー

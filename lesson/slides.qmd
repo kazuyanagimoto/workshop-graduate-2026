@@ -349,3 +349,95 @@ Details shown only if someone asks.
 ```
 
 Appendix のスライドが何十枚あっても「本編は25枚中25枚で終わり」と見えるので, 聞いている人に余計なプレッシャーを与えずに済みます.
+
+## 演習問題
+
+この章の演習は, `quarto-touying-typst` で実際に小さなスライドを組み立てます. 空のフォルダを1つ作り, そこを作業場所にしてください. Quarto と Typst が使える環境が必要です. 解答例は畳んであるので, まず自分で書いてみましょう.
+
+:::: {.quiz}
+テンプレートからスライドの雛形を作り, タイトルスライドを自分のものに差し替えます. サンプル付きのテンプレートを取得し, YAML でタイトル・サブタイトル・著者・テーマを設定して, PDF にレンダリングしてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+作業フォルダで, サンプルスライド付きのテンプレートを取得します.
+
+```sh
+quarto use template kazuyanagimoto/quarto-touying-typst
+```
+
+生成された `.qmd` のフロントマターを, 次のように書き換えます.
+
+```yaml
+---
+title: My First Touying Slides
+subtitle: 研究の進捗報告
+format: touying-typst
+theme: metropolis
+author:
+  - name: 山田太郎
+    affiliations: 神戸大学
+date: today
+---
+```
+
+`quarto render` で PDF を作るか, `quarto preview` で保存のたびに更新されるプレビューを開きます. タイトルスライドは YAML の `title` などから自動で作られ, `theme:` の一行を変えれば見た目が切り替わります.
+:::
+::::
+
+:::: {.quiz}
+中身のスライドを追加します. セクションの区切りスライドを1枚, 箇条書きを1項目ずつ表示する通常スライドを1枚, 図の代わりに数式を右に置いた2段組みスライドを1枚, それぞれ作ってください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```markdown
+# 背景
+
+## リサーチクエスチョン
+
+::: {.incremental}
+- 何を知りたいのか
+- なぜ重要なのか
+- どう答えるのか
+:::
+
+## 推定モデル
+
+:::: {.columns}
+::: {.column width="45%"}
+記号の定義:
+
+- $x_i$: 処置
+- $y_i$: アウトカム
+:::
+::: {.column width="55%"}
+$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
+:::
+::::
+```
+
+`#` はセクションの区切りスライド, `##` は通常のスライドになります. `.incremental` で囲むと箇条書きが1項目ずつ現れ, `.columns` と `.column` で2段組みになります.
+:::
+::::
+
+:::: {.quiz}
+最後に, R チャンクで作った図のスライドを足します. アンチパターンの節で見た文字サイズの問題を思い出し, スライドで読める大きさに調整してください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+````markdown
+```{{r}}
+#| fig-width: 10
+#| fig-height: 4.5
+library(ggplot2)
+ggplot(penguins, aes(bill_len, bill_dep, color = species)) +
+  geom_point() +
+  theme_minimal(base_size = 20)
+```
+````
+
+スライドでは R チャンクがそのまま実行され, ソースコードは既定で非表示になります. 重要なのは `theme_minimal(base_size = 20)` です. ggplot2 の既定の 11pt のままスライドに縮小して貼ると, 軸や凡例の文字がほとんど読めません. 図中の文字がスライドの本文と同じくらいに見えるよう `base_size` を大きくしておくと, 会場の後ろの席からも読めます. さらに, インラインコードで推定結果の数値を本文に埋め込んでおけば, 発表直前にデータが更新されても, レンダリングし直すだけで図も数値も追随します.
+:::
+::::

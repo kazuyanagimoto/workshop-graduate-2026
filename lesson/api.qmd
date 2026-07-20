@@ -261,3 +261,284 @@ income |>
 また, API には単位時間あたりのリクエスト数の上限 (rate limit) があります. `httr2` で多数のリクエストを送るときは, `req_throttle()` で送信間隔をあけ, `req_retry()` で失敗時の再試行を設定しておくと安全です.
 
 :::
+
+## 演習問題
+
+```{r}
+#| label: setup-quiz
+#| include: false
+library(checkdown)
+
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
+}
+quiz_button <- "答え合わせ"
+```
+
+前半は HTTP と API の基本に関するクイズ, 後半は実際に API からデータを取得する演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.
+
+### クイズ
+
+::: {.quiz}
+API にリクエストを送ったら, ステータスコード 404 が返ってきました. 何が起きたと考えられるでしょうか.
+
+```{r}
+#| label: quiz-status-code
+#| echo: false
+check_question(
+  "URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない",
+  options = c(
+    "URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない",
+    "リクエストは成功し, データが返ってきている",
+    "サーバーの内部でエラーが起きた",
+    "リクエストの回数制限 (rate limit) に達した"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です."
+  ),
+  wrong = quiz_wrong(
+    "404 Not Found の意味を思い出しましょう. 成功を表すのは 200 でした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+URL `https://api.worldbank.org/v2/country/JPN/indicator/NY.GDP.PCAP.CD?format=json&date=2000:2022` について, 正しい説明はどれでしょうか.
+
+```{r}
+#| label: quiz-endpoint
+#| echo: false
+check_question(
+  "? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)",
+  options = c(
+    "? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)",
+    "country/JPN の部分がクエリパラメータ",
+    "format=json はエンドポイントの一部",
+    "全体がエンドポイントで, 絞り込み条件は HTTP ヘッダで送る"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&... の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました."
+  ),
+  wrong = quiz_wrong(
+    "エンドポイントとクエリパラメータの役割分担を見直しましょう. 区切りは ? です."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+共同研究のリポジトリで e-Stat の API キーを使います. 正しい管理方法はどれでしょうか.
+
+```{r}
+#| label: quiz-api-key
+#| echo: false
+check_question(
+  ".gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む",
+  options = c(
+    ".gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む",
+    "スクリプトに直書きするが, リポジトリを private にしておく",
+    "コードに直書きしておき, GitHub に push する直前に消す",
+    "誤ってコミットしても, ファイルを削除してコミットし直せば安全"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です."
+  ),
+  wrong = quiz_wrong(
+    "コードにキーを書いた時点で, コミット履歴やコピーから流出するリスクが生まれるのでした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+ある API から数千件のデータをループで取得する予定です. どう実装するのがよいでしょうか.
+
+```{r}
+#| label: quiz-rate-limit
+#| echo: false
+check_question(
+  "req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する",
+  options = c(
+    "req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する",
+    "req_perform() を for ループで回すだけでよく, 特別な設定は不要",
+    "並列化して, できるだけ短時間で送り終える",
+    "resp_status() が 200 になるまで, 待ち時間なしで同じリクエストを送り続ける"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "API には rate limit があるので, req_throttle() で頻度を抑え, req_retry() で一時的な失敗に備えるのが作法です. 制限を無視して送り続けると 429 が返り, 最悪の場合キーがブロックされます."
+  ),
+  wrong = quiz_wrong(
+    "rate limit を超えないようにリクエストの頻度を制御する仕組みがありました. 章末の callout を見直しましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+### 世界銀行 API で失業率を取得する
+
+:::: {.quiz}
+世界銀行 API から, 日本・アメリカ・韓国の失業率 (ILO 推計, 労働力人口に占める割合) を2000〜2022年について取得します. 指標コードは `SL.UEM.TOTL.ZS` です.
+
+1. 本文と同じように, `httr2` でリクエストを組み立てて JSON を受け取り, `country`, `year`, `unemp` の3列の tibble に整えてください.
+1. 同じデータを `WDI` パッケージでも取得してください.
+1. どちらかのデータを使って, 3か国の失業率の推移を線グラフに描いてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+まず `httr2` で手組みする方法です. エンドポイントのパスとクエリパラメータは1人あたり GDP のときと同じで, 指標コードだけが変わります.
+
+```{r}
+#| label: exercise-wb-httr2
+resp_unemp <- request("https://api.worldbank.org/v2") |>
+  req_url_path_append(
+    "country",
+    "JPN;USA;KOR",
+    "indicator",
+    "SL.UEM.TOTL.ZS"
+  ) |>
+  req_url_query(format = "json", date = "2000:2022", per_page = 20000) |>
+  req_perform()
+
+records_unemp <- resp_body_json(resp_unemp)[[2]]
+
+unemp <- tibble(
+  country = map_chr(records_unemp, \(r) r$country$value),
+  year = as.integer(map_chr(records_unemp, \(r) r$date)),
+  unemp = map_dbl(records_unemp, \(r) r$value %||% NA_real_)
+)
+
+unemp |> arrange(country, year)
+```
+
+`WDI` なら同じデータが1つの関数呼び出しで手に入ります.
+
+```{r}
+#| label: exercise-wb-wdi
+unemp_wdi <- WDI(
+  country = c("JP", "US", "KR"),
+  indicator = c(unemp = "SL.UEM.TOTL.ZS"),
+  start = 2000,
+  end = 2022
+)
+
+unemp_wdi |> as_tibble() |> arrange(country, year)
+```
+
+可視化は本文の GDP の図とほぼ同じです.
+
+```{r}
+#| label: fig-exercise-unemp
+#| fig-cap: "Unemployment rate, 2000-2022 (World Bank, ILO estimate)"
+ggplot(unemp, aes(year, unemp, color = country, linetype = country)) +
+  geom_line(linewidth = 0.8) +
+  scale_color_discrete(name = NULL) +
+  scale_linetype_discrete(name = NULL) +
+  labs(x = NULL, y = "Unemployment rate (%)") +
+  theme_minimal() +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.85, 0.85)
+  )
+```
+:::
+::::
+
+### e-Stat で物価の地域差を調べる
+
+:::: {.quiz}
+本文で使った統計表 `0000010103` (都道府県データ 経済基盤) には, 物価に関する指標も含まれています. e-Stat の API キーを設定したうえで, 次の手順で「消費者物価地域差指数 (総合)」を調べてください. この指数は各年の全国平均を 100 として, その年の各都道府県の物価水準を相対値で表します.
+
+1. `estat_getMetaInfo()` で統計表のメタデータを取得し, `cat01` の一覧から「消費者物価地域差指数（総合）」のコードを探してください.
+1. 東京・愛知・大阪・沖縄の4都府県について指数を取得し, `area`, `year`, `cpi` の3列の tibble に整えてください.
+1. 4都府県の指数の推移を線グラフに描いてください. 全国平均を表す 100 の水平線も引くと読みやすくなります.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+メタデータの `cat01` が指標コードの一覧です. 名前で絞り込みます.
+
+```{r}
+#| label: exercise-estat-meta
+meta <- estat_getMetaInfo(appId = app_id, statsDataId = "0000010103")
+
+meta$cat01 |>
+  filter(str_detect(`@name`, "消費者物価地域差指数")) |>
+  select(`@code`, `@name`)
+```
+
+似た名前の系列が複数見つかりますが, これは基準や調査の切り替えでコードが分かれているためです. ここでは2013年度以降をカバーする現行の系列 `C5701` を使います.
+
+```{r}
+#| label: exercise-estat-fetch
+cpi_raw <- estat_getStatsData(
+  appId = app_id,
+  statsDataId = "0000010103",
+  cdCat01 = "C5701",
+  cdArea = c("13000", "23000", "27000", "47000")
+)
+
+cpi <- cpi_raw |>
+  transmute(
+    area = area_code,
+    year = as.integer(str_sub(time_code, 1, 4)),
+    cpi = value
+  )
+
+cpi
+```
+
+本文と同じように県名を英語ラベルに直して描きます.
+
+```{r}
+#| label: fig-exercise-cpi
+#| fig-cap: "Regional CPI level index, all items (national average = 100)"
+cpi |>
+  mutate(
+    prefecture = recode(
+      area,
+      "13000" = "Tokyo",
+      "23000" = "Aichi",
+      "27000" = "Osaka",
+      "47000" = "Okinawa"
+    )
+  ) |>
+  ggplot(aes(year, cpi, color = prefecture, linetype = prefecture)) +
+  geom_hline(yintercept = 100, linewidth = 0.3, color = "gray60") +
+  geom_line(linewidth = 0.8) +
+  scale_x_continuous(breaks = seq(2013, 2023, 2)) +
+  scale_color_discrete(name = NULL) +
+  scale_linetype_discrete(name = NULL) +
+  labs(x = NULL, y = "CPI level index (national avg. = 100)") +
+  theme_minimal() +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.85, 0.85)
+  )
+```
+
+図を読むときには注意が必要です. この指数は特定の基準年を 100 とするのではなく, 各年の全国平均を 100 とする空間方向の指数なので, 線の上下の動きはインフレ率ではありません. 例えば沖縄が2020年度以降 100 に近づいているのは, 物価が上がったことそのものではなく, 全国平均との相対的な物価差が縮まったことを意味します. 都道府県の間の物価水準の比較は各年ででき, 時間方向の物価上昇率を見たいときは通常の消費者物価指数を使います.
+:::
+::::

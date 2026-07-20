@@ -353,3 +353,272 @@ ggiplot(est_did) +
 ```
 
 処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています [@sun2021]. その場合は `i()` の代わりに `sunab()` を使うと, @sun2021 の補正済み推定量がそのまま得られ, `ggiplot()` で同じように描けます.
+
+## 演習問題
+
+```{r}
+#| label: setup-quiz
+#| include: false
+library(checkdown)
+
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
+}
+quiz_button <- "答え合わせ"
+```
+
+前半は理解度チェックのクイズ, 後半は回帰表とイベントスタディを実際に作る演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.
+
+### クイズ
+
+::: {.quiz}
+`lm(y ~ x1 * x2, data = df)` の formula は, どのように展開されるでしょうか.
+
+```{r}
+#| label: quiz-formula-expand
+#| echo: false
+check_question(
+  "x1 + x2 + x1:x2 (主効果と交互作用の両方)",
+  options = c(
+    "x1 + x2 + x1:x2 (主効果と交互作用の両方)",
+    "x1:x2 (交互作用のみ)",
+    "x1 + x2 (主効果のみ)",
+    "I(x1 * x2) と同じ (積を1つの変数として扱う)"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います."
+  ),
+  wrong = quiz_wrong(
+    "formula の中では * と : は特別な意味を持つのでした. 本文の formula 記法の箇条書きを見直しましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+`feols(body_mass ~ flipper_len | species + island, data = penguins)` が既定で返す標準誤差はどれでしょうか.
+
+```{r}
+#| label: quiz-fixest-default-se
+#| echo: false
+check_question(
+  "species でクラスタリングした標準誤差",
+  options = c(
+    "species でクラスタリングした標準誤差",
+    "通常の (iid を仮定した) 標準誤差",
+    "不均一分散に頑健な標準誤差",
+    "species と island の two-way クラスター標準誤差"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です."
+  ),
+  wrong = quiz_wrong(
+    "fixest の既定は lm() とは異なります. 「出力の標準誤差に注目してください」の段落を見直しましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+賃金 (wage) を経験年数 (exper) と教育年数 (educ) に回帰します. educ は内生なので距離 (dist) を操作変数とし, 地域固定効果 (region) を入れます. `fixest` での正しい書き方はどれでしょうか.
+
+```{r}
+#| label: quiz-iv-syntax
+#| echo: false
+check_question(
+  "feols(wage ~ exper | region | educ ~ dist, data = df)",
+  options = c(
+    "feols(wage ~ exper | region | educ ~ dist, data = df)",
+    "feols(wage ~ exper | educ ~ dist | region, data = df)",
+    "feols(wage ~ exper + educ ~ dist | region, data = df)",
+    "feols(wage ~ exper + dist | region, data = df)"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません."
+  ),
+  wrong = quiz_wrong(
+    "縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 でした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+処置の開始時期が個体によって異なる (staggered) DiD では, `i()` を使った素朴な二元配置固定効果 (TWFE) のイベントスタディが誤った推定値を与えることがあります. 主な理由はどれでしょうか.
+
+```{r}
+#| label: quiz-staggered
+#| echo: false
+check_question(
+  "処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから",
+  options = c(
+    "処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから",
+    "処置群のサンプルサイズが時点ごとに変わるから",
+    "固定効果の数が多すぎて自由度が足りなくなるから",
+    "クラスター標準誤差が正しく計算できなくなるから"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "TWFE は処置済みの個体も比較対象として使うため, 処置効果が時間やコホートで異なると推定量に負の重みがかかりえます. sunab() は Sun and Abraham (2021) の補正済み推定量を計算します. 下の演習で実際に確かめます."
+  ),
+  wrong = quiz_wrong(
+    "問題は標準誤差でも自由度でもなく, 「誰と誰を比べているか」にあります."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+### 回帰表の仕上げ
+
+次の4本のモデルを推定します. このコードはそのまま使ってください.
+
+```{r}
+#| label: exercise-models
+models_ex <- list(
+  "(1)" = feols(body_mass ~ flipper_len + bill_len, data = penguins),
+  "(2)" = feols(
+    body_mass ~ flipper_len + bill_len,
+    data = penguins,
+    vcov = "hetero"
+  ),
+  "(3)" = feols(
+    body_mass ~ flipper_len + bill_len | species,
+    data = penguins
+  ),
+  "(4)" = feols(
+    body_mass ~ flipper_len + bill_len | species + island,
+    data = penguins,
+    vcov = ~island
+  )
+)
+```
+
+この4本を `modelsummary` で整形して, 下の @tbl-exercise-target とまったく同じ表を作るのが課題です.
+
+```{r}
+#| label: tbl-exercise-target
+#| echo: false
+#| tbl-cap: 完成形の回帰表 (これを再現する)
+cm_ex <- c(
+  "flipper_len" = "Flipper length (mm)",
+  "bill_len" = "Bill length (mm)"
+)
+
+gm_ex <- tibble(
+  raw = c("FE: species", "FE: island", "nobs", "r2.within"),
+  clean = c("FE: Species", "FE: Island", "Observations", "Within R2"),
+  fmt = c(0, 0, 0, 3)
+)
+
+modelsummary(
+  models_ex,
+  output = "tinytable",
+  stars = c("*" = .1, "**" = .05, "***" = .01),
+  coef_map = cm_ex,
+  gof_map = gm_ex
+) |>
+  group_tt(j = list("Pooled OLS" = 2:3, "Fixed effects" = 4:5))
+```
+
+:::: {.quiz}
+@tbl-exercise-target を再現してください. 使うのは `coef_map`, `gof_map`, `stars` の3つの引数と, `tinytable` の `group_tt()` です. モデル (1) と (2), (3) と (4) は係数が同じで, 括弧内の標準誤差だけが違う点にも注目してください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{r}
+#| label: exercise-table-solution
+cm_ex <- c(
+  "flipper_len" = "Flipper length (mm)",
+  "bill_len" = "Bill length (mm)"
+)
+
+gm_ex <- tibble(
+  raw = c("FE: species", "FE: island", "nobs", "r2.within"),
+  clean = c("FE: Species", "FE: Island", "Observations", "Within R2"),
+  fmt = c(0, 0, 0, 3)
+)
+
+modelsummary(
+  models_ex,
+  output = "tinytable",
+  stars = c("*" = .1, "**" = .05, "***" = .01),
+  coef_map = cm_ex,
+  gof_map = gm_ex
+) |>
+  group_tt(j = list("Pooled OLS" = 2:3, "Fixed effects" = 4:5))
+```
+
+ポイントは次の3つです.
+
+- `coef_map` に挙げた係数だけが, 指定した順序と名前で表示されます (切片は自動的に落ちます).
+- `gof_map` は `raw`, `clean`, `fmt` の3列の tibble で渡します. ここに挙げた統計量だけが表示されるので, 既定の雑然とした統計量の一覧がすっきりします.
+- `modelsummary` の返り値は `tinytable` オブジェクトなので, `group_tt()` をパイプで継ぎ足すだけで column spanner を付けられます.
+:::
+::::
+
+### Staggered な処置のイベントスタディ
+
+本文のイベントスタディで使った `base_did` は, 処置群の全員が同じ時点で処置を受けるデータでした. `fixest` にはもう一つ, 処置の開始年が個体ごとに異なる staggered 設定の擬似データ `base_stagg` が同梱されています. 処置を一度も受けない個体は `year_treated = 10000` (したがって `time_to_treatment = -1000`) と記録されています.
+
+```{r}
+#| label: exercise-stagg-data
+data(base_stagg, package = "fixest")
+head(base_stagg)
+```
+
+:::: {.quiz}
+`base_stagg` を使って, 次の2通りのイベントスタディを推定し, `ggiplot()` で1つの図に重ねて比較してください. 固定効果はどちらも `id` と `year` です.
+
+1. 素朴な TWFE: `i(time_to_treatment, ...)` を使う. 基準時点の `-1` に加えて, never-treated 群を表す `-1000` も `ref` に入れる必要があります.
+1. @sun2021 の補正: `sunab(year_treated, year)` を使う.
+
+2つの推定値はどこで乖離するでしょうか. クイズで問うた「素朴な TWFE の問題」が図にどう表れているか確認してください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{r}
+#| label: fig-exercise-es-solution
+#| fig-cap: "Event-study estimates on staggered data: naive TWFE versus Sun and Abraham (2021)."
+es_twfe <- feols(
+  y ~ x1 + i(time_to_treatment, ref = c(-1, -1000)) | id + year,
+  data = base_stagg
+)
+
+es_sunab <- feols(
+  y ~ x1 + sunab(year_treated, year) | id + year,
+  data = base_stagg
+)
+
+ggiplot(
+  list("TWFE" = es_twfe, "Sun & Abraham (2021)" = es_sunab),
+  ref.line = -1
+) +
+  labs(x = "Time to treatment", y = "Estimate and 95% CI", title = NULL) +
+  theme_minimal()
+```
+
+`base_stagg` は処置効果がコホートと経過時間で異なるように作られているため, 素朴な TWFE の係数は Sun and Abraham の補正済み推定量から乖離します. 処置前の係数もゼロから外れており, 実際にはプレトレンドがないのに「あるように見える」推定値が出てしまう点に注目してください. `sunab()` は書き方を1行変えるだけなので, staggered な設定ではまずこちらを既定にするのが安全です.
+:::
+::::

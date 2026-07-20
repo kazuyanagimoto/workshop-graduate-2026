@@ -522,3 +522,104 @@ cat("```md\n円周率はおよそ `r round(pi, 2)` です.\n```\n")
 ::::
 
 数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは `r nrow(penguins)` である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.
+
+## 演習問題
+
+この章の演習は, 実際に小さな `.qmd` を書きながら進めます. VSCode か RStudio で `report.qmd` という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで `quarto render report.qmd` を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.
+
+:::: {.quiz}
+まず, ドキュメントの骨組みを作ります. `report.qmd` の冒頭に, タイトル・著者名・日付を持つ YAML フロントマターを書き, 出力形式を HTML に指定してください. その下に見出しを1つと短い段落を1つ書いて, HTML にレンダリングしてみましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```md
+---
+title: ペンギンデータの分析
+author: 山田太郎
+date: 2026-04-01
+format: html
+---
+
+## はじめに
+
+このレポートでは, Palmer ペンギンのデータを分析します.
+```
+
+`format: html` の代わりに `format: pdf` や `format: typst` と書けば, 同じ原稿から別の形式で出力できます. タイトルはフロントマターの `title` が `h1` として扱われるので, 本文の見出しは `##` (h2) から始めます.
+:::
+::::
+
+:::: {.quiz}
+次に, Markdown 記法の練習です. さきほどの段落に続けて, 太字とリンクを1つずつ含む文と, 3項目の箇条書きを書いてください. 箇条書きのうち1項目は, さらにネストした子項目を持たせてみましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```md
+このデータは [Palmer Station LTER](https://pallter.marine.rutgers.edu/) が収集した **実データ** です. 次の3種のペンギンが含まれます.
+
+- Adelie
+- Chinstrap
+- Gentoo
+    - Biscoe 島でのみ観測されます
+```
+
+太字は `**...**`, リンクは `[表示テキスト](URL)` でした. ネストは, 親項目の下でスペース4つ分字下げします.
+:::
+::::
+
+:::: {.quiz}
+コードが生成する図に, 番号を振って相互参照します. `penguins` データで, くちばしの長さとひれの長さの散布図を描くコードチャンクを追加してください. チャンクラベルを `fig-` で始め, `fig-cap` でキャプションを付け, 本文から `@` で参照しましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+チャンクの冒頭 (`setup` チャンクなど) で `library(dplyr)` と `library(ggplot2)` を読み込んでおきます. そのうえで, 次のチャンクを本文に追加します.
+
+```{{r}}
+#| label: fig-penguins-scatter
+#| fig-cap: "くちばしの長さとひれの長さの関係"
+penguins |>
+  ggplot(aes(x = flipper_len, y = bill_len, color = species)) +
+  geom_point() +
+  labs(
+    x = "Flipper length (mm)",
+    y = "Bill length (mm)",
+    color = "Species"
+  )
+```
+
+本文には「散布図を `@fig-penguins-scatter` に示します.」のように書きます. ラベルを `fig-` で始めるのが約束で, 図番号は出現順に自動で振られます.
+:::
+::::
+
+:::: {.quiz}
+最後に, 集計表とインラインコードを足します. 種ごとの平均値を `tinytable` で表にし, `tbl-` ラベルを付けて相互参照してください. さらに, サンプルサイズを本文にインラインコードで埋め込みましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+`setup` チャンクで `library(tinytable)` も読み込んでおき, 次のチャンクを追加します.
+
+```{{r}}
+#| label: tbl-penguins-mean
+#| tbl-cap: "種ごとの平均値"
+penguins |>
+  summarize(
+    bill_len = mean(bill_len, na.rm = TRUE),
+    flipper_len = mean(flipper_len, na.rm = TRUE),
+    .by = species
+  ) |>
+  tt()
+```
+
+本文には次のように書きます.
+
+```md
+種ごとの平均値を @tbl-penguins-mean にまとめました. 分析に使ったサンプルサイズは `r nrow(penguins)` です.
+```
+
+表番号も `tbl-` ラベルで自動管理され, インラインコードの `` `r nrow(penguins)` `` はレンダリング時に実際の行数へ置き換わります. データを差し替えても, 図・表・本文中の数値がすべて自動で追従します.
+:::
+::::

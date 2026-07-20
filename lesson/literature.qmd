@@ -321,3 +321,44 @@ format: typst
 ![Typst バックエンドでの引用と文献リスト](/static/quarto/example-typst.svg){#fig-quarto-typst}
 
 本文は @fig-quarto-cite の例と同じです. コンパイルした結果が @fig-quarto-typst で, LaTeX 経由の出力 (@fig-quarto-cite) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは "Bibliography" になります).
+
+## 演習問題
+
+この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の `@` 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.
+
+:::: {.quiz}
+Zotero を使って, 自分の研究に関係する論文を1本, 書誌情報つきで取り込んでみましょう.
+
+1. Zotero で練習用のコレクションを1つ作ります.
+1. 論文を1本選び, その DOI から Zotero に取り込みます (ブラウザ拡張か, 「新規アイテムを DOI から追加」を使います).
+1. 取り込んだ文献のメタデータ (著者名の表記, 年, 雑誌名など) を確認し, 誤りがあれば出版社や CrossRef の情報で修正します.
+1. Better BibTeX が割り当てた citekey (例: `auth.lower + year`) を確認します. これが Quarto で引用するときのキーになります.
+1. コレクションを右クリックし, 「Better BibTeX」形式で `references.bib` としてエクスポートします. 練習用の Quarto プロジェクトのルートに置き, 「Keep updated」も試してみましょう.
+::::
+
+:::: {.quiz}
+取り込んだ文献を, Quarto から引用します. ここでは確実に手順を追えるよう, この章の冒頭に載せた2件のエントリ (`acemoglu2012` と `halljones1999`) を使います. これらを含む `references.bib` を用意し, 地の文に組み込む引用と括弧に入れる引用を1つずつ書いて, 文献リストつきでレンダリングしてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+`example.qmd` のフロントマターで, `references.bib` を読み込むように指定します.
+
+```yaml
+---
+title: 引用の練習
+bibliography: references.bib
+link-citations: true
+format: html
+---
+```
+
+本文では, `@key` を地の文に, `[@key]` を括弧に使います.
+
+```markdown
+@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 [@halljones1999] を踏まえたものです.
+```
+
+レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. `link-citations: true` を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに `csl: econometrica.csl` のように CSL ファイルを渡します.
+:::
+::::

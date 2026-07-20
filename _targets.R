@@ -24,6 +24,11 @@ tar_option_set(packages = c("processx", "tinytex", "xfun", "curl"))
 # Directory of TeX Live's Latin Modern Sans OTFs (== Computer Modern Sans), so
 # Typst can reproduce Beamer's default font. NULL if TinyTeX is not on PATH.
 lm_font_dir <- function() {
+  # system2() errors (not warns) when the binary is missing, so check first:
+  # GUI-launched R sessions often lack TinyTeX's bin directory on PATH.
+  if (!nzchar(Sys.which("kpsewhich"))) {
+    return(NULL)
+  }
   f <- suppressWarnings(system2("kpsewhich", "lmsans10-regular.otf",
     stdout = TRUE, stderr = FALSE))
   if (length(f) && nzchar(f[1]) && file.exists(f[1])) dirname(f[1]) else NULL
@@ -141,7 +146,7 @@ qmd_paths <- function() {
 # --- Data: download the NYC taxi parquet -----------------------------------
 
 # Download one month of NYC TLC Yellow Taxi trip records (Parquet) into data/.
-# Used by lesson/computation-data.qmd. The file is gitignored; this target
+# Used by lesson/large-data.qmd. The file is gitignored; this target
 # fetches it on demand and skips the download if it is already present.
 # Source: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
 download_taxi <- function(path) {

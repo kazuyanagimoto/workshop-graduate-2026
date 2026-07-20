@@ -146,9 +146,8 @@ git pull origin main    # bring remote changes into local
 
 `main` はブランチ名で, ここではデフォルトの main ブランチを指します. `origin` はリモートリポジトリの名前で, GitHub 上の自分のリポジトリを指します.
 
-::: {.callout-tip}
-
-## Handson 1: コミットとプッシュ
+::: {.quiz}
+コミットからプッシュまでの一連の流れを, 実際に手を動かしてたどってみましょう.
 
 1. [GitHub](https://github.com/) でリポジトリを作ります
 1. 研究用なら private リポジトリを選びます.
@@ -157,7 +156,6 @@ git pull origin main    # bring remote changes into local
 1. 適当なテキストファイル (例: `foo1.txt`) を作り, 適当な一文 (例: "Hello Git!") を書きます.
 1. ステージを忘れずに, コミットを作ります.
 1. リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.
-
 :::
 
 ## ブランチとマージ
@@ -212,9 +210,8 @@ git merge BRANCH_NAME
 
 ![リモートマージ (Pull Request)](../static/cetz/remote-merge.svg){#fig-remote-merge fig-align="center" width="100%"}
 
-::: {.callout-tip}
-
-## Handson 2: 2種類のマージ
+::: {.quiz}
+2種類のマージ (ローカルマージとリモートマージ) を, どちらも実際に試してみましょう.
 
 **ローカルマージ**
 
@@ -236,7 +233,6 @@ git merge BRANCH_NAME
 1. `dev` を `main` にマージし, リモートの `dev` を消します
 1. ローカルに戻り `main` に移ります
 1. main を pull し, ローカルの `dev` を消します (`git branch -d dev`)
-
 :::
 
 
@@ -290,9 +286,8 @@ git merge origin/main
 
 中身がマージである以上, pull でもコンフリクトが起こりうる点には注意してください.
 
-::: {.callout-tip}
-
-## Handson 3: 3種類のコンフリクト
+::: {.quiz}
+3種類のコンフリクトを自分で起こして, それぞれ解決してみましょう.
 
 **ローカルコンフリクト**
 
@@ -315,7 +310,6 @@ git merge origin/main
 1. GitHub で `dev` を `main` にマージします.
 1. ローカルに戻り `main` に移って `foo3.txt` に別の一行 (例: "Village of Bamboo Shoot") を書き, コミットします.
 1. `origin/main` から pull してコンフリクトを起こし, それを解決します.
-
 :::
 
 ## 研究のワークフロー {#sec-workflow}
@@ -384,12 +378,10 @@ git branch -d dev    # delete local dev branch
 ```
 
 
-::: {.callout-tip}
+::: {.quiz}
+上で紹介した研究のワークフローを, 実際に真似てみましょう.
 
-## Handson 4: ワークフローを真似る
-
-- 上のステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.
-
+- ステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.
 :::
 
 ## 困ったときは
@@ -466,9 +458,8 @@ git reset --hard 1f2e3c4
 
 とすれば復元できます. このように reflog は, 他の方法で見失ったコミットまで救い出せる, 最後の安全網です.
 
-::: {.callout-tip}
-
-## Handson 5: reset と reflog で巻き戻す
+::: {.quiz}
+reset で履歴を巻き戻し, 戻りすぎたぶんを reflog で救い出す流れを体験してみましょう.
 
 まず, 練習用のコミットをいくつか作ります.
 

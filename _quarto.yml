@@ -23,8 +23,8 @@ book:
     - lesson/shell.qmd
     - lesson/git.qmd
     - lesson/quarto.qmd
-    - lesson/computation-fast.qmd
-    - lesson/computation-data.qmd
+    - lesson/speedup.qmd
+    - lesson/large-data.qmd
     - lesson/api.qmd
     - lesson/visualization.qmd
     - lesson/regression.qmd
@@ -41,6 +41,7 @@ book:
 format:
   html:
     code-tools: true
+    df-print: paged
     theme:
       - cosmo
       - brand

@@ -545,3 +545,343 @@ spd_cp_big <- ms_cp(30000L, "serial") / ms_cp(30000L, "parallel")
 同じ4コアでも, `furrr` が $n = 1000$ で逆に遅くなったのとは対照的に, `RcppParallel` は $n = 1000$ でも約 `r round(spd_cp_small, 1)` 倍, $n = 30000$ で約 `r round(spd_cp_big, 1)` 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは $O(n^2)$ のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.
 
 なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.
+
+## 演習問題
+
+```{r}
+#| label: setup-quiz
+#| include: false
+library(checkdown)
+
+# Shared helpers for the self-check quizzes. checkdown inserts the feedback
+# via innerHTML inside a single-quoted JS string, so use double quotes in the
+# HTML and avoid single quotes in the message.
+quiz_right <- function(msg) {
+  paste0("<span class=\"quiz-right\">&#10003; 正解! </span>", msg)
+}
+quiz_wrong <- function(msg) {
+  paste0(
+    "<span class=\"quiz-wrong\">&#10007; 残念, もう一度考えてみましょう. </span>",
+    msg
+  )
+}
+quiz_button <- "答え合わせ"
+```
+
+前半は計算量と高速化の考え方に関するクイズ, 後半は実際に測って確かめる演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.
+
+### クイズ
+
+::: {.quiz}
+時間計算量が $O(n^2)$, 領域計算量が $O(n)$ のアルゴリズムがあります. $n$ を10倍にすると, 計算時間とメモリ使用量はどうなるでしょうか.
+
+```{r}
+#| label: quiz-complexity
+#| echo: false
+check_question(
+  "計算時間は約100倍, メモリは約10倍になる",
+  options = c(
+    "計算時間は約100倍, メモリは約10倍になる",
+    "計算時間もメモリも約10倍になる",
+    "計算時間は約10倍, メモリは約100倍になる",
+    "計算時間もメモリも約100倍になる"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "時間計算量 O(n^2) なら10倍で10^2 = 100倍, 領域計算量 O(n) なら10倍です. オーダーが分かっていれば, 実測しなくても大きな n での挙動を見積もれます."
+  ),
+  wrong = quiz_wrong(
+    "O(n^2) と O(n) のそれぞれで, n を10倍したときの増え方を考えましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+メモリを速い順に並べたものはどれでしょうか.
+
+```{r}
+#| label: quiz-memory-hierarchy
+#| echo: false
+check_question(
+  "レジスタ > キャッシュ > RAM > SSD",
+  options = c(
+    "レジスタ > キャッシュ > RAM > SSD",
+    "キャッシュ > レジスタ > RAM > SSD",
+    "レジスタ > RAM > キャッシュ > SSD",
+    "RAM > キャッシュ > レジスタ > SSD"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "CPU に近いほど高速で, 容量が小さいというピラミッド構造でした. 繰り返し使うデータがキャッシュに収まるかどうかで, 同じ計算回数でも実行時間は大きく変わります."
+  ),
+  wrong = quiz_wrong(
+    "メモリのヒエラルキーの図を思い出しましょう. CPU に近いものほど高速です."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+R でベクトル化するとループより速くなるのはなぜでしょうか.
+
+```{r}
+#| label: quiz-vectorize
+#| echo: false
+check_question(
+  "要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから",
+  options = c(
+    "要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから",
+    "計算回数 (ステップ数) が減るから",
+    "複数の CPU コアを同時に使うようになるから",
+    "メモリ使用量が減るから"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "ベクトル化は計算量のオーダーを変えません. 型の定まったベクトル同士の演算にまとめることで, 1ステップあたりの定数項を小さくしています. メモリはむしろ増えることがあります (outer の距離行列を思い出してください)."
+  ),
+  wrong = quiz_wrong(
+    "ベクトル化しても計算回数そのものは変わらないのでした. 何が削られているのかを考えましょう."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+$O(n^2)$ の関数を Rcpp で書き直したら30倍速くなりました. このとき $n$ を10倍にすると, Rcpp 版の実行時間はどうなるでしょうか.
+
+```{r}
+#| label: quiz-rcpp-order
+#| echo: false
+check_question(
+  "約100倍になる",
+  options = c(
+    "約100倍になる",
+    "約10倍になる",
+    "約30倍になる",
+    "ほとんど変わらない"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "Rcpp が削るのは1ステップあたりの定数項で, オーダーは O(n^2) のままです. だから n を10倍にすれば, R 版も Rcpp 版も約100倍になります. オーダー自体を下げたければ, アルゴリズムを変える必要があります (下の演習で確かめます)."
+  ),
+  wrong = quiz_wrong(
+    "Rcpp は計算量のオーダーを変えるわけではありませんでした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+::: {.quiz}
+次のうち, 並列化に最も向いている計算はどれでしょうか.
+
+```{r}
+#| label: quiz-parallel
+#| echo: false
+check_question(
+  "ブートストラップの各リサンプルでの推定",
+  options = c(
+    "ブートストラップの各リサンプルでの推定",
+    "後ろ向き帰納法で解く動的計画問題の時間方向のループ",
+    "前の反復の結果を使う不動点反復",
+    "1本の MCMC チェーンの逐次的な更新"
+  ),
+  type = "radio",
+  right = quiz_right(
+    "各反復が互いに独立な計算 (embarrassingly parallel) が並列化に向きます. 残りの3つはどれも前の反復の結果に依存するため, その方向には並列化できません. ただし並列化にはオーバーヘッドがあるので, 1反復が軽すぎるとかえって遅くなる点にも注意しましょう."
+  ),
+  wrong = quiz_wrong(
+    "各反復が互いに独立かどうか, が判断基準でした."
+  ),
+  button_label = quiz_button,
+  random_answer_order = TRUE
+)
+```
+:::
+
+### ジニ係数で計算量を体感する
+
+所得分布の不平等度を測るジニ係数は, 所得ベクトル $x$ の平均絶対差を使って次のように書けます.
+
+$$
+G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \right|
+$$
+
+:::: {.quiz}
+対数正規分布に従う所得データ `x <- rlnorm(n)` に対してジニ係数を計算します.
+
+1. 定義式のとおり二重ループで計算する `gini_loop` を書いてください. この実装の時間計算量と領域計算量はいくつでしょうか.
+1. `bench::mark()` で $n = 100$ と $n = 1000$ の計算時間を測り, 倍率がオーダーの予測と合っているか確かめてください.
+1. 内側のループをベクトル化した `gini_vec` と, `outer()` で全ペアの差を一度に計算する `gini_outer` を書き, $n = 1000$ で3つの実装の速度とメモリ割り当てを比べてください.
+1. 昇順に並べ替えた値 $x_{(1)} \le \dots \le x_{(n)}$ を使うと, ジニ係数は $G = \frac{2 \sum_{i=1}^{n} i \, x_{(i)}}{n^2 \bar{x}} - \frac{n+1}{n}$ とも書けます. この式で `gini_sort` を書いて比較に加え, 結果を解釈してください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+まず二重ループ版です. 二重ループなので時間計算量は $O(n^2)$, 保持するのは途中経過のスカラーだけなので追加の領域計算量は $O(1)$ です (入力を含めれば $O(n)$).
+
+```{r}
+#| label: exercise-gini-loop
+gini_loop <- function(x) {
+  n <- length(x)
+  s <- 0
+  for (i in 1:n) {
+    for (j in 1:n) {
+      s <- s + abs(x[i] - x[j])
+    }
+  }
+  s / (2 * n^2 * mean(x))
+}
+
+x100 <- rlnorm(100)
+x1000 <- rlnorm(1000)
+
+bm_gini <- bench::mark(
+  "n = 100" = gini_loop(x100),
+  "n = 1000" = gini_loop(x1000),
+  check = FALSE,
+  filter_gc = FALSE
+)
+
+bm_gini |>
+  mutate(expression = as.character(expression)) |>
+  select(expression, median, mem_alloc)
+```
+
+$n$ を10倍にすると計算時間はおよそ100倍になっており, $O(n^2)$ の予測と合っています.
+
+`mem_alloc` の列が2行目で 0B になるのはバグではありません. `bench` が測るのは R が新しく確保したヒープメモリで, スカラー1つを更新するだけの二重ループは, 関数が一度バイトコンパイルされた後は新しいメモリをほとんど確保しないのです (1行目の数十 KB は, 初回呼び出し時のコンパイルなどのオーバーヘッドです). 追加の領域計算量が $O(1)$ であることが, 測定にもそのまま表れています.
+
+次に, ベクトル化した2つの実装と, ソートを使った実装です.
+
+```{r}
+#| label: exercise-gini-variants
+gini_vec <- function(x) {
+  s <- sum(purrr::map_dbl(x, \(xi) sum(abs(xi - x))))
+  s / (2 * length(x)^2 * mean(x))
+}
+
+gini_outer <- function(x) {
+  sum(abs(outer(x, x, "-"))) / (2 * length(x)^2 * mean(x))
+}
+
+gini_sort <- function(x) {
+  n <- length(x)
+  xs <- sort(x)
+  2 * sum(seq_len(n) * xs) / (n^2 * mean(x)) - (n + 1) / n
+}
+
+bm_gini2 <- bench::mark(
+  loop = gini_loop(x1000),
+  vec = gini_vec(x1000),
+  outer = gini_outer(x1000),
+  sort = gini_sort(x1000),
+  filter_gc = FALSE
+)
+
+bm_gini2 |>
+  mutate(expression = as.character(expression)) |>
+  select(expression, median, mem_alloc)
+```
+
+`bench::mark()` は既定で4つの返り値が一致することも確認してくれます. 結果は本文で見た構図の総復習になっています.
+
+- `vec` は `loop` の数十倍速くなりますが, これは型推定のオーバーヘッドを削っただけで, オーダーは $O(n^2)$ のままです.
+- `outer` は `vec` よりさらに速くなるわけではなく, $n \times n$ の行列を丸ごと確保するためメモリ割り当てが桁違いに大きくなります (領域計算量 $O(n^2)$).
+- `sort` は桁違いに速くなっています. ソートの時間計算量は $O(n \log n)$ なので, これはアルゴリズムそのものの改善であり, $n$ が大きくなるほど差は開きます.
+
+ベクトル化や Rcpp が削れるのは定数項だけです. 最も強力な高速化は, このようにアルゴリズムを変えてオーダー自体を下げることです.
+:::
+::::
+
+### ブートストラップを並列化する
+
+:::: {.quiz}
+OLS 係数のブートストラップ標準誤差を計算し, 並列化の効果を測ります. まず擬似データを作ります.
+
+```{r}
+#| label: exercise-boot-data
+n_obs <- 10000
+df_boot <- tibble(x = rnorm(n_obs)) |>
+  mutate(y = 1 + 2 * x + rnorm(n_obs))
+B <- 500
+```
+
+1. 行を復元抽出して `lm(y ~ x)` を推定し, `x` の係数を返す, という操作を $B$ 回繰り返す `boot_ols` を `purrr::map_dbl()` で書いてください.
+1. `furrr::future_map_dbl()` に置き換えた並列版 `boot_ols_par` を書いてください. 並列で乱数を使うために必要なオプションがあります.
+1. `plan(multisession, workers = 4)` のもとで, `bench::mark()` で逐次版と並列版を比較してください (`check = FALSE` が必要です. なぜでしょうか). 速度向上は4ワーカーに見合ったものになっているでしょうか.
+1. ブートストラップ標準誤差 (係数の標準偏差) を, `lm()` の解析的な標準誤差と比べてください.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{r}
+#| label: exercise-boot-funs
+boot_ols <- function(df, B) {
+  purrr::map_dbl(1:B, \(b) {
+    idx <- sample(nrow(df), replace = TRUE)
+    coef(lm(y ~ x, data = df[idx, ]))[["x"]]
+  })
+}
+
+boot_ols_par <- function(df, B) {
+  furrr::future_map_dbl(
+    1:B,
+    \(b) {
+      idx <- sample(nrow(df), replace = TRUE)
+      coef(lm(y ~ x, data = df[idx, ]))[["x"]]
+    },
+    .options = furrr_options(seed = TRUE)
+  )
+}
+```
+
+`furrr_options(seed = TRUE)` は, 並列でも統計的に健全で再現可能な乱数列 (L'Ecuyer-CMRG) を各ワーカーに配るためのオプションです. これを付けずに乱数を使うと furrr は警告を出します.
+
+```{r}
+#| label: exercise-boot-benchmark
+plan(multisession, workers = 4)
+
+bm_boot <- bench::mark(
+  serial = boot_ols(df_boot, B),
+  parallel = boot_ols_par(df_boot, B),
+  check = FALSE,
+  iterations = 3,
+  filter_gc = FALSE
+)
+
+plan(sequential)
+
+bm_boot |>
+  mutate(expression = as.character(expression)) |>
+  select(expression, median)
+```
+
+`check = FALSE` が必要なのは, 逐次版と並列版で乱数の発生順序が異なり, リサンプルされる行が同じにならないためです. 返り値は一致しませんが, どちらも同じ分布からのブートストラップ標本なので, 標準誤差の推定値としてはどちらも正しいものです.
+
+各リサンプルの推定は互いに独立 (embarrassingly parallel) なので, ブートストラップは原理的には並列化に理想的な計算です. ところが結果を見ると, 並列版は多少速くなる程度で, コア数の4倍にはほど遠いはずです (環境やそのときの負荷によっては, 逆に遅くなることもあります). `lm()` 1回は 1ms 程度と軽いため, 別プロセスにデータ・タスク・乱数シードを配って結果を回収する `multisession` のオーバーヘッドが, 並列化の利得の大部分を食いつぶしてしまうのです. 本文の `match_nn` ($n = 30000$) がコア数に近い速度向上を得られたのは, 計算全体が十分重かったからでした.
+
+このオーバーヘッドを小さくするには, プロセスを新しく立てる代わりにメモリを共有する仕組みを使う方法があります. 本文の `RcppParallel` (スレッド) がその一例でした. `future` にも, プロセスをフォークしてメモリを共有する `plan(multicore)` というバックエンドがあり (macOS / Linux で, RStudio 以外から実行する場合に使えます), この例でも `multisession` よりはっきり速くなります. 「並列化はタダではない」という本文の教訓が, 実際の推定でも確認できました.
+
+```{r}
+#| label: exercise-boot-se
+draws <- boot_ols(df_boot, B)
+fit <- lm(y ~ x, data = df_boot)
+
+c(
+  bootstrap = sd(draws),
+  analytic = summary(fit)$coefficients["x", "Std. Error"]
+)
+```
+
+ブートストラップ標準誤差は解析的な標準誤差とほぼ一致します. この例では `lm()` が正しい標準誤差を返すので比較のためのデモにすぎませんが, 解析的な標準誤差が手に入らない複雑な推定量でも, ブートストラップなら同じ手順で標準誤差を得られます.
+:::
+::::

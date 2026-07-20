@@ -401,10 +401,89 @@ compile_latex <- function(manuscript_file, path_pdf) {
 }
 ```
 
-## おわりに
+## 演習問題
 
-Quarto + `{targets}` を用いた研究のワークフローについて解説しました.
-`{targets}` は最初はやや難しいかもしれませんが, `{targets}` に身をまかせ, `{targets}` が実行できる状態を保つことで, 再現性に関してクリーンな状態を保つことができます.
-結果的には, 研究をより効率的に進めることができるはずです.
+この章の演習は, 実際に小さなパイプラインを組んで, `{targets}` の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (`{targets}` と `{tarchetypes}` が入っていなければ `install.packages(c("targets", "tarchetypes"))` で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.
 
-Happy Quarto + `{targets}` Life! 🥂
+:::: {.quiz}
+最小のパイプラインを作ります. 作業ディレクトリに `_targets.R` を作り, `penguins` データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. `tar_make()` で実行し, `tar_visnetwork()` で依存関係を可視化しましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```{.r filename="_targets.R"}
+library(targets)
+library(tarchetypes)
+suppressPackageStartupMessages(library(dplyr))
+
+summarize_penguins <- function(data) {
+  data |>
+    summarize(bill_len = mean(bill_len, na.rm = TRUE), .by = species)
+}
+
+tar_plan(
+  penguins_raw = penguins,
+  penguins_summary = summarize_penguins(penguins_raw)
+)
+```
+
+R のコンソールから, 次を実行します.
+
+```r
+targets::tar_make()
+targets::tar_visnetwork()
+```
+
+`penguins_raw` (オブジェクト) から `summarize_penguins()` (関数) を通って `penguins_summary` (オブジェクト) へ, という依存関係が図に表れます. `tar_make()` を実行済みなので, どのターゲットもグレーで表示されます.
+:::
+::::
+
+:::: {.quiz}
+計算結果を取り出します. パイプラインが作った `penguins_summary` の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+```r
+# Return the value directly
+tar_read(penguins_summary)
+
+# Load it into the environment under its own name
+tar_load(penguins_summary)
+penguins_summary
+```
+
+`tar_read()` は値を返すので `x <- tar_read(...)` のように受け取れます. `tar_load()` はターゲット名と同じ変数を環境に作ります. どちらも, 一度 `tar_make()` で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.
+:::
+::::
+
+:::: {.quiz}
+いよいよ本題です. `summarize_penguins()` に平均ひれ長 (`flipper_len`) の計算を追加してから, `tar_make()` を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.
+
+::: {.callout-tip collapse="true"}
+## 解答例
+
+関数を次のように変更します.
+
+```{.r filename="_targets.R"}
+summarize_penguins <- function(data) {
+  data |>
+    summarize(
+      bill_len = mean(bill_len, na.rm = TRUE),
+      flipper_len = mean(flipper_len, na.rm = TRUE),
+      .by = species
+    )
+}
+```
+
+`tar_make()` の前に, どのターゲットが古くなっているかを確認します.
+
+```r
+targets::tar_outdated()
+```
+
+返ってくるのは `penguins_summary` だけです. `penguins_raw` は変更した関数に依存していないので, 古くなりません. `tar_make()` を実行すると, 実際に `penguins_summary` だけが再計算され, `penguins_raw` は前の結果がそのまま再利用されます (`tar_visnetwork()` でも, `penguins_summary` だけが未実行状態に戻っていることを確認できます).
+
+この「変更の影響を受けるところだけが再計算される」性質こそが `{targets}` の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.
+:::
+::::

@@ -164,13 +164,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+  <a href="../lesson/speedup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+  <a href="../lesson/large-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
@@ -208,6 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -492,16 +498,8 @@ Figure&nbsp;3.8: ステージングとコミット
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main    <span class="co"># send local commits to the remote</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main    <span class="co"># bring remote changes into local</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>main</code> はブランチ名で, ここではデフォルトの main ブランチを指します. <code>origin</code> はリモートリポジトリの名前で, GitHub 上の自分のリポジトリを指します.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Handson 1: コミットとプッシュ
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="quiz">
+<p>コミットからプッシュまでの一連の流れを, 実際に手を動かしてたどってみましょう.</p>
 <ol type="1">
 <li><a href="https://github.com/">GitHub</a> でリポジトリを作ります</li>
 <li>研究用なら private リポジトリを選びます.</li>
@@ -511,7 +509,6 @@ Figure&nbsp;3.8: ステージングとコミット
 <li>ステージを忘れずに, コミットを作ります.</li>
 <li>リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.</li>
 </ol>
-</div>
 </div>
 </section>
 </section>
@@ -604,16 +601,8 @@ Figure&nbsp;3.13: リモートマージ (Pull Request)
 </figcaption>
 </figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Handson 2: 2種類のマージ
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="quiz">
+<p>2種類のマージ (ローカルマージとリモートマージ) を, どちらも実際に試してみましょう.</p>
 <p><strong>ローカルマージ</strong></p>
 <ol type="1">
 <li>新しいブランチ <code>dev</code> を作ります</li>
@@ -635,7 +624,6 @@ Figure&nbsp;3.13: リモートマージ (Pull Request)
 <li>ローカルに戻り <code>main</code> に移ります</li>
 <li>main を pull し, ローカルの <code>dev</code> を消します (<code>git branch -d dev</code>)</li>
 </ol>
-</div>
 </div>
 </section>
 </section>
@@ -699,16 +687,8 @@ Figure&nbsp;3.15: pull = fetch + merge
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin main</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>中身がマージである以上, pull でもコンフリクトが起こりうる点には注意してください.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Handson 3: 3種類のコンフリクト
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="quiz">
+<p>3種類のコンフリクトを自分で起こして, それぞれ解決してみましょう.</p>
 <p><strong>ローカルコンフリクト</strong></p>
 <ol type="1">
 <li><code>dev</code> に移り <code>foo1.txt</code> を作って一行 (例: “Tortilla sin Cebolla”) を書き, コミットします.</li>
@@ -733,7 +713,6 @@ Figure&nbsp;3.15: pull = fetch + merge
 <li>ローカルに戻り <code>main</code> に移って <code>foo3.txt</code> に別の一行 (例: “Village of Bamboo Shoot”) を書き, コミットします.</li>
 <li><code>origin/main</code> から pull してコンフリクトを起こし, それを解決します.</li>
 </ol>
-</div>
 </div>
 </section>
 </section>
@@ -833,20 +812,11 @@ Figure&nbsp;3.21: ローカルの main を最新化
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> dev    <span class="co"># delete local dev branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Handson 4: ワークフローを真似る
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="quiz">
+<p>上で紹介した研究のワークフローを, 実際に真似てみましょう.</p>
 <ul>
-<li>上のステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.</li>
+<li>ステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.</li>
 </ul>
-</div>
 </div>
 </section>
 </section>
@@ -900,16 +870,8 @@ Figure&nbsp;3.22: コミット列と HEAD
 <p>各行は, コミットのハッシュ, <code>HEAD@{N}</code> (N が何手前の状態か. 0 が最新), そして操作の種類と内容です. 注目してほしいのは <code>HEAD@{2}</code> の <code>1f2e3c4</code> です. これは一度コミットしたものの, その後の <code>reset</code> で main の履歴から外れたコミットで, <code>git log</code> にはもう現れません. それでも reflog には足あととして残っているので,</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> 1f2e3c4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>とすれば復元できます. このように reflog は, 他の方法で見失ったコミットまで救い出せる, 最後の安全網です.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Handson 5: reset と reflog で巻き戻す
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="quiz">
+<p>reset で履歴を巻き戻し, 戻りすぎたぶんを reflog で救い出す流れを体験してみましょう.</p>
 <p>まず, 練習用のコミットをいくつか作ります.</p>
 <ol type="1">
 <li><code>foo.txt</code> を作り, “line 1” と書いてコミットします.</li>
@@ -928,7 +890,6 @@ Figure&nbsp;3.22: コミット列と HEAD
 <li><code>git reset --hard HEAD@{1}</code> で, その状態に戻します.</li>
 <li><code>git log --oneline</code> と <code>foo.txt</code> で, “line 3” が復活したことを確認します.</li>
 </ol>
-</div>
 </div>
 </section>
 <section id="git-で悪いことは起きない" class="level3">
@@ -1580,353 +1541,344 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a><span class="in">`main`</span> はブランチ名で, ここではデフォルトの main ブランチを指します. <span class="in">`origin`</span> はリモートリポジトリの名前で, GitHub 上の自分のリポジトリを指します.</span>
 <span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## Handson 1: コミットとプッシュ</span></span>
-<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> でリポジトリを作ります</span>
-<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>研究用なら private リポジトリを選びます.</span>
-<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>gitignore, README, License は選ばなくて構いません (後から追加できます).</span>
-<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git clone REPO_URL`</span> で, リモートレポジトリをローカルにコピーします.</span>
-<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>適当なテキストファイル (例: <span class="in">`foo1.txt`</span>) を作り, 適当な一文 (例: "Hello Git!") を書きます.</span>
-<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ステージを忘れずに, コミットを作ります.</span>
-<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.</span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a>コミットからプッシュまでの一連の流れを, 実際に手を動かしてたどってみましょう.</span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> でリポジトリを作ります</span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>研究用なら private リポジトリを選びます.</span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>gitignore, README, License は選ばなくて構いません (後から追加できます).</span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git clone REPO_URL`</span> で, リモートレポジトリをローカルにコピーします.</span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>適当なテキストファイル (例: <span class="in">`foo1.txt`</span>) を作り, 適当な一文 (例: "Hello Git!") を書きます.</span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ステージを忘れずに, コミットを作ります.</span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## ブランチとマージ</span></span>
 <span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## ブランチとマージ</span></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### ブランチと HEAD</span></span>
 <span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a><span class="fu">### ブランチと HEAD</span></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>ブランチ (branch) は, あるコミットに付けたラベルのようなものです. よくある誤解として, ブランチは「変更の流れ」を表すものだと思われがちですが, 実際は「コミットの位置」を指すものです. そして HEAD は, いま自分がどのブランチ (どのコミット) にいるかを指します. 例えば, 安定版の main から枝分かれさせた dev のように, 複数のブランチを同時に持てます (@fig-branch-head).</span>
 <span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>ブランチ (branch) は, あるコミットに付けたラベルのようなものです. よくある誤解として, ブランチは「変更の流れ」を表すものだと思われがちですが, 実際は「コミットの位置」を指すものです. そして HEAD は, いま自分がどのブランチ (どのコミット) にいるかを指します. 例えば, 安定版の main から枝分かれさせた dev のように, 複数のブランチを同時に持てます (@fig-branch-head).</span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a><span class="al">![ブランチと HEAD](../static/cetz/branch-head.svg)</span>{#fig-branch-head fig-align="center" width="55%"}</span>
 <span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="al">![ブランチと HEAD](../static/cetz/branch-head.svg)</span>{#fig-branch-head fig-align="center" width="55%"}</span>
-<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch BRANCH_NAME    <span class="co"># create a branch</span></span>
-<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch BRANCH_NAME    <span class="co"># move HEAD to a branch</span></span>
-<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch BRANCH_NAME    <span class="co"># create a branch</span></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch BRANCH_NAME    <span class="co"># move HEAD to a branch</span></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### マージ</span></span>
 <span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="fu">### マージ</span></span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a>あるブランチの変更を, いま HEAD のあるブランチへ取り込む操作をマージ (merge) と呼びます. dev を main にマージすると, 両方の変更を併せ持つ新しいコミット (@fig-merge の M) ができます.</span>
 <span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>あるブランチの変更を, いま HEAD のあるブランチへ取り込む操作をマージ (merge) と呼びます. dev を main にマージすると, 両方の変更を併せ持つ新しいコミット (@fig-merge の M) ができます.</span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a><span class="al">![ブランチのマージ](../static/cetz/merge.svg)</span>{#fig-merge fig-align="center" width="55%"}</span>
 <span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="al">![ブランチのマージ](../static/cetz/merge.svg)</span>{#fig-merge fig-align="center" width="55%"}</span>
-<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge BRANCH_NAME</span>
-<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge BRANCH_NAME</span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### なぜブランチを使うのか</span></span>
 <span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### なぜブランチを使うのか</span></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a>ブランチを使う最大の目的は, main ブランチをいつでもきれいに動く状態に保つことです. main が常に動くと分かっていれば, 新しく入れた変更がバグの原因かどうかを切り分けやすくなります. 共同研究者も, それぞれ main からブランチを切って作業します.</span>
 <span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a>ブランチを使う最大の目的は, main ブランチをいつでもきれいに動く状態に保つことです. main が常に動くと分かっていれば, 新しく入れた変更がバグの原因かどうかを切り分けやすくなります. 共同研究者も, それぞれ main からブランチを切って作業します.</span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
 <span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## main-dev ワークフロー</span></span>
 <span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## main-dev ワークフロー</span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a>私が勧めるのは, シンプルな main-dev ワークフローです.</span>
 <span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a>私が勧めるのは, シンプルな main-dev ワークフローです.</span>
-<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>作業は dev ブランチでのみ行います (共同研究者がいる場合は, 自分の名前をブランチ名にします).</span>
-<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>意味のあるまとまりが完成したら, 不要なファイルを片付けてから dev を main にマージします.</span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>作業は dev ブランチでのみ行います (共同研究者がいる場合は, 自分の名前をブランチ名にします).</span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>意味のあるまとまりが完成したら, 不要なファイルを片付けてから dev を main にマージします.</span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2種類のマージ</span></span>
 <span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2種類のマージ</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>まず, 次のような状況を考えます (@fig-merge-setup). 手元 (Local) では, main の C2 から dev ブランチを切って D1 というコミットを作りました. 一方リモート (Remote) はまだ C1-C2 のままで, dev も D1 も持っていません. この D1 の変更を main に取り込み, @fig-merge の M のようなマージコミットをリモートに作ることが目的です.</span>
 <span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a>まず, 次のような状況を考えます (@fig-merge-setup). 手元 (Local) では, main の C2 から dev ブランチを切って D1 というコミットを作りました. 一方リモート (Remote) はまだ C1-C2 のままで, dev も D1 も持っていません. この D1 の変更を main に取り込み, @fig-merge の M のようなマージコミットをリモートに作ることが目的です.</span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="al">![マージ前の Local と Remote](../static/cetz/merge-setup.svg)</span>{#fig-merge-setup fig-align="center" width="90%"}</span>
 <span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="al">![マージ前の Local と Remote](../static/cetz/merge-setup.svg)</span>{#fig-merge-setup fig-align="center" width="90%"}</span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a>この dev を main に取り込む方法は, 大きく2つあります. 1つ目は, ローカルでマージする方法です. ローカルで dev を main にマージし, その main をリモートへ push します (@fig-local-merge). 手数が少なく, 一人で進めるプロジェクトに向いています.</span>
 <span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>この dev を main に取り込む方法は, 大きく2つあります. 1つ目は, ローカルでマージする方法です. ローカルで dev を main にマージし, その main をリモートへ push します (@fig-local-merge). 手数が少なく, 一人で進めるプロジェクトに向いています.</span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a><span class="al">![ローカルマージ](../static/cetz/local-merge.svg)</span>{#fig-local-merge fig-align="center" width="100%"}</span>
 <span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a><span class="al">![ローカルマージ](../static/cetz/local-merge.svg)</span>{#fig-local-merge fig-align="center" width="100%"}</span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a>2つ目は, リモートでマージする方法です. dev をリモートへ push し, GitHub 上で Pull Request を作って main に取り込みます (@fig-remote-merge). 変更をレビューしてから取り込めるので, 共同作業に向いています (私は一人のときもこちらを使います).</span>
 <span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a>2つ目は, リモートでマージする方法です. dev をリモートへ push し, GitHub 上で Pull Request を作って main に取り込みます (@fig-remote-merge). 変更をレビューしてから取り込めるので, 共同作業に向いています (私は一人のときもこちらを使います).</span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="al">![リモートマージ (Pull Request)](../static/cetz/remote-merge.svg)</span>{#fig-remote-merge fig-align="center" width="100%"}</span>
 <span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a><span class="al">![リモートマージ (Pull Request)](../static/cetz/remote-merge.svg)</span>{#fig-remote-merge fig-align="center" width="100%"}</span>
-<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Handson 2: 2種類のマージ</span></span>
-<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>**ローカルマージ**</span>
-<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>新しいブランチ <span class="in">`dev`</span> を作ります</span>
-<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>HEAD を <span class="in">`dev`</span> に移します</span>
-<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>いくつかコミットを作ります</span>
-<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>HEAD を <span class="in">`main`</span> に戻します</span>
-<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージします</span>
-<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/main`</span> へ push します</span>
-<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>(ローカルの) <span class="in">`dev`</span> ブランチを消します (<span class="in">`git branch -d dev`</span>)</span>
-<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a>**リモートマージ**</span>
-<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> ブランチを作ります</span>
-<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移ります</span>
-<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>いくつかコミットを作ります</span>
-<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/dev`</span> へ push します</span>
-<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で Pull Request を作ります</span>
-<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージし, リモートの <span class="in">`dev`</span> を消します</span>
-<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ローカルに戻り <span class="in">`main`</span> に移ります</span>
-<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>main を pull し, ローカルの <span class="in">`dev`</span> を消します (<span class="in">`git branch -d dev`</span>)</span>
-<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>2種類のマージ (ローカルマージとリモートマージ) を, どちらも実際に試してみましょう.</span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>**ローカルマージ**</span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>新しいブランチ <span class="in">`dev`</span> を作ります</span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>HEAD を <span class="in">`dev`</span> に移します</span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>いくつかコミットを作ります</span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>HEAD を <span class="in">`main`</span> に戻します</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージします</span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/main`</span> へ push します</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>(ローカルの) <span class="in">`dev`</span> ブランチを消します (<span class="in">`git branch -d dev`</span>)</span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a>**リモートマージ**</span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> ブランチを作ります</span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移ります</span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>いくつかコミットを作ります</span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/dev`</span> へ push します</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で Pull Request を作ります</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージし, リモートの <span class="in">`dev`</span> を消します</span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ローカルに戻り <span class="in">`main`</span> に移ります</span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>main を pull し, ローカルの <span class="in">`dev`</span> を消します (<span class="in">`git branch -d dev`</span>)</span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a><span class="fu">## コンフリクト</span></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>Gitを使っていると, 2つのブランチをマージしたときに, Git がどちらの変更を採用すべきか判断できない場合があります. その状態をコンフリクト (conflict) と呼びます (@fig-conflict). Git はどちらを採用すべきか判断できないので, 解決を人間に委ねます.</span>
 <span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="fu">## コンフリクト</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="al">![コンフリクト](../static/cetz/conflict.svg)</span>{#fig-conflict fig-align="center" width="55%"}</span>
 <span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>Gitを使っていると, 2つのブランチをマージしたときに, Git がどちらの変更を採用すべきか判断できない場合があります. その状態をコンフリクト (conflict) と呼びます (@fig-conflict). Git はどちらを採用すべきか判断できないので, 解決を人間に委ねます.</span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>コンフリクトが起きると, 該当するファイルの中に, 両方の変更が次のように並べて書き込まれます.</span>
 <span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a><span class="al">![コンフリクト](../static/cetz/conflict.svg)</span>{#fig-conflict fig-align="center" width="55%"}</span>
-<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>コンフリクトが起きると, 該当するファイルの中に, 両方の変更が次のように並べて書き込まれます.</span>
-<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename=foo.txt}</span></span>
-<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a>aaaaa</span>
-<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>bbbbb</span>
-<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>cccccc</span>
-<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="fu">=======</span></span>
-<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>zzzzzz</span>
-<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dev</span></span>
-<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a><span class="at">ddddd</span></span>
-<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="in">解決するには, 残したい方を選び, 不要な行とマーカー (`&lt;&lt;&lt;&lt;&lt;&lt;&lt;` `=======` `&gt;&gt;&gt;&gt;&gt;&gt;&gt;`) を消してファイルを保存し, 解決のためのコミットを作ります. 例えば dev 側の `zzzzz` を残すなら, 次のように整えます.</span></span>
-<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename=foo.txt}</span></span>
-<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="in">aaaaa</span></span>
-<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a><span class="in">bbbbb</span></span>
-<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a><span class="in">zzzzz</span></span>
-<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a><span class="in">ddddd</span></span>
-<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename=foo.txt}</span></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>aaaaa</span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>bbbbb</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>cccccc</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a><span class="fu">=======</span></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>zzzzzz</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dev</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="at">ddddd</span></span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="in">解決するには, 残したい方を選び, 不要な行とマーカー (`&lt;&lt;&lt;&lt;&lt;&lt;&lt;` `=======` `&gt;&gt;&gt;&gt;&gt;&gt;&gt;`) を消してファイルを保存し, 解決のためのコミットを作ります. 例えば dev 側の `zzzzz` を残すなら, 次のように整えます.</span></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename=foo.txt}</span></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="in">aaaaa</span></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="in">bbbbb</span></span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="in">zzzzz</span></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a><span class="in">ddddd</span></span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a>VSCode では, 「Accept Current Change」「Accept Incoming Change」などのボタンでどちらの変更を残すか選び, 保存してからコミットすれば済みます. なお, 同じファイルを複数人で同時に編集しないというルールを守るだけで, コンフリクトのほとんどは防げます.</span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pull {#sec-pull}</span></span>
 <span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>VSCode では, 「Accept Current Change」「Accept Incoming Change」などのボタンでどちらの変更を残すか選び, 保存してからコミットすれば済みます. なお, 同じファイルを複数人で同時に編集しないというルールを守るだけで, コンフリクトのほとんどは防げます.</span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>実は pull は, 2つの操作を続けて行っています (@fig-pull-fetch-merge).</span>
 <span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pull {#sec-pull}</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="al">![pull = fetch + merge](../static/cetz/pull-fetch-merge.svg)</span>{#fig-pull-fetch-merge fig-align="center" width="50%"}</span>
 <span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a>実は pull は, 2つの操作を続けて行っています (@fig-pull-fetch-merge).</span>
-<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="al">![pull = fetch + merge](../static/cetz/pull-fetch-merge.svg)</span>{#fig-pull-fetch-merge fig-align="center" width="50%"}</span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**fetch**: リモートのブランチをローカルへ取得して <span class="in">`origin/BRANCH_NAME`</span> と名付ける</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**merge**: <span class="in">`origin/BRANCH_NAME`</span> をいまのブランチへ取り込む</span>
 <span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**fetch**: リモートのブランチをローカルへ取得して <span class="in">`origin/BRANCH_NAME`</span> と名付ける</span>
-<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**merge**: <span class="in">`origin/BRANCH_NAME`</span> をいまのブランチへ取り込む</span>
-<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
-<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a><span class="co"># shorthand for the two commands below</span></span>
-<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin main</span>
-<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span>
-<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a>中身がマージである以上, pull でもコンフリクトが起こりうる点には注意してください.</span>
-<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a><span class="fu">## Handson 3: 3種類のコンフリクト</span></span>
-<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a>**ローカルコンフリクト**</span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="co"># shorthand for the two commands below</span></span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin main</span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a>中身がマージである以上, pull でもコンフリクトが起こりうる点には注意してください.</span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>3種類のコンフリクトを自分で起こして, それぞれ解決してみましょう.</span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>**ローカルコンフリクト**</span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo1.txt`</span> を作って一行 (例: "Tortilla sin Cebolla") を書き, コミットします.</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`main`</span> に移り <span class="in">`foo1.txt`</span> を作って別の一行 (例: "Tortilla con Cebolla") を書き, コミットします.</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージしてコンフリクトを起こします.</span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>どちらかの行を選んで解決します.</span>
 <span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo1.txt`</span> を作って一行 (例: "Tortilla sin Cebolla") を書き, コミットします.</span>
-<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`main`</span> に移り <span class="in">`foo1.txt`</span> を作って別の一行 (例: "Tortilla con Cebolla") を書き, コミットします.</span>
-<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> を <span class="in">`main`</span> にマージしてコンフリクトを起こします.</span>
-<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>どちらかの行を選んで解決します.</span>
-<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a>**リモートコンフリクト**</span>
-<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo2.txt`</span> を作って一行 (例: "But the Emperor has nothing at all on!") を書き, <span class="in">`origin/dev`</span> へ push します.</span>
-<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`main`</span> に移り <span class="in">`foo2.txt`</span> を作って別の一行 (例: "Oh! How beautiful are our Emperor's new clothes!") を書き, <span class="in">`origin/main`</span> へ push します.</span>
-<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で Pull Request を作り, コンフリクトを起こします.</span>
-<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>軽微なコンフリクトなら, GitHub 上で解決できます</span>
-<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>複雑なコンフリクトの場合, ローカルで <span class="in">`origin/main`</span> を <span class="in">`dev`</span> にマージし,  コンフリクトを解決してから <span class="in">`origin/dev`</span> へ push します.</span>
-<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a>**Pullとコンフリクト**</span>
-<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo3.txt`</span> を作って一行 (例: "Mountain of Mushroom") を書き, コミットして <span class="in">`origin/dev`</span> へ push します.</span>
-<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で <span class="in">`dev`</span> を <span class="in">`main`</span> にマージします.</span>
-<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ローカルに戻り <span class="in">`main`</span> に移って <span class="in">`foo3.txt`</span> に別の一行 (例: "Village of Bamboo Shoot") を書き, コミットします.</span>
-<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/main`</span> から pull してコンフリクトを起こし, それを解決します.</span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a>**リモートコンフリクト**</span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo2.txt`</span> を作って一行 (例: "But the Emperor has nothing at all on!") を書き, <span class="in">`origin/dev`</span> へ push します.</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`main`</span> に移り <span class="in">`foo2.txt`</span> を作って別の一行 (例: "Oh! How beautiful are our Emperor's new clothes!") を書き, <span class="in">`origin/main`</span> へ push します.</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で Pull Request を作り, コンフリクトを起こします.</span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>軽微なコンフリクトなら, GitHub 上で解決できます</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>複雑なコンフリクトの場合, ローカルで <span class="in">`origin/main`</span> を <span class="in">`dev`</span> にマージし,  コンフリクトを解決してから <span class="in">`origin/dev`</span> へ push します.</span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>**Pullとコンフリクト**</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`dev`</span> に移り <span class="in">`foo3.txt`</span> を作って一行 (例: "Mountain of Mushroom") を書き, コミットして <span class="in">`origin/dev`</span> へ push します.</span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>GitHub で <span class="in">`dev`</span> を <span class="in">`main`</span> にマージします.</span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ローカルに戻り <span class="in">`main`</span> に移って <span class="in">`foo3.txt`</span> に別の一行 (例: "Village of Bamboo Shoot") を書き, コミットします.</span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`origin/main`</span> から pull してコンフリクトを起こし, それを解決します.</span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究のワークフロー {#sec-workflow}</span></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a>ここまでの道具を, 日々の研究で繰り返す一連の流れにまとめます. 私はだいたい次の6ステップを回しています. 最初はこの流れをそのまま真似るだけで十分です.</span>
 <span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. ローカルを同期する</span></span>
 <span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## 研究のワークフロー {#sec-workflow}</span></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>作業を始める前に, まず main を最新の状態にしておきます (@fig-wf-pull).</span>
 <span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>ここまでの道具を, 日々の研究で繰り返す一連の流れにまとめます. 私はだいたい次の6ステップを回しています. 最初はこの流れをそのまま真似るだけで十分です.</span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a><span class="al">![main を最新化](../static/cetz/wf-pull.svg)</span>{#fig-wf-pull fig-align="center" width="22%"}</span>
 <span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. ローカルを同期する</span></span>
-<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>作業を始める前に, まず main を最新の状態にしておきます (@fig-wf-pull).</span>
-<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a><span class="al">![main を最新化](../static/cetz/wf-pull.svg)</span>{#fig-wf-pull fig-align="center" width="22%"}</span>
-<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
-<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. dev ブランチで書く</span></span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>main から dev を切り, そこで作業します (@fig-wf-branch).</span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a><span class="al">![dev ブランチで作業](../static/cetz/wf-branch.svg)</span>{#fig-wf-branch fig-align="center" width="50%"}</span>
 <span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. dev ブランチで書く</span></span>
-<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>main から dev を切り, そこで作業します (@fig-wf-branch).</span>
-<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a><span class="al">![dev ブランチで作業](../static/cetz/wf-branch.svg)</span>{#fig-wf-branch fig-align="center" width="50%"}</span>
-<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> dev    <span class="co"># create dev and switch to it (same as: git branch dev &amp;&amp; git switch dev)</span></span>
-<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a><span class="co"># ... write code ...</span></span>
-<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> dev    <span class="co"># create dev and switch to it (same as: git branch dev &amp;&amp; git switch dev)</span></span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a><span class="co"># ... write code ...</span></span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. コミットする</span></span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a>意味のあるまとまりごとに, ステージしてコミットします (@fig-wf-commit).</span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a><span class="al">![コミットを積む](../static/cetz/wf-commit.svg)</span>{#fig-wf-commit fig-align="center" width="50%"}</span>
 <span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. コミットする</span></span>
-<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a>意味のあるまとまりごとに, ステージしてコミットします (@fig-wf-commit).</span>
-<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a><span class="al">![コミットを積む](../static/cetz/wf-commit.svg)</span>{#fig-wf-commit fig-align="center" width="50%"}</span>
-<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add foo1.txt foo2.txt    <span class="co"># stage files to commit (git add . for all)</span></span>
-<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"MESSAGE"</span></span>
-<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add foo1.txt foo2.txt    <span class="co"># stage files to commit (git add . for all)</span></span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"MESSAGE"</span></span>
+<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. リモートへ Push する</span></span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>dev をリモートへ送ります (@fig-wf-push).</span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a><span class="al">![dev を push](../static/cetz/wf-push.svg)</span>{#fig-wf-push fig-align="center" width="100%"}</span>
 <span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. リモートへ Push する</span></span>
-<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a>dev をリモートへ送ります (@fig-wf-push).</span>
+<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin dev</span>
+<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a><span class="al">![dev を push](../static/cetz/wf-push.svg)</span>{#fig-wf-push fig-align="center" width="100%"}</span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Pull Request とマージ</span></span>
 <span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin dev</span>
-<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a>GitHub 上で Pull Request を作り, dev を main にマージします (@fig-wf-pr). マージが終わったら, リモートの dev ブランチを消しておくことを勧めます.</span>
+<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a><span class="al">![Pull Request でマージ](../static/cetz/wf-pr.svg)</span>{#fig-wf-pr fig-align="center" width="75%"}</span>
 <span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Pull Request とマージ</span></span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. ローカルの main を最新化する</span></span>
 <span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a>GitHub 上で Pull Request を作り, dev を main にマージします (@fig-wf-pr). マージが終わったら, リモートの dev ブランチを消しておくことを勧めます.</span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a>Pull Request でマージが済んだら, ローカルの main に戻って pull し, 役目を終えた dev を消します (@fig-wf-sync). これで手元の main にもマージ結果 (M) が反映され, 次の作業に備えられます.</span>
 <span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a><span class="al">![Pull Request でマージ](../static/cetz/wf-pr.svg)</span>{#fig-wf-pr fig-align="center" width="75%"}</span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a><span class="al">![ローカルの main を最新化](../static/cetz/wf-sync.svg)</span>{#fig-wf-sync fig-align="center" width="100%"}</span>
 <span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. ローカルの main を最新化する</span></span>
-<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a>Pull Request でマージが済んだら, ローカルの main に戻って pull し, 役目を終えた dev を消します (@fig-wf-sync). これで手元の main にもマージ結果 (M) が反映され, 次の作業に備えられます.</span>
-<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a><span class="al">![ローカルの main を最新化](../static/cetz/wf-sync.svg)</span>{#fig-wf-sync fig-align="center" width="100%"}</span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> dev    <span class="co"># delete local dev branch</span></span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
-<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
-<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> dev    <span class="co"># delete local dev branch</span></span>
-<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a>上で紹介した研究のワークフローを, 実際に真似てみましょう.</span>
+<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.</span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a><span class="fu">## 困ったときは</span></span>
 <span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a><span class="fu">## Handson 4: ワークフローを真似る</span></span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a>git を使う最大の強みは, トラブルが起きた時に過去に戻って再開できることです. </span>
 <span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>上のステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.</span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### 履歴をたどる</span></span>
 <span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a>まずは <span class="in">`git log --oneline`</span> で, これまでのコミットを一覧します (@sec-git-log).</span>
 <span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a><span class="fu">## 困ったときは</span></span>
-<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a>git を使う最大の強みは, トラブルが起きた時に過去に戻って再開できることです. </span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a><span class="fu">### 履歴をたどる</span></span>
-<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a>まずは <span class="in">`git log --oneline`</span> で, これまでのコミットを一覧します (@sec-git-log).</span>
-<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
-<span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="in">a84d0e9 add computation-data</span></span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 migrate to quarto book</span></span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a><span class="in">6761acb add high-speed</span></span>
+<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a>この一覧を図にすると @fig-commit-chain のようになります. 各コミットはハッシュ名で識別され, いまの作業位置を指す HEAD は, 最新コミット <span class="in">`a84d0e9`</span> の main 上にあります. この一覧から, どのコミットのあたりで問題が起きたか, どの2つを見比べればよいかの見当をつけます.</span>
 <span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
-<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a><span class="in">a84d0e9 add computation-data</span></span>
-<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 migrate to quarto book</span></span>
-<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a><span class="in">6761acb add high-speed</span></span>
-<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a><span class="al">![コミット列と HEAD](../static/cetz/commit-chain.svg)</span>{#fig-commit-chain fig-align="center" width="55%"}</span>
+<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a><span class="fu">### 変更を見比べる</span></span>
+<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a>怪しいコミットの見当がついたら, <span class="in">`git diff`</span> で中身を見比べます. @fig-commit-compare で見たように, 差分 (diff) を取れば「どこが, どう変わったか」だけに注目できます.</span>
 <span id="cb25-412"><a href="#cb25-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a>この一覧を図にすると @fig-commit-chain のようになります. 各コミットはハッシュ名で識別され, いまの作業位置を指す HEAD は, 最新コミット <span class="in">`a84d0e9`</span> の main 上にあります. この一覧から, どのコミットのあたりで問題が起きたか, どの2つを見比べればよいかの見当をつけます.</span>
-<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a><span class="al">![コミット列と HEAD](../static/cetz/commit-chain.svg)</span>{#fig-commit-chain fig-align="center" width="55%"}</span>
-<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a><span class="fu">### 変更を見比べる</span></span>
-<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a>怪しいコミットの見当がついたら, <span class="in">`git diff`</span> で中身を見比べます. @fig-commit-compare で見たように, 差分 (diff) を取れば「どこが, どう変わったか」だけに注目できます.</span>
-<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff                  <span class="co"># uncommitted changes vs the last commit</span></span>
-<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff 9d04011 a84d0e9  <span class="co"># differences between two commits</span></span>
-<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a>出力では, 取り除かれた行が <span class="in">`-`</span>, 加わった行が <span class="in">`+`</span> で示されます.</span>
-<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
-<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a><span class="in">- tip &lt;- mean(tip_amount)</span></span>
-<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a><span class="in">+ tip &lt;- mean(tip_amount, na.rm = TRUE)</span></span>
-<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a>この例なら, <span class="in">`na.rm = TRUE`</span> を足したことが変化の原因だと分かります. ここまで切り分けられれば, あとはその場で直すか, 前の状態に戻すかです.</span>
-<span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a><span class="fu">### 操作を取り消す</span></span>
-<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a>戻りたいコミットが分かったら, <span class="in">`git reset`</span> で HEAD をそこへ移します. 行き先は <span class="in">`git log`</span> で調べたハッシュで指定します. <span class="in">`--soft`</span> は変更内容を手元に残したまま HEAD の位置だけを戻し, <span class="in">`--hard`</span> は作業ディレクトリごとその状態に戻します (<span class="in">`--hard`</span> は未コミットの変更を捨てるので注意してください).</span>
-<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--soft</span> HEAD~1    <span class="co"># undo the last commit, keep its changes</span></span>
-<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> 9d04011   <span class="co"># discard everything back to commit 9d04011</span></span>
+<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff                  <span class="co"># uncommitted changes vs the last commit</span></span>
+<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff 9d04011 a84d0e9  <span class="co"># differences between two commits</span></span>
+<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a>出力では, 取り除かれた行が <span class="in">`-`</span>, 加わった行が <span class="in">`+`</span> で示されます.</span>
+<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a><span class="in">- tip &lt;- mean(tip_amount)</span></span>
+<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a><span class="in">+ tip &lt;- mean(tip_amount, na.rm = TRUE)</span></span>
+<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a>この例なら, <span class="in">`na.rm = TRUE`</span> を足したことが変化の原因だと分かります. ここまで切り分けられれば, あとはその場で直すか, 前の状態に戻すかです.</span>
+<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a><span class="fu">### 操作を取り消す</span></span>
+<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a>戻りたいコミットが分かったら, <span class="in">`git reset`</span> で HEAD をそこへ移します. 行き先は <span class="in">`git log`</span> で調べたハッシュで指定します. <span class="in">`--soft`</span> は変更内容を手元に残したまま HEAD の位置だけを戻し, <span class="in">`--hard`</span> は作業ディレクトリごとその状態に戻します (<span class="in">`--hard`</span> は未コミットの変更を捨てるので注意してください).</span>
+<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--soft</span> HEAD~1    <span class="co"># undo the last commit, keep its changes</span></span>
+<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> 9d04011   <span class="co"># discard everything back to commit 9d04011</span></span>
+<span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### 最終兵器: git reflog</span></span>
+<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a><span class="in">`git reset --hard`</span> で戻りすぎたり, コミットを消してしまったりして, <span class="in">`git log`</span> を見ても目当てのコミットが見つからない. そんなときの最終兵器が <span class="in">`git reflog`</span> です. <span class="in">`git log`</span> がいまの HEAD からたどれるコミット (プロジェクトの公式の歴史) しか見せないのに対し, <span class="in">`git reflog`</span> は HEAD がこれまで指してきた位置の足あとを, 操作の種類ごとにすべて見せます.</span>
+<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog</span>
 <span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a><span class="fu">### 最終兵器: git reflog</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a>出力はたとえば次のようになります.</span>
 <span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a><span class="in">`git reset --hard`</span> で戻りすぎたり, コミットを消してしまったりして, <span class="in">`git log`</span> を見ても目当てのコミットが見つからない. そんなときの最終兵器が <span class="in">`git reflog`</span> です. <span class="in">`git log`</span> がいまの HEAD からたどれるコミット (プロジェクトの公式の歴史) しか見せないのに対し, <span class="in">`git reflog`</span> は HEAD がこれまで指してきた位置の足あとを, 操作の種類ごとにすべて見せます.</span>
-<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog</span>
-<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a>出力はたとえば次のようになります.</span>
-<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
-<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a><span class="in">a84d0e9 HEAD@{0}: commit: add computation-data</span></span>
-<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 HEAD@{1}: reset: moving to HEAD~1</span></span>
-<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a><span class="in">1f2e3c4 HEAD@{2}: commit: experimental change</span></span>
-<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 HEAD@{3}: commit: migrate to quarto book</span></span>
-<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a><span class="in">a84d0e9 HEAD@{0}: commit: add computation-data</span></span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 HEAD@{1}: reset: moving to HEAD~1</span></span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a><span class="in">1f2e3c4 HEAD@{2}: commit: experimental change</span></span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a><span class="in">9d04011 HEAD@{3}: commit: migrate to quarto book</span></span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a>各行は, コミットのハッシュ, <span class="in">`HEAD@{N}`</span> (N が何手前の状態か. 0 が最新), そして操作の種類と内容です. 注目してほしいのは <span class="in">`HEAD@{2}`</span> の <span class="in">`1f2e3c4`</span> です. これは一度コミットしたものの, その後の <span class="in">`reset`</span> で main の履歴から外れたコミットで, <span class="in">`git log`</span> にはもう現れません. それでも reflog には足あととして残っているので,</span>
+<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> 1f2e3c4</span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a>とすれば復元できます. このように reflog は, 他の方法で見失ったコミットまで救い出せる, 最後の安全網です.</span>
 <span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a>各行は, コミットのハッシュ, <span class="in">`HEAD@{N}`</span> (N が何手前の状態か. 0 が最新), そして操作の種類と内容です. 注目してほしいのは <span class="in">`HEAD@{2}`</span> の <span class="in">`1f2e3c4`</span> です. これは一度コミットしたものの, その後の <span class="in">`reset`</span> で main の履歴から外れたコミットで, <span class="in">`git log`</span> にはもう現れません. それでも reflog には足あととして残っているので,</span>
-<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset <span class="at">--hard</span> 1f2e3c4</span>
-<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a>とすれば復元できます. このように reflog は, 他の方法で見失ったコミットまで救い出せる, 最後の安全網です.</span>
-<span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a>reset で履歴を巻き戻し, 戻りすぎたぶんを reflog で救い出す流れを体験してみましょう.</span>
+<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a>まず, 練習用のコミットをいくつか作ります.</span>
+<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`foo.txt`</span> を作り, "line 1" と書いてコミットします.</span>
+<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"line 2" を追記してコミットします.</span>
+<span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"line 3" を追記してコミットします.</span>
+<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> で, 3つのコミットが積まれたことを確認します.</span>
 <span id="cb25-470"><a href="#cb25-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## Handson 5: reset と reflog で巻き戻す</span></span>
+<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a>次に, <span class="in">`reset`</span> で1つ前に戻します.</span>
 <span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a>まず, 練習用のコミットをいくつか作ります.</span>
-<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`foo.txt`</span> を作り, "line 1" と書いてコミットします.</span>
-<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"line 2" を追記してコミットします.</span>
-<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"line 3" を追記してコミットします.</span>
-<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> で, 3つのコミットが積まれたことを確認します.</span>
-<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a>次に, <span class="in">`reset`</span> で1つ前に戻します.</span>
+<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>最新の "line 3" を取り消したいので, <span class="in">`git reset --hard HEAD~1`</span> を実行します.</span>
+<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> と <span class="in">`foo.txt`</span> を見て, "line 3" のコミットと行が消えたことを確認します.</span>
+<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a>最後に, 戻りすぎたぶんを <span class="in">`reflog`</span> で元に戻します.</span>
+<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>やはり "line 3" が必要でした. <span class="in">`git reflog`</span> を実行し, reset する前の状態 (<span class="in">`HEAD@{1}`</span> の "line 3" のコミット) を探します.</span>
+<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git reset --hard HEAD@{1}`</span> で, その状態に戻します.</span>
+<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> と <span class="in">`foo.txt`</span> で, "line 3" が復活したことを確認します.</span>
 <span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>最新の "line 3" を取り消したいので, <span class="in">`git reset --hard HEAD~1`</span> を実行します.</span>
-<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> と <span class="in">`foo.txt`</span> を見て, "line 3" のコミットと行が消えたことを確認します.</span>
-<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a>最後に, 戻りすぎたぶんを <span class="in">`reflog`</span> で元に戻します.</span>
-<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-487"><a href="#cb25-487" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>やはり "line 3" が必要でした. <span class="in">`git reflog`</span> を実行し, reset する前の状態 (<span class="in">`HEAD@{1}`</span> の "line 3" のコミット) を探します.</span>
-<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git reset --hard HEAD@{1}`</span> で, その状態に戻します.</span>
-<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`git log --oneline`</span> と <span class="in">`foo.txt`</span> で, "line 3" が復活したことを確認します.</span>
-<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a><span class="fu">### Git で悪いことは起きない</span></span>
-<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a>最後に覚えておいてほしいのは, Git はセーブポイントを保存しているだけなので, 悪いことは起きない, ということです. 実際にコミットから古いファイルを復元する場面はめったにありません. それでも「いつでも戻れる」という安心感が, 思い切ってコードを書き換える自由を支えてくれます.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a><span class="fu">### Git で悪いことは起きない</span></span>
+<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a>最後に覚えておいてほしいのは, Git はセーブポイントを保存しているだけなので, 悪いことは起きない, ということです. 実際にコミットから古いファイルを復元する場面はめったにありません. それでも「いつでも戻れる」という安心感が, 思い切ってコードを書き換える自由を支えてくれます.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});

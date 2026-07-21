@@ -63,7 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../lesson/computation-fast.html" rel="next">
+<link href="../lesson/speedup.html" rel="next">
 <link href="../lesson/git.html" rel="prev">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -98,6 +98,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -193,13 +195,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/computation-fast.html" class="sidebar-item-text sidebar-link">
+  <a href="../lesson/speedup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/computation-data.html" class="sidebar-item-text sidebar-link">
+  <a href="../lesson/large-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
   </div>
 </li>
@@ -237,6 +239,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -296,6 +304,7 @@ window.Quarto = {
   <li><a href="#tinytable-による表" id="toc-tinytable-による表" class="nav-link" data-scroll-target="#tinytable-による表"><code>tinytable</code> による表</a></li>
   </ul></li>
   <li><a href="#インラインコード" id="toc-インラインコード" class="nav-link" data-scroll-target="#インラインコード"><span class="header-section-number">4.7</span> インラインコード</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">4.8</span> 演習問題</a></li>
   </ul>
 </nav>
     </div>
@@ -750,19 +759,19 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_sc5liraddzw9ouaot9my = TinyTable.createTableFunctions("tinytable_sc5liraddzw9ouaot9my");
+      const tableFns_eaaa19i2oowdj80xqvaa = TinyTable.createTableFunctions("tinytable_eaaa19i2oowdj80xqvaa");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_ygu1m33xuh40heku2yda',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_g3fjies5uhar7bng00sf',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_q4qyqg7jastxz5kyltu1',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_wxvkejqtg2hjwzugztzu',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_sc5liraddzw9ouaot9my.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_eaaa19i2oowdj80xqvaa.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -771,11 +780,11 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_sc5liraddzw9ouaot9my td.tinytable_css_ygu1m33xuh40heku2yda, #tinytable_sc5liraddzw9ouaot9my th.tinytable_css_ygu1m33xuh40heku2yda {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_sc5liraddzw9ouaot9my td.tinytable_css_g3fjies5uhar7bng00sf, #tinytable_sc5liraddzw9ouaot9my th.tinytable_css_g3fjies5uhar7bng00sf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_eaaa19i2oowdj80xqvaa td.tinytable_css_q4qyqg7jastxz5kyltu1, #tinytable_eaaa19i2oowdj80xqvaa th.tinytable_css_q4qyqg7jastxz5kyltu1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_eaaa19i2oowdj80xqvaa td.tinytable_css_wxvkejqtg2hjwzugztzu, #tinytable_eaaa19i2oowdj80xqvaa th.tinytable_css_wxvkejqtg2hjwzugztzu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_sc5liraddzw9ouaot9my" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_eaaa19i2oowdj80xqvaa" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -830,6 +839,129 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 </div>
 </div>
 <p>数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは 344 である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.</p>
+</section>
+<section id="演習問題" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">4.8</span> 演習問題</h2>
+<p>この章の演習は, 実際に小さな <code>.qmd</code> を書きながら進めます. VSCode か RStudio で <code>report.qmd</code> という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで <code>quarto render report.qmd</code> を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.</p>
+<div class="quiz">
+<p>まず, ドキュメントの骨組みを作ります. <code>report.qmd</code> の冒頭に, タイトル・著者名・日付を持つ YAML フロントマターを書き, 出力形式を HTML に指定してください. その下に見出しを1つと短い段落を1つ書いて, HTML にレンダリングしてみましょう.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答例
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> ペンギンデータの分析</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> 山田太郎</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-04-01</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## はじめに</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>このレポートでは, Palmer ペンギンのデータを分析します.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>format: html</code> の代わりに <code>format: pdf</code> や <code>format: typst</code> と書けば, 同じ原稿から別の形式で出力できます. タイトルはフロントマターの <code>title</code> が <code>h1</code> として扱われるので, 本文の見出しは <code>##</code> (h2) から始めます.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>次に, Markdown 記法の練習です. さきほどの段落に続けて, 太字とリンクを1つずつ含む文と, 3項目の箇条書きを書いてください. 箇条書きのうち1項目は, さらにネストした子項目を持たせてみましょう.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答例
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>このデータは <span class="co">[</span><span class="ot">Palmer Station LTER</span><span class="co">](https://pallter.marine.rutgers.edu/)</span> が収集した **実データ** です. 次の3種のペンギンが含まれます.</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Adelie</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Chinstrap</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gentoo</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Biscoe 島でのみ観測されます</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>太字は <code>**...**</code>, リンクは <code>[表示テキスト](URL)</code> でした. ネストは, 親項目の下でスペース4つ分字下げします.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>コードが生成する図に, 番号を振って相互参照します. <code>penguins</code> データで, くちばしの長さとひれの長さの散布図を描くコードチャンクを追加してください. チャンクラベルを <code>fig-</code> で始め, <code>fig-cap</code> でキャプションを付け, 本文から <code>@</code> で参照しましょう.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答例
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>チャンクの冒頭 (<code>setup</code> チャンクなど) で <code>library(dplyr)</code> と <code>library(ggplot2)</code> を読み込んでおきます. そのうえで, 次のチャンクを本文に追加します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-penguins-scatter</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "くちばしの長さとひれの長さの関係"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_len, <span class="at">y =</span> bill_len, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Flipper length (mm)"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Bill length (mm)"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Species"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本文には「散布図を <code>@fig-penguins-scatter</code> に示します.」のように書きます. ラベルを <code>fig-</code> で始めるのが約束で, 図番号は出現順に自動で振られます.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>最後に, 集計表とインラインコードを足します. 種ごとの平均値を <code>tinytable</code> で表にし, <code>tbl-</code> ラベルを付けて相互参照してください. さらに, サンプルサイズを本文にインラインコードで埋め込みましょう.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答例
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>setup</code> チャンクで <code>library(tinytable)</code> も読み込んでおき, 次のチャンクを追加します.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-mean</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "種ごとの平均値"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本文には次のように書きます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>種ごとの平均値を @tbl-penguins-mean にまとめました. 分析に使ったサンプルサイズは 344 です.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>表番号も <code>tbl-</code> ラベルで自動管理され, インラインコードの <code>344</code> はレンダリング時に実際の行数へ置き換わります. データを差し替えても, 図・表・本文中の数値がすべて自動で追従します.</p>
+</div>
+</div>
+</div>
+</div>
 
 
 <!-- -->
@@ -1321,535 +1453,636 @@ document.addEventListener("DOMContentLoaded", function () {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lesson/computation-fast.html" class="pagination-link" aria-label="高速化">
+      <a href="../lesson/speedup.html" class="pagination-link" aria-label="高速化">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Quarto</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto とは</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](../static/img/01-quarto/quarto-flow.svg)</span>{fig-align="center"}</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, <span class="in">`.qmd`</span> という拡張子のファイルにあるコードを実行し, Markdown (<span class="in">`.md`</span>) 形式のドキュメントを生成します. さらに, <span class="co">[</span><span class="ot">pandoc</span><span class="co">](https://pandoc.org)</span> というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Markdown 記法</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>コードの実行については後の章で説明しますが, まずはMarkdown記法について簡単に説明します.</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Heading (見出し)</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Heading 1</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heading 2</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Heading 3</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Heading 1<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Heading 2<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Heading 3<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="in">`#`</span> の個数で見出しのレベルが決まります. HTMLのルールとして, <span class="in">`h1`</span> はそのページのタイトルに使うことが推奨されているため, 通常は <span class="in">`h2`</span> 以降を見出しとして使います. Quartoの場合は, 後に紹介するYAMLフロントマターで指定したタイトルが <span class="in">`h1`</span> として扱われるため, 基本的には <span class="in">`h2`</span> 以降を使ってください.^<span class="co">[</span><span class="ot">論文の場合は, `h1` を節ごとに使うこともありますが, その場合はQuartoが`##` を `h1` に自動で変換するため, 基本的には `##` 以降を見出しとして使うと覚えておくと良いでしょう.</span><span class="co">]</span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 改行とパラグラフ</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>アカデミックな文章では, 改行は段落の区切りを意味します. Markdownでは, パラグラフを明示的に区切るために, 空行を入れる必要があります. 逆に, markdown上で改行しているだけでは, 出力上では改行されません.</span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>吾輩は猫である.</span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>名前はまだない.</span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>どこで生れたかとんと見当がつかぬ.</span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>吾輩は猫である.</span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>名前はまだない.</span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>どこで生れたかとんと見当がつかぬ.</span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### 強調</span></span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a>Markdownでは必要最小限の以下の三つの装飾が用意されています.</span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>**太字** か __太字__ と書きます.</span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>*斜体* か _斜体_ と書きます.</span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>***太字かつ斜体*** か ___太字かつ斜体___</span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>~~打ち消し線~~ はあまり使いません.</span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>**太字** か __太字__ と書きます.</span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>*斜体* か _斜体_ と書きます.</span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>***太字かつ斜体*** か ___太字かつ斜体___</span>
-<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>~~打ち消し線~~ はあまり使いません.</span>
-<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### リンク</span></span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Google</span><span class="co">](https://google.com)</span> へのリンク</span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Google</span><span class="co">](https://google.com)</span> へのリンク</span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### 箇条書き</span></span>
-<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a>番号付きでないものは <span class="in">`-`</span> や <span class="in">`*`</span> を使って箇条書きにできます. ネストも可能です.</span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目1</span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目2</span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>項目2.1</span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>項目2.2</span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目3</span>
-<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="2%"}</span></span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="49%"}</span></span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="in">**Output**</span></span>
-<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目1</span></span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目2</span></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a><span class="in">    - 項目2.1</span></span>
-<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a><span class="in">    - 項目2.2</span></span>
-<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目3</span></span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
-<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="in">番号つきのものは, 数字を使います. なお, 全ての行で `1.` と書いても, 出力上では正しい番号になります.</span></span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {.columns}</span></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="49%"}</span></span>
-<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a><span class="in">**Input**</span></span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目1</span></span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目2</span></span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="in">    1. 項目2.1</span></span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a><span class="in">    1. 項目2.2</span></span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目3</span></span>
-<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目1</span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目2</span>
-<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>項目2.1</span>
-<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>項目2.2</span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目3</span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### 図の挿入</span></span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](path/to/image.png)</span></span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](../static/img/01-quarto/hokusai_kanagawa.jpg)</span></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a>ここでパスという概念が重要になります. Quartoでは, ドキュメントのルートディレクトリを基準にして画像ファイルを指定します. 基本的には, <span class="in">`.qmd`</span> ファイルと同じ階層に <span class="in">`img`</span> というフォルダを作り, そこに画像ファイルを入れるのが一般的です. 例えば, <span class="in">`report.qmd`</span> と同じ階層に <span class="in">`img/hokusai_kanagawa.jpg`</span> というファイルがある場合は, <span class="in">`![図のタイトル](img/hokusai_kanagawa.jpg)`</span> と書くことで画像を挿入できます.</span>
-<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表の挿入</span></span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Default <span class="pp">|</span> Left <span class="pp">|</span> Right <span class="pp">|</span> Center <span class="pp">|</span></span>
-<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|:-----|------:|:------:|</span></span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12      <span class="pp">|</span> 12   <span class="pp">|</span>    12 <span class="pp">|</span>   12   <span class="pp">|</span></span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 123     <span class="pp">|</span> 123  <span class="pp">|</span>   123 <span class="pp">|</span>  123   <span class="pp">|</span></span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a>: 表のタイトル</span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Default <span class="pp">|</span> Left <span class="pp">|</span> Right <span class="pp">|</span> Center <span class="pp">|</span></span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|:-----|------:|:------:|</span></span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12      <span class="pp">|</span> 12   <span class="pp">|</span>    12 <span class="pp">|</span>   12   <span class="pp">|</span></span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 123     <span class="pp">|</span> 123  <span class="pp">|</span>   123 <span class="pp">|</span>  123   <span class="pp">|</span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>: 表のタイトル</span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>Markdownでは, <span class="in">`|`</span> と <span class="in">`-`</span> を使って表を作ることができます. さらに, <span class="in">`:`</span> を使うことで, 列の位置を指定することもできます. デフォルトでは, 列は全て左寄せになりますが, <span class="in">`:---`</span> と書くと左寄せ, <span class="in">`---:`</span> と書くと右寄せ, <span class="in">`:---:`</span> と書くと中央寄せになります. GUIツールで表を作ってmarkdwon形式でエクスポートするサービスとして, <span class="co">[</span><span class="ot">Tables Generator</span><span class="co">](https://www.tablesgenerator.com/markdown_tables)</span> などがあります.</span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## $\LaTeX$ Math 記法</span></span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>Markdownでは $\LaTeX$ という組版ソフトの数式記法を使って数式を表現することができます. 数式は, <span class="in">`$...$`</span> で囲むとインライン数式, <span class="in">`$$...$$`</span> で囲むとブロック数式 (改行して中央揃え) になります.</span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-308"><a href="#cb20-308" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a>$e^{i\pi} + 1 = 0$ は最も美しい数式だ.</span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a>$e^{i\pi} + 1 = 0$ は最も美しい数式だ.</span>
-<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
-<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
-<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>ラマヌジャンの円周率公式は次の通り:</span>
-<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>\frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2}</span>
-<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>\sum_{n=0}^{\infty} \frac{(4 n)!}{(n!)^4}</span>
-<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>\frac{26390 n+1103}{396^{4 n}}</span>
-<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>ラマヌジャンの円周率公式は次の通り:</span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a>\frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2} \sum_{n=0}^{\infty} \frac{(4 n)!}{(n!)^4} \frac{26390 n+1103}{396^{4 n}}</span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto 記法</span></span>
-<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a>ここからは Quarto独自の記法についての説明です. 引用と文献情報については <span class="co">[</span><span class="ot">文献と引用</span><span class="co">](literature.qmd)</span> の章で説明します.</span>
-<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a><span class="fu">### Front Matter</span></span>
-<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> タイトル</span></span>
-<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> 著者名</span></span>
-<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2026-04-01</span></span>
-<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
-<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>ここから本文</span>
-<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a>Quartoのドキュメントでは, 冒頭に <span class="in">`---`</span> で囲まれたYAML形式のフロントマターを置くことができます. ここには, ドキュメントのタイトルや著者名, 日付などのメタデータを記述することができます. また, <span class="in">`format`</span> というフィールドで, 出力形式を指定することもできます. 例えば, <span class="in">`format: typst`</span> と書くと, Typst形式で出力されるようになります.</span>
-<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相互参照 (Cross Reference)</span></span>
-<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a>スライドでは必須ではありませんが, レポートなどを書く場合は, 図表番号や節番号を自動で管理できると便利です. Quartoでは, <span class="in">`fig-xxxx`</span>, <span class="in">`tbl-xxx`</span>, <span class="in">`sec-xxx`</span> などの特別なラベルを貼ることで, それらの番号を自動で管理することができます.</span>
-<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-376"><a href="#cb20-376" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
-<span id="cb20-377"><a href="#cb20-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
-<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](img/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
-<span id="cb20-382"><a href="#cb20-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-383"><a href="#cb20-383" aria-hidden="true" tabindex="-1"></a>@fig-kanagawa は葛飾北斎の有名な浮世絵である.</span>
-<span id="cb20-384"><a href="#cb20-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
-<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](../static/img/01-quarto/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
-<span id="cb20-389"><a href="#cb20-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-390"><a href="#cb20-390" aria-hidden="true" tabindex="-1"></a>@fig-kanagawa は葛飾北斎の有名な浮世絵である.</span>
-<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
-<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
-<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
-<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fruit  <span class="pp">|</span> price  <span class="pp">|</span></span>
-<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------|</span></span>
-<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> apple  <span class="pp">|</span> 2.05   <span class="pp">|</span></span>
-<span id="cb20-402"><a href="#cb20-402" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> pear   <span class="pp">|</span> 1.37   <span class="pp">|</span></span>
-<span id="cb20-403"><a href="#cb20-403" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> orange <span class="pp">|</span> 3.09   <span class="pp">|</span></span>
-<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a>: Fruit prices {#tbl-fruit}</span>
-<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a>@tbl-fruit は果物の値段を表している.</span>
-<span id="cb20-408"><a href="#cb20-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-409"><a href="#cb20-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
-<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fruit  <span class="pp">|</span> price  <span class="pp">|</span></span>
-<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------|</span></span>
-<span id="cb20-414"><a href="#cb20-414" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> apple  <span class="pp">|</span> 2.05   <span class="pp">|</span></span>
-<span id="cb20-415"><a href="#cb20-415" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> pear   <span class="pp">|</span> 1.37   <span class="pp">|</span></span>
-<span id="cb20-416"><a href="#cb20-416" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> orange <span class="pp">|</span> 3.09   <span class="pp">|</span></span>
-<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a>: Fruit prices {#tbl-fruit}</span>
-<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-420"><a href="#cb20-420" aria-hidden="true" tabindex="-1"></a>@tbl-fruit は果物の値段を表している.</span>
-<span id="cb20-421"><a href="#cb20-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-422"><a href="#cb20-422" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-423"><a href="#cb20-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-424"><a href="#cb20-424" aria-hidden="true" tabindex="-1"></a>基本的には, 特別な prefix (<span class="in">`fig-`</span>, <span class="in">`tbl-`</span>, <span class="in">`sec-`</span> など) をつけたラベルを <span class="in">`{#label}`</span> という形式で指定し, 本文中では <span class="in">`@label`</span> と書くことで, その要素の番号を自動で参照することができます. その他の要素 (式や命題など) も同様の方法で参照できるので <span class="co">[</span><span class="ot">Quartoのドキュメント</span><span class="co">](https://quarto.org/docs/authoring/cross-references.html)</span> を参照してください.</span>
-<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## コードの実行</span></span>
-<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a>Quartoの最大の特徴は, ドキュメントの中にコードを埋め込んで実行できることです. コードは, ` ``<span class="in">`{r} `</span> で始まり ` ``<span class="in">` `</span> で終わる コードチャンク (code chunk) の中に書きます. コンパイルのたびにQuartoがそのコードを実行し, コードと結果をドキュメントに挿入します.^<span class="co">[</span><span class="ot">ここでは `{r}` と書いてR言語を使っていますが, `{python}` や `{julia}` に変えれば, それぞれの言語のコードも実行できます. 一つのドキュメントの中で複数の言語を混在させることも可能です.</span><span class="co">]</span></span>
-<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-432"><a href="#cb20-432" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-436"><a href="#cb20-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-437"><a href="#cb20-437" aria-hidden="true" tabindex="-1"></a>チャンクの冒頭にある <span class="in">`#|`</span> で始まる行は, チャンクオプション (chunk option) です. YAML形式で, そのチャンクの挙動を細かく制御します. 例えば次のチャンクには <span class="in">`label`</span> と <span class="in">`eval`</span> の2つのオプションが付いています.</span>
-<span id="cb20-438"><a href="#cb20-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-441"><a href="#cb20-441" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-442"><a href="#cb20-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: install-example</span></span>
-<span id="cb20-443"><a href="#cb20-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb20-444"><a href="#cb20-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb20-445"><a href="#cb20-445" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb20-446"><a href="#cb20-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-447"><a href="#cb20-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-448"><a href="#cb20-448" aria-hidden="true" tabindex="-1"></a><span class="in">`eval: false`</span> を指定しているので, このコードは表示されるだけで実行されません. <span class="in">`install.packages()`</span> のように, コンパイルのたびに走らせたくないコードを載せるときに便利です. 実際, 上のチャンクには結果が表示されていないことを確かめてください. よく使うオプションは次の通りです.</span>
-<span id="cb20-449"><a href="#cb20-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-450"><a href="#cb20-450" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`label`</span>: チャンクにつける名前. 後述の相互参照で使います.</span>
-<span id="cb20-451"><a href="#cb20-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`echo`</span>: コード自体を出力に表示するか (<span class="in">`true`</span> / <span class="in">`false`</span>). 結果だけ見せたいときは <span class="in">`false`</span> にします.</span>
-<span id="cb20-452"><a href="#cb20-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`eval`</span>: コードを実行するか. <span class="in">`false`</span> にすると, 上の例のように, コードは表示されるだけで実行されません.</span>
-<span id="cb20-453"><a href="#cb20-453" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`include`</span>: コードも結果も出力に含めるか. <span class="in">`false`</span> にすると, 実行はされますが何も表示されません (パッケージの読み込みなど, 裏方の処理に使います).</span>
-<span id="cb20-454"><a href="#cb20-454" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`warning`</span> / <span class="in">`message`</span>: 警告やメッセージを表示するか.</span>
-<span id="cb20-455"><a href="#cb20-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-456"><a href="#cb20-456" aria-hidden="true" tabindex="-1"></a><span class="fu">## コードと相互参照</span></span>
-<span id="cb20-457"><a href="#cb20-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-458"><a href="#cb20-458" aria-hidden="true" tabindex="-1"></a>前の「相互参照」の節では, 手で書いた画像やMarkdownの表に番号を振りました. コードが生成する図や表にも, 同じ仕組みがそのまま使えます.</span>
-<span id="cb20-459"><a href="#cb20-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-460"><a href="#cb20-460" aria-hidden="true" tabindex="-1"></a><span class="fu">### `ggplot2` による図</span></span>
-<span id="cb20-461"><a href="#cb20-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-462"><a href="#cb20-462" aria-hidden="true" tabindex="-1"></a>コードで生成する図には, チャンクオプションの <span class="in">`#| label:`</span> を <span class="in">`fig-`</span> で始め, <span class="in">`#| fig-cap:`</span> でキャプションを付けます. 図そのものに <span class="in">`{#...}`</span> を付ける必要はありません.</span>
-<span id="cb20-463"><a href="#cb20-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-466"><a href="#cb20-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-467"><a href="#cb20-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-penguins</span></span>
-<span id="cb20-468"><a href="#cb20-468" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "くちばしの長さとひれの長さの関係"</span></span>
-<span id="cb20-469"><a href="#cb20-469" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb20-470"><a href="#cb20-470" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb20-471"><a href="#cb20-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_len, <span class="at">y =</span> bill_len, <span class="at">color =</span> species)) <span class="sc">+</span></span>
-<span id="cb20-472"><a href="#cb20-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb20-473"><a href="#cb20-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-474"><a href="#cb20-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Flipper length (mm)"</span>,</span>
-<span id="cb20-475"><a href="#cb20-475" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Bill length (mm)"</span>,</span>
-<span id="cb20-476"><a href="#cb20-476" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Species"</span></span>
-<span id="cb20-477"><a href="#cb20-477" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-478"><a href="#cb20-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-479"><a href="#cb20-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-480"><a href="#cb20-480" aria-hidden="true" tabindex="-1"></a>本文で <span class="in">`@fig-penguins`</span> と書くと @fig-penguins のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.</span>
-<span id="cb20-481"><a href="#cb20-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-482"><a href="#cb20-482" aria-hidden="true" tabindex="-1"></a><span class="fu">### `tinytable` による表</span></span>
-<span id="cb20-483"><a href="#cb20-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-484"><a href="#cb20-484" aria-hidden="true" tabindex="-1"></a>表も同様に, チャンクラベルを <span class="in">`tbl-`</span> で始め, <span class="in">`#| tbl-cap:`</span> でキャプションを付けます. <span class="in">`tinytable`</span> では <span class="in">`tt(caption = ...)`</span> よりも, このチャンクオプションを使う方が相互参照が確実に効きます.</span>
-<span id="cb20-485"><a href="#cb20-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-488"><a href="#cb20-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-489"><a href="#cb20-489" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins</span></span>
-<span id="cb20-490"><a href="#cb20-490" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "ペンギンの種類ごとの平均値"</span></span>
-<span id="cb20-491"><a href="#cb20-491" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
-<span id="cb20-492"><a href="#cb20-492" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb20-493"><a href="#cb20-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb20-494"><a href="#cb20-494" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb20-495"><a href="#cb20-495" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb20-496"><a href="#cb20-496" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
-<span id="cb20-497"><a href="#cb20-497" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb20-498"><a href="#cb20-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
-<span id="cb20-499"><a href="#cb20-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-500"><a href="#cb20-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-501"><a href="#cb20-501" aria-hidden="true" tabindex="-1"></a>本文で <span class="in">`@tbl-penguins`</span> と書くと @tbl-penguins のように参照できます.</span>
-<span id="cb20-502"><a href="#cb20-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-503"><a href="#cb20-503" aria-hidden="true" tabindex="-1"></a><span class="fu">## インラインコード</span></span>
-<span id="cb20-504"><a href="#cb20-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-505"><a href="#cb20-505" aria-hidden="true" tabindex="-1"></a>文章の途中に計算結果を埋め込みたいときは, インラインコード (inline code) を使います. バッククォートの中で <span class="in">`r`</span> に続けて式を書くと, コンパイル時にその評価結果が文章に挿入されます.</span>
-<span id="cb20-506"><a href="#cb20-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-507"><a href="#cb20-507" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb20-508"><a href="#cb20-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-509"><a href="#cb20-509" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-510"><a href="#cb20-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-511"><a href="#cb20-511" aria-hidden="true" tabindex="-1"></a>**Input**</span>
-<span id="cb20-512"><a href="#cb20-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-515"><a href="#cb20-515" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-516"><a href="#cb20-516" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-517"><a href="#cb20-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: asis</span></span>
-<span id="cb20-518"><a href="#cb20-518" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"```md</span><span class="sc">\n</span><span class="st">円周率はおよそ `r round(pi, 2)` です.</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb20-519"><a href="#cb20-519" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-520"><a href="#cb20-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-521"><a href="#cb20-521" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-522"><a href="#cb20-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-523"><a href="#cb20-523" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb20-524"><a href="#cb20-524" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-525"><a href="#cb20-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-526"><a href="#cb20-526" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb20-527"><a href="#cb20-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-528"><a href="#cb20-528" aria-hidden="true" tabindex="-1"></a>**Output**</span>
-<span id="cb20-529"><a href="#cb20-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-530"><a href="#cb20-530" aria-hidden="true" tabindex="-1"></a>円周率はおよそ <span class="in">`r round(pi, 2)`</span> です.</span>
-<span id="cb20-531"><a href="#cb20-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-532"><a href="#cb20-532" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-533"><a href="#cb20-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-534"><a href="#cb20-534" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-535"><a href="#cb20-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-536"><a href="#cb20-536" aria-hidden="true" tabindex="-1"></a>数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは <span class="in">`r nrow(penguins)`</span> である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Quarto</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto とは</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](../static/img/01-quarto/quarto-flow.svg)</span>{fig-align="center"}</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, <span class="in">`.qmd`</span> という拡張子のファイルにあるコードを実行し, Markdown (<span class="in">`.md`</span>) 形式のドキュメントを生成します. さらに, <span class="co">[</span><span class="ot">pandoc</span><span class="co">](https://pandoc.org)</span> というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Markdown 記法</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>コードの実行については後の章で説明しますが, まずはMarkdown記法について簡単に説明します.</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Heading (見出し)</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Heading 1</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heading 2</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Heading 3</span></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Heading 1<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Heading 2<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Heading 3<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="in">`#`</span> の個数で見出しのレベルが決まります. HTMLのルールとして, <span class="in">`h1`</span> はそのページのタイトルに使うことが推奨されているため, 通常は <span class="in">`h2`</span> 以降を見出しとして使います. Quartoの場合は, 後に紹介するYAMLフロントマターで指定したタイトルが <span class="in">`h1`</span> として扱われるため, 基本的には <span class="in">`h2`</span> 以降を使ってください.^<span class="co">[</span><span class="ot">論文の場合は, `h1` を節ごとに使うこともありますが, その場合はQuartoが`##` を `h1` に自動で変換するため, 基本的には `##` 以降を見出しとして使うと覚えておくと良いでしょう.</span><span class="co">]</span></span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 改行とパラグラフ</span></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>アカデミックな文章では, 改行は段落の区切りを意味します. Markdownでは, パラグラフを明示的に区切るために, 空行を入れる必要があります. 逆に, markdown上で改行しているだけでは, 出力上では改行されません.</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a>吾輩は猫である.</span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a>名前はまだない.</span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a>どこで生れたかとんと見当がつかぬ.</span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a>吾輩は猫である.</span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a>名前はまだない.</span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a>どこで生れたかとんと見当がつかぬ.</span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### 強調</span></span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a>Markdownでは必要最小限の以下の三つの装飾が用意されています.</span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a>**太字** か __太字__ と書きます.</span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a>*斜体* か _斜体_ と書きます.</span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>***太字かつ斜体*** か ___太字かつ斜体___</span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>~~打ち消し線~~ はあまり使いません.</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a>**太字** か __太字__ と書きます.</span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a>*斜体* か _斜体_ と書きます.</span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a>***太字かつ斜体*** か ___太字かつ斜体___</span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a>~~打ち消し線~~ はあまり使いません.</span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### リンク</span></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Google</span><span class="co">](https://google.com)</span> へのリンク</span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Google</span><span class="co">](https://google.com)</span> へのリンク</span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### 箇条書き</span></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a>番号付きでないものは <span class="in">`-`</span> や <span class="in">`*`</span> を使って箇条書きにできます. ネストも可能です.</span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目1</span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目2</span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>項目2.1</span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>項目2.2</span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>項目3</span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="2%"}</span></span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="49%"}</span></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a><span class="in">**Output**</span></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目1</span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目2</span></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="in">    - 項目2.1</span></span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a><span class="in">    - 項目2.2</span></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a><span class="in">- 項目3</span></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="in">番号つきのものは, 数字を使います. なお, 全ての行で `1.` と書いても, 出力上では正しい番号になります.</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {.columns}</span></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.column width="49%"}</span></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="in">**Input**</span></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目1</span></span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目2</span></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="in">    1. 項目2.1</span></span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="in">    1. 項目2.2</span></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a><span class="in">1. 項目3</span></span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目1</span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目2</span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>項目2.1</span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    1. </span>項目2.2</span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>項目3</span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### 図の挿入</span></span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](path/to/image.png)</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](../static/img/01-quarto/hokusai_kanagawa.jpg)</span></span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a>ここでパスという概念が重要になります. Quartoでは, ドキュメントのルートディレクトリを基準にして画像ファイルを指定します. 基本的には, <span class="in">`.qmd`</span> ファイルと同じ階層に <span class="in">`img`</span> というフォルダを作り, そこに画像ファイルを入れるのが一般的です. 例えば, <span class="in">`report.qmd`</span> と同じ階層に <span class="in">`img/hokusai_kanagawa.jpg`</span> というファイルがある場合は, <span class="in">`![図のタイトル](img/hokusai_kanagawa.jpg)`</span> と書くことで画像を挿入できます.</span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### 表の挿入</span></span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Default <span class="pp">|</span> Left <span class="pp">|</span> Right <span class="pp">|</span> Center <span class="pp">|</span></span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|:-----|------:|:------:|</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12      <span class="pp">|</span> 12   <span class="pp">|</span>    12 <span class="pp">|</span>   12   <span class="pp">|</span></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 123     <span class="pp">|</span> 123  <span class="pp">|</span>   123 <span class="pp">|</span>  123   <span class="pp">|</span></span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>: 表のタイトル</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Default <span class="pp">|</span> Left <span class="pp">|</span> Right <span class="pp">|</span> Center <span class="pp">|</span></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------|:-----|------:|:------:|</span></span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12      <span class="pp">|</span> 12   <span class="pp">|</span>    12 <span class="pp">|</span>   12   <span class="pp">|</span></span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 123     <span class="pp">|</span> 123  <span class="pp">|</span>   123 <span class="pp">|</span>  123   <span class="pp">|</span></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>: 表のタイトル</span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a>Markdownでは, <span class="in">`|`</span> と <span class="in">`-`</span> を使って表を作ることができます. さらに, <span class="in">`:`</span> を使うことで, 列の位置を指定することもできます. デフォルトでは, 列は全て左寄せになりますが, <span class="in">`:---`</span> と書くと左寄せ, <span class="in">`---:`</span> と書くと右寄せ, <span class="in">`:---:`</span> と書くと中央寄せになります. GUIツールで表を作ってmarkdwon形式でエクスポートするサービスとして, <span class="co">[</span><span class="ot">Tables Generator</span><span class="co">](https://www.tablesgenerator.com/markdown_tables)</span> などがあります.</span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## $\LaTeX$ Math 記法</span></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a>Markdownでは $\LaTeX$ という組版ソフトの数式記法を使って数式を表現することができます. 数式は, <span class="in">`$...$`</span> で囲むとインライン数式, <span class="in">`$$...$$`</span> で囲むとブロック数式 (改行して中央揃え) になります.</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a>$e^{i\pi} + 1 = 0$ は最も美しい数式だ.</span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>$e^{i\pi} + 1 = 0$ は最も美しい数式だ.</span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>ラマヌジャンの円周率公式は次の通り:</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>\frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2}</span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a>\sum_{n=0}^{\infty} \frac{(4 n)!}{(n!)^4}</span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>\frac{26390 n+1103}{396^{4 n}}</span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a>ラマヌジャンの円周率公式は次の通り:</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a>\frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2} \sum_{n=0}^{\infty} \frac{(4 n)!}{(n!)^4} \frac{26390 n+1103}{396^{4 n}}</span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto 記法</span></span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>ここからは Quarto独自の記法についての説明です. 引用と文献情報については <span class="co">[</span><span class="ot">文献と引用</span><span class="co">](literature.qmd)</span> の章で説明します.</span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a><span class="fu">### Front Matter</span></span>
+<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> タイトル</span></span>
+<span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> 著者名</span></span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2026-04-01</span></span>
+<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
+<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a>ここから本文</span>
+<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a>Quartoのドキュメントでは, 冒頭に <span class="in">`---`</span> で囲まれたYAML形式のフロントマターを置くことができます. ここには, ドキュメントのタイトルや著者名, 日付などのメタデータを記述することができます. また, <span class="in">`format`</span> というフィールドで, 出力形式を指定することもできます. 例えば, <span class="in">`format: typst`</span> と書くと, Typst形式で出力されるようになります.</span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相互参照 (Cross Reference)</span></span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a>スライドでは必須ではありませんが, レポートなどを書く場合は, 図表番号や節番号を自動で管理できると便利です. Quartoでは, <span class="in">`fig-xxxx`</span>, <span class="in">`tbl-xxx`</span>, <span class="in">`sec-xxx`</span> などの特別なラベルを貼ることで, それらの番号を自動で管理することができます.</span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
+<span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](img/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
+<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a>@fig-kanagawa は葛飾北斎の有名な浮世絵である.</span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
+<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](../static/img/01-quarto/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a>@fig-kanagawa は葛飾北斎の有名な浮世絵である.</span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fruit  <span class="pp">|</span> price  <span class="pp">|</span></span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------|</span></span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> apple  <span class="pp">|</span> 2.05   <span class="pp">|</span></span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> pear   <span class="pp">|</span> 1.37   <span class="pp">|</span></span>
+<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> orange <span class="pp">|</span> 3.09   <span class="pp">|</span></span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a>: Fruit prices {#tbl-fruit}</span>
+<span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a>@tbl-fruit は果物の値段を表している.</span>
+<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
+<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-412"><a href="#cb25-412" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fruit  <span class="pp">|</span> price  <span class="pp">|</span></span>
+<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------|--------|</span></span>
+<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> apple  <span class="pp">|</span> 2.05   <span class="pp">|</span></span>
+<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> pear   <span class="pp">|</span> 1.37   <span class="pp">|</span></span>
+<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> orange <span class="pp">|</span> 3.09   <span class="pp">|</span></span>
+<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a>: Fruit prices {#tbl-fruit}</span>
+<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a>@tbl-fruit は果物の値段を表している.</span>
+<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a>基本的には, 特別な prefix (<span class="in">`fig-`</span>, <span class="in">`tbl-`</span>, <span class="in">`sec-`</span> など) をつけたラベルを <span class="in">`{#label}`</span> という形式で指定し, 本文中では <span class="in">`@label`</span> と書くことで, その要素の番号を自動で参照することができます. その他の要素 (式や命題など) も同様の方法で参照できるので <span class="co">[</span><span class="ot">Quartoのドキュメント</span><span class="co">](https://quarto.org/docs/authoring/cross-references.html)</span> を参照してください.</span>
+<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## コードの実行</span></span>
+<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a>Quartoの最大の特徴は, ドキュメントの中にコードを埋め込んで実行できることです. コードは, ` ``<span class="in">`{r} `</span> で始まり ` ``<span class="in">` `</span> で終わる コードチャンク (code chunk) の中に書きます. コンパイルのたびにQuartoがそのコードを実行し, コードと結果をドキュメントに挿入します.^<span class="co">[</span><span class="ot">ここでは `{r}` と書いてR言語を使っていますが, `{python}` や `{julia}` に変えれば, それぞれの言語のコードも実行できます. 一つのドキュメントの中で複数の言語を混在させることも可能です.</span><span class="co">]</span></span>
+<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
+<span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a>チャンクの冒頭にある <span class="in">`#|`</span> で始まる行は, チャンクオプション (chunk option) です. YAML形式で, そのチャンクの挙動を細かく制御します. 例えば次のチャンクには <span class="in">`label`</span> と <span class="in">`eval`</span> の2つのオプションが付いています.</span>
+<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: install-example</span></span>
+<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
+<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a><span class="in">`eval: false`</span> を指定しているので, このコードは表示されるだけで実行されません. <span class="in">`install.packages()`</span> のように, コンパイルのたびに走らせたくないコードを載せるときに便利です. 実際, 上のチャンクには結果が表示されていないことを確かめてください. よく使うオプションは次の通りです.</span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`label`</span>: チャンクにつける名前. 後述の相互参照で使います.</span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`echo`</span>: コード自体を出力に表示するか (<span class="in">`true`</span> / <span class="in">`false`</span>). 結果だけ見せたいときは <span class="in">`false`</span> にします.</span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`eval`</span>: コードを実行するか. <span class="in">`false`</span> にすると, 上の例のように, コードは表示されるだけで実行されません.</span>
+<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`include`</span>: コードも結果も出力に含めるか. <span class="in">`false`</span> にすると, 実行はされますが何も表示されません (パッケージの読み込みなど, 裏方の処理に使います).</span>
+<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`warning`</span> / <span class="in">`message`</span>: 警告やメッセージを表示するか.</span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a><span class="fu">## コードと相互参照</span></span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a>前の「相互参照」の節では, 手で書いた画像やMarkdownの表に番号を振りました. コードが生成する図や表にも, 同じ仕組みがそのまま使えます.</span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a><span class="fu">### `ggplot2` による図</span></span>
+<span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a>コードで生成する図には, チャンクオプションの <span class="in">`#| label:`</span> を <span class="in">`fig-`</span> で始め, <span class="in">`#| fig-cap:`</span> でキャプションを付けます. 図そのものに <span class="in">`{#...}`</span> を付ける必要はありません.</span>
+<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-penguins</span></span>
+<span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "くちばしの長さとひれの長さの関係"</span></span>
+<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
+<span id="cb25-470"><a href="#cb25-470" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_len, <span class="at">y =</span> bill_len, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Flipper length (mm)"</span>,</span>
+<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Bill length (mm)"</span>,</span>
+<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Species"</span></span>
+<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a>本文で <span class="in">`@fig-penguins`</span> と書くと @fig-penguins のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.</span>
+<span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a><span class="fu">### `tinytable` による表</span></span>
+<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a>表も同様に, チャンクラベルを <span class="in">`tbl-`</span> で始め, <span class="in">`#| tbl-cap:`</span> でキャプションを付けます. <span class="in">`tinytable`</span> では <span class="in">`tt(caption = ...)`</span> よりも, このチャンクオプションを使う方が相互参照が確実に効きます.</span>
+<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins</span></span>
+<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "ペンギンの種類ごとの平均値"</span></span>
+<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: fenced</span></span>
+<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-496"><a href="#cb25-496" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
+<span id="cb25-497"><a href="#cb25-497" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-498"><a href="#cb25-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb25-499"><a href="#cb25-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-500"><a href="#cb25-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-501"><a href="#cb25-501" aria-hidden="true" tabindex="-1"></a>本文で <span class="in">`@tbl-penguins`</span> と書くと @tbl-penguins のように参照できます.</span>
+<span id="cb25-502"><a href="#cb25-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-503"><a href="#cb25-503" aria-hidden="true" tabindex="-1"></a><span class="fu">## インラインコード</span></span>
+<span id="cb25-504"><a href="#cb25-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-505"><a href="#cb25-505" aria-hidden="true" tabindex="-1"></a>文章の途中に計算結果を埋め込みたいときは, インラインコード (inline code) を使います. バッククォートの中で <span class="in">`r`</span> に続けて式を書くと, コンパイル時にその評価結果が文章に挿入されます.</span>
+<span id="cb25-506"><a href="#cb25-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-507"><a href="#cb25-507" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb25-508"><a href="#cb25-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-509"><a href="#cb25-509" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-510"><a href="#cb25-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-511"><a href="#cb25-511" aria-hidden="true" tabindex="-1"></a>**Input**</span>
+<span id="cb25-512"><a href="#cb25-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-515"><a href="#cb25-515" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-516"><a href="#cb25-516" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb25-517"><a href="#cb25-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: asis</span></span>
+<span id="cb25-518"><a href="#cb25-518" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"```md</span><span class="sc">\n</span><span class="st">円周率はおよそ `r round(pi, 2)` です.</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-519"><a href="#cb25-519" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-520"><a href="#cb25-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-521"><a href="#cb25-521" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-522"><a href="#cb25-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-523"><a href="#cb25-523" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-524"><a href="#cb25-524" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-525"><a href="#cb25-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-526"><a href="#cb25-526" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-527"><a href="#cb25-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-528"><a href="#cb25-528" aria-hidden="true" tabindex="-1"></a>**Output**</span>
+<span id="cb25-529"><a href="#cb25-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-530"><a href="#cb25-530" aria-hidden="true" tabindex="-1"></a>円周率はおよそ <span class="in">`r round(pi, 2)`</span> です.</span>
+<span id="cb25-531"><a href="#cb25-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-532"><a href="#cb25-532" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-533"><a href="#cb25-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-534"><a href="#cb25-534" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a>数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは <span class="in">`r nrow(penguins)`</span> である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.</span>
+<span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さな <span class="in">`.qmd`</span> を書きながら進めます. VSCode か RStudio で <span class="in">`report.qmd`</span> という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで <span class="in">`quarto render report.qmd`</span> を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.</span>
+<span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-542"><a href="#cb25-542" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb25-543"><a href="#cb25-543" aria-hidden="true" tabindex="-1"></a>まず, ドキュメントの骨組みを作ります. <span class="in">`report.qmd`</span> の冒頭に, タイトル・著者名・日付を持つ YAML フロントマターを書き, 出力形式を HTML に指定してください. その下に見出しを1つと短い段落を1つ書いて, HTML にレンダリングしてみましょう.</span>
+<span id="cb25-544"><a href="#cb25-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-545"><a href="#cb25-545" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb25-546"><a href="#cb25-546" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb25-547"><a href="#cb25-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-548"><a href="#cb25-548" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-549"><a href="#cb25-549" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-550"><a href="#cb25-550" aria-hidden="true" tabindex="-1"></a>title: ペンギンデータの分析</span>
+<span id="cb25-551"><a href="#cb25-551" aria-hidden="true" tabindex="-1"></a>author: 山田太郎</span>
+<span id="cb25-552"><a href="#cb25-552" aria-hidden="true" tabindex="-1"></a>date: 2026-04-01</span>
+<span id="cb25-553"><a href="#cb25-553" aria-hidden="true" tabindex="-1"></a>format: html</span>
+<span id="cb25-554"><a href="#cb25-554" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-555"><a href="#cb25-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-556"><a href="#cb25-556" aria-hidden="true" tabindex="-1"></a><span class="fu">## はじめに</span></span>
+<span id="cb25-557"><a href="#cb25-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-558"><a href="#cb25-558" aria-hidden="true" tabindex="-1"></a>このレポートでは, Palmer ペンギンのデータを分析します.</span>
+<span id="cb25-559"><a href="#cb25-559" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-560"><a href="#cb25-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-561"><a href="#cb25-561" aria-hidden="true" tabindex="-1"></a><span class="in">`format: html`</span> の代わりに <span class="in">`format: pdf`</span> や <span class="in">`format: typst`</span> と書けば, 同じ原稿から別の形式で出力できます. タイトルはフロントマターの <span class="in">`title`</span> が <span class="in">`h1`</span> として扱われるので, 本文の見出しは <span class="in">`##`</span> (h2) から始めます.</span>
+<span id="cb25-562"><a href="#cb25-562" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-563"><a href="#cb25-563" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-564"><a href="#cb25-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-565"><a href="#cb25-565" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb25-566"><a href="#cb25-566" aria-hidden="true" tabindex="-1"></a>次に, Markdown 記法の練習です. さきほどの段落に続けて, 太字とリンクを1つずつ含む文と, 3項目の箇条書きを書いてください. 箇条書きのうち1項目は, さらにネストした子項目を持たせてみましょう.</span>
+<span id="cb25-567"><a href="#cb25-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-568"><a href="#cb25-568" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb25-569"><a href="#cb25-569" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb25-570"><a href="#cb25-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-571"><a href="#cb25-571" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-572"><a href="#cb25-572" aria-hidden="true" tabindex="-1"></a>このデータは <span class="co">[</span><span class="ot">Palmer Station LTER</span><span class="co">](https://pallter.marine.rutgers.edu/)</span> が収集した **実データ** です. 次の3種のペンギンが含まれます.</span>
+<span id="cb25-573"><a href="#cb25-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-574"><a href="#cb25-574" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Adelie</span>
+<span id="cb25-575"><a href="#cb25-575" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Chinstrap</span>
+<span id="cb25-576"><a href="#cb25-576" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gentoo</span>
+<span id="cb25-577"><a href="#cb25-577" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Biscoe 島でのみ観測されます</span>
+<span id="cb25-578"><a href="#cb25-578" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-579"><a href="#cb25-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-580"><a href="#cb25-580" aria-hidden="true" tabindex="-1"></a><span class="in">太字は `**...**`, リンクは `[表示テキスト](URL)` でした. ネストは, 親項目の下でスペース4つ分字下げします.</span></span>
+<span id="cb25-581"><a href="#cb25-581" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb25-582"><a href="#cb25-582" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb25-583"><a href="#cb25-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-584"><a href="#cb25-584" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {.quiz}</span></span>
+<span id="cb25-585"><a href="#cb25-585" aria-hidden="true" tabindex="-1"></a><span class="in">コードが生成する図に, 番号を振って相互参照します. `penguins` データで, くちばしの長さとひれの長さの散布図を描くコードチャンクを追加してください. チャンクラベルを `fig-` で始め, `fig-cap` でキャプションを付け, 本文から `@` で参照しましょう.</span></span>
+<span id="cb25-586"><a href="#cb25-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-587"><a href="#cb25-587" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip collapse="true"}</span></span>
+<span id="cb25-588"><a href="#cb25-588" aria-hidden="true" tabindex="-1"></a><span class="in">## 解答例</span></span>
+<span id="cb25-589"><a href="#cb25-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-590"><a href="#cb25-590" aria-hidden="true" tabindex="-1"></a><span class="in">チャンクの冒頭 (`setup` チャンクなど) で `library(dplyr)` と `library(ggplot2)` を読み込んでおきます. そのうえで, 次のチャンクを本文に追加します.</span></span>
+<span id="cb25-591"><a href="#cb25-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-592"><a href="#cb25-592" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-593"><a href="#cb25-593" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-penguins-scatter</span></span>
+<span id="cb25-594"><a href="#cb25-594" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "くちばしの長さとひれの長さの関係"</span></span>
+<span id="cb25-595"><a href="#cb25-595" aria-hidden="true" tabindex="-1"></a><span class="in">penguins |&gt;</span></span>
+<span id="cb25-596"><a href="#cb25-596" aria-hidden="true" tabindex="-1"></a><span class="in">  ggplot(aes(x = flipper_len, y = bill_len, color = species)) +</span></span>
+<span id="cb25-597"><a href="#cb25-597" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
+<span id="cb25-598"><a href="#cb25-598" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(</span></span>
+<span id="cb25-599"><a href="#cb25-599" aria-hidden="true" tabindex="-1"></a><span class="in">    x = "Flipper length (mm)",</span></span>
+<span id="cb25-600"><a href="#cb25-600" aria-hidden="true" tabindex="-1"></a><span class="in">    y = "Bill length (mm)",</span></span>
+<span id="cb25-601"><a href="#cb25-601" aria-hidden="true" tabindex="-1"></a><span class="in">    color = "Species"</span></span>
+<span id="cb25-602"><a href="#cb25-602" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-603"><a href="#cb25-603" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-604"><a href="#cb25-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-605"><a href="#cb25-605" aria-hidden="true" tabindex="-1"></a>本文には「散布図を <span class="in">`@fig-penguins-scatter`</span> に示します.」のように書きます. ラベルを <span class="in">`fig-`</span> で始めるのが約束で, 図番号は出現順に自動で振られます.</span>
+<span id="cb25-606"><a href="#cb25-606" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-607"><a href="#cb25-607" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb25-608"><a href="#cb25-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-609"><a href="#cb25-609" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb25-610"><a href="#cb25-610" aria-hidden="true" tabindex="-1"></a>最後に, 集計表とインラインコードを足します. 種ごとの平均値を <span class="in">`tinytable`</span> で表にし, <span class="in">`tbl-`</span> ラベルを付けて相互参照してください. さらに, サンプルサイズを本文にインラインコードで埋め込みましょう.</span>
+<span id="cb25-611"><a href="#cb25-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-612"><a href="#cb25-612" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb25-613"><a href="#cb25-613" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb25-614"><a href="#cb25-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-615"><a href="#cb25-615" aria-hidden="true" tabindex="-1"></a><span class="in">`setup`</span> チャンクで <span class="in">`library(tinytable)`</span> も読み込んでおき, 次のチャンクを追加します.</span>
+<span id="cb25-616"><a href="#cb25-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-617"><a href="#cb25-617" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-618"><a href="#cb25-618" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-penguins-mean</span></span>
+<span id="cb25-619"><a href="#cb25-619" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "種ごとの平均値"</span></span>
+<span id="cb25-620"><a href="#cb25-620" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb25-621"><a href="#cb25-621" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb25-622"><a href="#cb25-622" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-623"><a href="#cb25-623" aria-hidden="true" tabindex="-1"></a>    <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb25-624"><a href="#cb25-624" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> species</span>
+<span id="cb25-625"><a href="#cb25-625" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-626"><a href="#cb25-626" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tt</span>()</span>
+<span id="cb25-627"><a href="#cb25-627" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-628"><a href="#cb25-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-629"><a href="#cb25-629" aria-hidden="true" tabindex="-1"></a>本文には次のように書きます.</span>
+<span id="cb25-630"><a href="#cb25-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-631"><a href="#cb25-631" aria-hidden="true" tabindex="-1"></a><span class="in">```md</span></span>
+<span id="cb25-632"><a href="#cb25-632" aria-hidden="true" tabindex="-1"></a>種ごとの平均値を @tbl-penguins-mean にまとめました. 分析に使ったサンプルサイズは <span class="in">`r nrow(penguins)`</span> です.</span>
+<span id="cb25-633"><a href="#cb25-633" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-634"><a href="#cb25-634" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-635"><a href="#cb25-635" aria-hidden="true" tabindex="-1"></a>表番号も <span class="in">`tbl-`</span> ラベルで自動管理され, インラインコードの `<span class="in">` `</span>r nrow(penguins)` `` はレンダリング時に実際の行数へ置き換わります. データを差し替えても, 図・表・本文中の数値がすべて自動で追従します.</span>
+<span id="cb25-636"><a href="#cb25-636" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-637"><a href="#cb25-637" aria-hidden="true" tabindex="-1"></a>::::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

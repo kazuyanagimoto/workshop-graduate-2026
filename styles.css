@@ -37,15 +37,9 @@ main {
 
 .quiz form {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.6rem 0.75rem;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
   align-items: stretch;
-}
-
-@media (max-width: 575.98px) {
-  .quiz form {
-    grid-template-columns: 1fr;
-  }
 }
 
 .quiz form br {

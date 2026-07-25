@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="hexFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#17a0b8"/>
+      <stop offset="0.55" stop-color="#107895"/>
+      <stop offset="1" stop-color="#0b5d72"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef4f5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="618" width="1200" height="12" fill="#107895"/>
+
+  <!-- Hex logo (inlined from hex-logo.svg), scaled to 400px tall -->
+  <g transform="translate(96 115) scale(0.6757)">
+    <path d="M256 14 L500.2 155 L500.2 437 L256 578 L11.8 437 L11.8 155 Z"
+          fill="url(#hexFill)" stroke="#63c4d6" stroke-width="18" stroke-linejoin="round"/>
+    <path d="M256 30 L488 163 L488 296 L24 296 L24 163 Z" fill="url(#gloss)"/>
+    <rect x="76" y="172" width="360" height="248" rx="26" fill="#f5f7f8"/>
+    <circle cx="106" cy="200" r="10" fill="#9a2515"/>
+    <circle cx="140" cy="200" r="10" fill="#e64173"/>
+    <circle cx="174" cy="200" r="10" fill="#107895"/>
+    <line x1="76" y1="228" x2="436" y2="228" stroke="#e2e8ea" stroke-width="2"/>
+    <path d="M128 262 L164 290 L128 318" fill="none" stroke="#107895"
+          stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="182" y="266" width="22" height="48" rx="5" fill="#e64173"/>
+    <rect x="128" y="356" width="70"  height="20" rx="10" fill="#9a2515"/>
+    <rect x="212" y="356" width="160" height="20" rx="10" fill="#b9c4c9"/>
+    <rect x="128" y="390" width="108" height="20" rx="10" fill="#107895" fill-opacity="0.55"/>
+    <rect x="250" y="390" width="96"  height="20" rx="10" fill="#b9c4c9"/>
+  </g>
+
+  <!-- Text block (nudged up so top/bottom margins match) -->
+  <g font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" transform="translate(0 -50)">
+    <text x="470" y="196" fill="#107895" font-size="24" font-weight="700" letter-spacing="6">WORKSHOP · 2026</text>
+    <text x="466" y="286" fill="#131516" font-size="92" font-weight="800">Empiricist&#8217;s</text>
+    <text x="466" y="380" fill="#131516" font-size="92" font-weight="800">Workflow</text>
+    <text x="470" y="452" fill="#107895" font-size="33" font-weight="600"
+          font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans CJK JP',sans-serif">実証研究のためのモダンなツールと作法</text>
+    <line x1="472" y1="492" x2="1000" y2="492" stroke="#c9d5d9" stroke-width="2"/>
+    <text x="470" y="534" fill="#5c636a" font-size="27"
+          font-family="'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans CJK JP',sans-serif">柳本和春 · 神戸大学</text>
+  </g>
+</svg>

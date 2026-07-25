@@ -12,7 +12,7 @@ library(tinytable)
 
 ## Quarto とは
 
-![](../static/img/01-quarto/quarto-flow.svg){fig-align="center"}
+![](../static/img/quarto/quarto-flow.svg){fig-align="center"}
 
 Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, `.qmd` という拡張子のファイルにあるコードを実行し, Markdown (`.md`) 形式のドキュメントを生成します. さらに, [pandoc](https://pandoc.org) というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.
 
@@ -250,7 +250,7 @@ Markdownでは必要最小限の以下の三つの装飾が用意されていま
 
 **Output**
 
-![図のタイトル](../static/img/01-quarto/hokusai_kanagawa.jpg)
+![図のタイトル](../static/img/quarto/hokusai_kanagawa.jpg)
 
 :::
 ::::
@@ -383,7 +383,7 @@ Quartoのドキュメントでは, 冒頭に `---` で囲まれたYAML形式の�
 
 ## Output
 
-![神奈川沖浪裏](../static/img/01-quarto/hokusai_kanagawa.jpg){#fig-kanagawa}
+![神奈川沖浪裏](../static/img/quarto/hokusai_kanagawa.jpg){#fig-kanagawa}
 
 @fig-kanagawa は葛飾北斎の有名な浮世絵である.
 

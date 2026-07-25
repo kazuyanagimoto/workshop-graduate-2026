@@ -2,11 +2,12 @@ project:
   type: book
   resources:
     - static/data/
+    - static/img/social-card.png
 
 book:
   search: false
-  title: Best Practices
-  subtitle: 大学院生のためのワークショップ
+  title: "Empiricist's Workflow"
+  subtitle: 実証研究のためのモダンなツールと作法
   author:
     - name: 柳本和春
       email: yanagimoto@econ.kobe-u.ac.jp
@@ -14,9 +15,17 @@ book:
       affiliations:
         - name: 神戸大学
   date: last-modified
-  date-format: "最終更新: YYYY年MM月DD日"
+  date-format: "YYYY年MM月DD日"
   site-url: https://kazuyanagimoto.com/workshop-graduate-2026
   repo-url: https://github.com/kazuyanagimoto/workshop-graduate-2026
+  favicon: static/img/logo/hex-logo.svg
+  open-graph:
+    image: static/img/social-card.png
+  twitter-card:
+    card-style: summary_large_image
+    image: static/img/social-card.png
+  sidebar:
+    logo: static/img/logo/hex-logo.svg
   chapters:
     - index.qmd
     - lesson/architecture.qmd
@@ -36,7 +45,8 @@ book:
     - lesson/dictionary.qmd
     - references.qmd
 
-
+website:
+  llms-txt: true
 
 format:
   html:

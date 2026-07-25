@@ -50,7 +50,7 @@ CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの�
 
 メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで (@fig-photo-ram), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).
 
-::: {#fig-photo-storage layout-ncol="2"}
+::: {#fig-photo-storage layout="[[65,35]]"}
 
 ![SSD (NVMe M.2)](../static/img/hardware/ssd.jpg){group="hardware"}
 

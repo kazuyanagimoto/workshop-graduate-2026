@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Best Practices",
+    "title": "Empiricist’s Workflow",
     "section": "",
     "text": "はじめに",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#ai時代のプログラミング知識",
     "href": "index.html#ai時代のプログラミング知識",
-    "title": "Best Practices",
+    "title": "Empiricist’s Workflow",
     "section": "AI時代のプログラミング知識",
     "text": "AI時代のプログラミング知識\nこのコースでは, AI時代に必要なプログラミング知識を学ぶという目的で作りました. プログラミングコードをAIがある程度の精度で書けるようになった今, プログラミングとはプロンプティングの技術に変わってきています. ここで求められるのは個別のパッケージや関数に関する理解ではなく, AIに適切な指示を与えられるかの能力になってきました.\nこのコースでは, プログラミングで何ができるのかを理解することに重きを置き, その上でAIに適切な指示を与えるための知識を学んでいきます. そのため, プログラミングの基礎的な知識は必要ですが, 個別のパッケージや関数の使い方については深くは解説しません. 分からなければAIに聞くことを推奨します.",
     "crumbs": [
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#環境構築",
     "href": "index.html#環境構築",
-    "title": "Best Practices",
+    "title": "Empiricist’s Workflow",
     "section": "環境構築",
     "text": "環境構築\nこのコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto のインストール手順をOS別にまとめます.\n\nMac\nまず, パッケージマネージャの Homebrew を導入します. ターミナルで以下を実行し, 画面の指示に従ってください (インストール後に表示される brew shellenv の設定コマンドも忘れずに実行します).\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\nHomebrewが入れば, 必要なソフトウェアはすべて brew でインストールできます.\nbrew install --cask visual-studio-code zotero\n\n# rig is distributed as a cask in the r-lib/rig tap\nbrew tap r-lib/rig\nbrew install --cask rig\n\nbrew install quarto\nR本体は rig を通じてインストールします. rig add release で最新の安定版が入ります.\nrig add release\nアップデートも Homebrew 経由で行います. 以下のコマンドで, brew でインストールしたソフトウェア (VSCode, Zotero, Quarto など) がまとめて最新版になります.\nbrew update && brew upgrade\nRの新しいバージョンがリリースされたときは, rig add release を再実行すれば追加されます. インストール済みのバージョンは rig list で確認でき, rig default 4.5.1 のように切り替えられます (不要になった古いバージョンは rig rm で削除できます).\n\n\nWindows\nVSCodeとZoteroはWindows側にインストールします. Windows標準のパッケージマネージャ winget を使い, PowerShellで以下を実行してください.\nwinget install Microsoft.VisualStudioCode\nwinget install DigitalScholar.Zotero\n次に, WSLを導入します. 管理者権限のPowerShellで以下を実行し, 再起動後にUbuntuのユーザー名とパスワードを設定してください.\nwsl --install\nVSCodeには拡張機能 WSL をインストールしておくと, WSL内のファイルをVSCodeから直接編集できます.\nWSLのUbuntuでは, ソフトウェアの管理に標準のパッケージマネージャ apt を使います. Macにおける Homebrew に相当するもので, 基本のコマンドは次の3つです.\n# refresh the package catalog and upgrade all installed packages\nsudo apt update && sudo apt upgrade -y\nsudo apt install -y curl # install a package (here: curl)\n先頭の sudo は, システムを変更する操作を管理者権限で実行するための命令で, 実行時にはWSLセットアップ時に設定したパスワードを聞かれます (詳しくは 権限とパーミッション で説明します). apt update はパッケージの「カタログ」を最新にするだけで, 何もインストールしません. インストールやアップグレードの前には, まず apt update を実行するのが作法です. -y は, インストールやアップグレードの途中で聞かれる「続行しますか?」という質問に自動で「はい」と答えるオプションです.\nこの後の手順で使うダウンロードツール (curl, wget) と, Rのパッケージをソースコードからビルドするときに必要になるコンパイラ類 (build-essential) を, ここでまとめて入れておきます.\nsudo apt update\nsudo apt install -y build-essential\nrigとQuartoは, apt ではなく公式の配布物からWSL (Ubuntu) 側にインストールします. WSLのターミナルで以下を実行してください.\n# rig (R installation manager)\ncurl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-$(arch)-latest.tar.gz |\n  sudo tar xz -C /usr/local\nrig add release\nQuartoは, バージョン番号を変数に入れて .deb パッケージをダウンロードし, インストールします.\n# Check https://quarto.org/docs/download/ for the latest version number\nQUARTO_VERSION=1.9.38\nwget \"https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb\"\nsudo dpkg -i \"quarto-${QUARTO_VERSION}-linux-amd64.deb\"\nアップデートするときは, QUARTO_VERSION を新しいバージョン番号に変えて同じコマンドを再実行するだけです. Rのアップデートは Mac と同様で, rig add release を再実行します. apt で入れたソフトウェアは sudo apt update && sudo apt upgrade で, Windows側のソフトウェアは winget upgrade --all でまとめて更新できます.",
     "crumbs": [
@@ -84,7 +84,7 @@
     "href": "lesson/architecture.html#演習問題",
     "title": "1  アーキテクチャ",
     "section": "1.5 演習問題",
-    "text": "1.5 演習問題\nこの章の理解度を確認しましょう. 選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).\n\nR で大きなデータセットを読み込もうとしたら, Error: cannot allocate vector of size 8.0 Gb というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.\n\n\n\n\n\nRAM\n\n\n\n\nSSD\n\n\n\n\nGPU\n\n\n\n\nCPU\n\n\n\n\n\n\n\n\n\n\n何年も前に書いた分析コードを最新の PC でそのまま実行しても, 昔の「PC を買い替えたらコードが劇的に速くなった」という体験は得にくくなっています. 主な理由はどれでしょうか.\n\n\n\n\n\nストレージの読み書き速度が頭打ちになったから\n\n\n\n\nCPU の進化がクロック周波数の向上からコア数の増加に移ったから\n\n\n\n\nOS が年々重くなり, 性能向上を打ち消しているから\n\n\n\n\nCPU が性能よりも省電力を優先するようになったから\n\n\n\n\n\n\n\n\n\n\n32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.\n\n\n\n\n\n16GB\n\n\n\n\n4GB\n\n\n\n\n2GB\n\n\n\n\n積んだ RAM の分だけ\n\n\n\n\n\n\n\n\n\n\nApple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.\n\n\n\n\n\n動かない\n\n\n\n\n問題なく動く\n\n\n\n\n遅くなるが動く\n\n\n\n\nサーバーに Rosetta 2 を入れれば動く\n\n\n\n\n\n\n\n\n\n\n次のうち, CPU が ARM64 のマシンをすべて選んでください.\n\n\n\n\n\nApple Silicon の Mac\n\n\n\n\nCopilot+ PC (Snapdragon 搭載)\n\n\n\n\nIntel の Mac\n\n\n\n\n大半の Windows デスクトップ PC\n\n\n\n\n\n\n\n\n\n\n次の OS のうち, Unix の系譜に属さないものはどれでしょうか.\n\n\n\n\n\niOS\n\n\n\n\nUbuntu\n\n\n\n\nmacOS\n\n\n\n\nWindows",
+    "text": "1.5 演習問題\nこの章の理解度を確認しましょう. 選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).\n\nR で大きなデータセットを読み込もうとしたら, Error: cannot allocate vector of size 8.0 Gb というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.\n\n\n\n\n\nCPU\n\n\n\n\nSSD\n\n\n\n\nRAM\n\n\n\n\nGPU\n\n\n\n\n\n\n\n\n\n\n何年も前に書いた分析コードを最新の PC でそのまま実行しても, 昔の「PC を買い替えたらコードが劇的に速くなった」という体験は得にくくなっています. 主な理由はどれでしょうか.\n\n\n\n\n\nCPU が性能よりも省電力を優先するようになったから\n\n\n\n\nOS が年々重くなり, 性能向上を打ち消しているから\n\n\n\n\nストレージの読み書き速度が頭打ちになったから\n\n\n\n\nCPU の進化がクロック周波数の向上からコア数の増加に移ったから\n\n\n\n\n\n\n\n\n\n\n32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.\n\n\n\n\n\n積んだ RAM の分だけ\n\n\n\n\n16GB\n\n\n\n\n4GB\n\n\n\n\n2GB\n\n\n\n\n\n\n\n\n\n\nApple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.\n\n\n\n\n\n遅くなるが動く\n\n\n\n\n動かない\n\n\n\n\n問題なく動く\n\n\n\n\nサーバーに Rosetta 2 を入れれば動く\n\n\n\n\n\n\n\n\n\n\n次のうち, CPU が ARM64 のマシンをすべて選んでください.\n\n\n\n\n\nApple Silicon の Mac\n\n\n\n\nCopilot+ PC (Snapdragon 搭載)\n\n\n\n\nIntel の Mac\n\n\n\n\n大半の Windows デスクトップ PC\n\n\n\n\n\n\n\n\n\n\n次の OS のうち, Unix の系譜に属さないものはどれでしょうか.\n\n\n\n\n\nWindows\n\n\n\n\niOS\n\n\n\n\nmacOS\n\n\n\n\nUbuntu",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>アーキテクチャ</span>"
     ]
@@ -988,23 +988,23 @@
   {
     "objectID": "references.html",
     "href": "references.html",
-    "title": "References",
+    "title": "参考文献",
     "section": "",
     "text": "図版クレジット\n本書で使用している部品写真は, いずれも Wikimedia Commons で公開されているものです.",
     "crumbs": [
       "Appendices",
-      "References"
+      "参考文献"
     ]
   },
   {
     "objectID": "references.html#図版クレジット",
     "href": "references.html#図版クレジット",
-    "title": "References",
+    "title": "参考文献",
     "section": "",
     "text": "Figure 1.2 (CPU): 撮影 Fritzchens Fritz, Wikimedia Commons, CC0 1.0\nFigure 1.3 (メモリ): 撮影 PantheraLeo1359531, Wikimedia Commons, CC BY 4.0\nFigure 1.4 (SSD): 撮影 D-Kuru, Wikimedia Commons, CC BY-SA 4.0\nFigure 1.4 (HDD): 撮影 Mk2010, Wikimedia Commons, CC BY 4.0\nFigure 1.5 (GPU): 撮影 FreeMediaKid!, Wikimedia Commons, CC BY-SA 4.0",
     "crumbs": [
       "Appendices",
-      "References"
+      "参考文献"
     ]
   }
 ]

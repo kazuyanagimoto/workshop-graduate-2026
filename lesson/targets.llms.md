@@ -1,0 +1,432 @@
+# 12  targets による再現性
+
+Code
+
+[`{targets}`](https://books.ropensci.org/targets/) は, 研究のワークフローを構築する R のパッケージです. 最大の特徴は, データ, 関数, 結果を R のオブジェクトとしてその依存関係を管理し, 上流のオブジェクトが変更されたときに, それに依存する下流のオブジェクトを自動的に再計算してくれることです. これにより, 再現性を保ち続けたまま研究を進めることができます.
+
+さらに [Quarto](https://quarto.org/) と組み合わせることで, 研究途中のレポートやスライド, 論文の執筆といった, 研究の全てのワークフローを一つのパイプラインで管理することができます. この章では Quarto + `{targets}` を用いた研究のワークフローを解説します. 実際に私が研究で用いており, 研究の進捗に合わせてステップを進めていくことができるようになっています. また, 研究とは直線的なものではなく, 試行錯誤を繰り返しながら道を見つけていくものだと思います. そのため, 論文を執筆し始める前の試行錯誤の段階に, ある程度の自由度を持たせています.
+
+コードは [`kazuyanagimoto/quarto-research-blog`](https://github.com/kazuyanagimoto/quarto-research-blog) にあります. コードやディレクトリ構成など参考にしてください.
+
+## 12.1 ワークフロー
+
+1.  `_targets.R` の初期設定を行う
+2.  データクリーニングを定義する `R/tar_data.R`
+3.  ウェブサイトを設定する `_quarto.yml`
+4.  データ分析やモデルの試行錯誤 `playground/yymmdd_*/index.qmd`
+5.  途中結果をスライドにまとめる `slide/yymmdd_*/index.qmd`
+6.  3-5 を繰り返す. 主要な結果をパイプラインに組み込む `R/tar_fact.R`, `R/tar_model.R`
+7.  最終的な結果で論文を執筆する `manuscript/*.qmd`
+
+論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.
+
+``` mermaid
+flowchart LR
+  raw["raw data"] --> data["data (cleaning)"]
+  data --> fact["fact (figures and numbers)"]
+  data --> model["model (Julia)"]
+  fact --> manuscript["manuscript"]
+  model --> manuscript
+  data --> website["website"]
+```
+
+Figure 12.1
+
+次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
+
+## 12.2 `{targets}` の基本
+
+`{targets}` の基本を学ぶには公式の[チュートリアル](https://books.ropensci.org/targets/)が良いですが, 実用上は `{targets}` を拡張した `{tarchetypes}` の文法を使うことが多いです. そのため, ここでは `{tarchetypes}` の文法に基づいて最低限の使い方を解説します. この `{targets}` から `{tarchetypes}` への移行に関しては, この[チュートリアル](https://carpentries-incubator.github.io/targets-workshop/index.html)が参考になりました.
+
+### 基本の3つの要素
+
+`{targets}` の哲学は, 研究のワークフローを三つの要素に分けて考えることです. それは, ファイル, 関数, オブジェクト です.
+
+- ファイル: `tar_file()` で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される
+- オブジェクト: 変数やデータフレームなどの R のオブジェクト
+- 関数: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる
+
+イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを使って関数を実行して新しいオブジェクトを作成するという流れです. これらの要素は, `tar_plan()` の中で定義されます.
+
+``` r
+clean_data1 <- function(data1_raw) {
+  data1_raw |>
+    filter(!is.na(col1))
+}
+
+tar_plan(
+  tar_file(data1_raw_file, "path/to/file/data1.csv"),
+  data1_raw = readr::read_csv(data1_raw_file),
+  data1_cleaned = clean_data1(data1_raw),
+)
+```
+
+上の例では, `data1_raw_file` がファイル, `data1_raw` と `data1_cleaned` がオブジェクト, `readr::read_csv` と `clean_data1()` が関数です.
+
+### 実行と依存関係の管理
+
+定義したパイプラインは, `targets::tar_visnetwork()` で可視化することができます.
+
+[![](../static/img/targets/tar-visnetwork-init.png)](../static/img/targets/tar-visnetwork-init.png "Figure 12.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト")
+
+Figure 12.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
+
+ここでは三角形が関数, 丸がファイルとオブジェクトを表していることがわかります. また, パイプラインが実行されていない状態が水色で表されています. ここで, `targets::tar_make()` を実行すると,
+
+[![](../static/img/targets/tar-visnetwork-made.png)](../static/img/targets/tar-visnetwork-made.png "Figure 12.3: tar_make() で実行された部分はグレーに変わる")
+
+Figure 12.3: `tar_make()` で実行された部分はグレーに変わる
+
+正常に実行されると, 実行された部分がグレーに変わります. ここで, `data1.csv` (`data1_raw_file`) の中身を変更すると,
+
+[![](../static/img/targets/tar-visnetwork-data-changed.png)](../static/img/targets/tar-visnetwork-data-changed.png "Figure 12.4: ファイルの中身を変更すると依存部分が未実行状態に戻る")
+
+Figure 12.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
+
+依存関係のある部分が未実行状態に戻ります. もちろん, `targets::tar_make()` を実行すると, 依存関係のある部分が再計算されます. さらに, `clean_data1()` の中身を変更すると, 以下のようになります.
+
+[![](../static/img/targets/tar-visnetwork-fn-changed.png)](../static/img/targets/tar-visnetwork-fn-changed.png "Figure 12.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る")
+
+Figure 12.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
+
+このように, `tar_plan()` 上でパイプラインの定義をし, `tar_make()` で実行するという流れを繰り返していくのが `{targets}` の基本的な使い方です.
+
+## 12.3 Quarto + `{targets}` のワークフロー
+
+### 1. `_targets.R` の初期設定を行う
+
+プロジェクト全体の入り口となる [`_targets.R`](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/_targets.R) では, 重要なのは以下の3つです.
+
+``` r
+library(targets)
+library(tarchetypes)
+suppressPackageStartupMessages(library(dplyr))
+
+here_rel <- function(...) {
+  fs::path_rel(here::here(...))
+}
+
+tar_source()
+
+tar_plan(
+  # Data Preparation ----------
+  data,
+  # Analysis ------------------
+  fact,
+  model,
+  # Graphics ------------------
+  fns_graphics = lst(theme_proj, color_base, color_accent, scale_fill_gender),
+  # Manuscript ----------------
+  tar_quarto(manuscript_book, path = "manuscript", quiet = FALSE),
+  tar_quarto(manuscript, path = "manuscript/main.qmd", quiet = FALSE),
+  # Website -------------------
+  tar_quarto(
+    website,
+    path = ".",
+    quiet = FALSE,
+    extra_files = here_rel("manuscript", "main.pdf")
+  )
+)
+```
+
+#### `tar_source()`
+
+パイプラインで使用する関数のソースコードのあるディレクトリを指定します. デフォルトでは `R/` ディレクトリが指定されています.
+
+#### `tar_plan()`
+
+パイプラインの定義を行います. 全てのパイプラインをここに記述する必要はなく, `tar_source()` で読み込まれるファイルの中でパイプラインを定義してそれを呼び出しても構いません. 例えば `data` というパイプラインは `R/tar_data.R` の中で定義されており, `_targets.R` ではその名前を書くだけで済みます.
+
+#### `here_rel()`
+
+`here::here()` は, プロジェクトのルートディレクトリを基準にした相対パスを指定するための関数です. これを使うことで, プロジェクトのルートディレクトリが変更されても, パスを変更する必要がなくなります. ただし, `_targets.R` の中で `here::here()` を使うと, 絶対パスが保存されてしまい, 他者と共有した場合に問題が発生します. そのため, `here::here()` の利便性を保ちつつ, 相対パスで保存できる関数を使用しています. この部分は Andrew Heiss さんの[コード](https://github.com/andrewheiss/lemon-lucifer/blob/main/_targets.R)を参考にしています.
+
+### 2. データクリーニングを定義する
+
+データクリーニングのパイプラインを `R/tar_data.R` に定義します. 詳しくは[コード](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_data.R)を参照してください.
+
+``` r
+data <- tar_plan(
+  dir_raw_accident_bike = download_accident_bike(
+    here_rel("data", "accident_bike")
+  ),
+  raw_accident_bike = load_accident_bike(dir_raw_accident_bike),
+  accident_bike = clean_accident_bike(raw_accident_bike)
+)
+```
+
+ポイントとしては,
+
+- raw データのファイルは `tar_file()` で定義する
+- raw データの読み込みは, `readr::read_csv()` などの関数を使う
+- クリーニングの関数は, raw データを引数に取り, クリーニング後のデータを返す
+
+という工程を必ず踏むことです. また上記の最初の二つを統合して, 以下のような書き方もできます.
+
+``` r
+tar_plan(
+  tar_file_read(
+    data1_raw,
+    here_rel("path", "to", "file", "data1.csv"),
+    readr::read_csv(!!.x),
+  ),
+  data1_cleaned = clean_data1(data1_raw)
+)
+```
+
+またオンライン上のファイルをダウンロードして `tar_file` で定義したい場合,
+
+``` r
+download_file <- function(url, destfile) {
+  if (!file.exists(destfile)) {
+    download.file(url, destfile)
+  }
+  return(destfile)
+}
+```
+
+といった関数を定義して, `tar_file()` の中で呼び出すことができます. 保存先のパスを返す関数を定義するというのがポイントです.
+
+### 3. ウェブサイトを設定する
+
+ウェブサイトをパイプラインの中でビルドするには `tar_quarto()` を用います. ウェブサイトを用いる意味や具体的な設定は, [研究のためのウェブサイトの記事](https://zenn.dev/nicetak/articles/quarto-research-blog)を参考にしてください.
+
+### 4. データ分析やモデルの試行錯誤
+
+上記で設定したウェブサイトの `playground` ディレクトリの中でノートブック形式のポストを作成し, データ分析やモデルの試行錯誤を行います. データクリーニングを行なった後のデータを `tar_load()` で読み込むことができます. また図などの設定は, `R/fns_graphics.R` 内で定義していて, それを読み込む形で使用しています.
+
+``` r
+targets::tar_config_set(
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
+)
+
+targets::tar_load(c(accident_bike))
+invisible(list2env(targets::tar_read(fns_graphics), .GlobalEnv))
+
+theme_set(theme_proj())
+```
+
+ポイントとしては, 必要以上にパイプラインに組み込まないことです. 試行錯誤の段階のほとんどの分析は実際の論文には含まれません. そのため, それをパイプラインに組み込むと, ほとんど必要ないにも関わらず, 依存関係の管理が難しくなります. そのため, `playground` ディレクトリの中で試行錯誤を行い, 最終的に必要なものだけをパイプラインに組み込むようにしています.
+
+`tar_quarto()` と Quarto の `freeze: auto` の設定を組み合わせることで, 一度コンパイルした結果は, 手動でコンパイルしない限り, 再計算されません. パイプラインの上流が変更された場合でもそれに依存する部分が再計算されないというデメリットはありますが, 不必要な部分の管理をほとんどしなくても良いというメリットがあります. 上流で変更があった場合には, プロジェクトの中で必要な部分だけを手動でコンパイルし直せば良いです.
+
+### 5. 途中結果をスライドにまとめる
+
+研究を進める中で, 途中結果をプレゼンする機会はよくあると思います. 試行錯誤した中で, 重要な結果をスライドにまとめるという形式が良いと思います. この段階も試行錯誤の過程の一つと考えるので, それをパイプラインに組み込む必要はありません. このプロジェクトでは, `slide` ディレクトリもウェブサイトのページの一部としてコンパイルされます.
+
+私はスライドを, [Quarto Clean Theme](https://github.com/kazuyanagimoto/quarto-clean-typst) で作成しています. Quarto で作成されるため, このワークフローに自然に取り込むことができます. また, Typst を用いているため, Beamer などと比べて高速にコンパイルされます.
+
+### 6. 3-5 を繰り返す. 主要な結果をパイプラインに組み込む
+
+プレゼンなどでフィードバックをもらいながら, 研究を進めていきます. 論文の執筆に十分な結果が得られたら, 次のステップに進みます. ここで初めて, `R/tar_fact.R` や `R/tar_model.R` などのパイプラインを定義していきます.
+
+#### 主要な結果をパイプラインに組み込む
+
+論文に必要な数値を [`R/tar_fact.R`](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_fact.R) でパイプラインに組み込みます. 私は, `compute_*()` という関数を定義して, クリーニングされたデータを引数にとり, 計算した結果を数値あるいはデータフレームとして返すようにしています. 図表の作成は論文の中で行うので, ここでは行いません.
+
+``` r
+fact <- tar_plan(
+  num_accident = compute_num_accident(accident_bike),
+  logit_hospital_death = compute_logit_hospital_death(accident_bike)
+)
+
+compute_num_accident <- function(accident_bike) {
+  accident_bike |>
+    summarize(n = n(), .by = c(type_person, gender))
+}
+```
+
+LaTeX 等で執筆される方は, この段階で図表を保存すると良いと思います. 例えば以下のようなパイプラインが考えられるでしょう.
+
+``` r
+tar_plan(
+  tar_file(
+    fig1_file,
+    plot_fig1(data1, here_rel("path", "to", "file", "fig1.pdf"))
+  )
+)
+
+plot_fig1 <- function(data1, path_fig1) {
+  ggplot(data1, aes(x = col1, y = col2)) +
+    geom_point()
+
+  ggsave(path_fig1)
+  return(path_fig1)
+}
+```
+
+#### Julia のコードをパイプラインに組み込む
+
+R の分析だけであれば, そのままパイプラインに組み込むことができますが, Julia のコードを組み込む場合は少し工夫が必要です. 私は以下の方法を取っています.
+
+1.  Julia のソースコードファイルとして読み込み (`tar_file_read()`), パイプラインに組み込む (`jl_file_*`)
+2.  Julia のソースコードを R の `system2()` でコマンドライン実行する (`run_model()`)
+3.  Julia の中で実行される結果は, CSV や YAML などのファイルとして保存しておき, R の中で読み込む (`tar_file_read()`)
+
+``` r
+model <- tar_plan(
+  tar_map(
+    values = list(name = c("main", "model")),
+    names = name,
+    tar_file_read(
+      jl,
+      here_rel("Julia", paste0(name, ".jl")),
+      readLines(!!.x)
+    )
+  ),
+  res_model = run_model(jl_file_main, jl_main, jl_model),
+  tar_file_read(parameters, res_model[[1]], yaml::read_yaml(!!.x)),
+  tar_file_read(demand_supply, res_model[[2]], read.csv(!!.x)),
+  tar_file_read(equilibrium, res_model[[3]], yaml::read_yaml(!!.x))
+)
+
+run_model <- function(jl_file_main, ...) {
+  system2(command = "julia", args = c("--project=.", jl_file_main))
+
+  return(file.path(
+    here_rel("output", "Julia"),
+    c("parameters.yaml", "demand_supply.csv", "equilibrium.yaml")
+  ))
+}
+```
+
+ポイントは以下の2点です.
+
+1.  Julia 内の依存関係も含められるように, `run_model()` の引数に全ての依存関係を指定する
+2.  結果を保存したファイルは, リストにまとめた上で, R から一つずつ読み込む
+
+ちなみに, `system2()` で実行する場合, Julia のパスが通っていないことがあります (PC のデフォルトのシェルと R のシェルが異なるため). その場合は, `.Renviron` で定義した Julia のパスを `.Rprofile` で読み込むようにしています.
+
+``` bash
+PATH_JULIA=/path/to/julia/
+```
+
+``` r
+Sys.setenv(
+  PATH = paste(Sys.getenv("PATH_JULIA"), Sys.getenv("PATH"), sep = ":")
+)
+```
+
+### 7. 最終的な結果で論文を執筆する
+
+論文の執筆は, `manuscript` ディレクトリの中で行います. ここでは, 上記で定義したパイプラインの実行結果を `tar_load()` で読み込んで, 論文を執筆します. 私は以下の3ステップで論文を執筆しています.
+
+1.  `manuscript/_quarto.yml` でディレクトリ自体を [Quarto Book](https://quarto.org/docs/books/) として設定する
+2.  Quarto Book として執筆する (`01-intro.qmd`, …)
+3.  `manuscript/main.qmd` に `01-intro.qmd`, `02-methods.qmd`, … をまとめてコンパイルする
+
+``` markdown
+{{< include 01-intro.qmd >}}
+{{< include 02-fact.qmd >}}
+{{< include 03-model.qmd >}}
+{{< include 04-result.qmd >}}
+{{< include 05-conclusion.qmd >}}
+```
+
+#### なぜ Quarto Book として執筆するのか
+
+Quarto Book として執筆すると, 複数ファイルに分けても cross-reference が効きます. これはかなり便利で, セクションごとにファイルを分けることで論文の構造が把握しやすくなり, cross-reference の入力補完が働くことで, 快適に執筆できます.
+
+ただし, Quarto Book は出力形式としては論文に相応しくないので, それらのファイルをまとめて `manuscript/main.qmd` でコンパイルしています. この時, バックエンドは高速でコンパイルできる Typst を使用しています. またテンプレートは [quarto-academic-typst](https://github.com/kazuyanagimoto/quarto-academic-typst) を使用しています. ちなみに LaTeX のソースコードが必要になった場合は, `quarto::quarto_render()` で LaTeX のソースコードを生成することができます (私は, 博士論文の執筆の際, LaTeX テンプレートに合わせるために使用しました).
+
+#### LaTeX で執筆する場合
+
+LaTeX で執筆する場合も `TinyTeX` を用いてコンパイルするならば, パイプラインに組み込むことができます. 例えば以下のような形が考えられるでしょう. ただし, 実際には全ての図表の依存関係を入れる必要があると考えられます.
+
+``` r
+tar_plan(
+  tar_file_read(
+    manuscript,
+    here_rel("manuscript", "main.tex"),
+    readLines(!!.x)
+  ),
+  tar_file(
+    manuscript_pdf,
+    compile_latex(manuscript, here_rel("manuscript", "main.pdf"))
+  )
+)
+
+compile_latex <- function(manuscript_file, path_pdf) {
+  tinytex::xelatex(
+    manuscript_file,
+    pdf_file = path_pdf
+  )
+  return(path_pdf)
+}
+```
+
+## 12.4 演習問題
+
+この章の演習は, 実際に小さなパイプラインを組んで, `{targets}` の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (`{targets}` と `{tarchetypes}` が入っていなければ `install.packages(c("targets", "tarchetypes"))` で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.
+
+最小のパイプラインを作ります. 作業ディレクトリに `_targets.R` を作り, `penguins` データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. `tar_make()` で実行し, `tar_visnetwork()` で依存関係を可視化しましょう.
+
+> **TIP:**
+>
+> ``` r
+> library(targets)
+> library(tarchetypes)
+> suppressPackageStartupMessages(library(dplyr))
+>
+> summarize_penguins <- function(data) {
+>   data |>
+>     summarize(bill_len = mean(bill_len, na.rm = TRUE), .by = species)
+> }
+>
+> tar_plan(
+>   penguins_raw = penguins,
+>   penguins_summary = summarize_penguins(penguins_raw)
+> )
+> ```
+>
+> R のコンソールから, 次を実行します.
+>
+> ``` r
+> targets::tar_make()
+> targets::tar_visnetwork()
+> ```
+>
+> `penguins_raw` (オブジェクト) から `summarize_penguins()` (関数) を通って `penguins_summary` (オブジェクト) へ, という依存関係が図に表れます. `tar_make()` を実行済みなので, どのターゲットもグレーで表示されます.
+
+計算結果を取り出します. パイプラインが作った `penguins_summary` の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.
+
+> **TIP:**
+>
+> ``` r
+> # Return the value directly
+> tar_read(penguins_summary)
+>
+> # Load it into the environment under its own name
+> tar_load(penguins_summary)
+> penguins_summary
+> ```
+>
+> `tar_read()` は値を返すので `x <- tar_read(...)` のように受け取れます. `tar_load()` はターゲット名と同じ変数を環境に作ります. どちらも, 一度 `tar_make()` で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.
+
+いよいよ本題です. `summarize_penguins()` に平均ひれ長 (`flipper_len`) の計算を追加してから, `tar_make()` を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.
+
+> **TIP:**
+>
+> 関数を次のように変更します.
+>
+> ``` r
+> summarize_penguins <- function(data) {
+>   data |>
+>     summarize(
+>       bill_len = mean(bill_len, na.rm = TRUE),
+>       flipper_len = mean(flipper_len, na.rm = TRUE),
+>       .by = species
+>     )
+> }
+> ```
+>
+> `tar_make()` の前に, どのターゲットが古くなっているかを確認します.
+>
+> ``` r
+> targets::tar_outdated()
+> ```
+>
+> 返ってくるのは `penguins_summary` だけです. `penguins_raw` は変更した関数に依存していないので, 古くなりません. `tar_make()` を実行すると, 実際に `penguins_summary` だけが再計算され, `penguins_raw` は前の結果がそのまま再利用されます (`tar_visnetwork()` でも, `penguins_summary` だけが未実行状態に戻っていることを確認できます).
+>
+> この「変更の影響を受けるところだけが再計算される」性質こそが `{targets}` の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.

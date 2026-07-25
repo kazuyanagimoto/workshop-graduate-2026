@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Quarto – Best Practices</title>
+<title>4&nbsp; Quarto – Empiricist's Workflow</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <link href="../lesson/speedup.html" rel="next">
 <link href="../lesson/git.html" rel="prev">
+<link href="../static/img/logo/hex-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -77,9 +78,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a6dab10a52faaac4b3286df81cc8bdbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2cc38e102e7a8b2af81dc809a8bbb635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-a6dab10a52faaac4b3286df81cc8bdbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-16f64e5e7cadf7c973142b0bfece6000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -132,6 +133,14 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="4&nbsp; Quarto – Empiricist’s Workflow">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
+<meta property="og:site_name" content="Empiricist’s Workflow">
+<meta name="twitter:title" content="4&nbsp; Quarto – Empiricist’s Workflow">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -153,9 +162,13 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../static/img/logo/hex-logo.svg" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../static/img/logo/hex-logo.svg" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Best Practices</a> 
+      <a href="../">Empiricist’s Workflow</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -265,7 +278,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">参考文献</span></a>
   </div>
 </li>
       </ul>
@@ -334,7 +347,7 @@ window.Quarto = {
 <h2 data-number="4.1" class="anchored" data-anchor-id="quarto-とは"><span class="header-section-number">4.1</span> Quarto とは</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../static/img/01-quarto/quarto-flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../static/img/01-quarto/quarto-flow.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="../static/img/quarto/quarto-flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../static/img/quarto/quarto-flow.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 <p>Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, <code>.qmd</code> という拡張子のファイルにあるコードを実行し, Markdown (<code>.md</code>) 形式のドキュメントを生成します. さらに, <a href="https://pandoc.org">pandoc</a> というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.</p>
@@ -489,7 +502,7 @@ Heading 3
 <p><strong>Output</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../static/img/01-quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="図のタイトル"><img src="../static/img/01-quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img" alt="図のタイトル"></a></p>
+<p><a href="../static/img/quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="図のタイトル"><img src="../static/img/quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img" alt="図のタイトル"></a></p>
 <figcaption>図のタイトル</figcaption>
 </figure>
 </div>
@@ -607,7 +620,7 @@ Heading 3
 <div id="fig-kanagawa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kanagawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/01-quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;4.1: 神奈川沖浪裏"><img src="../static/img/01-quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img"></a>
+<a href="../static/img/quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;4.1: 神奈川沖浪裏"><img src="../static/img/quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kanagawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: 神奈川沖浪裏
@@ -759,19 +772,19 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_eaaa19i2oowdj80xqvaa = TinyTable.createTableFunctions("tinytable_eaaa19i2oowdj80xqvaa");
+      const tableFns_h5m1ard4q7b5nad41tqt = TinyTable.createTableFunctions("tinytable_h5m1ard4q7b5nad41tqt");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_q4qyqg7jastxz5kyltu1',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_wxvkejqtg2hjwzugztzu',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_s7elnhb30ee8juo63gz1',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_yu8cthk5eq9wiqamxend',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_eaaa19i2oowdj80xqvaa.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_h5m1ard4q7b5nad41tqt.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -780,11 +793,11 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_eaaa19i2oowdj80xqvaa td.tinytable_css_q4qyqg7jastxz5kyltu1, #tinytable_eaaa19i2oowdj80xqvaa th.tinytable_css_q4qyqg7jastxz5kyltu1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_eaaa19i2oowdj80xqvaa td.tinytable_css_wxvkejqtg2hjwzugztzu, #tinytable_eaaa19i2oowdj80xqvaa th.tinytable_css_wxvkejqtg2hjwzugztzu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_h5m1ard4q7b5nad41tqt td.tinytable_css_s7elnhb30ee8juo63gz1, #tinytable_h5m1ard4q7b5nad41tqt th.tinytable_css_s7elnhb30ee8juo63gz1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_h5m1ard4q7b5nad41tqt td.tinytable_css_yu8cthk5eq9wiqamxend, #tinytable_h5m1ard4q7b5nad41tqt th.tinytable_css_yu8cthk5eq9wiqamxend {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_eaaa19i2oowdj80xqvaa" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_h5m1ard4q7b5nad41tqt" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1472,7 +1485,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto とは</span></span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](../static/img/01-quarto/quarto-flow.svg)</span>{fig-align="center"}</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](../static/img/quarto/quarto-flow.svg)</span>{fig-align="center"}</span>
 <span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, <span class="in">`.qmd`</span> という拡張子のファイルにあるコードを実行し, Markdown (<span class="in">`.md`</span>) 形式のドキュメントを生成します. さらに, <span class="co">[</span><span class="ot">pandoc</span><span class="co">](https://pandoc.org)</span> というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.</span>
 <span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -1710,7 +1723,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>**Output**</span>
 <span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](../static/img/01-quarto/hokusai_kanagawa.jpg)</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="al">![図のタイトル](../static/img/quarto/hokusai_kanagawa.jpg)</span></span>
 <span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a>::::</span>
@@ -1843,7 +1856,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output</span></span>
 <span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](../static/img/01-quarto/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a><span class="al">![神奈川沖浪裏](../static/img/quarto/hokusai_kanagawa.jpg)</span>{#fig-kanagawa}</span>
 <span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a>@fig-kanagawa は葛飾北斎の有名な浮世絵である.</span>
 <span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a></span>

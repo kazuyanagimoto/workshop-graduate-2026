@@ -185,12 +185,6 @@ a.github-card:hover {
   margin: 0.25rem auto 0.5rem;
 }
 
-/* Keep the book title on a single line under the logo */
-.sidebar-title {
-  white-space: nowrap;
-  font-size: 1.05rem;
-}
-
 /* Lightbox: scale up SVG figures.
    SVGs converted from PDFs (pdf2svg) and knitr's svg device have small
    intrinsic sizes in pt, so GLightbox would otherwise display them at that

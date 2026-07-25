@@ -43,6 +43,7 @@ book:
     - lesson/ai.qmd
   appendices:
     - lesson/dictionary.qmd
+    - lesson/color.qmd
     - references.qmd
 
 website:

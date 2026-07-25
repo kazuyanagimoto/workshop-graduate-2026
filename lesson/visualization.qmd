@@ -117,7 +117,7 @@ penguins_bar |>
 
 ## 色の選び方
 
-色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します.
+色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します. 色彩論に関する簡単な解説は @sec-color を参照してください.
 
 ### R Color Brewer's Palettes
 
@@ -187,9 +187,9 @@ penguins_bar |>
 library(MetBrewer)
 ```
 
-ここでは [Kandinsky](https://www.metmuseum.org/art/collection/search/369093?sortBy=Relevance&ft=Vasily+Kandinsky&offset=0&rpp=40&pos=12) のパレットを使ってみましょう.
+ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.
 
-![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true)
+![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)
 
 ```{r}
 #| label: plot-metbrewer
@@ -203,7 +203,7 @@ penguins_bar |>
     fill = NULL,
     title = "Number of Penguins by Species and Sex"
   ) +
-  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  scale_fill_manual(values = met.brewer("Egypt")) +
   theme_minimal() +
   theme(
     panel.grid.minor = element_blank(),
@@ -281,7 +281,7 @@ penguins_bar |>
     fill = NULL,
     title = "ペンギンの種と性別ごとの個体数"
   ) +
-  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  scale_fill_manual(values = met.brewer("Egypt")) +
   theme_minimal(base_family = "Noto Sans JP") +
   theme(
     panel.grid.minor = element_blank(),

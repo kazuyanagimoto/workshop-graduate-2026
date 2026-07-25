@@ -118,6 +118,8 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -290,6 +292,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -496,7 +504,7 @@ window.Quarto = {
 </section>
 <section id="色の選び方" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="色の選び方"><span class="header-section-number">8.2</span> 色の選び方</h2>
-<p>色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します.</p>
+<p>色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します. 色彩論に関する簡単な解説は <a href="color.html" class="quarto-xref"><span>Appendix B</span></a> を参照してください.</p>
 <section id="r-color-brewers-palettes" class="level3">
 <h3 class="anchored" data-anchor-id="r-color-brewers-palettes">R Color Brewer’s Palettes</h3>
 <p>現代的なカラーパレット集として有名な <a href="https://colorbrewer2.org/">Color Brewer</a> のパッケージとして, RColorBrewerが提供されています.</p>
@@ -571,8 +579,8 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("MetBrewer")</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MetBrewer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>ここでは <a href="https://www.metmuseum.org/art/collection/search/369093?sortBy=Relevance&amp;ft=Vasily+Kandinsky&amp;offset=0&amp;rpp=40&amp;pos=12">Kandinsky</a> のパレットを使ってみましょう.</p>
-<p><a href="https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true" class="img-fluid"></a></p>
+<p>ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.</p>
+<p><a href="https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true" class="img-fluid"></a></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins_bar <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
@@ -584,7 +592,7 @@ window.Quarto = {
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of Penguins by Species and Sex"</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Kandinsky"</span>)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Egypt"</span>)) <span class="sc">+</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
@@ -675,7 +683,7 @@ window.Quarto = {
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"ペンギンの種と性別ごとの個体数"</span></span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Kandinsky"</span>)) <span class="sc">+</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Egypt"</span>)) <span class="sc">+</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Noto Sans JP"</span>) <span class="sc">+</span></span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
@@ -792,19 +800,19 @@ Table&nbsp;8.1: 同じ写真を各形式で保存したときのファイルサ�
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_f7z7sqawgdhx1mkd83pu = TinyTable.createTableFunctions("tinytable_f7z7sqawgdhx1mkd83pu");
+      const tableFns_k1pavoxehqzvkzn24q93 = TinyTable.createTableFunctions("tinytable_k1pavoxehqzvkzn24q93");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 } ], css_id: 'tinytable_css_s0zqo8awkeqm36e3hlh2',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_x5b4y4ucbpj7r3fl5c85',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 } ], css_id: 'tinytable_css_6ltzmh5d4w0r4y9qcwiv',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_n4vfxbu64b30937pcjhz',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_f7z7sqawgdhx1mkd83pu.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_k1pavoxehqzvkzn24q93.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -813,11 +821,11 @@ Table&nbsp;8.1: 同じ写真を各形式で保存したときのファイルサ�
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_f7z7sqawgdhx1mkd83pu td.tinytable_css_s0zqo8awkeqm36e3hlh2, #tinytable_f7z7sqawgdhx1mkd83pu th.tinytable_css_s0zqo8awkeqm36e3hlh2 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_f7z7sqawgdhx1mkd83pu td.tinytable_css_x5b4y4ucbpj7r3fl5c85, #tinytable_f7z7sqawgdhx1mkd83pu th.tinytable_css_x5b4y4ucbpj7r3fl5c85 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k1pavoxehqzvkzn24q93 td.tinytable_css_6ltzmh5d4w0r4y9qcwiv, #tinytable_k1pavoxehqzvkzn24q93 th.tinytable_css_6ltzmh5d4w0r4y9qcwiv {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k1pavoxehqzvkzn24q93 td.tinytable_css_n4vfxbu64b30937pcjhz, #tinytable_k1pavoxehqzvkzn24q93 th.tinytable_css_n4vfxbu64b30937pcjhz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_f7z7sqawgdhx1mkd83pu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_k1pavoxehqzvkzn24q93" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -938,19 +946,19 @@ Table&nbsp;8.2: 点の多い散布図を各形式で保存したときのファ�
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_mmc30m0uldlj918nq33s = TinyTable.createTableFunctions("tinytable_mmc30m0uldlj918nq33s");
+      const tableFns_lmzz2oommvzc9kb9m9xh = TinyTable.createTableFunctions("tinytable_lmzz2oommvzc9kb9m9xh");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_mnj68s0y7t59qtc7u3tt',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_nclq1fn3n2kfgdfahpr9',}, 
+          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_h6spes1af1obxyy7zjwe',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ayvfq1iiu6jvpir42dnp',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_mmc30m0uldlj918nq33s.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_lmzz2oommvzc9kb9m9xh.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -959,11 +967,11 @@ Table&nbsp;8.2: 点の多い散布図を各形式で保存したときのファ�
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_mmc30m0uldlj918nq33s td.tinytable_css_mnj68s0y7t59qtc7u3tt, #tinytable_mmc30m0uldlj918nq33s th.tinytable_css_mnj68s0y7t59qtc7u3tt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_mmc30m0uldlj918nq33s td.tinytable_css_nclq1fn3n2kfgdfahpr9, #tinytable_mmc30m0uldlj918nq33s th.tinytable_css_nclq1fn3n2kfgdfahpr9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_lmzz2oommvzc9kb9m9xh td.tinytable_css_h6spes1af1obxyy7zjwe, #tinytable_lmzz2oommvzc9kb9m9xh th.tinytable_css_h6spes1af1obxyy7zjwe {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_lmzz2oommvzc9kb9m9xh td.tinytable_css_ayvfq1iiu6jvpir42dnp, #tinytable_lmzz2oommvzc9kb9m9xh th.tinytable_css_ayvfq1iiu6jvpir42dnp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_mmc30m0uldlj918nq33s" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_lmzz2oommvzc9kb9m9xh" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1015,33 +1023,33 @@ Table&nbsp;8.2: 点の多い散布図を各形式で保存したときのファ�
 <p>ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_1692" onsubmit="return validate_form_1692()" method="post">
+<form name="form_52261" onsubmit="return validate_form_52261()" method="post">
 <label>
-<input type="radio" name="answer_1692" id="answer_1692_1" value="ピクセルの数が十分に多いから">
+<input type="radio" name="answer_52261" id="answer_52261_1" value="ピクセルの数が十分に多いから">
 ピクセルの数が十分に多いから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_1692" id="answer_1692_2" value="可逆圧縮を使っているから">
+<input type="radio" name="answer_52261" id="answer_52261_2" value="ファイルサイズが大きいから">
+ファイルサイズが大きいから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_52261" id="answer_52261_3" value="可逆圧縮を使っているから">
 可逆圧縮を使っているから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_1692" id="answer_1692_3" value="画像を図形の数式として記録しているから">
+<input type="radio" name="answer_52261" id="answer_52261_4" value="画像を図形の数式として記録しているから">
 画像を図形の数式として記録しているから
 </label>
 <br>
-<label>
-<input type="radio" name="answer_1692" id="answer_1692_4" value="ファイルサイズが大きいから">
-ファイルサイズが大きいから
-</label>
-<br>
 <input type="submit" value="答え合わせ">
-<div id="result_1692"></div>
+<div id="result_52261"></div>
 </form>
-<script>function validate_form_1692() {var x, text; var x = document.forms['form_1692']['answer_1692'].value;if (x == '画像を図形の数式として記録しているから'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「1992」の図を思い出してください. ベクターは何を記録していましたか?';} document.getElementById('result_1692').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_52261() {var x, text; var x = document.forms['form_52261']['answer_52261'].value;if (x == '画像を図形の数式として記録しているから'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「1992」の図を思い出してください. ベクターは何を記録していましたか?';} document.getElementById('result_52261').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_1692').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_52261').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1051,33 +1059,33 @@ Table&nbsp;8.2: 点の多い散布図を各形式で保存したときのファ�
 <p>次のうち, ベクター形式をすべて選んでください.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_11632" onsubmit="return validate_form_11632()" method="post">
+<form name="form_24758" onsubmit="return validate_form_24758()" method="post">
 <label>
-<input type="checkbox" id="answer_11632_1" value="SVG">
+<input type="checkbox" id="answer_24758_1" value="SVG">
 SVG
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_11632_2" value="PDF">
+<input type="checkbox" id="answer_24758_2" value="PDF">
 PDF
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_11632_3" value="PNG">
+<input type="checkbox" id="answer_24758_3" value="PNG">
 PNG
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_11632_4" value="JPEG">
+<input type="checkbox" id="answer_24758_4" value="JPEG">
 JPEG
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_11632"></div>
+<div id="result_24758"></div>
 </form>
-<script>function validate_form_11632() {var text; var x1 = document.getElementById('answer_11632_1'); var x2 = document.getElementById('answer_11632_2'); var x3 = document.getElementById('answer_11632_3'); var x4 = document.getElementById('answer_11632_4'); if (x1.checked == true&x2.checked == true&x3.checked == false&x4.checked == false){text = '<span class="quiz-right">✓ 正解! </span>SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「画像形式の選び方」の表を見直しましょう.';} document.getElementById('result_11632').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_24758() {var text; var x1 = document.getElementById('answer_24758_1'); var x2 = document.getElementById('answer_24758_2'); var x3 = document.getElementById('answer_24758_3'); var x4 = document.getElementById('answer_24758_4'); if (x1.checked == true&x2.checked == true&x3.checked == false&x4.checked == false){text = '<span class="quiz-right">✓ 正解! </span>SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「画像形式の選び方」の表を見直しましょう.';} document.getElementById('result_24758').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_1692').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_11632').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_52261').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_24758').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1087,33 +1095,33 @@ JPEG
 <p>LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_45776" onsubmit="return validate_form_45776()" method="post">
+<form name="form_30901" onsubmit="return validate_form_30901()" method="post">
 <label>
-<input type="radio" name="answer_45776" id="answer_45776_1" value="PDF">
-PDF
-</label>
-<br>
-<label>
-<input type="radio" name="answer_45776" id="answer_45776_2" value="JPEG">
-JPEG
-</label>
-<br>
-<label>
-<input type="radio" name="answer_45776" id="answer_45776_3" value="SVG">
+<input type="radio" name="answer_30901" id="answer_30901_1" value="SVG">
 SVG
 </label>
 <br>
 <label>
-<input type="radio" name="answer_45776" id="answer_45776_4" value="PNG">
+<input type="radio" name="answer_30901" id="answer_30901_2" value="PNG">
 PNG
 </label>
 <br>
+<label>
+<input type="radio" name="answer_30901" id="answer_30901_3" value="JPEG">
+JPEG
+</label>
+<br>
+<label>
+<input type="radio" name="answer_30901" id="answer_30901_4" value="PDF">
+PDF
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_45776"></div>
+<div id="result_30901"></div>
 </form>
-<script>function validate_form_45776() {var x, text; var x = document.forms['form_45776']['answer_45776'].value;if (x == 'PDF'){text = '<span class="quiz-right">✓ 正解! </span>印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>統計グラフにはベクター形式が適しています. そのうち LaTeX がそのまま扱えるのはどちらでしたか?';} document.getElementById('result_45776').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_30901() {var x, text; var x = document.forms['form_30901']['answer_30901'].value;if (x == 'PDF'){text = '<span class="quiz-right">✓ 正解! </span>印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>統計グラフにはベクター形式が適しています. そのうち LaTeX がそのまま扱えるのはどちらでしたか?';} document.getElementById('result_30901').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_1692').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_11632').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_45776').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_52261').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_24758').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_30901').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1123,33 +1131,33 @@ PNG
 <p>共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_25725" onsubmit="return validate_form_25725()" method="post">
+<form name="form_40235" onsubmit="return validate_form_40235()" method="post">
 <label>
-<input type="radio" name="answer_25725" id="answer_25725_1" value="グラフを PNG で保存したことによる圧縮の劣化">
-グラフを PNG で保存したことによる圧縮の劣化
-</label>
-<br>
-<label>
-<input type="radio" name="answer_25725" id="answer_25725_2" value="フォントが埋め込まれていない">
-フォントが埋め込まれていない
-</label>
-<br>
-<label>
-<input type="radio" name="answer_25725" id="answer_25725_3" value="グラフを JPEG で保存したことによる非可逆圧縮のノイズ">
+<input type="radio" name="answer_40235" id="answer_40235_1" value="グラフを JPEG で保存したことによる非可逆圧縮のノイズ">
 グラフを JPEG で保存したことによる非可逆圧縮のノイズ
 </label>
 <br>
 <label>
-<input type="radio" name="answer_25725" id="answer_25725_4" value="SVG の解像度が足りていない">
+<input type="radio" name="answer_40235" id="answer_40235_2" value="フォントが埋め込まれていない">
+フォントが埋め込まれていない
+</label>
+<br>
+<label>
+<input type="radio" name="answer_40235" id="answer_40235_3" value="SVG の解像度が足りていない">
 SVG の解像度が足りていない
 </label>
 <br>
+<label>
+<input type="radio" name="answer_40235" id="answer_40235_4" value="グラフを PNG で保存したことによる圧縮の劣化">
+グラフを PNG で保存したことによる圧縮の劣化
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_25725"></div>
+<div id="result_40235"></div>
 </form>
-<script>function validate_form_25725() {var x, text; var x = document.forms['form_25725']['answer_25725'].value;if (x == 'グラフを JPEG で保存したことによる非可逆圧縮のノイズ'){text = '<span class="quiz-right">✓ 正解! </span>輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>輪郭のまわりのにじみは, どの圧縮方式に典型的な現象でしたか?';} document.getElementById('result_25725').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_40235() {var x, text; var x = document.forms['form_40235']['answer_40235'].value;if (x == 'グラフを JPEG で保存したことによる非可逆圧縮のノイズ'){text = '<span class="quiz-right">✓ 正解! </span>輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>輪郭のまわりのにじみは, どの圧縮方式に典型的な現象でしたか?';} document.getElementById('result_40235').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_1692').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_11632').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_45776').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_25725').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_52261').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_24758').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_30901').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_40235').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1159,33 +1167,33 @@ SVG の解像度が足りていない
 <p>数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_17035" onsubmit="return validate_form_17035()" method="post">
+<form name="form_74209" onsubmit="return validate_form_74209()" method="post">
 <label>
-<input type="radio" name="answer_17035" id="answer_17035_1" value="PDF に切り替える">
+<input type="radio" name="answer_74209" id="answer_74209_1" value="SVG の解像度を下げる">
+SVG の解像度を下げる
+</label>
+<br>
+<label>
+<input type="radio" name="answer_74209" id="answer_74209_2" value="PDF に切り替える">
 PDF に切り替える
 </label>
 <br>
 <label>
-<input type="radio" name="answer_17035" id="answer_17035_2" value="高解像度の PNG で保存する">
-高解像度の PNG で保存する
-</label>
-<br>
-<label>
-<input type="radio" name="answer_17035" id="answer_17035_3" value="JPEG (quality 5) で保存する">
+<input type="radio" name="answer_74209" id="answer_74209_3" value="JPEG (quality 5) で保存する">
 JPEG (quality 5) で保存する
 </label>
 <br>
 <label>
-<input type="radio" name="answer_17035" id="answer_17035_4" value="SVG の解像度を下げる">
-SVG の解像度を下げる
+<input type="radio" name="answer_74209" id="answer_74209_4" value="高解像度の PNG で保存する">
+高解像度の PNG で保存する
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_17035"></div>
+<div id="result_74209"></div>
 </form>
-<script>function validate_form_17035() {var x, text; var x = document.forms['form_17035']['answer_17035'].value;if (x == '高解像度の PNG で保存する'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>ベクター形式のファイルサイズは何に応じて増えるでしょうか. また, SVG に「解像度」はあるでしょうか.';} document.getElementById('result_17035').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_74209() {var x, text; var x = document.forms['form_74209']['answer_74209'].value;if (x == '高解像度の PNG で保存する'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>ベクター形式のファイルサイズは何に応じて増えるでしょうか. また, SVG に「解像度」はあるでしょうか.';} document.getElementById('result_74209').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5;res1 = document.getElementById('result_1692').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_11632').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_45776').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_25725').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.'; res5 = document.getElementById('result_17035').innerText == '✓ 正解! ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';text = res1 + res2 + res3 + res4 + res5;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5;res1 = document.getElementById('result_52261').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_24758').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_30901').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_40235').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.'; res5 = document.getElementById('result_74209').innerText == '✓ 正解! ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';text = res1 + res2 + res3 + res4 + res5;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1902,7 +1910,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a><span class="fu">## 色の選び方</span></span>
 <span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a>色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します.</span>
+<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a>色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します. 色彩論に関する簡単な解説は @sec-color を参照してください.</span>
 <span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### R Color Brewer's Palettes</span></span>
 <span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a></span>
@@ -1972,9 +1980,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MetBrewer)</span>
 <span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a>ここでは <span class="co">[</span><span class="ot">Kandinsky</span><span class="co">](https://www.metmuseum.org/art/collection/search/369093?sortBy=Relevance&amp;ft=Vasily+Kandinsky&amp;offset=0&amp;rpp=40&amp;pos=12)</span> のパレットを使ってみましょう.</span>
+<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a>ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.</span>
 <span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true)</span></span>
+<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)</span></span>
 <span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-211"><a href="#cb13-211" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: plot-metbrewer</span></span>
@@ -1988,7 +1996,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
 <span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of Penguins by Species and Sex"</span></span>
 <span id="cb13-221"><a href="#cb13-221" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Kandinsky"</span>)) <span class="sc">+</span></span>
+<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Egypt"</span>)) <span class="sc">+</span></span>
 <span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
@@ -2066,7 +2074,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-301"><a href="#cb13-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
 <span id="cb13-302"><a href="#cb13-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"ペンギンの種と性別ごとの個体数"</span></span>
 <span id="cb13-303"><a href="#cb13-303" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-304"><a href="#cb13-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Kandinsky"</span>)) <span class="sc">+</span></span>
+<span id="cb13-304"><a href="#cb13-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">met.brewer</span>(<span class="st">"Egypt"</span>)) <span class="sc">+</span></span>
 <span id="cb13-305"><a href="#cb13-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Noto Sans JP"</span>) <span class="sc">+</span></span>
 <span id="cb13-306"><a href="#cb13-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb13-307"><a href="#cb13-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>

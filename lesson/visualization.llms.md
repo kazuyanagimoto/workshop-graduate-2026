@@ -104,7 +104,7 @@ penguins_bar |>
 
 ## 8.2 色の選び方
 
-色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します.
+色の選択は重要なテーマで様々な理論がありますが, ここでは深入りせずに用意されているカラーパレットを紹介します. 色彩論に関する簡単な解説は [sec-color](#sec-color) を参照してください.
 
 ### R Color Brewer’s Palettes
 
@@ -175,9 +175,9 @@ penguins_bar |>
 library(MetBrewer)
 ```
 
-ここでは [Kandinsky](https://www.metmuseum.org/art/collection/search/369093?sortBy=Relevance&ft=Vasily+Kandinsky&offset=0&rpp=40&pos=12) のパレットを使ってみましょう.
+ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.
 
-[![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true)](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Kandinsky.png?raw=true)
+[![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)
 
 ``` r
 penguins_bar |>
@@ -190,7 +190,7 @@ penguins_bar |>
     fill = NULL,
     title = "Number of Penguins by Species and Sex"
   ) +
-  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  scale_fill_manual(values = met.brewer("Egypt")) +
   theme_minimal() +
   theme(
     panel.grid.minor = element_blank(),
@@ -268,7 +268,7 @@ penguins_bar |>
     fill = NULL,
     title = "ペンギンの種と性別ごとの個体数"
   ) +
-  scale_fill_manual(values = met.brewer("Kandinsky")) +
+  scale_fill_manual(values = met.brewer("Egypt")) +
   theme_minimal(base_family = "Noto Sans JP") +
   theme(
     panel.grid.minor = element_blank(),
@@ -395,9 +395,9 @@ Table 8.2: 点の多い散布図を各形式で保存したときのファイ�
 ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
 
 ピクセルの数が十分に多いから  
+ファイルサイズが大きいから  
 可逆圧縮を使っているから  
 画像を図形の数式として記録しているから  
-ファイルサイズが大きいから  
 
 次のうち, ベクター形式をすべて選んでください.
 
@@ -411,24 +411,24 @@ JPEG
 
 LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
 
-PDF  
-JPEG  
 SVG  
 PNG  
+JPEG  
+PDF  
 
 共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
 
-グラフを PNG で保存したことによる圧縮の劣化  
-フォントが埋め込まれていない  
 グラフを JPEG で保存したことによる非可逆圧縮のノイズ  
+フォントが埋め込まれていない  
 SVG の解像度が足りていない  
+グラフを PNG で保存したことによる圧縮の劣化  
 
 数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
 
-PDF に切り替える  
-高解像度の PNG で保存する  
-JPEG (quality 5) で保存する  
 SVG の解像度を下げる  
+PDF に切り替える  
+JPEG (quality 5) で保存する  
+高解像度の PNG で保存する  
 
 ### 見た目の悪いグラフの改善
 

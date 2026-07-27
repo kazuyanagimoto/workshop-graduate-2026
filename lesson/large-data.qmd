@@ -272,7 +272,7 @@ DuckDB は必要に応じて中間結果をディスクに退避できるため,
 
 なお, R のオブジェクトをそのまま高速に保存したいだけなら, [`fst`](https://www.fstpackage.org/) や [`qs2`](https://github.com/qsbase/qs2) も便利です. これらは `saveRDS()` の高速な代替として使えます.
 
-## 演習問題
+## 演習問題 {.unnumbered}
 
 ```{r}
 #| label: setup-quiz

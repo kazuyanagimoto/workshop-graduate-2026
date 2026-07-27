@@ -262,7 +262,7 @@ income |>
 
 :::
 
-## 演習問題
+## 演習問題 {.unnumbered}
 
 ```{r}
 #| label: setup-quiz

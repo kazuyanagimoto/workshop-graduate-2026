@@ -590,7 +590,7 @@ chmod -R a=rwx ABC      # 記号表記
 chown -R alice ABC      # ABC の所有者を alice にする
 ```
 
-## 演習問題
+## 演習問題 {.unnumbered}
 
 この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル ({{< kbd Ctrl >}} + {{< kbd ` >}}) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.
 

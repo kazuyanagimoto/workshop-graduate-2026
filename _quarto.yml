@@ -29,9 +29,8 @@ book:
   chapters:
     - index.qmd
     - lesson/architecture.qmd
-    - lesson/shell.qmd
+    - lesson/environment.qmd
     - lesson/git.qmd
-    - lesson/quarto.qmd
     - lesson/speedup.qmd
     - lesson/large-data.qmd
     - lesson/api.qmd
@@ -42,6 +41,8 @@ book:
     - lesson/targets.qmd
     - lesson/ai.qmd
   appendices:
+    - lesson/shell.qmd
+    - lesson/quarto.qmd
     - lesson/dictionary.qmd
     - lesson/color.qmd
     - references.qmd

@@ -1,8 +1,8 @@
-# 3  Git & GitHub
+# 4  Git & GitHub
 
 Code
 
-## 3.1 なぜ Git を使うのか
+## 4.1 なぜ Git を使うのか
 
 研究の分析コードは, 一度書いて終わり, ということはまずありません. データの前処理をやり直したり, 推定の仕様を変えたり, 図を作り直したりと, 何度も書き換えていきます. その過程で「昨日まで動いていたのに今日は動かない」「論文のあの数字を出したのはどの版だったか」といった事態は, 誰しも一度は経験します. Git は, こうしたコードの変更履歴を管理するための道具です.
 
@@ -23,15 +23,15 @@ Git を使うと, 主に次の4つのことができるようになります.
 
 Git と GitHub は名前が似ているため混同されがちですが, 別のものです. Git は手元のマシンで動くバージョン管理ツール (コマンドラインのアプリ) で, GitHub はそのコミット履歴を公開・共有し, 共同作業をするための Web サービスです([Figure fig-git-vs-github](#fig-git-vs-github)).[^1]
 
-[![](../static/cetz/git-vs-github.svg)](../static/cetz/git-vs-github.svg "Figure 3.1: GitHub を介した履歴の共有と公開")
+[![](../static/cetz/git-vs-github.svg)](../static/cetz/git-vs-github.svg "Figure 4.1: GitHub を介した履歴の共有と公開")
 
-Figure 3.1: GitHub を介した履歴の共有と公開
+Figure 4.1: GitHub を介した履歴の共有と公開
 
 ### コマンドライン
 
 Git を操作するGUIアプリは数多くありますが (VSCodeやRStudioにも), 私は学習の段階ではコマンドライン操作で学ぶことをお勧めしています. Gitの仕組みがそもそも非直感的なので, GUIといった直感的なツールでは裏で起こっていることをマスクしてしまって, 帰って仕組みの理解を妨げるからです. また, トラブルが起きた時もGUIからは解決できないことが多く, コマンドライン操作の知識が結局必要です. コマンドライン操作を理解することがGitを理解することと同義なので, AI時代であってもコマンドラインから学ぶことをお勧めします.
 
-## 3.2 Git の基礎概念
+## 4.2 Git の基礎概念
 
 ### レポジトリ
 
@@ -43,9 +43,9 @@ Gitのプロジェクトを始めるにはプロジェクトフォルダ内で�
 git init
 ```
 
-[![](../static/cetz/repo-tree.svg)](../static/cetz/repo-tree.svg "Figure 3.2: リポジトリ")
+[![](../static/cetz/repo-tree.svg)](../static/cetz/repo-tree.svg "Figure 4.2: リポジトリ")
 
-Figure 3.2: リポジトリ
+Figure 4.2: リポジトリ
 
 この時, `.git` という隠しフォルダが作られます. 以降, Gitはこのフォルダの中に, プロジェクトフォルダの状態を記録していきます. つまり, Gitはプロジェクトフォルダの中身を丸ごと保存する仕組みです. なお, 競技にはこの `.git` フォルダのことを「リポジトリ」と呼ぶこともありますが, ここではプロジェクトフォルダ全体を指す意味で使います.
 
@@ -53,9 +53,9 @@ Figure 3.2: リポジトリ
 
 Git でもっとも大切な概念がコミット (commit) です. コミットとは, プロジェクトフォルダのある時点の状態を丸ごと保存したセーブポイントだと考えてください. 「Git を使う」とは, 突き詰めればこのコミットを一つずつ積み重ねていく作業にほかなりません ([Figure fig-commit-savepoint](#fig-commit-savepoint)).
 
-[![](../static/cetz/commit-savepoint.svg)](../static/cetz/commit-savepoint.svg "Figure 3.3: コミット")
+[![](../static/cetz/commit-savepoint.svg)](../static/cetz/commit-savepoint.svg "Figure 4.3: コミット")
 
-Figure 3.3: コミット
+Figure 4.3: コミット
 
 デフォルトでは `main` という名前のブランチ (後述) に1つ目のコミットが作られます.
 
@@ -63,25 +63,25 @@ Figure 3.3: コミット
 
 いま自分がどのコミットを見ているかを指す目印を HEAD と呼びます. HEAD を過去のコミットに移すと, フォルダの中身はその時点の状態に戻ります ([Figure fig-commit-back](#fig-commit-back)). 一度作ったコミットは消えないので, 失敗を恐れずに思い切って実験できます. この「いつでも戻れる」という安心感こそ, セーブポイントを積む意味です.
 
-[![](../static/cetz/commit-back.svg)](../static/cetz/commit-back.svg "Figure 3.4: 過去のコミットに戻る")
+[![](../static/cetz/commit-back.svg)](../static/cetz/commit-back.svg "Figure 4.4: 過去のコミットに戻る")
 
-Figure 3.4: 過去のコミットに戻る
+Figure 4.4: 過去のコミットに戻る
 
 **コミットの比較**
 
 任意の2つのコミットの差分 (diff) を取れば, 「どこが, どう変わったか」だけに注目できます ([Figure fig-commit-compare](#fig-commit-compare)). これはバグの発見やコードレビューで大きな助けになります. 例えば, 昨日まで出ていた数字が今日は変わってしまったとき, その間のコミットの差分を見れば, 原因の見当がつきます.
 
-[![](../static/cetz/commit-compare.svg)](../static/cetz/commit-compare.svg "Figure 3.5: コミット間の差分 (diff)")
+[![](../static/cetz/commit-compare.svg)](../static/cetz/commit-compare.svg "Figure 4.5: コミット間の差分 (diff)")
 
-Figure 3.5: コミット間の差分 (diff)
+Figure 4.5: コミット間の差分 (diff)
 
 > **NOTE:**
 >
 > 私たちは「コミットは変更点 (差分) を記録している」と思いがちですが, 実際は違います. コミットが保存しているのは, その時点で Git が追跡しているファイル全体の状態, つまり丸ごとのスナップショットです ([Figure fig-commit-snapshot](#fig-commit-snapshot)).[^2] [Figure fig-commit-back](#fig-commit-back) で見た「どの時点にも戻れる」性質は, 各コミットが完全なスナップショットだからこそ成り立ちます.
 >
-> [![](../static/cetz/commit-snapshot.svg)](../static/cetz/commit-snapshot.svg "Figure 3.6: スナップショットとハッシュ名")
+> [![](../static/cetz/commit-snapshot.svg)](../static/cetz/commit-snapshot.svg "Figure 4.6: スナップショットとハッシュ名")
 >
-> Figure 3.6: スナップショットとハッシュ名
+> Figure 4.6: スナップショットとハッシュ名
 >
 > 図でオレンジに塗られた行は, そのコミットで変更されたファイルを表します. 変更の有無にかかわらず, コミットは毎回すべてのファイルの状態を丸ごと記録します. そして個々のコミットには, 人間が付ける連番ではなく, その中身から計算されたハッシュ値[^3] (例: `a84d0e9...`) が名前として割り当てられます. 中身が少しでも違えば異なるハッシュになるため, 名前が一意に定まり, 「このコミット」を確実に指し示せます. ふだんは, 図の各スナップショットの下に並ぶように, 先頭の7文字ほど (`a84d0e9`) だけを使ってコミットを指定することが多いです.
 
@@ -91,13 +91,13 @@ Figure 3.5: コミット間の差分 (diff)
 
 コードを共有したりバックアップしたりするには, GitHub 上のリモートリポジトリ (remote repository) を使います. この2つは, ローカルからリモートへ送る push と, リモートからローカルへ取り込む pull によって同期します ([Figure fig-local-remote](#fig-local-remote)).
 
-[![](../static/cetz/local-remote.svg)](../static/cetz/local-remote.svg "Figure 3.7: ローカルとリモートの同期")
+[![](../static/cetz/local-remote.svg)](../static/cetz/local-remote.svg "Figure 4.7: ローカルとリモートの同期")
 
-Figure 3.7: ローカルとリモートの同期
+Figure 4.7: ローカルとリモートの同期
 
 なお, Dropbox や Google Drive などと違って, 自分で明示的に push しない限り, ローカルの変更がリモートに反映されることはありません. つまり, ローカルでいくらコミットを積んでも, push しない限りリモートには何も変化が起きません. 逆も同様で, リモートの変更は pull しない限りローカルには反映されません.
 
-## 3.3 基本の操作
+## 4.3 基本の操作
 
 ### ステージング
 
@@ -105,9 +105,9 @@ Figure 3.7: ローカルとリモートの同期
 
 ステージングエリアに載せた変更だけが, 続く `git commit` でコミットになります. 図の `draft.txt` のように, 変更してあっても `git add` しなければコミットには含まれません. こうして, 関係する変更だけをひとまとめにした, 意味のあるコミットを作れます.
 
-[![](../static/cetz/staging.svg)](../static/cetz/staging.svg "Figure 3.8: ステージングとコミット")
+[![](../static/cetz/staging.svg)](../static/cetz/staging.svg "Figure 4.8: ステージングとコミット")
 
-Figure 3.8: ステージングとコミット
+Figure 4.8: ステージングとコミット
 
 ``` bash
 git add foo1.txt              # stage one file
@@ -162,15 +162,15 @@ git pull origin main    # bring remote changes into local
 6.  ステージを忘れずに, コミットを作ります.
 7.  リモートリポジトリへ push します. GitHub 上でファイルが更新されていることを確認しましょう.
 
-## 3.4 ブランチとマージ
+## 4.4 ブランチとマージ
 
 ### ブランチと HEAD
 
 ブランチ (branch) は, あるコミットに付けたラベルのようなものです. よくある誤解として, ブランチは「変更の流れ」を表すものだと思われがちですが, 実際は「コミットの位置」を指すものです. そして HEAD は, いま自分がどのブランチ (どのコミット) にいるかを指します. 例えば, 安定版の main から枝分かれさせた dev のように, 複数のブランチを同時に持てます ([Figure fig-branch-head](#fig-branch-head)).
 
-[![](../static/cetz/branch-head.svg)](../static/cetz/branch-head.svg "Figure 3.9: ブランチと HEAD")
+[![](../static/cetz/branch-head.svg)](../static/cetz/branch-head.svg "Figure 4.9: ブランチと HEAD")
 
-Figure 3.9: ブランチと HEAD
+Figure 4.9: ブランチと HEAD
 
 ``` bash
 git branch BRANCH_NAME    # create a branch
@@ -181,9 +181,9 @@ git switch BRANCH_NAME    # move HEAD to a branch
 
 あるブランチの変更を, いま HEAD のあるブランチへ取り込む操作をマージ (merge) と呼びます. dev を main にマージすると, 両方の変更を併せ持つ新しいコミット ([Figure fig-merge](#fig-merge) の M) ができます.
 
-[![](../static/cetz/merge.svg)](../static/cetz/merge.svg "Figure 3.10: ブランチのマージ")
+[![](../static/cetz/merge.svg)](../static/cetz/merge.svg "Figure 4.10: ブランチのマージ")
 
-Figure 3.10: ブランチのマージ
+Figure 4.10: ブランチのマージ
 
 ``` bash
 git merge BRANCH_NAME
@@ -204,21 +204,21 @@ git merge BRANCH_NAME
 
 まず, 次のような状況を考えます ([Figure fig-merge-setup](#fig-merge-setup)). 手元 (Local) では, main の C2 から dev ブランチを切って D1 というコミットを作りました. 一方リモート (Remote) はまだ C1-C2 のままで, dev も D1 も持っていません. この D1 の変更を main に取り込み, [Figure fig-merge](#fig-merge) の M のようなマージコミットをリモートに作ることが目的です.
 
-[![](../static/cetz/merge-setup.svg)](../static/cetz/merge-setup.svg "Figure 3.11: マージ前の Local と Remote")
+[![](../static/cetz/merge-setup.svg)](../static/cetz/merge-setup.svg "Figure 4.11: マージ前の Local と Remote")
 
-Figure 3.11: マージ前の Local と Remote
+Figure 4.11: マージ前の Local と Remote
 
 この dev を main に取り込む方法は, 大きく2つあります. 1つ目は, ローカルでマージする方法です. ローカルで dev を main にマージし, その main をリモートへ push します ([Figure fig-local-merge](#fig-local-merge)). 手数が少なく, 一人で進めるプロジェクトに向いています.
 
-[![](../static/cetz/local-merge.svg)](../static/cetz/local-merge.svg "Figure 3.12: ローカルマージ")
+[![](../static/cetz/local-merge.svg)](../static/cetz/local-merge.svg "Figure 4.12: ローカルマージ")
 
-Figure 3.12: ローカルマージ
+Figure 4.12: ローカルマージ
 
 2つ目は, リモートでマージする方法です. dev をリモートへ push し, GitHub 上で Pull Request を作って main に取り込みます ([Figure fig-remote-merge](#fig-remote-merge)). 変更をレビューしてから取り込めるので, 共同作業に向いています (私は一人のときもこちらを使います).
 
-[![](../static/cetz/remote-merge.svg)](../static/cetz/remote-merge.svg "Figure 3.13: リモートマージ (Pull Request)")
+[![](../static/cetz/remote-merge.svg)](../static/cetz/remote-merge.svg "Figure 4.13: リモートマージ (Pull Request)")
 
-Figure 3.13: リモートマージ (Pull Request)
+Figure 4.13: リモートマージ (Pull Request)
 
 2種類のマージ (ローカルマージとリモートマージ) を, どちらも実際に試してみましょう.
 
@@ -243,13 +243,13 @@ Figure 3.13: リモートマージ (Pull Request)
 7.  ローカルに戻り `main` に移ります
 8.  main を pull し, ローカルの `dev` を消します (`git branch -d dev`)
 
-## 3.5 コンフリクト
+## 4.5 コンフリクト
 
 Gitを使っていると, 2つのブランチをマージしたときに, Git がどちらの変更を採用すべきか判断できない場合があります. その状態をコンフリクト (conflict) と呼びます ([Figure fig-conflict](#fig-conflict)). Git はどちらを採用すべきか判断できないので, 解決を人間に委ねます.
 
-[![](../static/cetz/conflict.svg)](../static/cetz/conflict.svg "Figure 3.14: コンフリクト")
+[![](../static/cetz/conflict.svg)](../static/cetz/conflict.svg "Figure 4.14: コンフリクト")
 
-Figure 3.14: コンフリクト
+Figure 4.14: コンフリクト
 
 コンフリクトが起きると, 該当するファイルの中に, 両方の変更が次のように並べて書き込まれます.
 
@@ -279,9 +279,9 @@ VSCode では, 「Accept Current Change」「Accept Incoming Change」などの�
 
 実は pull は, 2つの操作を続けて行っています ([Figure fig-pull-fetch-merge](#fig-pull-fetch-merge)).
 
-[![](../static/cetz/pull-fetch-merge.svg)](../static/cetz/pull-fetch-merge.svg "Figure 3.15: pull = fetch + merge")
+[![](../static/cetz/pull-fetch-merge.svg)](../static/cetz/pull-fetch-merge.svg "Figure 4.15: pull = fetch + merge")
 
-Figure 3.15: pull = fetch + merge
+Figure 4.15: pull = fetch + merge
 
 1.  **fetch**: リモートのブランチをローカルへ取得して `origin/BRANCH_NAME` と名付ける
 2.  **merge**: `origin/BRANCH_NAME` をいまのブランチへ取り込む
@@ -319,7 +319,7 @@ git merge origin/main
 3.  ローカルに戻り `main` に移って `foo3.txt` に別の一行 (例: “Village of Bamboo Shoot”) を書き, コミットします.
 4.  `origin/main` から pull してコンフリクトを起こし, それを解決します.
 
-## 3.6 研究のワークフロー
+## 4.6 研究のワークフロー
 
 ここまでの道具を, 日々の研究で繰り返す一連の流れにまとめます. 私はだいたい次の6ステップを回しています. 最初はこの流れをそのまま真似るだけで十分です.
 
@@ -327,9 +327,9 @@ git merge origin/main
 
 作業を始める前に, まず main を最新の状態にしておきます ([Figure fig-wf-pull](#fig-wf-pull)).
 
-[![](../static/cetz/wf-pull.svg)](../static/cetz/wf-pull.svg "Figure 3.16: main を最新化")
+[![](../static/cetz/wf-pull.svg)](../static/cetz/wf-pull.svg "Figure 4.16: main を最新化")
 
-Figure 3.16: main を最新化
+Figure 4.16: main を最新化
 
 ``` bash
 git switch main
@@ -340,9 +340,9 @@ git pull origin main
 
 main から dev を切り, そこで作業します ([Figure fig-wf-branch](#fig-wf-branch)).
 
-[![](../static/cetz/wf-branch.svg)](../static/cetz/wf-branch.svg "Figure 3.17: dev ブランチで作業")
+[![](../static/cetz/wf-branch.svg)](../static/cetz/wf-branch.svg "Figure 4.17: dev ブランチで作業")
 
-Figure 3.17: dev ブランチで作業
+Figure 4.17: dev ブランチで作業
 
 ``` bash
 git switch -c dev    # create dev and switch to it (same as: git branch dev && git switch dev)
@@ -353,9 +353,9 @@ git switch -c dev    # create dev and switch to it (same as: git branch dev && g
 
 意味のあるまとまりごとに, ステージしてコミットします ([Figure fig-wf-commit](#fig-wf-commit)).
 
-[![](../static/cetz/wf-commit.svg)](../static/cetz/wf-commit.svg "Figure 3.18: コミットを積む")
+[![](../static/cetz/wf-commit.svg)](../static/cetz/wf-commit.svg "Figure 4.18: コミットを積む")
 
-Figure 3.18: コミットを積む
+Figure 4.18: コミットを積む
 
 ``` bash
 git add foo1.txt foo2.txt    # stage files to commit (git add . for all)
@@ -366,9 +366,9 @@ git commit -m "MESSAGE"
 
 dev をリモートへ送ります ([Figure fig-wf-push](#fig-wf-push)).
 
-[![](../static/cetz/wf-push.svg)](../static/cetz/wf-push.svg "Figure 3.19: dev を push")
+[![](../static/cetz/wf-push.svg)](../static/cetz/wf-push.svg "Figure 4.19: dev を push")
 
-Figure 3.19: dev を push
+Figure 4.19: dev を push
 
 ``` bash
 git push origin dev
@@ -378,17 +378,17 @@ git push origin dev
 
 GitHub 上で Pull Request を作り, dev を main にマージします ([Figure fig-wf-pr](#fig-wf-pr)). マージが終わったら, リモートの dev ブランチを消しておくことを勧めます.
 
-[![](../static/cetz/wf-pr.svg)](../static/cetz/wf-pr.svg "Figure 3.20: Pull Request でマージ")
+[![](../static/cetz/wf-pr.svg)](../static/cetz/wf-pr.svg "Figure 4.20: Pull Request でマージ")
 
-Figure 3.20: Pull Request でマージ
+Figure 4.20: Pull Request でマージ
 
 ### 6. ローカルの main を最新化する
 
 Pull Request でマージが済んだら, ローカルの main に戻って pull し, 役目を終えた dev を消します ([Figure fig-wf-sync](#fig-wf-sync)). これで手元の main にもマージ結果 (M) が反映され, 次の作業に備えられます.
 
-[![](../static/cetz/wf-sync.svg)](../static/cetz/wf-sync.svg "Figure 3.21: ローカルの main を最新化")
+[![](../static/cetz/wf-sync.svg)](../static/cetz/wf-sync.svg "Figure 4.21: ローカルの main を最新化")
 
-Figure 3.21: ローカルの main を最新化
+Figure 4.21: ローカルの main を最新化
 
 ``` bash
 git switch main
@@ -400,7 +400,7 @@ git branch -d dev    # delete local dev branch
 
 - ステップ1〜6を, いくつかコミットを作りながら一通りたどってみましょう.
 
-## 3.7 困ったときは
+## 4.7 困ったときは
 
 git を使う最大の強みは, トラブルが起きた時に過去に戻って再開できることです.
 
@@ -420,9 +420,9 @@ a84d0e9 add computation-data
 
 この一覧を図にすると [Figure fig-commit-chain](#fig-commit-chain) のようになります. 各コミットはハッシュ名で識別され, いまの作業位置を指す HEAD は, 最新コミット `a84d0e9` の main 上にあります. この一覧から, どのコミットのあたりで問題が起きたか, どの2つを見比べればよいかの見当をつけます.
 
-[![](../static/cetz/commit-chain.svg)](../static/cetz/commit-chain.svg "Figure 3.22: コミット列と HEAD")
+[![](../static/cetz/commit-chain.svg)](../static/cetz/commit-chain.svg "Figure 4.22: コミット列と HEAD")
 
-Figure 3.22: コミット列と HEAD
+Figure 4.22: コミット列と HEAD
 
 ### 変更を見比べる
 

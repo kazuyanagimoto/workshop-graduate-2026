@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; targets による再現性 – Empiricist's Workflow</title>
+<title>12&nbsp; パイプライン – Empiricist's Workflow</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -105,11 +105,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="12&nbsp; targets による再現性 – Empiricist’s Workflow">
+<meta property="og:title" content="12&nbsp; パイプライン – Empiricist’s Workflow">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta property="og:site_name" content="Empiricist’s Workflow">
-<meta name="twitter:title" content="12&nbsp; targets による再現性 – Empiricist’s Workflow">
+<meta name="twitter:title" content="12&nbsp; パイプライン – Empiricist’s Workflow">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/targets.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/targets.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -151,31 +151,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -243,14 +237,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -287,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#を繰り返す.-主要な結果をパイプラインに組み込む" id="toc-を繰り返す.-主要な結果をパイプラインに組み込む" class="nav-link" data-scroll-target="#を繰り返す.-主要な結果をパイプラインに組み込む">6. 3-5 を繰り返す. 主要な結果をパイプラインに組み込む</a></li>
   <li><a href="#最終的な結果で論文を執筆する" id="toc-最終的な結果で論文を執筆する" class="nav-link" data-scroll-target="#最終的な結果で論文を執筆する">7. 最終的な結果で論文を執筆する</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">12.4</span> 演習問題</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a></li>
   </ul>
 </nav>
     </div>
@@ -296,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -694,8 +700,8 @@ Figure&nbsp;12.5: 関数の中身を変更しても, 依存部分だけが未実
 </section>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">12.4</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>この章の演習は, 実際に小さなパイプラインを組んで, <code>{targets}</code> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<code>{targets}</code> と <code>{tarchetypes}</code> が入っていなければ <code>install.packages(c("targets", "tarchetypes"))</code> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</p>
 <div class="quiz">
 <p>最小のパイプラインを作ります. 作業ディレクトリに <code>_targets.R</code> を作り, <code>penguins</code> データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. <code>tar_make()</code> で実行し, <code>tar_visnetwork()</code> で依存関係を可視化しましょう.</p>
@@ -1288,7 +1294,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> targets による再現性</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> パイプライン</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`{targets}`</span><span class="co">](https://books.ropensci.org/targets/)</span> は, 研究のワークフローを構築する R のパッケージです.</span>
@@ -1690,7 +1696,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb19-403"><a href="#cb19-403" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb19-404"><a href="#cb19-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-405"><a href="#cb19-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb19-407"><a href="#cb19-407" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-408"><a href="#cb19-408" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さなパイプラインを組んで, <span class="in">`{targets}`</span> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<span class="in">`{targets}`</span> と <span class="in">`{tarchetypes}`</span> が入っていなければ <span class="in">`install.packages(c("targets", "tarchetypes"))`</span> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</span>
 <span id="cb19-409"><a href="#cb19-409" aria-hidden="true" tabindex="-1"></a></span>

@@ -1,14 +1,14 @@
-# 4  Quarto
+# Appendix B — Quarto
 
 Code
 
-## 4.1 Quarto とは
+## B.1 Quarto とは
 
 [![](../static/img/quarto/quarto-flow.svg)](../static/img/quarto/quarto-flow.svg)
 
 Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, `.qmd` という拡張子のファイルにあるコードを実行し, Markdown (`.md`) 形式のドキュメントを生成します. さらに, [pandoc](https://pandoc.org) というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.
 
-## 4.2 Markdown 記法
+## B.2 Markdown 記法
 
 コードの実行については後の章で説明しますが, まずはMarkdown記法について簡単に説明します.
 
@@ -157,7 +157,7 @@ Markdownでは必要最小限の以下の三つの装飾が用意されていま
 
 Markdownでは, `|` と `-` を使って表を作ることができます. さらに, `:` を使うことで, 列の位置を指定することもできます. デフォルトでは, 列は全て左寄せになりますが, `:---` と書くと左寄せ, `---:` と書くと右寄せ, `:---:` と書くと中央寄せになります. GUIツールで表を作ってmarkdwon形式でエクスポートするサービスとして, [Tables Generator](https://www.tablesgenerator.com/markdown_tables) などがあります.
 
-## 4.3 \\\LaTeX\\ Math 記法
+## B.3 \\\LaTeX\\ Math 記法
 
 Markdownでは \\\LaTeX\\ という組版ソフトの数式記法を使って数式を表現することができます. 数式は, `$...$` で囲むとインライン数式, `$$...$$` で囲むとブロック数式 (改行して中央揃え) になります.
 
@@ -185,7 +185,7 @@ Markdownでは \\\LaTeX\\ という組版ソフトの数式記法を使って数
 
 \\ \frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2} \sum\_{n=0}^{\infty} \frac{(4 n)!}{(n!)^4} \frac{26390 n+1103}{396^{4 n}} \\
 
-## 4.4 Quarto 記法
+## B.4 Quarto 記法
 
 ここからは Quarto独自の記法についての説明です. 引用と文献情報については [文献と引用](../lesson/literature.llms.md) の章で説明します.
 
@@ -216,9 +216,9 @@ Quartoのドキュメントでは, 冒頭に `---` で囲まれたYAML形式の�
 
 ## Output
 
-[![](../static/img/quarto/hokusai_kanagawa.jpg)](../static/img/quarto/hokusai_kanagawa.jpg "Figure 4.1: 神奈川沖浪裏")
+[![](../static/img/quarto/hokusai_kanagawa.jpg)](../static/img/quarto/hokusai_kanagawa.jpg "Figure B.1: 神奈川沖浪裏")
 
-Figure 4.1: 神奈川沖浪裏
+Figure B.1: 神奈川沖浪裏
 
 [Figure fig-kanagawa](#fig-kanagawa) は葛飾北斎の有名な浮世絵である.
 
@@ -242,13 +242,13 @@ Figure 4.1: 神奈川沖浪裏
 | pear   | 1.37  |
 | orange | 3.09  |
 
-Table 4.1: Fruit prices
+Table B.1: Fruit prices
 
 [Table tbl-fruit](#tbl-fruit) は果物の値段を表している.
 
 基本的には, 特別な prefix (`fig-`, `tbl-`, `sec-` など) をつけたラベルを `{#label}` という形式で指定し, 本文中では `@label` と書くことで, その要素の番号を自動で参照することができます. その他の要素 (式や命題など) も同様の方法で参照できるので [Quartoのドキュメント](https://quarto.org/docs/authoring/cross-references.html) を参照してください.
 
-## 4.5 コードの実行
+## B.5 コードの実行
 
 Quartoの最大の特徴は, ドキュメントの中にコードを埋め込んで実行できることです. コードは, ```` ```{r} ```` で始まり ```` ``` ```` で終わる コードチャンク (code chunk) の中に書きます. コンパイルのたびにQuartoがそのコードを実行し, コードと結果をドキュメントに挿入します.[^2]
 
@@ -278,7 +278,7 @@ install.packages("ggplot2")
 - `include`: コードも結果も出力に含めるか. `false` にすると, 実行はされますが何も表示されません (パッケージの読み込みなど, 裏方の処理に使います).
 - `warning` / `message`: 警告やメッセージを表示するか.
 
-## 4.6 コードと相互参照
+## B.6 コードと相互参照
 
 前の「相互参照」の節では, 手で書いた画像やMarkdownの表に番号を振りました. コードが生成する図や表にも, 同じ仕組みがそのまま使えます.
 
@@ -301,9 +301,9 @@ penguins |>
 ```
 ````
 
-[![](quarto_files/figure-html/fig-penguins-1.svg)](quarto_files/figure-html/fig-penguins-1.svg "Figure 4.2: くちばしの長さとひれの長さの関係")
+[![](quarto_files/figure-html/fig-penguins-1.svg)](quarto_files/figure-html/fig-penguins-1.svg "Figure B.2: くちばしの長さとひれの長さの関係")
 
-Figure 4.2: くちばしの長さとひれの長さの関係
+Figure B.2: くちばしの長さとひれの長さの関係
 
 本文で `@fig-penguins` と書くと [Figure fig-penguins](#fig-penguins) のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.
 
@@ -331,11 +331,11 @@ penguins |>
 | Gentoo    | 47.50488 | 217.1870    |
 | Chinstrap | 48.83382 | 195.8235    |
 
-Table 4.2: ペンギンの種類ごとの平均値
+Table B.2: ペンギンの種類ごとの平均値
 
 本文で `@tbl-penguins` と書くと [Table tbl-penguins](#tbl-penguins) のように参照できます.
 
-## 4.7 インラインコード
+## B.7 インラインコード
 
 文章の途中に計算結果を埋め込みたいときは, インラインコード (inline code) を使います. バッククォートの中で `r` に続けて式を書くと, コンパイル時にその評価結果が文章に挿入されます.
 
@@ -349,7 +349,7 @@ Table 4.2: ペンギンの種類ごとの平均値
 
 数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは 344 である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.
 
-## 4.8 演習問題
+## 演習問題
 
 この章の演習は, 実際に小さな `.qmd` を書きながら進めます. VSCode か RStudio で `report.qmd` という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで `quarto render report.qmd` を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.
 

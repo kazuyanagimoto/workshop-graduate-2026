@@ -295,7 +295,7 @@ Figure 11.4: Typst バックエンドでの引用と文献リスト
 
 本文は [Figure fig-quarto-cite](#fig-quarto-cite) の例と同じです. コンパイルした結果が [Figure fig-quarto-typst](#fig-quarto-typst) で, LaTeX 経由の出力 ([Figure fig-quarto-cite](#fig-quarto-cite)) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは “Bibliography” になります).
 
-## 11.4 演習問題
+## 演習問題
 
 この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の `@` 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.
 

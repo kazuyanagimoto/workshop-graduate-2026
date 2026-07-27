@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <link href="../lesson/large-data.html" rel="next">
-<link href="../lesson/quarto.html" rel="prev">
+<link href="../lesson/git.html" rel="prev">
 <link href="../static/img/logo/hex-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -179,31 +179,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -251,7 +245,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -271,14 +265,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -317,7 +323,7 @@ window.Quarto = {
   <li><a href="#並列化とベンチマーク" id="toc-並列化とベンチマーク" class="nav-link" data-scroll-target="#並列化とベンチマーク">並列化とベンチマーク</a></li>
   <li><a href="#cコードの並列化" id="toc-cコードの並列化" class="nav-link" data-scroll-target="#cコードの並列化">C++コードの並列化</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">5.5</span> 演習問題</a>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a>
   <ul class="collapse">
   <li><a href="#クイズ" id="toc-クイズ" class="nav-link" data-scroll-target="#クイズ">クイズ</a></li>
   <li><a href="#ジニ係数で計算量を体感する" id="toc-ジニ係数で計算量を体感する" class="nav-link" data-scroll-target="#ジニ係数で計算量を体感する">ジニ係数で計算量を体感する</a></li>
@@ -506,12 +512,12 @@ Table&nbsp;5.1: 観測数を変えたときのマッチングの計算時間と�
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">100</td>
-                  <td data-row="1" data-col="2">0.8</td>
+                  <td data-row="1" data-col="2">0.9</td>
                   <td data-row="1" data-col="3">2.1 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">1000</td>
-                  <td data-row="2" data-col="2">80.3</td>
+                  <td data-row="2" data-col="2">87.2</td>
                   <td data-row="2" data-col="3">19.7 KB</td>
                 </tr>
         </tbody>
@@ -523,7 +529,7 @@ Table&nbsp;5.1: 観測数を変えたときのマッチングの計算時間と�
 </figure>
 </div>
 </div>
-<p><span class="math inline">\(n\)</span> を 100 から 1000 へ 10 倍にすると, 計算時間は約 100 倍になる一方で, メモリ使用量は約 9 倍にしかなっていないことがわかります. これは, 計算時間が <span class="math inline">\(O(n^2)\)</span>, 領域計算量が <span class="math inline">\(O(n)\)</span> であることと一致しています.</p>
+<p><span class="math inline">\(n\)</span> を 100 から 1000 へ 10 倍にすると, 計算時間は約 98 倍になる一方で, メモリ使用量は約 9 倍にしかなっていないことがわかります. これは, 計算時間が <span class="math inline">\(O(n^2)\)</span>, 領域計算量が <span class="math inline">\(O(n)\)</span> であることと一致しています.</p>
 </section>
 <section id="高速化" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="高速化"><span class="header-section-number">5.3</span> 高速化</h2>
@@ -664,17 +670,17 @@ Table&nbsp;5.2: match_nn の実装による実行時間とメモリ割り当て 
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">二重ループ</td>
-                  <td data-row="1" data-col="2">81.2</td>
+                  <td data-row="1" data-col="2">89.3</td>
                   <td data-row="1" data-col="3">54.9 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">内側ベクトル化 (purrr::map)</td>
-                  <td data-row="2" data-col="2">3.6</td>
+                  <td data-row="2" data-col="2">4</td>
                   <td data-row="2" data-col="3">8.4 MB</td>
                 </tr>
                 <tr>
                   <td data-row="3" data-col="1">完全ベクトル化</td>
-                  <td data-row="3" data-col="2">4.1</td>
+                  <td data-row="3" data-col="2">4.6</td>
                   <td data-row="3" data-col="3">30.6 MB</td>
                 </tr>
         </tbody>
@@ -686,7 +692,7 @@ Table&nbsp;5.2: match_nn の実装による実行時間とメモリ割り当て 
 </figure>
 </div>
 </div>
-<p>内側ループをベクトル化するだけで, 二重ループの約 23 倍高速になりました. <code>abs(xi - x_c)</code> のように型が定まったベクトル同士の演算にまとめることで, 対照群1人ずつに対して行っていた型推定のオーバーヘッドを取り除けるためです. 外側ループを <code>purrr::map_int()</code> に変えても速度はほとんど変わりません. 速くなったのはあくまで内側のベクトル化によるものです.</p>
+<p>内側ループをベクトル化するだけで, 二重ループの約 22 倍高速になりました. <code>abs(xi - x_c)</code> のように型が定まったベクトル同士の演算にまとめることで, 対照群1人ずつに対して行っていた型推定のオーバーヘッドを取り除けるためです. 外側ループを <code>purrr::map_int()</code> に変えても速度はほとんど変わりません. 速くなったのはあくまで内側のベクトル化によるものです.</p>
 <p>一方で, 完全ベクトル化はさらに速くなるわけではありません. むしろ <a href="#tbl-vectorize" class="quarto-xref">Table&nbsp;<span>5.2</span></a> のとおり, メモリ割り当てが桁違いに大きくなっています. これは <code>outer()</code> が <span class="math inline">\(n \times n\)</span> の距離行列 (<span class="math inline">\(8 n^2\)</span> バイト) を一度に確保するためで, <a href="#sec-computation-theory" class="quarto-xref"><span>Section 5.1</span></a> でみた領域計算量そのものです. 内側ベクトル化も延べの割り当て量は大きいですが, 同時に保持するのは長さ <span class="math inline">\(n\)</span> の距離ベクトル1本だけ (<span class="math inline">\(O(n)\)</span>) なのに対し, 完全ベクトル化は行列全体を保持し続ける (<span class="math inline">\(O(n^2)\)</span>) ため, <span class="math inline">\(n\)</span> が大きいと RAM に収まらなくなります.</p>
 </section>
 <section id="rcpp" class="level3">
@@ -816,16 +822,16 @@ Table&nbsp;5.3: R と Rcpp によるマッチングの計算時間と領域計�
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">100</td>
-                  <td data-row="1" data-col="2">0.81</td>
+                  <td data-row="1" data-col="2">0.88</td>
                   <td data-row="1" data-col="3">2.1 KB</td>
-                  <td data-row="1" data-col="4">0.0066</td>
+                  <td data-row="1" data-col="4">0.0068</td>
                   <td data-row="1" data-col="5">2.1 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">1000</td>
-                  <td data-row="2" data-col="2">81.25</td>
+                  <td data-row="2" data-col="2">90.07</td>
                   <td data-row="2" data-col="3">19.7 KB</td>
-                  <td data-row="2" data-col="4">0.6075</td>
+                  <td data-row="2" data-col="4">0.6325</td>
                   <td data-row="2" data-col="5">19.7 KB</td>
                 </tr>
         </tbody>
@@ -837,7 +843,7 @@ Table&nbsp;5.3: R と Rcpp によるマッチングの計算時間と領域計�
 </figure>
 </div>
 </div>
-<p>同じ <span class="math inline">\(O(n^2)\)</span> のアルゴリズムでも, C++で書き直すことで <span class="math inline">\(n = 100\)</span> で約 123 倍, <span class="math inline">\(n = 1000\)</span> で約 134 倍高速になりました. 速度向上の倍率が <span class="math inline">\(n\)</span> によらずほぼ一定であることに注目してください. これは, Rcppが計算量のオーダー (<span class="math inline">\(O(n^2)\)</span>) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです. <a href="#sec-computation-theory" class="quarto-xref"><span>Section 5.1</span></a> のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです. オーダーが同じである以上, <span class="math inline">\(n\)</span> を10倍にすれば計算時間はやはり約100倍になります. アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.</p>
+<p>同じ <span class="math inline">\(O(n^2)\)</span> のアルゴリズムでも, C++で書き直すことで <span class="math inline">\(n = 100\)</span> で約 130 倍, <span class="math inline">\(n = 1000\)</span> で約 142 倍高速になりました. 速度向上の倍率が <span class="math inline">\(n\)</span> によらずほぼ一定であることに注目してください. これは, Rcppが計算量のオーダー (<span class="math inline">\(O(n^2)\)</span>) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです. <a href="#sec-computation-theory" class="quarto-xref"><span>Section 5.1</span></a> のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです. オーダーが同じである以上, <span class="math inline">\(n\)</span> を10倍にすれば計算時間はやはり約100倍になります. アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.</p>
 <p>一方で領域計算量に注目すると, RでもRcppでも保存するのはマッチング結果と共変量だけなので <span class="math inline">\(O(n)\)</span> のまま変わりません. 完全ベクトル化が距離行列で <span class="math inline">\(O(n^2)\)</span> のメモリを消費したのとは対照的に, Rcppは自然な二重ループのまま, メモリを増やさずに速度だけを引き上げられるのです.</p>
 </section>
 </section>
@@ -954,13 +960,13 @@ Table&nbsp;5.4: 逐次処理と4コア並列処理の計算時間
                   <td data-row="1" data-col="1">1000</td>
                   <td data-row="1" data-col="2">4</td>
                   <td data-row="1" data-col="3">12</td>
-                  <td data-row="1" data-col="4">0.31</td>
+                  <td data-row="1" data-col="4">0.32</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">30000</td>
-                  <td data-row="2" data-col="2">3152</td>
-                  <td data-row="2" data-col="3">872</td>
-                  <td data-row="2" data-col="4">3.62</td>
+                  <td data-row="2" data-col="2">3563</td>
+                  <td data-row="2" data-col="3">876</td>
+                  <td data-row="2" data-col="4">4.07</td>
                 </tr>
         </tbody>
       </table>
@@ -971,7 +977,7 @@ Table&nbsp;5.4: 逐次処理と4コア並列処理の計算時間
 </figure>
 </div>
 </div>
-<p><span class="math inline">\(n = 1000\)</span> では, 並列版の方がむしろ約 3 倍遅くなっています. 各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです. 一方 <span class="math inline">\(n = 30000\)</span> では, 並列版が約 3.6 倍速くなりました.</p>
+<p><span class="math inline">\(n = 1000\)</span> では, 並列版の方がむしろ約 3 倍遅くなっています. 各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです. 一方 <span class="math inline">\(n = 30000\)</span> では, 並列版が約 4.1 倍速くなりました.</p>
 <p>ここで重要なのは2点です. 第一に, 並列化はタダではありません. タスクの分配と結果の集約にオーバーヘッドがかかるため, 1つ1つの計算が軽い場合や問題が小さい場合には, かえって遅くなります. 第二に, 速度向上のおおよその目安はコア数 (ここでは4) で, データの分配や集約のオーバーヘッドのぶん前後します. それでも, 各反復が独立で計算が十分重い場合には, 並列化はコア数に近い高速化をもたらす有効な手段です.</p>
 </section>
 <section id="cコードの並列化" class="level3">
@@ -1111,9 +1117,9 @@ Table&nbsp;5.5: 逐次Rcppと4スレッド並列Rcppの計算時間
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">30000</td>
-                  <td data-row="2" data-col="2">542.2</td>
-                  <td data-row="2" data-col="3">122.9</td>
-                  <td data-row="2" data-col="4">4.4</td>
+                  <td data-row="2" data-col="2">556.4</td>
+                  <td data-row="2" data-col="3">123.2</td>
+                  <td data-row="2" data-col="4">4.5</td>
                 </tr>
         </tbody>
       </table>
@@ -1124,12 +1130,12 @@ Table&nbsp;5.5: 逐次Rcppと4スレッド並列Rcppの計算時間
 </figure>
 </div>
 </div>
-<p>同じ4コアでも, <code>furrr</code> が <span class="math inline">\(n = 1000\)</span> で逆に遅くなったのとは対照的に, <code>RcppParallel</code> は <span class="math inline">\(n = 1000\)</span> でも約 3.2 倍, <span class="math inline">\(n = 30000\)</span> で約 4.4 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは <span class="math inline">\(O(n^2)\)</span> のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.</p>
+<p>同じ4コアでも, <code>furrr</code> が <span class="math inline">\(n = 1000\)</span> で逆に遅くなったのとは対照的に, <code>RcppParallel</code> は <span class="math inline">\(n = 1000\)</span> でも約 3.2 倍, <span class="math inline">\(n = 30000\)</span> で約 4.5 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは <span class="math inline">\(O(n^2)\)</span> のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.</p>
 <p>なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.</p>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">5.5</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>前半は計算量と高速化の考え方に関するクイズ, 後半は実際に測って確かめる演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</p>
 <section id="クイズ" class="level3">
 <h3 class="anchored" data-anchor-id="クイズ">クイズ</h3>
@@ -1369,7 +1375,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"n = 100","2":"670.6781µs","3":"56.48438KB"},{"1":"n = 1000","2":"68.61657ms","3":"0B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"n = 100","2":"736.64705µs","3":"56.48438KB"},{"1":"n = 1000","2":"75.62856ms","3":"0B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1407,7 +1413,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"loop","2":"67.194818ms","3":"0B"},{"1":"vec","2":"1.97415ms","3":"7.686356MB"},{"1":"outer","2":"3.747113ms","3":"22.892181MB"},{"1":"sort","2":"28.084964µs","3":"23.625KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"loop","2":"75.873534ms","3":"0B"},{"1":"vec","2":"2.179068ms","3":"7.686356MB"},{"1":"outer","2":"4.172898ms","3":"22.892181MB"},{"1":"sort","2":"30.667987µs","3":"23.625KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1491,7 +1497,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]}],"data":[{"1":"serial","2":"354.6552ms"},{"1":"parallel","2":"326.4616ms"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]}],"data":[{"1":"serial","2":"379.7615ms"},{"1":"parallel","2":"330.455ms"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -2006,8 +2012,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lesson/quarto.html" class="pagination-link" aria-label="Quarto">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span>
+      <a href="../lesson/git.html" class="pagination-link" aria-label="Git &amp; GitHub">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -2564,7 +2570,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb20-594"><a href="#cb20-594" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-595"><a href="#cb20-595" aria-hidden="true" tabindex="-1"></a>なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.</span>
 <span id="cb20-596"><a href="#cb20-596" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-597"><a href="#cb20-597" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb20-597"><a href="#cb20-597" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb20-598"><a href="#cb20-598" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-601"><a href="#cb20-601" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb20-602"><a href="#cb20-602" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>

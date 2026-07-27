@@ -204,6 +204,64 @@ penguins_bar |>
 
 [![](visualization_files/figure-html/plot-metbrewer-1.svg)](visualization_files/figure-html/plot-metbrewer-1.svg)
 
+### alpha の活用
+
+alpha は色の透明度 (opacity) を指定するパラメータで, 彩度とは別物です. それでも白い背景の上では, alpha を下げると色が淡くなるので, ひとつの色相の中に順序をつける道具として使えます. 具体的には, グループの違い (ここでは男女) を色相で, グループ内の順序 (正規 → 非正規 → 非就業) を alpha で表す, という二段構えです. こうすると各パネルは1色でまとまり, 凡例も中立的なグレーになります ([Figure fig-alpha-status](#fig-alpha-status)).
+
+``` r
+emp <- targets::tar_read(employment_status, store = here::here("_targets")) |>
+  filter(status != "other_employed") |> # keep regular / non-regular / not in work
+  mutate(
+    sex = recode(sex, male = "Men", female = "Women"),
+    status = recode(
+      status,
+      regular = "Regular",
+      nonregular = "Non-regular",
+      not_employed = "Not in work"
+    ),
+    status = factor(
+      status,
+      levels = c("Regular", "Non-regular", "Not in work")
+    ),
+    age_group = factor(
+      age_group,
+      levels = c("25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "Total")
+    )
+  )
+
+ggplot(emp, aes(x = age_group, y = n, fill = sex, alpha = status)) +
+  geom_col(position = position_fill(reverse = TRUE), width = 0.85) +
+  facet_wrap(~sex) +
+  scale_fill_manual(
+    values = c(Men = "#217a6b", Women = "#8a4a9e"),
+    guide = "none"
+  ) +
+  scale_alpha_manual(
+    values = c("Regular" = 1, "Non-regular" = 0.55, "Not in work" = 0.25),
+    name = NULL
+  ) +
+  scale_y_continuous(
+    labels = scales::label_percent(),
+    expand = expansion(c(0, 0.02))
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid = element_blank(),
+    axis.text.x = element_text(size = 8),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold", size = 13)
+  )
+```
+
+[![](visualization_files/figure-html/fig-alpha-status-1.svg)](visualization_files/figure-html/fig-alpha-status-1.svg "Figure 8.1: 男女・年齢別にみた就業状態の構成")
+
+Figure 8.1: 男女・年齢別にみた就業状態の構成
+
+データは就業構造基本調査 (令和4年) の全国・総数で, 各年齢層の正規・非正規・非就業の構成比です (自営業主・会社役員などは除いています). 男性はほとんどが正規, 女性は年齢とともに非正規と非就業が増えるという違いが, 色相 (男女) と alpha (状態) の重ねがけで一目で読み取れます.
+
+ただし alpha は背景と混色する指定なので, この見せ方が有効なのは背景が一様 (白) のときに限られます. 背景が濃い場合や図を重ねる場合は, alpha ではなく明度をそろえた色 (HCL / OKLCh) で段階を作る方が安全です ([sec-color](#sec-color)).
+
 ## 8.3 フォント
 
 ### フォントの種類
@@ -292,15 +350,15 @@ penguins_bar |>
 
 同じ「1992」という文字を, ビットマップ (ラスター) とベクターのそれぞれで表してみましょう. 左はピクセルの格子, 右は輪郭を点とパスで定義したものです.
 
-[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "Figure 8.1 (a): Bitmap (raster)")
+[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "Figure 8.2 (a): Bitmap (raster)")
 
 \(a\) Bitmap (raster)
 
-[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "Figure 8.1 (b): Vector")
+[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "Figure 8.2 (b): Vector")
 
 \(b\) Vector
 
-Figure 8.1: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
+Figure 8.2: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
 
 左のビットマップは, 拡大するとピクセルのギザギザ (ジャギー) が目立ちます. きれいに見せるにはピクセル数を増やすしかなく, その分ファイルサイズも大きくなります. 一方, 右のベクターは輪郭を点 (アンカーポイント) とパスで定義しているので, どれだけ拡大しても滑らかなままで, ファイルサイズも解像度に依存しません.
 
@@ -308,15 +366,15 @@ Figure 8.1: The number 1992 as a bitmap (pixels) versus a vector (points and pa
 
 写真は本質的にラスター形式です. そして, ラスター形式のファイル形式のうち, JPEG は非可逆圧縮 (lossy compression) を採用しています. ファイルサイズを大きく減らせる代わりに, 圧縮を強めると輪郭のまわりにノイズ (アーティファクト) が生じます. 1枚の写真[^2] を高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "Figure 8.2 (a): JPEG quality 90")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "Figure 8.3 (a): JPEG quality 90")
 
 \(a\) JPEG quality 90
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "Figure 8.2 (b): JPEG quality 5")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "Figure 8.3 (b): JPEG quality 5")
 
 \(b\) JPEG quality 5
 
-Figure 8.2: The same photo saved as high- and low-quality JPEG, magnified.
+Figure 8.3: The same photo saved as high- and low-quality JPEG, magnified.
 
 低品質の JPEG では, 8x8 ピクセルのブロック状のムラや, 輪郭の周りのにじみがはっきり見えます. 一方で, ファイルサイズは大きく変わります. 同じ写真を PNG (可逆圧縮) と2種類の JPEG で保存し, サイズを比べてみましょう.
 
@@ -334,9 +392,9 @@ JPEG は, 写真のように色がなめらかに変化する画像にはとて�
 
 ベクター形式は図形を数式で記録するので, どれだけ拡大しても輪郭は滑らかなままで, ファイルサイズも解像度に依存しません. グラフは点・線・文字でできているので, ベクター形式と非常に相性が良いです. ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
 
-[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "Figure 8.3: A vector graphic stays sharp at any zoom level.")
+[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "Figure 8.4: A vector graphic stays sharp at any zoom level.")
 
-Figure 8.3: A vector graphic stays sharp at any zoom level.
+Figure 8.4: A vector graphic stays sharp at any zoom level.
 
 この図は SVG (ベクター形式) で埋め込まれているので, ブラウザで拡大しても曲線も文字も滑らかなまま保たれます.
 
@@ -369,9 +427,9 @@ Figure 8.3: A vector graphic stays sharp at any zoom level.
 
 ただし, 例外もあります. ベクター形式は図形を1つずつ記録するので, 描く図形の数が増えるほどファイルが大きくなります. 例として, ggplot2 に付属する `diamonds` データセットで, 53,940個のダイヤモンドの重さ (carat) と価格の散布図を描いてみます.
 
-[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "Figure 8.4: A scatter plot of 53,940 diamonds, embedded as a PNG.")
+[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "Figure 8.5: A scatter plot of 53,940 diamonds, embedded as a PNG.")
 
-Figure 8.4: A scatter plot of 53,940 diamonds, embedded as a PNG.
+Figure 8.5: A scatter plot of 53,940 diamonds, embedded as a PNG.
 
 この図を PNG, SVG, PDF のそれぞれで保存して, ファイルサイズを比べてみましょう.
 
@@ -386,7 +444,7 @@ Table 8.2: 点の多い散布図を各形式で保存したときのファイ�
 
 ラスター形式のファイルサイズは解像度に依存するので, 表には PNG のピクセル数を併記し, Web 表示には十分な 200 dpi と, 印刷にも耐える 600 dpi (このページに埋め込んだ図と同じ解像度) の2通りを載せています. SVG は約5.4万個の点を XML のテキストとして1つずつ記録するため, 高解像度の PNG と比べても1桁以上大きくなります. PDF は圧縮が効くため, ファイルサイズだけなら高解像度の PNG と同程度です. しかしベクター形式の問題はサイズだけではありません. ブラウザや PDF ビューアは表示のたびにすべての点を描画し直すので, 表示やスクロールが目に見えて遅くなります. 一方 PNG のファイルサイズと描画の重さは解像度だけで決まり, 点の数には依存しません. このように, データ点が非常に多い散布図では, ベクター形式ではなく高解像度の PNG を使う方が実用的です.
 
-## 8.5 演習問題
+## 演習問題
 
 前半は画像形式に関するクイズ, 後半は実際にグラフを改善する演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).
 
@@ -394,10 +452,10 @@ Table 8.2: 点の多い散布図を各形式で保存したときのファイ�
 
 ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
 
-ピクセルの数が十分に多いから  
-ファイルサイズが大きいから  
-可逆圧縮を使っているから  
 画像を図形の数式として記録しているから  
+可逆圧縮を使っているから  
+ファイルサイズが大きいから  
+ピクセルの数が十分に多いから  
 
 次のうち, ベクター形式をすべて選んでください.
 
@@ -411,24 +469,24 @@ JPEG
 
 LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
 
-SVG  
-PNG  
 JPEG  
 PDF  
+SVG  
+PNG  
 
 共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
 
-グラフを JPEG で保存したことによる非可逆圧縮のノイズ  
-フォントが埋め込まれていない  
-SVG の解像度が足りていない  
 グラフを PNG で保存したことによる圧縮の劣化  
+SVG の解像度が足りていない  
+フォントが埋め込まれていない  
+グラフを JPEG で保存したことによる非可逆圧縮のノイズ  
 
 数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
 
-SVG の解像度を下げる  
-PDF に切り替える  
 JPEG (quality 5) で保存する  
 高解像度の PNG で保存する  
+PDF に切り替える  
+SVG の解像度を下げる  
 
 ### 見た目の悪いグラフの改善
 

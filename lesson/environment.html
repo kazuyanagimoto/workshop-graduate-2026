@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; 環境の再現性 – Empiricist's Workflow</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../lesson/git.html" rel="next">
+<link href="../lesson/architecture.html" rel="prev">
+<link href="../static/img/logo/hex-logo.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-16f64e5e7cadf7c973142b0bfece6000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="3&nbsp; 環境の再現性 – Empiricist’s Workflow">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
+<meta property="og:site_name" content="Empiricist’s Workflow">
+<meta name="twitter:title" content="3&nbsp; 環境の再現性 – Empiricist’s Workflow">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/environment.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../static/img/logo/hex-logo.svg" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../static/img/logo/hex-logo.svg" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Empiricist’s Workflow</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/speedup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/large-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">大規模データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">API</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">可視化の技術</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/slides.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">スライド</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">文献と引用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#パッケージの依存関係" id="toc-パッケージの依存関係" class="nav-link active" data-scroll-target="#パッケージの依存関係"><span class="header-section-number">3.1</span> パッケージの依存関係</a></li>
+  <li><a href="#r-本体のバージョン" id="toc-r-本体のバージョン" class="nav-link" data-scroll-target="#r-本体のバージョン"><span class="header-section-number">3.2</span> R 本体のバージョン</a></li>
+  <li><a href="#他の-r-パッケージ" id="toc-他の-r-パッケージ" class="nav-link" data-scroll-target="#他の-r-パッケージ"><span class="header-section-number">3.3</span> 他の R パッケージ</a>
+  <ul class="collapse">
+  <li><a href="#どこに何が保存されるか" id="toc-どこに何が保存されるか" class="nav-link" data-scroll-target="#どこに何が保存されるか">どこに何が保存されるか</a></li>
+  <li><a href="#install.packages-と-pak" id="toc-install.packages-と-pak" class="nav-link" data-scroll-target="#install.packages-と-pak">install.packages と pak</a></li>
+  </ul></li>
+  <li><a href="#システムライブラリ" id="toc-システムライブラリ" class="nav-link" data-scroll-target="#システムライブラリ"><span class="header-section-number">3.4</span> システムライブラリ</a></li>
+  <li><a href="#ソースかバイナリか" id="toc-ソースかバイナリか" class="nav-link" data-scroll-target="#ソースかバイナリか"><span class="header-section-number">3.5</span> ソースかバイナリか</a></li>
+  <li><a href="#python-julia" id="toc-python-julia" class="nav-link" data-scroll-target="#python-julia"><span class="header-section-number">3.6</span> Python / Julia</a></li>
+  <li><a href="#このプロジェクトでの実践" id="toc-このプロジェクトでの実践" class="nav-link" data-scroll-target="#このプロジェクトでの実践"><span class="header-section-number">3.7</span> このプロジェクトでの実践</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-environment" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="../index.html#sec-setup" class="quarto-xref"><span>Section 1.2</span></a> では rig で R を入れ, パッケージを用意しました. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</p>
+<section id="パッケージの依存関係" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="パッケージの依存関係"><span class="header-section-number">3.1</span> パッケージの依存関係</h2>
+<p>環境をそろえるのがなぜ難しいのかは, パッケージの依存関係を見ると分かります. パッケージは単独では動かず, 1つ入れようとすると芋づる式に他のものまで必要になります. しかもその依存には, 性質の違う3つの種類があります (<a href="#fig-dependency-kinds" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>).</p>
+<div id="fig-dependency-kinds" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dependency-kinds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/dependency-kinds.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;3.1: パッケージの3種類の依存関係"><img src="../static/cetz/dependency-kinds.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dependency-kinds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: パッケージの3種類の依存関係
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>1. 他の R パッケージへの依存</strong>: 一番よくある依存です. たとえば <code>ggplot2</code> は <code>rlang</code>, <code>scales</code>, <code>gtable</code>, <code>farver</code> などに依存し, それらがさらに別のパッケージに依存します. R のパッケージ管理ツール (install.packages / pak / rv / renv) が, この依存の木を自動でたどって一緒に入れ, ロックファイルに全体を記録します. R の世界の中で完結する依存です.</li>
+<li><strong>2. 他のアプリケーション・システムライブラリへの依存</strong>: R の外にある C ライブラリや外部プログラムに依存するパッケージもあります. これらは R パッケージではないので, R のツールだけでは入りません. たとえば空間データの <code>sf</code> は GDAL・GEOS・PROJ を必要とします. OS のパッケージマネージャ (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 2.3</span></a> の apt や Homebrew) で先に用意します.</li>
+<li><strong>3. ビルドに必要な依存</strong>: パッケージをソースからインストールするとき, 中に C/C++/Fortran のコードがあれば, それを機械語に変換するコンパイラ (<a href="dictionary.html#sec-compiler" class="quarto-xref"><span>Section C.2</span></a>) が要ります. 実行時ではなく, インストール時にだけ必要な「道具」への依存です. Debian / Ubuntu なら <code>build-essential</code> (gcc / g++ / make) がこれにあたります.</li>
+</ul>
+<p>この3つは責任の持ち主が違います. 1 は R のパッケージ管理ツールとロックファイルが引き受けますが, 2 と 3 は R の外 (OS 側) の話なので, ロックファイルだけでは再現しきれません. この章の残りは, この見取り図に沿って進めます. まず土台となる R 本体のバージョンをそろえ, つづいて依存1 (R パッケージ), 依存2 (システムライブラリ), 依存3 (ビルドの道具) を順に見ていきます.</p>
+</section>
+<section id="r-本体のバージョン" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="r-本体のバージョン"><span class="header-section-number">3.2</span> R 本体のバージョン</h2>
+<p>あるプロジェクトが特定の R のバージョンを要求する場合があります. また, 昔のプロジェクトを再現するために, 古い R のバージョンを使う必要があることもあります. OS のパッケージマネージャ (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 2.3</span></a>) で R を1つだけ入れると, この要求の食い違いに対応できません. そこで, 複数のバージョンを並べて置き, 切り替えるための専用ツールを使います.</p>
+<p>R では <a href="https://github.com/r-lib/rig">rig</a> (R Installation Manager) がこれにあたります. 複数の R を独立に並置し, どれを既定にするかを切り替えます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release      <span class="co"># install the latest stable R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add 4.4          <span class="co"># keep an older version side by side</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> list             <span class="co"># show installed versions</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> default 4.6      <span class="co"># switch the `R` / `Rscript` on PATH</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>仕組みは単純で, rig は各バージョンを別々の場所にインストールし, <code>rig default</code> が選んだバージョンへの参照 (PATH 上の <code>R</code>) を張り替えるだけです. そのため切り替えは一瞬で, アンインストールも安全です. どのバージョンを使うかは, 後述の宣言ファイルにプロジェクト単位で書いておけます (このリポジトリなら <code>rproject.toml</code> の <code>r_version = "4.6"</code>). この「ランタイムのバージョンを並べて切り替える」道具は, R に限らずどの言語にもあります (のちほど「他の言語も同じ構図」で扱います).</p>
+</section>
+<section id="他の-r-パッケージ" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="他の-r-パッケージ"><span class="header-section-number">3.3</span> 他の R パッケージ</h2>
+<p>R 本体をそろえたら, 次は R パッケージ (依存の種類1) です. すべてのプロジェクトが1つの共有ライブラリにパッケージを入れると, プロジェクトAのための更新がプロジェクトBを壊す, という事故が起きます. 解決策は, プロジェクトごとに独立したライブラリを持ち, その中身をロックファイルに正確に記録することです.</p>
+<p>仕組みの中心は, プロジェクト起動時に走る <code>.Rprofile</code> です. R はプロジェクト直下の <code>.Rprofile</code> を起動時に読み込むので, ここでプロジェクト専用ライブラリを <code>.libPaths()</code> の先頭に差し込みます. すると <code>library()</code> はまずそのプロジェクトのライブラリを見にいき, ユーザー全体のライブラリから隔離されます. プロジェクトを開くだけで, そのプロジェクト用の環境に自動で入る, というわけです.</p>
+<p>R には成り立ちの違う2つのツールがあります.</p>
+<ul>
+<li><strong>renv</strong>: 確立された標準です. <code>renv::snapshot()</code> で「いま入っているパッケージ」を <code>renv.lock</code> に記録し, <code>renv::restore()</code> でそれを別のマシンに正確に再現します. スナップショット型で, 手元の状態を写し取る発想です.</li>
+<li><strong>rv</strong>: 新しい Rust 製のツールで, このリポジトリが採用しています. 宣言型で, 欲しいパッケージを <code>rproject.toml</code> に書き並べ, <code>rv sync</code> を実行すると, 依存を解決してライブラリを構築し, <code>rv.lock</code> に固定します. 「入れた結果を記録する」renv に対し, 「欲しい状態を宣言し, ツールにそれを実現させる」発想です. 後述する uv や cargo に近い考え方です.</li>
+</ul>
+<p>このリポジトリの <code>rproject.toml</code> は, 使う R のバージョンと, 取得元, 欲しいパッケージを宣言しています.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>rproject.toml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="rproject.toml"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"workshop-graduate-2026"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">r_version</span> <span class="op">=</span> <span class="st">"4.6"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">repositories</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="dt">alias</span><span class="op"> =</span> <span class="st">"CRAN"</span><span class="op">, </span><span class="dt">url</span><span class="op"> =</span> <span class="st">"https://cloud.r-project.org/"</span><span class="op">},</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="dt">alias</span><span class="op"> =</span> <span class="st">"r-multiverse"</span><span class="op">, </span><span class="dt">url</span><span class="op"> =</span> <span class="st">"https://community.r-multiverse.org"</span><span class="op">},</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dplyr"</span><span class="op">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ggplot2"</span><span class="op">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tinytable"</span><span class="op">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fixest"</span><span class="op">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>rv sync</code> を実行すると, この宣言を満たすようにパッケージが解決・インストールされ, 実際に選ばれた正確なバージョンが <code>rv.lock</code> に書き込まれます. <code>rproject.toml</code> が「欲しいもの」, <code>rv.lock</code> が「実際に入ったもの」で, 共同研究者は <code>rv.lock</code> から寸分違わぬ環境を復元できます. <code>.Rprofile</code> はこのプロジェクトライブラリを起動時に有効化する役割を担います.</p>
+<section id="どこに何が保存されるか" class="level3">
+<h3 class="anchored" data-anchor-id="どこに何が保存されるか">どこに何が保存されるか</h3>
+<p>rv も renv も, パッケージを2か所に分けて置きます. ひとつはプロジェクト専用のライブラリ, もうひとつは全プロジェクトで共有するキャッシュです. このリポジトリ (rv) の実際の配置は次のようになっています.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>workshop-graduate-2026/            # project root</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>├── .Rprofile                      # runs rv/scripts/activate.R on startup</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>├── rproject.toml                  # declared packages         &lt;- committed</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>├── rv.lock                        # exact locked versions     &lt;- committed</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>└── rv/</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    ├── scripts/activate.R         # prepends project lib to .libPaths()  &lt;- committed</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    └── library/4.6/arm64/         # project-local library     &lt;- gitignored</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        ├── dplyr/                   (materialized from the cache)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        ├── ggplot2/</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        └── ...</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>~/.cache/rv/                        # cache shared across all projects</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>├── 66bf25474b/                     (each package version stored once)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>├── abfa7ade75/</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>└── ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ポイントは2つあります. まず, プロジェクトライブラリ (<code>rv/library/4.6/arm64/</code>) は R のバージョンとプラットフォームごとに分かれていて, <code>.Rprofile</code> がこのパスを <code>.libPaths()</code> の先頭に差し込むことで, このプロジェクトの R だけがここを参照します. つぎに, パッケージの実体は共有キャッシュ (<code>~/.cache/rv/</code>) に版ごとに1回だけ保存され, 各プロジェクトのライブラリはそこから用意されます. このとき rv はキャッシュからコピーし (同じディスク上なので, ファイルシステムによっては copy-on-write で安価です), renv はキャッシュ実体へのシンボリックリンクを張ります. いずれもパッケージを再ビルドしないので, 2つ目以降のプロジェクトではインストールがほぼ一瞬になり, ディスクも節約できます. <a href="#fig-rv-cache" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> は, ひとつの共有キャッシュを複数のプロジェクトが利用し, それぞれが <code>.libPaths()</code> を通じて自分のライブラリだけを見る様子です.</p>
+<div id="fig-rv-cache" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rv-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/cetz/rv-cache.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;3.2: 共有キャッシュとプロジェクトライブラリ"><img src="../static/cetz/rv-cache.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rv-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: 共有キャッシュとプロジェクトライブラリ
+</figcaption>
+</figure>
+</div>
+<p>git にコミットするのは, 宣言ファイル (<code>rproject.toml</code>), ロックファイル (<code>rv.lock</code>), 有効化スクリプト (<code>rv/scripts/</code>) だけです. ライブラリ本体 (<code>rv/library/</code>) は <code>.gitignore</code> で除外し, 各マシンで <code>rv sync</code> が <code>rv.lock</code> から作り直します. 「環境そのもの」ではなく「環境の作り方」を共有する, というのが要点です. renv もまったく同じ構図で, <code>renv/library/...</code> がプロジェクトライブラリ, <code>~/.cache/R/renv/</code> が共有キャッシュ, <code>renv.lock</code> が固定, という対応になります.</p>
+</section>
+<section id="install.packages-と-pak" class="level3">
+<h3 class="anchored" data-anchor-id="install.packages-と-pak">install.packages と pak</h3>
+<p>rv や renv も, 最終的には1つ1つのパッケージをどこかのライブラリにインストールしています. その最も基本的なコマンドが, R に標準で付いてくる <code>install.packages()</code> です. 呼ぶと, パッケージを取得して <code>.libPaths()</code> の先頭 (書き込める最初の場所) にインストールします.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>) <span class="co"># install into the first writable .libPaths()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>install.packages()</code> は確実ですが, 依存パッケージを1つずつ順に取ってくるため遅く, パッケージが必要とする OS 側のライブラリ (依存の種類2) までは面倒を見ません. これを現代化したのが <a href="https://pak.r-lib.org/">pak</a> です. pak は依存関係をまとめて解決し, 並列にダウンロード・インストールするので速く, CRAN・Bioconductor・GitHub・URL を同じ書き方で扱え, 足りないシステム依存も教えてくれます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"dplyr"</span>)            <span class="co"># from CRAN</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"tidyverse/dplyr"</span>)  <span class="co"># from GitHub, same function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>GitHub など CRAN 以外にあるパッケージは, <code>install.packages()</code> では入れられません. 従来は <code>remotes::install_github("user/repo")</code> を使ってきました (<code>devtools::install_github()</code> も中身は remotes で, devtools は開発用ツールの詰め合わせパッケージです). <code>pak::pak("user/repo")</code> は同じことをより速く行い, CRAN も GitHub も同じ関数で扱えるので, これから使うなら pak に一本化すると覚えることが減ります.</p>
+<p>じつは rig で R を入れると, この pak も自動で一緒に入ります (<code>rig add</code> の既定で, <code>--without-pak</code> で無効化できます). そのため追加の準備なしに, R を入れた直後から <code>pak::pak()</code> が使えます. 手動で1つ足すだけなら pak が快適です. ただしプロジェクトの文脈では, これらを直接叩くよりも, rv や renv 経由で入れて <code>rv.lock</code> / <code>renv.lock</code> に記録するのが原則です (rv は独自のインストーラを内蔵し, renv は内部で pak を使えます). 手で入れたパッケージはロックファイルに残らず, 再現性の穴になるからです.</p>
+</section>
+</section>
+<section id="システムライブラリ" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="システムライブラリ"><span class="header-section-number">3.4</span> システムライブラリ</h2>
+<p>他の依存として, R の外にある C ライブラリや外部プログラムも考えられます. R パッケージではないので, <code>install.packages()</code> も rv も入れてくれません. これらは OS のパッケージマネージャ (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 2.3</span></a> の apt や Homebrew) で, プロジェクトとは別に用意します.</p>
+<p>代表的な例を挙げます. 空間データの <code>sf</code> は GDAL・GEOS・PROJ, <code>curl</code> は libcurl, <code>xml2</code> は libxml2, 画像処理の <code>magick</code> は ImageMagick, 文字描画の <code>ragg</code> / <code>textshaping</code> は freetype・harfbuzz を必要とします. <code>sf</code> が入らないときの多くは, R の問題ではなく, これらの C ライブラリが OS に無いことが原因です.</p>
+<p>どのシステムライブラリが要るかは, pak が教えてくれます. <code>pak::pkg_sysreqs()</code> は, そのパッケージが必要とする OS パッケージと, それを入れるコマンドを返します (Ubuntu なら <code>apt install ...</code> にあたります).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_sysreqs</span>(<span class="st">"sf"</span>) <span class="co"># report the OS libraries sf needs, and how to install them</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>注意点として, ロックファイル (<code>rv.lock</code> など) はこの層を記録しません. そのため, 必要なシステムライブラリは README に書いておくか, コンテナ (Docker など) に固めるなどして, R パッケージとは別に共有する必要があります.</p>
+</section>
+<section id="ソースかバイナリか" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="ソースかバイナリか"><span class="header-section-number">3.5</span> ソースかバイナリか</h2>
+<p>依存の種類3は, パッケージをソースからビルドするときに要るコンパイラ (<a href="dictionary.html#sec-compiler" class="quarto-xref"><span>Section C.2</span></a>) でした. これが必要になるかどうかは, パッケージをソースで取るか, ビルド済みのバイナリで取るかで決まります. R のパッケージは2つの形で配られます. ひとつはソース (<code>.tar.gz</code>) で, どの OS でも使えますが, 中の C/C++/Fortran コードはインストール時にコンパイルが必要です. もうひとつはバイナリで, ある OS と R のバージョン向けにコンパイル済みのため, 展開するだけで入ります.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ソース</th>
+<th>バイナリ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>中身</td>
+<td>未コンパイルのコード</td>
+<td>コンパイル済み</td>
+</tr>
+<tr class="even">
+<td>インストール</td>
+<td>ビルドが必要 (要コンパイラ)</td>
+<td>展開するだけ</td>
+</tr>
+<tr class="odd">
+<td>速度</td>
+<td>遅い</td>
+<td>速い</td>
+</tr>
+<tr class="even">
+<td>対応範囲</td>
+<td>どの OS・R 版でも</td>
+<td>OS・R 版に固定</td>
+</tr>
+<tr class="odd">
+<td>主な入手元</td>
+<td>CRAN (Linux の既定)</td>
+<td>CRAN (Win / Mac), P3M (Linux)</td>
+</tr>
+</tbody>
+</table>
+<p>どちらが使われるかは, 既定でほぼ自動的に決まります. <code>install.packages()</code> が取る型は <code>getOption("pkgType")</code> で決まり, Windows と macOS では実質バイナリ優先, Linux では <code>"source"</code> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. <a href="../index.html#sec-setup" class="quarto-xref"><span>Section 1.2</span></a> で <code>build-essential</code> を入れたのはこのためです. ビルドには時間もかかります.</p>
+<p>Linux でもバイナリを使う方法があります. <a href="https://packagemanager.posit.co/">Posit Public Package Manager</a> (P3M) は, ディストリビューションごとにビルド済みのバイナリを配布しています. <code>rproject.toml</code> (や renv の設定) の <code>repositories</code> にその URL を指定すると, rv や renv はソースの代わりにバイナリを取得し, インストールが桁違いに速くなります. コンパイル環境の細かな違いに悩まされることも減ります. 速さと再現性の両立という点で, 共同作業や CI ではバイナリ配布のリポジトリを使うのが定石です.</p>
+</section>
+<section id="python-julia" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="python-julia"><span class="header-section-number">3.6</span> Python / Julia</h2>
+<p>PythonやJuliaといった他の言語でも, 依存関係の管理は同じ構図です. ランタイムのバージョンを切り替えるツール, 欲しい依存を書く宣言ファイル, 実際の版を固定するロックファイルの三点セットです. Python の uv や Julia の Pkg は, R の rv / renv と同じ考え方で動きます.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>言語</th>
+<th>ランタイム管理</th>
+<th>宣言ファイル</th>
+<th>ロックファイル</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td>rig</td>
+<td><code>rproject.toml</code> (rv) / DESCRIPTION (renv)</td>
+<td><code>rv.lock</code> / <code>renv.lock</code></td>
+</tr>
+<tr class="even">
+<td>Python</td>
+<td>uv, pyenv</td>
+<td><code>pyproject.toml</code></td>
+<td><code>uv.lock</code></td>
+</tr>
+<tr class="odd">
+<td>Julia</td>
+<td>juliaup</td>
+<td><code>Project.toml</code></td>
+<td><code>Manifest.toml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Python の <a href="https://docs.astral.sh/uv/">uv</a> は, この構図を1つのツールにまとめた好例です. Python 本体のバージョンとパッケージの両方を管理し, <code>pyproject.toml</code> に依存を宣言して <code>uv.lock</code> に固定します. 従来は pyenv (バージョン), venv (隔離環境), pip (インストール), poetry (依存解決) と役割ごとに分かれていたものを, Rust 製の高速な1つのツールに統合しています.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init            <span class="co"># start a project (creates pyproject.toml)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add polars      <span class="co"># declare and install a dependency</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync            <span class="co"># reproduce the environment from uv.lock</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py   <span class="co"># run inside the project environment</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Julia は言語自体にパッケージマネージャ Pkg を内蔵しています. <code>Project.toml</code> に直接の依存を書き, <code>Manifest.toml</code> が依存の依存まで含めた完全なツリーを固定します. 環境の有効化は <code>julia --project</code> や <code>Pkg.activate()</code> で行い, <code>Pkg.instantiate()</code> が <code>Manifest.toml</code> から環境を復元します.</p>
+<p>宣言ファイルとロックファイルを分ける理由は共通しています. 宣言ファイルには人間が読める大まかな要求 (「dplyr が欲しい」) を書き, ロックファイルには機械が解決した正確な版 (「dplyr 1.1.4, この取得元, このハッシュ」) が入ります. 前者は git で共有して意図を伝え, 後者は git で共有して環境を一致させます. どちらもコミットするのが原則です.</p>
+</section>
+<section id="このプロジェクトでの実践" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="このプロジェクトでの実践"><span class="header-section-number">3.7</span> このプロジェクトでの実践</h2>
+<p>以上を踏まえると, このリポジトリの環境を復元する手順はごく短くなります.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig (@sec-setup)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>this repository<span class="op">&gt;</span>     <span class="co"># 2. clone the project</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> workshop-graduate-2026</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                         <span class="co"># 3. build the project library from rv.lock</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>rv sync</code> の後は, <code>.Rprofile</code> がプロジェクトライブラリを有効化するので, R を起動すればそのまま同じパッケージ環境で作業できます. 日々の開発でパッケージを増やすときは, <code>rproject.toml</code> に書き足して <code>rv sync</code> するか, <code>rv add &lt;package&gt;</code> を使います. どちらも <code>rv.lock</code> を更新するので, その差分をコミットすれば, 環境の変更履歴も git に残ります.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>使い分け
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>新しく R のプロジェクトを始めるなら, 宣言型で速い rv が扱いやすいです. 既存資産や共同研究者が renv を使っているなら renv に合わせます.</li>
+<li>ロックファイル (<code>rv.lock</code> / <code>renv.lock</code> / <code>uv.lock</code> / <code>Manifest.toml</code>) は必ず git にコミットします. これが再現性の実体です.</li>
+<li>環境の再現は, 計算の再現 (targets の章) と対になる話です. 同じ環境の上で同じパイプラインを回して, はじめて結果が完全に再現します.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
+<div class="quiz">
+<p><code>sf</code> パッケージを入れようとしたら, <code>GDAL</code> が見つからないというエラーが出ました. この GDAL は, どの種類の依存で, どう用意するのが正しいでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_62700" onsubmit="return validate_form_62700()" method="post">
+<label>
+<input type="radio" name="answer_62700" id="answer_62700_1" value="R パッケージ. install.packages で入れる">
+R パッケージ. install.packages で入れる
+</label>
+<br>
+<label>
+<input type="radio" name="answer_62700" id="answer_62700_2" value="R 本体のバージョン違い. rig で R を入れ直す">
+R 本体のバージョン違い. rig で R を入れ直す
+</label>
+<br>
+<label>
+<input type="radio" name="answer_62700" id="answer_62700_3" value="ロックファイルの記録漏れ. rv.lock を手で編集する">
+ロックファイルの記録漏れ. rv.lock を手で編集する
+</label>
+<br>
+<label>
+<input type="radio" name="answer_62700" id="answer_62700_4" value="システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる">
+システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_62700"></div>
+</form>
+<script>function validate_form_62700() {var x, text; var x = document.forms['form_62700']['answer_62700'].value;if (x == 'システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる'){text = '<span class="quiz-right">✓ 正解! </span>GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>GDAL は R パッケージではありません. R の外にあるものです.';} document.getElementById('result_62700').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_62700').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';text = res1;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>WSL (Ubuntu) で <code>install.packages()</code> を実行すると, 毎回コンパイルが走って時間がかかります. 最も的確な理由はどれでしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_80613" onsubmit="return validate_form_80613()" method="post">
+<label>
+<input type="radio" name="answer_80613" id="answer_80613_1" value="R のバージョンが古く, バイナリに対応していないから">
+R のバージョンが古く, バイナリに対応していないから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_80613" id="answer_80613_2" value="メモリ (RAM) が不足しているから">
+メモリ (RAM) が不足しているから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_80613" id="answer_80613_3" value="WSL は仮想環境なので, すべての処理が遅くなるから">
+WSL は仮想環境なので, すべての処理が遅くなるから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_80613" id="answer_80613_4" value="CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから">
+CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_80613"></div>
+</form>
+<script>function validate_form_80613() {var x, text; var x = document.forms['form_80613']['answer_80613'].value;if (x == 'CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから'){text = '<span class="quiz-right">✓ 正解! </span>CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>パッケージが「どの形で配られているか」を思い出してください. ソースとバイナリの違いです.';} document.getElementById('result_80613').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_62700').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_80613').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';text = res1 + res2;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>作った環境を共同研究者が再現できるよう, git にコミットすべきものはどれでしょうか (rv を使う場合).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_37694" onsubmit="return validate_form_37694()" method="post">
+<label>
+<input type="radio" name="answer_37694" id="answer_37694_1" value="共有キャッシュ ~/.cache/rv/ 全体">
+共有キャッシュ ~/.cache/rv/ 全体
+</label>
+<br>
+<label>
+<input type="radio" name="answer_37694" id="answer_37694_2" value="rproject.toml と rv.lock (と rv/scripts/)">
+rproject.toml と rv.lock (と rv/scripts/)
+</label>
+<br>
+<label>
+<input type="radio" name="answer_37694" id="answer_37694_3" value=".Rprofile だけ">
+.Rprofile だけ
+</label>
+<br>
+<label>
+<input type="radio" name="answer_37694" id="answer_37694_4" value="rv/library/ のパッケージ本体一式">
+rv/library/ のパッケージ本体一式
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_37694"></div>
+</form>
+<script>function validate_form_37694() {var x, text; var x = document.forms['form_37694']['answer_37694'].value;if (x == 'rproject.toml と rv.lock (と rv/scripts/)'){text = '<span class="quiz-right">✓ 正解! </span>コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>共有すべきなのは「環境そのもの」ではなく「環境の作り方」でした. どのファイルがあれば復元できるかを考えてください.';} document.getElementById('result_37694').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_62700').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_80613').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_37694').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';text = res1 + res2 + res3;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+</div>
+<div class="quiz">
+<p>プロジェクト A は R 4.2, プロジェクト B は R 4.6 を必要とします. どう対応するのが筋でしょうか.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<form name="form_57558" onsubmit="return validate_form_57558()" method="post">
+<label>
+<input type="radio" name="answer_57558" id="answer_57558_1" value="rv.lock に R のバージョンを書けば R 本体も切り替わる">
+rv.lock に R のバージョンを書けば R 本体も切り替わる
+</label>
+<br>
+<label>
+<input type="radio" name="answer_57558" id="answer_57558_2" value="OS の R を毎回アンインストールして入れ直す">
+OS の R を毎回アンインストールして入れ直す
+</label>
+<br>
+<label>
+<input type="radio" name="answer_57558" id="answer_57558_3" value="rig で両方の R を入れ, プロジェクトごとに切り替える">
+rig で両方の R を入れ, プロジェクトごとに切り替える
+</label>
+<br>
+<label>
+<input type="radio" name="answer_57558" id="answer_57558_4" value="新しい R 4.6 に統一し, A もそれで動かす">
+新しい R 4.6 に統一し, A もそれで動かす
+</label>
+<br>
+<input type="submit" value="答え合わせ">
+<div id="result_57558"></div>
+</form>
+<script>function validate_form_57558() {var x, text; var x = document.forms['form_57558']['answer_57558'].value;if (x == 'rig で両方の R を入れ, プロジェクトごとに切り替える'){text = '<span class="quiz-right">✓ 正解! </span>言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>R 本体 (ランタイム) のバージョンを複数並べて切り替える専用ツールがありました.';} document.getElementById('result_57558').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+         element = document.getElementById('checkdown_final_score');
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_62700').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_80613').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_37694').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.'; res4 = document.getElementById('result_57558').innerText == '✓ 正解! 言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         return false;
+         }}</script>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script>
+// Instant checking for checkdown quizzes inside .quiz cards: radio questions
+// are validated as soon as an option is clicked and their submit button is
+// hidden. Checkbox (multi-select) questions keep the button, since partial
+// selections would otherwise flash a wrong answer on every click.
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.quiz form[name^="form_"]').forEach(function (form) {
+    var radios = form.querySelectorAll('input[type="radio"]');
+    if (radios.length === 0) return;
+    var submit = form.querySelector('input[type="submit"]');
+    if (submit) submit.style.display = "none";
+    radios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        if (typeof form.onsubmit === "function") form.onsubmit();
+      });
+    });
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/kazuyanagimoto\.com\/workshop-graduate-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lesson/architecture.html" class="pagination-link" aria-label="アーキテクチャ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lesson/git.html" class="pagination-link" aria-label="Git &amp; GitHub">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 環境の再現性 {#sec-environment}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(checkdown)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared helpers for the self-check quizzes. checkdown inserts the feedback</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># via innerHTML inside a single-quoted JS string, so use double quotes in the</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML and avoid single quotes in the message.</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>quiz_right <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-right</span><span class="sc">\"</span><span class="st">&gt;&amp;#10003; 正解! &lt;/span&gt;"</span>, msg)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>quiz_wrong <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-wrong</span><span class="sc">\"</span><span class="st">&gt;&amp;#10007; 残念, もう一度考えてみましょう. &lt;/span&gt;"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    msg</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>quiz_button <span class="ot">&lt;-</span> <span class="st">"答え合わせ"</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>@sec-setup では rig で R を入れ, パッケージを用意しました. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## パッケージの依存関係</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>環境をそろえるのがなぜ難しいのかは, パッケージの依存関係を見ると分かります. パッケージは単独では動かず, 1つ入れようとすると芋づる式に他のものまで必要になります. しかもその依存には, 性質の違う3つの種類があります (@fig-dependency-kinds).</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="al">![パッケージの3種類の依存関係](../static/cetz/dependency-kinds.svg)</span>{#fig-dependency-kinds}</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**1. 他の R パッケージへの依存**: 一番よくある依存です. たとえば <span class="in">`ggplot2`</span> は <span class="in">`rlang`</span>, <span class="in">`scales`</span>, <span class="in">`gtable`</span>, <span class="in">`farver`</span> などに依存し, それらがさらに別のパッケージに依存します. R のパッケージ管理ツール (install.packages / pak / rv / renv) が, この依存の木を自動でたどって一緒に入れ, ロックファイルに全体を記録します. R の世界の中で完結する依存です.</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**2. 他のアプリケーション・システムライブラリへの依存**: R の外にある C ライブラリや外部プログラムに依存するパッケージもあります. これらは R パッケージではないので, R のツールだけでは入りません. たとえば空間データの <span class="in">`sf`</span> は GDAL・GEOS・PROJ を必要とします. OS のパッケージマネージャ (@sec-os の apt や Homebrew) で先に用意します.</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**3. ビルドに必要な依存**: パッケージをソースからインストールするとき, 中に C/C++/Fortran のコードがあれば, それを機械語に変換するコンパイラ (@sec-compiler) が要ります. 実行時ではなく, インストール時にだけ必要な「道具」への依存です. Debian / Ubuntu なら <span class="in">`build-essential`</span> (gcc / g++ / make) がこれにあたります.</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>この3つは責任の持ち主が違います. 1 は R のパッケージ管理ツールとロックファイルが引き受けますが, 2 と 3 は R の外 (OS 側) の話なので, ロックファイルだけでは再現しきれません. この章の残りは, この見取り図に沿って進めます. まず土台となる R 本体のバージョンをそろえ, つづいて依存1 (R パッケージ), 依存2 (システムライブラリ), 依存3 (ビルドの道具) を順に見ていきます.</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## R 本体のバージョン</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>あるプロジェクトが特定の R のバージョンを要求する場合があります. また, 昔のプロジェクトを再現するために, 古い R のバージョンを使う必要があることもあります. OS のパッケージマネージャ (@sec-os) で R を1つだけ入れると, この要求の食い違いに対応できません. そこで, 複数のバージョンを並べて置き, 切り替えるための専用ツールを使います.</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>R では <span class="co">[</span><span class="ot">rig</span><span class="co">](https://github.com/r-lib/rig)</span> (R Installation Manager) がこれにあたります. 複数の R を独立に並置し, どれを既定にするかを切り替えます.</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release      <span class="co"># install the latest stable R</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add 4.4          <span class="co"># keep an older version side by side</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> list             <span class="co"># show installed versions</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> default 4.6      <span class="co"># switch the `R` / `Rscript` on PATH</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>仕組みは単純で, rig は各バージョンを別々の場所にインストールし, <span class="in">`rig default`</span> が選んだバージョンへの参照 (PATH 上の <span class="in">`R`</span>) を張り替えるだけです. そのため切り替えは一瞬で, アンインストールも安全です. どのバージョンを使うかは, 後述の宣言ファイルにプロジェクト単位で書いておけます (このリポジトリなら <span class="in">`rproject.toml`</span> の <span class="in">`r_version = "4.6"`</span>). この「ランタイムのバージョンを並べて切り替える」道具は, R に限らずどの言語にもあります (のちほど「他の言語も同じ構図」で扱います).</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## 他の R パッケージ</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>R 本体をそろえたら, 次は R パッケージ (依存の種類1) です. すべてのプロジェクトが1つの共有ライブラリにパッケージを入れると, プロジェクトAのための更新がプロジェクトBを壊す, という事故が起きます. 解決策は, プロジェクトごとに独立したライブラリを持ち, その中身をロックファイルに正確に記録することです.</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>仕組みの中心は, プロジェクト起動時に走る <span class="in">`.Rprofile`</span> です. R はプロジェクト直下の <span class="in">`.Rprofile`</span> を起動時に読み込むので, ここでプロジェクト専用ライブラリを <span class="in">`.libPaths()`</span> の先頭に差し込みます. すると <span class="in">`library()`</span> はまずそのプロジェクトのライブラリを見にいき, ユーザー全体のライブラリから隔離されます. プロジェクトを開くだけで, そのプロジェクト用の環境に自動で入る, というわけです.</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>R には成り立ちの違う2つのツールがあります.</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**renv**: 確立された標準です. <span class="in">`renv::snapshot()`</span> で「いま入っているパッケージ」を <span class="in">`renv.lock`</span> に記録し, <span class="in">`renv::restore()`</span> でそれを別のマシンに正確に再現します. スナップショット型で, 手元の状態を写し取る発想です.</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**rv**: 新しい Rust 製のツールで, このリポジトリが採用しています. 宣言型で, 欲しいパッケージを <span class="in">`rproject.toml`</span> に書き並べ, <span class="in">`rv sync`</span> を実行すると, 依存を解決してライブラリを構築し, <span class="in">`rv.lock`</span> に固定します. 「入れた結果を記録する」renv に対し, 「欲しい状態を宣言し, ツールにそれを実現させる」発想です. 後述する uv や cargo に近い考え方です.</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>このリポジトリの <span class="in">`rproject.toml`</span> は, 使う R のバージョンと, 取得元, 欲しいパッケージを宣言しています.</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{.toml filename="rproject.toml"}</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="in">[project]</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="in">name = "workshop-graduate-2026"</span></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="in">r_version = "4.6"</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="in">repositories = [</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="in">    {alias = "CRAN", url = "https://cloud.r-project.org/"},</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="in">    {alias = "r-multiverse", url = "https://community.r-multiverse.org"},</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="in">]</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="in">dependencies = [</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="in">    "dplyr",</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="in">    "ggplot2",</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="in">    "tinytable",</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="in">    "fixest",</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="in">    # ...</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="in">]</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="in">`rv sync`</span> を実行すると, この宣言を満たすようにパッケージが解決・インストールされ, 実際に選ばれた正確なバージョンが <span class="in">`rv.lock`</span> に書き込まれます. <span class="in">`rproject.toml`</span> が「欲しいもの」, <span class="in">`rv.lock`</span> が「実際に入ったもの」で, 共同研究者は <span class="in">`rv.lock`</span> から寸分違わぬ環境を復元できます. <span class="in">`.Rprofile`</span> はこのプロジェクトライブラリを起動時に有効化する役割を担います.</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### どこに何が保存されるか</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>rv も renv も, パッケージを2か所に分けて置きます. ひとつはプロジェクト専用のライブラリ, もうひとつは全プロジェクトで共有するキャッシュです. このリポジトリ (rv) の実際の配置は次のようになっています.</span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="in">```default</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="in">workshop-graduate-2026/            # project root</span></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="in">├── .Rprofile                      # runs rv/scripts/activate.R on startup</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="in">├── rproject.toml                  # declared packages         &lt;- committed</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="in">├── rv.lock                        # exact locked versions     &lt;- committed</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="in">└── rv/</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="in">    ├── scripts/activate.R         # prepends project lib to .libPaths()  &lt;- committed</span></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="in">    └── library/4.6/arm64/         # project-local library     &lt;- gitignored</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="in">        ├── dplyr/                   (materialized from the cache)</span></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">        ├── ggplot2/</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="in">        └── ...</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="in">~/.cache/rv/                        # cache shared across all projects</span></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="in">├── 66bf25474b/                     (each package version stored once)</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="in">├── abfa7ade75/</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="in">└── ...</span></span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>ポイントは2つあります. まず, プロジェクトライブラリ (<span class="in">`rv/library/4.6/arm64/`</span>) は R のバージョンとプラットフォームごとに分かれていて, <span class="in">`.Rprofile`</span> がこのパスを <span class="in">`.libPaths()`</span> の先頭に差し込むことで, このプロジェクトの R だけがここを参照します. つぎに, パッケージの実体は共有キャッシュ (<span class="in">`~/.cache/rv/`</span>) に版ごとに1回だけ保存され, 各プロジェクトのライブラリはそこから用意されます. このとき rv はキャッシュからコピーし (同じディスク上なので, ファイルシステムによっては copy-on-write で安価です), renv はキャッシュ実体へのシンボリックリンクを張ります. いずれもパッケージを再ビルドしないので, 2つ目以降のプロジェクトではインストールがほぼ一瞬になり, ディスクも節約できます. @fig-rv-cache は, ひとつの共有キャッシュを複数のプロジェクトが利用し, それぞれが <span class="in">`.libPaths()`</span> を通じて自分のライブラリだけを見る様子です.</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="al">![共有キャッシュとプロジェクトライブラリ](../static/cetz/rv-cache.svg)</span>{#fig-rv-cache}</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>git にコミットするのは, 宣言ファイル (<span class="in">`rproject.toml`</span>), ロックファイル (<span class="in">`rv.lock`</span>), 有効化スクリプト (<span class="in">`rv/scripts/`</span>) だけです. ライブラリ本体 (<span class="in">`rv/library/`</span>) は <span class="in">`.gitignore`</span> で除外し, 各マシンで <span class="in">`rv sync`</span> が <span class="in">`rv.lock`</span> から作り直します. 「環境そのもの」ではなく「環境の作り方」を共有する, というのが要点です. renv もまったく同じ構図で, <span class="in">`renv/library/...`</span> がプロジェクトライブラリ, <span class="in">`~/.cache/R/renv/`</span> が共有キャッシュ, <span class="in">`renv.lock`</span> が固定, という対応になります.</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="fu">### install.packages と pak</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>rv や renv も, 最終的には1つ1つのパッケージをどこかのライブラリにインストールしています. その最も基本的なコマンドが, R に標準で付いてくる <span class="in">`install.packages()`</span> です. 呼ぶと, パッケージを取得して <span class="in">`.libPaths()`</span> の先頭 (書き込める最初の場所) にインストールします.</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>) <span class="co"># install into the first writable .libPaths()</span></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="in">`install.packages()`</span> は確実ですが, 依存パッケージを1つずつ順に取ってくるため遅く, パッケージが必要とする OS 側のライブラリ (依存の種類2) までは面倒を見ません. これを現代化したのが <span class="co">[</span><span class="ot">pak</span><span class="co">](https://pak.r-lib.org/)</span> です. pak は依存関係をまとめて解決し, 並列にダウンロード・インストールするので速く, CRAN・Bioconductor・GitHub・URL を同じ書き方で扱え, 足りないシステム依存も教えてくれます.</span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"dplyr"</span>)            <span class="co"># from CRAN</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"tidyverse/dplyr"</span>)  <span class="co"># from GitHub, same function</span></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>GitHub など CRAN 以外にあるパッケージは, <span class="in">`install.packages()`</span> では入れられません. 従来は <span class="in">`remotes::install_github("user/repo")`</span> を使ってきました (<span class="in">`devtools::install_github()`</span> も中身は remotes で, devtools は開発用ツールの詰め合わせパッケージです). <span class="in">`pak::pak("user/repo")`</span> は同じことをより速く行い, CRAN も GitHub も同じ関数で扱えるので, これから使うなら pak に一本化すると覚えることが減ります.</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>じつは rig で R を入れると, この pak も自動で一緒に入ります (<span class="in">`rig add`</span> の既定で, <span class="in">`--without-pak`</span> で無効化できます). そのため追加の準備なしに, R を入れた直後から <span class="in">`pak::pak()`</span> が使えます. 手動で1つ足すだけなら pak が快適です. ただしプロジェクトの文脈では, これらを直接叩くよりも, rv や renv 経由で入れて <span class="in">`rv.lock`</span> / <span class="in">`renv.lock`</span> に記録するのが原則です (rv は独自のインストーラを内蔵し, renv は内部で pak を使えます). 手で入れたパッケージはロックファイルに残らず, 再現性の穴になるからです.</span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## システムライブラリ</span></span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>他の依存として, R の外にある C ライブラリや外部プログラムも考えられます. R パッケージではないので, <span class="in">`install.packages()`</span> も rv も入れてくれません. これらは OS のパッケージマネージャ (@sec-os の apt や Homebrew) で, プロジェクトとは別に用意します.</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>代表的な例を挙げます. 空間データの <span class="in">`sf`</span> は GDAL・GEOS・PROJ, <span class="in">`curl`</span> は libcurl, <span class="in">`xml2`</span> は libxml2, 画像処理の <span class="in">`magick`</span> は ImageMagick, 文字描画の <span class="in">`ragg`</span> / <span class="in">`textshaping`</span> は freetype・harfbuzz を必要とします. <span class="in">`sf`</span> が入らないときの多くは, R の問題ではなく, これらの C ライブラリが OS に無いことが原因です.</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>どのシステムライブラリが要るかは, pak が教えてくれます. <span class="in">`pak::pkg_sysreqs()`</span> は, そのパッケージが必要とする OS パッケージと, それを入れるコマンドを返します (Ubuntu なら <span class="in">`apt install ...`</span> にあたります).</span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_sysreqs</span>(<span class="st">"sf"</span>) <span class="co"># report the OS libraries sf needs, and how to install them</span></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>注意点として, ロックファイル (<span class="in">`rv.lock`</span> など) はこの層を記録しません. そのため, 必要なシステムライブラリは README に書いておくか, コンテナ (Docker など) に固めるなどして, R パッケージとは別に共有する必要があります.</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## ソースかバイナリか</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>依存の種類3は, パッケージをソースからビルドするときに要るコンパイラ (@sec-compiler) でした. これが必要になるかどうかは, パッケージをソースで取るか, ビルド済みのバイナリで取るかで決まります. R のパッケージは2つの形で配られます. ひとつはソース (<span class="in">`.tar.gz`</span>) で, どの OS でも使えますが, 中の C/C++/Fortran コードはインストール時にコンパイルが必要です. もうひとつはバイナリで, ある OS と R のバージョン向けにコンパイル済みのため, 展開するだけで入ります.</span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="pp">|</span> ソース <span class="pp">|</span> バイナリ <span class="pp">|</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 中身 <span class="pp">|</span> 未コンパイルのコード <span class="pp">|</span> コンパイル済み <span class="pp">|</span></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> インストール <span class="pp">|</span> ビルドが必要 (要コンパイラ) <span class="pp">|</span> 展開するだけ <span class="pp">|</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 速度 <span class="pp">|</span> 遅い <span class="pp">|</span> 速い <span class="pp">|</span></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 対応範囲 <span class="pp">|</span> どの OS・R 版でも <span class="pp">|</span> OS・R 版に固定 <span class="pp">|</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 主な入手元 <span class="pp">|</span> CRAN (Linux の既定) <span class="pp">|</span> CRAN (Win / Mac), P3M (Linux) <span class="pp">|</span></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>どちらが使われるかは, 既定でほぼ自動的に決まります. <span class="in">`install.packages()`</span> が取る型は <span class="in">`getOption("pkgType")`</span> で決まり, Windows と macOS では実質バイナリ優先, Linux では <span class="in">`"source"`</span> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. @sec-setup で <span class="in">`build-essential`</span> を入れたのはこのためです. ビルドには時間もかかります.</span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>Linux でもバイナリを使う方法があります. <span class="co">[</span><span class="ot">Posit Public Package Manager</span><span class="co">](https://packagemanager.posit.co/)</span> (P3M) は, ディストリビューションごとにビルド済みのバイナリを配布しています. <span class="in">`rproject.toml`</span> (や renv の設定) の <span class="in">`repositories`</span> にその URL を指定すると, rv や renv はソースの代わりにバイナリを取得し, インストールが桁違いに速くなります. コンパイル環境の細かな違いに悩まされることも減ります. 速さと再現性の両立という点で, 共同作業や CI ではバイナリ配布のリポジトリを使うのが定石です.</span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python / Julia</span></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>PythonやJuliaといった他の言語でも, 依存関係の管理は同じ構図です. ランタイムのバージョンを切り替えるツール, 欲しい依存を書く宣言ファイル, 実際の版を固定するロックファイルの三点セットです. Python の uv や Julia の Pkg は, R の rv / renv と同じ考え方で動きます.</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 言語 <span class="pp">|</span> ランタイム管理 <span class="pp">|</span> 宣言ファイル <span class="pp">|</span> ロックファイル <span class="pp">|</span></span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> R <span class="pp">|</span> rig <span class="pp">|</span> <span class="in">`rproject.toml`</span> (rv) / DESCRIPTION (renv) <span class="pp">|</span> <span class="in">`rv.lock`</span> / <span class="in">`renv.lock`</span> <span class="pp">|</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Python <span class="pp">|</span> uv, pyenv <span class="pp">|</span> <span class="in">`pyproject.toml`</span> <span class="pp">|</span> <span class="in">`uv.lock`</span> <span class="pp">|</span></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Julia <span class="pp">|</span> juliaup <span class="pp">|</span> <span class="in">`Project.toml`</span> <span class="pp">|</span> <span class="in">`Manifest.toml`</span> <span class="pp">|</span></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>Python の <span class="co">[</span><span class="ot">uv</span><span class="co">](https://docs.astral.sh/uv/)</span> は, この構図を1つのツールにまとめた好例です. Python 本体のバージョンとパッケージの両方を管理し, <span class="in">`pyproject.toml`</span> に依存を宣言して <span class="in">`uv.lock`</span> に固定します. 従来は pyenv (バージョン), venv (隔離環境), pip (インストール), poetry (依存解決) と役割ごとに分かれていたものを, Rust 製の高速な1つのツールに統合しています.</span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init            <span class="co"># start a project (creates pyproject.toml)</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add polars      <span class="co"># declare and install a dependency</span></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync            <span class="co"># reproduce the environment from uv.lock</span></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run script.py   <span class="co"># run inside the project environment</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>Julia は言語自体にパッケージマネージャ Pkg を内蔵しています. <span class="in">`Project.toml`</span> に直接の依存を書き, <span class="in">`Manifest.toml`</span> が依存の依存まで含めた完全なツリーを固定します. 環境の有効化は <span class="in">`julia --project`</span> や <span class="in">`Pkg.activate()`</span> で行い, <span class="in">`Pkg.instantiate()`</span> が <span class="in">`Manifest.toml`</span> から環境を復元します.</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>宣言ファイルとロックファイルを分ける理由は共通しています. 宣言ファイルには人間が読める大まかな要求 (「dplyr が欲しい」) を書き, ロックファイルには機械が解決した正確な版 (「dplyr 1.1.4, この取得元, このハッシュ」) が入ります. 前者は git で共有して意図を伝え, 後者は git で共有して環境を一致させます. どちらもコミットするのが原則です.</span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## このプロジェクトでの実践</span></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>以上を踏まえると, このリポジトリの環境を復元する手順はごく短くなります.</span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig (@sec-setup)</span></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>this repository<span class="op">&gt;</span>     <span class="co"># 2. clone the project</span></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> workshop-graduate-2026</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                         <span class="co"># 3. build the project library from rv.lock</span></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="in">`rv sync`</span> の後は, <span class="in">`.Rprofile`</span> がプロジェクトライブラリを有効化するので, R を起動すればそのまま同じパッケージ環境で作業できます. 日々の開発でパッケージを増やすときは, <span class="in">`rproject.toml`</span> に書き足して <span class="in">`rv sync`</span> するか, <span class="in">`rv add &lt;package&gt;`</span> を使います. どちらも <span class="in">`rv.lock`</span> を更新するので, その差分をコミットすれば, 環境の変更履歴も git に残ります.</span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## 使い分け</span></span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>新しく R のプロジェクトを始めるなら, 宣言型で速い rv が扱いやすいです. 既存資産や共同研究者が renv を使っているなら renv に合わせます.</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ロックファイル (<span class="in">`rv.lock`</span> / <span class="in">`renv.lock`</span> / <span class="in">`uv.lock`</span> / <span class="in">`Manifest.toml`</span>) は必ず git にコミットします. これが再現性の実体です.</span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>環境の再現は, 計算の再現 (targets の章) と対になる話です. 同じ環境の上で同じパイプラインを回して, はじめて結果が完全に再現します.</span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a><span class="in">`sf`</span> パッケージを入れようとしたら, <span class="in">`GDAL`</span> が見つからないというエラーが出ました. この GDAL は, どの種類の依存で, どう用意するのが正しいでしょうか.</span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-deps</span></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a>  <span class="st">"システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる"</span>,</span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>    <span class="st">"システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる"</span>,</span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R パッケージ. install.packages で入れる"</span>,</span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R 本体のバージョン違い. rig で R を入れ直す"</span>,</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ロックファイルの記録漏れ. rv.lock を手で編集する"</span></span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます."</span></span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GDAL は R パッケージではありません. R の外にあるものです."</span></span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a>WSL (Ubuntu) で <span class="in">`install.packages()`</span> を実行すると, 毎回コンパイルが走って時間がかかります. 最も的確な理由はどれでしょうか.</span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-source</span></span>
+<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから"</span>,</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから"</span>,</span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>    <span class="st">"WSL は仮想環境なので, すべての処理が遅くなるから"</span>,</span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R のバージョンが古く, バイナリに対応していないから"</span>,</span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>    <span class="st">"メモリ (RAM) が不足しているから"</span></span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります."</span></span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>    <span class="st">"パッケージが「どの形で配られているか」を思い出してください. ソースとバイナリの違いです."</span></span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>作った環境を共同研究者が再現できるよう, git にコミットすべきものはどれでしょうか (rv を使う場合).</span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-commit</span></span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rproject.toml と rv.lock (と rv/scripts/)"</span>,</span>
+<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rproject.toml と rv.lock (と rv/scripts/)"</span>,</span>
+<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rv/library/ のパッケージ本体一式"</span>,</span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a>    <span class="st">"共有キャッシュ ~/.cache/rv/ 全体"</span>,</span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a>    <span class="st">".Rprofile だけ"</span></span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>    <span class="st">"コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます."</span></span>
+<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>    <span class="st">"共有すべきなのは「環境そのもの」ではなく「環境の作り方」でした. どのファイルがあれば復元できるかを考えてください."</span></span>
+<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>プロジェクト A は R 4.2, プロジェクト B は R 4.6 を必要とします. どう対応するのが筋でしょうか.</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-rig</span></span>
+<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rig で両方の R を入れ, プロジェクトごとに切り替える"</span>,</span>
+<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rig で両方の R を入れ, プロジェクトごとに切り替える"</span>,</span>
+<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>    <span class="st">"OS の R を毎回アンインストールして入れ直す"</span>,</span>
+<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a>    <span class="st">"新しい R 4.6 に統一し, A もそれで動かす"</span>,</span>
+<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rv.lock に R のバージョンを書けば R 本体も切り替わる"</span></span>
+<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a>    <span class="st">"言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます."</span></span>
+<span id="cb9-319"><a href="#cb9-319" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-320"><a href="#cb9-320" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb9-321"><a href="#cb9-321" aria-hidden="true" tabindex="-1"></a>    <span class="st">"R 本体 (ランタイム) のバージョンを複数並べて切り替える専用ツールがありました."</span></span>
+<span id="cb9-322"><a href="#cb9-322" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb9-323"><a href="#cb9-323" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb9-324"><a href="#cb9-324" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-325"><a href="#cb9-325" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-326"><a href="#cb9-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-327"><a href="#cb9-327" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

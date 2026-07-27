@@ -150,31 +150,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,14 +236,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -290,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#テーマとカスタマイズ" id="toc-テーマとカスタマイズ" class="nav-link" data-scroll-target="#テーマとカスタマイズ">テーマとカスタマイズ</a></li>
   <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">10.4</span> 演習問題</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a></li>
   </ul>
 </nav>
     </div>
@@ -747,8 +753,8 @@ Figure&nbsp;10.2: ナビゲーションを消したスライド
 <p>Appendix のスライドが何十枚あっても「本編は25枚中25枚で終わり」と見えるので, 聞いている人に余計なプレッシャーを与えずに済みます.</p>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">10.4</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>この章の演習は, <code>quarto-touying-typst</code> で実際に小さなスライドを組み立てます. 空のフォルダを1つ作り, そこを作業場所にしてください. Quarto と Typst が使える環境が必要です. 解答例は畳んであるので, まず自分で書いてみましょう.</p>
 <div class="quiz">
 <p>テンプレートからスライドの雛形を作り, タイトルスライドを自分のものに差し替えます. サンプル付きのテンプレートを取得し, YAML でタイトル・サブタイトル・著者・テーマを設定して, PDF にレンダリングしてください.</p>
@@ -1698,7 +1704,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a>Appendix のスライドが何十枚あっても「本編は25枚中25枚で終わり」と見えるので, 聞いている人に余計なプレッシャーを与えずに済みます.</span>
 <span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a>この章の演習は, <span class="in">`quarto-touying-typst`</span> で実際に小さなスライドを組み立てます. 空のフォルダを1つ作り, そこを作業場所にしてください. Quarto と Typst が使える環境が必要です. 解答例は畳んであるので, まず自分で書いてみましょう.</span>
 <span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a></span>

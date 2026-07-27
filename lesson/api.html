@@ -150,31 +150,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,14 +236,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#データを取得する" id="toc-データを取得する" class="nav-link" data-scroll-target="#データを取得する">データを取得する</a></li>
   <li><a href="#可視化" id="toc-可視化" class="nav-link" data-scroll-target="#可視化">可視化</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">7.5</span> 演習問題</a>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a>
   <ul class="collapse">
   <li><a href="#クイズ" id="toc-クイズ" class="nav-link" data-scroll-target="#クイズ">クイズ</a></li>
   <li><a href="#世界銀行-api-で失業率を取得する" id="toc-世界銀行-api-で失業率を取得する" class="nav-link" data-scroll-target="#世界銀行-api-で失業率を取得する">世界銀行 API で失業率を取得する</a></li>
@@ -601,8 +607,8 @@ Figure&nbsp;7.3: 1人当たり県民所得の推移 (e-Stat)
 </div>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">7.5</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>前半は HTTP と API の基本に関するクイズ, 後半は実際に API からデータを取得する演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</p>
 <section id="クイズ" class="level3">
 <h3 class="anchored" data-anchor-id="クイズ">クイズ</h3>
@@ -610,33 +616,33 @@ Figure&nbsp;7.3: 1人当たり県民所得の推移 (e-Stat)
 <p>API にリクエストを送ったら, ステータスコード 404 が返ってきました. 何が起きたと考えられるでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_33921" onsubmit="return validate_form_33921()" method="post">
+<form name="form_74646" onsubmit="return validate_form_74646()" method="post">
 <label>
-<input type="radio" name="answer_33921" id="answer_33921_1" value="リクエストの回数制限 (rate limit) に達した">
-リクエストの回数制限 (rate limit) に達した
+<input type="radio" name="answer_74646" id="answer_74646_1" value="リクエストは成功し, データが返ってきている">
+リクエストは成功し, データが返ってきている
 </label>
 <br>
 <label>
-<input type="radio" name="answer_33921" id="answer_33921_2" value="サーバーの内部でエラーが起きた">
-サーバーの内部でエラーが起きた
-</label>
-<br>
-<label>
-<input type="radio" name="answer_33921" id="answer_33921_3" value="URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない">
+<input type="radio" name="answer_74646" id="answer_74646_2" value="URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない">
 URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない
 </label>
 <br>
 <label>
-<input type="radio" name="answer_33921" id="answer_33921_4" value="リクエストは成功し, データが返ってきている">
-リクエストは成功し, データが返ってきている
+<input type="radio" name="answer_74646" id="answer_74646_3" value="サーバーの内部でエラーが起きた">
+サーバーの内部でエラーが起きた
+</label>
+<br>
+<label>
+<input type="radio" name="answer_74646" id="answer_74646_4" value="リクエストの回数制限 (rate limit) に達した">
+リクエストの回数制限 (rate limit) に達した
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_33921"></div>
+<div id="result_74646"></div>
 </form>
-<script>function validate_form_33921() {var x, text; var x = document.forms['form_33921']['answer_33921'].value;if (x == 'URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない'){text = '<span class="quiz-right">✓ 正解! </span>404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>404 Not Found の意味を思い出しましょう. 成功を表すのは 200 でした.';} document.getElementById('result_33921').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_74646() {var x, text; var x = document.forms['form_74646']['answer_74646'].value;if (x == 'URL の綴りやパスが間違っているなど, リクエスト先のリソースが存在しない'){text = '<span class="quiz-right">✓ 正解! </span>404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>404 Not Found の意味を思い出しましょう. 成功を表すのは 200 でした.';} document.getElementById('result_74646').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_33921').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_74646').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -646,33 +652,33 @@ URL の綴りやパスが間違っているなど, リクエスト先のリソ�
 <p>URL <code>https://api.worldbank.org/v2/country/JPN/indicator/NY.GDP.PCAP.CD?format=json&amp;date=2000:2022</code> について, 正しい説明はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_41187" onsubmit="return validate_form_41187()" method="post">
+<form name="form_74279" onsubmit="return validate_form_74279()" method="post">
 <label>
-<input type="radio" name="answer_41187" id="answer_41187_1" value="全体がエンドポイントで, 絞り込み条件は HTTP ヘッダで送る">
+<input type="radio" name="answer_74279" id="answer_74279_1" value="全体がエンドポイントで, 絞り込み条件は HTTP ヘッダで送る">
 全体がエンドポイントで, 絞り込み条件は HTTP ヘッダで送る
 </label>
 <br>
 <label>
-<input type="radio" name="answer_41187" id="answer_41187_2" value="format=json はエンドポイントの一部">
+<input type="radio" name="answer_74279" id="answer_74279_2" value="? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)">
+? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)
+</label>
+<br>
+<label>
+<input type="radio" name="answer_74279" id="answer_74279_3" value="format=json はエンドポイントの一部">
 format=json はエンドポイントの一部
 </label>
 <br>
 <label>
-<input type="radio" name="answer_41187" id="answer_41187_3" value="country/JPN の部分がクエリパラメータ">
+<input type="radio" name="answer_74279" id="answer_74279_4" value="country/JPN の部分がクエリパラメータ">
 country/JPN の部分がクエリパラメータ
 </label>
 <br>
-<label>
-<input type="radio" name="answer_41187" id="answer_41187_4" value="? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)">
-? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)
-</label>
-<br>
 <input type="submit" value="答え合わせ">
-<div id="result_41187"></div>
+<div id="result_74279"></div>
 </form>
-<script>function validate_form_41187() {var x, text; var x = document.forms['form_41187']['answer_41187'].value;if (x == '? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)'){text = '<span class="quiz-right">✓ 正解! </span>エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>エンドポイントとクエリパラメータの役割分担を見直しましょう. 区切りは ? です.';} document.getElementById('result_41187').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_74279() {var x, text; var x = document.forms['form_74279']['answer_74279'].value;if (x == '? より前がエンドポイント (宛先のパス) で, ? より後がクエリパラメータ (絞り込み条件)'){text = '<span class="quiz-right">✓ 正解! </span>エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>エンドポイントとクエリパラメータの役割分担を見直しましょう. 区切りは ? です.';} document.getElementById('result_74279').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_33921').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_41187').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_74646').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_74279').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -682,33 +688,33 @@ country/JPN の部分がクエリパラメータ
 <p>共同研究のリポジトリで e-Stat の API キーを使います. 正しい管理方法はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_61579" onsubmit="return validate_form_61579()" method="post">
+<form name="form_91742" onsubmit="return validate_form_91742()" method="post">
 <label>
-<input type="radio" name="answer_61579" id="answer_61579_1" value=".gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む">
+<input type="radio" name="answer_91742" id="answer_91742_1" value=".gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む">
 .gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む
 </label>
 <br>
 <label>
-<input type="radio" name="answer_61579" id="answer_61579_2" value="誤ってコミットしても, ファイルを削除してコミットし直せば安全">
+<input type="radio" name="answer_91742" id="answer_91742_2" value="誤ってコミットしても, ファイルを削除してコミットし直せば安全">
 誤ってコミットしても, ファイルを削除してコミットし直せば安全
 </label>
 <br>
 <label>
-<input type="radio" name="answer_61579" id="answer_61579_3" value="スクリプトに直書きするが, リポジトリを private にしておく">
-スクリプトに直書きするが, リポジトリを private にしておく
-</label>
-<br>
-<label>
-<input type="radio" name="answer_61579" id="answer_61579_4" value="コードに直書きしておき, GitHub に push する直前に消す">
+<input type="radio" name="answer_91742" id="answer_91742_3" value="コードに直書きしておき, GitHub に push する直前に消す">
 コードに直書きしておき, GitHub に push する直前に消す
 </label>
 <br>
+<label>
+<input type="radio" name="answer_91742" id="answer_91742_4" value="スクリプトに直書きするが, リポジトリを private にしておく">
+スクリプトに直書きするが, リポジトリを private にしておく
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_61579"></div>
+<div id="result_91742"></div>
 </form>
-<script>function validate_form_61579() {var x, text; var x = document.forms['form_61579']['answer_61579'].value;if (x == '.gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む'){text = '<span class="quiz-right">✓ 正解! </span>キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>コードにキーを書いた時点で, コミット履歴やコピーから流出するリスクが生まれるのでした.';} document.getElementById('result_61579').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_91742() {var x, text; var x = document.forms['form_91742']['answer_91742'].value;if (x == '.gitignore に追加した .Renviron にキーを書き, Sys.getenv() で読み込む'){text = '<span class="quiz-right">✓ 正解! </span>キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>コードにキーを書いた時点で, コミット履歴やコピーから流出するリスクが生まれるのでした.';} document.getElementById('result_91742').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_33921').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_41187').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.'; res3 = document.getElementById('result_61579').innerText == '✓ 正解! キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_74646').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_74279').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.'; res3 = document.getElementById('result_91742').innerText == '✓ 正解! キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -718,33 +724,33 @@ country/JPN の部分がクエリパラメータ
 <p>ある API から数千件のデータをループで取得する予定です. どう実装するのがよいでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_99840" onsubmit="return validate_form_99840()" method="post">
+<form name="form_73121" onsubmit="return validate_form_73121()" method="post">
 <label>
-<input type="radio" name="answer_99840" id="answer_99840_1" value="resp_status() が 200 になるまで, 待ち時間なしで同じリクエストを送り続ける">
-resp_status() が 200 になるまで, 待ち時間なしで同じリクエストを送り続ける
-</label>
-<br>
-<label>
-<input type="radio" name="answer_99840" id="answer_99840_2" value="req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する">
+<input type="radio" name="answer_73121" id="answer_73121_1" value="req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する">
 req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する
 </label>
 <br>
 <label>
-<input type="radio" name="answer_99840" id="answer_99840_3" value="req_perform() を for ループで回すだけでよく, 特別な設定は不要">
-req_perform() を for ループで回すだけでよく, 特別な設定は不要
-</label>
-<br>
-<label>
-<input type="radio" name="answer_99840" id="answer_99840_4" value="並列化して, できるだけ短時間で送り終える">
+<input type="radio" name="answer_73121" id="answer_73121_2" value="並列化して, できるだけ短時間で送り終える">
 並列化して, できるだけ短時間で送り終える
 </label>
 <br>
+<label>
+<input type="radio" name="answer_73121" id="answer_73121_3" value="resp_status() が 200 になるまで, 待ち時間なしで同じリクエストを送り続ける">
+resp_status() が 200 になるまで, 待ち時間なしで同じリクエストを送り続ける
+</label>
+<br>
+<label>
+<input type="radio" name="answer_73121" id="answer_73121_4" value="req_perform() を for ループで回すだけでよく, 特別な設定は不要">
+req_perform() を for ループで回すだけでよく, 特別な設定は不要
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_99840"></div>
+<div id="result_73121"></div>
 </form>
-<script>function validate_form_99840() {var x, text; var x = document.forms['form_99840']['answer_99840'].value;if (x == 'req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する'){text = '<span class="quiz-right">✓ 正解! </span>API には rate limit があるので, req_throttle() で頻度を抑え, req_retry() で一時的な失敗に備えるのが作法です. 制限を無視して送り続けると 429 が返り, 最悪の場合キーがブロックされます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>rate limit を超えないようにリクエストの頻度を制御する仕組みがありました. 章末の callout を見直しましょう.';} document.getElementById('result_99840').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_73121() {var x, text; var x = document.forms['form_73121']['answer_73121'].value;if (x == 'req_throttle() で送信間隔をあけ, req_retry() で失敗時の再試行を設定する'){text = '<span class="quiz-right">✓ 正解! </span>API には rate limit があるので, req_throttle() で頻度を抑え, req_retry() で一時的な失敗に備えるのが作法です. 制限を無視して送り続けると 429 が返り, 最悪の場合キーがブロックされます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>rate limit を超えないようにリクエストの頻度を制御する仕組みがありました. 章末の callout を見直しましょう.';} document.getElementById('result_73121').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_33921').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_41187').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.'; res3 = document.getElementById('result_61579').innerText == '✓ 正解! キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.'; res4 = document.getElementById('result_99840').innerText == '✓ 正解! API には rate limit があるので, req_throttle() で頻度を抑え, req_retry() で一時的な失敗に備えるのが作法です. 制限を無視して送り続けると 429 が返り, 最悪の場合キーがブロックされます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_74646').innerText == '✓ 正解! 404 Not Found はリクエスト先のリソースが見つからないという意味です. まずエンドポイントの綴りやパスの組み立てを疑いましょう. なお成功は 200, サーバー内部エラーは 500 番台, rate limit 超過は 429 です.'; res2 = document.getElementById('result_74279').innerText == '✓ 正解! エンドポイントは「どのデータが欲しいか」を表す URL のパス, クエリパラメータは ?key=value&amp;… の形の絞り込み条件です. httr2 では前者を req_url_path_append() で, 後者を req_url_query() で組み立てました.'; res3 = document.getElementById('result_91742').innerText == '✓ 正解! キーは環境変数に置き, .Renviron ごと Git の管理対象から外すのが基本です. private リポジトリでも公開設定の変更や他人の環境から流出しえますし, 一度コミットした値は履歴に残り続けます. 漏れた場合はキーの再発行が必要です.'; res4 = document.getElementById('result_73121').innerText == '✓ 正解! API には rate limit があるので, req_throttle() で頻度を抑え, req_retry() で一時的な失敗に備えるのが作法です. 制限を無視して送り続けると 429 が返り, 最悪の場合キーがブロックされます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1715,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb21-288"><a href="#cb21-288" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>

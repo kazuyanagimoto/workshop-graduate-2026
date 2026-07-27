@@ -150,31 +150,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,14 +236,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -284,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#どれを使えばよいか" id="toc-どれを使えばよいか" class="nav-link" data-scroll-target="#どれを使えばよいか">どれを使えばよいか</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">6.6</span> 演習問題</a>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a>
   <ul class="collapse">
   <li><a href="#クイズ" id="toc-クイズ" class="nav-link" data-scroll-target="#クイズ">クイズ</a></li>
   <li><a href="#時間帯別のチップ率と-explain" id="toc-時間帯別のチップ率と-explain" class="nav-link" data-scroll-target="#時間帯別のチップ率と-explain">時間帯別のチップ率と explain</a></li>
@@ -411,19 +417,19 @@ Table&nbsp;6.1: CSV と Parquet のファイルサイズ
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_n9fzckqxdpaq2qywqj6p = TinyTable.createTableFunctions("tinytable_n9fzckqxdpaq2qywqj6p");
+      const tableFns_ajx41dabzzknviy5nri1 = TinyTable.createTableFunctions("tinytable_ajx41dabzzknviy5nri1");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 } ], css_id: 'tinytable_css_uvrfiw33fusoqe4qblgl',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_mgin7uruz9annnmvxwih',}, 
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 } ], css_id: 'tinytable_css_zp9agw25lp4z2epxhwl8',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_juj9zk968vchryaggvmb',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_n9fzckqxdpaq2qywqj6p.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_ajx41dabzzknviy5nri1.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -432,11 +438,11 @@ Table&nbsp;6.1: CSV と Parquet のファイルサイズ
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_n9fzckqxdpaq2qywqj6p td.tinytable_css_uvrfiw33fusoqe4qblgl, #tinytable_n9fzckqxdpaq2qywqj6p th.tinytable_css_uvrfiw33fusoqe4qblgl {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_n9fzckqxdpaq2qywqj6p td.tinytable_css_mgin7uruz9annnmvxwih, #tinytable_n9fzckqxdpaq2qywqj6p th.tinytable_css_mgin7uruz9annnmvxwih {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_ajx41dabzzknviy5nri1 td.tinytable_css_zp9agw25lp4z2epxhwl8, #tinytable_ajx41dabzzknviy5nri1 th.tinytable_css_zp9agw25lp4z2epxhwl8 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_ajx41dabzzknviy5nri1 td.tinytable_css_juj9zk968vchryaggvmb, #tinytable_ajx41dabzzknviy5nri1 th.tinytable_css_juj9zk968vchryaggvmb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_n9fzckqxdpaq2qywqj6p" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_ajx41dabzzknviy5nri1" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -622,19 +628,19 @@ Table&nbsp;6.2: 集計の計算時間とメモリ
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_7fcrohgkvi1ueqjs7isn = TinyTable.createTableFunctions("tinytable_7fcrohgkvi1ueqjs7isn");
+      const tableFns_53zbvwsmghmyrd1tkbut = TinyTable.createTableFunctions("tinytable_53zbvwsmghmyrd1tkbut");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_upzph0dzhrjewuljsi8o',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_8i6l30mgxox7afubs3aj',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_8lgvqnu5wp5c43mpdhcx',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_dd3puh5ytfr1p2tnkwnx',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_7fcrohgkvi1ueqjs7isn.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_53zbvwsmghmyrd1tkbut.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -643,11 +649,11 @@ Table&nbsp;6.2: 集計の計算時間とメモリ
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_7fcrohgkvi1ueqjs7isn td.tinytable_css_upzph0dzhrjewuljsi8o, #tinytable_7fcrohgkvi1ueqjs7isn th.tinytable_css_upzph0dzhrjewuljsi8o {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_7fcrohgkvi1ueqjs7isn td.tinytable_css_8i6l30mgxox7afubs3aj, #tinytable_7fcrohgkvi1ueqjs7isn th.tinytable_css_8i6l30mgxox7afubs3aj {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_53zbvwsmghmyrd1tkbut td.tinytable_css_8lgvqnu5wp5c43mpdhcx, #tinytable_53zbvwsmghmyrd1tkbut th.tinytable_css_8lgvqnu5wp5c43mpdhcx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_53zbvwsmghmyrd1tkbut td.tinytable_css_dd3puh5ytfr1p2tnkwnx, #tinytable_53zbvwsmghmyrd1tkbut th.tinytable_css_dd3puh5ytfr1p2tnkwnx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_7fcrohgkvi1ueqjs7isn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_53zbvwsmghmyrd1tkbut" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -660,17 +666,17 @@ Table&nbsp;6.2: 集計の計算時間とメモリ
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">dplyr</td>
-                  <td data-row="1" data-col="2">402</td>
+                  <td data-row="1" data-col="2">447</td>
                   <td data-row="1" data-col="3">1.3 GB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">tidypolars</td>
-                  <td data-row="2" data-col="2">45</td>
+                  <td data-row="2" data-col="2">47</td>
                   <td data-row="2" data-col="3">421.1 KB</td>
                 </tr>
                 <tr>
                   <td data-row="3" data-col="1">duckplyr</td>
-                  <td data-row="3" data-col="2">21</td>
+                  <td data-row="3" data-col="2">23</td>
                   <td data-row="3" data-col="3">85.9 KB</td>
                 </tr>
         </tbody>
@@ -696,8 +702,8 @@ Table&nbsp;6.2: 集計の計算時間とメモリ
 <p>なお, R のオブジェクトをそのまま高速に保存したいだけなら, <a href="https://www.fstpackage.org/"><code>fst</code></a> や <a href="https://github.com/qsbase/qs2"><code>qs2</code></a> も便利です. これらは <code>saveRDS()</code> の高速な代替として使えます.</p>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">6.6</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>前半は保存形式とエンジンの考え方に関するクイズ, 後半はタクシーデータを使った演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</p>
 <section id="クイズ" class="level3">
 <h3 class="anchored" data-anchor-id="クイズ">クイズ</h3>
@@ -705,33 +711,33 @@ Table&nbsp;6.2: 集計の計算時間とメモリ
 <p>19列のテーブルから3列だけを使って集計するとき, Parquet + Polars が CSV + dplyr より圧倒的に速い最大の理由はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_26846" onsubmit="return validate_form_26846()" method="post">
+<form name="form_77495" onsubmit="return validate_form_77495()" method="post">
 <label>
-<input type="radio" name="answer_26846" id="answer_26846_1" value="CSV は型情報を持たないから">
-CSV は型情報を持たないから
+<input type="radio" name="answer_77495" id="answer_77495_1" value="Polars が R より新しい言語で書かれているから">
+Polars が R より新しい言語で書かれているから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_26846" id="answer_26846_2" value="列指向なので, 必要な3列だけをディスクから読める">
+<input type="radio" name="answer_77495" id="answer_77495_2" value="列指向なので, 必要な3列だけをディスクから読める">
 列指向なので, 必要な3列だけをディスクから読める
 </label>
 <br>
 <label>
-<input type="radio" name="answer_26846" id="answer_26846_3" value="Parquet はテキストではなくバイナリだから">
+<input type="radio" name="answer_77495" id="answer_77495_3" value="Parquet はテキストではなくバイナリだから">
 Parquet はテキストではなくバイナリだから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_26846" id="answer_26846_4" value="Polars が R より新しい言語で書かれているから">
-Polars が R より新しい言語で書かれているから
+<input type="radio" name="answer_77495" id="answer_77495_4" value="CSV は型情報を持たないから">
+CSV は型情報を持たないから
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_26846"></div>
+<div id="result_77495"></div>
 </form>
-<script>function validate_form_26846() {var x, text; var x = document.forms['form_26846']['answer_26846'].value;if (x == '列指向なので, 必要な3列だけをディスクから読める'){text = '<span class="quiz-right">✓ 正解! </span>列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>行指向と列指向の図を思い出しましょう. ディスクから読む量が根本的に違います.';} document.getElementById('result_26846').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_77495() {var x, text; var x = document.forms['form_77495']['answer_77495'].value;if (x == '列指向なので, 必要な3列だけをディスクから読める'){text = '<span class="quiz-right">✓ 正解! </span>列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>行指向と列指向の図を思い出しましょう. ディスクから読む量が根本的に違います.';} document.getElementById('result_77495').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_26846').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_77495').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -744,33 +750,33 @@ Polars が R より新しい言語で書かれているから
 <p>を実行した直後, どういう状態になっているでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_60368" onsubmit="return validate_form_60368()" method="post">
+<form name="form_73384" onsubmit="return validate_form_73384()" method="post">
 <label>
-<input type="radio" name="answer_60368" id="answer_60368_1" value="集計結果まですでに計算されている">
-集計結果まですでに計算されている
-</label>
-<br>
-<label>
-<input type="radio" name="answer_60368" id="answer_60368_2" value="ファイル全体がメモリに読み込まれている">
+<input type="radio" name="answer_73384" id="answer_73384_1" value="ファイル全体がメモリに読み込まれている">
 ファイル全体がメモリに読み込まれている
 </label>
 <br>
 <label>
-<input type="radio" name="answer_60368" id="answer_60368_3" value="データはまだ読まれておらず, 何をするかの計画だけができている">
+<input type="radio" name="answer_73384" id="answer_73384_2" value="データはまだ読まれておらず, 何をするかの計画だけができている">
 データはまだ読まれておらず, 何をするかの計画だけができている
 </label>
 <br>
 <label>
-<input type="radio" name="answer_60368" id="answer_60368_4" value="filter までは実行済みで, summarise だけが残っている">
+<input type="radio" name="answer_73384" id="answer_73384_3" value="filter までは実行済みで, summarise だけが残っている">
 filter までは実行済みで, summarise だけが残っている
 </label>
 <br>
+<label>
+<input type="radio" name="answer_73384" id="answer_73384_4" value="集計結果まですでに計算されている">
+集計結果まですでに計算されている
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_60368"></div>
+<div id="result_73384"></div>
 </form>
-<script>function validate_form_60368() {var x, text; var x = document.forms['form_60368']['answer_60368'].value;if (x == 'データはまだ読まれておらず, 何をするかの計画だけができている'){text = '<span class="quiz-right">✓ 正解! </span>遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>遅延評価では「書いた時点」と「実行される時点」が分離されているのでした.';} document.getElementById('result_60368').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_73384() {var x, text; var x = document.forms['form_73384']['answer_73384'].value;if (x == 'データはまだ読まれておらず, 何をするかの計画だけができている'){text = '<span class="quiz-right">✓ 正解! </span>遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>遅延評価では「書いた時点」と「実行される時点」が分離されているのでした.';} document.getElementById('result_73384').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_26846').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_60368').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_77495').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_73384').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -780,33 +786,33 @@ filter までは実行済みで, summarise だけが残っている
 <p>Parquet と Arrow の関係として正しいものはどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_97915" onsubmit="return validate_form_97915()" method="post">
+<form name="form_71608" onsubmit="return validate_form_71608()" method="post">
 <label>
-<input type="radio" name="answer_97915" id="answer_97915_1" value="どちらもディスク上の保存形式で, 圧縮率が違うだけ">
-どちらもディスク上の保存形式で, 圧縮率が違うだけ
-</label>
-<br>
-<label>
-<input type="radio" name="answer_97915" id="answer_97915_2" value="Arrow がディスク上の保存形式で, Parquet はメモリ上の形式">
+<input type="radio" name="answer_71608" id="answer_71608_1" value="Arrow がディスク上の保存形式で, Parquet はメモリ上の形式">
 Arrow がディスク上の保存形式で, Parquet はメモリ上の形式
 </label>
 <br>
 <label>
-<input type="radio" name="answer_97915" id="answer_97915_3" value="Arrow は Parquet の新しいバージョン">
+<input type="radio" name="answer_71608" id="answer_71608_2" value="どちらもディスク上の保存形式で, 圧縮率が違うだけ">
+どちらもディスク上の保存形式で, 圧縮率が違うだけ
+</label>
+<br>
+<label>
+<input type="radio" name="answer_71608" id="answer_71608_3" value="Arrow は Parquet の新しいバージョン">
 Arrow は Parquet の新しいバージョン
 </label>
 <br>
 <label>
-<input type="radio" name="answer_97915" id="answer_97915_4" value="Parquet はディスク上の保存形式で, Arrow はメモリ上の形式">
+<input type="radio" name="answer_71608" id="answer_71608_4" value="Parquet はディスク上の保存形式で, Arrow はメモリ上の形式">
 Parquet はディスク上の保存形式で, Arrow はメモリ上の形式
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_97915"></div>
+<div id="result_71608"></div>
 </form>
-<script>function validate_form_97915() {var x, text; var x = document.forms['form_97915']['answer_97915'].value;if (x == 'Parquet はディスク上の保存形式で, Arrow はメモリ上の形式'){text = '<span class="quiz-right">✓ 正解! </span>対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>2つが担う層 (ディスクかメモリか) が違うのでした.';} document.getElementById('result_97915').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_71608() {var x, text; var x = document.forms['form_71608']['answer_71608'].value;if (x == 'Parquet はディスク上の保存形式で, Arrow はメモリ上の形式'){text = '<span class="quiz-right">✓ 正解! </span>対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>2つが担う層 (ディスクかメモリか) が違うのでした.';} document.getElementById('result_71608').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_26846').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_60368').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.'; res3 = document.getElementById('result_97915').innerText == '✓ 正解! 対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_77495').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_73384').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.'; res3 = document.getElementById('result_71608').innerText == '✓ 正解! 対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -816,33 +822,33 @@ Parquet はディスク上の保存形式で, Arrow はメモリ上の形式
 <p>RAM が 8GB のノート PC で, 20GB のデータを集計する必要があります. どうするのがよいでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_45003" onsubmit="return validate_form_45003()" method="post">
+<form name="form_11475" onsubmit="return validate_form_11475()" method="post">
 <label>
-<input type="radio" name="answer_45003" id="answer_45003_1" value="データ全体をメモリに読み込んでから, 不要な列を落とす">
-データ全体をメモリに読み込んでから, 不要な列を落とす
-</label>
-<br>
-<label>
-<input type="radio" name="answer_45003" id="answer_45003_2" value="Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する">
-Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する
-</label>
-<br>
-<label>
-<input type="radio" name="answer_45003" id="answer_45003_3" value="RAM を超えるデータは, メモリを増設しない限り R では扱えない">
+<input type="radio" name="answer_11475" id="answer_11475_1" value="RAM を超えるデータは, メモリを増設しない限り R では扱えない">
 RAM を超えるデータは, メモリを増設しない限り R では扱えない
 </label>
 <br>
 <label>
-<input type="radio" name="answer_45003" id="answer_45003_4" value="乱数で 1% に間引いてから dplyr で集計する">
+<input type="radio" name="answer_11475" id="answer_11475_2" value="データ全体をメモリに読み込んでから, 不要な列を落とす">
+データ全体をメモリに読み込んでから, 不要な列を落とす
+</label>
+<br>
+<label>
+<input type="radio" name="answer_11475" id="answer_11475_3" value="Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する">
+Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する
+</label>
+<br>
+<label>
+<input type="radio" name="answer_11475" id="answer_11475_4" value="乱数で 1% に間引いてから dplyr で集計する">
 乱数で 1% に間引いてから dplyr で集計する
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_45003"></div>
+<div id="result_11475"></div>
 </form>
-<script>function validate_form_45003() {var x, text; var x = document.forms['form_45003']['answer_45003'].value;if (x == 'Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する'){text = '<span class="quiz-right">✓ 正解! </span>クエリに必要な列と行だけを読めば, RAM を超えるデータも扱えます. DuckDB は中間結果をディスクに退避できるので larger-than-memory でも動きます. 全体を読み込む方法は読み込みの時点で破綻し, 間引きは推定精度を不必要に捨てます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「必要な分だけ読む」という, この章の出発点を思い出しましょう.';} document.getElementById('result_45003').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_11475() {var x, text; var x = document.forms['form_11475']['answer_11475'].value;if (x == 'Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する'){text = '<span class="quiz-right">✓ 正解! </span>クエリに必要な列と行だけを読めば, RAM を超えるデータも扱えます. DuckDB は中間結果をディスクに退避できるので larger-than-memory でも動きます. 全体を読み込む方法は読み込みの時点で破綻し, 間引きは推定精度を不必要に捨てます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「必要な分だけ読む」という, この章の出発点を思い出しましょう.';} document.getElementById('result_11475').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_26846').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_60368').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.'; res3 = document.getElementById('result_97915').innerText == '✓ 正解! 対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).'; res4 = document.getElementById('result_45003').innerText == '✓ 正解! クエリに必要な列と行だけを読めば, RAM を超えるデータも扱えます. DuckDB は中間結果をディスクに退避できるので larger-than-memory でも動きます. 全体を読み込む方法は読み込みの時点で破綻し, 間引きは推定精度を不必要に捨てます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_77495').innerText == '✓ 正解! 列指向フォーマットの projection pushdown (列の刈り込み) です. 行指向の CSV では, どの列が欲しくても結局すべての行・列を読むしかありません. バイナリ形式や型情報も効きますが, 読む量そのものを桁で減らすのは列の刈り込みです.'; res2 = document.getElementById('result_73384').innerText == '✓ 正解! 遅延評価です. as_tibble() や collect() を呼んで初めて, 最適化された計画が実行されます. 実行を遅らせるからこそ, エンジンはクエリ全体を見て列の刈り込みや述語の押し下げができます.'; res3 = document.getElementById('result_71608').innerText == '✓ 正解! 対の関係です. ディスクの Parquet を読み込むと, メモリ上では Arrow の形になります. Arrow を共通形式とするツール同士 (Polars, DuckDB, Python のツールなど) は, データをコピーせずに受け渡せます (zero-copy).'; res4 = document.getElementById('result_11475').innerText == '✓ 正解! クエリに必要な列と行だけを読めば, RAM を超えるデータも扱えます. DuckDB は中間結果をディスクに退避できるので larger-than-memory でも動きます. 全体を読み込む方法は読み込みの時点で破綻し, 間引きは推定精度を不必要に捨てます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -974,7 +980,7 @@ Figure&nbsp;6.4: Tip rate by pickup hour (credit-card trips, January 2024)
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"dplyr","2":"443.34952ms","3":"1.249032GB"},{"1":"duckplyr","2":"19.84486ms","3":"87.828125KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"dplyr","2":"478.74913ms","3":"1.249032GB"},{"1":"duckplyr","2":"21.07876ms","3":"87.828125KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1759,7 +1765,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb13-294"><a href="#cb13-294" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-295"><a href="#cb13-295" aria-hidden="true" tabindex="-1"></a>なお, R のオブジェクトをそのまま高速に保存したいだけなら, <span class="co">[</span><span class="ot">`fst`</span><span class="co">](https://www.fstpackage.org/)</span> や <span class="co">[</span><span class="ot">`qs2`</span><span class="co">](https://github.com/qsbase/qs2)</span> も便利です. これらは <span class="in">`saveRDS()`</span> の高速な代替として使えます.</span>
 <span id="cb13-296"><a href="#cb13-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-297"><a href="#cb13-297" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb13-297"><a href="#cb13-297" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb13-298"><a href="#cb13-298" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-301"><a href="#cb13-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-302"><a href="#cb13-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>

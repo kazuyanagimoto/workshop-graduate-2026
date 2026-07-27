@@ -1,26 +1,26 @@
-# Appendix B — 色彩論
+# Appendix D — 色彩論
 
 Code
 
-## B.1 なぜダサいスライドが生まれるのか
+## D.1 なぜダサいスライドが生まれるのか
 
 BeamerやRのコードで色を指定するとき, 色に頓着のない人は原色を選んでしまいます. つまり, 純粋な赤 `#FF0000`, 緑 `#00FF00`, 青 `#0000FF` をそのまま使うことです. 色を選ぶ意思があっても, 色彩の知識がないと, ついカラーピッカーの `R, G, B` のスライダーを動かして適当に色を決めてしまいます. これらの結果は, うまく言語化できないにしろ, ダサいと感じるでしょう. これは, 人間が色から受ける印象が `R, G, B` という3つの数値に対して線形に対応していないからです. 分かりやすい例が明るさです. ここでいう純色とは, 赤・緑・青の各チャンネルが 0 か最大値 255 のいずれかだけでできた, 最も鮮やかな色のことです. 純色を並べてみると, 同じ最大の色でも, 感じる明るさは違います.
 
-[![](color_files/figure-html/fig-primary-lightness-1.svg)](color_files/figure-html/fig-primary-lightness-1.svg "Figure B.1: 純色の知覚明度 L*")
+[![](color_files/figure-html/fig-primary-lightness-1.svg)](color_files/figure-html/fig-primary-lightness-1.svg "Figure D.1: 純色の知覚明度 L*")
 
-Figure B.1: 純色の知覚明度 L\*
+Figure D.1: 純色の知覚明度 L\*
 
 [Figure fig-primary-lightness](#fig-primary-lightness) の縦軸 `L*` は, 後で定義する知覚的な明度です. 純色の青の明度は 32 しかないのに, 純色の黄は 97 もあります. つまり原色をいくつか並べただけで, 明るさが大きくばらついた, ちらちらとまとまりのない配色ができあがります. これがダサさの正体です. さらに原色は彩度も最大なので, どの色も自己主張が強く, 図の主張 ([sec-visualization](#sec-visualization)) を邪魔します.
 
 解決の方針はひとつです. 色を `R, G, B` ではなく, 人間が感じる3つの軸, すなわち明度 (lightness), 彩度 (saturation), 色相 (hue) で考えることです. こうすれば「明るさをそろえて色相だけ変える」といった, 知覚に沿った操作ができるようになります.
 
-## B.2 色の3要素とカラーマップ
+## D.2 色の3要素とカラーマップ
 
 色は, 色相 (hue), 彩度 (saturation), 明度 (lightness) という3つの知覚的な軸で捉えられます. 色相は色味そのもの (赤・黄・緑・青・紫…) で, 円環の角度で表します. 彩度は鮮やかさ, つまり灰色からどれだけ離れているかです. 明度は明るさです. まずはこの3つを, ひとつずつ動かして目で確かめましょう.
 
-[![](color_files/figure-html/fig-three-elements-1.svg)](color_files/figure-html/fig-three-elements-1.svg "Figure B.2: 色の3要素: 色相・彩度・明度")
+[![](color_files/figure-html/fig-three-elements-1.svg)](color_files/figure-html/fig-three-elements-1.svg "Figure D.2: 色の3要素: 色相・彩度・明度")
 
-Figure B.2: 色の3要素: 色相・彩度・明度
+Figure D.2: 色の3要素: 色相・彩度・明度
 
 [Figure fig-three-elements](#fig-three-elements) は, 3つの軸のうち2つを固定して, ひとつだけを動かしたものです. 左の輪は色相環で, 明るさと鮮やかさを一定に保ったまま色味だけを一周させています. 色相が角度に対応することがよく分かります. 右上は色相を固定して彩度を上げたもので, 左の灰色から右の鮮やかなオレンジへ進みます. 右下は色相を固定して明度を上げたもので, 左の暗いところから右の明るいところへ進みます. どんな色も, この3つの数値の組で一意に決まります.
 
@@ -35,25 +35,25 @@ Figure B.2: 色の3要素: 色相・彩度・明度
 
 3要素の定義そのものは素朴でした. 難しいのは, これらを「知覚的に均等」に測ることです. ここで色空間による差が出ます. HSL の明度と, 人が本当に感じる明度は一致しません. 実際, HSL で明度を `50%` に固定し彩度を最大にして色相だけ一周させると, 感じる明るさは大きく波打ちます. 一方, 知覚均等な HCL で \\L^\*\\ を固定すれば, 色相を変えても明るさはほぼ一定に保てます.
 
-[![](color_files/figure-html/fig-hsl-hcl-1.svg)](color_files/figure-html/fig-hsl-hcl-1.svg "Figure B.3: 同じ「明度」でも色相で知覚明度は動く")
+[![](color_files/figure-html/fig-hsl-hcl-1.svg)](color_files/figure-html/fig-hsl-hcl-1.svg "Figure D.3: 同じ「明度」でも色相で知覚明度は動く")
 
-Figure B.3: 同じ「明度」でも色相で知覚明度は動く
+Figure D.3: 同じ「明度」でも色相で知覚明度は動く
 
 [Figure fig-hsl-hcl](#fig-hsl-hcl) の上段が色帯, 下段がその知覚明度です. HSL の帯 (実線) は黄で明るく青で暗く, 明度が大きく上下します. HCL の帯 (破線) はほぼ平らで, どの色相でも明るさがそろっています. だからこそ, 質的な色分けをするときは HCL で明度と彩度を固定し, 色相だけを動かすのが定石になります.
 
 ではもうひとつの軸, 色相はどうでしょうか. 3つの空間はどれも色相を角度で表しますが, その角度の割り当ては同じではありません. 同じ色が, 空間によって別の角度に置かれます.
 
-[![](color_files/figure-html/fig-hue-spaces-1.svg)](color_files/figure-html/fig-hue-spaces-1.svg "Figure B.4: 色空間による色相角の違い")
+[![](color_files/figure-html/fig-hue-spaces-1.svg)](color_files/figure-html/fig-hue-spaces-1.svg "Figure D.4: 色空間による色相角の違い")
 
-Figure B.4: 色空間による色相角の違い
+Figure D.4: 色空間による色相角の違い
 
 [Figure fig-hue-spaces](#fig-hue-spaces) は, HSL で色相を一周させた各色が, CIELCh と OKLCh では何度に対応するかを示しています. 点線は「もし3つの空間で色相角が完全に一致するなら」という基準線です. まず, どちらの曲線も基準線からずれています. HSL は原色を赤 0°, 緑 120°, 青 240° と機械的に等間隔で並べますが, 知覚的な空間はそうではありません. さらに注目すべきは青の領域 (HSL で 180° から 260° あたり) です. ここだけ CIELCh と OKLCh が大きく食い違います. これは CIELAB では青が紫の方向へ曲がってしまう有名な欠陥で, OKLab はまさにこれを補正するように設計されています. 赤や緑では両者はほぼ重なります.
 
 明度と色相を見てきました. 残るは彩度です. これも HSL では素直ではありません. HSL の彩度を最大 (100%) に固定して色相を一周させると, 知覚的な鮮やかさ (chroma) は大きく上下します.
 
-[![](color_files/figure-html/fig-saturation-1.svg)](color_files/figure-html/fig-saturation-1.svg "Figure B.5: 同じ HSL 彩度でも知覚的な鮮やかさは動く")
+[![](color_files/figure-html/fig-saturation-1.svg)](color_files/figure-html/fig-saturation-1.svg "Figure D.5: 同じ HSL 彩度でも知覚的な鮮やかさは動く")
 
-Figure B.5: 同じ HSL 彩度でも知覚的な鮮やかさは動く
+Figure D.5: 同じ HSL 彩度でも知覚的な鮮やかさは動く
 
 [Figure fig-saturation](#fig-saturation) の上段は, どれも彩度 100% の色です. ところが下段の知覚的な彩度 C\* を見ると, 最も鈍い水色のあたりでは 44 ほどしかないのに, 最も鮮やかな青のあたりでは 134 を超えます. 同じ「最大の彩度」でも, 感じる鮮やかさは色相によっておよそ 3.1 倍も違うのです. 一方 HCL や OKLCh では, この C\* そのものを直接指定するので, 色相をまたいで鮮やかさをそろえられます.
 
@@ -63,9 +63,9 @@ Figure B.5: 同じ HSL 彩度でも知覚的な鮮やかさは動く
 
 連続量を色で表すときの色の並びをカラーマップ (colormap) と呼びます. 用途に応じて4つの類型があります.
 
-[![](color_files/figure-html/fig-colormap-types-1.svg)](color_files/figure-html/fig-colormap-types-1.svg "Figure B.6: カラーマップの4類型")
+[![](color_files/figure-html/fig-colormap-types-1.svg)](color_files/figure-html/fig-colormap-types-1.svg "Figure D.6: カラーマップの4類型")
 
-Figure B.6: カラーマップの4類型
+Figure D.6: カラーマップの4類型
 
 - Sequential (連続): 低い値から高い値へ一方向に進むデータ (人口密度, 濃度など) に使います. 明度が単調に変化するのが条件です.
 - Diverging (発散): 中央 (ゼロや平均) から両側に離れる量 (偏差, 相関など) に使い, 中央を淡く, 両端を濃くします.
@@ -74,27 +74,27 @@ Figure B.6: カラーマップの4類型
 
 悪いカラーマップの代表が, かつてよく使われた虹 (rainbow, jet) です[^1]. 見た目は派手ですが, 明度が単調でないため, データにない偽の境界 (false boundary) を作り出し, さらにグレースケール印刷や色覚異常で情報が失われます. これに対し viridis のような現代的なカラーマップは, 明度が単調に増加するよう設計されています.
 
-[![](color_files/figure-html/fig-colormap-lightness-1.svg)](color_files/figure-html/fig-colormap-lightness-1.svg "Figure B.7: Rainbow と viridis の知覚明度プロファイル")
+[![](color_files/figure-html/fig-colormap-lightness-1.svg)](color_files/figure-html/fig-colormap-lightness-1.svg "Figure D.7: Rainbow と viridis の知覚明度プロファイル")
 
-Figure B.7: Rainbow と viridis の知覚明度プロファイル
+Figure D.7: Rainbow と viridis の知覚明度プロファイル
 
 [Figure fig-colormap-lightness](#fig-colormap-lightness) の下段を見ると, 虹の明度はでこぼこで, 特に黄の位置に鋭いピークがあります. このピークが偽の等高線に見えてしまうのです. viridis の明度は右肩上がりの直線に近く, 値の大小がそのまま明るさの順序として読めます.
 
 viridis はひとつのカラーマップではなく, 同じ設計思想をもつ姉妹マップの一群です. どれも明度が単調で, 色覚異常やグレースケールに強いという性質は共通で, 色調の好みや図の背景に合わせて選べます. これらは Python の matplotlib で提案・標準化され, R でも viridisLite パッケージ (この章の図もこれを使っています) から同じものが使えます.
 
-[![](color_files/figure-html/fig-viridis-family-1.svg)](color_files/figure-html/fig-viridis-family-1.svg "Figure B.8: viridis 系のカラーマップ")
+[![](color_files/figure-html/fig-viridis-family-1.svg)](color_files/figure-html/fig-viridis-family-1.svg "Figure D.8: viridis 系のカラーマップ")
 
-Figure B.8: viridis 系のカラーマップ
+Figure D.8: viridis 系のカラーマップ
 
-## B.3 色の選び方
+## D.3 色の選び方
 
 原理はここまでで出そろいました. 質的なパレットが欲しいなら, 明度 \\L^\*\\ と彩度 \\C^\*\\ を固定し, 色相 \\h\\ を等間隔にずらすだけです. 連続的なグラデーションなら, 色相を固定して明度を動かします. これを手作業でやるのは面倒なので, 色相環の上で直感的に選べるツールを使うのが近道です.
 
 その前に, 色相環がどんな形をしているのかを見ておきましょう. ある明度をひとつ固定すると, その明るさで表示できる色だけが, 色相を角度, 彩度を中心からの距離としてリング状に並びます. 色域からはみ出す色はそもそも存在しないので, 縁はいびつな形になります.
 
-[![](color_files/figure-html/fig-hue-wheel-1.svg)](color_files/figure-html/fig-hue-wheel-1.svg "Figure B.9: 明度ごとの色相環 (CIELAB, sRGB色域内のみ)")
+[![](color_files/figure-html/fig-hue-wheel-1.svg)](color_files/figure-html/fig-hue-wheel-1.svg "Figure D.9: 明度ごとの色相環 (CIELAB, sRGB色域内のみ)")
 
-Figure B.9: 明度ごとの色相環 (CIELAB, sRGB色域内のみ)
+Figure D.9: 明度ごとの色相環 (CIELAB, sRGB色域内のみ)
 
 [Figure fig-hue-wheel](#fig-hue-wheel) は, 明度を 45, 65, 85 に固定したときの色相環です. 外周の角度ラベルが色相 (度), 同心円が等彩度 (C\* = 40, 80, 120) を表します. 中心からの角度が色相, 距離が彩度で, その明度で sRGB に収まる色だけを描いています. 縁がいびつで, しかも明度によって形が変わることに注目してください. 明度が低いと青や赤が, 高いと黄や緑が, より鮮やかなところまで届きます. これが「明るさと鮮やかさは同時に最大化できない」という色域 (gamut) の制約です.
 
@@ -102,9 +102,9 @@ Figure B.9: 明度ごとの色相環 (CIELAB, sRGB色域内のみ)
 
 [hue360](https://www.hue360.me) は, まさにこの色相環の上で色を選ぶためのオンラインツールです. 明度 (Munsell でいう Value) をひとつ決めてから, 色相環をクリックして色を拾っていくと, 明度と彩度のそろったパレットが手に入ります. ここまで見てきた「明度をそろえて色相を回す」という操作を, そのまま画面の上で行えます ([Figure fig-hue360](#fig-hue360)).
 
-[![](../static/img/color/hue360.png)](../static/img/color/hue360.png "Figure B.10: Hue360")
+[![](../static/img/color/hue360.png)](../static/img/color/hue360.png "Figure D.10: Hue360")
 
-Figure B.10: Hue360
+Figure D.10: Hue360
 
 使い方の流れは次のとおりです.
 
@@ -115,15 +115,15 @@ Figure B.10: Hue360
 5.  選んだ色の彩度が低い色も選んでおくと, 第3, 第4の色として使えるので便利です.
 6.  “Print User Color” をクリックして, HEX コードを確認します.
 
-## B.4 補足: 色を感じる仕組み
+## D.4 補足: 色を感じる仕組み
 
 最後に, なぜ黄がまぶしく見えるのか, という素朴な問いを通して, 色を感じる生理を覗いておきます. ここは実務に直結しませんが, これまでの話の裏側にある理屈です.
 
 人間の網膜には, 色を感じる錐体細胞 (cone cell) が3種類あります. それぞれ短波長 (S, 青あたり), 中波長 (M, 緑あたり), 長波長 (L, 赤あたり) に感度のピークをもちます. 脳はこの3つの信号の比から色を復元します. つまり私たちは光の波長そのものではなく, 3種類の錐体がどれだけ反応したか, という3つの数値だけを手がかりにしているのです.
 
-[![](color_files/figure-html/fig-cones-1.svg)](color_files/figure-html/fig-cones-1.svg "Figure B.11: 錐体細胞の分光感度 (模式図)")
+[![](color_files/figure-html/fig-cones-1.svg)](color_files/figure-html/fig-cones-1.svg "Figure D.11: 錐体細胞の分光感度 (模式図)")
 
-Figure B.11: 錐体細胞の分光感度 (模式図)
+Figure D.11: 錐体細胞の分光感度 (模式図)
 
 [Figure fig-cones](#fig-cones) のように, M (緑) と L (赤) の感度は大きく重なっていて, そのちょうど中間, 黄のあたりの波長で両方が同時に強く反応します. ここから2つの面白い帰結が出ます.
 
@@ -131,9 +131,9 @@ Figure B.11: 錐体細胞の分光感度 (模式図)
 
 もうひとつが, 黄がまぶしく見える理由です. 明るさの感覚は, おもに L 錐体と M 錐体の反応の和で決まり, その感度は黄緑 (およそ 555 nm) 付近で最大になります. 黄はこのピークのすぐそばにあるため, 同じエネルギーの光でも明るく感じられます. 画面ではさらに事情が重なります. 加法混色では黄は赤と緑の両方を最大にした色 `#FFFF00` であり, ひとつの原色しか光らせない青 `#0000FF` より, 単純に多くの光を出しています.
 
-[![](color_files/figure-html/fig-additive-yellow-1.svg)](color_files/figure-html/fig-additive-yellow-1.svg "Figure B.12: 加法混色: 赤 + 緑 = 黄")
+[![](color_files/figure-html/fig-additive-yellow-1.svg)](color_files/figure-html/fig-additive-yellow-1.svg "Figure D.12: 加法混色: 赤 + 緑 = 黄")
 
-Figure B.12: 加法混色: 赤 + 緑 = 黄
+Figure D.12: 加法混色: 赤 + 緑 = 黄
 
 この2つの効果が重なって, 純色の黄は際立って明るく ([Figure fig-primary-lightness](#fig-primary-lightness) の \\L^\*\\ で最大), 相対輝度でみると純色の青のおよそ 13 倍にもなります. だから白背景に黄の文字を置くと明るすぎて読めず, 逆に純色の青は暗すぎて重く見えるのです. スライドで原色を避けるべき理由は, 見た目の好みだけでなく, こうした知覚と生理の裏づけがあるのです.
 

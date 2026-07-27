@@ -169,31 +169,25 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -241,7 +235,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -261,14 +255,26 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,7 +313,7 @@ div.csl-indent {
   <li><a href="#回帰表を整える-modelsummary" id="toc-回帰表を整える-modelsummary" class="nav-link" data-scroll-target="#回帰表を整える-modelsummary">回帰表を整える: <code>modelsummary</code></a></li>
   <li><a href="#係数のプロット-ggfixest" id="toc-係数のプロット-ggfixest" class="nav-link" data-scroll-target="#係数のプロット-ggfixest">係数のプロット: <code>ggfixest</code></a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">9.3</span> 演習問題</a>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a>
   <ul class="collapse">
   <li><a href="#クイズ" id="toc-クイズ" class="nav-link" data-scroll-target="#クイズ">クイズ</a></li>
   <li><a href="#回帰表の仕上げ" id="toc-回帰表の仕上げ" class="nav-link" data-scroll-target="#回帰表の仕上げ">回帰表の仕上げ</a></li>
@@ -383,19 +389,19 @@ Table&nbsp;9.1: ペンギンの種別の要約統計量
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_vd8az0yoybkwuuj2e5bu = TinyTable.createTableFunctions("tinytable_vd8az0yoybkwuuj2e5bu");
+      const tableFns_zxzb1ie030wsfpn67tb6 = TinyTable.createTableFunctions("tinytable_zxzb1ie030wsfpn67tb6");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_qrcsb3h0x3l0tzq55h36',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_iutjpj6zn7wgmu0ewsvc',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_ja5ybk14cmk6wm4h5rsj',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_klfv0095m5zzgujr9iv0',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_vd8az0yoybkwuuj2e5bu.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_zxzb1ie030wsfpn67tb6.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -404,11 +410,11 @@ Table&nbsp;9.1: ペンギンの種別の要約統計量
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_vd8az0yoybkwuuj2e5bu td.tinytable_css_qrcsb3h0x3l0tzq55h36, #tinytable_vd8az0yoybkwuuj2e5bu th.tinytable_css_qrcsb3h0x3l0tzq55h36 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_vd8az0yoybkwuuj2e5bu td.tinytable_css_iutjpj6zn7wgmu0ewsvc, #tinytable_vd8az0yoybkwuuj2e5bu th.tinytable_css_iutjpj6zn7wgmu0ewsvc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_zxzb1ie030wsfpn67tb6 td.tinytable_css_ja5ybk14cmk6wm4h5rsj, #tinytable_zxzb1ie030wsfpn67tb6 th.tinytable_css_ja5ybk14cmk6wm4h5rsj {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_zxzb1ie030wsfpn67tb6 td.tinytable_css_klfv0095m5zzgujr9iv0, #tinytable_zxzb1ie030wsfpn67tb6 th.tinytable_css_klfv0095m5zzgujr9iv0 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_vd8az0yoybkwuuj2e5bu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_zxzb1ie030wsfpn67tb6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -488,19 +494,19 @@ Table&nbsp;9.2: 桁数をそろえた要約統計量
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_ueoa23tt3ot4i9wcf653 = TinyTable.createTableFunctions("tinytable_ueoa23tt3ot4i9wcf653");
+      const tableFns_wsxc7cyjd3r09whkx7ch = TinyTable.createTableFunctions("tinytable_wsxc7cyjd3r09whkx7ch");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_x4781e0v6bg07skx0z60',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_plwz149aeuiyll8fwwgi',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_71jzb7d8y95z7hoc30yu',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_qlv4knbveyytejfhwhlc',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_ueoa23tt3ot4i9wcf653.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_wsxc7cyjd3r09whkx7ch.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -509,11 +515,11 @@ Table&nbsp;9.2: 桁数をそろえた要約統計量
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_ueoa23tt3ot4i9wcf653 td.tinytable_css_x4781e0v6bg07skx0z60, #tinytable_ueoa23tt3ot4i9wcf653 th.tinytable_css_x4781e0v6bg07skx0z60 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_ueoa23tt3ot4i9wcf653 td.tinytable_css_plwz149aeuiyll8fwwgi, #tinytable_ueoa23tt3ot4i9wcf653 th.tinytable_css_plwz149aeuiyll8fwwgi {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_wsxc7cyjd3r09whkx7ch td.tinytable_css_71jzb7d8y95z7hoc30yu, #tinytable_wsxc7cyjd3r09whkx7ch th.tinytable_css_71jzb7d8y95z7hoc30yu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_wsxc7cyjd3r09whkx7ch td.tinytable_css_qlv4knbveyytejfhwhlc, #tinytable_wsxc7cyjd3r09whkx7ch th.tinytable_css_qlv4knbveyytejfhwhlc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_ueoa23tt3ot4i9wcf653" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_wsxc7cyjd3r09whkx7ch" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -586,19 +592,19 @@ Table&nbsp;9.3: 種と島ごとの個体数
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_k2l2q4m4iji08w4omwij = TinyTable.createTableFunctions("tinytable_k2l2q4m4iji08w4omwij");
+      const tableFns_nrbyc0rxbekmu5f3h89k = TinyTable.createTableFunctions("tinytable_nrbyc0rxbekmu5f3h89k");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_ws28uu5q8qilmitgtufs',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_ec5ped78s442w1ulsu1n',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_q7jzlu1hydqxa53s8j02',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_gwnaxeeas47f9e0yi1ro',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_k2l2q4m4iji08w4omwij.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_nrbyc0rxbekmu5f3h89k.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -607,11 +613,11 @@ Table&nbsp;9.3: 種と島ごとの個体数
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_k2l2q4m4iji08w4omwij td.tinytable_css_ws28uu5q8qilmitgtufs, #tinytable_k2l2q4m4iji08w4omwij th.tinytable_css_ws28uu5q8qilmitgtufs {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_k2l2q4m4iji08w4omwij td.tinytable_css_ec5ped78s442w1ulsu1n, #tinytable_k2l2q4m4iji08w4omwij th.tinytable_css_ec5ped78s442w1ulsu1n {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_nrbyc0rxbekmu5f3h89k td.tinytable_css_q7jzlu1hydqxa53s8j02, #tinytable_nrbyc0rxbekmu5f3h89k th.tinytable_css_q7jzlu1hydqxa53s8j02 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_nrbyc0rxbekmu5f3h89k td.tinytable_css_gwnaxeeas47f9e0yi1ro, #tinytable_nrbyc0rxbekmu5f3h89k th.tinytable_css_gwnaxeeas47f9e0yi1ro {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_k2l2q4m4iji08w4omwij" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_nrbyc0rxbekmu5f3h89k" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -693,20 +699,20 @@ Table&nbsp;9.4: 平均体重が大きい種を強調
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_yztzinniu6ofk11h09tw = TinyTable.createTableFunctions("tinytable_yztzinniu6ofk11h09tw");
+      const tableFns_375c2nrbqn8878mywfji = TinyTable.createTableFunctions("tinytable_375c2nrbqn8878mywfji");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_7ottfoh1m0zgchntdkhi',}, 
-          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_22caqxt8ghekrysf8wko',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_b2lpm370pz6zcpc60kic',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_4qsbdbgunxwhnk4hy60e',}, 
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_gnzqrpad6sbtmdbdqrz9',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_uh3f9xspmrthwavlle70',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_yztzinniu6ofk11h09tw.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_375c2nrbqn8878mywfji.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -715,12 +721,12 @@ Table&nbsp;9.4: 平均体重が大きい種を強調
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_yztzinniu6ofk11h09tw td.tinytable_css_7ottfoh1m0zgchntdkhi, #tinytable_yztzinniu6ofk11h09tw th.tinytable_css_7ottfoh1m0zgchntdkhi {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_yztzinniu6ofk11h09tw td.tinytable_css_22caqxt8ghekrysf8wko, #tinytable_yztzinniu6ofk11h09tw th.tinytable_css_22caqxt8ghekrysf8wko { background-color: #ffe9b3 }
-    #tinytable_yztzinniu6ofk11h09tw td.tinytable_css_b2lpm370pz6zcpc60kic, #tinytable_yztzinniu6ofk11h09tw th.tinytable_css_b2lpm370pz6zcpc60kic {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
+    #tinytable_375c2nrbqn8878mywfji td.tinytable_css_4qsbdbgunxwhnk4hy60e, #tinytable_375c2nrbqn8878mywfji th.tinytable_css_4qsbdbgunxwhnk4hy60e {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_375c2nrbqn8878mywfji td.tinytable_css_gnzqrpad6sbtmdbdqrz9, #tinytable_375c2nrbqn8878mywfji th.tinytable_css_gnzqrpad6sbtmdbdqrz9 { background-color: #ffe9b3 }
+    #tinytable_375c2nrbqn8878mywfji td.tinytable_css_uh3f9xspmrthwavlle70, #tinytable_375c2nrbqn8878mywfji th.tinytable_css_uh3f9xspmrthwavlle70 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_yztzinniu6ofk11h09tw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_375c2nrbqn8878mywfji" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -803,23 +809,23 @@ Table&nbsp;9.5: 指標をグループ化した要約統計量
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_47sreonvt48v3vl12mci = TinyTable.createTableFunctions("tinytable_47sreonvt48v3vl12mci");
+      const tableFns_f83h6kdov9nfqnpb7ikx = TinyTable.createTableFunctions("tinytable_f83h6kdov9nfqnpb7ikx");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_z1pexksph7rbrvrs9ufg',}, 
-          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_05f9uuu6vd6mvfepmhif',}, 
-          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_bwbxky6624kfhe5krpv0',}, 
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 }, { i: '3', j: 5 } ], css_id: 'tinytable_css_nf8xbfaifq7t8b5nj6lp',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_4j8q55mmicjaw4ndasuw',}, 
-          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_9esp4me34exbwpzb2lck',}, 
+          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_dr18qcr1cy6ejirkcjmi',}, 
+          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_2s0x4wv4forzmv78d1cp',}, 
+          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_km5zcxjkh44jz5liyfe6',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 }, { i: '3', j: 5 } ], css_id: 'tinytable_css_chhhcachidm0pnr87b73',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_mw4wlghmyh146mx7aj9n',}, 
+          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_kt42f27khnr12580hhbr',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_47sreonvt48v3vl12mci.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_f83h6kdov9nfqnpb7ikx.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -828,15 +834,15 @@ Table&nbsp;9.5: 指標をグループ化した要約統計量
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_z1pexksph7rbrvrs9ufg, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_z1pexksph7rbrvrs9ufg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_05f9uuu6vd6mvfepmhif, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_05f9uuu6vd6mvfepmhif {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_bwbxky6624kfhe5krpv0, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_bwbxky6624kfhe5krpv0 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_nf8xbfaifq7t8b5nj6lp, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_nf8xbfaifq7t8b5nj6lp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_4j8q55mmicjaw4ndasuw, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_4j8q55mmicjaw4ndasuw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_47sreonvt48v3vl12mci td.tinytable_css_9esp4me34exbwpzb2lck, #tinytable_47sreonvt48v3vl12mci th.tinytable_css_9esp4me34exbwpzb2lck {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_dr18qcr1cy6ejirkcjmi, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_dr18qcr1cy6ejirkcjmi {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_2s0x4wv4forzmv78d1cp, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_2s0x4wv4forzmv78d1cp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_km5zcxjkh44jz5liyfe6, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_km5zcxjkh44jz5liyfe6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_chhhcachidm0pnr87b73, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_chhhcachidm0pnr87b73 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_mw4wlghmyh146mx7aj9n, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_mw4wlghmyh146mx7aj9n {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_f83h6kdov9nfqnpb7ikx td.tinytable_css_kt42f27khnr12580hhbr, #tinytable_f83h6kdov9nfqnpb7ikx th.tinytable_css_kt42f27khnr12580hhbr {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_47sreonvt48v3vl12mci" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_f83h6kdov9nfqnpb7ikx" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
 <tr>
@@ -931,21 +937,21 @@ Table&nbsp;9.6: 性別で行をまとめた平均値
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_45guah7oq7m6ophelgz0 = TinyTable.createTableFunctions("tinytable_45guah7oq7m6ophelgz0");
+      const tableFns_ojawsbe5hafhsh0o03u7 = TinyTable.createTableFunctions("tinytable_ojawsbe5hafhsh0o03u7");
       // tinytable span after
-      window.addEventListener('load', function () { tableFns_45guah7oq7m6ophelgz0.spanCell(5, 1, 1, 3) })
-      window.addEventListener('load', function () { tableFns_45guah7oq7m6ophelgz0.spanCell(1, 1, 1, 3) })
+      window.addEventListener('load', function () { tableFns_ojawsbe5hafhsh0o03u7.spanCell(5, 1, 1, 3) })
+      window.addEventListener('load', function () { tableFns_ojawsbe5hafhsh0o03u7.spanCell(1, 1, 1, 3) })
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_e228ftsbwruv5xj0h9fp',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_d7jtab2xlx6rfsyb08xa',}, 
+          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_6xtbcfyh0w2s8tw1yoyo',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_2cflpkuoohz6adnps3mb',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_45guah7oq7m6ophelgz0.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_ojawsbe5hafhsh0o03u7.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -954,11 +960,11 @@ Table&nbsp;9.6: 性別で行をまとめた平均値
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_45guah7oq7m6ophelgz0 td.tinytable_css_e228ftsbwruv5xj0h9fp, #tinytable_45guah7oq7m6ophelgz0 th.tinytable_css_e228ftsbwruv5xj0h9fp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_45guah7oq7m6ophelgz0 td.tinytable_css_d7jtab2xlx6rfsyb08xa, #tinytable_45guah7oq7m6ophelgz0 th.tinytable_css_d7jtab2xlx6rfsyb08xa {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_ojawsbe5hafhsh0o03u7 td.tinytable_css_6xtbcfyh0w2s8tw1yoyo, #tinytable_ojawsbe5hafhsh0o03u7 th.tinytable_css_6xtbcfyh0w2s8tw1yoyo {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_ojawsbe5hafhsh0o03u7 td.tinytable_css_2cflpkuoohz6adnps3mb, #tinytable_ojawsbe5hafhsh0o03u7 th.tinytable_css_2cflpkuoohz6adnps3mb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_45guah7oq7m6ophelgz0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_ojawsbe5hafhsh0o03u7" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1059,19 +1065,19 @@ Table&nbsp;9.7: 注を付けた表
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_bcyx2wfh220krrencwvi = TinyTable.createTableFunctions("tinytable_bcyx2wfh220krrencwvi");
+      const tableFns_b7wxc5372mrepl65q24p = TinyTable.createTableFunctions("tinytable_b7wxc5372mrepl65q24p");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_m82oyt181gj98rfiultq',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_6ra0xfn6lt2ux5ri7fj7',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_0ydptfevjaaaixzh0g6j',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_5wyrwyiwz8d7f3b9pune',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_bcyx2wfh220krrencwvi.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_b7wxc5372mrepl65q24p.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1080,11 +1086,11 @@ Table&nbsp;9.7: 注を付けた表
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_bcyx2wfh220krrencwvi td.tinytable_css_m82oyt181gj98rfiultq, #tinytable_bcyx2wfh220krrencwvi th.tinytable_css_m82oyt181gj98rfiultq {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_bcyx2wfh220krrencwvi td.tinytable_css_6ra0xfn6lt2ux5ri7fj7, #tinytable_bcyx2wfh220krrencwvi th.tinytable_css_6ra0xfn6lt2ux5ri7fj7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_b7wxc5372mrepl65q24p td.tinytable_css_0ydptfevjaaaixzh0g6j, #tinytable_b7wxc5372mrepl65q24p th.tinytable_css_0ydptfevjaaaixzh0g6j {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_b7wxc5372mrepl65q24p td.tinytable_css_5wyrwyiwz8d7f3b9pune, #tinytable_b7wxc5372mrepl65q24p th.tinytable_css_5wyrwyiwz8d7f3b9pune {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_bcyx2wfh220krrencwvi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_b7wxc5372mrepl65q24p" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1165,19 +1171,19 @@ Table&nbsp;9.8: 列見出しに数式を使った表
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_73gi0x7dv2plcp9ozrkq = TinyTable.createTableFunctions("tinytable_73gi0x7dv2plcp9ozrkq");
+      const tableFns_yz59mkrh6od9bhvkhu5k = TinyTable.createTableFunctions("tinytable_yz59mkrh6od9bhvkhu5k");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_q6jjdsn1rtyh1yv2jlvs',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_1zbxmf7z7wnnbjraa8xj',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_k9hjezrpmhr8o512nlgg',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_1zi90htc4blksuuozmxy',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_73gi0x7dv2plcp9ozrkq.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_yz59mkrh6od9bhvkhu5k.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1186,11 +1192,11 @@ Table&nbsp;9.8: 列見出しに数式を使った表
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_73gi0x7dv2plcp9ozrkq td.tinytable_css_q6jjdsn1rtyh1yv2jlvs, #tinytable_73gi0x7dv2plcp9ozrkq th.tinytable_css_q6jjdsn1rtyh1yv2jlvs {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_73gi0x7dv2plcp9ozrkq td.tinytable_css_1zbxmf7z7wnnbjraa8xj, #tinytable_73gi0x7dv2plcp9ozrkq th.tinytable_css_1zbxmf7z7wnnbjraa8xj {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_yz59mkrh6od9bhvkhu5k td.tinytable_css_k9hjezrpmhr8o512nlgg, #tinytable_yz59mkrh6od9bhvkhu5k th.tinytable_css_k9hjezrpmhr8o512nlgg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_yz59mkrh6od9bhvkhu5k td.tinytable_css_1zi90htc4blksuuozmxy, #tinytable_yz59mkrh6od9bhvkhu5k th.tinytable_css_1zi90htc4blksuuozmxy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_73gi0x7dv2plcp9ozrkq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_yz59mkrh6od9bhvkhu5k" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1457,25 +1463,25 @@ Table&nbsp;9.9: modelsummary の既定の出力
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_e4kyussa268mgyzhuywz = TinyTable.createTableFunctions("tinytable_e4kyussa268mgyzhuywz");
+      const tableFns_zrsd049eonvnu1l1j9s6 = TinyTable.createTableFunctions("tinytable_zrsd049eonvnu1l1j9s6");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '16', j: 2 }, { i: '16', j: 3 }, { i: '16', j: 4 }, { i: '16', j: 5 } ], css_id: 'tinytable_css_lemifodgaq5elm7gsbqa',}, 
-          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 }, { i: '6', j: 4 }, { i: '6', j: 5 } ], css_id: 'tinytable_css_j6rbn9hsr4zmff11tzsa',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '4', j: 5 }, { i: '5', j: 5 }, { i: '7', j: 5 }, { i: '8', j: 5 }, { i: '9', j: 5 }, { i: '10', j: 5 }, { i: '11', j: 5 }, { i: '12', j: 5 }, { i: '13', j: 5 }, { i: '14', j: 5 }, { i: '15', j: 5 } ], css_id: 'tinytable_css_h7u91ldq0gyr0b2pdcpe',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_ryb76o2r6c1v93rwlobp',}, 
-          { positions: [ { i: '16', j: 1 } ], css_id: 'tinytable_css_z04yj16htll547rxgn7i',}, 
-          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_j1bus54jt12lon29wmsh',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 } ], css_id: 'tinytable_css_9ysggw7p4cur99ps48ym',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_bcdpw05ho3wixbj9i3iy',}, 
+          { positions: [ { i: '16', j: 2 }, { i: '16', j: 3 }, { i: '16', j: 4 }, { i: '16', j: 5 } ], css_id: 'tinytable_css_aodvkk71as1yvtkdl5o8',}, 
+          { positions: [ { i: '6', j: 2 }, { i: '6', j: 3 }, { i: '6', j: 4 }, { i: '6', j: 5 } ], css_id: 'tinytable_css_slwulyqqylf25ss5odqq',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '4', j: 5 }, { i: '5', j: 5 }, { i: '7', j: 5 }, { i: '8', j: 5 }, { i: '9', j: 5 }, { i: '10', j: 5 }, { i: '11', j: 5 }, { i: '12', j: 5 }, { i: '13', j: 5 }, { i: '14', j: 5 }, { i: '15', j: 5 } ], css_id: 'tinytable_css_3gwtst9464bemzvuy49v',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_0hjckgkkn3smikreeles',}, 
+          { positions: [ { i: '16', j: 1 } ], css_id: 'tinytable_css_izej9psm3rzx2bl92a3i',}, 
+          { positions: [ { i: '6', j: 1 } ], css_id: 'tinytable_css_cm6t3gmr0y4zf9rmmdxr',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 } ], css_id: 'tinytable_css_5m6xm8z6po8xnw0sgp07',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_vthtf7o7c4zdhbqtmgpi',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_e4kyussa268mgyzhuywz.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_zrsd049eonvnu1l1j9s6.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1484,17 +1490,17 @@ Table&nbsp;9.9: modelsummary の既定の出力
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_lemifodgaq5elm7gsbqa, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_lemifodgaq5elm7gsbqa {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_j6rbn9hsr4zmff11tzsa, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_j6rbn9hsr4zmff11tzsa {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_h7u91ldq0gyr0b2pdcpe, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_h7u91ldq0gyr0b2pdcpe { text-align: center }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_ryb76o2r6c1v93rwlobp, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_ryb76o2r6c1v93rwlobp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_z04yj16htll547rxgn7i, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_z04yj16htll547rxgn7i {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_j1bus54jt12lon29wmsh, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_j1bus54jt12lon29wmsh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_9ysggw7p4cur99ps48ym, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_9ysggw7p4cur99ps48ym { text-align: left }
-    #tinytable_e4kyussa268mgyzhuywz td.tinytable_css_bcdpw05ho3wixbj9i3iy, #tinytable_e4kyussa268mgyzhuywz th.tinytable_css_bcdpw05ho3wixbj9i3iy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_aodvkk71as1yvtkdl5o8, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_aodvkk71as1yvtkdl5o8 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_slwulyqqylf25ss5odqq, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_slwulyqqylf25ss5odqq {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_3gwtst9464bemzvuy49v, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_3gwtst9464bemzvuy49v { text-align: center }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_0hjckgkkn3smikreeles, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_0hjckgkkn3smikreeles {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_izej9psm3rzx2bl92a3i, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_izej9psm3rzx2bl92a3i {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_cm6t3gmr0y4zf9rmmdxr, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_cm6t3gmr0y4zf9rmmdxr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_5m6xm8z6po8xnw0sgp07, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_5m6xm8z6po8xnw0sgp07 { text-align: left }
+    #tinytable_zrsd049eonvnu1l1j9s6 td.tinytable_css_vthtf7o7c4zdhbqtmgpi, #tinytable_zrsd049eonvnu1l1j9s6 th.tinytable_css_vthtf7o7c4zdhbqtmgpi {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_e4kyussa268mgyzhuywz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_zrsd049eonvnu1l1j9s6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1682,27 +1688,27 @@ Table&nbsp;9.10: 標準誤差と固定効果を変えた回帰の比較
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_mrc1xb7vqbwf9v9e2ayk = TinyTable.createTableFunctions("tinytable_mrc1xb7vqbwf9v9e2ayk");
+      const tableFns_2r79xo542fcy9x4885pv = TinyTable.createTableFunctions("tinytable_2r79xo542fcy9x4885pv");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_cqvp1vy7npkij851ms7y',}, 
-          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_xfqk3540h7owe6b1gi5v',}, 
-          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_2m48glnpkjjz9sw8euna',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_dbbubtsthgq6qpgg6lvq',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_0fexbpkdfumt1a3vpn7k',}, 
-          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_0c67zz4dj7nr529up4bu',}, 
-          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_qxqir86t9ky6keyn4ces',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_m9ak5i1j2e01o6ov0coi',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_kko49uh5q3dgx7ljsdqn',}, 
-          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_lomjeg3plq2ikve4mrkg',}, 
+          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_vbknnc4791z6641g1tx5',}, 
+          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_ns1j0mxedufz3hmdrg9j',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_hq9mg73wtx0di8ub9sko',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_nnfshey6nm0lixdhd27f',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_h74glaoaal5vw9zpiexy',}, 
+          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_dmjq2juesc9kth8jbmis',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_s4x0pzfeur3f6whlp6ck',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_4ze73trcojl8wjumb1n5',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_866rc7i479zfqhextkg8',}, 
+          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_ry3ohblf2p7m7y5i1h13',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_mrc1xb7vqbwf9v9e2ayk.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_2r79xo542fcy9x4885pv.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1711,19 +1717,19 @@ Table&nbsp;9.10: 標準誤差と固定効果を変えた回帰の比較
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_cqvp1vy7npkij851ms7y, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_cqvp1vy7npkij851ms7y {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_xfqk3540h7owe6b1gi5v, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_xfqk3540h7owe6b1gi5v {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_2m48glnpkjjz9sw8euna, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_2m48glnpkjjz9sw8euna {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_dbbubtsthgq6qpgg6lvq, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_dbbubtsthgq6qpgg6lvq { text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_0fexbpkdfumt1a3vpn7k, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_0fexbpkdfumt1a3vpn7k {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_0c67zz4dj7nr529up4bu, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_0c67zz4dj7nr529up4bu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_qxqir86t9ky6keyn4ces, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_qxqir86t9ky6keyn4ces {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_m9ak5i1j2e01o6ov0coi, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_m9ak5i1j2e01o6ov0coi { text-align: left }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_kko49uh5q3dgx7ljsdqn, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_kko49uh5q3dgx7ljsdqn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_mrc1xb7vqbwf9v9e2ayk td.tinytable_css_lomjeg3plq2ikve4mrkg, #tinytable_mrc1xb7vqbwf9v9e2ayk th.tinytable_css_lomjeg3plq2ikve4mrkg {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_vbknnc4791z6641g1tx5, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_vbknnc4791z6641g1tx5 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_ns1j0mxedufz3hmdrg9j, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_ns1j0mxedufz3hmdrg9j {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_hq9mg73wtx0di8ub9sko, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_hq9mg73wtx0di8ub9sko {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_nnfshey6nm0lixdhd27f, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_nnfshey6nm0lixdhd27f { text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_h74glaoaal5vw9zpiexy, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_h74glaoaal5vw9zpiexy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_dmjq2juesc9kth8jbmis, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_dmjq2juesc9kth8jbmis {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_s4x0pzfeur3f6whlp6ck, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_s4x0pzfeur3f6whlp6ck {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_4ze73trcojl8wjumb1n5, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_4ze73trcojl8wjumb1n5 { text-align: left }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_866rc7i479zfqhextkg8, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_866rc7i479zfqhextkg8 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_2r79xo542fcy9x4885pv td.tinytable_css_ry3ohblf2p7m7y5i1h13, #tinytable_2r79xo542fcy9x4885pv th.tinytable_css_ry3ohblf2p7m7y5i1h13 {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_mrc1xb7vqbwf9v9e2ayk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_2r79xo542fcy9x4885pv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
 <tr>
@@ -1855,8 +1861,8 @@ Figure&nbsp;9.2: Event-study estimates around treatment (reference period = 5).
 <p>処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています <span class="citation" data-cites="sun2021">(<a href="../references.html#ref-sun2021" role="doc-biblioref">Sun and Abraham 2021</a>)</span>. その場合は <code>i()</code> の代わりに <code>sunab()</code> を使うと, <span class="citation" data-cites="sun2021">Sun and Abraham (<a href="../references.html#ref-sun2021" role="doc-biblioref">2021</a>)</span> の補正済み推定量がそのまま得られ, <code>ggiplot()</code> で同じように描けます.</p>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">9.3</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>前半は理解度チェックのクイズ, 後半は回帰表とイベントスタディを実際に作る演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</p>
 <section id="クイズ" class="level3">
 <h3 class="anchored" data-anchor-id="クイズ">クイズ</h3>
@@ -1864,33 +1870,33 @@ Figure&nbsp;9.2: Event-study estimates around treatment (reference period = 5).
 <p><code>lm(y ~ x1 * x2, data = df)</code> の formula は, どのように展開されるでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_25100" onsubmit="return validate_form_25100()" method="post">
+<form name="form_15873" onsubmit="return validate_form_15873()" method="post">
 <label>
-<input type="radio" name="answer_25100" id="answer_25100_1" value="x1 + x2 + x1:x2 (主効果と交互作用の両方)">
-x1 + x2 + x1:x2 (主効果と交互作用の両方)
-</label>
-<br>
-<label>
-<input type="radio" name="answer_25100" id="answer_25100_2" value="I(x1 * x2) と同じ (積を1つの変数として扱う)">
-I(x1 * x2) と同じ (積を1つの変数として扱う)
-</label>
-<br>
-<label>
-<input type="radio" name="answer_25100" id="answer_25100_3" value="x1:x2 (交互作用のみ)">
+<input type="radio" name="answer_15873" id="answer_15873_1" value="x1:x2 (交互作用のみ)">
 x1:x2 (交互作用のみ)
 </label>
 <br>
 <label>
-<input type="radio" name="answer_25100" id="answer_25100_4" value="x1 + x2 (主効果のみ)">
+<input type="radio" name="answer_15873" id="answer_15873_2" value="x1 + x2 (主効果のみ)">
 x1 + x2 (主効果のみ)
 </label>
 <br>
+<label>
+<input type="radio" name="answer_15873" id="answer_15873_3" value="I(x1 * x2) と同じ (積を1つの変数として扱う)">
+I(x1 * x2) と同じ (積を1つの変数として扱う)
+</label>
+<br>
+<label>
+<input type="radio" name="answer_15873" id="answer_15873_4" value="x1 + x2 + x1:x2 (主効果と交互作用の両方)">
+x1 + x2 + x1:x2 (主効果と交互作用の両方)
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_25100"></div>
+<div id="result_15873"></div>
 </form>
-<script>function validate_form_25100() {var x, text; var x = document.forms['form_25100']['answer_25100'].value;if (x == 'x1 + x2 + x1:x2 (主効果と交互作用の両方)'){text = '<span class="quiz-right">✓ 正解! </span>アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>formula の中では * と : は特別な意味を持つのでした. 本文の formula 記法の箇条書きを見直しましょう.';} document.getElementById('result_25100').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_15873() {var x, text; var x = document.forms['form_15873']['answer_15873'].value;if (x == 'x1 + x2 + x1:x2 (主効果と交互作用の両方)'){text = '<span class="quiz-right">✓ 正解! </span>アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>formula の中では * と : は特別な意味を持つのでした. 本文の formula 記法の箇条書きを見直しましょう.';} document.getElementById('result_15873').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_25100').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_15873').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1900,33 +1906,33 @@ x1 + x2 (主効果のみ)
 <p><code>feols(body_mass ~ flipper_len | species + island, data = penguins)</code> が既定で返す標準誤差はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_54743" onsubmit="return validate_form_54743()" method="post">
+<form name="form_49538" onsubmit="return validate_form_49538()" method="post">
 <label>
-<input type="radio" name="answer_54743" id="answer_54743_1" value="不均一分散に頑健な標準誤差">
-不均一分散に頑健な標準誤差
-</label>
-<br>
-<label>
-<input type="radio" name="answer_54743" id="answer_54743_2" value="species でクラスタリングした標準誤差">
+<input type="radio" name="answer_49538" id="answer_49538_1" value="species でクラスタリングした標準誤差">
 species でクラスタリングした標準誤差
 </label>
 <br>
 <label>
-<input type="radio" name="answer_54743" id="answer_54743_3" value="通常の (iid を仮定した) 標準誤差">
+<input type="radio" name="answer_49538" id="answer_49538_2" value="通常の (iid を仮定した) 標準誤差">
 通常の (iid を仮定した) 標準誤差
 </label>
 <br>
 <label>
-<input type="radio" name="answer_54743" id="answer_54743_4" value="species と island の two-way クラスター標準誤差">
+<input type="radio" name="answer_49538" id="answer_49538_3" value="不均一分散に頑健な標準誤差">
+不均一分散に頑健な標準誤差
+</label>
+<br>
+<label>
+<input type="radio" name="answer_49538" id="answer_49538_4" value="species と island の two-way クラスター標準誤差">
 species と island の two-way クラスター標準誤差
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_54743"></div>
+<div id="result_49538"></div>
 </form>
-<script>function validate_form_54743() {var x, text; var x = document.forms['form_54743']['answer_54743'].value;if (x == 'species でクラスタリングした標準誤差'){text = '<span class="quiz-right">✓ 正解! </span>fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>fixest の既定は lm() とは異なります. 「出力の標準誤差に注目してください」の段落を見直しましょう.';} document.getElementById('result_54743').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_49538() {var x, text; var x = document.forms['form_49538']['answer_49538'].value;if (x == 'species でクラスタリングした標準誤差'){text = '<span class="quiz-right">✓ 正解! </span>fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>fixest の既定は lm() とは異なります. 「出力の標準誤差に注目してください」の段落を見直しましょう.';} document.getElementById('result_49538').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_25100').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_54743').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_15873').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_49538').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1936,33 +1942,33 @@ species と island の two-way クラスター標準誤差
 <p>賃金 (wage) を経験年数 (exper) と教育年数 (educ) に回帰します. educ は内生なので距離 (dist) を操作変数とし, 地域固定効果 (region) を入れます. <code>fixest</code> での正しい書き方はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_64300" onsubmit="return validate_form_64300()" method="post">
+<form name="form_67683" onsubmit="return validate_form_67683()" method="post">
 <label>
-<input type="radio" name="answer_64300" id="answer_64300_1" value="feols(wage ~ exper | region | educ ~ dist, data = df)">
-feols(wage ~ exper | region | educ ~ dist, data = df)
-</label>
-<br>
-<label>
-<input type="radio" name="answer_64300" id="answer_64300_2" value="feols(wage ~ exper + educ ~ dist | region, data = df)">
-feols(wage ~ exper + educ ~ dist | region, data = df)
-</label>
-<br>
-<label>
-<input type="radio" name="answer_64300" id="answer_64300_3" value="feols(wage ~ exper | educ ~ dist | region, data = df)">
+<input type="radio" name="answer_67683" id="answer_67683_1" value="feols(wage ~ exper | educ ~ dist | region, data = df)">
 feols(wage ~ exper | educ ~ dist | region, data = df)
 </label>
 <br>
 <label>
-<input type="radio" name="answer_64300" id="answer_64300_4" value="feols(wage ~ exper + dist | region, data = df)">
+<input type="radio" name="answer_67683" id="answer_67683_2" value="feols(wage ~ exper + dist | region, data = df)">
 feols(wage ~ exper + dist | region, data = df)
 </label>
 <br>
+<label>
+<input type="radio" name="answer_67683" id="answer_67683_3" value="feols(wage ~ exper + educ ~ dist | region, data = df)">
+feols(wage ~ exper + educ ~ dist | region, data = df)
+</label>
+<br>
+<label>
+<input type="radio" name="answer_67683" id="answer_67683_4" value="feols(wage ~ exper | region | educ ~ dist, data = df)">
+feols(wage ~ exper | region | educ ~ dist, data = df)
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_64300"></div>
+<div id="result_67683"></div>
 </form>
-<script>function validate_form_64300() {var x, text; var x = document.forms['form_64300']['answer_64300'].value;if (x == 'feols(wage ~ exper | region | educ ~ dist, data = df)'){text = '<span class="quiz-right">✓ 正解! </span>縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 でした.';} document.getElementById('result_64300').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_67683() {var x, text; var x = document.forms['form_67683']['answer_67683'].value;if (x == 'feols(wage ~ exper | region | educ ~ dist, data = df)'){text = '<span class="quiz-right">✓ 正解! </span>縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 でした.';} document.getElementById('result_67683').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_25100').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_54743').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.'; res3 = document.getElementById('result_64300').innerText == '✓ 正解! 縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_15873').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_49538').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.'; res3 = document.getElementById('result_67683').innerText == '✓ 正解! 縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1972,33 +1978,33 @@ feols(wage ~ exper + dist | region, data = df)
 <p>処置の開始時期が個体によって異なる (staggered) DiD では, <code>i()</code> を使った素朴な二元配置固定効果 (TWFE) のイベントスタディが誤った推定値を与えることがあります. 主な理由はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_9404" onsubmit="return validate_form_9404()" method="post">
+<form name="form_62737" onsubmit="return validate_form_62737()" method="post">
 <label>
-<input type="radio" name="answer_9404" id="answer_9404_1" value="処置群のサンプルサイズが時点ごとに変わるから">
+<input type="radio" name="answer_62737" id="answer_62737_1" value="処置群のサンプルサイズが時点ごとに変わるから">
 処置群のサンプルサイズが時点ごとに変わるから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_9404" id="answer_9404_2" value="処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから">
+<input type="radio" name="answer_62737" id="answer_62737_2" value="固定効果の数が多すぎて自由度が足りなくなるから">
+固定効果の数が多すぎて自由度が足りなくなるから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_62737" id="answer_62737_3" value="処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから">
 処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_9404" id="answer_9404_3" value="クラスター標準誤差が正しく計算できなくなるから">
+<input type="radio" name="answer_62737" id="answer_62737_4" value="クラスター標準誤差が正しく計算できなくなるから">
 クラスター標準誤差が正しく計算できなくなるから
 </label>
 <br>
-<label>
-<input type="radio" name="answer_9404" id="answer_9404_4" value="固定効果の数が多すぎて自由度が足りなくなるから">
-固定効果の数が多すぎて自由度が足りなくなるから
-</label>
-<br>
 <input type="submit" value="答え合わせ">
-<div id="result_9404"></div>
+<div id="result_62737"></div>
 </form>
-<script>function validate_form_9404() {var x, text; var x = document.forms['form_9404']['answer_9404'].value;if (x == '処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから'){text = '<span class="quiz-right">✓ 正解! </span>TWFE は処置済みの個体も比較対象として使うため, 処置効果が時間やコホートで異なると推定量に負の重みがかかりえます. sunab() は Sun and Abraham (2021) の補正済み推定量を計算します. 下の演習で実際に確かめます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>問題は標準誤差でも自由度でもなく, 「誰と誰を比べているか」にあります.';} document.getElementById('result_9404').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_62737() {var x, text; var x = document.forms['form_62737']['answer_62737'].value;if (x == '処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから'){text = '<span class="quiz-right">✓ 正解! </span>TWFE は処置済みの個体も比較対象として使うため, 処置効果が時間やコホートで異なると推定量に負の重みがかかりえます. sunab() は Sun and Abraham (2021) の補正済み推定量を計算します. 下の演習で実際に確かめます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>問題は標準誤差でも自由度でもなく, 「誰と誰を比べているか」にあります.';} document.getElementById('result_62737').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_25100').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_54743').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.'; res3 = document.getElementById('result_64300').innerText == '✓ 正解! 縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.'; res4 = document.getElementById('result_9404').innerText == '✓ 正解! TWFE は処置済みの個体も比較対象として使うため, 処置効果が時間やコホートで異なると推定量に負の重みがかかりえます. sunab() は Sun and Abraham (2021) の補正済み推定量を計算します. 下の演習で実際に確かめます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_15873').innerText == '✓ 正解! アスタリスクは主効果と交互作用の両方を展開します. 交互作用項だけが欲しいときはコロン (x1:x2) を, 算術的な積が欲しいときは I(x1 * x2) を使います.'; res2 = document.getElementById('result_49538').innerText == '✓ 正解! fixest は固定効果モデルでは, 最初の固定効果でクラスタリングした標準誤差を既定で返します. lm() や Stata の既定とは違うので, 論文に載せる前に vcov 引数で意図した標準誤差を明示するのが安全です.'; res3 = document.getElementById('result_67683').innerText == '✓ 正解! 縦棒の順序は 外生変数 | 固定効果 | 内生変数 ~ 操作変数 です. 4つ目の選択肢のように操作変数を説明変数に直接入れるのは reduced form であり, educ の係数は得られません.'; res4 = document.getElementById('result_62737').innerText == '✓ 正解! TWFE は処置済みの個体も比較対象として使うため, 処置効果が時間やコホートで異なると推定量に負の重みがかかりえます. sunab() は Sun and Abraham (2021) の補正済み推定量を計算します. 下の演習で実際に確かめます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -2056,27 +2062,27 @@ Table&nbsp;9.11: 完成形の回帰表 (これを再現する)
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_miy2c854wvv68lib9zgp = TinyTable.createTableFunctions("tinytable_miy2c854wvv68lib9zgp");
+      const tableFns_wzbt8exlutwpz45igu19 = TinyTable.createTableFunctions("tinytable_wzbt8exlutwpz45igu19");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_06icgten9yu3wnpiu89k',}, 
-          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_64kly8hnhvkc8fg3pi3x',}, 
-          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_fvqsds03yhmct5r4apma',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_lakv3emtlomlwjp3z8j9',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_po5yb4z0od01kj9g5dz0',}, 
-          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_wdbbdxto7ct4lc0bagwz',}, 
-          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_99de4vlaotbcz0m9adaz',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_l26xfu74bsq8x6n95zvj',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_sl2j3vj6enfppjt52tyd',}, 
-          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_gsonh9vjvut4ayp7l02j',}, 
+          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_p97wjnuin9la33hdgti8',}, 
+          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_pahesi95b9gii4kdob2p',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_zoejk20wnqsjqcl8vzwd',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_2uaj2pxg6adzwonyef0g',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_5nnyjklk4wv48hbahnuk',}, 
+          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_5didz8hvl2ts8l1flpbu',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_u1wz0amnnmavzzznyma4',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_ys8s4u6953i788un3xau',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_fo7zxrklawhkcjtdhaz6',}, 
+          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_iaifdns28u9oz8ash3po',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_miy2c854wvv68lib9zgp.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_wzbt8exlutwpz45igu19.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2085,19 +2091,19 @@ Table&nbsp;9.11: 完成形の回帰表 (これを再現する)
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_06icgten9yu3wnpiu89k, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_06icgten9yu3wnpiu89k {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_64kly8hnhvkc8fg3pi3x, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_64kly8hnhvkc8fg3pi3x {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_fvqsds03yhmct5r4apma, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_fvqsds03yhmct5r4apma {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_lakv3emtlomlwjp3z8j9, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_lakv3emtlomlwjp3z8j9 { text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_po5yb4z0od01kj9g5dz0, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_po5yb4z0od01kj9g5dz0 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_wdbbdxto7ct4lc0bagwz, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_wdbbdxto7ct4lc0bagwz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_99de4vlaotbcz0m9adaz, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_99de4vlaotbcz0m9adaz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_l26xfu74bsq8x6n95zvj, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_l26xfu74bsq8x6n95zvj { text-align: left }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_sl2j3vj6enfppjt52tyd, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_sl2j3vj6enfppjt52tyd {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_miy2c854wvv68lib9zgp td.tinytable_css_gsonh9vjvut4ayp7l02j, #tinytable_miy2c854wvv68lib9zgp th.tinytable_css_gsonh9vjvut4ayp7l02j {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_p97wjnuin9la33hdgti8, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_p97wjnuin9la33hdgti8 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_pahesi95b9gii4kdob2p, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_pahesi95b9gii4kdob2p {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_zoejk20wnqsjqcl8vzwd, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_zoejk20wnqsjqcl8vzwd {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_2uaj2pxg6adzwonyef0g, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_2uaj2pxg6adzwonyef0g { text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_5nnyjklk4wv48hbahnuk, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_5nnyjklk4wv48hbahnuk {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_5didz8hvl2ts8l1flpbu, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_5didz8hvl2ts8l1flpbu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_u1wz0amnnmavzzznyma4, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_u1wz0amnnmavzzznyma4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_ys8s4u6953i788un3xau, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_ys8s4u6953i788un3xau { text-align: left }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_fo7zxrklawhkcjtdhaz6, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_fo7zxrklawhkcjtdhaz6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_wzbt8exlutwpz45igu19 td.tinytable_css_iaifdns28u9oz8ash3po, #tinytable_wzbt8exlutwpz45igu19 th.tinytable_css_iaifdns28u9oz8ash3po {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_miy2c854wvv68lib9zgp" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_wzbt8exlutwpz45igu19" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
 <tr>
@@ -2235,27 +2241,27 @@ Table&nbsp;9.11: 完成形の回帰表 (これを再現する)
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_emo5d3iiiy3jklsov9n4 = TinyTable.createTableFunctions("tinytable_emo5d3iiiy3jklsov9n4");
+      const tableFns_w29cradmv3wmwno3hibo = TinyTable.createTableFunctions("tinytable_w29cradmv3wmwno3hibo");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_qxcty26ktbykzd0qf9e9',}, 
-          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_y7paal9a7sxvzkwmliel',}, 
-          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_5jkbcqzy80hmu0inr0ea',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_c5ckup0zp3f74ezl6dcv',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_yxtxaxjxymtu6xt7ipnx',}, 
-          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_iulgsznsbgipz7v2808h',}, 
-          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_ioqjyi56e2ylg8cpm9fp',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_cmbiojm762qyofq3frze',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_24w5chky86hkcg8b2enx',}, 
-          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_475kt2h6euo2i6nflh1m',}, 
+          { positions: [ { i: '-1', j: 5 } ], css_id: 'tinytable_css_i6k02vbh79bp4zdox0qc',}, 
+          { positions: [ { i: '-1', j: 3 } ], css_id: 'tinytable_css_wbf8tn11sol2pzyrfle4',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 }, { i: '8', j: 5 } ], css_id: 'tinytable_css_wfxf9lzpnuczh34yzch6',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 } ], css_id: 'tinytable_css_4ujv7nam362fy3tyogup',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '4', j: 2 }, { i: '0', j: 3 }, { i: '4', j: 3 }, { i: '0', j: 4 }, { i: '4', j: 4 }, { i: '0', j: 5 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_aezcbd8bukwg8qdsm8k9',}, 
+          { positions: [ { i: '-1', j: 2 }, { i: '-1', j: 4 } ], css_id: 'tinytable_css_xl8r7m3bln25ce75het6',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_f8a1rcrbv5654jf4y3qf',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 } ], css_id: 'tinytable_css_bpec4wnyrmzz4u6gkbzg',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '4', j: 1 } ], css_id: 'tinytable_css_v138bxqsckqggz4i666q',}, 
+          { positions: [ { i: '-1', j: 1 } ], css_id: 'tinytable_css_9pkk8nqnkt74nig5p2ei',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_emo5d3iiiy3jklsov9n4.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_w29cradmv3wmwno3hibo.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -2264,19 +2270,19 @@ Table&nbsp;9.11: 完成形の回帰表 (これを再現する)
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_qxcty26ktbykzd0qf9e9, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_qxcty26ktbykzd0qf9e9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_y7paal9a7sxvzkwmliel, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_y7paal9a7sxvzkwmliel {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_5jkbcqzy80hmu0inr0ea, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_5jkbcqzy80hmu0inr0ea {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_c5ckup0zp3f74ezl6dcv, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_c5ckup0zp3f74ezl6dcv { text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_yxtxaxjxymtu6xt7ipnx, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_yxtxaxjxymtu6xt7ipnx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_iulgsznsbgipz7v2808h, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_iulgsznsbgipz7v2808h {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_ioqjyi56e2ylg8cpm9fp, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_ioqjyi56e2ylg8cpm9fp {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_cmbiojm762qyofq3frze, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_cmbiojm762qyofq3frze { text-align: left }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_24w5chky86hkcg8b2enx, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_24w5chky86hkcg8b2enx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_emo5d3iiiy3jklsov9n4 td.tinytable_css_475kt2h6euo2i6nflh1m, #tinytable_emo5d3iiiy3jklsov9n4 th.tinytable_css_475kt2h6euo2i6nflh1m {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_i6k02vbh79bp4zdox0qc, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_i6k02vbh79bp4zdox0qc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_wbf8tn11sol2pzyrfle4, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_wbf8tn11sol2pzyrfle4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 3%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_wfxf9lzpnuczh34yzch6, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_wfxf9lzpnuczh34yzch6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_4ujv7nam362fy3tyogup, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_4ujv7nam362fy3tyogup { text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_aezcbd8bukwg8qdsm8k9, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_aezcbd8bukwg8qdsm8k9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_xl8r7m3bln25ce75het6, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_xl8r7m3bln25ce75het6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.03em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 3%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_f8a1rcrbv5654jf4y3qf, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_f8a1rcrbv5654jf4y3qf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_bpec4wnyrmzz4u6gkbzg, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_bpec4wnyrmzz4u6gkbzg { text-align: left }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_v138bxqsckqggz4i666q, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_v138bxqsckqggz4i666q {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_w29cradmv3wmwno3hibo td.tinytable_css_9pkk8nqnkt74nig5p2ei, #tinytable_w29cradmv3wmwno3hibo th.tinytable_css_9pkk8nqnkt74nig5p2ei {  position: relative; --border-bottom: 0; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_emo5d3iiiy3jklsov9n4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_w29cradmv3wmwno3hibo" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
 <tr>
@@ -3295,7 +3301,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a>処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています <span class="co">[</span><span class="ot">@sun2021</span><span class="co">]</span>. その場合は <span class="in">`i()`</span> の代わりに <span class="in">`sunab()`</span> を使うと, @sun2021 の補正済み推定量がそのまま得られ, <span class="in">`ggiplot()`</span> で同じように描けます.</span>
 <span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>

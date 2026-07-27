@@ -1,4 +1,4 @@
-# 12  targets による再現性
+# 12  パイプライン
 
 Code
 
@@ -356,7 +356,7 @@ compile_latex <- function(manuscript_file, path_pdf) {
 }
 ```
 
-## 12.4 演習問題
+## 演習問題
 
 この章の演習は, 実際に小さなパイプラインを組んで, `{targets}` の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (`{targets}` と `{tarchetypes}` が入っていなければ `install.packages(c("targets", "tarchetypes"))` で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Shell – Empiricist's Workflow</title>
+<title>Appendix A — Shell – Empiricist’s Workflow</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -63,8 +63,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../lesson/git.html" rel="next">
-<link href="../lesson/architecture.html" rel="prev">
+<link href="../lesson/quarto.html" rel="next">
+<link href="../lesson/ai.html" rel="prev">
 <link href="../static/img/logo/hex-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -130,11 +130,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="2&nbsp; Shell – Empiricist’s Workflow">
+<meta property="og:title" content="Appendix A — Shell – Empiricist’s Workflow">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta property="og:site_name" content="Empiricist’s Workflow">
-<meta name="twitter:title" content="2&nbsp; Shell – Empiricist’s Workflow">
+<meta name="twitter:title" content="Appendix A — Shell – Empiricist’s Workflow">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/shell.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -176,31 +176,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -248,7 +242,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -268,14 +262,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -296,20 +302,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#shell-とは" id="toc-shell-とは" class="nav-link active" data-scroll-target="#shell-とは"><span class="header-section-number">2.1</span> Shell とは</a>
+  <li><a href="#shell-とは" id="toc-shell-とは" class="nav-link active" data-scroll-target="#shell-とは"><span class="header-section-number">A.1</span> Shell とは</a>
   <ul class="collapse">
   <li><a href="#unix-哲学" id="toc-unix-哲学" class="nav-link" data-scroll-target="#unix-哲学">Unix 哲学</a></li>
   <li><a href="#shell-terminal-cli" id="toc-shell-terminal-cli" class="nav-link" data-scroll-target="#shell-terminal-cli">Shell, Terminal, CLI</a></li>
   <li><a href="#なぜシェルを使うのか" id="toc-なぜシェルを使うのか" class="nav-link" data-scroll-target="#なぜシェルを使うのか">なぜシェルを使うのか</a></li>
   </ul></li>
-  <li><a href="#シェルの基本" id="toc-シェルの基本" class="nav-link" data-scroll-target="#シェルの基本"><span class="header-section-number">2.2</span> シェルの基本</a>
+  <li><a href="#シェルの基本" id="toc-シェルの基本" class="nav-link" data-scroll-target="#シェルの基本"><span class="header-section-number">A.2</span> シェルの基本</a>
   <ul class="collapse">
   <li><a href="#はじめてのシェル" id="toc-はじめてのシェル" class="nav-link" data-scroll-target="#はじめてのシェル">はじめてのシェル</a></li>
   <li><a href="#キーボードショートカット" id="toc-キーボードショートカット" class="nav-link" data-scroll-target="#キーボードショートカット">キーボードショートカット</a></li>
   <li><a href="#コマンドの構文" id="toc-コマンドの構文" class="nav-link" data-scroll-target="#コマンドの構文">コマンドの構文</a></li>
   <li><a href="#ヘルプの引き方" id="toc-ヘルプの引き方" class="nav-link" data-scroll-target="#ヘルプの引き方">ヘルプの引き方</a></li>
   </ul></li>
-  <li><a href="#ファイルとディレクトリ" id="toc-ファイルとディレクトリ" class="nav-link" data-scroll-target="#ファイルとディレクトリ"><span class="header-section-number">2.3</span> ファイルとディレクトリ</a>
+  <li><a href="#ファイルとディレクトリ" id="toc-ファイルとディレクトリ" class="nav-link" data-scroll-target="#ファイルとディレクトリ"><span class="header-section-number">A.3</span> ファイルとディレクトリ</a>
   <ul class="collapse">
   <li><a href="#移動する" id="toc-移動する" class="nav-link" data-scroll-target="#移動する">移動する</a></li>
   <li><a href="#一覧表示する" id="toc-一覧表示する" class="nav-link" data-scroll-target="#一覧表示する">一覧表示する</a></li>
@@ -318,7 +324,7 @@ window.Quarto = {
   <li><a href="#ワイルドカード" id="toc-ワイルドカード" class="nav-link" data-scroll-target="#ワイルドカード">ワイルドカード</a></li>
   <li><a href="#探す" id="toc-探す" class="nav-link" data-scroll-target="#探す">探す</a></li>
   </ul></li>
-  <li><a href="#テキストファイルの操作" id="toc-テキストファイルの操作" class="nav-link" data-scroll-target="#テキストファイルの操作"><span class="header-section-number">2.4</span> テキストファイルの操作</a>
+  <li><a href="#テキストファイルの操作" id="toc-テキストファイルの操作" class="nav-link" data-scroll-target="#テキストファイルの操作"><span class="header-section-number">A.4</span> テキストファイルの操作</a>
   <ul class="collapse">
   <li><a href="#数える" id="toc-数える" class="nav-link" data-scroll-target="#数える">数える</a></li>
   <li><a href="#読む" id="toc-読む" class="nav-link" data-scroll-target="#読む">読む</a></li>
@@ -326,38 +332,38 @@ window.Quarto = {
   <li><a href="#加工する" id="toc-加工する" class="nav-link" data-scroll-target="#加工する">加工する</a></li>
   <li><a href="#並べ替え重複削除" id="toc-並べ替え重複削除" class="nav-link" data-scroll-target="#並べ替え重複削除">並べ替え・重複削除</a></li>
   </ul></li>
-  <li><a href="#リダイレクトとパイプ" id="toc-リダイレクトとパイプ" class="nav-link" data-scroll-target="#リダイレクトとパイプ"><span class="header-section-number">2.5</span> リダイレクトとパイプ</a>
+  <li><a href="#リダイレクトとパイプ" id="toc-リダイレクトとパイプ" class="nav-link" data-scroll-target="#リダイレクトとパイプ"><span class="header-section-number">A.5</span> リダイレクトとパイプ</a>
   <ul class="collapse">
   <li><a href="#リダイレクト" id="toc-リダイレクト" class="nav-link" data-scroll-target="#リダイレクト">リダイレクト</a></li>
   <li><a href="#パイプ" id="toc-パイプ" class="nav-link" data-scroll-target="#パイプ">パイプ</a></li>
   </ul></li>
-  <li><a href="#繰り返し-for-ループ" id="toc-繰り返し-for-ループ" class="nav-link" data-scroll-target="#繰り返し-for-ループ"><span class="header-section-number">2.6</span> 繰り返し (for ループ)</a>
+  <li><a href="#繰り返し-for-ループ" id="toc-繰り返し-for-ループ" class="nav-link" data-scroll-target="#繰り返し-for-ループ"><span class="header-section-number">A.6</span> 繰り返し (for ループ)</a>
   <ul class="collapse">
   <li><a href="#for-の構文" id="toc-for-の構文" class="nav-link" data-scroll-target="#for-の構文">for の構文</a></li>
   <li><a href="#例-数列を表示する" id="toc-例-数列を表示する" class="nav-link" data-scroll-target="#例-数列を表示する">例: 数列を表示する</a></li>
   <li><a href="#例-複数の-csv-を結合する" id="toc-例-複数の-csv-を結合する" class="nav-link" data-scroll-target="#例-複数の-csv-を結合する">例: 複数の CSV を結合する</a></li>
   </ul></li>
-  <li><a href="#スクリプト" id="toc-スクリプト" class="nav-link" data-scroll-target="#スクリプト"><span class="header-section-number">2.7</span> スクリプト</a>
+  <li><a href="#スクリプト" id="toc-スクリプト" class="nav-link" data-scroll-target="#スクリプト"><span class="header-section-number">A.7</span> スクリプト</a>
   <ul class="collapse">
   <li><a href="#hello-world" id="toc-hello-world" class="nav-link" data-scroll-target="#hello-world">Hello World</a></li>
   <li><a href="#rscript" id="toc-rscript" class="nav-link" data-scroll-target="#rscript">Rscript</a></li>
   </ul></li>
-  <li><a href="#sec-permission" id="toc-sec-permission" class="nav-link" data-scroll-target="#sec-permission"><span class="header-section-number">2.8</span> 権限とパーミッション</a>
+  <li><a href="#sec-permission" id="toc-sec-permission" class="nav-link" data-scroll-target="#sec-permission"><span class="header-section-number">A.8</span> 権限とパーミッション</a>
   <ul class="collapse">
   <li><a href="#スーパーユーザー-root-と-sudo" id="toc-スーパーユーザー-root-と-sudo" class="nav-link" data-scroll-target="#スーパーユーザー-root-と-sudo">スーパーユーザー: root と sudo</a></li>
   <li><a href="#パーミッションを変える-chmod" id="toc-パーミッションを変える-chmod" class="nav-link" data-scroll-target="#パーミッションを変える-chmod">パーミッションを変える: chmod</a></li>
   <li><a href="#所有者を変える-chown" id="toc-所有者を変える-chown" class="nav-link" data-scroll-target="#所有者を変える-chown">所有者を変える: chown</a></li>
   </ul></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">2.9</span> 演習問題</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/shell.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Appendix A — Shell</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -374,11 +380,11 @@ window.Quarto = {
 </header>
 
 
-<section id="shell-とは" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="shell-とは"><span class="header-section-number">2.1</span> Shell とは</h2>
+<section id="shell-とは" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="shell-とは"><span class="header-section-number">A.1</span> Shell とは</h2>
 <section id="unix-哲学" class="level3">
 <h3 class="anchored" data-anchor-id="unix-哲学">Unix 哲学</h3>
-<p>これから使うシェルという道具は, 前章の Unix の系譜 (<a href="architecture.html#sec-unix-family" class="quarto-xref"><span>Section 1.3.2</span></a>) で見た OS, <a href="https://ja.wikipedia.org/wiki/UNIX">Unix</a> とともに Bell 研究所で生まれました. macOS と Linux でコマンドや開発ツールがほぼ共通なのは同じ Unix の流れを汲むためで, これから学ぶシェルの操作もこの系譜の上にあります. その設計の背景にあるのが Unix 哲学 (Unix philosophy) です.</p>
+<p>これから使うシェルという道具は, 前章の Unix の系譜 (<a href="architecture.html#sec-unix-family" class="quarto-xref"><span>Section 2.3.2</span></a>) で見た OS, <a href="https://ja.wikipedia.org/wiki/UNIX">Unix</a> とともに Bell 研究所で生まれました. macOS と Linux でコマンドや開発ツールがほぼ共通なのは同じ Unix の流れを汲むためで, これから学ぶシェルの操作もこの系譜の上にあります. その設計の背景にあるのが Unix 哲学 (Unix philosophy) です.</p>
 <blockquote class="blockquote">
 <p>Do One Thing and Do It Well</p>
 </blockquote>
@@ -386,7 +392,7 @@ window.Quarto = {
 </section>
 <section id="shell-terminal-cli" class="level3">
 <h3 class="anchored" data-anchor-id="shell-terminal-cli">Shell, Terminal, CLI</h3>
-<p>前章で見たように, アプリケーションは OS が用意した窓口 (システムコール) を通じてその機能を利用するのでした (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 1.3</span></a>). シェルもその一つで, OS への指示を人間がキーボードから直接打ち込むためのプログラムです. シェル (shell) やターミナル (terminal) といった言葉は, いずれも <strong>コマンドラインインターフェース</strong> (CLI, command line interface) を指しています. シェルにはいくつか種類がありますが, ここでは最も標準的な <a href="https://www.gnu.org/software/bash/"><strong>Bash</strong></a> (Bourne again shell) を中心に扱います. 各OSの標準的なシェルは次のとおりです.</p>
+<p>前章で見たように, アプリケーションは OS が用意した窓口 (システムコール) を通じてその機能を利用するのでした (<a href="architecture.html#sec-os" class="quarto-xref"><span>Section 2.3</span></a>). シェルもその一つで, OS への指示を人間がキーボードから直接打ち込むためのプログラムです. シェル (shell) やターミナル (terminal) といった言葉は, いずれも <strong>コマンドラインインターフェース</strong> (CLI, command line interface) を指しています. シェルにはいくつか種類がありますが, ここでは最も標準的な <a href="https://www.gnu.org/software/bash/"><strong>Bash</strong></a> (Bourne again shell) を中心に扱います. 各OSの標準的なシェルは次のとおりです.</p>
 <ul>
 <li>Linux: Bash</li>
 <li>macOS: zsh (Bash 互換)</li>
@@ -405,8 +411,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="シェルの基本" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="シェルの基本"><span class="header-section-number">2.2</span> シェルの基本</h2>
+<section id="シェルの基本" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="シェルの基本"><span class="header-section-number">A.2</span> シェルの基本</h2>
 <section id="はじめてのシェル" class="level3">
 <h3 class="anchored" data-anchor-id="はじめてのシェル">はじめてのシェル</h3>
 <p>まずはシェルを開いてみましょう. VSCode を使っているなら, <kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd title="`" aria-hidden="true">`</kbd><span class="visually-hidden">`</span> で統合ターミナルが開きます. macOS のターミナルアプリや, WSL の Ubuntu などでも構いません.</p>
@@ -477,8 +483,8 @@ window.Quarto = {
 <p><code>man</code> は網羅的ですが冗長なので, 最近ならAIに聞くのもよいでしょう.</p>
 </section>
 </section>
-<section id="ファイルとディレクトリ" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="ファイルとディレクトリ"><span class="header-section-number">2.3</span> ファイルとディレクトリ</h2>
+<section id="ファイルとディレクトリ" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="ファイルとディレクトリ"><span class="header-section-number">A.3</span> ファイルとディレクトリ</h2>
 <section id="移動する" class="level3">
 <h3 class="anchored" data-anchor-id="移動する">移動する</h3>
 <p>ディレクトリ間の移動は, 次の2つが基本になります.</p>
@@ -519,7 +525,7 @@ window.Quarto = {
 <li>その後に, オブジェクトの <strong>所有者</strong> と <strong>グループ</strong> が続きます. グループの名前は環境によって変わり, この例の <code>users</code> の位置が, macOS では <code>staff</code>, Ubuntu (WSL) ではユーザー名と同名のグループになります.</li>
 <li>最後に, サイズ, 作成日時, 名前が並びます.</li>
 </ul>
-<p>パーミッションと所有者については, 後の節で詳しく説明します (<a href="#sec-permission" class="quarto-xref"><span>Section 2.8</span></a>).</p>
+<p>パーミッションと所有者については, 後の節で詳しく説明します (<a href="#sec-permission" class="quarto-xref"><span>Section A.8</span></a>).</p>
 </section>
 <section id="作る消す" class="level3">
 <h3 class="anchored" data-anchor-id="作る消す">作る・消す</h3>
@@ -586,8 +592,8 @@ Warning
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># 100 KB より大きいファイル</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="テキストファイルの操作" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="テキストファイルの操作"><span class="header-section-number">2.4</span> テキストファイルの操作</h2>
+<section id="テキストファイルの操作" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="テキストファイルの操作"><span class="header-section-number">A.4</span> テキストファイルの操作</h2>
 <p>経済学を含むデータサイエンスでは, スクリプト, Markdown, CSV など, テキストファイルを扱う時間が長いです. シェルはテキスト処理がとても得意なので, ここで代表的な道具を紹介します.</p>
 <section id="数える" class="level3">
 <h3 class="anchored" data-anchor-id="数える">数える</h3>
@@ -628,8 +634,8 @@ Warning
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r で逆順</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="リダイレクトとパイプ" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="リダイレクトとパイプ"><span class="header-section-number">2.5</span> リダイレクトとパイプ</h2>
+<section id="リダイレクトとパイプ" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="リダイレクトとパイプ"><span class="header-section-number">A.5</span> リダイレクトとパイプ</h2>
 <section id="リダイレクト" class="level3">
 <h3 class="anchored" data-anchor-id="リダイレクト">リダイレクト</h3>
 <p><code>&gt;</code> を使うと, コマンドの出力を画面ではなくファイルへ送れます. これを <strong>リダイレクト</strong> (redirect) といいます.</p>
@@ -651,8 +657,8 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.bash_history <span class="kw">|</span> <span class="fu">grep</span> head</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="繰り返し-for-ループ" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="繰り返し-for-ループ"><span class="header-section-number">2.6</span> 繰り返し (for ループ)</h2>
+<section id="繰り返し-for-ループ" class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="繰り返し-for-ループ"><span class="header-section-number">A.6</span> 繰り返し (for ループ)</h2>
 <section id="for-の構文" class="level3">
 <h3 class="anchored" data-anchor-id="for-の構文">for の構文</h3>
 <p>Bash の for ループは, 他の言語のものとよく似ています. 基本の構文は次のとおりです.</p>
@@ -686,8 +692,8 @@ Warning
 <p>シェルで結合する利点は, <strong>効率の良さ</strong> にあります. すべてのファイルを同時にメモリ (RAM) に載せる必要がないので, ファイル数が多いとき, あるいは1つ1つが巨大なときに大きな差が出ます.</p>
 </section>
 </section>
-<section id="スクリプト" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="スクリプト"><span class="header-section-number">2.7</span> スクリプト</h2>
+<section id="スクリプト" class="level2" data-number="A.7">
+<h2 data-number="A.7" class="anchored" data-anchor-id="スクリプト"><span class="header-section-number">A.7</span> スクリプト</h2>
 <section id="hello-world" class="level3">
 <h3 class="anchored" data-anchor-id="hello-world">Hello World</h3>
 <p>データやファイル構造を探索するときは, シェルに対話的にコマンドを打つのが理にかなっています. 一方で, 一連のコマンドをまとめた <strong>シェルスクリプト</strong> を書いておくと, 再現可能になります. シェルスクリプトは <code>.sh</code> という拡張子で表します.</p>
@@ -724,8 +730,8 @@ Warning
 <p>引数を渡すかどうかは任意ですが, 大きなジョブをまとめて回す (バッチ処理) ようなときに役立ちます.</p>
 </section>
 </section>
-<section id="sec-permission" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="sec-permission"><span class="header-section-number">2.8</span> 権限とパーミッション</h2>
+<section id="sec-permission" class="level2" data-number="A.8">
+<h2 data-number="A.8" class="anchored" data-anchor-id="sec-permission"><span class="header-section-number">A.8</span> 権限とパーミッション</h2>
 <section id="スーパーユーザー-root-と-sudo" class="level3">
 <h3 class="anchored" data-anchor-id="スーパーユーザー-root-と-sudo">スーパーユーザー: root と sudo</h3>
 <p>Linux には大きく2種類のユーザーがいます.</p>
@@ -809,8 +815,8 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># ABC の所有者を alice にする</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="演習問題" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">2.9</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル (<kbd title="Ctrl" aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd title="`" aria-hidden="true">`</kbd><span class="visually-hidden">`</span>) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.</p>
 <p>まず, 練習用のデータをダウンロードします. 架空の売上データの CSV 6年分をこちらで用意してあるので, <code>wget</code> で取得してホームディレクトリに展開してください.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
@@ -1473,13 +1479,13 @@ document.addEventListener("DOMContentLoaded", function () {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lesson/architecture.html" class="pagination-link" aria-label="アーキテクチャ">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span>
+      <a href="../lesson/ai.html" class="pagination-link" aria-label="AIと研究する">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lesson/git.html" class="pagination-link" aria-label="Git &amp; GitHub">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lesson/quarto.html" class="pagination-link" aria-label="Quarto">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -2075,7 +2081,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-590"><a href="#cb56-590" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># ABC の所有者を alice にする</span></span>
 <span id="cb56-591"><a href="#cb56-591" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-592"><a href="#cb56-592" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-593"><a href="#cb56-593" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb56-593"><a href="#cb56-593" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb56-594"><a href="#cb56-594" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-595"><a href="#cb56-595" aria-hidden="true" tabindex="-1"></a>この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル ({{&lt; kbd Ctrl &gt;}} + {{&lt; kbd ` &gt;}}) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.</span>
 <span id="cb56-596"><a href="#cb56-596" aria-hidden="true" tabindex="-1"></a></span>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Quarto – Empiricist's Workflow</title>
+<title>Appendix B — Quarto – Empiricist’s Workflow</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -63,8 +63,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../lesson/speedup.html" rel="next">
-<link href="../lesson/git.html" rel="prev">
+<link href="../lesson/dictionary.html" rel="next">
+<link href="../lesson/shell.html" rel="prev">
 <link href="../static/img/logo/hex-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -133,11 +133,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="4&nbsp; Quarto – Empiricist’s Workflow">
+<meta property="og:title" content="Appendix B — Quarto – Empiricist’s Workflow">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta property="og:site_name" content="Empiricist’s Workflow">
-<meta name="twitter:title" content="4&nbsp; Quarto – Empiricist’s Workflow">
+<meta name="twitter:title" content="Appendix B — Quarto – Empiricist’s Workflow">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://kazuyanagimoto.com/workshop-graduate-2026/lesson/static/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -152,7 +152,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/quarto.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/quarto.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -179,31 +179,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">環境構築</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">アーキテクチャ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  <a href="../lesson/environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">環境の再現性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -251,7 +245,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">targets による再現性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -271,14 +265,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lesson/shell.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lesson/quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lesson/dictionary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lesson/color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">色彩論</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -299,8 +305,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#quarto-とは" id="toc-quarto-とは" class="nav-link active" data-scroll-target="#quarto-とは"><span class="header-section-number">4.1</span> Quarto とは</a></li>
-  <li><a href="#markdown-記法" id="toc-markdown-記法" class="nav-link" data-scroll-target="#markdown-記法"><span class="header-section-number">4.2</span> Markdown 記法</a>
+  <li><a href="#quarto-とは" id="toc-quarto-とは" class="nav-link active" data-scroll-target="#quarto-とは"><span class="header-section-number">B.1</span> Quarto とは</a></li>
+  <li><a href="#markdown-記法" id="toc-markdown-記法" class="nav-link" data-scroll-target="#markdown-記法"><span class="header-section-number">B.2</span> Markdown 記法</a>
   <ul class="collapse">
   <li><a href="#heading-見出し" id="toc-heading-見出し" class="nav-link" data-scroll-target="#heading-見出し">Heading (見出し)</a></li>
   <li><a href="#改行とパラグラフ" id="toc-改行とパラグラフ" class="nav-link" data-scroll-target="#改行とパラグラフ">改行とパラグラフ</a></li>
@@ -310,29 +316,29 @@ window.Quarto = {
   <li><a href="#図の挿入" id="toc-図の挿入" class="nav-link" data-scroll-target="#図の挿入">図の挿入</a></li>
   <li><a href="#表の挿入" id="toc-表の挿入" class="nav-link" data-scroll-target="#表の挿入">表の挿入</a></li>
   </ul></li>
-  <li><a href="#latex-math-記法" id="toc-latex-math-記法" class="nav-link" data-scroll-target="#latex-math-記法"><span class="header-section-number">4.3</span> <span class="math inline">\(\LaTeX\)</span> Math 記法</a></li>
-  <li><a href="#quarto-記法" id="toc-quarto-記法" class="nav-link" data-scroll-target="#quarto-記法"><span class="header-section-number">4.4</span> Quarto 記法</a>
+  <li><a href="#latex-math-記法" id="toc-latex-math-記法" class="nav-link" data-scroll-target="#latex-math-記法"><span class="header-section-number">B.3</span> <span class="math inline">\(\LaTeX\)</span> Math 記法</a></li>
+  <li><a href="#quarto-記法" id="toc-quarto-記法" class="nav-link" data-scroll-target="#quarto-記法"><span class="header-section-number">B.4</span> Quarto 記法</a>
   <ul class="collapse">
   <li><a href="#front-matter" id="toc-front-matter" class="nav-link" data-scroll-target="#front-matter">Front Matter</a></li>
   <li><a href="#相互参照-cross-reference" id="toc-相互参照-cross-reference" class="nav-link" data-scroll-target="#相互参照-cross-reference">相互参照 (Cross Reference)</a></li>
   </ul></li>
-  <li><a href="#コードの実行" id="toc-コードの実行" class="nav-link" data-scroll-target="#コードの実行"><span class="header-section-number">4.5</span> コードの実行</a></li>
-  <li><a href="#コードと相互参照" id="toc-コードと相互参照" class="nav-link" data-scroll-target="#コードと相互参照"><span class="header-section-number">4.6</span> コードと相互参照</a>
+  <li><a href="#コードの実行" id="toc-コードの実行" class="nav-link" data-scroll-target="#コードの実行"><span class="header-section-number">B.5</span> コードの実行</a></li>
+  <li><a href="#コードと相互参照" id="toc-コードと相互参照" class="nav-link" data-scroll-target="#コードと相互参照"><span class="header-section-number">B.6</span> コードと相互参照</a>
   <ul class="collapse">
   <li><a href="#ggplot2-による図" id="toc-ggplot2-による図" class="nav-link" data-scroll-target="#ggplot2-による図"><code>ggplot2</code> による図</a></li>
   <li><a href="#tinytable-による表" id="toc-tinytable-による表" class="nav-link" data-scroll-target="#tinytable-による表"><code>tinytable</code> による表</a></li>
   </ul></li>
-  <li><a href="#インラインコード" id="toc-インラインコード" class="nav-link" data-scroll-target="#インラインコード"><span class="header-section-number">4.7</span> インラインコード</a></li>
-  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">4.8</span> 演習問題</a></li>
+  <li><a href="#インラインコード" id="toc-インラインコード" class="nav-link" data-scroll-target="#インラインコード"><span class="header-section-number">B.7</span> インラインコード</a></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題">演習問題</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lesson/shell.html">Appendices</a></li><li class="breadcrumb-item"><a href="../lesson/quarto.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Quarto</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Appendix B — Quarto</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -349,8 +355,8 @@ window.Quarto = {
 </header>
 
 
-<section id="quarto-とは" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="quarto-とは"><span class="header-section-number">4.1</span> Quarto とは</h2>
+<section id="quarto-とは" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="quarto-とは"><span class="header-section-number">B.1</span> Quarto とは</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../static/img/quarto/quarto-flow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../static/img/quarto/quarto-flow.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
@@ -358,8 +364,8 @@ window.Quarto = {
 </div>
 <p>Quartoはプログラミングコードを含んだレポートやスライドを作成するためのツールです. これによって, 研究者が再現可能なドキュメントを簡単に作成できるようになっています. Quartoは, <code>.qmd</code> という拡張子のファイルにあるコードを実行し, Markdown (<code>.md</code>) 形式のドキュメントを生成します. さらに, <a href="https://pandoc.org">pandoc</a> というツールを使って, HTMLやPDF, Microsoft Word, Typstなどの様々な形式に変換することができます.</p>
 </section>
-<section id="markdown-記法" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="markdown-記法"><span class="header-section-number">4.2</span> Markdown 記法</h2>
+<section id="markdown-記法" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="markdown-記法"><span class="header-section-number">B.2</span> Markdown 記法</h2>
 <p>コードの実行については後の章で説明しますが, まずはMarkdown記法について簡単に説明します.</p>
 <section id="heading-見出し" class="level3">
 <h3 class="anchored">Heading (見出し)</h3>
@@ -561,8 +567,8 @@ Heading 3
 <p>Markdownでは, <code>|</code> と <code>-</code> を使って表を作ることができます. さらに, <code>:</code> を使うことで, 列の位置を指定することもできます. デフォルトでは, 列は全て左寄せになりますが, <code>:---</code> と書くと左寄せ, <code>---:</code> と書くと右寄せ, <code>:---:</code> と書くと中央寄せになります. GUIツールで表を作ってmarkdwon形式でエクスポートするサービスとして, <a href="https://www.tablesgenerator.com/markdown_tables">Tables Generator</a> などがあります.</p>
 </section>
 </section>
-<section id="latex-math-記法" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="latex-math-記法"><span class="header-section-number">4.3</span> <span class="math inline">\(\LaTeX\)</span> Math 記法</h2>
+<section id="latex-math-記法" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="latex-math-記法"><span class="header-section-number">B.3</span> <span class="math inline">\(\LaTeX\)</span> Math 記法</h2>
 <p>Markdownでは <span class="math inline">\(\LaTeX\)</span> という組版ソフトの数式記法を使って数式を表現することができます. 数式は, <code>$...$</code> で囲むとインライン数式, <code>$$...$$</code> で囲むとブロック数式 (改行して中央揃え) になります.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
@@ -596,8 +602,8 @@ Heading 3
 </div>
 </div>
 </section>
-<section id="quarto-記法" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="quarto-記法"><span class="header-section-number">4.4</span> Quarto 記法</h2>
+<section id="quarto-記法" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="quarto-記法"><span class="header-section-number">B.4</span> Quarto 記法</h2>
 <p>ここからは Quarto独自の記法についての説明です. 引用と文献情報については <a href="../lesson/literature.html">文献と引用</a> の章で説明します.</p>
 <section id="front-matter" class="level3">
 <h3 class="anchored" data-anchor-id="front-matter">Front Matter</h3>
@@ -626,14 +632,14 @@ Heading 3
 <div id="fig-kanagawa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kanagawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;4.1: 神奈川沖浪裏"><img src="../static/img/quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img"></a>
+<a href="../static/img/quarto/hokusai_kanagawa.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;B.1: 神奈川沖浪裏"><img src="../static/img/quarto/hokusai_kanagawa.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kanagawa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.1: 神奈川沖浪裏
+Figure&nbsp;B.1: 神奈川沖浪裏
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-kanagawa" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> は葛飾北斎の有名な浮世絵である.</p>
+<p><a href="#fig-kanagawa" class="quarto-xref">Figure&nbsp;<span>B.1</span></a> は葛飾北斎の有名な浮世絵である.</p>
 </div>
 </div>
 </div>
@@ -655,7 +661,7 @@ Figure&nbsp;4.1: 神奈川沖浪裏
 <div id="tbl-fruit" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fruit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.1: Fruit prices
+Table&nbsp;B.1: Fruit prices
 </figcaption>
 <div aria-describedby="tbl-fruit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -683,15 +689,15 @@ Table&nbsp;4.1: Fruit prices
 </div>
 </figure>
 </div>
-<p><a href="#tbl-fruit" class="quarto-xref">Table&nbsp;<span>4.1</span></a> は果物の値段を表している.</p>
+<p><a href="#tbl-fruit" class="quarto-xref">Table&nbsp;<span>B.1</span></a> は果物の値段を表している.</p>
 </div>
 </div>
 </div>
 <p>基本的には, 特別な prefix (<code>fig-</code>, <code>tbl-</code>, <code>sec-</code> など) をつけたラベルを <code>{#label}</code> という形式で指定し, 本文中では <code>@label</code> と書くことで, その要素の番号を自動で参照することができます. その他の要素 (式や命題など) も同様の方法で参照できるので <a href="https://quarto.org/docs/authoring/cross-references.html">Quartoのドキュメント</a> を参照してください.</p>
 </section>
 </section>
-<section id="コードの実行" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="コードの実行"><span class="header-section-number">4.5</span> コードの実行</h2>
+<section id="コードの実行" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="コードの実行"><span class="header-section-number">B.5</span> コードの実行</h2>
 <p>Quartoの最大の特徴は, ドキュメントの中にコードを埋め込んで実行できることです. コードは, <code>```{r}</code> で始まり <code>```</code> で終わる コードチャンク (code chunk) の中に書きます. コンパイルのたびにQuartoがそのコードを実行し, コードと結果をドキュメントに挿入します.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -716,8 +722,8 @@ Table&nbsp;4.1: Fruit prices
 <li><code>warning</code> / <code>message</code>: 警告やメッセージを表示するか.</li>
 </ul>
 </section>
-<section id="コードと相互参照" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="コードと相互参照"><span class="header-section-number">4.6</span> コードと相互参照</h2>
+<section id="コードと相互参照" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="コードと相互参照"><span class="header-section-number">B.6</span> コードと相互参照</h2>
 <p>前の「相互参照」の節では, 手で書いた画像やMarkdownの表に番号を振りました. コードが生成する図や表にも, 同じ仕組みがそのまま使えます.</p>
 <section id="ggplot2-による図" class="level3">
 <h3 class="anchored" data-anchor-id="ggplot2-による図"><code>ggplot2</code> による図</h3>
@@ -739,16 +745,16 @@ Table&nbsp;4.1: Fruit prices
 <div id="fig-penguins" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-penguins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="quarto_files/figure-html/fig-penguins-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4.2: くちばしの長さとひれの長さの関係"><img src="quarto_files/figure-html/fig-penguins-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="quarto_files/figure-html/fig-penguins-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;B.2: くちばしの長さとひれの長さの関係"><img src="quarto_files/figure-html/fig-penguins-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-penguins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.2: くちばしの長さとひれの長さの関係
+Figure&nbsp;B.2: くちばしの長さとひれの長さの関係
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>本文で <code>@fig-penguins</code> と書くと <a href="#fig-penguins" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.</p>
+<p>本文で <code>@fig-penguins</code> と書くと <a href="#fig-penguins" class="quarto-xref">Figure&nbsp;<span>B.2</span></a> のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.</p>
 </section>
 <section id="tinytable-による表" class="level3">
 <h3 class="anchored" data-anchor-id="tinytable-による表"><code>tinytable</code> による表</h3>
@@ -768,7 +774,7 @@ Figure&nbsp;4.2: くちばしの長さとひれの長さの関係
 <div id="tbl-penguins" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-penguins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.2: ペンギンの種類ごとの平均値
+Table&nbsp;B.2: ペンギンの種類ごとの平均値
 </figcaption>
 <div aria-describedby="tbl-penguins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -778,19 +784,19 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_h5m1ard4q7b5nad41tqt = TinyTable.createTableFunctions("tinytable_h5m1ard4q7b5nad41tqt");
+      const tableFns_8j9d05623qswe2lqwq2o = TinyTable.createTableFunctions("tinytable_8j9d05623qswe2lqwq2o");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_s7elnhb30ee8juo63gz1',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_yu8cthk5eq9wiqamxend',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_5ysvorwql22lzymldf11',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_1a61qlct0b0ivtoak2nr',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_h5m1ard4q7b5nad41tqt.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_8j9d05623qswe2lqwq2o.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -799,11 +805,11 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_h5m1ard4q7b5nad41tqt td.tinytable_css_s7elnhb30ee8juo63gz1, #tinytable_h5m1ard4q7b5nad41tqt th.tinytable_css_s7elnhb30ee8juo63gz1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_h5m1ard4q7b5nad41tqt td.tinytable_css_yu8cthk5eq9wiqamxend, #tinytable_h5m1ard4q7b5nad41tqt th.tinytable_css_yu8cthk5eq9wiqamxend {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_8j9d05623qswe2lqwq2o td.tinytable_css_5ysvorwql22lzymldf11, #tinytable_8j9d05623qswe2lqwq2o th.tinytable_css_5ysvorwql22lzymldf11 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_8j9d05623qswe2lqwq2o td.tinytable_css_1a61qlct0b0ivtoak2nr, #tinytable_8j9d05623qswe2lqwq2o th.tinytable_css_1a61qlct0b0ivtoak2nr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_h5m1ard4q7b5nad41tqt" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_8j9d05623qswe2lqwq2o" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -838,11 +844,11 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 </figure>
 </div>
 </div>
-<p>本文で <code>@tbl-penguins</code> と書くと <a href="#tbl-penguins" class="quarto-xref">Table&nbsp;<span>4.2</span></a> のように参照できます.</p>
+<p>本文で <code>@tbl-penguins</code> と書くと <a href="#tbl-penguins" class="quarto-xref">Table&nbsp;<span>B.2</span></a> のように参照できます.</p>
 </section>
 </section>
-<section id="インラインコード" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="インラインコード"><span class="header-section-number">4.7</span> インラインコード</h2>
+<section id="インラインコード" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="インラインコード"><span class="header-section-number">B.7</span> インラインコード</h2>
 <p>文章の途中に計算結果を埋め込みたいときは, インラインコード (inline code) を使います. バッククォートの中で <code>r</code> に続けて式を書くと, コンパイル時にその評価結果が文章に挿入されます.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
@@ -859,8 +865,8 @@ Table&nbsp;4.2: ペンギンの種類ごとの平均値
 </div>
 <p>数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは 344 である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.</p>
 </section>
-<section id="演習問題" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">4.8</span> 演習問題</h2>
+<section id="演習問題" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="演習問題">演習問題</h2>
 <p>この章の演習は, 実際に小さな <code>.qmd</code> を書きながら進めます. VSCode か RStudio で <code>report.qmd</code> という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで <code>quarto render report.qmd</code> を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.</p>
 <div class="quiz">
 <p>まず, ドキュメントの骨組みを作ります. <code>report.qmd</code> の冒頭に, タイトル・著者名・日付を持つ YAML フロントマターを書き, 出力形式を HTML に指定してください. その下に見出しを1つと短い段落を1つ書いて, HTML にレンダリングしてみましょう.</p>
@@ -1467,13 +1473,13 @@ document.addEventListener("DOMContentLoaded", function () {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lesson/git.html" class="pagination-link" aria-label="Git &amp; GitHub">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Git &amp; GitHub</span></span>
+      <a href="../lesson/shell.html" class="pagination-link" aria-label="Shell">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Shell</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lesson/speedup.html" class="pagination-link" aria-label="高速化">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">高速化</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lesson/dictionary.html" class="pagination-link" aria-label="用語解説">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">用語解説</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -2002,7 +2008,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a>数値を直接書く代わりにインラインコードで書いておくと, データが変わっても本文中の数値が自動で更新されます. 例えば「ペンギンのサンプルサイズは <span class="in">`r nrow(penguins)`</span> である」のように書いておけば, データを差し替えたときに数値が追従するので, 書き間違いや更新漏れを防げます.</span>
 <span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題</span></span>
+<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さな <span class="in">`.qmd`</span> を書きながら進めます. VSCode か RStudio で <span class="in">`report.qmd`</span> という新しいファイルを作り, 各問題の指示にそって少しずつ書き足していきましょう. 一区切りごとにレンダリングして, 意図した見た目になっているかを確認してください. レンダリングは, RStudio や VSCode の Render ボタンを押すか, ターミナルで <span class="in">`quarto render report.qmd`</span> を実行します. 解答例は畳んであるので, 開く前にまず自分で書いてみましょう.</span>
 <span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a></span>

@@ -2,6 +2,12 @@
 title: AIと研究する
 ---
 
+```{r}
+#| label: setup
+#| include: false
+source(here::here("R/github-card.R"))
+```
+
 ## 文献調査
 
 文献調査では, AI に手元の文献ライブラリを直接参照させると便利です. ここでは, [文献と引用](literature.qmd) の章で使った Zotero を, MCP (Model Context Protocol) 経由で Claude につなぎます. これにより, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼を, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては @sec-mcp を参照してください.
@@ -71,6 +77,13 @@ claude mcp add zotero --env ZOTERO_LOCAL=true -- uvx --upgrade zotero-mcp
 ## ワークフロー
 
 研究を始めるたびにディレクトリ構成や設定を一から作るのは無駄が多く, AI に手伝ってもらうにも「どこに何を置くか」が定まっていないと指示がぶれます. そこで, [targets による再現性](targets.qmd) の章で紹介した Quarto + `{targets}` のワークフローを, そのまま使えるテンプレートにまとめたものが [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) です. GitHub の「Use this template」から自分のリポジトリを作れば, 研究プロジェクトの骨格がすぐに手に入ります.
+
+```{r}
+#| label: card-template-research
+#| echo: false
+github_card("kazuyanagimoto/template-research")
+```
+
 
 ### テンプレートの構成
 

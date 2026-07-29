@@ -72,6 +72,14 @@ claude mcp add zotero --env ZOTERO_LOCAL=true -- uvx --upgrade zotero-mcp
 
 研究を始めるたびにディレクトリ構成や設定を一から作るのは無駄が多く, AI に手伝ってもらうにも「どこに何を置くか」が定まっていないと指示がぶれます. そこで, [targets による再現性](../lesson/targets.llms.md) の章で紹介した Quarto + `{targets}` のワークフローを, そのまま使えるテンプレートにまとめたものが [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) です. GitHub の「Use this template」から自分のリポジトリを作れば, 研究プロジェクトの骨格がすぐに手に入ります.
 
+[![GitHub avatar of kazuyanagimoto](https://github.com/kazuyanagimoto.png?size=120)](https://github.com/kazuyanagimoto/template-research)
+
+kazuyanagimoto/template-research
+
+Template for empirical research projects: targets pipeline, rig + rv, Quarto notes/slides/manuscript (Typst)
+
+![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdib3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJjdXJyZW50Q29sb3IiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBkPSJNOCAwYzQuNDIgMCA4IDMuNTggOCA4YTguMDEzIDguMDEzIDAgMCAxLTUuNDUgNy41OWMtLjQuMDgtLjU1LS4xNy0uNTUtLjM4IDAtLjI3LjAxLTEuMTMuMDEtMi4yIDAtLjc1LS4yNS0xLjIzLS41NC0xLjQ4IDEuNzgtLjIgMy42NS0uODggMy42NS0zLjk1IDAtLjg4LS4zMS0xLjU5LS44Mi0yLjE1LjA4LS4yLjM2LTEuMDItLjA4LTIuMTIgMCAwLS42Ny0uMjItMi4yLjgyLS42NC0uMTgtMS4zMi0uMjctMi0uMjctLjY4IDAtMS4zNi4wOS0yIC4yNy0xLjUzLTEuMDMtMi4yLS44Mi0yLjItLjgyLS40NCAxLjEtLjE2IDEuOTItLjA4IDIuMTItLjUxLjU2LS44MiAxLjI4LS44MiAyLjE1IDAgMy4wNiAxLjg2IDMuNzUgMy42NCAzLjk1LS4yMy4yLS40NC41NS0uNTEgMS4wNy0uNDYuMjEtMS42MS41NS0yLjMzLS42Ni0uMTUtLjI0LS42LS44My0xLjIzLS44Mi0uNjcuMDEtLjI3LjM4LjAxLjUzLjM0LjE5LjczLjkuODIgMS4xMy4xNi40NS42OCAxLjMxIDIuNjkuOTQgMCAuNjcuMDEgMS4zLjAxIDEuNDkgMCAuMjEtLjE1LjQ1LS41NS4zOEE3Ljk5NSA3Ljk5NSAwIDAgMSAwIDhjMC00LjQyIDMuNTgtOCA4LThaIiAvPjwvc3ZnPg==) GitHub Lua
+
 ### テンプレートの構成
 
 テンプレートをクローンすると, 次のようなフォルダ構成になっています. [targets による再現性](../lesson/targets.llms.md) の章で説明したワークフローが, そのままディレクトリの形になっています.

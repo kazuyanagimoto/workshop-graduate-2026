@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-ai-research" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -965,165 +965,163 @@ document.addEventListener("DOMContentLoaded", function () {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> AIと研究する</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/github-card.R"</span>))</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># AIと研究する {#sec-ai-research}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/github-card.R"</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 文献調査</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## 文献調査</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>文献調査では, AI に手元の文献ライブラリを直接参照させると便利です. ここでは, <span class="co">[</span><span class="ot">文献と引用</span><span class="co">](literature.qmd)</span> の章で使った Zotero を, MCP (Model Context Protocol) 経由で Claude につなぎます. これにより, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼を, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては @sec-mcp を参照してください.</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>文献調査では, AI に手元の文献ライブラリを直接参照させると便利です. ここでは, <span class="co">[</span><span class="ot">文献と引用</span><span class="co">](literature.qmd)</span> の章で使った Zotero を, MCP (Model Context Protocol) 経由で Claude につなぎます. これにより, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼を, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては @sec-mcp を参照してください.</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Zotero MCP Server</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Zotero MCP Server</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ここで使うのは, <span class="co">[</span><span class="ot">`kujenga/zotero-mcp`</span><span class="co">](https://github.com/kujenga/zotero-mcp)</span> というオープンソースの MCP サーバーです. このサーバーは, Claude に対して次の3つのツールを提供します.</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ここで使うのは, <span class="co">[</span><span class="ot">`kujenga/zotero-mcp`</span><span class="co">](https://github.com/kujenga/zotero-mcp)</span> というオープンソースの MCP サーバーです. このサーバーは, Claude に対して次の3つのツールを提供します.</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_search_items`</span>: ライブラリを検索する</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_metadata`</span>: 文献の書誌情報を取得する</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_fulltext`</span>: 文献の全文を取得する</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_search_items`</span>: ライブラリを検索する</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_metadata`</span>: 文献の書誌情報を取得する</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_fulltext`</span>: 文献の全文を取得する</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>Claude は, ユーザーの依頼に応じてこれらのツールを自分で選んで呼び出します.</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>Claude は, ユーザーの依頼に応じてこれらのツールを自分で選んで呼び出します.</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 事前準備</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 事前準備</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>このサーバーは, 手元で動いている Zotero に接続します (ローカル API). そのため次の2つを用意します.</span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>このサーバーは, 手元で動いている Zotero に接続します (ローカル API). そのため次の2つを用意します.</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero 7 以降のデスクトップアプリをインストールし, 起動しておきます.</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero の「設定」→「詳細」で, 「この PC 上の他のアプリケーションが Zotero と通信することを許可する」にチェックを入れます (英語表記では Preferences → Advanced → "Allow other applications on this computer to communicate with Zotero").</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero 7 以降のデスクトップアプリをインストールし, 起動しておきます.</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero の「設定」→「詳細」で, 「この PC 上の他のアプリケーションが Zotero と通信することを許可する」にチェックを入れます (英語表記では Preferences → Advanced → "Allow other applications on this computer to communicate with Zotero").</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>サーバー自体は Python 製で, <span class="co">[</span><span class="ot">`uv`</span><span class="co">](https://docs.astral.sh/uv/)</span> の <span class="in">`uvx`</span> コマンドで起動します. <span class="in">`uv`</span> が入っていなければ, 先にインストールしておいてください (公式サイトの手順に従います). <span class="in">`uvx`</span> はパッケージを自動でダウンロードして実行するので, <span class="in">`zotero-mcp`</span> を手動でインストールする必要はありません.</span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>サーバー自体は Python 製で, <span class="co">[</span><span class="ot">`uv`</span><span class="co">](https://docs.astral.sh/uv/)</span> の <span class="in">`uvx`</span> コマンドで起動します. <span class="in">`uv`</span> が入っていなければ, 先にインストールしておいてください (公式サイトの手順に従います). <span class="in">`uvx`</span> はパッケージを自動でダウンロードして実行するので, <span class="in">`zotero-mcp`</span> を手動でインストールする必要はありません.</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Claude Desktop での設定</span></span>
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Claude Desktop での設定</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>Claude Desktop の設定ファイル <span class="in">`claude_desktop_config.json`</span> に, サーバーを1つ追加します. このファイルの場所は, macOS では <span class="in">`~/Library/Application Support/Claude/`</span>, Windows では <span class="in">`%APPDATA%\Claude\`</span> です.</span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>Claude Desktop の設定ファイル <span class="in">`claude_desktop_config.json`</span> に, サーバーを1つ追加します. このファイルの場所は, macOS では <span class="in">`~/Library/Application Support/Claude/`</span>, Windows では <span class="in">`%APPDATA%\Claude\`</span> です.</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{.json filename="claude_desktop_config.json"}</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mcpServers"</span><span class="op">:</span> {</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"zotero"</span><span class="op">:</span> {</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"command"</span><span class="op">:</span> <span class="st">"uvx"</span><span class="op">,</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"args"</span><span class="op">:</span> [<span class="st">"--upgrade"</span><span class="op">,</span> <span class="st">"zotero-mcp"</span>]<span class="op">,</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"env"</span><span class="op">:</span> {</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ZOTERO_LOCAL"</span><span class="op">:</span> <span class="st">"true"</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{.json filename="claude_desktop_config.json"}</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mcpServers"</span><span class="op">:</span> {</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"zotero"</span><span class="op">:</span> {</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>      <span class="st">"command"</span><span class="op">:</span> <span class="st">"uvx"</span><span class="op">,</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="st">"args"</span><span class="op">:</span> [<span class="st">"--upgrade"</span><span class="op">,</span> <span class="st">"zotero-mcp"</span>]<span class="op">,</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"env"</span><span class="op">:</span> {</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ZOTERO_LOCAL"</span><span class="op">:</span> <span class="st">"true"</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`true`</span> にすると, 上で有効にしたローカル API 経由で手元の Zotero に接続します. 設定を保存して Claude Desktop を再起動すると, サーバーが読み込まれます.</span>
 <span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`true`</span> にすると, 上で有効にしたローカル API 経由で手元の Zotero に接続します. 設定を保存して Claude Desktop を再起動すると, サーバーが読み込まれます.</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Claude Code での設定</span></span>
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Claude Code での設定</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>ターミナルで動く Claude Code なら, 設定ファイルを直接編集せずに, <span class="in">`claude mcp add`</span> コマンドで追加できます.</span>
 <span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>ターミナルで動く Claude Code なら, 設定ファイルを直接編集せずに, <span class="in">`claude mcp add`</span> コマンドで追加できます.</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add zotero <span class="at">--env</span> ZOTERO_LOCAL=true <span class="at">--</span> uvx <span class="at">--upgrade</span> zotero-mcp</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add zotero <span class="at">--env</span> ZOTERO_LOCAL=true <span class="at">--</span> uvx <span class="at">--upgrade</span> zotero-mcp</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">`--`</span> (ダッシュ2つ) は, Claude Code 自身のオプションと, サーバーを起動するコマンドの境目を表します. <span class="in">`--`</span> の後ろ (<span class="in">`uvx --upgrade zotero-mcp`</span>) が, サーバーを起動するコマンドとしてそのまま実行されます.</span>
 <span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="in">`--`</span> (ダッシュ2つ) は, Claude Code 自身のオプションと, サーバーを起動するコマンドの境目を表します. <span class="in">`--`</span> の後ろ (<span class="in">`uvx --upgrade zotero-mcp`</span>) が, サーバーを起動するコマンドとしてそのまま実行されます.</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 使ってみる</span></span>
 <span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 使ってみる</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>設定できたら, Claude に自然な日本語で依頼するだけです. 例えば次のように頼むと, Claude は <span class="in">`zotero_search_items`</span> でライブラリを検索し, 見つかった論文を一覧して答えます.</span>
 <span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>設定できたら, Claude に自然な日本語で依頼するだけです. 例えば次のように頼むと, Claude は <span class="in">`zotero_search_items`</span> でライブラリを検索し, 見つかった論文を一覧して答えます.</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Zotero のライブラリから, 最低賃金の雇用効果に関する論文を探して, それぞれ一行で要約して.</span></span>
 <span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Zotero のライブラリから, 最低賃金の雇用効果に関する論文を探して, それぞれ一行で要約して.</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>さらに特定の論文について「この論文の識別戦略を説明して」と頼めば, <span class="in">`zotero_item_fulltext`</span> で全文を取得したうえで答えます. 手元のライブラリに基づいて答えるので, 存在しない論文をでっち上げる (ハルシネーション) 危険が減るのが利点です.</span>
 <span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>さらに特定の論文について「この論文の識別戦略を説明して」と頼めば, <span class="in">`zotero_item_fulltext`</span> で全文を取得したうえで答えます. 手元のライブラリに基づいて答えるので, 存在しない論文をでっち上げる (ハルシネーション) 危険が減るのが利点です.</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 注意点</span></span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 注意点</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>全文取得 (<span class="in">`zotero_item_fulltext`</span>) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <span class="ot">&lt;https://www.zotero.org/settings/keys&gt;</span> で API キーとライブラリ ID を取得し, <span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`false`</span> にして <span class="in">`ZOTERO_API_KEY`</span> と <span class="in">`ZOTERO_LIBRARY_ID`</span> を設定します. API キーはコードやリポジトリに直接書かず, <span class="co">[</span><span class="ot">API</span><span class="co">](api.qmd)</span> の章の e-Stat の例と同じように, 秘密情報として扱ってください.</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>全文取得 (<span class="in">`zotero_item_fulltext`</span>) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <span class="ot">&lt;https://www.zotero.org/settings/keys&gt;</span> で API キーとライブラリ ID を取得し, <span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`false`</span> にして <span class="in">`ZOTERO_API_KEY`</span> と <span class="in">`ZOTERO_LIBRARY_ID`</span> を設定します. API キーはコードやリポジトリに直接書かず, <span class="co">[</span><span class="ot">API</span><span class="co">](api.qmd)</span> の章の e-Stat の例と同じように, 秘密情報として扱ってください.</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## ワークフロー</span></span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## ワークフロー</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>研究を始めるたびにディレクトリ構成や設定を一から作るのは無駄が多く, AI に手伝ってもらうにも「どこに何を置くか」が定まっていないと指示がぶれます. そこで, <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章で紹介した Quarto + <span class="in">`{targets}`</span> のワークフローを, そのまま使えるテンプレートにまとめたものが <span class="co">[</span><span class="ot">`kazuyanagimoto/template-research`</span><span class="co">](https://github.com/kazuyanagimoto/template-research)</span> です. GitHub の「Use this template」から自分のリポジトリを作れば, 研究プロジェクトの骨格がすぐに手に入ります.</span>
 <span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>研究を始めるたびにディレクトリ構成や設定を一から作るのは無駄が多く, AI に手伝ってもらうにも「どこに何を置くか」が定まっていないと指示がぶれます. そこで, <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章で紹介した Quarto + <span class="in">`{targets}`</span> のワークフローを, そのまま使えるテンプレートにまとめたものが <span class="co">[</span><span class="ot">`kazuyanagimoto/template-research`</span><span class="co">](https://github.com/kazuyanagimoto/template-research)</span> です. GitHub の「Use this template」から自分のリポジトリを作れば, 研究プロジェクトの骨格がすぐに手に入ります.</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: card-template-research</span></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="fu">github_card</span>(<span class="st">"kazuyanagimoto/template-research"</span>)</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: card-template-research</span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="fu">github_card</span>(<span class="st">"kazuyanagimoto/template-research"</span>)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="fu">### テンプレートの構成</span></span>
 <span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="fu">### テンプレートの構成</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>テンプレートをクローンすると, 次のようなフォルダ構成になっています. <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章で説明したワークフローが, そのままディレクトリの形になっています.</span>
 <span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>テンプレートをクローンすると, 次のようなフォルダ構成になっています. <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章で説明したワークフローが, そのままディレクトリの形になっています.</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="in">```default</span></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">template-research/</span></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="in">├── _targets.R        # pipeline composition</span></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="in">├── R/                # pipeline code: tar_data.R, tar_fact.R, ...</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="in">├── data/             # raw data (gitignored)</span></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">├── notes/            # exploratory Quarto notes (NN-name/)</span></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="in">├── slides/           # presentation decks</span></span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="in">├── manuscript/       # paper: Quarto Book + Typst</span></span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="in">├── references.bib    # bibliography</span></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="in">├── rproject.toml     # R version + packages (managed by rv)</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="in">└── CLAUDE.md         # project conventions for the AI assistant</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="in">```default</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="in">template-research/</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="in">├── _targets.R        # pipeline composition</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">├── R/                # pipeline code: tar_data.R, tar_fact.R, ...</span></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="in">├── data/             # raw data (gitignored)</span></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a><span class="in">├── notes/            # exploratory Quarto notes (NN-name/)</span></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="in">├── slides/           # presentation decks</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="in">├── manuscript/       # paper: Quarto Book + Typst</span></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="in">├── references.bib    # bibliography</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="in">├── rproject.toml     # R version + packages (managed by rv)</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="in">└── CLAUDE.md         # project conventions for the AI assistant</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>各ディレクトリの役割は次のとおりです.</span>
 <span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>各ディレクトリの役割は次のとおりです.</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`_targets.R`</span> と <span class="in">`R/tar_*.R`</span>: パイプラインの定義. パイプラインはデータオブジェクトだけを生成し, 図はファイルに保存せず, Quarto の中で <span class="in">`tar_read()`</span> を使ってその場で描きます.</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data/`</span>: 生データ (gitignore の対象).</span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`notes/NN-name/`</span>: 試行錯誤のノート. 1フォルダが1ラウンドの試行錯誤にあたり, ここでの計算はここに閉じておき, 固まったものだけをパイプラインに昇格させます.</span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`slides/`</span>: 発表スライド. パイプラインから切り離した「凍結スナップショット」で, 必要なデータを自分で持ち, <span class="in">`tar_load()`</span> を呼びません (<span class="co">[</span><span class="ot">スライド</span><span class="co">](slides.qmd)</span> の章の考え方です).</span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`manuscript/`</span>: 論文. <span class="in">`tar_load()`</span> でパイプラインの結果を読み込み, 常に最新のデータを反映します. Quarto Book として書き, Typst で PDF にします.</span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`_targets.R`</span> と <span class="in">`R/tar_*.R`</span>: パイプラインの定義. パイプラインはデータオブジェクトだけを生成し, 図はファイルに保存せず, Quarto の中で <span class="in">`tar_read()`</span> を使ってその場で描きます.</span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`data/`</span>: 生データ (gitignore の対象).</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`notes/NN-name/`</span>: 試行錯誤のノート. 1フォルダが1ラウンドの試行錯誤にあたり, ここでの計算はここに閉じておき, 固まったものだけをパイプラインに昇格させます.</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`slides/`</span>: 発表スライド. パイプラインから切り離した「凍結スナップショット」で, 必要なデータを自分で持ち, <span class="in">`tar_load()`</span> を呼びません (<span class="co">[</span><span class="ot">スライド</span><span class="co">](slides.qmd)</span> の章の考え方です).</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`manuscript/`</span>: 論文. <span class="in">`tar_load()`</span> でパイプラインの結果を読み込み, 常に最新のデータを反映します. Quarto Book として書き, Typst で PDF にします.</span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>パッケージは <span class="in">`install.packages()`</span> ではなく <span class="in">`rv`</span> で, R のバージョンは <span class="in">`rproject.toml`</span> で固定し, コードの整形は <span class="in">`air`</span> に任せます (この本のリポジトリも同じ構成です).</span>
 <span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>パッケージは <span class="in">`install.packages()`</span> ではなく <span class="in">`rv`</span> で, R のバージョンは <span class="in">`rproject.toml`</span> で固定し, コードの整形は <span class="in">`air`</span> に任せます (この本のリポジトリも同じ構成です).</span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>これらのフォルダがどう連携するかを図にすると, @fig-research-workflow のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. <span class="in">`notes/`</span> で固まった分析はパイプラインに昇格し, ルートの <span class="in">`CLAUDE.md`</span> を読んだ AI がこのプロジェクト全体の作業を手伝います.</span>
 <span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>これらのフォルダがどう連携するかを図にすると, @fig-research-workflow のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. <span class="in">`notes/`</span> で固まった分析はパイプラインに昇格し, ルートの <span class="in">`CLAUDE.md`</span> を読んだ AI がこのプロジェクト全体の作業を手伝います.</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a><span class="al">![研究プロジェクトの構成とデータの流れ](../static/cetz/research-workflow.svg)</span>{#fig-research-workflow fig-align="center" width="92%"}</span>
 <span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="al">![研究プロジェクトの構成とデータの流れ](../static/cetz/research-workflow.svg)</span>{#fig-research-workflow fig-align="center" width="92%"}</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### CLAUDE.md で AI にプロジェクトの規約を教える</span></span>
 <span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### CLAUDE.md で AI にプロジェクトの規約を教える</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>このテンプレートの肝は, ルートに置かれた <span class="in">`CLAUDE.md`</span> です. これは, Claude Code のような AI アシスタントが起動時に読み込む指示書で, このプロジェクトの規約を AI に伝えます. これがあると, AI は「このプロジェクトのやり方」に沿って作業します. 逆に, <span class="in">`CLAUDE.md`</span> が無ければ, AI は一般的な, しばしばプロジェクトの流儀と食い違うやり方でコードを書いてしまいます.</span>
 <span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>このテンプレートの肝は, ルートに置かれた <span class="in">`CLAUDE.md`</span> です. これは, Claude Code のような AI アシスタントが起動時に読み込む指示書で, このプロジェクトの規約を AI に伝えます. これがあると, AI は「このプロジェクトのやり方」に沿って作業します. 逆に, <span class="in">`CLAUDE.md`</span> が無ければ, AI は一般的な, しばしばプロジェクトの流儀と食い違うやり方でコードを書いてしまいます.</span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>テンプレートの <span class="in">`CLAUDE.md`</span> には, 例えば次のような規約が書かれています.</span>
 <span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>テンプレートの <span class="in">`CLAUDE.md`</span> には, 例えば次のような規約が書かれています.</span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パイプラインはデータオブジェクトだけを生成し, 図はファイルに保存せず Quarto 内で <span class="in">`tar_read()`</span> を使って描く.</span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パッケージは <span class="in">`install.packages()`</span> ではなく <span class="in">`rv`</span> で管理する.</span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ノート内だけの計算はノートに閉じ, 固まってからパイプラインに移す.</span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>スライドは凍結スナップショットとして, <span class="in">`tar_load()`</span> を呼ばず自分でデータを持つ.</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>表は <span class="in">`knitr::kable()`</span> ではなく <span class="in">`tinytable`</span> で作り, 回帰は <span class="in">`fixest`</span> を使う.</span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>実証結果の数値を本文やキャプションに直接書かず, 計算した値をインラインコードで埋め込む.</span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パイプラインはデータオブジェクトだけを生成し, 図はファイルに保存せず Quarto 内で <span class="in">`tar_read()`</span> を使って描く.</span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パッケージは <span class="in">`install.packages()`</span> ではなく <span class="in">`rv`</span> で管理する.</span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ノート内だけの計算はノートに閉じ, 固まってからパイプラインに移す.</span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>スライドは凍結スナップショットとして, <span class="in">`tar_load()`</span> を呼ばず自分でデータを持つ.</span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>表は <span class="in">`knitr::kable()`</span> ではなく <span class="in">`tinytable`</span> で作り, 回帰は <span class="in">`fixest`</span> を使う.</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>実証結果の数値を本文やキャプションに直接書かず, 計算した値をインラインコードで埋め込む.</span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>これらは, この本のこれまでの章で推奨してきたルールとほぼ同じです. 大事なのは, こうした自分の流儀を <span class="in">`CLAUDE.md`</span> に明文化しておくと, AI がそれを前提に働いてくれる, という点です. 新しいルールを決めるたびに <span class="in">`CLAUDE.md`</span> に書き足していくことで, AI との共同作業は少しずつ自分のやり方に馴染んでいきます.</span>
 <span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>これらは, この本のこれまでの章で推奨してきたルールとほぼ同じです. 大事なのは, こうした自分の流儀を <span class="in">`CLAUDE.md`</span> に明文化しておくと, AI がそれを前提に働いてくれる, という点です. 新しいルールを決めるたびに <span class="in">`CLAUDE.md`</span> に書き足していくことで, AI との共同作業は少しずつ自分のやり方に馴染んでいきます.</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### 始め方</span></span>
 <span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### 始め方</span></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>GitHub でテンプレートから自分のリポジトリを作り, クローンしたら, ツールチェインを用意します. R のバージョンは <span class="co">[</span><span class="ot">`rig`</span><span class="co">](https://github.com/r-lib/rig)</span> で, パッケージは <span class="co">[</span><span class="ot">`rv`</span><span class="co">](https://github.com/a2-ai/rv)</span> で管理します.</span>
 <span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>GitHub でテンプレートから自分のリポジトリを作り, クローンしたら, ツールチェインを用意します. R のバージョンは <span class="co">[</span><span class="ot">`rig`</span><span class="co">](https://github.com/r-lib/rig)</span> で, パッケージは <span class="co">[</span><span class="ot">`rv`</span><span class="co">](https://github.com/a2-ai/rv)</span> で管理します.</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add 4.6                 <span class="co"># install the pinned R version</span></span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install rv             <span class="co"># package manager (macOS; see repo for other OSes)</span></span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install air            <span class="co"># optional: R formatter</span></span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                     <span class="co"># restore the package library</span></span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">'targets::tar_make()'</span>  <span class="co"># run the pipeline</span></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add 4.6                 <span class="co"># install the pinned R version</span></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install rv             <span class="co"># package manager (macOS; see repo for other OSes)</span></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install air            <span class="co"># optional: R formatter</span></span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                     <span class="co"># restore the package library</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">'targets::tar_make()'</span>  <span class="co"># run the pipeline</span></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>最後に, <span class="in">`.Renviron.example`</span> を <span class="in">`.Renviron`</span> にコピーして, API キーなどの秘密情報を書き込めば (<span class="co">[</span><span class="ot">API</span><span class="co">](api.qmd)</span> の章を参照), 準備は完了です.</span>
 <span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>最後に, <span class="in">`.Renviron.example`</span> を <span class="in">`.Renviron`</span> にコピーして, API キーなどの秘密情報を書き込めば (<span class="co">[</span><span class="ot">API</span><span class="co">](api.qmd)</span> の章を参照), 準備は完了です.</span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### AI と進める</span></span>
 <span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a><span class="fu">### AI と進める</span></span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです (@fig-research-cycle). 具体的な流れは <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章と同じですが, AI を使うと各段階が次のように楽になります.</span>
 <span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです (@fig-research-cycle). 具体的な流れは <span class="co">[</span><span class="ot">targets による再現性</span><span class="co">](targets.qmd)</span> の章と同じですが, AI を使うと各段階が次のように楽になります.</span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a><span class="al">![AI と回す研究のサイクル](../static/cetz/research-cycle.svg)</span>{#fig-research-cycle fig-align="center" width="62%"}</span>
 <span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a><span class="al">![AI と回す研究のサイクル](../static/cetz/research-cycle.svg)</span>{#fig-research-cycle fig-align="center" width="62%"}</span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ノートでの試行錯誤: 「このデータで最低賃金の雇用効果を回帰して図にして」と頼めば, <span class="in">`notes/`</span> の中にコードを書いてくれます.</span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パイプラインへの昇格: 固まった分析を <span class="in">`R/tar_*.R`</span> に移す作業を任せます.</span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>論文執筆: <span class="in">`manuscript/`</span> でパイプラインの結果を読み込み, 文章の下書きや相互参照の整理を手伝わせます.</span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a>いずれの段階でも, <span class="in">`CLAUDE.md`</span> があるおかげで, AI はプロジェクトの規約 (パイプラインはデータオブジェクトだけ, 図は <span class="in">`tar_read()`</span> で描く, など) を守ったコードを書きます. AI に任せきりにするのではなく, 規約を明文化して土台を整え, その上で AI に働いてもらう, というのがこのワークフローの考え方です.</span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ノートでの試行錯誤: 「このデータで最低賃金の雇用効果を回帰して図にして」と頼めば, <span class="in">`notes/`</span> の中にコードを書いてくれます.</span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>パイプラインへの昇格: 固まった分析を <span class="in">`R/tar_*.R`</span> に移す作業を任せます.</span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>論文執筆: <span class="in">`manuscript/`</span> でパイプラインの結果を読み込み, 文章の下書きや相互参照の整理を手伝わせます.</span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a>いずれの段階でも, <span class="in">`CLAUDE.md`</span> があるおかげで, AI はプロジェクトの規約 (パイプラインはデータオブジェクトだけ, 図は <span class="in">`tar_read()`</span> で描く, など) を守ったコードを書きます. AI に任せきりにするのではなく, 規約を明文化して土台を整え, その上で AI に働いてもらう, というのがこのワークフローの考え方です.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

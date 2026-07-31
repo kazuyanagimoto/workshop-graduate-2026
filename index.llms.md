@@ -14,7 +14,7 @@ Affiliation
 
 Published
 
-2026年07月29日
+2026年07月31日
 
 # 1 はじめに
 
@@ -26,7 +26,9 @@ Published
 
 ## 1.2 環境構築
 
-このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto のインストール手順をOS別にまとめます.
+授業を始める前に次の環境構築を完了させておいてください. また, [sec-git](#sec-git) で用いるため, GitHub のアカウントも作成しておいてください. [sec-github-copilot](#sec-github-copilot) で述べるように, GitHub の Education アカウントに登録することをお勧めします.
+
+このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto, バージョン管理システムの git のインストール手順をOS別にまとめます.
 
 ### Mac
 
@@ -35,6 +37,8 @@ Published
 ``` sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+なお, バージョン管理の git は, Homebrew を入れるときに一緒に導入される Xcode Command Line Tools に含まれているため, 別途インストールする必要はありません. `git --version` でバージョンが表示されれば導入済みです (まだなら `xcode-select --install` で入ります).
 
 Homebrewが入れば, 必要なソフトウェアはすべて `brew` でインストールできます.
 
@@ -89,11 +93,11 @@ sudo apt install -y curl # install a package (here: curl)
 
 先頭の `sudo` は, システムを変更する操作を管理者権限で実行するための命令で, 実行時にはWSLセットアップ時に設定したパスワードを聞かれます (詳しくは [sec-permission](#sec-permission) で説明します). `apt update` はパッケージの「カタログ」を最新にするだけで, 何もインストールしません. インストールやアップグレードの前には, まず `apt update` を実行するのが作法です. `-y` は, インストールやアップグレードの途中で聞かれる「続行しますか?」という質問に自動で「はい」と答えるオプションです.
 
-この後の手順で使うダウンロードツール (curl, wget) と, Rのパッケージをソースコードからビルドするときに必要になるコンパイラ類 (build-essential) を, ここでまとめて入れておきます.
+この後の手順で使うダウンロードツール (curl, wget), Rのパッケージをソースコードからビルドするときに必要になるコンパイラ類 (build-essential), そしてバージョン管理の git を, ここでまとめて入れておきます.
 
 ``` sh
 sudo apt update
-sudo apt install -y build-essential
+sudo apt install -y build-essential git
 ```
 
 rigとQuartoは, apt ではなく公式の配布物からWSL (Ubuntu) 側にインストールします. WSLのターミナルで以下を実行してください.
@@ -115,3 +119,13 @@ sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 ```
 
 アップデートするときは, `QUARTO_VERSION` を新しいバージョン番号に変えて同じコマンドを再実行するだけです. Rのアップデートは Mac と同様で, `rig add release` を再実行します. apt で入れたソフトウェアは `sudo apt update && sudo apt upgrade` で, Windows側のソフトウェアは `winget upgrade --all` でまとめて更新できます.
+
+## 1.3 AI Coding Tools
+
+私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では [sec-ai-research](#sec-ai-research) 以外では必要ありません. また, [sec-ai-research](#sec-ai-research) で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.
+
+### GitHub Copilot
+
+GitHub Copilot は, GitHub が提供する AI コーディングアシスタントです. Visual Studio Code の拡張機能として提供されており, コードの補完や生成を支援します. Copilot は OpenAI の Codex モデルを基盤としており, プログラミング言語やフレームワークに関する知識を持っています. また, Claude や Gemini などの他のモデルも利用可能です.
+
+学生や教員の場合は, GitHub Education のアカウントを作成することで, GitHub Pro の機能を無料で利用できます. これにより, Copilot の使用上限が無料アカウントと比べて拡大します. 教育機関の認証はやや厳しくなっていると言われており, 大学の構内からのアクセスが必要と言われています.

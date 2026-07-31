@@ -1,6 +1,4 @@
----
-title: AIと研究する
----
+# AIと研究する {#sec-ai-research}
 
 ```{r}
 #| label: setup

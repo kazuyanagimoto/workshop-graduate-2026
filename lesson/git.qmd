@@ -1,6 +1,4 @@
----
-title: Git & GitHub
----
+# Git & GitHub {#sec-git}
 
 ## なぜ Git を使うのか
 

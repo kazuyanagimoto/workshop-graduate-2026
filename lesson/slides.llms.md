@@ -1,8 +1,8 @@
-# 10  スライド
+# 9  スライド
 
 Code
 
-## 10.1 技術要件
+## 9.1 技術要件
 
 アカデミックなスライドを作る際に次のようなアプリケーションやフレームワークの選択肢があると思います.
 
@@ -35,7 +35,7 @@ A drop-in Quarto extension for Touying slides with selectable built-in themes
 
 もちろん, 共著のプロジェクトでは Beamer を使わないといけない場合もありますが…
 
-## 10.2 アンチパターン
+## 9.2 アンチパターン
 
 経済学の発表を聞いていると, いくつか典型的なアンチパターンがあることに気づきます. ここでは, それらを紹介しながら, スライドの作り方の鉄則を学びましょう.
 
@@ -43,9 +43,9 @@ A drop-in Quarto extension for Touying slides with selectable built-in themes
 
 スライドからは聴衆の注意をそらす要素はできるだけ排除すべきです. しかし, Beamer のデフォルトの設定ではスライドの右下にナビゲーション記号を表示します. これをクリックしてスライドを操作する人はおらず, 不必要です.
 
-[![](../static/beamer/navigation-bad-1.svg)](../static/beamer/navigation-bad-1.svg "Figure 10.1: 不必要なナビゲーション")
+[![](../static/beamer/navigation-bad-1.svg)](../static/beamer/navigation-bad-1.svg "Figure 9.1: 不必要なナビゲーション")
 
-Figure 10.1: 不必要なナビゲーション
+Figure 9.1: 不必要なナビゲーション
 
 ナビゲーション記号は, プリアンブルに次の一行を加えれば消せます.
 
@@ -53,9 +53,9 @@ Figure 10.1: 不必要なナビゲーション
 \setbeamertemplate{navigation symbols}{}
 ```
 
-[![](../static/beamer/navigation-good-1.svg)](../static/beamer/navigation-good-1.svg "Figure 10.2: ナビゲーションを消したスライド")
+[![](../static/beamer/navigation-good-1.svg)](../static/beamer/navigation-good-1.svg "Figure 9.2: ナビゲーションを消したスライド")
 
-Figure 10.2: ナビゲーションを消したスライド
+Figure 9.2: ナビゲーションを消したスライド
 
 ### 4:3 vs. 16:9
 
@@ -153,7 +153,7 @@ tab |>
   style_tt(i = 3, bold = TRUE) # bold the Education estimate
 ```
 
-## 10.3 Quarto + Touying
+## 9.3 Quarto + Touying
 
 ここからは, [quarto-touying-typst](https://github.com/kazuyanagimoto/quarto-touying-typst) を使ってスライドを作る流れを一通り見ていきます. この節で扱うのは日常的に使う機能だけです. 完全なチュートリアルは公式ドキュメントの [Tutorial](https://kazuyanagimoto.com/quarto-touying-typst/tutorial.html) に, テーマごとの実際の見た目は [Gallery](https://kazuyanagimoto.com/quarto-touying-typst/gallery.html) にあります.
 

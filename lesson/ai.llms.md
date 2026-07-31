@@ -1,8 +1,8 @@
-# 13  AIと研究する
+# 12  AIと研究する
 
 Code
 
-## 13.1 文献調査
+## 12.1 文献調査
 
 文献調査では, AI に手元の文献ライブラリを直接参照させると便利です. ここでは, [文献と引用](../lesson/literature.llms.md) の章で使った Zotero を, MCP (Model Context Protocol) 経由で Claude につなぎます. これにより, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼を, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては [sec-mcp](#sec-mcp) を参照してください.
 
@@ -68,7 +68,7 @@ claude mcp add zotero --env ZOTERO_LOCAL=true -- uvx --upgrade zotero-mcp
 - Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.
 - 全文取得 (`zotero_item_fulltext`) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <https://www.zotero.org/settings/keys> で API キーとライブラリ ID を取得し, `ZOTERO_LOCAL` を `false` にして `ZOTERO_API_KEY` と `ZOTERO_LIBRARY_ID` を設定します. API キーはコードやリポジトリに直接書かず, [API](../lesson/api.llms.md) の章の e-Stat の例と同じように, 秘密情報として扱ってください.
 
-## 13.2 ワークフロー
+## 12.2 ワークフロー
 
 研究を始めるたびにディレクトリ構成や設定を一から作るのは無駄が多く, AI に手伝ってもらうにも「どこに何を置くか」が定まっていないと指示がぶれます. そこで, [targets による再現性](../lesson/targets.llms.md) の章で紹介した Quarto + `{targets}` のワークフローを, そのまま使えるテンプレートにまとめたものが [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) です. GitHub の「Use this template」から自分のリポジトリを作れば, 研究プロジェクトの骨格がすぐに手に入ります.
 
@@ -109,9 +109,9 @@ template-research/
 
 これらのフォルダがどう連携するかを図にすると, [Figure fig-research-workflow](#fig-research-workflow) のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. `notes/` で固まった分析はパイプラインに昇格し, ルートの `CLAUDE.md` を読んだ AI がこのプロジェクト全体の作業を手伝います.
 
-[![](../static/cetz/research-workflow.svg)](../static/cetz/research-workflow.svg "Figure 13.1: 研究プロジェクトの構成とデータの流れ")
+[![](../static/cetz/research-workflow.svg)](../static/cetz/research-workflow.svg "Figure 12.1: 研究プロジェクトの構成とデータの流れ")
 
-Figure 13.1: 研究プロジェクトの構成とデータの流れ
+Figure 12.1: 研究プロジェクトの構成とデータの流れ
 
 ### CLAUDE.md で AI にプロジェクトの規約を教える
 
@@ -147,9 +147,9 @@ R -e 'targets::tar_make()'  # run the pipeline
 
 研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです ([Figure fig-research-cycle](#fig-research-cycle)). 具体的な流れは [targets による再現性](../lesson/targets.llms.md) の章と同じですが, AI を使うと各段階が次のように楽になります.
 
-[![](../static/cetz/research-cycle.svg)](../static/cetz/research-cycle.svg "Figure 13.2: AI と回す研究のサイクル")
+[![](../static/cetz/research-cycle.svg)](../static/cetz/research-cycle.svg "Figure 12.2: AI と回す研究のサイクル")
 
-Figure 13.2: AI と回す研究のサイクル
+Figure 12.2: AI と回す研究のサイクル
 
 - ノートでの試行錯誤: 「このデータで最低賃金の雇用効果を回帰して図にして」と頼めば, `notes/` の中にコードを書いてくれます.
 - パイプラインへの昇格: 固まった分析を `R/tar_*.R` に移す作業を任せます.

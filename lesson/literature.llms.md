@@ -1,8 +1,8 @@
-# 11  文献と引用
+# 10  文献と引用
 
 Code
 
-## 11.1 Zoteroによる文献管理
+## 10.1 Zoteroによる文献管理
 
 Zoteroを使うと, 文献情報 (著者, 年, タイトル, DOI など) を整理して, BibTeX形式として書き出せます.
 
@@ -114,7 +114,7 @@ Better BibTeXが設定されていると, 自動的にcitekeyが生成される�
 
 コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は “Better BibTeX” を選び, ファイル名は `references.bib` として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに `references.bib` が自動で更新されるようになります.
 
-## 11.2 LaTeX による引用
+## 10.2 LaTeX による引用
 
 `references.bib` を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.
 
@@ -156,9 +156,9 @@ of long-run growth. This view builds on earlier work
 \end{document}
 ```
 
-[![](../static/tex/main.svg)](../static/tex/main.svg "Figure 11.1: natbib + BibTeX による引用と文献リスト")
+[![](../static/tex/main.svg)](../static/tex/main.svg "Figure 10.1: natbib + BibTeX による引用と文献リスト")
 
-Figure 11.1: natbib + BibTeX による引用と文献リスト
+Figure 10.1: natbib + BibTeX による引用と文献リスト
 
 コンパイルした結果が [Figure fig-natbib-bibtex](#fig-natbib-bibtex) です. `\citet` が地の文の「Acemoglu and Robinson (2012)」に, `\citep` が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see …, chap. 2)」になっている点に注目してください.
 
@@ -191,9 +191,9 @@ of long-run growth. This view builds on earlier work
 \end{document}
 ```
 
-[![](../static/tex/biblatex.svg)](../static/tex/biblatex.svg "Figure 11.2: biblatex + Biber による引用と文献リスト")
+[![](../static/tex/biblatex.svg)](../static/tex/biblatex.svg "Figure 10.2: biblatex + Biber による引用と文献リスト")
 
-Figure 11.2: biblatex + Biber による引用と文献リスト
+Figure 10.2: biblatex + Biber による引用と文献リスト
 
 コンパイルした結果が [Figure fig-biblatex-biber](#fig-biblatex-biber) です (スタイルは `biblatex-chicago` の author-date). `natbib` + `econ-aea` 版とほぼ同じ出力になっているのが分かります.
 
@@ -216,7 +216,7 @@ Figure 11.2: biblatex + Biber による引用と文献リスト
 >
 > `natbib` を勧めるもう一つの理由が, [arXiv](https://arxiv.org) への投稿です. arXiv は投稿された `.tex` をコンパイルしますが, bibtex も biber も実行しません. 代わりに, 一緒にアップロードした `.bbl` ファイル (文献リストを組版した中間ファイル) をそのまま使います. ここで両者に差が出ます. BibTeX が生成する `.bbl` は素朴なテキストでバージョンに依存しないため, arXiv 上でもそのまま通ります. 一方 `biblatex` の `.bbl` は biblatex/biber のバージョンと強く結合しており, arXiv 側の biblatex が手元と違うバージョンだと読めずにエラーになることがあります. どちらも `.bbl` を同梱すれば投稿自体は可能ですが, この一点でも `natbib` + BibTeX のほうが安全です.
 
-## 11.3 Quartoによる引用
+## 10.3 Quartoによる引用
 
 Quarto では LaTeX のように `\citet` / `\citep` を使わず, Markdown の `@` 記法で引用します. `@key` が地の文に入る形 (`\citet` 相当), `[@key]` が括弧に入る形 (`\citep` 相当) で, ページや章は `[@key, chap. 2]` のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます[^1]. `link-citations: true` を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.
 
@@ -243,9 +243,9 @@ long-run growth. This view builds on earlier work [@halljones1999],
 and is developed in detail elsewhere [see @acemoglu2012, chap. 2].
 ```
 
-[![](../static/quarto/example.svg)](../static/quarto/example.svg "Figure 11.3: Quartoによる引用と文献リスト")
+[![](../static/quarto/example.svg)](../static/quarto/example.svg "Figure 10.3: Quartoによる引用と文献リスト")
 
-Figure 11.3: Quartoによる引用と文献リスト
+Figure 10.3: Quartoによる引用と文献リスト
 
 これをレンダリングした結果が [Figure fig-quarto-cite](#fig-quarto-cite) です. natbib + `econ-aea` や biblatex-chicago の例とほぼ同じ出力が得られます. `link-citations: true` を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.
 
@@ -289,9 +289,9 @@ format: typst
 ---
 ```
 
-[![](../static/quarto/example-typst.svg)](../static/quarto/example-typst.svg "Figure 11.4: Typst バックエンドでの引用と文献リスト")
+[![](../static/quarto/example-typst.svg)](../static/quarto/example-typst.svg "Figure 10.4: Typst バックエンドでの引用と文献リスト")
 
-Figure 11.4: Typst バックエンドでの引用と文献リスト
+Figure 10.4: Typst バックエンドでの引用と文献リスト
 
 本文は [Figure fig-quarto-cite](#fig-quarto-cite) の例と同じです. コンパイルした結果が [Figure fig-quarto-typst](#fig-quarto-typst) で, LaTeX 経由の出力 ([Figure fig-quarto-cite](#fig-quarto-cite)) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは “Bibliography” になります).
 

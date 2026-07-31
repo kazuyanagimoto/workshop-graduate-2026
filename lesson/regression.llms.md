@@ -1,8 +1,8 @@
-# 9  回帰分析
+# 8  回帰分析
 
 Code
 
-## 9.1 表
+## 8.1 表
 
 論文や資料に載せる表は, 長らく `kableExtra` や `gt` で作るのが定番でした. しかし近年は, それらより軽量で扱いやすい [`tinytable`](https://vincentarelbundock.github.io/tinytable/) が標準になりつつあります. `tinytable` は base R だけで動く依存ゼロのパッケージでありながら, セルの結合や色付け, 数式の埋め込みといった凝った表現にも対応し, HTML・LaTeX・PDF・Typst のどの形式にも同じコードから書き出せます. 後で紹介する `modelsummary` の回帰表もそのまま `tinytable` のオブジェクトとして返ってくるため, 一度使い方を覚えれば表まわりはこれ一つで完結します.
 
@@ -31,7 +31,7 @@ penguins_summary |>
 | Gentoo    | 124 | 47.50488 | 5076.016  |
 | Chinstrap | 68  | 48.83382 | 3733.088  |
 
-Table 9.1: ペンギンの種別の要約統計量
+Table 8.1: ペンギンの種別の要約統計量
 
 ### 数値の整形: `format_tt()`
 
@@ -55,7 +55,7 @@ penguins_summary |>
 | Gentoo    | 124 | 47.5     | 5,076     |
 | Chinstrap | 68  | 48.8     | 3,733     |
 
-Table 9.2: 桁数をそろえた要約統計量
+Table 8.2: 桁数をそろえた要約統計量
 
 欠損値の扱いも `format_tt()` の仕事です. 集計の途中で生じた `NA` は, 表の上では空白やハイフンに置き換えたいことがほとんどです. その場合は `replace` 引数を使います. 例えば種ごと・島ごとの個体数をクロス集計すると, ペンギンの生息分布には偏りがあるため (Gentoo は Biscoe 島, Chinstrap は Dream 島にしかいません), 観測のない組み合わせが `NA` になります.
 
@@ -73,7 +73,7 @@ penguins |>
 | Gentoo    | \-        | 124    | \-    |
 | Chinstrap | \-        | \-     | 68    |
 
-Table 9.3: 種と島ごとの個体数
+Table 8.3: 種と島ごとの個体数
 
 ### スタイル: `style_tt()`
 
@@ -99,7 +99,7 @@ penguins_summary |>
 | Gentoo    | 124 | 47.5     | 5,076     |
 | Chinstrap | 68  | 48.8     | 3,733     |
 
-Table 9.4: 平均体重が大きい種を強調
+Table 8.4: 平均体重が大きい種を強調
 
 ### 行と列のグループ化: `group_tt()`
 
@@ -128,7 +128,7 @@ penguins |>
 | Gentoo    | 47.5      | 15       | 217.2       | 5076      |
 | Chinstrap | 48.8      | 18.4     | 195.8       | 3733.1    |
 
-Table 9.5: 指標をグループ化した要約統計量
+Table 8.5: 指標をグループ化した要約統計量
 
 次に行をまとめます. 性別ごとに種別の平均を並べ, 性別を行の見出しにします. `i` に渡す数値は「その行の直前に見出しを挿入する」位置を表すので, 雌が 1–3 行目, 雄が 4–6 行目なら `list("Female" = 1, "Male" = 4)` とします.
 
@@ -164,7 +164,7 @@ penguins |>
 | Chinstrap | 51.1     | 3,939     |
 | Gentoo    | 49.5     | 5,485     |
 
-Table 9.6: 性別で行をまとめた平均値
+Table 8.6: 性別で行をまとめた平均値
 
 ### キャプションと脚注
 
@@ -189,7 +189,7 @@ penguins_summary |>
 | Chinstrap | 68 | 48.8 | 3,733 |
 | Source: Palmer Station LTER. body_mass の単位はグラム. |  |  |  |
 
-Table 9.7: 注を付けた表
+Table 8.7: 注を付けた表
 
 ### セル内の数式
 
@@ -214,13 +214,13 @@ penguins_summary |>
 | Gentoo    | 124   | 47.5                         | 5,076                        |
 | Chinstrap | 68    | 48.8                         | 3,733                        |
 
-Table 9.8: 列見出しに数式を使った表
+Table 8.8: 列見出しに数式を使った表
 
 ### 出力形式とエクスポート
 
 ここまで作った表は, Quarto上でレンダリングする文書の形式 (HTML / PDF / Typst) に合わせて `tinytable` が自動的に適切な出力へ変換してくれます. 同じコードがどの形式でも通用するのが `tinytable` の大きな利点です. 表を単体のファイルとして書き出したいときは `save_tt()` を使い, 拡張子から形式を判断させます (例: `save_tt("table.tex")` で LaTeX, `save_tt("table.png")` で画像). LaTeX 文書に貼り付けるためにスタイルを落とした素の `tabular` が欲しい場合は, 保存前に `theme_tt("tabular")` を挟みます.
 
-## 9.2 回帰分析
+## 8.2 回帰分析
 
 R で回帰分析を行う方法は数えきれないほどあります. 標準誤差の頑健化には `sandwich` や `estimatr`, 高次元固定効果には `lfe`, 操作変数法には `AER`, 限界効果には `margins` や `mfx`, と用途ごとに別々のパッケージを覚えるのが従来の常識でした. しかし結論から言えば, いまや applied micro の実証で必要になる推定のほとんどは `fixest` ひとつでまかなえます. この節では `lm()` を出発点に, なぜ `fixest` だけ覚えればよいのか, そしてその使い方を見ていきます. 引き続き `penguins` データセットを使い, ペンギンの体重 (`body_mass`) を体格から説明する回帰を例にします.
 
@@ -411,7 +411,7 @@ modelsummary(models)
 | FE: species    |           |           | X       | X       |
 | FE: island     |           |           |         | X       |
 
-Table 9.9: modelsummary の既定の出力
+Table 8.9: modelsummary の既定の出力
 
 既定の表は変数名がそのまま並び, 統計量も載りすぎて雑然としています. 論文用に仕上げるには, 主に次の 3 つの引数を使います.
 
@@ -456,7 +456,7 @@ modelsummary(
 | Within R2 |  |  | 0.462 | 0.463 |
 | \* p \< 0.1, \*\* p \< 0.05, \*\*\* p \< 0.01 |  |  |  |  |
 
-Table 9.10: 標準誤差と固定効果を変えた回帰の比較
+Table 8.10: 標準誤差と固定効果を変えた回帰の比較
 
 LaTeX 文書に貼り付けたい場合は, 「表」の節で触れたように `theme_tt("tabular")` を挟んでから `save_tt("table_reg.tex")` で書き出します. 同じ回帰表のコードから HTML でも PDF でも同じ表が得られるのが, `tinytable` ベースで作ることの利点です.
 
@@ -469,9 +469,9 @@ ggcoefplot(m_fe) +
   theme_minimal()
 ```
 
-[![](regression_files/figure-html/fig-coefplot-1.svg)](regression_files/figure-html/fig-coefplot-1.svg "Figure 9.1: Coefficient plot for the two-way fixed-effects model.")
+[![](regression_files/figure-html/fig-coefplot-1.svg)](regression_files/figure-html/fig-coefplot-1.svg "Figure 8.1: Coefficient plot for the two-way fixed-effects model.")
 
-Figure 9.1: Coefficient plot for the two-way fixed-effects model.
+Figure 8.1: Coefficient plot for the two-way fixed-effects model.
 
 `ggfixest` が特に活躍するのがイベントスタディです. `fixest` では formula の中に `i(time, treat, ref)` と書くと, 処置群について時点ごとの交互作用項 (= イベントスタディの係数) が一括で作られます. `ref` で基準時点を指定します. ここでは `fixest` に同梱されている擬似的な差分の差分 (difference-in-differences) データ `base_did` を使います.
 
@@ -488,9 +488,9 @@ ggiplot(est_did) +
   theme_minimal()
 ```
 
-[![](regression_files/figure-html/fig-event-study-1.svg)](regression_files/figure-html/fig-event-study-1.svg "Figure 9.2: Event-study estimates around treatment (reference period = 5).")
+[![](regression_files/figure-html/fig-event-study-1.svg)](regression_files/figure-html/fig-event-study-1.svg "Figure 8.2: Event-study estimates around treatment (reference period = 5).")
 
-Figure 9.2: Event-study estimates around treatment (reference period = 5).
+Figure 8.2: Event-study estimates around treatment (reference period = 5).
 
 処置が時点によってずれて始まる staggered な設定では, 単純な二元配置固定効果推定が誤った推定値を与えうることが知られています ([Sun and Abraham 2021](#ref-sun2021)). その場合は `i()` の代わりに `sunab()` を使うと, Sun and Abraham ([2021](#ref-sun2021)) の補正済み推定量がそのまま得られ, `ggiplot()` で同じように描けます.
 
@@ -567,7 +567,7 @@ models_ex <- list(
 | Within R2 |  |  | 0.462 | 0.463 |
 | \* p \< 0.1, \*\* p \< 0.05, \*\*\* p \< 0.01 |  |  |  |  |
 
-Table 9.11: 完成形の回帰表 (これを再現する)
+Table 8.11: 完成形の回帰表 (これを再現する)
 
 [Table tbl-exercise-target](#tbl-exercise-target) を再現してください. 使うのは `coef_map`, `gof_map`, `stars` の3つの引数と, `tinytable` の `group_tt()` です. モデル (1) と (2), (3) と (4) は係数が同じで, 括弧内の標準誤差だけが違う点にも注目してください.
 
@@ -651,9 +651,9 @@ head(base_stagg)
 >   theme_minimal()
 > ```
 >
-> [![](regression_files/figure-html/fig-exercise-es-solution-1.svg)](regression_files/figure-html/fig-exercise-es-solution-1.svg "Figure 9.3: Event-study estimates on staggered data: naive TWFE versus Sun and Abraham (2021).")
+> [![](regression_files/figure-html/fig-exercise-es-solution-1.svg)](regression_files/figure-html/fig-exercise-es-solution-1.svg "Figure 8.3: Event-study estimates on staggered data: naive TWFE versus Sun and Abraham (2021).")
 >
-> Figure 9.3: Event-study estimates on staggered data: naive TWFE versus Sun and Abraham (2021).
+> Figure 8.3: Event-study estimates on staggered data: naive TWFE versus Sun and Abraham (2021).
 >
 > `base_stagg` は処置効果がコホートと経過時間で異なるように作られているため, 素朴な TWFE の係数は Sun and Abraham の補正済み推定量から乖離します. 処置前の係数もゼロから外れており, 実際にはプレトレンドがないのに「あるように見える」推定値が出てしまう点に注目してください. `sunab()` は書き方を1行変えるだけなので, staggered な設定ではまずこちらを既定にするのが安全です.
 

@@ -16,15 +16,15 @@ Published
 
 2026年07月31日
 
-# 1 はじめに
+# はじめに
 
-## 1.1 AI時代のプログラミング知識
+## AI時代のプログラミング知識
 
 このコースでは, AI時代に必要なプログラミング知識を学ぶという目的で作りました. プログラミングコードをAIがある程度の精度で書けるようになった今, プログラミングとはプロンプティングの技術に変わってきています. ここで求められるのは個別のパッケージや関数に関する理解ではなく, AIに適切な指示を与えられるかの能力になってきました.
 
 このコースでは, プログラミングで何ができるのかを理解することに重きを置き, その上でAIに適切な指示を与えるための知識を学んでいきます. そのため, プログラミングの基礎的な知識は必要ですが, 個別のパッケージや関数の使い方については深くは解説しません. 分からなければAIに聞くことを推奨します.
 
-## 1.2 環境構築
+## 環境構築
 
 授業を始める前に次の環境構築を完了させておいてください. また, [sec-git](#sec-git) で用いるため, GitHub のアカウントも作成しておいてください. [sec-github-copilot](#sec-github-copilot) で述べるように, GitHub の Education アカウントに登録することをお勧めします.
 
@@ -120,7 +120,7 @@ sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 
 アップデートするときは, `QUARTO_VERSION` を新しいバージョン番号に変えて同じコマンドを再実行するだけです. Rのアップデートは Mac と同様で, `rig add release` を再実行します. apt で入れたソフトウェアは `sudo apt update && sudo apt upgrade` で, Windows側のソフトウェアは `winget upgrade --all` でまとめて更新できます.
 
-## 1.3 AI Coding Tools
+## AI Coding Tools
 
 私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では [sec-ai-research](#sec-ai-research) 以外では必要ありません. また, [sec-ai-research](#sec-ai-research) で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.
 

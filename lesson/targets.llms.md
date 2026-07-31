@@ -1,4 +1,4 @@
-# 12  パイプライン
+# 11  パイプライン
 
 Code
 
@@ -8,7 +8,7 @@ Code
 
 コードは [`kazuyanagimoto/quarto-research-blog`](https://github.com/kazuyanagimoto/quarto-research-blog) にあります. コードやディレクトリ構成など参考にしてください.
 
-## 12.1 ワークフロー
+## 11.1 ワークフロー
 
 1.  `_targets.R` の初期設定を行う
 2.  データクリーニングを定義する `R/tar_data.R`
@@ -30,11 +30,11 @@ flowchart LR
   data --> website["website"]
 ```
 
-Figure 12.1
+Figure 11.1
 
 次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
 
-## 12.2 `{targets}` の基本
+## 11.2 `{targets}` の基本
 
 `{targets}` の基本を学ぶには公式の[チュートリアル](https://books.ropensci.org/targets/)が良いですが, 実用上は `{targets}` を拡張した `{tarchetypes}` の文法を使うことが多いです. そのため, ここでは `{tarchetypes}` の文法に基づいて最低限の使い方を解説します. この `{targets}` から `{tarchetypes}` への移行に関しては, この[チュートリアル](https://carpentries-incubator.github.io/targets-workshop/index.html)が参考になりました.
 
@@ -67,31 +67,31 @@ tar_plan(
 
 定義したパイプラインは, `targets::tar_visnetwork()` で可視化することができます.
 
-[![](../static/img/targets/tar-visnetwork-init.png)](../static/img/targets/tar-visnetwork-init.png "Figure 12.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト")
+[![](../static/img/targets/tar-visnetwork-init.png)](../static/img/targets/tar-visnetwork-init.png "Figure 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト")
 
-Figure 12.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
+Figure 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
 
 ここでは三角形が関数, 丸がファイルとオブジェクトを表していることがわかります. また, パイプラインが実行されていない状態が水色で表されています. ここで, `targets::tar_make()` を実行すると,
 
-[![](../static/img/targets/tar-visnetwork-made.png)](../static/img/targets/tar-visnetwork-made.png "Figure 12.3: tar_make() で実行された部分はグレーに変わる")
+[![](../static/img/targets/tar-visnetwork-made.png)](../static/img/targets/tar-visnetwork-made.png "Figure 11.3: tar_make() で実行された部分はグレーに変わる")
 
-Figure 12.3: `tar_make()` で実行された部分はグレーに変わる
+Figure 11.3: `tar_make()` で実行された部分はグレーに変わる
 
 正常に実行されると, 実行された部分がグレーに変わります. ここで, `data1.csv` (`data1_raw_file`) の中身を変更すると,
 
-[![](../static/img/targets/tar-visnetwork-data-changed.png)](../static/img/targets/tar-visnetwork-data-changed.png "Figure 12.4: ファイルの中身を変更すると依存部分が未実行状態に戻る")
+[![](../static/img/targets/tar-visnetwork-data-changed.png)](../static/img/targets/tar-visnetwork-data-changed.png "Figure 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る")
 
-Figure 12.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
+Figure 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
 
 依存関係のある部分が未実行状態に戻ります. もちろん, `targets::tar_make()` を実行すると, 依存関係のある部分が再計算されます. さらに, `clean_data1()` の中身を変更すると, 以下のようになります.
 
-[![](../static/img/targets/tar-visnetwork-fn-changed.png)](../static/img/targets/tar-visnetwork-fn-changed.png "Figure 12.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る")
+[![](../static/img/targets/tar-visnetwork-fn-changed.png)](../static/img/targets/tar-visnetwork-fn-changed.png "Figure 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る")
 
-Figure 12.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
+Figure 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
 
 このように, `tar_plan()` 上でパイプラインの定義をし, `tar_make()` で実行するという流れを繰り返していくのが `{targets}` の基本的な使い方です.
 
-## 12.3 Quarto + `{targets}` のワークフロー
+## 11.3 Quarto + `{targets}` のワークフロー
 
 ### 1. `_targets.R` の初期設定を行う
 

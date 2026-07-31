@@ -1,14 +1,14 @@
-# 7  API
+# 6  API
 
 Code
 
-## 7.1 Client-Server Model
+## 6.1 Client-Server Model
 
 私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています ([Figure fig-client-server](#fig-client-server)).
 
-[![](../static/cetz/client-server.svg)](../static/cetz/client-server.svg "Figure 7.1: クライアントとサーバー")
+[![](../static/cetz/client-server.svg)](../static/cetz/client-server.svg "Figure 6.1: クライアントとサーバー")
 
-Figure 7.1: クライアントとサーバー
+Figure 6.1: クライアントとサーバー
 
 - **クライアント** (client) は Web ブラウザやスマホのアプリなど, ユーザーが直接操作する側のソフトウェアです
 - **サーバー** (server) は Web サイトを運営する側のコンピュータで, クライアントからのリクエストに応じてデータを返す役割を担います
@@ -40,7 +40,7 @@ resp |>
 
 私たちが普段ブラウザで見ているページは, この HTML をブラウザが解釈して描画したものです. ブラウザは, ここで R がやったのと同じリクエストを送り, 返ってきた HTML を画面に整形して表示しているにすぎません.
 
-## 7.2 REST API の基本
+## 6.2 REST API の基本
 
 人間向けの HTML を解析してデータを取り出す方法 (スクレイピング) もありますが, 多くのサービスは「プログラムがデータを取りに来るための窓口」をはじめから用意しています. これが API (Application Programming Interface) です. API にリクエストを送ると, 本文は HTML ではなく JSON のような構造化データで返ってきます. 整形済みのデータがそのまま手に入り, ページの見た目に左右されず仕様も安定しているので, データを取得するなら API が第一の選択です.
 
@@ -61,7 +61,7 @@ Web の API の多くは REST という様式に従っており, 普段ブラウ
 
 R では `httr2` がこの JSON を自動でリスト (`list`) に変換してくれるので, あとはそこから必要な値を取り出して整えるだけです.
 
-## 7.3 Application: 世界銀行
+## 6.3 Application: 世界銀行
 
 R で API を叩くには [`httr2`](https://httr2.r-lib.org/) を使います. リクエストを少しずつ組み立て (`req_*`), 最後に送信して (`req_perform`), レスポンスから中身を取り出す (`resp_*`), という流れです.
 
@@ -134,9 +134,9 @@ ggplot(gdp, aes(year, gdp_pc, color = country, linetype = country)) +
   )
 ```
 
-[![](api_files/figure-html/fig-gdp-pc-1.svg)](api_files/figure-html/fig-gdp-pc-1.svg "Figure 7.2: GDP per capita, 2000-2022 (World Bank)")
+[![](api_files/figure-html/fig-gdp-pc-1.svg)](api_files/figure-html/fig-gdp-pc-1.svg "Figure 6.2: GDP per capita, 2000-2022 (World Bank)")
 
-Figure 7.2: GDP per capita, 2000-2022 (World Bank)
+Figure 6.2: GDP per capita, 2000-2022 (World Bank)
 
 ### ラッパーパッケージ: WDI
 
@@ -155,7 +155,7 @@ gdp_wdi |> as_tibble() |> arrange(country, year)
 
 国コード・指標コード・期間を渡すだけで, さきほど手作業で組み立てたのと同じ整然データが返ってきます. `indicator` に名前付きベクトルを渡すと, 値の列名 (`gdp_pc`) もその場で指定できます. ラッパーがある API では, まずこちらを使うのが近道です.
 
-## 7.4 Application: e-Stat
+## 6.4 Application: e-Stat
 
 実用的な API の多くは, 誰がどれだけ使ったかを管理するために, 利用登録と API キー (api key) を求めます. 日本の官庁統計を横断的に提供する [e-Stat](https://www.e-stat.go.jp/) (政府統計の総合窓口) もその一つです. ここでは, キーの安全な扱い方とあわせて, 都道府県別の1人当たり県民所得を取得してみます.
 
@@ -245,9 +245,9 @@ income |>
   )
 ```
 
-[![](api_files/figure-html/fig-estat-income-1.svg)](api_files/figure-html/fig-estat-income-1.svg "Figure 7.3: 1人当たり県民所得の推移 (e-Stat)")
+[![](api_files/figure-html/fig-estat-income-1.svg)](api_files/figure-html/fig-estat-income-1.svg "Figure 6.3: 1人当たり県民所得の推移 (e-Stat)")
 
-Figure 7.3: 1人当たり県民所得の推移 (e-Stat)
+Figure 6.3: 1人当たり県民所得の推移 (e-Stat)
 
 > **WARNING:**
 >
@@ -351,9 +351,9 @@ req_perform() を for ループで回すだけでよく, 特別な設定は不�
 >   )
 > ```
 >
-> [![](api_files/figure-html/fig-exercise-unemp-1.svg)](api_files/figure-html/fig-exercise-unemp-1.svg "Figure 7.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)")
+> [![](api_files/figure-html/fig-exercise-unemp-1.svg)](api_files/figure-html/fig-exercise-unemp-1.svg "Figure 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)")
 >
-> Figure 7.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)
+> Figure 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)
 
 ### e-Stat で物価の地域差を調べる
 
@@ -422,9 +422,9 @@ req_perform() を for ループで回すだけでよく, 特別な設定は不�
 >   )
 > ```
 >
-> [![](api_files/figure-html/fig-exercise-cpi-1.svg)](api_files/figure-html/fig-exercise-cpi-1.svg "Figure 7.5: Regional CPI level index, all items (national average = 100)")
+> [![](api_files/figure-html/fig-exercise-cpi-1.svg)](api_files/figure-html/fig-exercise-cpi-1.svg "Figure 6.5: Regional CPI level index, all items (national average = 100)")
 >
-> Figure 7.5: Regional CPI level index, all items (national average = 100)
+> Figure 6.5: Regional CPI level index, all items (national average = 100)
 >
 > 図を読むときには注意が必要です. この指数は特定の基準年を 100 とするのではなく, 各年の全国平均を 100 とする空間方向の指数なので, 線の上下の動きはインフレ率ではありません. 例えば沖縄が2020年度以降 100 に近づいているのは, 物価が上がったことそのものではなく, 全国平均との相対的な物価差が縮まったことを意味します. 都道府県の間の物価水準の比較は各年ででき, 時間方向の物価上昇率を見たいときは通常の消費者物価指数を使います.
 

@@ -1,8 +1,8 @@
-# 6  大規模データ
+# 5  大規模データ
 
 Code
 
-## 6.1 大規模データとメモリ
+## 5.1 大規模データとメモリ
 
 `dplyr` や `data.frame` のような R の標準的な道具は, データ全体をメモリ (RAM) に読み込んでから処理します. [sec-computation-theory](#sec-computation-theory) のメモリのヒエラルキーで見たように, RAM の容量には限りがあります. データが RAM に収まらなくなると, 処理は途端に遅くなり, やがて止まってしまいます.
 
@@ -10,9 +10,9 @@ Code
 
 これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが [Figure fig-data-stack](#fig-data-stack) です.
 
-[![](../static/cetz/data-stack.svg)](../static/cetz/data-stack.svg "Figure 6.1: Parquet・Polars・DuckDB の関係")
+[![](../static/cetz/data-stack.svg)](../static/cetz/data-stack.svg "Figure 5.1: Parquet・Polars・DuckDB の関係")
 
-Figure 6.1: Parquet・Polars・DuckDB の関係
+Figure 5.1: Parquet・Polars・DuckDB の関係
 
 - Parquet は保存形式. データをディスクにどう並べるかを決めるだけで, それ自体は計算しません.
 - Polars と DuckDB は処理エンジン. ディスク上のデータを読み込み, 絞り込みや集計を実行します. 役割はほぼ同じで, 互いに置き換えられる選択肢です. Polars は Rust 製のデータフレームライブラリ, DuckDB は分析に特化した組み込み型のデータベースです.
@@ -36,15 +36,15 @@ Rscript -e 'targets::tar_make(taxi_parquet)'
 path_pq <- here::here("data", "yellow_tripdata_2024-01.parquet")
 ```
 
-## 6.2 列指向フォーマット
+## 5.2 列指向フォーマット
 
 大規模データを「必要な分だけ読む」ための鍵が, この **列指向フォーマット** です. CSV は **行指向** のテキストファイルで, 1行ずつ順に値がカンマ区切りで並びます. そのため, 一部の列だけが欲しいときでも, 結局すべての行・すべての列を読む必要があります.
 
 [Parquet](https://parquet.apache.org/) は **列指向** のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます ([Figure fig-row-vs-column](#fig-row-vs-column)).
 
-[![](../static/cetz/row-vs-column.svg)](../static/cetz/row-vs-column.svg "Figure 6.2: 行指向と列指向")
+[![](../static/cetz/row-vs-column.svg)](../static/cetz/row-vs-column.svg "Figure 5.2: 行指向と列指向")
 
-Figure 6.2: 行指向と列指向
+Figure 5.2: 行指向と列指向
 
 同じ列の値が連続して並ぶことから, 次のような利点が生まれます.
 
@@ -75,7 +75,7 @@ dbDisconnect(con)
 | CSV     | 285.4 MB       |
 | Parquet | 47.6 MB        |
 
-Table 6.1: CSV と Parquet のファイルサイズ
+Table 5.1: CSV と Parquet のファイルサイズ
 
 Parquet は CSV のおよそ 6 分の1のサイズに収まっています. Rからだと [`nanoparquet`](https://nanoparquet.r-lib.org/) (軽量) や [`arrow`](https://arrow.apache.org/docs/r/) で Parquet を読み書きできます. 分析用のデータは, できるだけ Parquet で保存しておくのがよいでしょう.
 
@@ -83,9 +83,9 @@ Parquet は CSV のおよそ 6 分の1のサイズに収まっています. Rか
 
 Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です ([Figure fig-parquet-arrow](#fig-parquet-arrow)).
 
-[![](../static/cetz/parquet-arrow.svg)](../static/cetz/parquet-arrow.svg "Figure 6.3: Parquet と Arrow")
+[![](../static/cetz/parquet-arrow.svg)](../static/cetz/parquet-arrow.svg "Figure 5.3: Parquet と Arrow")
 
-Figure 6.3: Parquet と Arrow
+Figure 5.3: Parquet と Arrow
 
 Arrowは標準的な形式になっているので, Arrow を使うツール同士 (Polars, DuckDB, さらに Python のツールなど) は, データをコピーせずに (zero-copy) 受け渡せます. 逆に, RのデータフレームはArrow形式ではないため, 変換のため `collect()` / `as_tibble()` などのステップが必要になります.[^3]
 
@@ -97,7 +97,7 @@ Arrowは標準的な形式になっているので, Arrow を使うツール同�
 > - **Feather** (Arrow IPC): Arrow のメモリ上の形をほぼそのままディスクに書いた形式. 圧縮をほとんどかけず読み書きが非常に速い反面ファイルは大きく, 長期保存より一時ファイルや R ↔︎ Python の高速な受け渡しに向きます (小さく圧縮して保存・大規模クエリ向けに最適化する Parquet とは設計の方向が逆です).
 > - クラウドのデータウェアハウス (BigQuery, Redshift, Snowflake など) も, 内部は列指向です.
 
-## 6.3 ![Polars](../static/img/logo/polars-icon.svg) Polars
+## 5.3 ![Polars](../static/img/logo/polars-icon.svg) Polars
 
 [Polars](https://pola.rs/) は Rust で書かれた高速なデータフレームライブラリです. マルチスレッドで動き ([sec-computation-theory](#sec-computation-theory) の並列化を思い出してください), **遅延評価** (lazy evaluation) によってクエリを最適化します.
 
@@ -139,7 +139,7 @@ cat(explain(q))
 
 `PROJECT 3/19 COLUMNS` は, 19列のうち必要な3列 (`payment_type`, `fare_amount`, `tip_amount`) だけを読むこと (列の刈り込み) を表します. `SELECTION: [(col("fare_amount")) > 0.0]` は, `filter` の条件が Parquet の読み込み段階まで押し下げられていること (述語の押し下げ) を表します. このように Polars は, こちらが書いた順序にとらわれず, 「必要なデータだけを最小限読む」ように勝手に並べ替えてくれます.
 
-## 6.4 ![DuckDB](../static/img/logo/duckdb-icon.svg) DuckDB
+## 5.4 ![DuckDB](../static/img/logo/duckdb-icon.svg) DuckDB
 
 [DuckDB](https://duckdb.org/) は, 分析用途に特化した組み込み型のデータベースです. SQLite が「手軽なトランザクション用 DB」なら, DuckDB は「手軽な分析用 DB」だと考えるとよいでしょう. マルチスレッドで動き, RAM に収まらないデータ (larger-than-memory) も扱えます. 先ほど CSV への変換に使ったのも, この DuckDB です.
 
@@ -155,7 +155,7 @@ read_parquet_duckdb(path_pq) |>
 
 `read_parquet_duckdb()` で遅延的に Parquet を開き, dplyr の動詞を並べ, `collect()` で結果を取り出します. Polars (tidypolars) と書き方がほとんど同じであることに注目してください. どちらも内部では遅延評価とクエリ最適化を行っています.
 
-## 6.5 ベンチマーク
+## 5.5 ベンチマーク
 
 では, 同じ集計を `dplyr`, `tidypolars`, `duckplyr` の3通りで実行し, 速度とメモリを比べてみましょう. `dplyr` 版は, Parquet をいったん全部メモリに読み込んでから処理します.
 
@@ -187,7 +187,7 @@ bm <- bench::mark(
 | tidypolars | 47          | 421.1 KB       |
 | duckplyr   | 23          | 85.9 KB        |
 
-Table 6.2: 集計の計算時間とメモリ
+Table 5.2: 集計の計算時間とメモリ
 
 集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 9 倍速いですが, より目を引くのは **R が確保するメモリ** の差です. [Table tbl-benchmark-data](#tbl-benchmark-data) のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
 
@@ -302,9 +302,9 @@ Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリ�
 >   theme(panel.grid.minor = element_blank())
 > ```
 >
-> [![](large-data_files/figure-html/fig-exercise-tip-hour-1.svg)](large-data_files/figure-html/fig-exercise-tip-hour-1.svg "Figure 6.4: Tip rate by pickup hour (credit-card trips, January 2024)")
+> [![](large-data_files/figure-html/fig-exercise-tip-hour-1.svg)](large-data_files/figure-html/fig-exercise-tip-hour-1.svg "Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)")
 >
-> Figure 6.4: Tip rate by pickup hour (credit-card trips, January 2024)
+> Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)
 >
 > 300万行のデータですが, 遅延評価と列の刈り込みのおかげで, 集計は一瞬で終わります.
 

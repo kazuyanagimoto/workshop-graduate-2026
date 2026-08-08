@@ -1,0 +1,3 @@
+# Updated automatically at render time by scripts/update-quarto-version.sh.
+# The committed value is the fallback used when the release feed is unreachable.
+quarto-version: 1.10.18

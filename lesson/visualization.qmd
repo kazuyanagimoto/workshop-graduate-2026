@@ -280,9 +280,9 @@ ggplot(emp, aes(x = age_group, y = n, fill = sex, alpha = status)) +
 フォントには大きく分けて, セリフ体 (serif) とサンセリフ体 (sans-serif) の二種類があります. セリフ体は文字の端に装飾があるフォントで, サンセリフ体は装飾のないフォントです. 下の左の図で赤く示された, 文字の端の突起や飾りが「セリフ」です.
 
 ::: {layout-ncol=2}
-![セリフ体 (serif)](https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg)
+![セリフ体 (serif)](/static/img/visualization/serif.svg){#fig-serif}
 
-![サンセリフ体 (sans-serif)](https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg)
+![サンセリフ体 (sans-serif)](/static/img/visualization/sans-serif.svg){#fig-sans-serif}
 :::
 
 日本語でも明朝体がセリフ体でゴシック体がサンセリフ体に相当します. 英語では, セリフ体は Times New Roman や Garamond などが有名で, サンセリフ体は Arial や Helvetica などが有名です.

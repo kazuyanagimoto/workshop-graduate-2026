@@ -16,14 +16,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # The CeTZ diagrams are SVG, which LaTeX cannot include directly; Quarto
+      # converts them with rsvg-convert.
+      - name: Install rsvg-convert
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.9.38
+          version: release
+          tinytex: true
+
+      # Quarto auto-installs missing .sty files during the render, but not
+      # fonts, so the ones named in _quarto.yml have to be pulled in by hand.
+      - name: Install fonts for the PDF
+        run: tlmgr install haranoaji juliamono tex-gyre
 
       # R is not installed on the runner: all R chunks must be pre-rendered
-      # locally and committed to _freeze/ (freeze: auto). If a chunk is edited
-      # without re-rendering locally, this step fails instead of executing R.
+      # locally and committed to _freeze/ (freeze: auto). Both formats are
+      # built here, so every chapter needs a committed tex.json as well as its
+      # html.json. If a chunk is edited without re-rendering locally, this step
+      # fails instead of executing R.
       - name: Render and publish to gh-pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:

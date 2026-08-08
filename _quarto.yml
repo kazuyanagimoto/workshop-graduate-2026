@@ -1,5 +1,6 @@
 project:
   type: book
+  pre-render: scripts/update-quarto-version.sh
   resources:
     - static/data/
     - static/img/social-card.png
@@ -8,6 +9,8 @@ book:
   search: false
   title: "Empiricist's Workflow"
   subtitle: 実証研究のためのモダンなツールと作法
+  output-file: empiricists-workflow
+  downloads: [pdf]
   author:
     - name: 柳本和春
       email: yanagimoto@econ.kobe-u.ac.jp
@@ -63,6 +66,42 @@ format:
     toc: true
     number-depth: 2
     lightbox: true
+  pdf:
+    lang: ja
+    documentclass: ltjsbook
+    pdf-engine: lualatex
+    mainfont: TeX Gyre Termes
+    CJKmainfont: Harano Aji Mincho
+    sansfont: Harano Aji Gothic
+    monofont: JuliaMono
+    geometry:
+      - margin=1in
+    toc-depth: 2
+    number-depth: 2
+    linkcolor: primary
+    citecolor: primary
+    urlcolor: primary
+    include-in-header:
+      - text: |
+          \definecolor{primary}{HTML}{107895}
+          \ltjsetparameter{jacharrange={-2, -3}}
+          % This book is code-heavy: wrap long lines inside code blocks
+          % instead of letting them run past the right margin.
+          \usepackage{fvextra}
+          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
+            breaklines,breakanywhere,commandchars=\\\{\}}
+          % tinytable emits column names such as `bill_len` unescaped into the
+          % tabularray body, which is a LaTeX error in text mode. This makes a
+          % bare `_` typeset as an underscore while leaving math subscripts
+          % alone, so table code needs no per-table escaping.
+          \usepackage[strings]{underscore}
+          % Some tables sit inside callouts (the collapsible 解答例 blocks),
+          % and a LaTeX float cannot open inside the tcolorbox a callout
+          % becomes. Pin tables in place instead of letting them float, which
+          % also keeps their position consistent with the HTML edition.
+          \usepackage{float}
+          \restylefloat{table}
+          \floatplacement{table}{H}
 
 
 freeze: auto
@@ -71,12 +110,15 @@ execute:
   message: false
   error: false
 
+filters:
+  - filters/gif-still.lua
+
 bibliography: references.bib
 bibliography-style: chicago-author-date
 link-citations: true
 
 knitr:
-  opts_chunk: 
+  opts_chunk:
     fig.align: center
     fig.retina: 3
     fig.width: 8

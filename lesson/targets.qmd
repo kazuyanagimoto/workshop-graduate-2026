@@ -27,16 +27,7 @@ title: パイプライン
 
 論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.
 
-```{mermaid}
-%%| label: fig-pipeline-overview
-flowchart LR
-  raw["raw data"] --> data["data (cleaning)"]
-  data --> fact["fact (figures and numbers)"]
-  data --> model["model (Julia)"]
-  fact --> manuscript["manuscript"]
-  model --> manuscript
-  data --> website["website"]
-```
+![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg){#fig-pipeline-overview}
 
 次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
 

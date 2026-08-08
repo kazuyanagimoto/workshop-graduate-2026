@@ -20,17 +20,9 @@ Code
 
 論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.
 
-``` mermaid
-flowchart LR
-  raw["raw data"] --> data["data (cleaning)"]
-  data --> fact["fact (figures and numbers)"]
-  data --> model["model (Julia)"]
-  fact --> manuscript["manuscript"]
-  model --> manuscript
-  data --> website["website"]
-```
+[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "Figure 11.1: 論文を書き終えた頃にできあがっているパイプライン")
 
-Figure 11.1
+Figure 11.1: 論文を書き終えた頃にできあがっているパイプライン
 
 次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
 

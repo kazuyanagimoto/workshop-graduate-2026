@@ -4,8 +4,9 @@ Code
 
 ## 図版クレジット
 
-本書で使用している部品写真は, いずれも Wikimedia Commons で公開されているものです.
+本書で使用している部品写真と一部の図版は, いずれも Wikimedia Commons で公開されているものです.
 
+- [Figure fig-serif](#fig-serif), [Figure fig-sans-serif](#fig-sans-serif) (セリフ体・サンセリフ体): 作成 Stannered, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Serif_and_sans-serif_03.svg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
 - [Figure fig-photo-cpu](#fig-photo-cpu) (CPU): 撮影 Fritzchens Fritz, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AMD_Ryzen_5_2600_(39851733273).jpg), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 - [Figure fig-photo-ram](#fig-photo-ram) (メモリ): 撮影 PantheraLeo1359531, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - [Figure fig-photo-storage](#fig-photo-storage) (SSD): 撮影 D-Kuru, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

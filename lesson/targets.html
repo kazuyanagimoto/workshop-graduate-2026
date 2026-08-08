@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,14 +76,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-25dec783d6e1d11f8e0bba9e4fbb47f4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-16f64e5e7cadf7c973142b0bfece6000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-222bf84bab3647eac29364631cd7050e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -99,9 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -143,6 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a href="../">Empiricist’s Workflow</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../empiricists-workflow.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -334,28 +335,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>最終的な結果で論文を執筆する <code>manuscript/*.qmd</code></li>
 </ol>
 <p>論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
 <div id="fig-pipeline-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pipeline-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-pipeline-overview">flowchart LR
-  raw["raw data"] --&gt; data["data (cleaning)"]
-  data --&gt; fact["fact (figures and numbers)"]
-  data --&gt; model["model (Julia)"]
-  fact --&gt; manuscript["manuscript"]
-  model --&gt; manuscript
-  data --&gt; website["website"]
-</pre>
+<a href="../static/cetz/pipeline-overview.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;11.1: 論文を書き終えた頃にできあがっているパイプライン"><img src="../static/cetz/pipeline-overview.svg" class="img-fluid figure-img"></a>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pipeline-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipeline-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: 論文を書き終えた頃にできあがっているパイプライン
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>次節ではワークフローの各部分を解説していきますが, その前に <code>{targets}</code> の基本的な使い方を解説します.</p>
 </section>
@@ -394,7 +382,7 @@ Figure&nbsp;11.1
 <div id="fig-tar-visnetwork-init" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tar-visnetwork-init-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/targets/tar-visnetwork-init.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト"><img src="../static/img/targets/tar-visnetwork-init.png" class="img-fluid figure-img"></a>
+<a href="../static/img/targets/tar-visnetwork-init.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト"><img src="../static/img/targets/tar-visnetwork-init.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tar-visnetwork-init-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
@@ -405,7 +393,7 @@ Figure&nbsp;11.2: パイプラインの可視化. 三角形が関数, 丸がフ�
 <div id="fig-tar-visnetwork-made" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tar-visnetwork-made-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/targets/tar-visnetwork-made.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;11.3: tar_make() で実行された部分はグレーに変わる"><img src="../static/img/targets/tar-visnetwork-made.png" class="img-fluid figure-img"></a>
+<a href="../static/img/targets/tar-visnetwork-made.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;11.3: tar_make() で実行された部分はグレーに変わる"><img src="../static/img/targets/tar-visnetwork-made.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tar-visnetwork-made-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.3: <code>tar_make()</code> で実行された部分はグレーに変わる
@@ -416,7 +404,7 @@ Figure&nbsp;11.3: <code>tar_make()</code> で実行された部分はグレー�
 <div id="fig-tar-visnetwork-data-changed" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tar-visnetwork-data-changed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/targets/tar-visnetwork-data-changed.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る"><img src="../static/img/targets/tar-visnetwork-data-changed.png" class="img-fluid figure-img"></a>
+<a href="../static/img/targets/tar-visnetwork-data-changed.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る"><img src="../static/img/targets/tar-visnetwork-data-changed.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tar-visnetwork-data-changed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
@@ -427,7 +415,7 @@ Figure&nbsp;11.4: ファイルの中身を変更すると依存部分が未実�
 <div id="fig-tar-visnetwork-fn-changed" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tar-visnetwork-fn-changed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/img/targets/tar-visnetwork-fn-changed.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る"><img src="../static/img/targets/tar-visnetwork-fn-changed.png" class="img-fluid figure-img"></a>
+<a href="../static/img/targets/tar-visnetwork-fn-changed.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る"><img src="../static/img/targets/tar-visnetwork-fn-changed.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tar-visnetwork-fn-changed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
@@ -922,16 +910,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -1322,467 +1310,457 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.</span>
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>%%| label: fig-pipeline-overview</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  raw[<span class="ot">"</span><span class="st">raw data</span><span class="ot">"</span>] --&gt; data[<span class="ot">"</span><span class="st">data (cleaning)</span><span class="ot">"</span>]</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  data --&gt; fact[<span class="ot">"</span><span class="st">fact (figures and numbers)</span><span class="ot">"</span>]</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  data --&gt; model[<span class="ot">"</span><span class="st">model (Julia)</span><span class="ot">"</span>]</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  fact --&gt; manuscript[<span class="ot">"</span><span class="st">manuscript</span><span class="ot">"</span>]</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  model --&gt; manuscript</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  data --&gt; website[<span class="ot">"</span><span class="st">website</span><span class="ot">"</span>]</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>次節ではワークフローの各部分を解説していきますが, その前に <span class="in">`{targets}`</span> の基本的な使い方を解説します.</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="al">![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg)</span>{#fig-pipeline-overview}</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>次節ではワークフローの各部分を解説していきますが, その前に <span class="in">`{targets}`</span> の基本的な使い方を解説します.</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## `{targets}` の基本</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="in">`{targets}`</span> の基本を学ぶには公式の<span class="co">[</span><span class="ot">チュートリアル</span><span class="co">](https://books.ropensci.org/targets/)</span>が良いですが, 実用上は <span class="in">`{targets}`</span> を拡張した <span class="in">`{tarchetypes}`</span> の文法を使うことが多いです.</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>そのため, ここでは <span class="in">`{tarchetypes}`</span> の文法に基づいて最低限の使い方を解説します.</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>この <span class="in">`{targets}`</span> から <span class="in">`{tarchetypes}`</span> への移行に関しては, この<span class="co">[</span><span class="ot">チュートリアル</span><span class="co">](https://carpentries-incubator.github.io/targets-workshop/index.html)</span>が参考になりました.</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 基本の3つの要素</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="in">`{targets}`</span> の哲学は, 研究のワークフローを三つの要素に分けて考えることです.</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>それは, ファイル, 関数, オブジェクト です.</span>
 <span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## `{targets}` の基本</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="in">`{targets}`</span> の基本を学ぶには公式の<span class="co">[</span><span class="ot">チュートリアル</span><span class="co">](https://books.ropensci.org/targets/)</span>が良いですが, 実用上は <span class="in">`{targets}`</span> を拡張した <span class="in">`{tarchetypes}`</span> の文法を使うことが多いです.</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>そのため, ここでは <span class="in">`{tarchetypes}`</span> の文法に基づいて最低限の使い方を解説します.</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>この <span class="in">`{targets}`</span> から <span class="in">`{tarchetypes}`</span> への移行に関しては, この<span class="co">[</span><span class="ot">チュートリアル</span><span class="co">](https://carpentries-incubator.github.io/targets-workshop/index.html)</span>が参考になりました.</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 基本の3つの要素</span></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="in">`{targets}`</span> の哲学は, 研究のワークフローを三つの要素に分けて考えることです.</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>それは, ファイル, 関数, オブジェクト です.</span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ファイル: <span class="in">`tar_file()`</span> で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される</span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>オブジェクト: 変数やデータフレームなどの R のオブジェクト</span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>関数: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる</span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを使って関数を実行して新しいオブジェクトを作成するという流れです.</span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>これらの要素は, <span class="in">`tar_plan()`</span> の中で定義されます.</span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>clean_data1 <span class="ot">&lt;-</span> <span class="cf">function</span>(data1_raw) {</span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>  data1_raw <span class="sc">|&gt;</span></span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(col1))</span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ファイル: <span class="in">`tar_file()`</span> で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>オブジェクト: 変数やデータフレームなどの R のオブジェクト</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>関数: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを使って関数を実行して新しいオブジェクトを作成するという流れです.</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>これらの要素は, <span class="in">`tar_plan()`</span> の中で定義されます.</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>clean_data1 <span class="ot">&lt;-</span> <span class="cf">function</span>(data1_raw) {</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>  data1_raw <span class="sc">|&gt;</span></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(col1))</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(data1_raw_file, <span class="st">"path/to/file/data1.csv"</span>),</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_raw =</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data1_raw_file),</span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_cleaned =</span> <span class="fu">clean_data1</span>(data1_raw),</span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>上の例では, <span class="in">`data1_raw_file`</span> がファイル, <span class="in">`data1_raw`</span> と <span class="in">`data1_cleaned`</span> がオブジェクト, <span class="in">`readr::read_csv`</span> と <span class="in">`clean_data1()`</span> が関数です.</span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### 実行と依存関係の管理</span></span>
 <span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(data1_raw_file, <span class="st">"path/to/file/data1.csv"</span>),</span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_raw =</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(data1_raw_file),</span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_cleaned =</span> <span class="fu">clean_data1</span>(data1_raw),</span>
-<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>上の例では, <span class="in">`data1_raw_file`</span> がファイル, <span class="in">`data1_raw`</span> と <span class="in">`data1_cleaned`</span> がオブジェクト, <span class="in">`readr::read_csv`</span> と <span class="in">`clean_data1()`</span> が関数です.</span>
-<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### 実行と依存関係の管理</span></span>
-<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>定義したパイプラインは, <span class="in">`targets::tar_visnetwork()`</span> で可視化することができます.</span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>定義したパイプラインは, <span class="in">`targets::tar_visnetwork()`</span> で可視化することができます.</span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a><span class="al">![パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト](/static/img/targets/tar-visnetwork-init.png)</span>{#fig-tar-visnetwork-init}</span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>ここでは三角形が関数, 丸がファイルとオブジェクトを表していることがわかります.</span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>また, パイプラインが実行されていない状態が水色で表されています.</span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>ここで, <span class="in">`targets::tar_make()`</span> を実行すると,</span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a><span class="al">![`tar_make()` で実行された部分はグレーに変わる](/static/img/targets/tar-visnetwork-made.png)</span>{#fig-tar-visnetwork-made}</span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>正常に実行されると, 実行された部分がグレーに変わります.</span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>ここで, <span class="in">`data1.csv`</span> (<span class="in">`data1_raw_file`</span>) の中身を変更すると,</span>
 <span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a><span class="al">![パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト](/static/img/targets/tar-visnetwork-init.png)</span>{#fig-tar-visnetwork-init}</span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a><span class="al">![ファイルの中身を変更すると依存部分が未実行状態に戻る](/static/img/targets/tar-visnetwork-data-changed.png)</span>{#fig-tar-visnetwork-data-changed}</span>
 <span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>ここでは三角形が関数, 丸がファイルとオブジェクトを表していることがわかります.</span>
-<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>また, パイプラインが実行されていない状態が水色で表されています.</span>
-<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>ここで, <span class="in">`targets::tar_make()`</span> を実行すると,</span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>依存関係のある部分が未実行状態に戻ります.</span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>もちろん, <span class="in">`targets::tar_make()`</span> を実行すると, 依存関係のある部分が再計算されます.</span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>さらに, <span class="in">`clean_data1()`</span> の中身を変更すると, 以下のようになります.</span>
 <span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a><span class="al">![`tar_make()` で実行された部分はグレーに変わる](/static/img/targets/tar-visnetwork-made.png)</span>{#fig-tar-visnetwork-made}</span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a><span class="al">![関数の中身を変更しても, 依存部分だけが未実行状態に戻る](/static/img/targets/tar-visnetwork-fn-changed.png)</span>{#fig-tar-visnetwork-fn-changed}</span>
 <span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>正常に実行されると, 実行された部分がグレーに変わります.</span>
-<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a>ここで, <span class="in">`data1.csv`</span> (<span class="in">`data1_raw_file`</span>) の中身を変更すると,</span>
-<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-93"><a href="#cb19-93" aria-hidden="true" tabindex="-1"></a><span class="al">![ファイルの中身を変更すると依存部分が未実行状態に戻る](/static/img/targets/tar-visnetwork-data-changed.png)</span>{#fig-tar-visnetwork-data-changed}</span>
-<span id="cb19-94"><a href="#cb19-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-95"><a href="#cb19-95" aria-hidden="true" tabindex="-1"></a>依存関係のある部分が未実行状態に戻ります.</span>
-<span id="cb19-96"><a href="#cb19-96" aria-hidden="true" tabindex="-1"></a>もちろん, <span class="in">`targets::tar_make()`</span> を実行すると, 依存関係のある部分が再計算されます.</span>
-<span id="cb19-97"><a href="#cb19-97" aria-hidden="true" tabindex="-1"></a>さらに, <span class="in">`clean_data1()`</span> の中身を変更すると, 以下のようになります.</span>
-<span id="cb19-98"><a href="#cb19-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-99"><a href="#cb19-99" aria-hidden="true" tabindex="-1"></a><span class="al">![関数の中身を変更しても, 依存部分だけが未実行状態に戻る](/static/img/targets/tar-visnetwork-fn-changed.png)</span>{#fig-tar-visnetwork-fn-changed}</span>
-<span id="cb19-100"><a href="#cb19-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-101"><a href="#cb19-101" aria-hidden="true" tabindex="-1"></a>このように, <span class="in">`tar_plan()`</span> 上でパイプラインの定義をし, <span class="in">`tar_make()`</span> で実行するという流れを繰り返していくのが <span class="in">`{targets}`</span> の基本的な使い方です.</span>
+<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>このように, <span class="in">`tar_plan()`</span> 上でパイプラインの定義をし, <span class="in">`tar_make()`</span> で実行するという流れを繰り返していくのが <span class="in">`{targets}`</span> の基本的な使い方です.</span>
+<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto + `{targets}` のワークフロー</span></span>
+<span id="cb19-93"><a href="#cb19-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-94"><a href="#cb19-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `_targets.R` の初期設定を行う</span></span>
+<span id="cb19-95"><a href="#cb19-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-96"><a href="#cb19-96" aria-hidden="true" tabindex="-1"></a>プロジェクト全体の入り口となる <span class="co">[</span><span class="ot">`_targets.R`</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/_targets.R)</span> では, 重要なのは以下の3つです.</span>
+<span id="cb19-97"><a href="#cb19-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-98"><a href="#cb19-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-99"><a href="#cb19-99" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb19-100"><a href="#cb19-100" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
+<span id="cb19-101"><a href="#cb19-101" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
 <span id="cb19-102"><a href="#cb19-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-103"><a href="#cb19-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quarto + `{targets}` のワークフロー</span></span>
-<span id="cb19-104"><a href="#cb19-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-105"><a href="#cb19-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. `_targets.R` の初期設定を行う</span></span>
+<span id="cb19-103"><a href="#cb19-103" aria-hidden="true" tabindex="-1"></a>here_rel <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb19-104"><a href="#cb19-104" aria-hidden="true" tabindex="-1"></a>  fs<span class="sc">::</span><span class="fu">path_rel</span>(here<span class="sc">::</span><span class="fu">here</span>(...))</span>
+<span id="cb19-105"><a href="#cb19-105" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb19-106"><a href="#cb19-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-107"><a href="#cb19-107" aria-hidden="true" tabindex="-1"></a>プロジェクト全体の入り口となる <span class="co">[</span><span class="ot">`_targets.R`</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/_targets.R)</span> では, 重要なのは以下の3つです.</span>
+<span id="cb19-107"><a href="#cb19-107" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_source</span>()</span>
 <span id="cb19-108"><a href="#cb19-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-109"><a href="#cb19-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-110"><a href="#cb19-110" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb19-111"><a href="#cb19-111" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
-<span id="cb19-112"><a href="#cb19-112" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb19-113"><a href="#cb19-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-114"><a href="#cb19-114" aria-hidden="true" tabindex="-1"></a>here_rel <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb19-115"><a href="#cb19-115" aria-hidden="true" tabindex="-1"></a>  fs<span class="sc">::</span><span class="fu">path_rel</span>(here<span class="sc">::</span><span class="fu">here</span>(...))</span>
-<span id="cb19-116"><a href="#cb19-116" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-117"><a href="#cb19-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-118"><a href="#cb19-118" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_source</span>()</span>
-<span id="cb19-119"><a href="#cb19-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-120"><a href="#cb19-120" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-121"><a href="#cb19-121" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data Preparation ----------</span></span>
-<span id="cb19-122"><a href="#cb19-122" aria-hidden="true" tabindex="-1"></a>  data,</span>
-<span id="cb19-123"><a href="#cb19-123" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analysis ------------------</span></span>
-<span id="cb19-124"><a href="#cb19-124" aria-hidden="true" tabindex="-1"></a>  fact,</span>
-<span id="cb19-125"><a href="#cb19-125" aria-hidden="true" tabindex="-1"></a>  model,</span>
-<span id="cb19-126"><a href="#cb19-126" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Graphics ------------------</span></span>
-<span id="cb19-127"><a href="#cb19-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">fns_graphics =</span> <span class="fu">lst</span>(theme_proj, color_base, color_accent, scale_fill_gender),</span>
-<span id="cb19-128"><a href="#cb19-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Manuscript ----------------</span></span>
-<span id="cb19-129"><a href="#cb19-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(manuscript_book, <span class="at">path =</span> <span class="st">"manuscript"</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb19-130"><a href="#cb19-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(manuscript, <span class="at">path =</span> <span class="st">"manuscript/main.qmd"</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb19-131"><a href="#cb19-131" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Website -------------------</span></span>
-<span id="cb19-132"><a href="#cb19-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(</span>
-<span id="cb19-133"><a href="#cb19-133" aria-hidden="true" tabindex="-1"></a>    website,</span>
-<span id="cb19-134"><a href="#cb19-134" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> <span class="st">"."</span>,</span>
-<span id="cb19-135"><a href="#cb19-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb19-136"><a href="#cb19-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">extra_files =</span> <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.pdf"</span>)</span>
-<span id="cb19-137"><a href="#cb19-137" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-138"><a href="#cb19-138" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-139"><a href="#cb19-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-109"><a href="#cb19-109" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-110"><a href="#cb19-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data Preparation ----------</span></span>
+<span id="cb19-111"><a href="#cb19-111" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb19-112"><a href="#cb19-112" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analysis ------------------</span></span>
+<span id="cb19-113"><a href="#cb19-113" aria-hidden="true" tabindex="-1"></a>  fact,</span>
+<span id="cb19-114"><a href="#cb19-114" aria-hidden="true" tabindex="-1"></a>  model,</span>
+<span id="cb19-115"><a href="#cb19-115" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Graphics ------------------</span></span>
+<span id="cb19-116"><a href="#cb19-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">fns_graphics =</span> <span class="fu">lst</span>(theme_proj, color_base, color_accent, scale_fill_gender),</span>
+<span id="cb19-117"><a href="#cb19-117" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Manuscript ----------------</span></span>
+<span id="cb19-118"><a href="#cb19-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(manuscript_book, <span class="at">path =</span> <span class="st">"manuscript"</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb19-119"><a href="#cb19-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(manuscript, <span class="at">path =</span> <span class="st">"manuscript/main.qmd"</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb19-120"><a href="#cb19-120" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Website -------------------</span></span>
+<span id="cb19-121"><a href="#cb19-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_quarto</span>(</span>
+<span id="cb19-122"><a href="#cb19-122" aria-hidden="true" tabindex="-1"></a>    website,</span>
+<span id="cb19-123"><a href="#cb19-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> <span class="st">"."</span>,</span>
+<span id="cb19-124"><a href="#cb19-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-125"><a href="#cb19-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">extra_files =</span> <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.pdf"</span>)</span>
+<span id="cb19-126"><a href="#cb19-126" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-127"><a href="#cb19-127" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-128"><a href="#cb19-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-129"><a href="#cb19-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-130"><a href="#cb19-130" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `tar_source()`</span></span>
+<span id="cb19-131"><a href="#cb19-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-132"><a href="#cb19-132" aria-hidden="true" tabindex="-1"></a>パイプラインで使用する関数のソースコードのあるディレクトリを指定します.</span>
+<span id="cb19-133"><a href="#cb19-133" aria-hidden="true" tabindex="-1"></a>デフォルトでは <span class="in">`R/`</span> ディレクトリが指定されています.</span>
+<span id="cb19-134"><a href="#cb19-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-135"><a href="#cb19-135" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `tar_plan()`</span></span>
+<span id="cb19-136"><a href="#cb19-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-137"><a href="#cb19-137" aria-hidden="true" tabindex="-1"></a>パイプラインの定義を行います.</span>
+<span id="cb19-138"><a href="#cb19-138" aria-hidden="true" tabindex="-1"></a>全てのパイプラインをここに記述する必要はなく, <span class="in">`tar_source()`</span> で読み込まれるファイルの中でパイプラインを定義してそれを呼び出しても構いません.</span>
+<span id="cb19-139"><a href="#cb19-139" aria-hidden="true" tabindex="-1"></a>例えば <span class="in">`data`</span> というパイプラインは <span class="in">`R/tar_data.R`</span> の中で定義されており, <span class="in">`_targets.R`</span> ではその名前を書くだけで済みます.</span>
 <span id="cb19-140"><a href="#cb19-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-141"><a href="#cb19-141" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `tar_source()`</span></span>
+<span id="cb19-141"><a href="#cb19-141" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `here_rel()`</span></span>
 <span id="cb19-142"><a href="#cb19-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-143"><a href="#cb19-143" aria-hidden="true" tabindex="-1"></a>パイプラインで使用する関数のソースコードのあるディレクトリを指定します.</span>
-<span id="cb19-144"><a href="#cb19-144" aria-hidden="true" tabindex="-1"></a>デフォルトでは <span class="in">`R/`</span> ディレクトリが指定されています.</span>
-<span id="cb19-145"><a href="#cb19-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-146"><a href="#cb19-146" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `tar_plan()`</span></span>
-<span id="cb19-147"><a href="#cb19-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-148"><a href="#cb19-148" aria-hidden="true" tabindex="-1"></a>パイプラインの定義を行います.</span>
-<span id="cb19-149"><a href="#cb19-149" aria-hidden="true" tabindex="-1"></a>全てのパイプラインをここに記述する必要はなく, <span class="in">`tar_source()`</span> で読み込まれるファイルの中でパイプラインを定義してそれを呼び出しても構いません.</span>
-<span id="cb19-150"><a href="#cb19-150" aria-hidden="true" tabindex="-1"></a>例えば <span class="in">`data`</span> というパイプラインは <span class="in">`R/tar_data.R`</span> の中で定義されており, <span class="in">`_targets.R`</span> ではその名前を書くだけで済みます.</span>
-<span id="cb19-151"><a href="#cb19-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-152"><a href="#cb19-152" aria-hidden="true" tabindex="-1"></a><span class="fu">#### `here_rel()`</span></span>
+<span id="cb19-143"><a href="#cb19-143" aria-hidden="true" tabindex="-1"></a><span class="in">`here::here()`</span> は, プロジェクトのルートディレクトリを基準にした相対パスを指定するための関数です.</span>
+<span id="cb19-144"><a href="#cb19-144" aria-hidden="true" tabindex="-1"></a>これを使うことで, プロジェクトのルートディレクトリが変更されても, パスを変更する必要がなくなります.</span>
+<span id="cb19-145"><a href="#cb19-145" aria-hidden="true" tabindex="-1"></a>ただし, <span class="in">`_targets.R`</span> の中で <span class="in">`here::here()`</span> を使うと, 絶対パスが保存されてしまい, 他者と共有した場合に問題が発生します.</span>
+<span id="cb19-146"><a href="#cb19-146" aria-hidden="true" tabindex="-1"></a>そのため, <span class="in">`here::here()`</span> の利便性を保ちつつ, 相対パスで保存できる関数を使用しています.</span>
+<span id="cb19-147"><a href="#cb19-147" aria-hidden="true" tabindex="-1"></a>この部分は Andrew Heiss さんの<span class="co">[</span><span class="ot">コード</span><span class="co">](https://github.com/andrewheiss/lemon-lucifer/blob/main/_targets.R)</span>を参考にしています.</span>
+<span id="cb19-148"><a href="#cb19-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-149"><a href="#cb19-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. データクリーニングを定義する</span></span>
+<span id="cb19-150"><a href="#cb19-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-151"><a href="#cb19-151" aria-hidden="true" tabindex="-1"></a>データクリーニングのパイプラインを <span class="in">`R/tar_data.R`</span> に定義します.</span>
+<span id="cb19-152"><a href="#cb19-152" aria-hidden="true" tabindex="-1"></a>詳しくは<span class="co">[</span><span class="ot">コード</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_data.R)</span>を参照してください.</span>
 <span id="cb19-153"><a href="#cb19-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-154"><a href="#cb19-154" aria-hidden="true" tabindex="-1"></a><span class="in">`here::here()`</span> は, プロジェクトのルートディレクトリを基準にした相対パスを指定するための関数です.</span>
-<span id="cb19-155"><a href="#cb19-155" aria-hidden="true" tabindex="-1"></a>これを使うことで, プロジェクトのルートディレクトリが変更されても, パスを変更する必要がなくなります.</span>
-<span id="cb19-156"><a href="#cb19-156" aria-hidden="true" tabindex="-1"></a>ただし, <span class="in">`_targets.R`</span> の中で <span class="in">`here::here()`</span> を使うと, 絶対パスが保存されてしまい, 他者と共有した場合に問題が発生します.</span>
-<span id="cb19-157"><a href="#cb19-157" aria-hidden="true" tabindex="-1"></a>そのため, <span class="in">`here::here()`</span> の利便性を保ちつつ, 相対パスで保存できる関数を使用しています.</span>
-<span id="cb19-158"><a href="#cb19-158" aria-hidden="true" tabindex="-1"></a>この部分は Andrew Heiss さんの<span class="co">[</span><span class="ot">コード</span><span class="co">](https://github.com/andrewheiss/lemon-lucifer/blob/main/_targets.R)</span>を参考にしています.</span>
-<span id="cb19-159"><a href="#cb19-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-160"><a href="#cb19-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. データクリーニングを定義する</span></span>
-<span id="cb19-161"><a href="#cb19-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-162"><a href="#cb19-162" aria-hidden="true" tabindex="-1"></a>データクリーニングのパイプラインを <span class="in">`R/tar_data.R`</span> に定義します.</span>
-<span id="cb19-163"><a href="#cb19-163" aria-hidden="true" tabindex="-1"></a>詳しくは<span class="co">[</span><span class="ot">コード</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_data.R)</span>を参照してください.</span>
-<span id="cb19-164"><a href="#cb19-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_data.R"}</span></span>
-<span id="cb19-166"><a href="#cb19-166" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
-<span id="cb19-167"><a href="#cb19-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_raw_accident_bike =</span> <span class="fu">download_accident_bike</span>(</span>
-<span id="cb19-168"><a href="#cb19-168" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"data"</span>, <span class="st">"accident_bike"</span>)</span>
-<span id="cb19-169"><a href="#cb19-169" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb19-170"><a href="#cb19-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">raw_accident_bike =</span> <span class="fu">load_accident_bike</span>(dir_raw_accident_bike),</span>
-<span id="cb19-171"><a href="#cb19-171" aria-hidden="true" tabindex="-1"></a>  <span class="at">accident_bike =</span> <span class="fu">clean_accident_bike</span>(raw_accident_bike)</span>
-<span id="cb19-172"><a href="#cb19-172" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-173"><a href="#cb19-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-174"><a href="#cb19-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-175"><a href="#cb19-175" aria-hidden="true" tabindex="-1"></a>ポイントとしては,</span>
-<span id="cb19-176"><a href="#cb19-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-177"><a href="#cb19-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>raw データのファイルは <span class="in">`tar_file()`</span> で定義する</span>
-<span id="cb19-178"><a href="#cb19-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>raw データの読み込みは, <span class="in">`readr::read_csv()`</span> などの関数を使う</span>
-<span id="cb19-179"><a href="#cb19-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>クリーニングの関数は, raw データを引数に取り, クリーニング後のデータを返す</span>
-<span id="cb19-180"><a href="#cb19-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-181"><a href="#cb19-181" aria-hidden="true" tabindex="-1"></a>という工程を必ず踏むことです.</span>
-<span id="cb19-182"><a href="#cb19-182" aria-hidden="true" tabindex="-1"></a>また上記の最初の二つを統合して, 以下のような書き方もできます.</span>
+<span id="cb19-154"><a href="#cb19-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_data.R"}</span></span>
+<span id="cb19-155"><a href="#cb19-155" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
+<span id="cb19-156"><a href="#cb19-156" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_raw_accident_bike =</span> <span class="fu">download_accident_bike</span>(</span>
+<span id="cb19-157"><a href="#cb19-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"data"</span>, <span class="st">"accident_bike"</span>)</span>
+<span id="cb19-158"><a href="#cb19-158" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb19-159"><a href="#cb19-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">raw_accident_bike =</span> <span class="fu">load_accident_bike</span>(dir_raw_accident_bike),</span>
+<span id="cb19-160"><a href="#cb19-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">accident_bike =</span> <span class="fu">clean_accident_bike</span>(raw_accident_bike)</span>
+<span id="cb19-161"><a href="#cb19-161" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-162"><a href="#cb19-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-163"><a href="#cb19-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-164"><a href="#cb19-164" aria-hidden="true" tabindex="-1"></a>ポイントとしては,</span>
+<span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-166"><a href="#cb19-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>raw データのファイルは <span class="in">`tar_file()`</span> で定義する</span>
+<span id="cb19-167"><a href="#cb19-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>raw データの読み込みは, <span class="in">`readr::read_csv()`</span> などの関数を使う</span>
+<span id="cb19-168"><a href="#cb19-168" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>クリーニングの関数は, raw データを引数に取り, クリーニング後のデータを返す</span>
+<span id="cb19-169"><a href="#cb19-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-170"><a href="#cb19-170" aria-hidden="true" tabindex="-1"></a>という工程を必ず踏むことです.</span>
+<span id="cb19-171"><a href="#cb19-171" aria-hidden="true" tabindex="-1"></a>また上記の最初の二つを統合して, 以下のような書き方もできます.</span>
+<span id="cb19-172"><a href="#cb19-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-173"><a href="#cb19-173" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-174"><a href="#cb19-174" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-175"><a href="#cb19-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(</span>
+<span id="cb19-176"><a href="#cb19-176" aria-hidden="true" tabindex="-1"></a>    data1_raw,</span>
+<span id="cb19-177"><a href="#cb19-177" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"path"</span>, <span class="st">"to"</span>, <span class="st">"file"</span>, <span class="st">"data1.csv"</span>),</span>
+<span id="cb19-178"><a href="#cb19-178" aria-hidden="true" tabindex="-1"></a>    readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="sc">!!</span>.x),</span>
+<span id="cb19-179"><a href="#cb19-179" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb19-180"><a href="#cb19-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_cleaned =</span> <span class="fu">clean_data1</span>(data1_raw)</span>
+<span id="cb19-181"><a href="#cb19-181" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-182"><a href="#cb19-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-183"><a href="#cb19-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-184"><a href="#cb19-184" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-185"><a href="#cb19-185" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-186"><a href="#cb19-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(</span>
-<span id="cb19-187"><a href="#cb19-187" aria-hidden="true" tabindex="-1"></a>    data1_raw,</span>
-<span id="cb19-188"><a href="#cb19-188" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"path"</span>, <span class="st">"to"</span>, <span class="st">"file"</span>, <span class="st">"data1.csv"</span>),</span>
-<span id="cb19-189"><a href="#cb19-189" aria-hidden="true" tabindex="-1"></a>    readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="sc">!!</span>.x),</span>
-<span id="cb19-190"><a href="#cb19-190" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb19-191"><a href="#cb19-191" aria-hidden="true" tabindex="-1"></a>  <span class="at">data1_cleaned =</span> <span class="fu">clean_data1</span>(data1_raw)</span>
-<span id="cb19-192"><a href="#cb19-192" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-184"><a href="#cb19-184" aria-hidden="true" tabindex="-1"></a>またオンライン上のファイルをダウンロードして <span class="in">`tar_file`</span> で定義したい場合,</span>
+<span id="cb19-185"><a href="#cb19-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-186"><a href="#cb19-186" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-187"><a href="#cb19-187" aria-hidden="true" tabindex="-1"></a>download_file <span class="ot">&lt;-</span> <span class="cf">function</span>(url, destfile) {</span>
+<span id="cb19-188"><a href="#cb19-188" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(destfile)) {</span>
+<span id="cb19-189"><a href="#cb19-189" aria-hidden="true" tabindex="-1"></a>    <span class="fu">download.file</span>(url, destfile)</span>
+<span id="cb19-190"><a href="#cb19-190" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-191"><a href="#cb19-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(destfile)</span>
+<span id="cb19-192"><a href="#cb19-192" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb19-193"><a href="#cb19-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-194"><a href="#cb19-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-195"><a href="#cb19-195" aria-hidden="true" tabindex="-1"></a>またオンライン上のファイルをダウンロードして <span class="in">`tar_file`</span> で定義したい場合,</span>
-<span id="cb19-196"><a href="#cb19-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-197"><a href="#cb19-197" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-198"><a href="#cb19-198" aria-hidden="true" tabindex="-1"></a>download_file <span class="ot">&lt;-</span> <span class="cf">function</span>(url, destfile) {</span>
-<span id="cb19-199"><a href="#cb19-199" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(destfile)) {</span>
-<span id="cb19-200"><a href="#cb19-200" aria-hidden="true" tabindex="-1"></a>    <span class="fu">download.file</span>(url, destfile)</span>
-<span id="cb19-201"><a href="#cb19-201" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(destfile)</span>
-<span id="cb19-203"><a href="#cb19-203" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-205"><a href="#cb19-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-206"><a href="#cb19-206" aria-hidden="true" tabindex="-1"></a>といった関数を定義して, <span class="in">`tar_file()`</span> の中で呼び出すことができます.</span>
-<span id="cb19-207"><a href="#cb19-207" aria-hidden="true" tabindex="-1"></a>保存先のパスを返す関数を定義するというのがポイントです.</span>
+<span id="cb19-195"><a href="#cb19-195" aria-hidden="true" tabindex="-1"></a>といった関数を定義して, <span class="in">`tar_file()`</span> の中で呼び出すことができます.</span>
+<span id="cb19-196"><a href="#cb19-196" aria-hidden="true" tabindex="-1"></a>保存先のパスを返す関数を定義するというのがポイントです.</span>
+<span id="cb19-197"><a href="#cb19-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-198"><a href="#cb19-198" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. ウェブサイトを設定する</span></span>
+<span id="cb19-199"><a href="#cb19-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-200"><a href="#cb19-200" aria-hidden="true" tabindex="-1"></a>ウェブサイトをパイプラインの中でビルドするには <span class="in">`tar_quarto()`</span> を用います.</span>
+<span id="cb19-201"><a href="#cb19-201" aria-hidden="true" tabindex="-1"></a>ウェブサイトを用いる意味や具体的な設定は, <span class="co">[</span><span class="ot">研究のためのウェブサイトの記事</span><span class="co">](https://zenn.dev/nicetak/articles/quarto-research-blog)</span>を参考にしてください.</span>
+<span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-203"><a href="#cb19-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. データ分析やモデルの試行錯誤</span></span>
+<span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-205"><a href="#cb19-205" aria-hidden="true" tabindex="-1"></a>上記で設定したウェブサイトの <span class="in">`playground`</span> ディレクトリの中でノートブック形式のポストを作成し, データ分析やモデルの試行錯誤を行います.</span>
+<span id="cb19-206"><a href="#cb19-206" aria-hidden="true" tabindex="-1"></a>データクリーニングを行なった後のデータを <span class="in">`tar_load()`</span> で読み込むことができます.</span>
+<span id="cb19-207"><a href="#cb19-207" aria-hidden="true" tabindex="-1"></a>また図などの設定は, <span class="in">`R/fns_graphics.R`</span> 内で定義していて, それを読み込む形で使用しています.</span>
 <span id="cb19-208"><a href="#cb19-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-209"><a href="#cb19-209" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. ウェブサイトを設定する</span></span>
-<span id="cb19-210"><a href="#cb19-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-211"><a href="#cb19-211" aria-hidden="true" tabindex="-1"></a>ウェブサイトをパイプラインの中でビルドするには <span class="in">`tar_quarto()`</span> を用います.</span>
-<span id="cb19-212"><a href="#cb19-212" aria-hidden="true" tabindex="-1"></a>ウェブサイトを用いる意味や具体的な設定は, <span class="co">[</span><span class="ot">研究のためのウェブサイトの記事</span><span class="co">](https://zenn.dev/nicetak/articles/quarto-research-blog)</span>を参考にしてください.</span>
-<span id="cb19-213"><a href="#cb19-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-214"><a href="#cb19-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. データ分析やモデルの試行錯誤</span></span>
-<span id="cb19-215"><a href="#cb19-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-216"><a href="#cb19-216" aria-hidden="true" tabindex="-1"></a>上記で設定したウェブサイトの <span class="in">`playground`</span> ディレクトリの中でノートブック形式のポストを作成し, データ分析やモデルの試行錯誤を行います.</span>
-<span id="cb19-217"><a href="#cb19-217" aria-hidden="true" tabindex="-1"></a>データクリーニングを行なった後のデータを <span class="in">`tar_load()`</span> で読み込むことができます.</span>
-<span id="cb19-218"><a href="#cb19-218" aria-hidden="true" tabindex="-1"></a>また図などの設定は, <span class="in">`R/fns_graphics.R`</span> 内で定義していて, それを読み込む形で使用しています.</span>
-<span id="cb19-219"><a href="#cb19-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-220"><a href="#cb19-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="playground/240324_accident_bike/index.qmd"}</span></span>
-<span id="cb19-221"><a href="#cb19-221" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_config_set</span>(</span>
-<span id="cb19-222"><a href="#cb19-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>),</span>
-<span id="cb19-223"><a href="#cb19-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets.R"</span>)</span>
-<span id="cb19-224"><a href="#cb19-224" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-209"><a href="#cb19-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="playground/240324_accident_bike/index.qmd"}</span></span>
+<span id="cb19-210"><a href="#cb19-210" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_config_set</span>(</span>
+<span id="cb19-211"><a href="#cb19-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>),</span>
+<span id="cb19-212"><a href="#cb19-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets.R"</span>)</span>
+<span id="cb19-213"><a href="#cb19-213" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-214"><a href="#cb19-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-215"><a href="#cb19-215" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_load</span>(<span class="fu">c</span>(accident_bike))</span>
+<span id="cb19-216"><a href="#cb19-216" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">list2env</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(fns_graphics), .GlobalEnv))</span>
+<span id="cb19-217"><a href="#cb19-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-218"><a href="#cb19-218" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_proj</span>())</span>
+<span id="cb19-219"><a href="#cb19-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-220"><a href="#cb19-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-221"><a href="#cb19-221" aria-hidden="true" tabindex="-1"></a>ポイントとしては, 必要以上にパイプラインに組み込まないことです.</span>
+<span id="cb19-222"><a href="#cb19-222" aria-hidden="true" tabindex="-1"></a>試行錯誤の段階のほとんどの分析は実際の論文には含まれません.</span>
+<span id="cb19-223"><a href="#cb19-223" aria-hidden="true" tabindex="-1"></a>そのため, それをパイプラインに組み込むと, ほとんど必要ないにも関わらず, 依存関係の管理が難しくなります.</span>
+<span id="cb19-224"><a href="#cb19-224" aria-hidden="true" tabindex="-1"></a>そのため, <span class="in">`playground`</span> ディレクトリの中で試行錯誤を行い, 最終的に必要なものだけをパイプラインに組み込むようにしています.</span>
 <span id="cb19-225"><a href="#cb19-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-226"><a href="#cb19-226" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_load</span>(<span class="fu">c</span>(accident_bike))</span>
-<span id="cb19-227"><a href="#cb19-227" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">list2env</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(fns_graphics), .GlobalEnv))</span>
-<span id="cb19-228"><a href="#cb19-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-229"><a href="#cb19-229" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_proj</span>())</span>
-<span id="cb19-230"><a href="#cb19-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-226"><a href="#cb19-226" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_quarto()`</span> と Quarto の <span class="in">`freeze: auto`</span> の設定を組み合わせることで, 一度コンパイルした結果は, 手動でコンパイルしない限り, 再計算されません.</span>
+<span id="cb19-227"><a href="#cb19-227" aria-hidden="true" tabindex="-1"></a>パイプラインの上流が変更された場合でもそれに依存する部分が再計算されないというデメリットはありますが, 不必要な部分の管理をほとんどしなくても良いというメリットがあります.</span>
+<span id="cb19-228"><a href="#cb19-228" aria-hidden="true" tabindex="-1"></a>上流で変更があった場合には, プロジェクトの中で必要な部分だけを手動でコンパイルし直せば良いです.</span>
+<span id="cb19-229"><a href="#cb19-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-230"><a href="#cb19-230" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 途中結果をスライドにまとめる</span></span>
 <span id="cb19-231"><a href="#cb19-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-232"><a href="#cb19-232" aria-hidden="true" tabindex="-1"></a>ポイントとしては, 必要以上にパイプラインに組み込まないことです.</span>
-<span id="cb19-233"><a href="#cb19-233" aria-hidden="true" tabindex="-1"></a>試行錯誤の段階のほとんどの分析は実際の論文には含まれません.</span>
-<span id="cb19-234"><a href="#cb19-234" aria-hidden="true" tabindex="-1"></a>そのため, それをパイプラインに組み込むと, ほとんど必要ないにも関わらず, 依存関係の管理が難しくなります.</span>
-<span id="cb19-235"><a href="#cb19-235" aria-hidden="true" tabindex="-1"></a>そのため, <span class="in">`playground`</span> ディレクトリの中で試行錯誤を行い, 最終的に必要なものだけをパイプラインに組み込むようにしています.</span>
+<span id="cb19-232"><a href="#cb19-232" aria-hidden="true" tabindex="-1"></a>研究を進める中で, 途中結果をプレゼンする機会はよくあると思います.</span>
+<span id="cb19-233"><a href="#cb19-233" aria-hidden="true" tabindex="-1"></a>試行錯誤した中で, 重要な結果をスライドにまとめるという形式が良いと思います.</span>
+<span id="cb19-234"><a href="#cb19-234" aria-hidden="true" tabindex="-1"></a>この段階も試行錯誤の過程の一つと考えるので, それをパイプラインに組み込む必要はありません.</span>
+<span id="cb19-235"><a href="#cb19-235" aria-hidden="true" tabindex="-1"></a>このプロジェクトでは, <span class="in">`slide`</span> ディレクトリもウェブサイトのページの一部としてコンパイルされます.</span>
 <span id="cb19-236"><a href="#cb19-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-237"><a href="#cb19-237" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_quarto()`</span> と Quarto の <span class="in">`freeze: auto`</span> の設定を組み合わせることで, 一度コンパイルした結果は, 手動でコンパイルしない限り, 再計算されません.</span>
-<span id="cb19-238"><a href="#cb19-238" aria-hidden="true" tabindex="-1"></a>パイプラインの上流が変更された場合でもそれに依存する部分が再計算されないというデメリットはありますが, 不必要な部分の管理をほとんどしなくても良いというメリットがあります.</span>
-<span id="cb19-239"><a href="#cb19-239" aria-hidden="true" tabindex="-1"></a>上流で変更があった場合には, プロジェクトの中で必要な部分だけを手動でコンパイルし直せば良いです.</span>
+<span id="cb19-237"><a href="#cb19-237" aria-hidden="true" tabindex="-1"></a>私はスライドを, <span class="co">[</span><span class="ot">Quarto Clean Theme</span><span class="co">](https://github.com/kazuyanagimoto/quarto-clean-typst)</span> で作成しています.</span>
+<span id="cb19-238"><a href="#cb19-238" aria-hidden="true" tabindex="-1"></a>Quarto で作成されるため, このワークフローに自然に取り込むことができます.</span>
+<span id="cb19-239"><a href="#cb19-239" aria-hidden="true" tabindex="-1"></a>また, Typst を用いているため, Beamer などと比べて高速にコンパイルされます.</span>
 <span id="cb19-240"><a href="#cb19-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-241"><a href="#cb19-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. 途中結果をスライドにまとめる</span></span>
+<span id="cb19-241"><a href="#cb19-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. 3-5 を繰り返す. 主要な結果をパイプラインに組み込む</span></span>
 <span id="cb19-242"><a href="#cb19-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-243"><a href="#cb19-243" aria-hidden="true" tabindex="-1"></a>研究を進める中で, 途中結果をプレゼンする機会はよくあると思います.</span>
-<span id="cb19-244"><a href="#cb19-244" aria-hidden="true" tabindex="-1"></a>試行錯誤した中で, 重要な結果をスライドにまとめるという形式が良いと思います.</span>
-<span id="cb19-245"><a href="#cb19-245" aria-hidden="true" tabindex="-1"></a>この段階も試行錯誤の過程の一つと考えるので, それをパイプラインに組み込む必要はありません.</span>
-<span id="cb19-246"><a href="#cb19-246" aria-hidden="true" tabindex="-1"></a>このプロジェクトでは, <span class="in">`slide`</span> ディレクトリもウェブサイトのページの一部としてコンパイルされます.</span>
-<span id="cb19-247"><a href="#cb19-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-248"><a href="#cb19-248" aria-hidden="true" tabindex="-1"></a>私はスライドを, <span class="co">[</span><span class="ot">Quarto Clean Theme</span><span class="co">](https://github.com/kazuyanagimoto/quarto-clean-typst)</span> で作成しています.</span>
-<span id="cb19-249"><a href="#cb19-249" aria-hidden="true" tabindex="-1"></a>Quarto で作成されるため, このワークフローに自然に取り込むことができます.</span>
-<span id="cb19-250"><a href="#cb19-250" aria-hidden="true" tabindex="-1"></a>また, Typst を用いているため, Beamer などと比べて高速にコンパイルされます.</span>
-<span id="cb19-251"><a href="#cb19-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-252"><a href="#cb19-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. 3-5 を繰り返す. 主要な結果をパイプラインに組み込む</span></span>
-<span id="cb19-253"><a href="#cb19-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-254"><a href="#cb19-254" aria-hidden="true" tabindex="-1"></a>プレゼンなどでフィードバックをもらいながら, 研究を進めていきます.</span>
-<span id="cb19-255"><a href="#cb19-255" aria-hidden="true" tabindex="-1"></a>論文の執筆に十分な結果が得られたら, 次のステップに進みます.</span>
-<span id="cb19-256"><a href="#cb19-256" aria-hidden="true" tabindex="-1"></a>ここで初めて, <span class="in">`R/tar_fact.R`</span> や <span class="in">`R/tar_model.R`</span> などのパイプラインを定義していきます.</span>
-<span id="cb19-257"><a href="#cb19-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-258"><a href="#cb19-258" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 主要な結果をパイプラインに組み込む</span></span>
-<span id="cb19-259"><a href="#cb19-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-260"><a href="#cb19-260" aria-hidden="true" tabindex="-1"></a>論文に必要な数値を <span class="co">[</span><span class="ot">`R/tar_fact.R`</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_fact.R)</span> でパイプラインに組み込みます.</span>
-<span id="cb19-261"><a href="#cb19-261" aria-hidden="true" tabindex="-1"></a>私は, <span class="in">`compute_*()`</span> という関数を定義して, クリーニングされたデータを引数にとり, 計算した結果を数値あるいはデータフレームとして返すようにしています.</span>
-<span id="cb19-262"><a href="#cb19-262" aria-hidden="true" tabindex="-1"></a>図表の作成は論文の中で行うので, ここでは行いません.</span>
-<span id="cb19-263"><a href="#cb19-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-264"><a href="#cb19-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_fact.R"}</span></span>
-<span id="cb19-265"><a href="#cb19-265" aria-hidden="true" tabindex="-1"></a>fact <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
-<span id="cb19-266"><a href="#cb19-266" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_accident =</span> <span class="fu">compute_num_accident</span>(accident_bike),</span>
-<span id="cb19-267"><a href="#cb19-267" aria-hidden="true" tabindex="-1"></a>  <span class="at">logit_hospital_death =</span> <span class="fu">compute_logit_hospital_death</span>(accident_bike)</span>
-<span id="cb19-268"><a href="#cb19-268" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-269"><a href="#cb19-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-270"><a href="#cb19-270" aria-hidden="true" tabindex="-1"></a>compute_num_accident <span class="ot">&lt;-</span> <span class="cf">function</span>(accident_bike) {</span>
-<span id="cb19-271"><a href="#cb19-271" aria-hidden="true" tabindex="-1"></a>  accident_bike <span class="sc">|&gt;</span></span>
-<span id="cb19-272"><a href="#cb19-272" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by =</span> <span class="fu">c</span>(type_person, gender))</span>
-<span id="cb19-273"><a href="#cb19-273" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-274"><a href="#cb19-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-243"><a href="#cb19-243" aria-hidden="true" tabindex="-1"></a>プレゼンなどでフィードバックをもらいながら, 研究を進めていきます.</span>
+<span id="cb19-244"><a href="#cb19-244" aria-hidden="true" tabindex="-1"></a>論文の執筆に十分な結果が得られたら, 次のステップに進みます.</span>
+<span id="cb19-245"><a href="#cb19-245" aria-hidden="true" tabindex="-1"></a>ここで初めて, <span class="in">`R/tar_fact.R`</span> や <span class="in">`R/tar_model.R`</span> などのパイプラインを定義していきます.</span>
+<span id="cb19-246"><a href="#cb19-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-247"><a href="#cb19-247" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 主要な結果をパイプラインに組み込む</span></span>
+<span id="cb19-248"><a href="#cb19-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-249"><a href="#cb19-249" aria-hidden="true" tabindex="-1"></a>論文に必要な数値を <span class="co">[</span><span class="ot">`R/tar_fact.R`</span><span class="co">](https://github.com/kazuyanagimoto/quarto-research-blog/blob/main/R/tar_fact.R)</span> でパイプラインに組み込みます.</span>
+<span id="cb19-250"><a href="#cb19-250" aria-hidden="true" tabindex="-1"></a>私は, <span class="in">`compute_*()`</span> という関数を定義して, クリーニングされたデータを引数にとり, 計算した結果を数値あるいはデータフレームとして返すようにしています.</span>
+<span id="cb19-251"><a href="#cb19-251" aria-hidden="true" tabindex="-1"></a>図表の作成は論文の中で行うので, ここでは行いません.</span>
+<span id="cb19-252"><a href="#cb19-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-253"><a href="#cb19-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_fact.R"}</span></span>
+<span id="cb19-254"><a href="#cb19-254" aria-hidden="true" tabindex="-1"></a>fact <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
+<span id="cb19-255"><a href="#cb19-255" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_accident =</span> <span class="fu">compute_num_accident</span>(accident_bike),</span>
+<span id="cb19-256"><a href="#cb19-256" aria-hidden="true" tabindex="-1"></a>  <span class="at">logit_hospital_death =</span> <span class="fu">compute_logit_hospital_death</span>(accident_bike)</span>
+<span id="cb19-257"><a href="#cb19-257" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-258"><a href="#cb19-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-259"><a href="#cb19-259" aria-hidden="true" tabindex="-1"></a>compute_num_accident <span class="ot">&lt;-</span> <span class="cf">function</span>(accident_bike) {</span>
+<span id="cb19-260"><a href="#cb19-260" aria-hidden="true" tabindex="-1"></a>  accident_bike <span class="sc">|&gt;</span></span>
+<span id="cb19-261"><a href="#cb19-261" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by =</span> <span class="fu">c</span>(type_person, gender))</span>
+<span id="cb19-262"><a href="#cb19-262" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-263"><a href="#cb19-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-264"><a href="#cb19-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-265"><a href="#cb19-265" aria-hidden="true" tabindex="-1"></a>LaTeX 等で執筆される方は, この段階で図表を保存すると良いと思います.</span>
+<span id="cb19-266"><a href="#cb19-266" aria-hidden="true" tabindex="-1"></a>例えば以下のようなパイプラインが考えられるでしょう.</span>
+<span id="cb19-267"><a href="#cb19-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-268"><a href="#cb19-268" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-269"><a href="#cb19-269" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-270"><a href="#cb19-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(</span>
+<span id="cb19-271"><a href="#cb19-271" aria-hidden="true" tabindex="-1"></a>    fig1_file,</span>
+<span id="cb19-272"><a href="#cb19-272" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_fig1</span>(data1, <span class="fu">here_rel</span>(<span class="st">"path"</span>, <span class="st">"to"</span>, <span class="st">"file"</span>, <span class="st">"fig1.pdf"</span>))</span>
+<span id="cb19-273"><a href="#cb19-273" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-274"><a href="#cb19-274" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb19-275"><a href="#cb19-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-276"><a href="#cb19-276" aria-hidden="true" tabindex="-1"></a>LaTeX 等で執筆される方は, この段階で図表を保存すると良いと思います.</span>
-<span id="cb19-277"><a href="#cb19-277" aria-hidden="true" tabindex="-1"></a>例えば以下のようなパイプラインが考えられるでしょう.</span>
-<span id="cb19-278"><a href="#cb19-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-279"><a href="#cb19-279" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-280"><a href="#cb19-280" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-281"><a href="#cb19-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(</span>
-<span id="cb19-282"><a href="#cb19-282" aria-hidden="true" tabindex="-1"></a>    fig1_file,</span>
-<span id="cb19-283"><a href="#cb19-283" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_fig1</span>(data1, <span class="fu">here_rel</span>(<span class="st">"path"</span>, <span class="st">"to"</span>, <span class="st">"file"</span>, <span class="st">"fig1.pdf"</span>))</span>
-<span id="cb19-284"><a href="#cb19-284" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-285"><a href="#cb19-285" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-276"><a href="#cb19-276" aria-hidden="true" tabindex="-1"></a>plot_fig1 <span class="ot">&lt;-</span> <span class="cf">function</span>(data1, path_fig1) {</span>
+<span id="cb19-277"><a href="#cb19-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data1, <span class="fu">aes</span>(<span class="at">x =</span> col1, <span class="at">y =</span> col2)) <span class="sc">+</span></span>
+<span id="cb19-278"><a href="#cb19-278" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span>
+<span id="cb19-279"><a href="#cb19-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-280"><a href="#cb19-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(path_fig1)</span>
+<span id="cb19-281"><a href="#cb19-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(path_fig1)</span>
+<span id="cb19-282"><a href="#cb19-282" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-283"><a href="#cb19-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-284"><a href="#cb19-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-285"><a href="#cb19-285" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Julia のコードをパイプラインに組み込む</span></span>
 <span id="cb19-286"><a href="#cb19-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-287"><a href="#cb19-287" aria-hidden="true" tabindex="-1"></a>plot_fig1 <span class="ot">&lt;-</span> <span class="cf">function</span>(data1, path_fig1) {</span>
-<span id="cb19-288"><a href="#cb19-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data1, <span class="fu">aes</span>(<span class="at">x =</span> col1, <span class="at">y =</span> col2)) <span class="sc">+</span></span>
-<span id="cb19-289"><a href="#cb19-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span>
-<span id="cb19-290"><a href="#cb19-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-291"><a href="#cb19-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(path_fig1)</span>
-<span id="cb19-292"><a href="#cb19-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(path_fig1)</span>
-<span id="cb19-293"><a href="#cb19-293" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-294"><a href="#cb19-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-295"><a href="#cb19-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-296"><a href="#cb19-296" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Julia のコードをパイプラインに組み込む</span></span>
-<span id="cb19-297"><a href="#cb19-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-298"><a href="#cb19-298" aria-hidden="true" tabindex="-1"></a>R の分析だけであれば, そのままパイプラインに組み込むことができますが, Julia のコードを組み込む場合は少し工夫が必要です.</span>
-<span id="cb19-299"><a href="#cb19-299" aria-hidden="true" tabindex="-1"></a>私は以下の方法を取っています.</span>
-<span id="cb19-300"><a href="#cb19-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-301"><a href="#cb19-301" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Julia のソースコードファイルとして読み込み (<span class="in">`tar_file_read()`</span>), パイプラインに組み込む (<span class="in">`jl_file_*`</span>)</span>
-<span id="cb19-302"><a href="#cb19-302" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Julia のソースコードを R の <span class="in">`system2()`</span> でコマンドライン実行する (<span class="in">`run_model()`</span>)</span>
-<span id="cb19-303"><a href="#cb19-303" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Julia の中で実行される結果は, CSV や YAML などのファイルとして保存しておき, R の中で読み込む (<span class="in">`tar_file_read()`</span>)</span>
-<span id="cb19-304"><a href="#cb19-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-305"><a href="#cb19-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_model.R"}</span></span>
-<span id="cb19-306"><a href="#cb19-306" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
-<span id="cb19-307"><a href="#cb19-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_map</span>(</span>
-<span id="cb19-308"><a href="#cb19-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"main"</span>, <span class="st">"model"</span>)),</span>
-<span id="cb19-309"><a href="#cb19-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> name,</span>
-<span id="cb19-310"><a href="#cb19-310" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tar_file_read</span>(</span>
-<span id="cb19-311"><a href="#cb19-311" aria-hidden="true" tabindex="-1"></a>      jl,</span>
-<span id="cb19-312"><a href="#cb19-312" aria-hidden="true" tabindex="-1"></a>      <span class="fu">here_rel</span>(<span class="st">"Julia"</span>, <span class="fu">paste0</span>(name, <span class="st">".jl"</span>)),</span>
-<span id="cb19-313"><a href="#cb19-313" aria-hidden="true" tabindex="-1"></a>      <span class="fu">readLines</span>(<span class="sc">!!</span>.x)</span>
-<span id="cb19-314"><a href="#cb19-314" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-315"><a href="#cb19-315" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb19-316"><a href="#cb19-316" aria-hidden="true" tabindex="-1"></a>  <span class="at">res_model =</span> <span class="fu">run_model</span>(jl_file_main, jl_main, jl_model),</span>
-<span id="cb19-317"><a href="#cb19-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(parameters, res_model[[<span class="dv">1</span>]], yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="sc">!!</span>.x)),</span>
-<span id="cb19-318"><a href="#cb19-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(demand_supply, res_model[[<span class="dv">2</span>]], <span class="fu">read.csv</span>(<span class="sc">!!</span>.x)),</span>
-<span id="cb19-319"><a href="#cb19-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(equilibrium, res_model[[<span class="dv">3</span>]], yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="sc">!!</span>.x))</span>
-<span id="cb19-320"><a href="#cb19-320" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-321"><a href="#cb19-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-322"><a href="#cb19-322" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(jl_file_main, ...) {</span>
-<span id="cb19-323"><a href="#cb19-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system2</span>(<span class="at">command =</span> <span class="st">"julia"</span>, <span class="at">args =</span> <span class="fu">c</span>(<span class="st">"--project=."</span>, jl_file_main))</span>
-<span id="cb19-324"><a href="#cb19-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-325"><a href="#cb19-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">file.path</span>(</span>
-<span id="cb19-326"><a href="#cb19-326" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"output"</span>, <span class="st">"Julia"</span>),</span>
-<span id="cb19-327"><a href="#cb19-327" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"parameters.yaml"</span>, <span class="st">"demand_supply.csv"</span>, <span class="st">"equilibrium.yaml"</span>)</span>
-<span id="cb19-328"><a href="#cb19-328" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb19-329"><a href="#cb19-329" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-330"><a href="#cb19-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-331"><a href="#cb19-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-332"><a href="#cb19-332" aria-hidden="true" tabindex="-1"></a>ポイントは以下の2点です.</span>
-<span id="cb19-333"><a href="#cb19-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-334"><a href="#cb19-334" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Julia 内の依存関係も含められるように, <span class="in">`run_model()`</span> の引数に全ての依存関係を指定する</span>
-<span id="cb19-335"><a href="#cb19-335" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>結果を保存したファイルは, リストにまとめた上で, R から一つずつ読み込む</span>
-<span id="cb19-336"><a href="#cb19-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-337"><a href="#cb19-337" aria-hidden="true" tabindex="-1"></a>ちなみに, <span class="in">`system2()`</span> で実行する場合, Julia のパスが通っていないことがあります (PC のデフォルトのシェルと R のシェルが異なるため).</span>
-<span id="cb19-338"><a href="#cb19-338" aria-hidden="true" tabindex="-1"></a>その場合は, <span class="in">`.Renviron`</span> で定義した Julia のパスを <span class="in">`.Rprofile`</span> で読み込むようにしています.</span>
-<span id="cb19-339"><a href="#cb19-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-340"><a href="#cb19-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{.bash filename=".Renviron"}</span></span>
-<span id="cb19-341"><a href="#cb19-341" aria-hidden="true" tabindex="-1"></a><span class="va">PATH_JULIA</span><span class="op">=</span>/path/to/julia/</span>
-<span id="cb19-342"><a href="#cb19-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-343"><a href="#cb19-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-344"><a href="#cb19-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename=".Rprofile"}</span></span>
-<span id="cb19-345"><a href="#cb19-345" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(</span>
-<span id="cb19-346"><a href="#cb19-346" aria-hidden="true" tabindex="-1"></a>  <span class="at">PATH =</span> <span class="fu">paste</span>(<span class="fu">Sys.getenv</span>(<span class="st">"PATH_JULIA"</span>), <span class="fu">Sys.getenv</span>(<span class="st">"PATH"</span>), <span class="at">sep =</span> <span class="st">":"</span>)</span>
-<span id="cb19-347"><a href="#cb19-347" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-348"><a href="#cb19-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-349"><a href="#cb19-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-350"><a href="#cb19-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. 最終的な結果で論文を執筆する</span></span>
-<span id="cb19-351"><a href="#cb19-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-352"><a href="#cb19-352" aria-hidden="true" tabindex="-1"></a>論文の執筆は, <span class="in">`manuscript`</span> ディレクトリの中で行います.</span>
-<span id="cb19-353"><a href="#cb19-353" aria-hidden="true" tabindex="-1"></a>ここでは, 上記で定義したパイプラインの実行結果を <span class="in">`tar_load()`</span> で読み込んで, 論文を執筆します.</span>
-<span id="cb19-354"><a href="#cb19-354" aria-hidden="true" tabindex="-1"></a>私は以下の3ステップで論文を執筆しています.</span>
-<span id="cb19-355"><a href="#cb19-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-356"><a href="#cb19-356" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`manuscript/_quarto.yml`</span> でディレクトリ自体を <span class="co">[</span><span class="ot">Quarto Book</span><span class="co">](https://quarto.org/docs/books/)</span> として設定する</span>
-<span id="cb19-357"><a href="#cb19-357" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Quarto Book として執筆する (<span class="in">`01-intro.qmd`</span>, ...)</span>
-<span id="cb19-358"><a href="#cb19-358" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`manuscript/main.qmd`</span> に <span class="in">`01-intro.qmd`</span>, <span class="in">`02-methods.qmd`</span>, ... をまとめてコンパイルする</span>
-<span id="cb19-359"><a href="#cb19-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-360"><a href="#cb19-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename="manuscript/main.qmd"}</span></span>
-<span id="cb19-361"><a href="#cb19-361" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 01-intro.qmd &gt;}}}</span>
-<span id="cb19-362"><a href="#cb19-362" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 02-fact.qmd &gt;}}}</span>
-<span id="cb19-363"><a href="#cb19-363" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 03-model.qmd &gt;}}}</span>
-<span id="cb19-364"><a href="#cb19-364" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 04-result.qmd &gt;}}}</span>
-<span id="cb19-365"><a href="#cb19-365" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 05-conclusion.qmd &gt;}}}</span>
-<span id="cb19-366"><a href="#cb19-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-367"><a href="#cb19-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-368"><a href="#cb19-368" aria-hidden="true" tabindex="-1"></a><span class="fu">#### なぜ Quarto Book として執筆するのか</span></span>
-<span id="cb19-369"><a href="#cb19-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-370"><a href="#cb19-370" aria-hidden="true" tabindex="-1"></a>Quarto Book として執筆すると, 複数ファイルに分けても cross-reference が効きます.</span>
-<span id="cb19-371"><a href="#cb19-371" aria-hidden="true" tabindex="-1"></a>これはかなり便利で, セクションごとにファイルを分けることで論文の構造が把握しやすくなり, cross-reference の入力補完が働くことで, 快適に執筆できます.</span>
+<span id="cb19-287"><a href="#cb19-287" aria-hidden="true" tabindex="-1"></a>R の分析だけであれば, そのままパイプラインに組み込むことができますが, Julia のコードを組み込む場合は少し工夫が必要です.</span>
+<span id="cb19-288"><a href="#cb19-288" aria-hidden="true" tabindex="-1"></a>私は以下の方法を取っています.</span>
+<span id="cb19-289"><a href="#cb19-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-290"><a href="#cb19-290" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Julia のソースコードファイルとして読み込み (<span class="in">`tar_file_read()`</span>), パイプラインに組み込む (<span class="in">`jl_file_*`</span>)</span>
+<span id="cb19-291"><a href="#cb19-291" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Julia のソースコードを R の <span class="in">`system2()`</span> でコマンドライン実行する (<span class="in">`run_model()`</span>)</span>
+<span id="cb19-292"><a href="#cb19-292" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Julia の中で実行される結果は, CSV や YAML などのファイルとして保存しておき, R の中で読み込む (<span class="in">`tar_file_read()`</span>)</span>
+<span id="cb19-293"><a href="#cb19-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-294"><a href="#cb19-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="R/tar_model.R"}</span></span>
+<span id="cb19-295"><a href="#cb19-295" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">tar_plan</span>(</span>
+<span id="cb19-296"><a href="#cb19-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_map</span>(</span>
+<span id="cb19-297"><a href="#cb19-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"main"</span>, <span class="st">"model"</span>)),</span>
+<span id="cb19-298"><a href="#cb19-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> name,</span>
+<span id="cb19-299"><a href="#cb19-299" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tar_file_read</span>(</span>
+<span id="cb19-300"><a href="#cb19-300" aria-hidden="true" tabindex="-1"></a>      jl,</span>
+<span id="cb19-301"><a href="#cb19-301" aria-hidden="true" tabindex="-1"></a>      <span class="fu">here_rel</span>(<span class="st">"Julia"</span>, <span class="fu">paste0</span>(name, <span class="st">".jl"</span>)),</span>
+<span id="cb19-302"><a href="#cb19-302" aria-hidden="true" tabindex="-1"></a>      <span class="fu">readLines</span>(<span class="sc">!!</span>.x)</span>
+<span id="cb19-303"><a href="#cb19-303" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-304"><a href="#cb19-304" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb19-305"><a href="#cb19-305" aria-hidden="true" tabindex="-1"></a>  <span class="at">res_model =</span> <span class="fu">run_model</span>(jl_file_main, jl_main, jl_model),</span>
+<span id="cb19-306"><a href="#cb19-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(parameters, res_model[[<span class="dv">1</span>]], yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="sc">!!</span>.x)),</span>
+<span id="cb19-307"><a href="#cb19-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(demand_supply, res_model[[<span class="dv">2</span>]], <span class="fu">read.csv</span>(<span class="sc">!!</span>.x)),</span>
+<span id="cb19-308"><a href="#cb19-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(equilibrium, res_model[[<span class="dv">3</span>]], yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="sc">!!</span>.x))</span>
+<span id="cb19-309"><a href="#cb19-309" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-310"><a href="#cb19-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-311"><a href="#cb19-311" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(jl_file_main, ...) {</span>
+<span id="cb19-312"><a href="#cb19-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system2</span>(<span class="at">command =</span> <span class="st">"julia"</span>, <span class="at">args =</span> <span class="fu">c</span>(<span class="st">"--project=."</span>, jl_file_main))</span>
+<span id="cb19-313"><a href="#cb19-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-314"><a href="#cb19-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">file.path</span>(</span>
+<span id="cb19-315"><a href="#cb19-315" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"output"</span>, <span class="st">"Julia"</span>),</span>
+<span id="cb19-316"><a href="#cb19-316" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"parameters.yaml"</span>, <span class="st">"demand_supply.csv"</span>, <span class="st">"equilibrium.yaml"</span>)</span>
+<span id="cb19-317"><a href="#cb19-317" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb19-318"><a href="#cb19-318" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-319"><a href="#cb19-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-320"><a href="#cb19-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-321"><a href="#cb19-321" aria-hidden="true" tabindex="-1"></a>ポイントは以下の2点です.</span>
+<span id="cb19-322"><a href="#cb19-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-323"><a href="#cb19-323" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Julia 内の依存関係も含められるように, <span class="in">`run_model()`</span> の引数に全ての依存関係を指定する</span>
+<span id="cb19-324"><a href="#cb19-324" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>結果を保存したファイルは, リストにまとめた上で, R から一つずつ読み込む</span>
+<span id="cb19-325"><a href="#cb19-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-326"><a href="#cb19-326" aria-hidden="true" tabindex="-1"></a>ちなみに, <span class="in">`system2()`</span> で実行する場合, Julia のパスが通っていないことがあります (PC のデフォルトのシェルと R のシェルが異なるため).</span>
+<span id="cb19-327"><a href="#cb19-327" aria-hidden="true" tabindex="-1"></a>その場合は, <span class="in">`.Renviron`</span> で定義した Julia のパスを <span class="in">`.Rprofile`</span> で読み込むようにしています.</span>
+<span id="cb19-328"><a href="#cb19-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-329"><a href="#cb19-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{.bash filename=".Renviron"}</span></span>
+<span id="cb19-330"><a href="#cb19-330" aria-hidden="true" tabindex="-1"></a><span class="va">PATH_JULIA</span><span class="op">=</span>/path/to/julia/</span>
+<span id="cb19-331"><a href="#cb19-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-332"><a href="#cb19-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-333"><a href="#cb19-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename=".Rprofile"}</span></span>
+<span id="cb19-334"><a href="#cb19-334" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(</span>
+<span id="cb19-335"><a href="#cb19-335" aria-hidden="true" tabindex="-1"></a>  <span class="at">PATH =</span> <span class="fu">paste</span>(<span class="fu">Sys.getenv</span>(<span class="st">"PATH_JULIA"</span>), <span class="fu">Sys.getenv</span>(<span class="st">"PATH"</span>), <span class="at">sep =</span> <span class="st">":"</span>)</span>
+<span id="cb19-336"><a href="#cb19-336" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-337"><a href="#cb19-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-338"><a href="#cb19-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-339"><a href="#cb19-339" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7. 最終的な結果で論文を執筆する</span></span>
+<span id="cb19-340"><a href="#cb19-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-341"><a href="#cb19-341" aria-hidden="true" tabindex="-1"></a>論文の執筆は, <span class="in">`manuscript`</span> ディレクトリの中で行います.</span>
+<span id="cb19-342"><a href="#cb19-342" aria-hidden="true" tabindex="-1"></a>ここでは, 上記で定義したパイプラインの実行結果を <span class="in">`tar_load()`</span> で読み込んで, 論文を執筆します.</span>
+<span id="cb19-343"><a href="#cb19-343" aria-hidden="true" tabindex="-1"></a>私は以下の3ステップで論文を執筆しています.</span>
+<span id="cb19-344"><a href="#cb19-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-345"><a href="#cb19-345" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`manuscript/_quarto.yml`</span> でディレクトリ自体を <span class="co">[</span><span class="ot">Quarto Book</span><span class="co">](https://quarto.org/docs/books/)</span> として設定する</span>
+<span id="cb19-346"><a href="#cb19-346" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Quarto Book として執筆する (<span class="in">`01-intro.qmd`</span>, ...)</span>
+<span id="cb19-347"><a href="#cb19-347" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`manuscript/main.qmd`</span> に <span class="in">`01-intro.qmd`</span>, <span class="in">`02-methods.qmd`</span>, ... をまとめてコンパイルする</span>
+<span id="cb19-348"><a href="#cb19-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-349"><a href="#cb19-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{.markdown filename="manuscript/main.qmd"}</span></span>
+<span id="cb19-350"><a href="#cb19-350" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 01-intro.qmd &gt;}}}</span>
+<span id="cb19-351"><a href="#cb19-351" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 02-fact.qmd &gt;}}}</span>
+<span id="cb19-352"><a href="#cb19-352" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 03-model.qmd &gt;}}}</span>
+<span id="cb19-353"><a href="#cb19-353" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 04-result.qmd &gt;}}}</span>
+<span id="cb19-354"><a href="#cb19-354" aria-hidden="true" tabindex="-1"></a>{{{&lt; include 05-conclusion.qmd &gt;}}}</span>
+<span id="cb19-355"><a href="#cb19-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-356"><a href="#cb19-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-357"><a href="#cb19-357" aria-hidden="true" tabindex="-1"></a><span class="fu">#### なぜ Quarto Book として執筆するのか</span></span>
+<span id="cb19-358"><a href="#cb19-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-359"><a href="#cb19-359" aria-hidden="true" tabindex="-1"></a>Quarto Book として執筆すると, 複数ファイルに分けても cross-reference が効きます.</span>
+<span id="cb19-360"><a href="#cb19-360" aria-hidden="true" tabindex="-1"></a>これはかなり便利で, セクションごとにファイルを分けることで論文の構造が把握しやすくなり, cross-reference の入力補完が働くことで, 快適に執筆できます.</span>
+<span id="cb19-361"><a href="#cb19-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-362"><a href="#cb19-362" aria-hidden="true" tabindex="-1"></a>ただし, Quarto Book は出力形式としては論文に相応しくないので, それらのファイルをまとめて <span class="in">`manuscript/main.qmd`</span> でコンパイルしています.</span>
+<span id="cb19-363"><a href="#cb19-363" aria-hidden="true" tabindex="-1"></a>この時, バックエンドは高速でコンパイルできる Typst を使用しています.</span>
+<span id="cb19-364"><a href="#cb19-364" aria-hidden="true" tabindex="-1"></a>またテンプレートは <span class="co">[</span><span class="ot">quarto-academic-typst</span><span class="co">](https://github.com/kazuyanagimoto/quarto-academic-typst)</span> を使用しています.</span>
+<span id="cb19-365"><a href="#cb19-365" aria-hidden="true" tabindex="-1"></a>ちなみに LaTeX のソースコードが必要になった場合は, <span class="in">`quarto::quarto_render()`</span> で LaTeX のソースコードを生成することができます (私は, 博士論文の執筆の際, LaTeX テンプレートに合わせるために使用しました).</span>
+<span id="cb19-366"><a href="#cb19-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-367"><a href="#cb19-367" aria-hidden="true" tabindex="-1"></a><span class="fu">#### LaTeX で執筆する場合</span></span>
+<span id="cb19-368"><a href="#cb19-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-369"><a href="#cb19-369" aria-hidden="true" tabindex="-1"></a>LaTeX で執筆する場合も <span class="in">`TinyTeX`</span> を用いてコンパイルするならば, パイプラインに組み込むことができます.</span>
+<span id="cb19-370"><a href="#cb19-370" aria-hidden="true" tabindex="-1"></a>例えば以下のような形が考えられるでしょう.</span>
+<span id="cb19-371"><a href="#cb19-371" aria-hidden="true" tabindex="-1"></a>ただし, 実際には全ての図表の依存関係を入れる必要があると考えられます.</span>
 <span id="cb19-372"><a href="#cb19-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-373"><a href="#cb19-373" aria-hidden="true" tabindex="-1"></a>ただし, Quarto Book は出力形式としては論文に相応しくないので, それらのファイルをまとめて <span class="in">`manuscript/main.qmd`</span> でコンパイルしています.</span>
-<span id="cb19-374"><a href="#cb19-374" aria-hidden="true" tabindex="-1"></a>この時, バックエンドは高速でコンパイルできる Typst を使用しています.</span>
-<span id="cb19-375"><a href="#cb19-375" aria-hidden="true" tabindex="-1"></a>またテンプレートは <span class="co">[</span><span class="ot">quarto-academic-typst</span><span class="co">](https://github.com/kazuyanagimoto/quarto-academic-typst)</span> を使用しています.</span>
-<span id="cb19-376"><a href="#cb19-376" aria-hidden="true" tabindex="-1"></a>ちなみに LaTeX のソースコードが必要になった場合は, <span class="in">`quarto::quarto_render()`</span> で LaTeX のソースコードを生成することができます (私は, 博士論文の執筆の際, LaTeX テンプレートに合わせるために使用しました).</span>
-<span id="cb19-377"><a href="#cb19-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-378"><a href="#cb19-378" aria-hidden="true" tabindex="-1"></a><span class="fu">#### LaTeX で執筆する場合</span></span>
-<span id="cb19-379"><a href="#cb19-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-380"><a href="#cb19-380" aria-hidden="true" tabindex="-1"></a>LaTeX で執筆する場合も <span class="in">`TinyTeX`</span> を用いてコンパイルするならば, パイプラインに組み込むことができます.</span>
-<span id="cb19-381"><a href="#cb19-381" aria-hidden="true" tabindex="-1"></a>例えば以下のような形が考えられるでしょう.</span>
-<span id="cb19-382"><a href="#cb19-382" aria-hidden="true" tabindex="-1"></a>ただし, 実際には全ての図表の依存関係を入れる必要があると考えられます.</span>
-<span id="cb19-383"><a href="#cb19-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-384"><a href="#cb19-384" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-385"><a href="#cb19-385" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-386"><a href="#cb19-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(</span>
-<span id="cb19-387"><a href="#cb19-387" aria-hidden="true" tabindex="-1"></a>    manuscript,</span>
-<span id="cb19-388"><a href="#cb19-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.tex"</span>),</span>
-<span id="cb19-389"><a href="#cb19-389" aria-hidden="true" tabindex="-1"></a>    <span class="fu">readLines</span>(<span class="sc">!!</span>.x)</span>
-<span id="cb19-390"><a href="#cb19-390" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb19-391"><a href="#cb19-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(</span>
-<span id="cb19-392"><a href="#cb19-392" aria-hidden="true" tabindex="-1"></a>    manuscript_pdf,</span>
-<span id="cb19-393"><a href="#cb19-393" aria-hidden="true" tabindex="-1"></a>    <span class="fu">compile_latex</span>(manuscript, <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.pdf"</span>))</span>
-<span id="cb19-394"><a href="#cb19-394" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-395"><a href="#cb19-395" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-373"><a href="#cb19-373" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-374"><a href="#cb19-374" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-375"><a href="#cb19-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file_read</span>(</span>
+<span id="cb19-376"><a href="#cb19-376" aria-hidden="true" tabindex="-1"></a>    manuscript,</span>
+<span id="cb19-377"><a href="#cb19-377" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.tex"</span>),</span>
+<span id="cb19-378"><a href="#cb19-378" aria-hidden="true" tabindex="-1"></a>    <span class="fu">readLines</span>(<span class="sc">!!</span>.x)</span>
+<span id="cb19-379"><a href="#cb19-379" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb19-380"><a href="#cb19-380" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_file</span>(</span>
+<span id="cb19-381"><a href="#cb19-381" aria-hidden="true" tabindex="-1"></a>    manuscript_pdf,</span>
+<span id="cb19-382"><a href="#cb19-382" aria-hidden="true" tabindex="-1"></a>    <span class="fu">compile_latex</span>(manuscript, <span class="fu">here_rel</span>(<span class="st">"manuscript"</span>, <span class="st">"main.pdf"</span>))</span>
+<span id="cb19-383"><a href="#cb19-383" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-384"><a href="#cb19-384" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-385"><a href="#cb19-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-386"><a href="#cb19-386" aria-hidden="true" tabindex="-1"></a>compile_latex <span class="ot">&lt;-</span> <span class="cf">function</span>(manuscript_file, path_pdf) {</span>
+<span id="cb19-387"><a href="#cb19-387" aria-hidden="true" tabindex="-1"></a>  tinytex<span class="sc">::</span><span class="fu">xelatex</span>(</span>
+<span id="cb19-388"><a href="#cb19-388" aria-hidden="true" tabindex="-1"></a>    manuscript_file,</span>
+<span id="cb19-389"><a href="#cb19-389" aria-hidden="true" tabindex="-1"></a>    <span class="at">pdf_file =</span> path_pdf</span>
+<span id="cb19-390"><a href="#cb19-390" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-391"><a href="#cb19-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(path_pdf)</span>
+<span id="cb19-392"><a href="#cb19-392" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-393"><a href="#cb19-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-394"><a href="#cb19-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-395"><a href="#cb19-395" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb19-396"><a href="#cb19-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-397"><a href="#cb19-397" aria-hidden="true" tabindex="-1"></a>compile_latex <span class="ot">&lt;-</span> <span class="cf">function</span>(manuscript_file, path_pdf) {</span>
-<span id="cb19-398"><a href="#cb19-398" aria-hidden="true" tabindex="-1"></a>  tinytex<span class="sc">::</span><span class="fu">xelatex</span>(</span>
-<span id="cb19-399"><a href="#cb19-399" aria-hidden="true" tabindex="-1"></a>    manuscript_file,</span>
-<span id="cb19-400"><a href="#cb19-400" aria-hidden="true" tabindex="-1"></a>    <span class="at">pdf_file =</span> path_pdf</span>
-<span id="cb19-401"><a href="#cb19-401" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-402"><a href="#cb19-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(path_pdf)</span>
-<span id="cb19-403"><a href="#cb19-403" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-404"><a href="#cb19-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-405"><a href="#cb19-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
-<span id="cb19-407"><a href="#cb19-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-408"><a href="#cb19-408" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さなパイプラインを組んで, <span class="in">`{targets}`</span> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<span class="in">`{targets}`</span> と <span class="in">`{tarchetypes}`</span> が入っていなければ <span class="in">`install.packages(c("targets", "tarchetypes"))`</span> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb19-397"><a href="#cb19-397" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さなパイプラインを組んで, <span class="in">`{targets}`</span> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<span class="in">`{targets}`</span> と <span class="in">`{tarchetypes}`</span> が入っていなければ <span class="in">`install.packages(c("targets", "tarchetypes"))`</span> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb19-398"><a href="#cb19-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-399"><a href="#cb19-399" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-400"><a href="#cb19-400" aria-hidden="true" tabindex="-1"></a>最小のパイプラインを作ります. 作業ディレクトリに <span class="in">`_targets.R`</span> を作り, <span class="in">`penguins`</span> データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. <span class="in">`tar_make()`</span> で実行し, <span class="in">`tar_visnetwork()`</span> で依存関係を可視化しましょう.</span>
+<span id="cb19-401"><a href="#cb19-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-402"><a href="#cb19-402" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-403"><a href="#cb19-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb19-404"><a href="#cb19-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-405"><a href="#cb19-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb19-407"><a href="#cb19-407" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
+<span id="cb19-408"><a href="#cb19-408" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
 <span id="cb19-409"><a href="#cb19-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-410"><a href="#cb19-410" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-411"><a href="#cb19-411" aria-hidden="true" tabindex="-1"></a>最小のパイプラインを作ります. 作業ディレクトリに <span class="in">`_targets.R`</span> を作り, <span class="in">`penguins`</span> データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. <span class="in">`tar_make()`</span> で実行し, <span class="in">`tar_visnetwork()`</span> で依存関係を可視化しましょう.</span>
-<span id="cb19-412"><a href="#cb19-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-413"><a href="#cb19-413" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-414"><a href="#cb19-414" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-415"><a href="#cb19-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-416"><a href="#cb19-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-417"><a href="#cb19-417" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb19-418"><a href="#cb19-418" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
-<span id="cb19-419"><a href="#cb19-419" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb19-410"><a href="#cb19-410" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb19-411"><a href="#cb19-411" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb19-412"><a href="#cb19-412" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.by =</span> species)</span>
+<span id="cb19-413"><a href="#cb19-413" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-414"><a href="#cb19-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-415"><a href="#cb19-415" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-416"><a href="#cb19-416" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_raw =</span> penguins,</span>
+<span id="cb19-417"><a href="#cb19-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_summary =</span> <span class="fu">summarize_penguins</span>(penguins_raw)</span>
+<span id="cb19-418"><a href="#cb19-418" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-419"><a href="#cb19-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-420"><a href="#cb19-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-421"><a href="#cb19-421" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb19-422"><a href="#cb19-422" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb19-423"><a href="#cb19-423" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.by =</span> species)</span>
-<span id="cb19-424"><a href="#cb19-424" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-425"><a href="#cb19-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-426"><a href="#cb19-426" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-427"><a href="#cb19-427" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_raw =</span> penguins,</span>
-<span id="cb19-428"><a href="#cb19-428" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_summary =</span> <span class="fu">summarize_penguins</span>(penguins_raw)</span>
-<span id="cb19-429"><a href="#cb19-429" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-430"><a href="#cb19-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-421"><a href="#cb19-421" aria-hidden="true" tabindex="-1"></a>R のコンソールから, 次を実行します.</span>
+<span id="cb19-422"><a href="#cb19-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-423"><a href="#cb19-423" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-424"><a href="#cb19-424" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span>
+<span id="cb19-425"><a href="#cb19-425" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb19-426"><a href="#cb19-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-427"><a href="#cb19-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-428"><a href="#cb19-428" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins_raw`</span> (オブジェクト) から <span class="in">`summarize_penguins()`</span> (関数) を通って <span class="in">`penguins_summary`</span> (オブジェクト) へ, という依存関係が図に表れます. <span class="in">`tar_make()`</span> を実行済みなので, どのターゲットもグレーで表示されます.</span>
+<span id="cb19-429"><a href="#cb19-429" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-430"><a href="#cb19-430" aria-hidden="true" tabindex="-1"></a>::::</span>
 <span id="cb19-431"><a href="#cb19-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-432"><a href="#cb19-432" aria-hidden="true" tabindex="-1"></a>R のコンソールから, 次を実行します.</span>
-<span id="cb19-433"><a href="#cb19-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-434"><a href="#cb19-434" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-435"><a href="#cb19-435" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span>
-<span id="cb19-436"><a href="#cb19-436" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb19-437"><a href="#cb19-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-438"><a href="#cb19-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-439"><a href="#cb19-439" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins_raw`</span> (オブジェクト) から <span class="in">`summarize_penguins()`</span> (関数) を通って <span class="in">`penguins_summary`</span> (オブジェクト) へ, という依存関係が図に表れます. <span class="in">`tar_make()`</span> を実行済みなので, どのターゲットもグレーで表示されます.</span>
-<span id="cb19-440"><a href="#cb19-440" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-441"><a href="#cb19-441" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb19-442"><a href="#cb19-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-443"><a href="#cb19-443" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-444"><a href="#cb19-444" aria-hidden="true" tabindex="-1"></a>計算結果を取り出します. パイプラインが作った <span class="in">`penguins_summary`</span> の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.</span>
-<span id="cb19-445"><a href="#cb19-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-446"><a href="#cb19-446" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-447"><a href="#cb19-447" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-448"><a href="#cb19-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-449"><a href="#cb19-449" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the value directly</span></span>
-<span id="cb19-451"><a href="#cb19-451" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(penguins_summary)</span>
-<span id="cb19-452"><a href="#cb19-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-453"><a href="#cb19-453" aria-hidden="true" tabindex="-1"></a><span class="co"># Load it into the environment under its own name</span></span>
-<span id="cb19-454"><a href="#cb19-454" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(penguins_summary)</span>
-<span id="cb19-455"><a href="#cb19-455" aria-hidden="true" tabindex="-1"></a>penguins_summary</span>
-<span id="cb19-456"><a href="#cb19-456" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-457"><a href="#cb19-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-458"><a href="#cb19-458" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_read()`</span> は値を返すので <span class="in">`x &lt;- tar_read(...)`</span> のように受け取れます. <span class="in">`tar_load()`</span> はターゲット名と同じ変数を環境に作ります. どちらも, 一度 <span class="in">`tar_make()`</span> で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.</span>
-<span id="cb19-459"><a href="#cb19-459" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-460"><a href="#cb19-460" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb19-461"><a href="#cb19-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-462"><a href="#cb19-462" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-463"><a href="#cb19-463" aria-hidden="true" tabindex="-1"></a>いよいよ本題です. <span class="in">`summarize_penguins()`</span> に平均ひれ長 (<span class="in">`flipper_len`</span>) の計算を追加してから, <span class="in">`tar_make()`</span> を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.</span>
-<span id="cb19-464"><a href="#cb19-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-465"><a href="#cb19-465" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-466"><a href="#cb19-466" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-467"><a href="#cb19-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-468"><a href="#cb19-468" aria-hidden="true" tabindex="-1"></a>関数を次のように変更します.</span>
+<span id="cb19-432"><a href="#cb19-432" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-433"><a href="#cb19-433" aria-hidden="true" tabindex="-1"></a>計算結果を取り出します. パイプラインが作った <span class="in">`penguins_summary`</span> の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.</span>
+<span id="cb19-434"><a href="#cb19-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-435"><a href="#cb19-435" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-436"><a href="#cb19-436" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb19-437"><a href="#cb19-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-438"><a href="#cb19-438" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-439"><a href="#cb19-439" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the value directly</span></span>
+<span id="cb19-440"><a href="#cb19-440" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(penguins_summary)</span>
+<span id="cb19-441"><a href="#cb19-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-442"><a href="#cb19-442" aria-hidden="true" tabindex="-1"></a><span class="co"># Load it into the environment under its own name</span></span>
+<span id="cb19-443"><a href="#cb19-443" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(penguins_summary)</span>
+<span id="cb19-444"><a href="#cb19-444" aria-hidden="true" tabindex="-1"></a>penguins_summary</span>
+<span id="cb19-445"><a href="#cb19-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-446"><a href="#cb19-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-447"><a href="#cb19-447" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_read()`</span> は値を返すので <span class="in">`x &lt;- tar_read(...)`</span> のように受け取れます. <span class="in">`tar_load()`</span> はターゲット名と同じ変数を環境に作ります. どちらも, 一度 <span class="in">`tar_make()`</span> で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.</span>
+<span id="cb19-448"><a href="#cb19-448" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-449"><a href="#cb19-449" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-451"><a href="#cb19-451" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-452"><a href="#cb19-452" aria-hidden="true" tabindex="-1"></a>いよいよ本題です. <span class="in">`summarize_penguins()`</span> に平均ひれ長 (<span class="in">`flipper_len`</span>) の計算を追加してから, <span class="in">`tar_make()`</span> を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.</span>
+<span id="cb19-453"><a href="#cb19-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-454"><a href="#cb19-454" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-455"><a href="#cb19-455" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb19-456"><a href="#cb19-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-457"><a href="#cb19-457" aria-hidden="true" tabindex="-1"></a>関数を次のように変更します.</span>
+<span id="cb19-458"><a href="#cb19-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-459"><a href="#cb19-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-460"><a href="#cb19-460" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb19-461"><a href="#cb19-461" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb19-462"><a href="#cb19-462" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb19-463"><a href="#cb19-463" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-464"><a href="#cb19-464" aria-hidden="true" tabindex="-1"></a>      <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-465"><a href="#cb19-465" aria-hidden="true" tabindex="-1"></a>      <span class="at">.by =</span> species</span>
+<span id="cb19-466"><a href="#cb19-466" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-467"><a href="#cb19-467" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-468"><a href="#cb19-468" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-469"><a href="#cb19-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-470"><a href="#cb19-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-471"><a href="#cb19-471" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb19-472"><a href="#cb19-472" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb19-473"><a href="#cb19-473" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb19-474"><a href="#cb19-474" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb19-475"><a href="#cb19-475" aria-hidden="true" tabindex="-1"></a>      <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb19-476"><a href="#cb19-476" aria-hidden="true" tabindex="-1"></a>      <span class="at">.by =</span> species</span>
-<span id="cb19-477"><a href="#cb19-477" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-478"><a href="#cb19-478" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-479"><a href="#cb19-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-480"><a href="#cb19-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-481"><a href="#cb19-481" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_make()`</span> の前に, どのターゲットが古くなっているかを確認します.</span>
-<span id="cb19-482"><a href="#cb19-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-483"><a href="#cb19-483" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-484"><a href="#cb19-484" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>()</span>
-<span id="cb19-485"><a href="#cb19-485" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-486"><a href="#cb19-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-487"><a href="#cb19-487" aria-hidden="true" tabindex="-1"></a>返ってくるのは <span class="in">`penguins_summary`</span> だけです. <span class="in">`penguins_raw`</span> は変更した関数に依存していないので, 古くなりません. <span class="in">`tar_make()`</span> を実行すると, 実際に <span class="in">`penguins_summary`</span> だけが再計算され, <span class="in">`penguins_raw`</span> は前の結果がそのまま再利用されます (<span class="in">`tar_visnetwork()`</span> でも, <span class="in">`penguins_summary`</span> だけが未実行状態に戻っていることを確認できます).</span>
-<span id="cb19-488"><a href="#cb19-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-489"><a href="#cb19-489" aria-hidden="true" tabindex="-1"></a>この「変更の影響を受けるところだけが再計算される」性質こそが <span class="in">`{targets}`</span> の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.</span>
-<span id="cb19-490"><a href="#cb19-490" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-491"><a href="#cb19-491" aria-hidden="true" tabindex="-1"></a>::::</span>
-</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb19-470"><a href="#cb19-470" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_make()`</span> の前に, どのターゲットが古くなっているかを確認します.</span>
+<span id="cb19-471"><a href="#cb19-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-472"><a href="#cb19-472" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-473"><a href="#cb19-473" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>()</span>
+<span id="cb19-474"><a href="#cb19-474" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-475"><a href="#cb19-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-476"><a href="#cb19-476" aria-hidden="true" tabindex="-1"></a>返ってくるのは <span class="in">`penguins_summary`</span> だけです. <span class="in">`penguins_raw`</span> は変更した関数に依存していないので, 古くなりません. <span class="in">`tar_make()`</span> を実行すると, 実際に <span class="in">`penguins_summary`</span> だけが再計算され, <span class="in">`penguins_raw`</span> は前の結果がそのまま再利用されます (<span class="in">`tar_visnetwork()`</span> でも, <span class="in">`penguins_summary`</span> だけが未実行状態に戻っていることを確認できます).</span>
+<span id="cb19-477"><a href="#cb19-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-478"><a href="#cb19-478" aria-hidden="true" tabindex="-1"></a>この「変更の影響を受けるところだけが再計算される」性質こそが <span class="in">`{targets}`</span> の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.</span>
+<span id="cb19-479"><a href="#cb19-479" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-480"><a href="#cb19-480" aria-hidden="true" tabindex="-1"></a>::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});

@@ -268,13 +268,13 @@ Figure 7.1: 男女・年齢別にみた就業状態の構成
 
 フォントには大きく分けて, セリフ体 (serif) とサンセリフ体 (sans-serif) の二種類があります. セリフ体は文字の端に装飾があるフォントで, サンセリフ体は装飾のないフォントです. 下の左の図で赤く示された, 文字の端の突起や飾りが「セリフ」です.
 
-[![セリフ体 (serif)](https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg)](https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg "セリフ体 (serif)")
+[![](../static/img/visualization/serif.svg)](../static/img/visualization/serif.svg "Figure 7.2: セリフ体 (serif)")
 
-セリフ体 (serif)
+Figure 7.2: セリフ体 (serif)
 
-[![サンセリフ体 (sans-serif)](https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg)](https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg "サンセリフ体 (sans-serif)")
+[![](../static/img/visualization/sans-serif.svg)](../static/img/visualization/sans-serif.svg "Figure 7.3: サンセリフ体 (sans-serif)")
 
-サンセリフ体 (sans-serif)
+Figure 7.3: サンセリフ体 (sans-serif)
 
 日本語でも明朝体がセリフ体でゴシック体がサンセリフ体に相当します. 英語では, セリフ体は Times New Roman や Garamond などが有名で, サンセリフ体は Arial や Helvetica などが有名です.
 
@@ -350,15 +350,15 @@ penguins_bar |>
 
 同じ「1992」という文字を, ビットマップ (ラスター) とベクターのそれぞれで表してみましょう. 左はピクセルの格子, 右は輪郭を点とパスで定義したものです.
 
-[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "Figure 7.2 (a): Bitmap (raster)")
+[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "Figure 7.4 (a): Bitmap (raster)")
 
 \(a\) Bitmap (raster)
 
-[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "Figure 7.2 (b): Vector")
+[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "Figure 7.4 (b): Vector")
 
 \(b\) Vector
 
-Figure 7.2: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
+Figure 7.4: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
 
 左のビットマップは, 拡大するとピクセルのギザギザ (ジャギー) が目立ちます. きれいに見せるにはピクセル数を増やすしかなく, その分ファイルサイズも大きくなります. 一方, 右のベクターは輪郭を点 (アンカーポイント) とパスで定義しているので, どれだけ拡大しても滑らかなままで, ファイルサイズも解像度に依存しません.
 
@@ -366,15 +366,15 @@ Figure 7.2: The number 1992 as a bitmap (pixels) versus a vector (points and pa
 
 写真は本質的にラスター形式です. そして, ラスター形式のファイル形式のうち, JPEG は非可逆圧縮 (lossy compression) を採用しています. ファイルサイズを大きく減らせる代わりに, 圧縮を強めると輪郭のまわりにノイズ (アーティファクト) が生じます. 1枚の写真[^2] を高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "Figure 7.3 (a): JPEG quality 90")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "Figure 7.5 (a): JPEG quality 90")
 
 \(a\) JPEG quality 90
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "Figure 7.3 (b): JPEG quality 5")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "Figure 7.5 (b): JPEG quality 5")
 
 \(b\) JPEG quality 5
 
-Figure 7.3: The same photo saved as high- and low-quality JPEG, magnified.
+Figure 7.5: The same photo saved as high- and low-quality JPEG, magnified.
 
 低品質の JPEG では, 8x8 ピクセルのブロック状のムラや, 輪郭の周りのにじみがはっきり見えます. 一方で, ファイルサイズは大きく変わります. 同じ写真を PNG (可逆圧縮) と2種類の JPEG で保存し, サイズを比べてみましょう.
 
@@ -392,9 +392,9 @@ JPEG は, 写真のように色がなめらかに変化する画像にはとて�
 
 ベクター形式は図形を数式で記録するので, どれだけ拡大しても輪郭は滑らかなままで, ファイルサイズも解像度に依存しません. グラフは点・線・文字でできているので, ベクター形式と非常に相性が良いです. ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
 
-[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "Figure 7.4: A vector graphic stays sharp at any zoom level.")
+[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "Figure 7.6: A vector graphic stays sharp at any zoom level.")
 
-Figure 7.4: A vector graphic stays sharp at any zoom level.
+Figure 7.6: A vector graphic stays sharp at any zoom level.
 
 この図は SVG (ベクター形式) で埋め込まれているので, ブラウザで拡大しても曲線も文字も滑らかなまま保たれます.
 
@@ -427,9 +427,9 @@ Figure 7.4: A vector graphic stays sharp at any zoom level.
 
 ただし, 例外もあります. ベクター形式は図形を1つずつ記録するので, 描く図形の数が増えるほどファイルが大きくなります. 例として, ggplot2 に付属する `diamonds` データセットで, 53,940個のダイヤモンドの重さ (carat) と価格の散布図を描いてみます.
 
-[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "Figure 7.5: A scatter plot of 53,940 diamonds, embedded as a PNG.")
+[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "Figure 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.")
 
-Figure 7.5: A scatter plot of 53,940 diamonds, embedded as a PNG.
+Figure 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.
 
 この図を PNG, SVG, PDF のそれぞれで保存して, ファイルサイズを比べてみましょう.
 
@@ -452,41 +452,41 @@ Table 7.2: 点の多い散布図を各形式で保存したときのファイ�
 
 ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
 
-画像を図形の数式として記録しているから  
-可逆圧縮を使っているから  
-ファイルサイズが大きいから  
-ピクセルの数が十分に多いから  
+可逆圧縮を使っているから\
+ピクセルの数が十分に多いから\
+ファイルサイズが大きいから\
+画像を図形の数式として記録しているから\
 
 次のうち, ベクター形式をすべて選んでください.
 
-SVG  
+SVG\
 
-PDF  
+PDF\
 
-PNG  
+PNG\
 
-JPEG  
+JPEG\
 
 LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
 
-JPEG  
-PDF  
-SVG  
-PNG  
+PDF\
+PNG\
+JPEG\
+SVG\
 
 共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
 
-グラフを PNG で保存したことによる圧縮の劣化  
-SVG の解像度が足りていない  
-フォントが埋め込まれていない  
-グラフを JPEG で保存したことによる非可逆圧縮のノイズ  
+フォントが埋め込まれていない\
+グラフを PNG で保存したことによる圧縮の劣化\
+SVG の解像度が足りていない\
+グラフを JPEG で保存したことによる非可逆圧縮のノイズ\
 
 数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
 
-JPEG (quality 5) で保存する  
-高解像度の PNG で保存する  
-PDF に切り替える  
-SVG の解像度を下げる  
+PDF に切り替える\
+高解像度の PNG で保存する\
+SVG の解像度を下げる\
+JPEG (quality 5) で保存する\
 
 ### 見た目の悪いグラフの改善
 

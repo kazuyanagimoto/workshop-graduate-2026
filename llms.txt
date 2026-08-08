@@ -20,3 +20,4 @@
 - [Appendix C — 用語解説](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/dictionary.llms.md)
 - [[Appendix D — 色彩論]{#sec-color .quarto-section-identifier}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/color.llms.md)
 - [参考文献](https://kazuyanagimoto.com/workshop-graduate-2026/references.llms.md)
+- [Empiricist's Workflow](https://kazuyanagimoto.com/workshop-graduate-2026/empiricists-workflow.pdf)

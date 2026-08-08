@@ -14,7 +14,7 @@ Affiliation
 
 Published
 
-2026年07月31日
+2026年08月08日
 
 # はじめに
 
@@ -112,8 +112,8 @@ rig add release
 Quartoは, バージョン番号を変数に入れて .deb パッケージをダウンロードし, インストールします.
 
 ``` sh
-# Check https://quarto.org/docs/download/ for the latest version number
-QUARTO_VERSION=1.9.38
+# Latest release as of this page's build; see https://quarto.org/docs/download/
+QUARTO_VERSION=1.10.18
 wget "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb"
 sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 ```

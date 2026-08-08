@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -92,14 +95,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cac0433bb97fa58dc0fc6599c25c149a.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-25dec783d6e1d11f8e0bba9e4fbb47f4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-16f64e5e7cadf7c973142b0bfece6000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-69e794b18c8f723e0659ccadd184d517.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-222bf84bab3647eac29364631cd7050e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -122,7 +125,7 @@ div.csl-indent {
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -190,6 +193,7 @@ window.Quarto = {
       <a href="../">Empiricist’s Workflow</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../empiricists-workflow.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -690,18 +694,26 @@ Figure&nbsp;7.1: 男女・年齢別にみた就業状態の構成
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="セリフ体 (serif)"><img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg" class="img-fluid figure-img" alt="セリフ体 (serif)"></a></p>
-<figcaption>セリフ体 (serif)</figcaption>
+<div id="fig-serif" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-serif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/visualization/serif.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;7.2: セリフ体 (serif)"><img src="../static/img/visualization/serif.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-serif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: セリフ体 (serif)
+</figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="サンセリフ体 (sans-serif)"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg" class="img-fluid figure-img" alt="サンセリフ体 (sans-serif)"></a></p>
-<figcaption>サンセリフ体 (sans-serif)</figcaption>
+<div id="fig-sans-serif" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sans-serif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../static/img/visualization/sans-serif.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;7.3: サンセリフ体 (sans-serif)"><img src="../static/img/visualization/sans-serif.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sans-serif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: サンセリフ体 (sans-serif)
+</figcaption>
 </figure>
 </div>
 </div>
@@ -788,7 +800,7 @@ Figure&nbsp;7.1: 男女・年齢別にみた就業状態の構成
 <div id="fig-bitmap-vector-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-bitmap-vector-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-bitmap-vector-1.svg" class="lightbox" data-gallery="fig-bitmap-vector" title="Figure&nbsp;7.2&nbsp;(a): Bitmap (raster)"><img src="visualization_files/figure-html/fig-bitmap-vector-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-bitmap-vector"></a>
+<a href="visualization_files/figure-html/fig-bitmap-vector-1.svg" class="lightbox" data-gallery="fig-bitmap-vector" title="Figure&nbsp;7.4&nbsp;(a): Bitmap (raster)"><img src="visualization_files/figure-html/fig-bitmap-vector-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-bitmap-vector"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-bitmap-vector-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Bitmap (raster)
@@ -800,7 +812,7 @@ Figure&nbsp;7.1: 男女・年齢別にみた就業状態の構成
 <div id="fig-bitmap-vector-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-bitmap-vector-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-bitmap-vector-2.svg" class="lightbox" data-gallery="fig-bitmap-vector" title="Figure&nbsp;7.2&nbsp;(b): Vector"><img src="visualization_files/figure-html/fig-bitmap-vector-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-bitmap-vector"></a>
+<a href="visualization_files/figure-html/fig-bitmap-vector-2.svg" class="lightbox" data-gallery="fig-bitmap-vector" title="Figure&nbsp;7.4&nbsp;(b): Vector"><img src="visualization_files/figure-html/fig-bitmap-vector-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-bitmap-vector"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-bitmap-vector-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Vector
@@ -811,7 +823,7 @@ Figure&nbsp;7.1: 男女・年齢別にみた就業状態の構成
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bitmap-vector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.2: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
+Figure&nbsp;7.4: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
 </figcaption>
 </figure>
 </div>
@@ -828,7 +840,7 @@ Figure&nbsp;7.2: The number 1992 as a bitmap (pixels) versus a vector (points an
 <div id="fig-jpeg-artifacts-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-jpeg-artifacts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-jpeg-artifacts-1.png" class="lightbox" data-gallery="fig-jpeg-artifacts" title="Figure&nbsp;7.3&nbsp;(a): JPEG quality 90"><img src="visualization_files/figure-html/fig-jpeg-artifacts-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-jpeg-artifacts"></a>
+<a href="visualization_files/figure-html/fig-jpeg-artifacts-1.png" class="lightbox" data-gallery="fig-jpeg-artifacts" title="Figure&nbsp;7.5&nbsp;(a): JPEG quality 90"><img src="visualization_files/figure-html/fig-jpeg-artifacts-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-jpeg-artifacts"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-jpeg-artifacts-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) JPEG quality 90
@@ -840,7 +852,7 @@ Figure&nbsp;7.2: The number 1992 as a bitmap (pixels) versus a vector (points an
 <div id="fig-jpeg-artifacts-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-jpeg-artifacts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-jpeg-artifacts-2.png" class="lightbox" data-gallery="fig-jpeg-artifacts" title="Figure&nbsp;7.3&nbsp;(b): JPEG quality 5"><img src="visualization_files/figure-html/fig-jpeg-artifacts-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-jpeg-artifacts"></a>
+<a href="visualization_files/figure-html/fig-jpeg-artifacts-2.png" class="lightbox" data-gallery="fig-jpeg-artifacts" title="Figure&nbsp;7.5&nbsp;(b): JPEG quality 5"><img src="visualization_files/figure-html/fig-jpeg-artifacts-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" data-ref-parent="fig-jpeg-artifacts"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-jpeg-artifacts-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) JPEG quality 5
@@ -851,7 +863,7 @@ Figure&nbsp;7.2: The number 1992 as a bitmap (pixels) versus a vector (points an
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jpeg-artifacts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.3: The same photo saved as high- and low-quality JPEG, magnified.
+Figure&nbsp;7.5: The same photo saved as high- and low-quality JPEG, magnified.
 </figcaption>
 </figure>
 </div>
@@ -870,19 +882,19 @@ Table&nbsp;7.1: 同じ写真を各形式で保存したときのファイルサ�
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_znnpljp0v9zhocdf9mwi = TinyTable.createTableFunctions("tinytable_znnpljp0v9zhocdf9mwi");
+      const tableFns_pp5gfc0li4y6y6gpzl68 = TinyTable.createTableFunctions("tinytable_pp5gfc0li4y6y6gpzl68");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 } ], css_id: 'tinytable_css_fpwdqng7e1zo54tqkdlr',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_k5e0kfzwtth8qucrrmsy',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 } ], css_id: 'tinytable_css_8ujwx84uv2jkzahidfqg',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 } ], css_id: 'tinytable_css_wv2l0mcng1t33yag2nry',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_znnpljp0v9zhocdf9mwi.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_pp5gfc0li4y6y6gpzl68.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -891,11 +903,11 @@ Table&nbsp;7.1: 同じ写真を各形式で保存したときのファイルサ�
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_znnpljp0v9zhocdf9mwi td.tinytable_css_fpwdqng7e1zo54tqkdlr, #tinytable_znnpljp0v9zhocdf9mwi th.tinytable_css_fpwdqng7e1zo54tqkdlr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_znnpljp0v9zhocdf9mwi td.tinytable_css_k5e0kfzwtth8qucrrmsy, #tinytable_znnpljp0v9zhocdf9mwi th.tinytable_css_k5e0kfzwtth8qucrrmsy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_pp5gfc0li4y6y6gpzl68 td.tinytable_css_8ujwx84uv2jkzahidfqg, #tinytable_pp5gfc0li4y6y6gpzl68 th.tinytable_css_8ujwx84uv2jkzahidfqg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_pp5gfc0li4y6y6gpzl68 td.tinytable_css_wv2l0mcng1t33yag2nry, #tinytable_pp5gfc0li4y6y6gpzl68 th.tinytable_css_wv2l0mcng1t33yag2nry {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_znnpljp0v9zhocdf9mwi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_pp5gfc0li4y6y6gpzl68" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -936,10 +948,10 @@ Table&nbsp;7.1: 同じ写真を各形式で保存したときのファイルサ�
 <div id="fig-vector-graph" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-vector-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-vector-graph-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;7.4: A vector graphic stays sharp at any zoom level."><img src="visualization_files/figure-html/fig-vector-graph-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="visualization_files/figure-html/fig-vector-graph-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;7.6: A vector graphic stays sharp at any zoom level."><img src="visualization_files/figure-html/fig-vector-graph-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vector-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.4: A vector graphic stays sharp at any zoom level.
+Figure&nbsp;7.6: A vector graphic stays sharp at any zoom level.
 </figcaption>
 </figure>
 </div>
@@ -992,10 +1004,10 @@ Figure&nbsp;7.4: A vector graphic stays sharp at any zoom level.
 <div id="fig-too-many-points" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-too-many-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="visualization_files/figure-html/fig-too-many-points-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;7.5: A scatter plot of 53,940 diamonds, embedded as a PNG."><img src="visualization_files/figure-html/fig-too-many-points-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="visualization_files/figure-html/fig-too-many-points-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;7.7: A scatter plot of 53,940 diamonds, embedded as a PNG."><img src="visualization_files/figure-html/fig-too-many-points-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-too-many-points-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.5: A scatter plot of 53,940 diamonds, embedded as a PNG.
+Figure&nbsp;7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.
 </figcaption>
 </figure>
 </div>
@@ -1016,19 +1028,19 @@ Table&nbsp;7.2: 点の多い散布図を各形式で保存したときのファ�
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_kakc57tprteqcchufszf = TinyTable.createTableFunctions("tinytable_kakc57tprteqcchufszf");
+      const tableFns_t4jc623n5n28cf1pfeqw = TinyTable.createTableFunctions("tinytable_t4jc623n5n28cf1pfeqw");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_2xz5uyb85anjki3pqbgb',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_g4s33wkoglycdsyu5w97',}, 
+          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_raqkqt12ritm8wqle3uk',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_nljx233cicwl6ngxu82c',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_kakc57tprteqcchufszf.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_t4jc623n5n28cf1pfeqw.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -1037,11 +1049,11 @@ Table&nbsp;7.2: 点の多い散布図を各形式で保存したときのファ�
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_kakc57tprteqcchufszf td.tinytable_css_2xz5uyb85anjki3pqbgb, #tinytable_kakc57tprteqcchufszf th.tinytable_css_2xz5uyb85anjki3pqbgb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_kakc57tprteqcchufszf td.tinytable_css_g4s33wkoglycdsyu5w97, #tinytable_kakc57tprteqcchufszf th.tinytable_css_g4s33wkoglycdsyu5w97 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_t4jc623n5n28cf1pfeqw td.tinytable_css_raqkqt12ritm8wqle3uk, #tinytable_t4jc623n5n28cf1pfeqw th.tinytable_css_raqkqt12ritm8wqle3uk {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_t4jc623n5n28cf1pfeqw td.tinytable_css_nljx233cicwl6ngxu82c, #tinytable_t4jc623n5n28cf1pfeqw th.tinytable_css_nljx233cicwl6ngxu82c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_kakc57tprteqcchufszf" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_t4jc623n5n28cf1pfeqw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -1093,33 +1105,33 @@ Table&nbsp;7.2: 点の多い散布図を各形式で保存したときのファ�
 <p>ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_23554" onsubmit="return validate_form_23554()" method="post">
+<form name="form_19634" onsubmit="return validate_form_19634()" method="post">
 <label>
-<input type="radio" name="answer_23554" id="answer_23554_1" value="画像を図形の数式として記録しているから">
-画像を図形の数式として記録しているから
-</label>
-<br>
-<label>
-<input type="radio" name="answer_23554" id="answer_23554_2" value="可逆圧縮を使っているから">
+<input type="radio" name="answer_19634" id="answer_19634_1" value="可逆圧縮を使っているから">
 可逆圧縮を使っているから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_23554" id="answer_23554_3" value="ファイルサイズが大きいから">
+<input type="radio" name="answer_19634" id="answer_19634_2" value="ピクセルの数が十分に多いから">
+ピクセルの数が十分に多いから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_19634" id="answer_19634_3" value="ファイルサイズが大きいから">
 ファイルサイズが大きいから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_23554" id="answer_23554_4" value="ピクセルの数が十分に多いから">
-ピクセルの数が十分に多いから
+<input type="radio" name="answer_19634" id="answer_19634_4" value="画像を図形の数式として記録しているから">
+画像を図形の数式として記録しているから
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_23554"></div>
+<div id="result_19634"></div>
 </form>
-<script>function validate_form_23554() {var x, text; var x = document.forms['form_23554']['answer_23554'].value;if (x == '画像を図形の数式として記録しているから'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「1992」の図を思い出してください. ベクターは何を記録していましたか?';} document.getElementById('result_23554').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_19634() {var x, text; var x = document.forms['form_19634']['answer_19634'].value;if (x == '画像を図形の数式として記録しているから'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「1992」の図を思い出してください. ベクターは何を記録していましたか?';} document.getElementById('result_19634').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_23554').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_19634').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1129,33 +1141,33 @@ Table&nbsp;7.2: 点の多い散布図を各形式で保存したときのファ�
 <p>次のうち, ベクター形式をすべて選んでください.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_60350" onsubmit="return validate_form_60350()" method="post">
+<form name="form_36404" onsubmit="return validate_form_36404()" method="post">
 <label>
-<input type="checkbox" id="answer_60350_1" value="SVG">
+<input type="checkbox" id="answer_36404_1" value="SVG">
 SVG
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_60350_2" value="PDF">
+<input type="checkbox" id="answer_36404_2" value="PDF">
 PDF
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_60350_3" value="PNG">
+<input type="checkbox" id="answer_36404_3" value="PNG">
 PNG
 </label>
 <br>
 <label>
-<input type="checkbox" id="answer_60350_4" value="JPEG">
+<input type="checkbox" id="answer_36404_4" value="JPEG">
 JPEG
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_60350"></div>
+<div id="result_36404"></div>
 </form>
-<script>function validate_form_60350() {var text; var x1 = document.getElementById('answer_60350_1'); var x2 = document.getElementById('answer_60350_2'); var x3 = document.getElementById('answer_60350_3'); var x4 = document.getElementById('answer_60350_4'); if (x1.checked == true&x2.checked == true&x3.checked == false&x4.checked == false){text = '<span class="quiz-right">✓ 正解! </span>SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「画像形式の選び方」の表を見直しましょう.';} document.getElementById('result_60350').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_36404() {var text; var x1 = document.getElementById('answer_36404_1'); var x2 = document.getElementById('answer_36404_2'); var x3 = document.getElementById('answer_36404_3'); var x4 = document.getElementById('answer_36404_4'); if (x1.checked == true&x2.checked == true&x3.checked == false&x4.checked == false){text = '<span class="quiz-right">✓ 正解! </span>SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>「画像形式の選び方」の表を見直しましょう.';} document.getElementById('result_36404').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_23554').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_60350').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_19634').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_36404').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1165,33 +1177,33 @@ JPEG
 <p>LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_86225" onsubmit="return validate_form_86225()" method="post">
+<form name="form_70948" onsubmit="return validate_form_70948()" method="post">
 <label>
-<input type="radio" name="answer_86225" id="answer_86225_1" value="JPEG">
-JPEG
-</label>
-<br>
-<label>
-<input type="radio" name="answer_86225" id="answer_86225_2" value="PDF">
+<input type="radio" name="answer_70948" id="answer_70948_1" value="PDF">
 PDF
 </label>
 <br>
 <label>
-<input type="radio" name="answer_86225" id="answer_86225_3" value="SVG">
-SVG
-</label>
-<br>
-<label>
-<input type="radio" name="answer_86225" id="answer_86225_4" value="PNG">
+<input type="radio" name="answer_70948" id="answer_70948_2" value="PNG">
 PNG
 </label>
 <br>
+<label>
+<input type="radio" name="answer_70948" id="answer_70948_3" value="JPEG">
+JPEG
+</label>
+<br>
+<label>
+<input type="radio" name="answer_70948" id="answer_70948_4" value="SVG">
+SVG
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_86225"></div>
+<div id="result_70948"></div>
 </form>
-<script>function validate_form_86225() {var x, text; var x = document.forms['form_86225']['answer_86225'].value;if (x == 'PDF'){text = '<span class="quiz-right">✓ 正解! </span>印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>統計グラフにはベクター形式が適しています. そのうち LaTeX がそのまま扱えるのはどちらでしたか?';} document.getElementById('result_86225').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_70948() {var x, text; var x = document.forms['form_70948']['answer_70948'].value;if (x == 'PDF'){text = '<span class="quiz-right">✓ 正解! </span>印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>統計グラフにはベクター形式が適しています. そのうち LaTeX がそのまま扱えるのはどちらでしたか?';} document.getElementById('result_70948').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_23554').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_60350').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_86225').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_19634').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_36404').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_70948').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1201,33 +1213,33 @@ PNG
 <p>共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_58640" onsubmit="return validate_form_58640()" method="post">
+<form name="form_98213" onsubmit="return validate_form_98213()" method="post">
 <label>
-<input type="radio" name="answer_58640" id="answer_58640_1" value="グラフを PNG で保存したことによる圧縮の劣化">
-グラフを PNG で保存したことによる圧縮の劣化
-</label>
-<br>
-<label>
-<input type="radio" name="answer_58640" id="answer_58640_2" value="SVG の解像度が足りていない">
-SVG の解像度が足りていない
-</label>
-<br>
-<label>
-<input type="radio" name="answer_58640" id="answer_58640_3" value="フォントが埋め込まれていない">
+<input type="radio" name="answer_98213" id="answer_98213_1" value="フォントが埋め込まれていない">
 フォントが埋め込まれていない
 </label>
 <br>
 <label>
-<input type="radio" name="answer_58640" id="answer_58640_4" value="グラフを JPEG で保存したことによる非可逆圧縮のノイズ">
+<input type="radio" name="answer_98213" id="answer_98213_2" value="グラフを PNG で保存したことによる圧縮の劣化">
+グラフを PNG で保存したことによる圧縮の劣化
+</label>
+<br>
+<label>
+<input type="radio" name="answer_98213" id="answer_98213_3" value="SVG の解像度が足りていない">
+SVG の解像度が足りていない
+</label>
+<br>
+<label>
+<input type="radio" name="answer_98213" id="answer_98213_4" value="グラフを JPEG で保存したことによる非可逆圧縮のノイズ">
 グラフを JPEG で保存したことによる非可逆圧縮のノイズ
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_58640"></div>
+<div id="result_98213"></div>
 </form>
-<script>function validate_form_58640() {var x, text; var x = document.forms['form_58640']['answer_58640'].value;if (x == 'グラフを JPEG で保存したことによる非可逆圧縮のノイズ'){text = '<span class="quiz-right">✓ 正解! </span>輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>輪郭のまわりのにじみは, どの圧縮方式に典型的な現象でしたか?';} document.getElementById('result_58640').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_98213() {var x, text; var x = document.forms['form_98213']['answer_98213'].value;if (x == 'グラフを JPEG で保存したことによる非可逆圧縮のノイズ'){text = '<span class="quiz-right">✓ 正解! </span>輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>輪郭のまわりのにじみは, どの圧縮方式に典型的な現象でしたか?';} document.getElementById('result_98213').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_23554').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_60350').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_86225').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_58640').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_19634').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_36404').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_70948').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_98213').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1237,33 +1249,33 @@ SVG の解像度が足りていない
 <p>数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_12095" onsubmit="return validate_form_12095()" method="post">
+<form name="form_24979" onsubmit="return validate_form_24979()" method="post">
 <label>
-<input type="radio" name="answer_12095" id="answer_12095_1" value="JPEG (quality 5) で保存する">
-JPEG (quality 5) で保存する
-</label>
-<br>
-<label>
-<input type="radio" name="answer_12095" id="answer_12095_2" value="高解像度の PNG で保存する">
-高解像度の PNG で保存する
-</label>
-<br>
-<label>
-<input type="radio" name="answer_12095" id="answer_12095_3" value="PDF に切り替える">
+<input type="radio" name="answer_24979" id="answer_24979_1" value="PDF に切り替える">
 PDF に切り替える
 </label>
 <br>
 <label>
-<input type="radio" name="answer_12095" id="answer_12095_4" value="SVG の解像度を下げる">
+<input type="radio" name="answer_24979" id="answer_24979_2" value="高解像度の PNG で保存する">
+高解像度の PNG で保存する
+</label>
+<br>
+<label>
+<input type="radio" name="answer_24979" id="answer_24979_3" value="SVG の解像度を下げる">
 SVG の解像度を下げる
 </label>
 <br>
+<label>
+<input type="radio" name="answer_24979" id="answer_24979_4" value="JPEG (quality 5) で保存する">
+JPEG (quality 5) で保存する
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_12095"></div>
+<div id="result_24979"></div>
 </form>
-<script>function validate_form_12095() {var x, text; var x = document.forms['form_12095']['answer_12095'].value;if (x == '高解像度の PNG で保存する'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>ベクター形式のファイルサイズは何に応じて増えるでしょうか. また, SVG に「解像度」はあるでしょうか.';} document.getElementById('result_12095').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_24979() {var x, text; var x = document.forms['form_24979']['answer_24979'].value;if (x == '高解像度の PNG で保存する'){text = '<span class="quiz-right">✓ 正解! </span>ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>ベクター形式のファイルサイズは何に応じて増えるでしょうか. また, SVG に「解像度」はあるでしょうか.';} document.getElementById('result_24979').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5;res1 = document.getElementById('result_23554').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_60350').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_86225').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_58640').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.'; res5 = document.getElementById('result_12095').innerText == '✓ 正解! ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';text = res1 + res2 + res3 + res4 + res5;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4, res5;res1 = document.getElementById('result_19634').innerText == '✓ 正解! ベクター形式は点・線・塗りを数式で記録するので, どんな倍率でも輪郭を描き直せます. ピクセルの格子として記録するラスター形式との根本的な違いです.'; res2 = document.getElementById('result_36404').innerText == '✓ 正解! SVG は Web で, PDF は印刷・論文で使われるベクター形式です. PNG と JPEG はどちらもラスター形式です.'; res3 = document.getElementById('result_70948').innerText == '✓ 正解! 印刷・論文向けのベクター形式は PDF です. SVG も同じベクター形式ですが, LaTeX はそのままでは扱えません.'; res4 = document.getElementById('result_98213').innerText == '✓ 正解! 輪郭のはっきりした文字や線のまわりに出るにじみは, JPEG の非可逆圧縮に典型的なアーティファクトです. PNG は可逆圧縮なので劣化せず, SVG はベクター形式なのでそもそも解像度という概念がありません.'; res5 = document.getElementById('result_24979').innerText == '✓ 正解! ベクター形式はすべての図形を記録するので, 点が非常に多いとファイルが重くなります. この場合は高解像度の PNG が実用的です. PDF も同じベクター形式なので解決にならず, JPEG は文字や線がにじみます.';text = res1 + res2 + res3 + res4 + res5;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1490,16 +1502,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -2143,9 +2155,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a>フォントには大きく分けて, セリフ体 (serif) とサンセリフ体 (sans-serif) の二種類があります. セリフ体は文字の端に装飾があるフォントで, サンセリフ体は装飾のないフォントです. 下の左の図で赤く示された, 文字の端の突起や飾りが「セリフ」です.</span>
 <span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a>::: {layout-ncol=2}</span>
-<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a><span class="al">![セリフ体 (serif)](https://upload.wikimedia.org/wikipedia/commons/2/26/Serif_and_sans-serif_03.svg)</span></span>
+<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a><span class="al">![セリフ体 (serif)](/static/img/visualization/serif.svg)</span>{#fig-serif}</span>
 <span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a><span class="al">![サンセリフ体 (sans-serif)](https://upload.wikimedia.org/wikipedia/commons/9/99/Serif_and_sans-serif_01.svg)</span></span>
+<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a><span class="al">![サンセリフ体 (sans-serif)](/static/img/visualization/sans-serif.svg)</span>{#fig-sans-serif}</span>
 <span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a>日本語でも明朝体がセリフ体でゴシック体がサンセリフ体に相当します. 英語では, セリフ体は Times New Roman や Garamond などが有名で, サンセリフ体は Arial や Helvetica などが有名です.</span>

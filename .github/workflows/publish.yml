@@ -25,21 +25,17 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: release
-          tinytex: true
+
+      # TinyTeX comes from r-lib rather than quarto-actions' `tinytex: true`,
+      # which installs it but exports its bin directory to PATH on macOS and
+      # Windows only.
+      - name: Set up TinyTeX
+        uses: r-lib/actions/setup-tinytex@v2
 
       # Quarto auto-installs missing .sty files during the render, but not
       # fonts, so the ones named in _quarto.yml have to be pulled in by hand.
-      # quarto-actions exports TinyTeX's bin directory to PATH only on macOS
-      # and Windows, so locate tlmgr before calling it.
       - name: Install fonts for the PDF
-        run: |
-          tlmgr_bin=$(find "$HOME" -name tlmgr -type f -print -quit)
-          if [ -z "$tlmgr_bin" ]; then
-            echo "tlmgr not found under $HOME" >&2
-            exit 1
-          fi
-          dirname "$tlmgr_bin" >> "$GITHUB_PATH"
-          "$tlmgr_bin" install haranoaji juliamono tex-gyre
+        run: tlmgr install haranoaji juliamono tex-gyre
 
       # R is not installed on the runner: all R chunks must be pre-rendered
       # locally and committed to _freeze/ (freeze: auto). Both formats are

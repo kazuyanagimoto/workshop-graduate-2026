@@ -14,7 +14,7 @@ Affiliation
 
 Published
 
-2026年08月09日
+2026年08月10日
 
 # はじめに
 

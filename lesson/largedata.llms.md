@@ -183,13 +183,13 @@ bm <- bench::mark(
 
 | 手法       | 中央値 (ms) | メモリ割り当て |
 |------------|-------------|----------------|
-| dplyr      | 447         | 1.3 GB         |
-| tidypolars | 47          | 421.1 KB       |
-| duckplyr   | 23          | 85.9 KB        |
+| dplyr      | 437         | 1.3 GB         |
+| tidypolars | 44          | 421.1 KB       |
+| duckplyr   | 22          | 85.9 KB        |
 
 Table 5.2: 集計の計算時間とメモリ
 
-集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 9 倍速いですが, より目を引くのは **R が確保するメモリ** の差です. [Table tbl-benchmark-data](#tbl-benchmark-data) のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
+集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 10 倍速いですが, より目を引くのは **R が確保するメモリ** の差です. [Table tbl-benchmark-data](#tbl-benchmark-data) のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
 
 理由は2つあります. 第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは `payment_type`, `fare_amount`, `tip_amount` の列と `fare_amount > 0` の行だけ」と見抜いて, その分しか読み込みません ([sec-polars](#sec-polars) の `explain()` で見た列の刈り込みと述語の押し下げです). 第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します. そのため R のヒープにはほとんど何も積まれません. 一方 `dplyr` は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.
 
@@ -214,9 +214,9 @@ Table 5.2: 集計の計算時間とメモリ
 
 19列のテーブルから3列だけを使って集計するとき, Parquet + Polars が CSV + dplyr より圧倒的に速い最大の理由はどれでしょうか.
 
+Parquet はテキストではなくバイナリだから\
 Polars が R より新しい言語で書かれているから\
 列指向なので, 必要な3列だけをディスクから読める\
-Parquet はテキストではなくバイナリだから\
 CSV は型情報を持たないから\
 
 ``` r
@@ -227,22 +227,22 @@ q <- scan_parquet_polars(path) |>
 
 を実行した直後, どういう状態になっているでしょうか.
 
-ファイル全体がメモリに読み込まれている\
 データはまだ読まれておらず, 何をするかの計画だけができている\
-filter までは実行済みで, summarise だけが残っている\
 集計結果まですでに計算されている\
+ファイル全体がメモリに読み込まれている\
+filter までは実行済みで, summarise だけが残っている\
 
 Parquet と Arrow の関係として正しいものはどれでしょうか.
 
-Arrow がディスク上の保存形式で, Parquet はメモリ上の形式\
-どちらもディスク上の保存形式で, 圧縮率が違うだけ\
 Arrow は Parquet の新しいバージョン\
+どちらもディスク上の保存形式で, 圧縮率が違うだけ\
 Parquet はディスク上の保存形式で, Arrow はメモリ上の形式\
+Arrow がディスク上の保存形式で, Parquet はメモリ上の形式\
 
 RAM が 8GB のノート PC で, 20GB のデータを集計する必要があります. どうするのがよいでしょうか.
 
-RAM を超えるデータは, メモリを増設しない限り R では扱えない\
 データ全体をメモリに読み込んでから, 不要な列を落とす\
+RAM を超えるデータは, メモリを増設しない限り R では扱えない\
 Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する\
 乱数で 1% に間引いてから dplyr で集計する\
 
@@ -302,7 +302,7 @@ Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリ�
 >   theme(panel.grid.minor = element_blank())
 > ```
 >
-> [![](large-data_files/figure-html/fig-exercise-tip-hour-1.svg)](large-data_files/figure-html/fig-exercise-tip-hour-1.svg "Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)")
+> [![](largedata_files/figure-html/fig-exercise-tip-hour-1.svg)](largedata_files/figure-html/fig-exercise-tip-hour-1.svg "Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)")
 >
 > Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)
 >

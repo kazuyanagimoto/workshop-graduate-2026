@@ -7,7 +7,7 @@
 - [[[2]{.chapter-number}  [環境の再現性]{.chapter-title}]{#sec-environment .quarto-section-identifier}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/environment.llms.md)
 - [[[3]{.chapter-number}  [Git & GitHub]{.chapter-title}]{#sec-git .quarto-section-identifier}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/git.llms.md)
 - [[4]{.chapter-number}  [高速化]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/speedup.llms.md)
-- [[5]{.chapter-number}  [大規模データ]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/large-data.llms.md)
+- [[5]{.chapter-number}  [大規模データ]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/largedata.llms.md)
 - [[6]{.chapter-number}  [API]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/api.llms.md)
 - [[[7]{.chapter-number}  [可視化の技術]{.chapter-title}]{#sec-visualization .quarto-section-identifier}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/visualization.llms.md)
 - [[8]{.chapter-number}  [回帰分析]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/regression.llms.md)

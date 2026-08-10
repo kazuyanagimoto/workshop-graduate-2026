@@ -35,7 +35,7 @@ info <- nanoparquet::read_parquet_info(path_pq)
 
 これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが @fig-data-stack です.
 
-![Parquet・Polars・DuckDB の関係](../static/cetz/data-stack.svg){#fig-data-stack fig-align="center" width="80%"}
+![Parquet・Polars・DuckDB の関係](../static/cetz/data-stack.svg){#fig-data-stack fig-align="center" width="60%"}
 
 - Parquet は保存形式. データをディスクにどう並べるかを決めるだけで, それ自体は計算しません.
 - Polars と DuckDB は処理エンジン. ディスク上のデータを読み込み, 絞り込みや集計を実行します. 役割はほぼ同じで, 互いに置き換えられる選択肢です. Polars は Rust 製のデータフレームライブラリ, DuckDB は分析に特化した組み込み型のデータベースです.

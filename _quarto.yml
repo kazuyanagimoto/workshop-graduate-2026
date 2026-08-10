@@ -35,7 +35,7 @@ book:
     - lesson/environment.qmd
     - lesson/git.qmd
     - lesson/speedup.qmd
-    - lesson/large-data.qmd
+    - lesson/largedata.qmd
     - lesson/api.qmd
     - lesson/visualization.qmd
     - lesson/regression.qmd

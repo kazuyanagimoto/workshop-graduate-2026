@@ -12,7 +12,7 @@ Rendered site: <https://kazuyanagimoto.com/workshop-graduate-2026>
 - [rv](https://github.com/A2-ai/rv), which installs the R packages pinned in `rv.lock`
 - [Quarto](https://quarto.org/) (the version the site was last built with is recorded in `_variables.yml`)
 
-The PDF edition is typeset by Typst, which ships with Quarto, so no TeX distribution is needed to build the book. It does need the fonts named in `_quarto.yml` installed as system fonts: [Harano Aji](https://github.com/trueroad/HaranoAjiFonts) and [JuliaMono](https://juliamono.netlify.app/). On macOS both are casks (`brew install --cask font-harano-aji font-juliamono`); neither is packaged for Ubuntu, so the CI workflow downloads them from upstream instead. Run `quarto typst fonts` (which prints to stderr) to check that Typst can see them.
+The PDF edition is typeset by Typst, which ships with Quarto, so no TeX distribution is needed to build the book. The monospace face is declared in `_brand.yml` and Quarto fetches it from Google Fonts while rendering, so nothing has to be installed for it. The Japanese faces are different: Google Fonts serves CJK families as unicode-range subsets and Quarto downloads only one of them, which carries the kana but almost no kanji, so [Harano Aji](https://github.com/trueroad/HaranoAjiFonts) has to be present as a system font (`brew install --cask font-harano-aji`; the CI workflow pulls the tarball, since it is not packaged for Ubuntu). Run `quarto typst fonts` (which prints to stderr) to check that Typst can see it.
 
 Rebuilding the figures with `targets` is the one part that still needs a TeX distribution, because the slides and citation chapters illustrate Beamer and BibTeX with genuinely LaTeX-compiled examples:
 

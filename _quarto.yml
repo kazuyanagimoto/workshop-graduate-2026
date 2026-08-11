@@ -73,9 +73,10 @@ format:
   # build the book, SVG figures are embedded directly (no rsvg-convert), and
   # long lines inside code blocks wrap on their own.
   jsbook-typst:
+    # The monospace face comes from _brand.yml (and so does the HTML one).
+    # brand.yml has no notion of a CJK font, so those stay here.
     CJKmainfont: Harano Aji Mincho
     CJKsansfont: Harano Aji Gothic
-    codefont: JuliaMono
     toc-depth: 2
     number-depth: 2
     linkcolor: "#107895"

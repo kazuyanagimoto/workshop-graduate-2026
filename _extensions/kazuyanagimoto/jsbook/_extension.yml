@@ -7,7 +7,6 @@ contributes:
     typst:
       lang: ja
       papersize: a4
-      fontsize: 10pt
       number-sections: true
       section-numbering: "1.1.1"
       frontmatter: true

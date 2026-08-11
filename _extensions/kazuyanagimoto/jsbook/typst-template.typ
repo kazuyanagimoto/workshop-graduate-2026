@@ -31,6 +31,24 @@
 
 #let _blank(it) = _to-str(it).trim() == ""
 
+// Font families arrive either as a single name (`mainfont: Foo`) or as a Typst
+// array (`_brand.yml` typography, which Quarto hands over as a font list).
+#let _families(spec) = {
+  if spec == none { () } else if type(spec) == array { spec } else { (spec,) }
+}
+
+#let _first-family(spec) = _families(spec).at(0, default: none)
+
+// `js` tags the latin family with `covers` so that CJK glyphs fall through to
+// the CJK family. Same idea, but for a whole fallback chain.
+#let _font-list(latin, cjk, covers) = {
+  _families(latin).map(name => (name: name, covers: covers)) + _families(cjk)
+}
+
+// `js`'s own default for `non-cjk`, needed here because the font lists above
+// are built outside of `js`.
+#let JS-NON-CJK = regex("[\u{0000}-\u{2023}]")
+
 #let _js-author(author) = {
   let lines = ("name", "affiliation", "email")
     .map(k => author.at(k, default: none))
@@ -95,6 +113,10 @@
   sansfont-cjk: "Harano Aji Gothic",
   mathfont: none,
   codefont: none,
+  heading-family: none,
+  heading-weight: none,
+  heading-style: none,
+  heading-color: none,
   baselineskip: auto,
   textwidth: auto,
   lines-per-page: auto,
@@ -128,12 +150,33 @@
     author: js-authors.map(array2text).map(_to-str),
   ) if js-authors.len() > 0
 
+  // `js` takes one family per role and builds the covers-tagged font list
+  // itself, so it only ever sees the first family; the full fallback chains
+  // are re-applied inside its body below.
+  let covers = if non-cjk == auto { JS-NON-CJK } else { non-cjk }
+  let serif-list = _font-list(seriffont, seriffont-cjk, covers)
+  let sans-list = _font-list(sansfont, sansfont-cjk, covers)
+  let emph-list = _font-list(seriffont, sansfont-cjk, covers)
+  let heading-list = if heading-family == none {
+    sans-list
+  } else {
+    _font-list(heading-family, sansfont-cjk, covers)
+  }
+
+  // The title page follows the heading typography (brand.yml `headings`) when
+  // one is given; otherwise it stays in the body font, as jsbook does.
+  let title-style = (:)
+  if heading-family != none { title-style.insert("font", heading-list) }
+  if heading-weight != none { title-style.insert("weight", heading-weight) }
+  if heading-style != none { title-style.insert("style", heading-style) }
+  if heading-color != none { title-style.insert("fill", heading-color) }
+
   let js-args = (
     lang: lang,
-    seriffont: seriffont,
-    seriffont-cjk: seriffont-cjk,
-    sansfont: sansfont,
-    sansfont-cjk: sansfont-cjk,
+    seriffont: _first-family(seriffont),
+    seriffont-cjk: _first-family(seriffont-cjk),
+    sansfont: _first-family(sansfont),
+    sansfont-cjk: _first-family(sansfont-cjk),
     paper: paper,
     fontsize: fontsize,
     baselineskip: baselineskip,
@@ -164,6 +207,15 @@
       set heading(numbering: sectionnumbering)
       // `js` sets `supplement: none`; Quarto needs the 図/表 prefixes back.
       set ref(supplement: auto)
+
+      // Full font fallback chains (`js` only saw the first family of each).
+      set text(font: serif-list)
+      show strong: set text(font: sans-list)
+      show emph: set text(font: emph-list)
+      show heading: set text(font: heading-list)
+      show heading: set text(weight: heading-weight) if heading-weight != none
+      show heading: set text(style: heading-style) if heading-style != none
+      show heading: set text(fill: heading-color) if heading-color != none
 
       show math.equation: set text(font: mathfont) if mathfont != none
       show raw: set text(font: codefont) if codefont != none
@@ -227,7 +279,9 @@
                     )#h(1em)#h2last.body #h(1fr) #n
                   ]
                 },
-                line(stroke: 0.4pt, length: 100%),
+                // Follow the text colour so that a brand.yml foreground /
+                // background pair does not leave a black rule behind.
+                line(stroke: (thickness: 0.4pt, paint: text.fill), length: 100%),
               )
             }
           } else {
@@ -248,7 +302,9 @@
                     )#h(1em)#h1last.body
                   ]
                 },
-                line(stroke: 0.4pt, length: 100%),
+                // Follow the text colour so that a brand.yml foreground /
+                // background pair does not leave a black rule behind.
+                line(stroke: (thickness: 0.4pt, paint: text.fill), length: 100%),
               )
             }
           }
@@ -291,10 +347,10 @@
         #set align(center)
         #set par(first-line-indent: 0em, justify: false)
         #v(1fr)
-        #if title != none { text(2.4 * fontsize, title) }
+        #if title != none { text(2.4 * fontsize, ..title-style, title) }
         #if subtitle != none {
           v(1.2em)
-          text(1.5 * fontsize, subtitle)
+          text(1.5 * fontsize, ..title-style, subtitle)
         }
         #v(2fr)
         #if js-authors.len() > 0 {

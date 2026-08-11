@@ -1,3 +1,18 @@
+# Fira Code comes from Google Fonts, so nothing has to be installed: Quarto
+# links it in the HTML and downloads the file for Typst under .quarto/.
+# The CJK faces cannot be sourced this way -- Google Fonts serves Japanese
+# families as unicode-range subsets and Quarto fetches only one of them, which
+# carries the kana but almost no kanji -- so they stay in _quarto.yml as system
+# fonts that the machine has to provide.
+typography:
+  fonts:
+    - family: Fira Code
+      source: google
+      weight: [400, 700]
+      style: [normal]
+  monospace:
+    family: Fira Code
+
 # Default palette of kazuyanagimoto/quarto-clean-typst
 color:
   palette:

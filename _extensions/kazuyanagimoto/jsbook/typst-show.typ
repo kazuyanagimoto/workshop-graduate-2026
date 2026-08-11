@@ -37,30 +37,50 @@ $if(papersize)$
 $endif$
 $if(fontsize)$
   fontsize: $fontsize$,
+$elseif(brand.typography.base.size)$
+  fontsize: $brand.typography.base.size$,
 $endif$
-$if(seriffont)$
+$if(mainfont)$
+  seriffont: ("$mainfont$",),
+$elseif(seriffont)$
   seriffont: "$seriffont$",
-$elseif(mainfont)$
-  seriffont: "$mainfont$",
+$elseif(brand.typography.base.family)$
+  seriffont: $brand.typography.base.family$,
 $endif$
-$if(seriffont-cjk)$
-  seriffont-cjk: "$seriffont-cjk$",
-$elseif(CJKmainfont)$
+$if(CJKmainfont)$
   seriffont-cjk: "$CJKmainfont$",
+$elseif(seriffont-cjk)$
+  seriffont-cjk: "$seriffont-cjk$",
 $endif$
 $if(sansfont)$
   sansfont: "$sansfont$",
 $endif$
-$if(sansfont-cjk)$
-  sansfont-cjk: "$sansfont-cjk$",
-$elseif(CJKsansfont)$
+$if(CJKsansfont)$
   sansfont-cjk: "$CJKsansfont$",
+$elseif(sansfont-cjk)$
+  sansfont-cjk: "$sansfont-cjk$",
 $endif$
 $if(mathfont)$
   mathfont: ($for(mathfont)$"$mathfont$",$endfor$),
 $endif$
 $if(codefont)$
   codefont: ($for(codefont)$"$codefont$",$endfor$),
+$elseif(monofont)$
+  codefont: ("$monofont$",),
+$elseif(brand.typography.monospace.family)$
+  codefont: $brand.typography.monospace.family$,
+$endif$
+$if(brand.typography.headings.family)$
+  heading-family: $brand.typography.headings.family$,
+$endif$
+$if(brand.typography.headings.weight)$
+  heading-weight: $brand.typography.headings.weight$,
+$endif$
+$if(brand.typography.headings.style)$
+  heading-style: "$brand.typography.headings.style$",
+$endif$
+$if(brand.typography.headings.color)$
+  heading-color: $brand.typography.headings.color$,
 $endif$
 $if(baselineskip)$
   baselineskip: $baselineskip$,

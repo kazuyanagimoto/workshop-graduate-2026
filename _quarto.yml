@@ -29,6 +29,9 @@ book:
     image: static/img/social-card.png
   sidebar:
     logo: static/img/logo/hex-logo.svg
+  page-footer:
+    left: |
+      © 2026 柳本和春. 文章・図は [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), コードは [MIT License](https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md) の下で公開されています.
   chapters:
     - index.qmd
     - lesson/architecture.qmd
@@ -66,43 +69,21 @@ format:
     toc: true
     number-depth: 2
     lightbox: true
-  pdf:
-    lang: ja
-    documentclass: ltjsbook
-    pdf-engine: lualatex
-    mainfont: TeX Gyre Termes
+  # The PDF is typeset by Typst, not LaTeX: no TeX distribution is needed to
+  # build the book, SVG figures are embedded directly (no rsvg-convert), and
+  # long lines inside code blocks wrap on their own.
+  jsbook-typst:
     CJKmainfont: Harano Aji Mincho
-    sansfont: Harano Aji Gothic
-    monofont: JuliaMono
-    geometry:
-      - margin=1in
+    CJKsansfont: Harano Aji Gothic
+    codefont: JuliaMono
     toc-depth: 2
     number-depth: 2
-    linkcolor: primary
-    citecolor: primary
-    urlcolor: primary
-    include-in-header:
-      - text: |
-          \definecolor{primary}{HTML}{107895}
-          \ltjsetparameter{jacharrange={-2, -3}}
-          % This book is code-heavy: wrap long lines inside code blocks
-          % instead of letting them run past the right margin.
-          \usepackage{fvextra}
-          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
-            breaklines,breakanywhere,commandchars=\\\{\}}
-          % tinytable emits column names such as `bill_len` unescaped into the
-          % tabularray body, which is a LaTeX error in text mode. This makes a
-          % bare `_` typeset as an underscore while leaving math subscripts
-          % alone, so table code needs no per-table escaping.
-          \usepackage[strings]{underscore}
-          % Some tables sit inside callouts (the collapsible 解答例 blocks),
-          % and a LaTeX float cannot open inside the tcolorbox a callout
-          % becomes. Pin tables in place instead of letting them float, which
-          % also keeps their position consistent with the HTML edition.
-          \usepackage{float}
-          \restylefloat{table}
-          \floatplacement{table}{H}
-
+    linkcolor: "#107895"
+    citecolor: "#107895"
+    filecolor: "#107895"
+    # Use citeproc so the bibliography lands in the #refs div of references.qmd
+    # instead of Typst's native #bibliography (which would duplicate the heading).
+    citeproc: true
 
 freeze: auto
 execute:

@@ -691,6 +691,16 @@ force_source = false
 dependencies = []
 
 [[packages]]
+name = "later"
+version = "1.4.8"
+source = { repository = "https://cloud.r-project.org/" }
+force_source = false
+dependencies = [
+    { name = "Rcpp", requirement = "(>= 1.0.10)" },
+    "rlang",
+]
+
+[[packages]]
 name = "lattice"
 version = "0.22-9"
 source = { builtin = true }
@@ -998,6 +1008,26 @@ dependencies = [
 ]
 
 [[packages]]
+name = "quarto"
+version = "1.5.1"
+source = { repository = "https://cloud.r-project.org/" }
+force_source = false
+dependencies = [
+    "cli",
+    "fs",
+    "htmltools",
+    "jsonlite",
+    "later",
+    "lifecycle",
+    "processx",
+    "rlang",
+    "rmarkdown",
+    "rstudioapi",
+    "xfun",
+    { name = "yaml", requirement = "(>= 2.3.10)" },
+]
+
+[[packages]]
 name = "rappdirs"
 version = "0.3.4"
 source = { repository = "https://cloud.r-project.org/" }
@@ -1053,6 +1083,13 @@ dependencies = [
 [[packages]]
 name = "rprojroot"
 version = "2.1.1"
+source = { repository = "https://cloud.r-project.org/" }
+force_source = false
+dependencies = []
+
+[[packages]]
+name = "rstudioapi"
+version = "0.19.0"
 source = { repository = "https://cloud.r-project.org/" }
 force_source = false
 dependencies = []

@@ -158,18 +158,19 @@ penguins_summary |>
 
 ### セル内の数式
 
-列見出しやセルに数式を入れたいことはよくあります. `tinytable` ではセルの中に LaTeX を `$...$` で書けます. HTML 出力では MathJax で描画されるので, セットアップチャンクで `options(tinytable_html_mathjax = TRUE)` を有効にしておきます (この章の冒頭で設定済みです). 列名を後から付け替えるには `setNames()` を使うのが手軽です.
+列見出しやセルに数式を入れたいことはよくあります. `tinytable` ではセルの中に `$...$` で数式を書けます. ただし, セルの中身は出力形式へそのまま渡されるだけなので, 数式もその形式の文法で書く必要があります. HTML 出力は MathJax が描画するので LaTeX 記法 (`$\bar{x}$`), この本の PDF は Typst で組んでいるので Typst 記法 (`$macron(x)$`) になります. `$n$` のように単なる英字や添字だけなら両方で通りますが, それ以上の記法は下のように出力形式で切り替えます. HTML 側では, セットアップチャンクで `options(tinytable_html_mathjax = TRUE)` を有効にしておきます (この章の冒頭で設定済みです). 列名を後から付け替えるには `setNames()` を使うのが手軽です.
 
 ```{r}
 #| label: tbl-penguins-math
 #| tbl-cap: 列見出しに数式を使った表
+mean_cols <- if (knitr::is_html_output()) {
+  c("$\\bar{x}_{\\mathrm{bill}}$", "$\\bar{x}_{\\mathrm{mass}}$")
+} else {
+  c("$macron(x)_\"bill\"$", "$macron(x)_\"mass\"$")
+}
+
 penguins_summary |>
-  setNames(c(
-    "Species",
-    "$n$",
-    "$\\bar{x}_{\\mathrm{bill}}$",
-    "$\\bar{x}_{\\mathrm{mass}}$"
-  )) |>
+  setNames(c("Species", "$n$", mean_cols)) |>
   tt() |>
   format_tt(j = 3, digits = 1, num_fmt = "decimal") |>
   format_tt(j = 4, digits = 0, num_fmt = "decimal", num_mark_big = ",")

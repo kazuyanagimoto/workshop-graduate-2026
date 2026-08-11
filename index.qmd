@@ -6,9 +6,9 @@
 
 このコースでは, プログラミングで何ができるのかを理解することに重きを置き, その上でAIに適切な指示を与えるための知識を学んでいきます. そのため, プログラミングの基礎的な知識は必要ですが, 個別のパッケージや関数の使い方については深くは解説しません. 分からなければAIに聞くことを推奨します.
 
-## 環境構築 {#sec-setup}
+## 環境構築
 
-授業を始める前に次の環境構築を完了させておいてください. また, @sec-git で用いるため, GitHub のアカウントも作成しておいてください. @sec-github-copilot で述べるように, GitHub の Education アカウントに登録することをお勧めします.
+授業を始める前に次の環境構築を完了させておいてください. また, @sec-git で用いるため, GitHub のアカウントも作成しておいてください. 後述するように, GitHub の Education アカウントに登録することをお勧めします.
 
 このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto, バージョン管理システムの git のインストール手順をOS別にまとめます.
 
@@ -106,7 +106,7 @@ sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 
 私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では @sec-ai-research 以外では必要ありません. また, @sec-ai-research で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.
 
-### GitHub Copilot {#sec-github-copilot}
+### GitHub Copilot
 
 GitHub Copilot は, GitHub が提供する AI コーディングアシスタントです. Visual Studio Code の拡張機能として提供されており, コードの補完や生成を支援します. Copilot は OpenAI の Codex モデルを基盤としており, プログラミング言語やフレームワークに関する知識を持っています. また, Claude や Gemini などの他のモデルも利用可能です.
 

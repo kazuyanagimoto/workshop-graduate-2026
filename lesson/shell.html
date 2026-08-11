@@ -76,14 +76,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-25dec783d6e1d11f8e0bba9e4fbb47f4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-16e5d9079585c28b088c2fef09a1076c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ea2432bc35d1b96858aad645df82c412.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-16e5d9079585c28b088c2fef09a1076c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-222bf84bab3647eac29364631cd7050e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-296c0f978c51b5197c34a2daf9016c9c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a10be8e27a92cc00f73d60c8ffb6a821.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a70fee94b43eeb32587d105877143021.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a10be8e27a92cc00f73d60c8ffb6a821.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -458,8 +458,8 @@ window.Quarto = {
 <li><code>-l</code> は長い形式で表示する, <code>-h</code> は人間に読みやすい単位で表示する, <code>-u</code> は重複行を削除する, といった意味です.</li>
 <li>複数のオプションは1つのダッシュにまとめられます.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="at">-a</span> <span class="at">-h</span> /var/log    <span class="co"># これと</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /var/log        <span class="co"># これは同じ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="at">-a</span> <span class="at">-h</span> /var/log    <span class="co"># this one</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /var/log        <span class="co"># and this one are the same</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>まれに, 2つのダッシュで始まる長い名前のオプションもあります.</li>
 </ul>
@@ -481,7 +481,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>スペースキーで1画面ずつ進みます.</li>
-<li><code>/パターン</code> でマニュアル内を検索でき, <code>n</code> で次の一致へ進みます.</li>
+<li><code>/pattern</code> でマニュアル内を検索でき, <code>n</code> で次の一致へ進みます.</li>
 <li><code>h</code> で <code>man</code> 自身のヘルプ, <code>q</code> で終了します.</li>
 </ul>
 <p><code>man</code> は網羅的ですが冗長なので, 最近ならAIに聞くのもよいでしょう.</p>
@@ -502,9 +502,9 @@ window.Quarto = {
 <p>相対パスとは, カレントディレクトリからの相対的な位置を表すパスです. たとえば, <code>examples</code> サブディレクトリに移動するには, 絶対パスでは <code>/Users/kazuharu/github/workshop-graduate-2026/examples</code> と書く必要がありますが, 相対パスなら単に <code>examples</code> と書くだけで済みます.</p>
 <p><strong>コマンド</strong></p>
 <p>絶対パスも使えますが, 相対パスと特殊記号を組み合わせる方が扱いやすいです. 特殊記号には, ホーム (<code>~</code>), カレントディレクトリ (<code>.</code>), 親ディレクトリ (<code>..</code>) があります.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples    <span class="co"># examples サブディレクトリへ入る</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..       <span class="co"># 2つ上のディレクトリへ戻る</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>            <span class="co"># いまどこにいるか確認</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples    <span class="co"># enter the examples subdirectory</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..       <span class="co"># go two directories up</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>            <span class="co"># check where we are now</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>ここで一つ注意があり, ディレクトリ名に空白が含まれていると厄介です. たとえば <code>My Documents</code> というフォルダに <code>cd My Documents</code> としても動きません. Bash は空白を区切りとみなし, <code>My</code> と <code>Documents</code> を別々の引数だと解釈してしまうからです.</p>
 <ul>
 <li>対処法1: 引用符で囲む. <code>cd "My Documents"</code></li>
@@ -547,9 +547,9 @@ window.Quarto = {
 <li><code>rmdir</code>: 空のディレクトリを消す.</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testing/test1.txt</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> testing       <span class="co"># 中身が残っているとエラーになる</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> testing       <span class="co"># fails if anything is left inside</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>rmdir</code> は中身の入ったディレクトリを消せません. そのときは <code>rm</code> に「再帰的」(<code>-r</code>) と「強制」(<code>-f</code>) のオプションを付けます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> testing      <span class="co"># 中身ごと消す</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> testing      <span class="co"># deletes it with its contents</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -567,14 +567,14 @@ Warning
 <section id="コピー移動名前変更" class="level3">
 <h3 class="anchored" data-anchor-id="コピー移動名前変更">コピー・移動・名前変更</h3>
 <p><code>cp</code> はコピー, <code>mv</code> は移動です.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> reps.txt copies/reps-copy.txt    <span class="co"># 新しい名前でコピー</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> meals/ copies/                <span class="co"># ディレクトリは -r で中身ごとコピー</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ABC/abc.txt examples             <span class="co"># abc.txt を examples へ移動</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> reps.txt copies/reps-copy.txt    <span class="co"># copy under a new name</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> meals/ copies/                <span class="co"># -r copies a directory and its contents</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ABC/abc.txt examples             <span class="co"># move abc.txt into examples</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>同じディレクトリ内で新しい名前を付けて「移動」すると, それは実質的にリネームになります.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> reps-copy.txt reps2.txt          <span class="co"># 移動 = リネーム</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> reps-copy.txt reps2.txt          <span class="co"># moving == renaming</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>多数のファイルをまとめてリネームしたいときは, <code>rename</code> が便利です. パターンと置換文字列, 対象ファイルを指定します. ワイルドカード (次節) と組み合わせると真価を発揮します.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/monday.csv     <span class="co"># 1つのファイルの拡張子を変える</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/<span class="pp">*</span>              <span class="co"># meals 内のすべてに適用</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/monday.csv     <span class="co"># change the extension of one file</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/<span class="pp">*</span>              <span class="co"># apply it to everything in meals</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ワイルドカード" class="level3">
 <h3 class="anchored" data-anchor-id="ワイルドカード">ワイルドカード</h3>
@@ -583,17 +583,17 @@ Warning
 <li><code>*</code>: 任意の長さの文字列にマッチします. ファイルをまとめて操作したいときに便利です.</li>
 <li><code>?</code>: 任意の1文字にマッチします. 似た名前のファイルを区別したいときに便利です.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.sh copies          <span class="co"># 拡張子が .sh のファイルをすべてコピー</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> copies/<span class="pp">*</span>             <span class="co"># copies の中身をすべて削除</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">??</span>nday.csv     <span class="co"># monday.csv, sunday.csv にマッチ</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">?</span>onday.csv     <span class="co"># monday.csv にマッチ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.sh copies          <span class="co"># copy every file with the .sh extension</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> copies/<span class="pp">*</span>             <span class="co"># delete everything inside copies</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">??</span>nday.csv     <span class="co"># matches monday.csv and sunday.csv</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">?</span>onday.csv     <span class="co"># matches monday.csv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="探す" class="level3">
 <h3 class="anchored" data-anchor-id="探す">探す</h3>
 <p>ナビゲーション関連で最後に紹介するのが <code>find</code> です. 名前やサイズなど, さまざまな条件でファイルやディレクトリを探せます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> examples <span class="at">-iname</span> <span class="st">"monday.csv"</span>   <span class="co"># 名前で検索 (再帰的, 大文字小文字を無視)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*.txt"</span>               <span class="co"># カレント以下の .txt をすべて</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># 100 KB より大きいファイル</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> examples <span class="at">-iname</span> <span class="st">"monday.csv"</span>   <span class="co"># search by name (recursive, case-insensitive)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*.txt"</span>               <span class="co"># every .txt below the current directory</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># files larger than 100 KB</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="テキストファイルの操作" class="level2" data-number="A.4">
@@ -608,34 +608,34 @@ Warning
 <section id="読む" class="level3">
 <h3 class="anchored" data-anchor-id="読む">読む</h3>
 <p>最も単純にテキストを読むコマンドが <code>cat</code> (concatenate) です. ただし <code>cat</code> は全文を一気に表示するので, 長いファイルでは扱いにくいです.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt      <span class="co"># -n で行番号を付ける</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt      <span class="co"># -n adds line numbers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>長いファイルを1画面ずつ読むには <code>more</code> や <code>less</code> を使います. <code>f</code> / <code>b</code> で前後に移動し, <code>q</code> で終了します.</p>
 <p>先頭や末尾だけを覗くなら <code>head</code> と <code>tail</code> が便利です (既定では10行).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sonnets.txt       <span class="co"># 先頭3行</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 1 sonnets.txt       <span class="co"># 末尾1行</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +3024 sonnets.txt   <span class="co"># 3024行目以降をすべて</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sonnets.txt       <span class="co"># first 3 lines</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 1 sonnets.txt       <span class="co"># last line</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +3024 sonnets.txt   <span class="co"># everything from line 3024 on</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="探す-1" class="level3">
 <h3 class="anchored" data-anchor-id="探す-1">探す</h3>
 <p>テキストの中からパターンを探すには <code>grep</code> を使います. 正規表現によるマッチングができます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Shall I compare thee"</span> sonnets.txt    <span class="co"># -n で一致した行番号も表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Shall I compare thee"</span> sonnets.txt    <span class="co"># -n also prints the line number</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>grep</code> はディレクトリ内の複数ファイルにまたがって探すこともできます. 関数名を含むファイルを探す, といった場面で特に役立ちます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"pasta"</span> meals    <span class="co"># -R 再帰的, -l 一致したファイル名だけを表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"pasta"</span> meals    <span class="co"># -R recursive, -l print only the matching file names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>-i</code> (大文字小文字を無視) など, 便利なオプションが他にもあります.</p>
 </section>
 <section id="加工する" class="level3">
 <h3 class="anchored" data-anchor-id="加工する">加工する</h3>
 <p>テキストを加工する代表的なコマンドが <code>sed</code> と <code>awk</code> です. どちらも強力で柔軟ですが (特に <code>awk</code> は CSV に強いです), ここでは基本だけ示します.</p>
 <p>ある文字列を別の文字列に置換するには, <code>sed</code> を使います.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Jack/Bill/g'</span> nursery.txt    <span class="co"># ファイル内の Jack をすべて Bill に</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Jack/Bill/g'</span> nursery.txt    <span class="co"># replace every Jack in the file with Bill</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>複数のコマンドをつなげれば, より複雑な処理もできます (パイプ <code>|</code> は次節で説明します). たとえば, シェイクスピアのソネットで最もよく使われる単語の上位10件は, 次のように求められます.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-e</span> <span class="st">'s/\s/\n/g'</span> <span class="op">&lt;</span> sonnets.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="並べ替え重複削除" class="level3">
 <h3 class="anchored" data-anchor-id="並べ替え重複削除">並べ替え・重複削除</h3>
 <p><code>sort</code> は行を並べ替えます. <code>-u</code> (unique) を付けると, 重複行を取り除けます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> reps.txt        <span class="co"># 並べ替えつつ重複を削除</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r で逆順</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> reps.txt        <span class="co"># sort and drop duplicates</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r reverses the order</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="リダイレクトとパイプ" class="level2" data-number="A.5">
@@ -643,8 +643,8 @@ Warning
 <section id="リダイレクト" class="level3">
 <h3 class="anchored" data-anchor-id="リダイレクト">リダイレクト</h3>
 <p><code>&gt;</code> を使うと, コマンドの出力を画面ではなくファイルへ送れます. これを <strong>リダイレクト</strong> (redirect) といいます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span>               <span class="co"># 画面に表示</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span> <span class="op">&gt;</span> note.txt    <span class="co"># note.txt に書き出す</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span>               <span class="co"># print to the screen</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span> <span class="op">&gt;</span> note.txt    <span class="co"># write it out to note.txt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>既存のファイルに <strong>追記</strong> したいときは <code>&gt;&gt;</code> を使います. <code>&gt;</code> は上書きしてしまうので注意してください.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"second line"</span> <span class="op">&gt;&gt;</span> note.txt</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> note.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -654,7 +654,7 @@ Warning
 <section id="パイプ" class="level3">
 <h3 class="anchored" data-anchor-id="パイプ">パイプ</h3>
 <p><code>|</code> (パイプ) は Bash で最も強力な機能の一つです. あるコマンドの出力を, 次のコマンドの入力として渡します. 単純な操作を数珠つなぎにして, 複雑な処理を組み立てられます (まさに Unix 哲学です).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 100 <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 10    <span class="co"># 91-100行目を表示</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 100 <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 10    <span class="co"># show lines 91-100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>たとえば「336行目から始まる14行のソネットだけを取り出す」なら, 次のように書けます.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +336 sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 14</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>コマンド履歴の検索にも使えます. 入力したコマンドは <code>~/.bash_history</code> (zsh なら <code>~/.zsh_history</code>) に残るので, 次のようにたどれます.</p>
@@ -668,7 +668,7 @@ Warning
 <p>Bash の for ループは, 他の言語のものとよく似ています. 基本の構文は次のとおりです.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> LIST</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">OPERATION</span> <span class="va">$i</span>    <span class="co"># $ は変数を表す</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">OPERATION</span> <span class="va">$i</span>    <span class="co"># $ marks a variable</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>セミコロン <code>;</code> を使えば1行にまとめられます.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> LIST<span class="kw">;</span> <span class="cf">do</span> <span class="ex">OPERATION</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -688,10 +688,10 @@ Warning
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span> <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>ただしこれだと, 各ファイルの見出し行 (ヘッダー) が繰り返し入ってしまいます. そこで, 最初に1つのファイルからヘッダーだけを書き出し, 残りは2行目以降だけを追記するようにします.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> meals/monday.csv <span class="op">&gt;</span> mealplan.csv       <span class="co"># ヘッダーだけ書き出す</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> meals/monday.csv <span class="op">&gt;</span> mealplan.csv       <span class="co"># write out the header only</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="va">$(</span><span class="fu">ls</span> meals/<span class="pp">*</span>day.csv<span class="va">)</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv               <span class="co"># 2行目以降を追記</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv               <span class="co"># append everything from line 2 on</span></span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>シェルで結合する利点は, <strong>効率の良さ</strong> にあります. すべてのファイルを同時にメモリ (RAM) に載せる必要がないので, ファイル数が多いとき, あるいは1つ1つが巨大なときに大きな差が出ます.</p>
 </section>
@@ -745,8 +745,8 @@ Warning
 </ul>
 <p>違いは権限です. スーパーユーザーはシステムの変更, ソフトウェアのインストール, 他ユーザーのフォルダの閲覧などができます. 通常のユーザーにできることはずっと限られています. Unix 系 OS がウイルスなどの脅威に比較的強いのは, (悪意ある) ソフトウェアのインストールにスーパーユーザー権限が要るからです.</p>
 <p>では, 通常のユーザーはどうやってソフトのインストールのような操作をするのでしょうか. 答えは <code>sudo</code> (“superuser do”) を使うことです. 実行したいコマンドの前に <code>sudo</code> を付けると, 一時的にスーパーユーザーの権限で実行できます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root          <span class="co"># 失敗する</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ls /root     <span class="co"># 成功する</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root          <span class="co"># fails</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ls /root     <span class="co"># succeeds</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>root として常時ログインすることも一応できますが, 安全装置も「元に戻す」機能も無いため, 一般に悪い習慣とされています.</p>
 </section>
 <section id="パーミッションを変える-chmod" class="level3">
@@ -810,13 +810,13 @@ Warning
 </tbody>
 </table>
 <p>たとえば <code>ABC</code> ディレクトリを全員フルアクセスにするなら, 次のいずれでも構いません (ディレクトリなので再帰的に <code>-R</code> を付けます).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 777 ABC        <span class="co"># 8進数表記</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> a=rwx ABC      <span class="co"># 記号表記</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 777 ABC        <span class="co"># octal notation</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> a=rwx ABC      <span class="co"># symbolic notation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="所有者を変える-chown" class="level3">
 <h3 class="anchored" data-anchor-id="所有者を変える-chown">所有者を変える: chown</h3>
 <p>所有者の変更は <code>chown</code> で行います. 8進数と記号の対応を覚える必要がない分, <code>chmod</code> より簡単です.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># ABC の所有者を alice にする</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># make alice the owner of ABC</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="演習問題" class="level2 unnumbered">
@@ -1580,8 +1580,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-85"><a href="#cb56-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>複数のオプションは1つのダッシュにまとめられます.</span>
 <span id="cb56-86"><a href="#cb56-86" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-87"><a href="#cb56-87" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-88"><a href="#cb56-88" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="at">-a</span> <span class="at">-h</span> /var/log    <span class="co"># これと</span></span>
-<span id="cb56-89"><a href="#cb56-89" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /var/log        <span class="co"># これは同じ</span></span>
+<span id="cb56-88"><a href="#cb56-88" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="at">-a</span> <span class="at">-h</span> /var/log    <span class="co"># this one</span></span>
+<span id="cb56-89"><a href="#cb56-89" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /var/log        <span class="co"># and this one are the same</span></span>
 <span id="cb56-90"><a href="#cb56-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-91"><a href="#cb56-91" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-92"><a href="#cb56-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>まれに, 2つのダッシュで始まる長い名前のオプションもあります.</span>
@@ -1617,7 +1617,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-122"><a href="#cb56-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-123"><a href="#cb56-123" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-124"><a href="#cb56-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>スペースキーで1画面ずつ進みます.</span>
-<span id="cb56-125"><a href="#cb56-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`/パターン`</span> でマニュアル内を検索でき, <span class="in">`n`</span> で次の一致へ進みます.</span>
+<span id="cb56-125"><a href="#cb56-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`/pattern`</span> でマニュアル内を検索でき, <span class="in">`n`</span> で次の一致へ進みます.</span>
 <span id="cb56-126"><a href="#cb56-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`h`</span> で <span class="in">`man`</span> 自身のヘルプ, <span class="in">`q`</span> で終了します.</span>
 <span id="cb56-127"><a href="#cb56-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-128"><a href="#cb56-128" aria-hidden="true" tabindex="-1"></a><span class="in">`man`</span> は網羅的ですが冗長なので, 最近ならAIに聞くのもよいでしょう.</span>
@@ -1645,9 +1645,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-150"><a href="#cb56-150" aria-hidden="true" tabindex="-1"></a>特殊記号には, ホーム (<span class="in">`~`</span>), カレントディレクトリ (<span class="in">`.`</span>), 親ディレクトリ (<span class="in">`..`</span>) があります.</span>
 <span id="cb56-151"><a href="#cb56-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-152"><a href="#cb56-152" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-153"><a href="#cb56-153" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples    <span class="co"># examples サブディレクトリへ入る</span></span>
-<span id="cb56-154"><a href="#cb56-154" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..       <span class="co"># 2つ上のディレクトリへ戻る</span></span>
-<span id="cb56-155"><a href="#cb56-155" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>            <span class="co"># いまどこにいるか確認</span></span>
+<span id="cb56-153"><a href="#cb56-153" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples    <span class="co"># enter the examples subdirectory</span></span>
+<span id="cb56-154"><a href="#cb56-154" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../..       <span class="co"># go two directories up</span></span>
+<span id="cb56-155"><a href="#cb56-155" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>            <span class="co"># check where we are now</span></span>
 <span id="cb56-156"><a href="#cb56-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-157"><a href="#cb56-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-158"><a href="#cb56-158" aria-hidden="true" tabindex="-1"></a>ここで一つ注意があり, ディレクトリ名に空白が含まれていると厄介です. たとえば <span class="in">`My Documents`</span> というフォルダに <span class="in">`cd My Documents`</span> としても動きません.</span>
@@ -1703,14 +1703,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-208"><a href="#cb56-208" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-209"><a href="#cb56-209" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
 <span id="cb56-210"><a href="#cb56-210" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> testing/test1.txt</span>
-<span id="cb56-211"><a href="#cb56-211" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> testing       <span class="co"># 中身が残っているとエラーになる</span></span>
+<span id="cb56-211"><a href="#cb56-211" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span> testing       <span class="co"># fails if anything is left inside</span></span>
 <span id="cb56-212"><a href="#cb56-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-213"><a href="#cb56-213" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-214"><a href="#cb56-214" aria-hidden="true" tabindex="-1"></a><span class="in">`rmdir`</span> は中身の入ったディレクトリを消せません.</span>
 <span id="cb56-215"><a href="#cb56-215" aria-hidden="true" tabindex="-1"></a>そのときは <span class="in">`rm`</span> に「再帰的」(<span class="in">`-r`</span>) と「強制」(<span class="in">`-f`</span>) のオプションを付けます.</span>
 <span id="cb56-216"><a href="#cb56-216" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-217"><a href="#cb56-217" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-218"><a href="#cb56-218" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> testing      <span class="co"># 中身ごと消す</span></span>
+<span id="cb56-218"><a href="#cb56-218" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> testing      <span class="co"># deletes it with its contents</span></span>
 <span id="cb56-219"><a href="#cb56-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-220"><a href="#cb56-220" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-221"><a href="#cb56-221" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
@@ -1723,15 +1723,15 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-228"><a href="#cb56-228" aria-hidden="true" tabindex="-1"></a><span class="in">`cp`</span> はコピー, <span class="in">`mv`</span> は移動です.</span>
 <span id="cb56-229"><a href="#cb56-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-230"><a href="#cb56-230" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-231"><a href="#cb56-231" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> reps.txt copies/reps-copy.txt    <span class="co"># 新しい名前でコピー</span></span>
-<span id="cb56-232"><a href="#cb56-232" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> meals/ copies/                <span class="co"># ディレクトリは -r で中身ごとコピー</span></span>
-<span id="cb56-233"><a href="#cb56-233" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ABC/abc.txt examples             <span class="co"># abc.txt を examples へ移動</span></span>
+<span id="cb56-231"><a href="#cb56-231" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> reps.txt copies/reps-copy.txt    <span class="co"># copy under a new name</span></span>
+<span id="cb56-232"><a href="#cb56-232" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> meals/ copies/                <span class="co"># -r copies a directory and its contents</span></span>
+<span id="cb56-233"><a href="#cb56-233" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ABC/abc.txt examples             <span class="co"># move abc.txt into examples</span></span>
 <span id="cb56-234"><a href="#cb56-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-235"><a href="#cb56-235" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-236"><a href="#cb56-236" aria-hidden="true" tabindex="-1"></a>同じディレクトリ内で新しい名前を付けて「移動」すると, それは実質的にリネームになります.</span>
 <span id="cb56-237"><a href="#cb56-237" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-238"><a href="#cb56-238" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-239"><a href="#cb56-239" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> reps-copy.txt reps2.txt          <span class="co"># 移動 = リネーム</span></span>
+<span id="cb56-239"><a href="#cb56-239" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> reps-copy.txt reps2.txt          <span class="co"># moving == renaming</span></span>
 <span id="cb56-240"><a href="#cb56-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-241"><a href="#cb56-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-242"><a href="#cb56-242" aria-hidden="true" tabindex="-1"></a>多数のファイルをまとめてリネームしたいときは, <span class="in">`rename`</span> が便利です.</span>
@@ -1739,8 +1739,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-244"><a href="#cb56-244" aria-hidden="true" tabindex="-1"></a>ワイルドカード (次節) と組み合わせると真価を発揮します.</span>
 <span id="cb56-245"><a href="#cb56-245" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-246"><a href="#cb56-246" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-247"><a href="#cb56-247" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/monday.csv     <span class="co"># 1つのファイルの拡張子を変える</span></span>
-<span id="cb56-248"><a href="#cb56-248" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/<span class="pp">*</span>              <span class="co"># meals 内のすべてに適用</span></span>
+<span id="cb56-247"><a href="#cb56-247" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/monday.csv     <span class="co"># change the extension of one file</span></span>
+<span id="cb56-248"><a href="#cb56-248" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> csv TXT meals/<span class="pp">*</span>              <span class="co"># apply it to everything in meals</span></span>
 <span id="cb56-249"><a href="#cb56-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-250"><a href="#cb56-250" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-251"><a href="#cb56-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### ワイルドカード</span></span>
@@ -1752,10 +1752,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-257"><a href="#cb56-257" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`?`</span>: 任意の1文字にマッチします. 似た名前のファイルを区別したいときに便利です.</span>
 <span id="cb56-258"><a href="#cb56-258" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-259"><a href="#cb56-259" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-260"><a href="#cb56-260" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.sh copies          <span class="co"># 拡張子が .sh のファイルをすべてコピー</span></span>
-<span id="cb56-261"><a href="#cb56-261" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> copies/<span class="pp">*</span>             <span class="co"># copies の中身をすべて削除</span></span>
-<span id="cb56-262"><a href="#cb56-262" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">??</span>nday.csv     <span class="co"># monday.csv, sunday.csv にマッチ</span></span>
-<span id="cb56-263"><a href="#cb56-263" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">?</span>onday.csv     <span class="co"># monday.csv にマッチ</span></span>
+<span id="cb56-260"><a href="#cb56-260" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="pp">*</span>.sh copies          <span class="co"># copy every file with the .sh extension</span></span>
+<span id="cb56-261"><a href="#cb56-261" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> copies/<span class="pp">*</span>             <span class="co"># delete everything inside copies</span></span>
+<span id="cb56-262"><a href="#cb56-262" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">??</span>nday.csv     <span class="co"># matches monday.csv and sunday.csv</span></span>
+<span id="cb56-263"><a href="#cb56-263" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> meals/<span class="pp">?</span>onday.csv     <span class="co"># matches monday.csv</span></span>
 <span id="cb56-264"><a href="#cb56-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-265"><a href="#cb56-265" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-266"><a href="#cb56-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### 探す</span></span>
@@ -1764,9 +1764,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-269"><a href="#cb56-269" aria-hidden="true" tabindex="-1"></a>名前やサイズなど, さまざまな条件でファイルやディレクトリを探せます.</span>
 <span id="cb56-270"><a href="#cb56-270" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-271"><a href="#cb56-271" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-272"><a href="#cb56-272" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> examples <span class="at">-iname</span> <span class="st">"monday.csv"</span>   <span class="co"># 名前で検索 (再帰的, 大文字小文字を無視)</span></span>
-<span id="cb56-273"><a href="#cb56-273" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*.txt"</span>               <span class="co"># カレント以下の .txt をすべて</span></span>
-<span id="cb56-274"><a href="#cb56-274" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># 100 KB より大きいファイル</span></span>
+<span id="cb56-272"><a href="#cb56-272" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> examples <span class="at">-iname</span> <span class="st">"monday.csv"</span>   <span class="co"># search by name (recursive, case-insensitive)</span></span>
+<span id="cb56-273"><a href="#cb56-273" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-iname</span> <span class="st">"*.txt"</span>               <span class="co"># every .txt below the current directory</span></span>
+<span id="cb56-274"><a href="#cb56-274" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-size</span> +100k                  <span class="co"># files larger than 100 KB</span></span>
 <span id="cb56-275"><a href="#cb56-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-276"><a href="#cb56-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-277"><a href="#cb56-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## テキストファイルの操作</span></span>
@@ -1791,7 +1791,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-296"><a href="#cb56-296" aria-hidden="true" tabindex="-1"></a>ただし <span class="in">`cat`</span> は全文を一気に表示するので, 長いファイルでは扱いにくいです.</span>
 <span id="cb56-297"><a href="#cb56-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-298"><a href="#cb56-298" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-299"><a href="#cb56-299" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt      <span class="co"># -n で行番号を付ける</span></span>
+<span id="cb56-299"><a href="#cb56-299" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt      <span class="co"># -n adds line numbers</span></span>
 <span id="cb56-300"><a href="#cb56-300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-301"><a href="#cb56-301" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-302"><a href="#cb56-302" aria-hidden="true" tabindex="-1"></a>長いファイルを1画面ずつ読むには <span class="in">`more`</span> や <span class="in">`less`</span> を使います.</span>
@@ -1800,9 +1800,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-305"><a href="#cb56-305" aria-hidden="true" tabindex="-1"></a>先頭や末尾だけを覗くなら <span class="in">`head`</span> と <span class="in">`tail`</span> が便利です (既定では10行).</span>
 <span id="cb56-306"><a href="#cb56-306" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-307"><a href="#cb56-307" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-308"><a href="#cb56-308" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sonnets.txt       <span class="co"># 先頭3行</span></span>
-<span id="cb56-309"><a href="#cb56-309" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 1 sonnets.txt       <span class="co"># 末尾1行</span></span>
-<span id="cb56-310"><a href="#cb56-310" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +3024 sonnets.txt   <span class="co"># 3024行目以降をすべて</span></span>
+<span id="cb56-308"><a href="#cb56-308" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 3 sonnets.txt       <span class="co"># first 3 lines</span></span>
+<span id="cb56-309"><a href="#cb56-309" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 1 sonnets.txt       <span class="co"># last line</span></span>
+<span id="cb56-310"><a href="#cb56-310" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +3024 sonnets.txt   <span class="co"># everything from line 3024 on</span></span>
 <span id="cb56-311"><a href="#cb56-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-312"><a href="#cb56-312" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-313"><a href="#cb56-313" aria-hidden="true" tabindex="-1"></a><span class="fu">### 探す</span></span>
@@ -1811,14 +1811,14 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-316"><a href="#cb56-316" aria-hidden="true" tabindex="-1"></a>正規表現によるマッチングができます.</span>
 <span id="cb56-317"><a href="#cb56-317" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-318"><a href="#cb56-318" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-319"><a href="#cb56-319" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Shall I compare thee"</span> sonnets.txt    <span class="co"># -n で一致した行番号も表示</span></span>
+<span id="cb56-319"><a href="#cb56-319" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Shall I compare thee"</span> sonnets.txt    <span class="co"># -n also prints the line number</span></span>
 <span id="cb56-320"><a href="#cb56-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-321"><a href="#cb56-321" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-322"><a href="#cb56-322" aria-hidden="true" tabindex="-1"></a><span class="in">`grep`</span> はディレクトリ内の複数ファイルにまたがって探すこともできます.</span>
 <span id="cb56-323"><a href="#cb56-323" aria-hidden="true" tabindex="-1"></a>関数名を含むファイルを探す, といった場面で特に役立ちます.</span>
 <span id="cb56-324"><a href="#cb56-324" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-325"><a href="#cb56-325" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-326"><a href="#cb56-326" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"pasta"</span> meals    <span class="co"># -R 再帰的, -l 一致したファイル名だけを表示</span></span>
+<span id="cb56-326"><a href="#cb56-326" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"pasta"</span> meals    <span class="co"># -R recursive, -l print only the matching file names</span></span>
 <span id="cb56-327"><a href="#cb56-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-328"><a href="#cb56-328" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-329"><a href="#cb56-329" aria-hidden="true" tabindex="-1"></a><span class="in">`-i`</span> (大文字小文字を無視) など, 便利なオプションが他にもあります.</span>
@@ -1831,7 +1831,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-336"><a href="#cb56-336" aria-hidden="true" tabindex="-1"></a>ある文字列を別の文字列に置換するには, <span class="in">`sed`</span> を使います.</span>
 <span id="cb56-337"><a href="#cb56-337" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-338"><a href="#cb56-338" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-339"><a href="#cb56-339" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Jack/Bill/g'</span> nursery.txt    <span class="co"># ファイル内の Jack をすべて Bill に</span></span>
+<span id="cb56-339"><a href="#cb56-339" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Jack/Bill/g'</span> nursery.txt    <span class="co"># replace every Jack in the file with Bill</span></span>
 <span id="cb56-340"><a href="#cb56-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-341"><a href="#cb56-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-342"><a href="#cb56-342" aria-hidden="true" tabindex="-1"></a>複数のコマンドをつなげれば, より複雑な処理もできます (パイプ <span class="in">`|`</span> は次節で説明します).</span>
@@ -1847,8 +1847,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-352"><a href="#cb56-352" aria-hidden="true" tabindex="-1"></a><span class="in">`-u`</span> (unique) を付けると, 重複行を取り除けます.</span>
 <span id="cb56-353"><a href="#cb56-353" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-354"><a href="#cb56-354" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-355"><a href="#cb56-355" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> reps.txt        <span class="co"># 並べ替えつつ重複を削除</span></span>
-<span id="cb56-356"><a href="#cb56-356" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r で逆順</span></span>
+<span id="cb56-355"><a href="#cb56-355" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> reps.txt        <span class="co"># sort and drop duplicates</span></span>
+<span id="cb56-356"><a href="#cb56-356" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-ur</span> reps.txt       <span class="co"># -r reverses the order</span></span>
 <span id="cb56-357"><a href="#cb56-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-358"><a href="#cb56-358" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-359"><a href="#cb56-359" aria-hidden="true" tabindex="-1"></a><span class="fu">## リダイレクトとパイプ</span></span>
@@ -1859,8 +1859,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-364"><a href="#cb56-364" aria-hidden="true" tabindex="-1"></a>これを **リダイレクト** (redirect) といいます.</span>
 <span id="cb56-365"><a href="#cb56-365" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-366"><a href="#cb56-366" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-367"><a href="#cb56-367" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span>               <span class="co"># 画面に表示</span></span>
-<span id="cb56-368"><a href="#cb56-368" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span> <span class="op">&gt;</span> note.txt    <span class="co"># note.txt に書き出す</span></span>
+<span id="cb56-367"><a href="#cb56-367" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span>               <span class="co"># print to the screen</span></span>
+<span id="cb56-368"><a href="#cb56-368" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"first line"</span> <span class="op">&gt;</span> note.txt    <span class="co"># write it out to note.txt</span></span>
 <span id="cb56-369"><a href="#cb56-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-370"><a href="#cb56-370" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-371"><a href="#cb56-371" aria-hidden="true" tabindex="-1"></a>既存のファイルに **追記** したいときは <span class="in">`&gt;&gt;`</span> を使います.</span>
@@ -1884,7 +1884,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-389"><a href="#cb56-389" aria-hidden="true" tabindex="-1"></a>単純な操作を数珠つなぎにして, 複雑な処理を組み立てられます (まさに Unix 哲学です).</span>
 <span id="cb56-390"><a href="#cb56-390" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-391"><a href="#cb56-391" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-392"><a href="#cb56-392" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 100 <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 10    <span class="co"># 91-100行目を表示</span></span>
+<span id="cb56-392"><a href="#cb56-392" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> sonnets.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 100 <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 10    <span class="co"># show lines 91-100</span></span>
 <span id="cb56-393"><a href="#cb56-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-394"><a href="#cb56-394" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-395"><a href="#cb56-395" aria-hidden="true" tabindex="-1"></a>たとえば「336行目から始まる14行のソネットだけを取り出す」なら, 次のように書けます.</span>
@@ -1910,7 +1910,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-415"><a href="#cb56-415" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
 <span id="cb56-416"><a href="#cb56-416" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> LIST</span>
 <span id="cb56-417"><a href="#cb56-417" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb56-418"><a href="#cb56-418" aria-hidden="true" tabindex="-1"></a>  <span class="ex">OPERATION</span> <span class="va">$i</span>    <span class="co"># $ は変数を表す</span></span>
+<span id="cb56-418"><a href="#cb56-418" aria-hidden="true" tabindex="-1"></a>  <span class="ex">OPERATION</span> <span class="va">$i</span>    <span class="co"># $ marks a variable</span></span>
 <span id="cb56-419"><a href="#cb56-419" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb56-420"><a href="#cb56-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-421"><a href="#cb56-421" aria-hidden="true" tabindex="-1"></a></span>
@@ -1950,10 +1950,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-455"><a href="#cb56-455" aria-hidden="true" tabindex="-1"></a>そこで, 最初に1つのファイルからヘッダーだけを書き出し, 残りは2行目以降だけを追記するようにします.</span>
 <span id="cb56-456"><a href="#cb56-456" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-457"><a href="#cb56-457" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-458"><a href="#cb56-458" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> meals/monday.csv <span class="op">&gt;</span> mealplan.csv       <span class="co"># ヘッダーだけ書き出す</span></span>
+<span id="cb56-458"><a href="#cb56-458" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> meals/monday.csv <span class="op">&gt;</span> mealplan.csv       <span class="co"># write out the header only</span></span>
 <span id="cb56-459"><a href="#cb56-459" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="va">$(</span><span class="fu">ls</span> meals/<span class="pp">*</span>day.csv<span class="va">)</span></span>
 <span id="cb56-460"><a href="#cb56-460" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb56-461"><a href="#cb56-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv               <span class="co"># 2行目以降を追記</span></span>
+<span id="cb56-461"><a href="#cb56-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> mealplan.csv               <span class="co"># append everything from line 2 on</span></span>
 <span id="cb56-462"><a href="#cb56-462" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb56-463"><a href="#cb56-463" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-464"><a href="#cb56-464" aria-hidden="true" tabindex="-1"></a></span>
@@ -2031,8 +2031,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-536"><a href="#cb56-536" aria-hidden="true" tabindex="-1"></a>実行したいコマンドの前に <span class="in">`sudo`</span> を付けると, 一時的にスーパーユーザーの権限で実行できます.</span>
 <span id="cb56-537"><a href="#cb56-537" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-538"><a href="#cb56-538" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-539"><a href="#cb56-539" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root          <span class="co"># 失敗する</span></span>
-<span id="cb56-540"><a href="#cb56-540" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ls /root     <span class="co"># 成功する</span></span>
+<span id="cb56-539"><a href="#cb56-539" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root          <span class="co"># fails</span></span>
+<span id="cb56-540"><a href="#cb56-540" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ls /root     <span class="co"># succeeds</span></span>
 <span id="cb56-541"><a href="#cb56-541" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-542"><a href="#cb56-542" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-543"><a href="#cb56-543" aria-hidden="true" tabindex="-1"></a>root として常時ログインすることも一応できますが, 安全装置も「元に戻す」機能も無いため, 一般に悪い習慣とされています.</span>
@@ -2072,8 +2072,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-577"><a href="#cb56-577" aria-hidden="true" tabindex="-1"></a>たとえば <span class="in">`ABC`</span> ディレクトリを全員フルアクセスにするなら, 次のいずれでも構いません (ディレクトリなので再帰的に <span class="in">`-R`</span> を付けます).</span>
 <span id="cb56-578"><a href="#cb56-578" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-579"><a href="#cb56-579" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-580"><a href="#cb56-580" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 777 ABC        <span class="co"># 8進数表記</span></span>
-<span id="cb56-581"><a href="#cb56-581" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> a=rwx ABC      <span class="co"># 記号表記</span></span>
+<span id="cb56-580"><a href="#cb56-580" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 777 ABC        <span class="co"># octal notation</span></span>
+<span id="cb56-581"><a href="#cb56-581" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> a=rwx ABC      <span class="co"># symbolic notation</span></span>
 <span id="cb56-582"><a href="#cb56-582" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-583"><a href="#cb56-583" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-584"><a href="#cb56-584" aria-hidden="true" tabindex="-1"></a><span class="fu">### 所有者を変える: chown</span></span>
@@ -2082,7 +2082,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-587"><a href="#cb56-587" aria-hidden="true" tabindex="-1"></a>8進数と記号の対応を覚える必要がない分, <span class="in">`chmod`</span> より簡単です.</span>
 <span id="cb56-588"><a href="#cb56-588" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-589"><a href="#cb56-589" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-590"><a href="#cb56-590" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># ABC の所有者を alice にする</span></span>
+<span id="cb56-590"><a href="#cb56-590" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># make alice the owner of ABC</span></span>
 <span id="cb56-591"><a href="#cb56-591" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-592"><a href="#cb56-592" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-593"><a href="#cb56-593" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>

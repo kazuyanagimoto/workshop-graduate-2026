@@ -82,8 +82,8 @@ sort -u myfile.txt
 - 複数のオプションは1つのダッシュにまとめられます.
 
 ``` bash
-ls -l -a -h /var/log    # これと
-ls -lah /var/log        # これは同じ
+ls -l -a -h /var/log    # this one
+ls -lah /var/log        # and this one are the same
 ```
 
 - まれに, 2つのダッシュで始まる長い名前のオプションもあります.
@@ -118,7 +118,7 @@ man ls
 ```
 
 - スペースキーで1画面ずつ進みます.
-- `/パターン` でマニュアル内を検索でき, `n` で次の一致へ進みます.
+- `/pattern` でマニュアル内を検索でき, `n` で次の一致へ進みます.
 - `h` で `man` 自身のヘルプ, `q` で終了します.
 
 `man` は網羅的ですが冗長なので, 最近ならAIに聞くのもよいでしょう.
@@ -145,9 +145,9 @@ man ls
 絶対パスも使えますが, 相対パスと特殊記号を組み合わせる方が扱いやすいです. 特殊記号には, ホーム (`~`), カレントディレクトリ (`.`), 親ディレクトリ (`..`) があります.
 
 ``` bash
-cd examples    # examples サブディレクトリへ入る
-cd ../..       # 2つ上のディレクトリへ戻る
-pwd            # いまどこにいるか確認
+cd examples    # enter the examples subdirectory
+cd ../..       # go two directories up
+pwd            # check where we are now
 ```
 
 ここで一つ注意があり, ディレクトリ名に空白が含まれていると厄介です. たとえば `My Documents` というフォルダに `cd My Documents` としても動きません. Bash は空白を区切りとみなし, `My` と `Documents` を別々の引数だと解釈してしまうからです.
@@ -201,13 +201,13 @@ ls testing
 
 ``` bash
 rm testing/test1.txt
-rmdir testing       # 中身が残っているとエラーになる
+rmdir testing       # fails if anything is left inside
 ```
 
 `rmdir` は中身の入ったディレクトリを消せません. そのときは `rm` に「再帰的」(`-r`) と「強制」(`-f`) のオプションを付けます.
 
 ``` bash
-rm -rf testing      # 中身ごと消す
+rm -rf testing      # deletes it with its contents
 ```
 
 > **WARNING:**
@@ -219,22 +219,22 @@ rm -rf testing      # 中身ごと消す
 `cp` はコピー, `mv` は移動です.
 
 ``` bash
-cp reps.txt copies/reps-copy.txt    # 新しい名前でコピー
-cp -r meals/ copies/                # ディレクトリは -r で中身ごとコピー
-mv ABC/abc.txt examples             # abc.txt を examples へ移動
+cp reps.txt copies/reps-copy.txt    # copy under a new name
+cp -r meals/ copies/                # -r copies a directory and its contents
+mv ABC/abc.txt examples             # move abc.txt into examples
 ```
 
 同じディレクトリ内で新しい名前を付けて「移動」すると, それは実質的にリネームになります.
 
 ``` bash
-mv reps-copy.txt reps2.txt          # 移動 = リネーム
+mv reps-copy.txt reps2.txt          # moving == renaming
 ```
 
 多数のファイルをまとめてリネームしたいときは, `rename` が便利です. パターンと置換文字列, 対象ファイルを指定します. ワイルドカード (次節) と組み合わせると真価を発揮します.
 
 ``` bash
-rename csv TXT meals/monday.csv     # 1つのファイルの拡張子を変える
-rename csv TXT meals/*              # meals 内のすべてに適用
+rename csv TXT meals/monday.csv     # change the extension of one file
+rename csv TXT meals/*              # apply it to everything in meals
 ```
 
 ### ワイルドカード
@@ -245,10 +245,10 @@ rename csv TXT meals/*              # meals 内のすべてに適用
 - `?`: 任意の1文字にマッチします. 似た名前のファイルを区別したいときに便利です.
 
 ``` bash
-cp *.sh copies          # 拡張子が .sh のファイルをすべてコピー
-rm copies/*             # copies の中身をすべて削除
-ls meals/??nday.csv     # monday.csv, sunday.csv にマッチ
-ls meals/?onday.csv     # monday.csv にマッチ
+cp *.sh copies          # copy every file with the .sh extension
+rm copies/*             # delete everything inside copies
+ls meals/??nday.csv     # matches monday.csv and sunday.csv
+ls meals/?onday.csv     # matches monday.csv
 ```
 
 ### 探す
@@ -256,9 +256,9 @@ ls meals/?onday.csv     # monday.csv にマッチ
 ナビゲーション関連で最後に紹介するのが `find` です. 名前やサイズなど, さまざまな条件でファイルやディレクトリを探せます.
 
 ``` bash
-find examples -iname "monday.csv"   # 名前で検索 (再帰的, 大文字小文字を無視)
-find . -iname "*.txt"               # カレント以下の .txt をすべて
-find . -size +100k                  # 100 KB より大きいファイル
+find examples -iname "monday.csv"   # search by name (recursive, case-insensitive)
+find . -iname "*.txt"               # every .txt below the current directory
+find . -size +100k                  # files larger than 100 KB
 ```
 
 ## A.4 テキストファイルの操作
@@ -280,7 +280,7 @@ wc sonnets.txt
 最も単純にテキストを読むコマンドが `cat` (concatenate) です. ただし `cat` は全文を一気に表示するので, 長いファイルでは扱いにくいです.
 
 ``` bash
-cat -n sonnets.txt      # -n で行番号を付ける
+cat -n sonnets.txt      # -n adds line numbers
 ```
 
 長いファイルを1画面ずつ読むには `more` や `less` を使います. `f` / `b` で前後に移動し, `q` で終了します.
@@ -288,9 +288,9 @@ cat -n sonnets.txt      # -n で行番号を付ける
 先頭や末尾だけを覗くなら `head` と `tail` が便利です (既定では10行).
 
 ``` bash
-head -n 3 sonnets.txt       # 先頭3行
-tail -n 1 sonnets.txt       # 末尾1行
-tail -n +3024 sonnets.txt   # 3024行目以降をすべて
+head -n 3 sonnets.txt       # first 3 lines
+tail -n 1 sonnets.txt       # last line
+tail -n +3024 sonnets.txt   # everything from line 3024 on
 ```
 
 ### 探す
@@ -298,13 +298,13 @@ tail -n +3024 sonnets.txt   # 3024行目以降をすべて
 テキストの中からパターンを探すには `grep` を使います. 正規表現によるマッチングができます.
 
 ``` bash
-grep -n "Shall I compare thee" sonnets.txt    # -n で一致した行番号も表示
+grep -n "Shall I compare thee" sonnets.txt    # -n also prints the line number
 ```
 
 `grep` はディレクトリ内の複数ファイルにまたがって探すこともできます. 関数名を含むファイルを探す, といった場面で特に役立ちます.
 
 ``` bash
-grep -Rl "pasta" meals    # -R 再帰的, -l 一致したファイル名だけを表示
+grep -Rl "pasta" meals    # -R recursive, -l print only the matching file names
 ```
 
 `-i` (大文字小文字を無視) など, 便利なオプションが他にもあります.
@@ -316,7 +316,7 @@ grep -Rl "pasta" meals    # -R 再帰的, -l 一致したファイル名だけ�
 ある文字列を別の文字列に置換するには, `sed` を使います.
 
 ``` bash
-sed -i 's/Jack/Bill/g' nursery.txt    # ファイル内の Jack をすべて Bill に
+sed -i 's/Jack/Bill/g' nursery.txt    # replace every Jack in the file with Bill
 ```
 
 複数のコマンドをつなげれば, より複雑な処理もできます (パイプ `|` は次節で説明します). たとえば, シェイクスピアのソネットで最もよく使われる単語の上位10件は, 次のように求められます.
@@ -330,8 +330,8 @@ sed -e 's/\s/\n/g' < sonnets.txt | sort | uniq -c | sort -nr | head -10
 `sort` は行を並べ替えます. `-u` (unique) を付けると, 重複行を取り除けます.
 
 ``` bash
-sort -u reps.txt        # 並べ替えつつ重複を削除
-sort -ur reps.txt       # -r で逆順
+sort -u reps.txt        # sort and drop duplicates
+sort -ur reps.txt       # -r reverses the order
 ```
 
 ## A.5 リダイレクトとパイプ
@@ -341,8 +341,8 @@ sort -ur reps.txt       # -r で逆順
 `>` を使うと, コマンドの出力を画面ではなくファイルへ送れます. これを **リダイレクト** (redirect) といいます.
 
 ``` bash
-echo "first line"               # 画面に表示
-echo "first line" > note.txt    # note.txt に書き出す
+echo "first line"               # print to the screen
+echo "first line" > note.txt    # write it out to note.txt
 ```
 
 既存のファイルに **追記** したいときは `>>` を使います. `>` は上書きしてしまうので注意してください.
@@ -363,7 +363,7 @@ echo "*.csv" >> .gitignore
 `|` (パイプ) は Bash で最も強力な機能の一つです. あるコマンドの出力を, 次のコマンドの入力として渡します. 単純な操作を数珠つなぎにして, 複雑な処理を組み立てられます (まさに Unix 哲学です).
 
 ``` bash
-cat -n sonnets.txt | head -n 100 | tail -n 10    # 91-100行目を表示
+cat -n sonnets.txt | head -n 100 | tail -n 10    # show lines 91-100
 ```
 
 たとえば「336行目から始まる14行のソネットだけを取り出す」なら, 次のように書けます.
@@ -387,7 +387,7 @@ Bash の for ループは, 他の言語のものとよく似ています. 基本
 ``` bash
 for i in LIST
 do
-  OPERATION $i    # $ は変数を表す
+  OPERATION $i    # $ marks a variable
 done
 ```
 
@@ -424,10 +424,10 @@ done
 ただしこれだと, 各ファイルの見出し行 (ヘッダー) が繰り返し入ってしまいます. そこで, 最初に1つのファイルからヘッダーだけを書き出し, 残りは2行目以降だけを追記するようにします.
 
 ``` bash
-head -1 meals/monday.csv > mealplan.csv       # ヘッダーだけ書き出す
+head -1 meals/monday.csv > mealplan.csv       # write out the header only
 for i in $(ls meals/*day.csv)
 do
-  tail -n +2 $i >> mealplan.csv               # 2行目以降を追記
+  tail -n +2 $i >> mealplan.csv               # append everything from line 2 on
 done
 ```
 
@@ -493,8 +493,8 @@ Linux には大きく2種類のユーザーがいます.
 では, 通常のユーザーはどうやってソフトのインストールのような操作をするのでしょうか. 答えは `sudo` (“superuser do”) を使うことです. 実行したいコマンドの前に `sudo` を付けると, 一時的にスーパーユーザーの権限で実行できます.
 
 ``` bash
-ls /root          # 失敗する
-sudo ls /root     # 成功する
+ls /root          # fails
+sudo ls /root     # succeeds
 ```
 
 root として常時ログインすることも一応できますが, 安全装置も「元に戻す」機能も無いため, 一般に悪い習慣とされています.
@@ -533,8 +533,8 @@ drwxr-xr-x 2 kazuharu users 4.0K Jan 12 22:12 ABC
 たとえば `ABC` ディレクトリを全員フルアクセスにするなら, 次のいずれでも構いません (ディレクトリなので再帰的に `-R` を付けます).
 
 ``` bash
-chmod -R 777 ABC        # 8進数表記
-chmod -R a=rwx ABC      # 記号表記
+chmod -R 777 ABC        # octal notation
+chmod -R a=rwx ABC      # symbolic notation
 ```
 
 ### 所有者を変える: chown
@@ -542,7 +542,7 @@ chmod -R a=rwx ABC      # 記号表記
 所有者の変更は `chown` で行います. 8進数と記号の対応を覚える必要がない分, `chmod` より簡単です.
 
 ``` bash
-chown -R alice ABC      # ABC の所有者を alice にする
+chown -R alice ABC      # make alice the owner of ABC
 ```
 
 ## 演習問題

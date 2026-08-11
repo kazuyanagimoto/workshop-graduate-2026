@@ -14,7 +14,7 @@ Affiliation
 
 Published
 
-2026年08月10日
+2026年08月11日
 
 # はじめに
 
@@ -26,7 +26,7 @@ Published
 
 ## 環境構築
 
-授業を始める前に次の環境構築を完了させておいてください. また, [sec-git](#sec-git) で用いるため, GitHub のアカウントも作成しておいてください. [sec-github-copilot](#sec-github-copilot) で述べるように, GitHub の Education アカウントに登録することをお勧めします.
+授業を始める前に次の環境構築を完了させておいてください. また, [sec-git](#sec-git) で用いるため, GitHub のアカウントも作成しておいてください. 後述するように, GitHub の Education アカウントに登録することをお勧めします.
 
 このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto, バージョン管理システムの git のインストール手順をOS別にまとめます.
 

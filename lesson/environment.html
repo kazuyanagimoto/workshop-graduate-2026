@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="../index.html#sec-setup" class="quarto-xref"><span>Section 2</span></a> では rig で R を入れ, パッケージを用意しました. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</p>
+<p>この講義では rig で R を入れ rv でパッケージを揃えることを推奨しています. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</p>
 <section id="パッケージの依存関係" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="パッケージの依存関係"><span class="header-section-number">2.1</span> パッケージの依存関係</h2>
 <p>環境をそろえるのがなぜ難しいのかは, パッケージの依存関係を見ると分かります. パッケージは単独では動かず, 1つ入れようとすると芋づる式に他のものまで必要になります. しかもその依存には, 性質の違う3つの種類があります (<a href="#fig-dependency-kinds" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>).</p>
@@ -469,7 +469,7 @@ Figure&nbsp;2.2: 共有キャッシュとプロジェクトライブラリ
 </tr>
 </tbody>
 </table>
-<p>どちらが使われるかは, 既定でほぼ自動的に決まります. <code>install.packages()</code> が取る型は <code>getOption("pkgType")</code> で決まり, Windows と macOS では実質バイナリ優先, Linux では <code>"source"</code> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. <a href="../index.html#sec-setup" class="quarto-xref"><span>Section 2</span></a> で <code>build-essential</code> を入れたのはこのためです. ビルドには時間もかかります.</p>
+<p>どちらが使われるかは, 既定でほぼ自動的に決まります. <code>install.packages()</code> が取る型は <code>getOption("pkgType")</code> で決まり, Windows と macOS では実質バイナリ優先, Linux では <code>"source"</code> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. 環境構築で <code>build-essential</code> を入れたのはこのためです. ビルドには時間もかかります.</p>
 <p>Linux でもバイナリを使う方法があります. <a href="https://packagemanager.posit.co/">Posit Public Package Manager</a> (P3M) は, ディストリビューションごとにビルド済みのバイナリを配布しています. <code>rproject.toml</code> (や renv の設定) の <code>repositories</code> にその URL を指定すると, rv や renv はソースの代わりにバイナリを取得し, インストールが桁違いに速くなります. コンパイル環境の細かな違いに悩まされることも減ります. 速さと再現性の両立という点で, 共同作業や CI ではバイナリ配布のリポジトリを使うのが定石です.</p>
 </section>
 <section id="python-julia" class="level2" data-number="2.6">
@@ -522,7 +522,7 @@ Figure&nbsp;2.2: 共有キャッシュとプロジェクトライブラリ
 <section id="このプロジェクトでの実践" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="このプロジェクトでの実践"><span class="header-section-number">2.7</span> このプロジェクトでの実践</h2>
 <p>以上を踏まえると, このリポジトリの環境を復元する手順はごく短くなります.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig (@sec-setup)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>this repository<span class="op">&gt;</span>     <span class="co"># 2. clone the project</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> workshop-graduate-2026</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                         <span class="co"># 3. build the project library from rv.lock</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -551,33 +551,33 @@ Figure&nbsp;2.2: 共有キャッシュとプロジェクトライブラリ
 <p><code>sf</code> パッケージを入れようとしたら, <code>GDAL</code> が見つからないというエラーが出ました. この GDAL は, どの種類の依存で, どう用意するのが正しいでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_49666" onsubmit="return validate_form_49666()" method="post">
+<form name="form_35472" onsubmit="return validate_form_35472()" method="post">
 <label>
-<input type="radio" name="answer_49666" id="answer_49666_1" value="R 本体のバージョン違い. rig で R を入れ直す">
-R 本体のバージョン違い. rig で R を入れ直す
-</label>
-<br>
-<label>
-<input type="radio" name="answer_49666" id="answer_49666_2" value="システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる">
+<input type="radio" name="answer_35472" id="answer_35472_1" value="システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる">
 システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる
 </label>
 <br>
 <label>
-<input type="radio" name="answer_49666" id="answer_49666_3" value="R パッケージ. install.packages で入れる">
+<input type="radio" name="answer_35472" id="answer_35472_2" value="R 本体のバージョン違い. rig で R を入れ直す">
+R 本体のバージョン違い. rig で R を入れ直す
+</label>
+<br>
+<label>
+<input type="radio" name="answer_35472" id="answer_35472_3" value="R パッケージ. install.packages で入れる">
 R パッケージ. install.packages で入れる
 </label>
 <br>
 <label>
-<input type="radio" name="answer_49666" id="answer_49666_4" value="ロックファイルの記録漏れ. rv.lock を手で編集する">
+<input type="radio" name="answer_35472" id="answer_35472_4" value="ロックファイルの記録漏れ. rv.lock を手で編集する">
 ロックファイルの記録漏れ. rv.lock を手で編集する
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_49666"></div>
+<div id="result_35472"></div>
 </form>
-<script>function validate_form_49666() {var x, text; var x = document.forms['form_49666']['answer_49666'].value;if (x == 'システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる'){text = '<span class="quiz-right">✓ 正解! </span>GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>GDAL は R パッケージではありません. R の外にあるものです.';} document.getElementById('result_49666').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_35472() {var x, text; var x = document.forms['form_35472']['answer_35472'].value;if (x == 'システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる'){text = '<span class="quiz-right">✓ 正解! </span>GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>GDAL は R パッケージではありません. R の外にあるものです.';} document.getElementById('result_35472').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_49666').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';text = res1;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1;res1 = document.getElementById('result_35472').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.';text = res1;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -587,33 +587,33 @@ R パッケージ. install.packages で入れる
 <p>WSL (Ubuntu) で <code>install.packages()</code> を実行すると, 毎回コンパイルが走って時間がかかります. 最も的確な理由はどれでしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_46152" onsubmit="return validate_form_46152()" method="post">
+<form name="form_89881" onsubmit="return validate_form_89881()" method="post">
 <label>
-<input type="radio" name="answer_46152" id="answer_46152_1" value="CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから">
-CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから
-</label>
-<br>
-<label>
-<input type="radio" name="answer_46152" id="answer_46152_2" value="メモリ (RAM) が不足しているから">
-メモリ (RAM) が不足しているから
-</label>
-<br>
-<label>
-<input type="radio" name="answer_46152" id="answer_46152_3" value="WSL は仮想環境なので, すべての処理が遅くなるから">
+<input type="radio" name="answer_89881" id="answer_89881_1" value="WSL は仮想環境なので, すべての処理が遅くなるから">
 WSL は仮想環境なので, すべての処理が遅くなるから
 </label>
 <br>
 <label>
-<input type="radio" name="answer_46152" id="answer_46152_4" value="R のバージョンが古く, バイナリに対応していないから">
+<input type="radio" name="answer_89881" id="answer_89881_2" value="R のバージョンが古く, バイナリに対応していないから">
 R のバージョンが古く, バイナリに対応していないから
 </label>
 <br>
+<label>
+<input type="radio" name="answer_89881" id="answer_89881_3" value="CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから">
+CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから
+</label>
+<br>
+<label>
+<input type="radio" name="answer_89881" id="answer_89881_4" value="メモリ (RAM) が不足しているから">
+メモリ (RAM) が不足しているから
+</label>
+<br>
 <input type="submit" value="答え合わせ">
-<div id="result_46152"></div>
+<div id="result_89881"></div>
 </form>
-<script>function validate_form_46152() {var x, text; var x = document.forms['form_46152']['answer_46152'].value;if (x == 'CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから'){text = '<span class="quiz-right">✓ 正解! </span>CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>パッケージが「どの形で配られているか」を思い出してください. ソースとバイナリの違いです.';} document.getElementById('result_46152').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_89881() {var x, text; var x = document.forms['form_89881']['answer_89881'].value;if (x == 'CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから'){text = '<span class="quiz-right">✓ 正解! </span>CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>パッケージが「どの形で配られているか」を思い出してください. ソースとバイナリの違いです.';} document.getElementById('result_89881').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_49666').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_46152').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';text = res1 + res2;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2;res1 = document.getElementById('result_35472').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_89881').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.';text = res1 + res2;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -623,33 +623,33 @@ R のバージョンが古く, バイナリに対応していないから
 <p>作った環境を共同研究者が再現できるよう, git にコミットすべきものはどれでしょうか (rv を使う場合).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_30687" onsubmit="return validate_form_30687()" method="post">
+<form name="form_54000" onsubmit="return validate_form_54000()" method="post">
 <label>
-<input type="radio" name="answer_30687" id="answer_30687_1" value="共有キャッシュ ~/.cache/rv/ 全体">
-共有キャッシュ ~/.cache/rv/ 全体
+<input type="radio" name="answer_54000" id="answer_54000_1" value="rv/library/ のパッケージ本体一式">
+rv/library/ のパッケージ本体一式
 </label>
 <br>
 <label>
-<input type="radio" name="answer_30687" id="answer_30687_2" value=".Rprofile だけ">
+<input type="radio" name="answer_54000" id="answer_54000_2" value=".Rprofile だけ">
 .Rprofile だけ
 </label>
 <br>
 <label>
-<input type="radio" name="answer_30687" id="answer_30687_3" value="rproject.toml と rv.lock (と rv/scripts/)">
+<input type="radio" name="answer_54000" id="answer_54000_3" value="rproject.toml と rv.lock (と rv/scripts/)">
 rproject.toml と rv.lock (と rv/scripts/)
 </label>
 <br>
 <label>
-<input type="radio" name="answer_30687" id="answer_30687_4" value="rv/library/ のパッケージ本体一式">
-rv/library/ のパッケージ本体一式
+<input type="radio" name="answer_54000" id="answer_54000_4" value="共有キャッシュ ~/.cache/rv/ 全体">
+共有キャッシュ ~/.cache/rv/ 全体
 </label>
 <br>
 <input type="submit" value="答え合わせ">
-<div id="result_30687"></div>
+<div id="result_54000"></div>
 </form>
-<script>function validate_form_30687() {var x, text; var x = document.forms['form_30687']['answer_30687'].value;if (x == 'rproject.toml と rv.lock (と rv/scripts/)'){text = '<span class="quiz-right">✓ 正解! </span>コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>共有すべきなのは「環境そのもの」ではなく「環境の作り方」でした. どのファイルがあれば復元できるかを考えてください.';} document.getElementById('result_30687').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_54000() {var x, text; var x = document.forms['form_54000']['answer_54000'].value;if (x == 'rproject.toml と rv.lock (と rv/scripts/)'){text = '<span class="quiz-right">✓ 正解! </span>コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>共有すべきなのは「環境そのもの」ではなく「環境の作り方」でした. どのファイルがあれば復元できるかを考えてください.';} document.getElementById('result_54000').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_49666').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_46152').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_30687').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';text = res1 + res2 + res3;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3;res1 = document.getElementById('result_35472').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_89881').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_54000').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.';text = res1 + res2 + res3;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -659,33 +659,33 @@ rv/library/ のパッケージ本体一式
 <p>プロジェクト A は R 4.2, プロジェクト B は R 4.6 を必要とします. どう対応するのが筋でしょうか.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<form name="form_75549" onsubmit="return validate_form_75549()" method="post">
+<form name="form_68380" onsubmit="return validate_form_68380()" method="post">
 <label>
-<input type="radio" name="answer_75549" id="answer_75549_1" value="rig で両方の R を入れ, プロジェクトごとに切り替える">
+<input type="radio" name="answer_68380" id="answer_68380_1" value="rv.lock に R のバージョンを書けば R 本体も切り替わる">
+rv.lock に R のバージョンを書けば R 本体も切り替わる
+</label>
+<br>
+<label>
+<input type="radio" name="answer_68380" id="answer_68380_2" value="rig で両方の R を入れ, プロジェクトごとに切り替える">
 rig で両方の R を入れ, プロジェクトごとに切り替える
 </label>
 <br>
 <label>
-<input type="radio" name="answer_75549" id="answer_75549_2" value="新しい R 4.6 に統一し, A もそれで動かす">
+<input type="radio" name="answer_68380" id="answer_68380_3" value="新しい R 4.6 に統一し, A もそれで動かす">
 新しい R 4.6 に統一し, A もそれで動かす
 </label>
 <br>
 <label>
-<input type="radio" name="answer_75549" id="answer_75549_3" value="OS の R を毎回アンインストールして入れ直す">
+<input type="radio" name="answer_68380" id="answer_68380_4" value="OS の R を毎回アンインストールして入れ直す">
 OS の R を毎回アンインストールして入れ直す
 </label>
 <br>
-<label>
-<input type="radio" name="answer_75549" id="answer_75549_4" value="rv.lock に R のバージョンを書けば R 本体も切り替わる">
-rv.lock に R のバージョンを書けば R 本体も切り替わる
-</label>
-<br>
 <input type="submit" value="答え合わせ">
-<div id="result_75549"></div>
+<div id="result_68380"></div>
 </form>
-<script>function validate_form_75549() {var x, text; var x = document.forms['form_75549']['answer_75549'].value;if (x == 'rig で両方の R を入れ, プロジェクトごとに切り替える'){text = '<span class="quiz-right">✓ 正解! </span>言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>R 本体 (ランタイム) のバージョンを複数並べて切り替える専用ツールがありました.';} document.getElementById('result_75549').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
+<script>function validate_form_68380() {var x, text; var x = document.forms['form_68380']['answer_68380'].value;if (x == 'rig で両方の R を入れ, プロジェクトごとに切り替える'){text = '<span class="quiz-right">✓ 正解! </span>言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';} else {text = '<span class="quiz-wrong">✗ 残念, もう一度考えてみましょう. </span>R 本体 (ランタイム) のバージョンを複数並べて切り替える専用ツールがありました.';} document.getElementById('result_68380').innerHTML = text; evaluate_final_score(); return false;}function evaluate_final_score(){
          element = document.getElementById('checkdown_final_score');
-         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_49666').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_46152').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_30687').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.'; res4 = document.getElementById('result_75549').innerText == '✓ 正解! 言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
+         if(element === null){return false;} else {var element, text, res1, res2, res3, res4;res1 = document.getElementById('result_35472').innerText == '✓ 正解! GDAL は R パッケージではなく, R の外にある C ライブラリ (依存の種類2) です. apt や Homebrew で先に入れます. pak はこの種のシステム要件を検出して教えてくれます.'; res2 = document.getElementById('result_89881').innerText == '✓ 正解! CRAN は Windows と macOS にはバイナリを, Linux にはソースのみを配布します. そのため Linux では既定でコンパイルが走り, コンパイラ (build-essential) も要ります. P3M のようなバイナリ配布のリポジトリを使うと桁違いに速くなります.'; res3 = document.getElementById('result_54000').innerText == '✓ 正解! コミットするのは「環境そのもの」ではなく「環境の作り方」です. 宣言 (rproject.toml) とロック (rv.lock), 有効化スクリプトがあれば, 各マシンで rv sync がライブラリを作り直せます.'; res4 = document.getElementById('result_68380').innerText == '✓ 正解! 言語ランタイムのバージョン管理は rig の仕事です. 複数の R を並置し, rig default や rproject.toml の r_version でプロジェクトごとに使い分けます.';text = res1 + res2 + res3 + res4;element.innerHTML = text;
          return false;
          }}</script>
 </div>
@@ -1202,7 +1202,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>quiz_button <span class="ot">&lt;-</span> <span class="st">"答え合わせ"</span></span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>@sec-setup では rig で R を入れ, パッケージを用意しました. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>この講義では rig で R を入れ rv でパッケージを揃えることを推奨しています. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## パッケージの依存関係</span></span>
 <span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -1338,7 +1338,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 対応範囲 <span class="pp">|</span> どの OS・R 版でも <span class="pp">|</span> OS・R 版に固定 <span class="pp">|</span></span>
 <span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 主な入手元 <span class="pp">|</span> CRAN (Linux の既定) <span class="pp">|</span> CRAN (Win / Mac), P3M (Linux) <span class="pp">|</span></span>
 <span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>どちらが使われるかは, 既定でほぼ自動的に決まります. <span class="in">`install.packages()`</span> が取る型は <span class="in">`getOption("pkgType")`</span> で決まり, Windows と macOS では実質バイナリ優先, Linux では <span class="in">`"source"`</span> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. @sec-setup で <span class="in">`build-essential`</span> を入れたのはこのためです. ビルドには時間もかかります.</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>どちらが使われるかは, 既定でほぼ自動的に決まります. <span class="in">`install.packages()`</span> が取る型は <span class="in">`getOption("pkgType")`</span> で決まり, Windows と macOS では実質バイナリ優先, Linux では <span class="in">`"source"`</span> (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. 環境構築で <span class="in">`build-essential`</span> を入れたのはこのためです. ビルドには時間もかかります.</span>
 <span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>Linux でもバイナリを使う方法があります. <span class="co">[</span><span class="ot">Posit Public Package Manager</span><span class="co">](https://packagemanager.posit.co/)</span> (P3M) は, ディストリビューションごとにビルド済みのバイナリを配布しています. <span class="in">`rproject.toml`</span> (や renv の設定) の <span class="in">`repositories`</span> にその URL を指定すると, rv や renv はソースの代わりにバイナリを取得し, インストールが桁違いに速くなります. コンパイル環境の細かな違いに悩まされることも減ります. 速さと再現性の両立という点で, 共同作業や CI ではバイナリ配布のリポジトリを使うのが定石です.</span>
 <span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a></span>
@@ -1370,7 +1370,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>以上を踏まえると, このリポジトリの環境を復元する手順はごく短くなります.</span>
 <span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig (@sec-setup)</span></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release                 <span class="co"># 1. get R via rig</span></span>
 <span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="op">&lt;</span>this repository<span class="op">&gt;</span>     <span class="co"># 2. clone the project</span></span>
 <span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> workshop-graduate-2026</span>
 <span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a><span class="ex">rv</span> sync                         <span class="co"># 3. build the project library from rv.lock</span></span>
@@ -1500,6 +1500,19 @@ document.addEventListener("DOMContentLoaded", function () {
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 柳本和春. 文章・図は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;

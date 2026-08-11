@@ -2,7 +2,7 @@
 
 Code
 
-[sec-setup](#sec-setup) では rig で R を入れ, パッケージを用意しました. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.
+この講義では rig で R を入れ rv でパッケージを揃えることを推奨しています. この章では, その裏で何が起きているのか, 「モダンな」パッケージ管理ツールの仕組みを学んでいきます. 半年後の自分や共同研究者が数コマンドで同じ計算を再現できる環境を作ることが目標です.
 
 ## 2.1 パッケージの依存関係
 
@@ -142,7 +142,7 @@ pak::pkg_sysreqs("sf") # report the OS libraries sf needs, and how to install th
 | 対応範囲     | どの OS・R 版でも           | OS・R 版に固定                |
 | 主な入手元   | CRAN (Linux の既定)         | CRAN (Win / Mac), P3M (Linux) |
 
-どちらが使われるかは, 既定でほぼ自動的に決まります. `install.packages()` が取る型は `getOption("pkgType")` で決まり, Windows と macOS では実質バイナリ優先, Linux では `"source"` (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. [sec-setup](#sec-setup) で `build-essential` を入れたのはこのためです. ビルドには時間もかかります.
+どちらが使われるかは, 既定でほぼ自動的に決まります. `install.packages()` が取る型は `getOption("pkgType")` で決まり, Windows と macOS では実質バイナリ優先, Linux では `"source"` (ソースからビルド) です. これは配布側の事情を反映しています. CRAN は Windows と macOS にはバイナリを提供しますが, Linux にはソースしか提供してこなかったからです. そのため WSL などの Linux では, 既定だとパッケージをソースからビルドすることになり, コンパイラ (build-essential) やシステムライブラリのヘッダが必要になります. 環境構築で `build-essential` を入れたのはこのためです. ビルドには時間もかかります.
 
 Linux でもバイナリを使う方法があります. [Posit Public Package Manager](https://packagemanager.posit.co/) (P3M) は, ディストリビューションごとにビルド済みのバイナリを配布しています. `rproject.toml` (や renv の設定) の `repositories` にその URL を指定すると, rv や renv はソースの代わりにバイナリを取得し, インストールが桁違いに速くなります. コンパイル環境の細かな違いに悩まされることも減ります. 速さと再現性の両立という点で, 共同作業や CI ではバイナリ配布のリポジトリを使うのが定石です.
 
@@ -174,7 +174,7 @@ Julia は言語自体にパッケージマネージャ Pkg を内蔵していま
 以上を踏まえると, このリポジトリの環境を復元する手順はごく短くなります.
 
 ``` sh
-rig add release                 # 1. get R via rig (@sec-setup)
+rig add release                 # 1. get R via rig
 git clone <this repository>     # 2. clone the project
 cd workshop-graduate-2026
 rv sync                         # 3. build the project library from rv.lock
@@ -192,28 +192,28 @@ rv sync                         # 3. build the project library from rv.lock
 
 `sf` パッケージを入れようとしたら, `GDAL` が見つからないというエラーが出ました. この GDAL は, どの種類の依存で, どう用意するのが正しいでしょうか.
 
-R 本体のバージョン違い. rig で R を入れ直す\
 システムライブラリ. OS のパッケージマネージャ (apt / brew) で入れる\
+R 本体のバージョン違い. rig で R を入れ直す\
 R パッケージ. install.packages で入れる\
 ロックファイルの記録漏れ. rv.lock を手で編集する\
 
 WSL (Ubuntu) で `install.packages()` を実行すると, 毎回コンパイルが走って時間がかかります. 最も的確な理由はどれでしょうか.
 
-CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから\
-メモリ (RAM) が不足しているから\
 WSL は仮想環境なので, すべての処理が遅くなるから\
 R のバージョンが古く, バイナリに対応していないから\
+CRAN は Linux 向けにソースしか配布しておらず, 既定でソースからビルドするから\
+メモリ (RAM) が不足しているから\
 
 作った環境を共同研究者が再現できるよう, git にコミットすべきものはどれでしょうか (rv を使う場合).
 
-共有キャッシュ ~/.cache/rv/ 全体\
+rv/library/ のパッケージ本体一式\
 .Rprofile だけ\
 rproject.toml と rv.lock (と rv/scripts/)\
-rv/library/ のパッケージ本体一式\
+共有キャッシュ ~/.cache/rv/ 全体\
 
 プロジェクト A は R 4.2, プロジェクト B は R 4.6 を必要とします. どう対応するのが筋でしょうか.
 
+rv.lock に R のバージョンを書けば R 本体も切り替わる\
 rig で両方の R を入れ, プロジェクトごとに切り替える\
 新しい R 4.6 に統一し, A もそれで動かす\
 OS の R を毎回アンインストールして入れ直す\
-rv.lock に R のバージョンを書けば R 本体も切り替わる\

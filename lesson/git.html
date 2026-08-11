@@ -394,7 +394,7 @@ Figure&nbsp;3.1: GitHub を介した履歴の共有と公開
 <div id="fig-repo-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-repo-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/repo-tree.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;3.2: リポジトリ"><img src="../static/cetz/repo-tree.svg" class="img-fluid figure-img" style="width:60.0%"></a>
+<a href="../static/cetz/repo-tree.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;3.2: リポジトリ"><img src="../static/cetz/repo-tree.svg" class="img-fluid figure-img" style="width:50.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repo-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.2: リポジトリ
@@ -457,7 +457,7 @@ Figure&nbsp;3.5: コミット間の差分 (diff)
 <div id="fig-commit-snapshot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-commit-snapshot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/commit-snapshot.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;3.6: スナップショットとハッシュ名"><img src="../static/cetz/commit-snapshot.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></a>
+<a href="../static/cetz/commit-snapshot.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;3.6: スナップショットとハッシュ名"><img src="../static/cetz/commit-snapshot.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-commit-snapshot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.6: スナップショットとハッシュ名
@@ -1468,7 +1468,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
 <span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="al">![リポジトリ](/static/cetz/repo-tree.svg)</span>{#fig-repo-tree width=60%}</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="al">![リポジトリ](/static/cetz/repo-tree.svg)</span>{#fig-repo-tree width=50%}</span>
 <span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>この時, <span class="in">`.git`</span> という隠しフォルダが作られます. 以降, Gitはこのフォルダの中に, プロジェクトフォルダの状態を記録していきます. つまり, Gitはプロジェクトフォルダの中身を丸ごと保存する仕組みです. なお, 競技にはこの <span class="in">`.git`</span> フォルダのことを「リポジトリ」と呼ぶこともありますが, ここではプロジェクトフォルダ全体を指す意味で使います.</span>
 <span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a></span>
@@ -1499,7 +1499,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a>私たちは「コミットは変更点 (差分) を記録している」と思いがちですが, 実際は違います. コミットが保存しているのは, その時点で Git が追跡しているファイル全体の状態, つまり丸ごとのスナップショットです (@fig-commit-snapshot).^<span class="co">[</span><span class="ot">とはいえ, 変わっていないファイルまで毎回コピーするわけではありません. Git は内部で同じ中身のファイルを使い回す (重複排除する) ため, スナップショット方式でも容量はそれほど膨らみません.</span><span class="co">]</span> @fig-commit-back で見た「どの時点にも戻れる」性質は, 各コミットが完全なスナップショットだからこそ成り立ちます.</span>
 <span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a><span class="al">![スナップショットとハッシュ名](../static/cetz/commit-snapshot.svg)</span>{#fig-commit-snapshot fig-align="center" width="85%"}</span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a><span class="al">![スナップショットとハッシュ名](../static/cetz/commit-snapshot.svg)</span>{#fig-commit-snapshot fig-align="center" width="60%"}</span>
 <span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a>図でオレンジに塗られた行は, そのコミットで変更されたファイルを表します. 変更の有無にかかわらず, コミットは毎回すべてのファイルの状態を丸ごと記録します. そして個々のコミットには, 人間が付ける連番ではなく, その中身から計算されたハッシュ値^<span class="co">[</span><span class="ot">@sec-hash を参照</span><span class="co">]</span> (例: <span class="in">`a84d0e9...`</span>) が名前として割り当てられます. 中身が少しでも違えば異なるハッシュになるため, 名前が一意に定まり, 「このコミット」を確実に指し示せます. ふだんは, 図の各スナップショットの下に並ぶように, 先頭の7文字ほど (<span class="in">`a84d0e9`</span>) だけを使ってコミットを指定することが多いです.</span>
 <span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a></span>
@@ -1908,6 +1908,19 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a>最後に覚えておいてほしいのは, Git はセーブポイントを保存しているだけなので, 悪いことは起きない, ということです. 実際にコミットから古いファイルを復元する場面はめったにありません. それでも「いつでも戻れる」という安心感が, 思い切ってコードを書き換える自由を支えてくれます.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 柳本和春. 文章・図は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;

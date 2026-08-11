@@ -433,7 +433,7 @@ Figure&nbsp;C.1: シェルが PATH からコマンドを探す流れ
 <section id="r-とコンパイラ" class="level3">
 <h3 class="anchored" data-anchor-id="r-とコンパイラ">R とコンパイラ</h3>
 <p>R 本体はインタプリタ型ですが, 速度が要る部分では, 多くのパッケージが内部に C や C++, Fortran のコードを抱えています (<a href="https://www.rcpp.org/">Rcpp</a> がその代表的な仕組みです). こうしたパッケージをソースからインストールするとき (<a href="environment.html" class="quarto-xref"><span>Chapter 2</span></a>), その過程でコンパイラが走り, C/C++ のコードを R が読み込める機械語の共有ライブラリ (<code>.so</code> や <code>.dll</code>) に変換します.</p>
-<p>そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では <code>build-essential</code> が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります (<a href="../index.html#sec-setup" class="quarto-xref"><span>Section 2</span></a> でこれを入れたのはこのためです). macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ (<a href="environment.html" class="quarto-xref"><span>Chapter 2</span></a>) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.</p>
+<p>そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では <code>build-essential</code> が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります. macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ (<a href="environment.html" class="quarto-xref"><span>Chapter 2</span></a>) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.</p>
 </section>
 </section>
 <section id="sec-hash" class="level2" data-number="C.3">
@@ -1132,7 +1132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>R 本体はインタプリタ型ですが, 速度が要る部分では, 多くのパッケージが内部に C や C++, Fortran のコードを抱えています (<span class="co">[</span><span class="ot">Rcpp</span><span class="co">](https://www.rcpp.org/)</span> がその代表的な仕組みです). こうしたパッケージをソースからインストールするとき (@sec-environment), その過程でコンパイラが走り, C/C++ のコードを R が読み込める機械語の共有ライブラリ (<span class="in">`.so`</span> や <span class="in">`.dll`</span>) に変換します.</span>
 <span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では <span class="in">`build-essential`</span> が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります (@sec-setup でこれを入れたのはこのためです). macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ (@sec-environment) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では <span class="in">`build-essential`</span> が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります. macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ (@sec-environment) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.</span>
 <span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## ハッシュ {#sec-hash}</span></span>
 <span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
@@ -1258,6 +1258,19 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a>ローカルの stdio 方式では, サーバーはユーザーの権限で PC 上で動きます. したがって, 信頼できるサーバーだけを追加することが大切です. 素性の分からない MCP サーバーを設定に加えると, PC 上のファイルや認証情報にアクセスされる恐れがあります. 導入するのは, ソースコードが公開され広く使われているサーバーに限るのが安全です. どのサーバーを許可するかはユーザーが設定で決められるので, AI にできることの範囲は自分でコントロールできます.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 柳本和春. 文章・図は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;

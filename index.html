@@ -282,14 +282,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a>
   <ul class="collapse">
   <li><a href="#ai時代のプログラミング知識" id="toc-ai時代のプログラミング知識" class="nav-link" data-scroll-target="#ai時代のプログラミング知識">AI時代のプログラミング知識</a></li>
-  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">環境構築</a>
+  <li><a href="#環境構築" id="toc-環境構築" class="nav-link" data-scroll-target="#環境構築">環境構築</a>
   <ul class="collapse">
   <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
   <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
   </ul></li>
   <li><a href="#ai-coding-tools" id="toc-ai-coding-tools" class="nav-link" data-scroll-target="#ai-coding-tools">AI Coding Tools</a>
   <ul class="collapse">
-  <li><a href="#sec-github-copilot" id="toc-sec-github-copilot" class="nav-link" data-scroll-target="#sec-github-copilot">GitHub Copilot</a></li>
+  <li><a href="#github-copilot" id="toc-github-copilot" class="nav-link" data-scroll-target="#github-copilot">GitHub Copilot</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -325,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年08月10日</p>
+      <p class="date">2026年08月11日</p>
     </div>
   </div>
   
@@ -344,9 +344,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>このコースでは, AI時代に必要なプログラミング知識を学ぶという目的で作りました. プログラミングコードをAIがある程度の精度で書けるようになった今, プログラミングとはプロンプティングの技術に変わってきています. ここで求められるのは個別のパッケージや関数に関する理解ではなく, AIに適切な指示を与えられるかの能力になってきました.</p>
 <p>このコースでは, プログラミングで何ができるのかを理解することに重きを置き, その上でAIに適切な指示を与えるための知識を学んでいきます. そのため, プログラミングの基礎的な知識は必要ですが, 個別のパッケージや関数の使い方については深くは解説しません. 分からなければAIに聞くことを推奨します.</p>
 </section>
-<section id="sec-setup" class="level2">
-<h2 class="anchored" data-anchor-id="sec-setup">環境構築</h2>
-<p>授業を始める前に次の環境構築を完了させておいてください. また, <a href="lesson/git.html" class="quarto-xref"><span>3&nbsp; Git &amp; GitHub</span></a> で用いるため, GitHub のアカウントも作成しておいてください. <a href="#sec-github-copilot" class="quarto-xref"><span>GitHub Copilot</span></a> で述べるように, GitHub の Education アカウントに登録することをお勧めします.</p>
+<section id="環境構築" class="level2">
+<h2 class="anchored" data-anchor-id="環境構築">環境構築</h2>
+<p>授業を始める前に次の環境構築を完了させておいてください. また, <a href="lesson/git.html" class="quarto-xref"><span>3&nbsp; Git &amp; GitHub</span></a> で用いるため, GitHub のアカウントも作成しておいてください. 後述するように, GitHub の Education アカウントに登録することをお勧めします.</p>
 <p>このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto, バージョン管理システムの git のインストール手順をOS別にまとめます.</p>
 <section id="mac" class="level3">
 <h3 class="anchored" data-anchor-id="mac">Mac</h3>
@@ -399,8 +399,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ai-coding-tools" class="level2">
 <h2 class="anchored" data-anchor-id="ai-coding-tools">AI Coding Tools</h2>
 <p>私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では <a href="lesson/ai.html" class="quarto-xref"><span>12&nbsp; AIと研究する</span></a> 以外では必要ありません. また, <a href="lesson/ai.html" class="quarto-xref"><span>12&nbsp; AIと研究する</span></a> で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.</p>
-<section id="sec-github-copilot" class="level3">
-<h3 class="anchored" data-anchor-id="sec-github-copilot">GitHub Copilot</h3>
+<section id="github-copilot" class="level3">
+<h3 class="anchored" data-anchor-id="github-copilot">GitHub Copilot</h3>
 <p>GitHub Copilot は, GitHub が提供する AI コーディングアシスタントです. Visual Studio Code の拡張機能として提供されており, コードの補完や生成を支援します. Copilot は OpenAI の Codex モデルを基盤としており, プログラミング言語やフレームワークに関する知識を持っています. また, Claude や Gemini などの他のモデルも利用可能です.</p>
 <p>学生や教員の場合は, GitHub Education のアカウントを作成することで, GitHub Pro の機能を無料で利用できます. これにより, Copilot の使用上限が無料アカウントと比べて拡大します. 教育機関の認証はやや厳しくなっていると言われており, 大学の構内からのアクセスが必要と言われています.</p>
 
@@ -899,9 +899,9 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>このコースでは, プログラミングで何ができるのかを理解することに重きを置き, その上でAIに適切な指示を与えるための知識を学んでいきます. そのため, プログラミングの基礎的な知識は必要ですが, 個別のパッケージや関数の使い方については深くは解説しません. 分からなければAIに聞くことを推奨します.</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## 環境構築 {#sec-setup}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## 環境構築</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>授業を始める前に次の環境構築を完了させておいてください. また, @sec-git で用いるため, GitHub のアカウントも作成しておいてください. @sec-github-copilot で述べるように, GitHub の Education アカウントに登録することをお勧めします.</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>授業を始める前に次の環境構築を完了させておいてください. また, @sec-git で用いるため, GitHub のアカウントも作成しておいてください. 後述するように, GitHub の Education アカウントに登録することをお勧めします.</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>このコースではMacまたはLinux環境での実行を想定しています. Windowsユーザーには, Windows Subsystem for Linux (WSL) 上での実行を推奨します. 以下では, エディタ (VSCode), 文献管理ソフト (Zotero), Rのバージョン管理ツール (rig), Quarto, バージョン管理システムの git のインストール手順をOS別にまとめます.</span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
@@ -999,13 +999,26 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では @sec-ai-research 以外では必要ありません. また, @sec-ai-research で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.</span>
 <span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### GitHub Copilot {#sec-github-copilot}</span></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### GitHub Copilot</span></span>
 <span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a>GitHub Copilot は, GitHub が提供する AI コーディングアシスタントです. Visual Studio Code の拡張機能として提供されており, コードの補完や生成を支援します. Copilot は OpenAI の Codex モデルを基盤としており, プログラミング言語やフレームワークに関する知識を持っています. また, Claude や Gemini などの他のモデルも利用可能です.</span>
 <span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>学生や教員の場合は, GitHub Education のアカウントを作成することで, GitHub Pro の機能を無料で利用できます. これにより, Copilot の使用上限が無料アカウントと比べて拡大します. 教育機関の認証はやや厳しくなっていると言われており, 大学の構内からのアクセスが必要と言われています.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 柳本和春. 文章・図は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

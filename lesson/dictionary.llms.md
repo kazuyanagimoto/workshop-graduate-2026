@@ -74,7 +74,7 @@ R でも同じことが起こります. R は起動時に `.Renviron` を読ん�
 
 R 本体はインタプリタ型ですが, 速度が要る部分では, 多くのパッケージが内部に C や C++, Fortran のコードを抱えています ([Rcpp](https://www.rcpp.org/) がその代表的な仕組みです). こうしたパッケージをソースからインストールするとき ([sec-environment](#sec-environment)), その過程でコンパイラが走り, C/C++ のコードを R が読み込める機械語の共有ライブラリ (`.so` や `.dll`) に変換します.
 
-そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では `build-essential` が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります ([sec-setup](#sec-setup) でこれを入れたのはこのためです). macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ ([sec-environment](#sec-environment)) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.
+そのため, パッケージをソースからビルドするにはコンパイラ一式 (ツールチェーン) が必要です. Debian や Ubuntu では `build-essential` が C/C++ コンパイラ (gcc / g++) と make をまとめて入れ, Fortran には別途 gfortran が要ります. macOS では Xcode Command Line Tools (clang), Windows では Rtools が同じ役割を担います. 一方, コンパイル済みのバイナリパッケージ ([sec-environment](#sec-environment)) を使えば, この変換は済んでいるので, コンパイラなしで速く導入できます.
 
 ## C.3 ハッシュ
 

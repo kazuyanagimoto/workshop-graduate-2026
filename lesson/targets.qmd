@@ -27,7 +27,7 @@ title: パイプライン
 
 論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.
 
-![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg){#fig-pipeline-overview}
+![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg){#fig-pipeline-overview width="100%"}
 
 次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
 
@@ -392,6 +392,8 @@ compile_latex <- function(manuscript_file, path_pdf) {
 }
 ```
 
+::::: {.content-visible when-format="html"}
+
 ## 演習問題 {.unnumbered}
 
 この章の演習は, 実際に小さなパイプラインを組んで, `{targets}` の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (`{targets}` と `{tarchetypes}` が入っていなければ `install.packages(c("targets", "tarchetypes"))` で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.
@@ -478,3 +480,5 @@ targets::tar_outdated()
 この「変更の影響を受けるところだけが再計算される」性質こそが `{targets}` の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.
 :::
 ::::
+
+:::::

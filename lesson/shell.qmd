@@ -590,6 +590,8 @@ chmod -R a=rwx ABC      # symbolic notation
 chown -R alice ABC      # make alice the owner of ABC
 ```
 
+::::: {.content-visible when-format="html"}
+
 ## 演習問題 {.unnumbered}
 
 この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル ({{< kbd Ctrl >}} + {{< kbd ` >}}) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.
@@ -734,3 +736,4 @@ rm -rf shell-practice shell-practice.tar.gz
 :::
 ::::
 
+:::::

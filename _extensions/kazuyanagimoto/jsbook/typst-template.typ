@@ -49,6 +49,23 @@
 // are built outside of `js`.
 #let JS-NON-CJK = regex("[\u{0000}-\u{2023}]")
 
+// Table rules. Typst draws a full grid by default (`1pt + black`) and `js`
+// only thins it to jsbook's `\arrayrulewidth` (0.4pt at 10pt) — the grid
+// itself is Typst's default, not something jsbook prescribes, so the booktabs
+// look of most Japanese papers is available as well.
+#let TABLE-STYLES = ("booktabs", "grid", "plain")
+
+// Only tables that took the `stroke: none` above get the rules; anything with
+// an explicit stroke (js's own `boxtable`, or a hand-written table) is left
+// alone. Quarto emits the header rule itself as `table.hline()`.
+#let _booktabs(it, style) = {
+  if style == "booktabs" and it.stroke == none {
+    block(stroke: (top: 0.08em, bottom: 0.08em), inset: 0pt, breakable: true, it)
+  } else {
+    it
+  }
+}
+
 #let _js-author(author) = {
   let lines = ("name", "affiliation", "email")
     .map(k => author.at(k, default: none))
@@ -117,6 +134,7 @@
   heading-weight: none,
   heading-style: none,
   heading-color: none,
+  table-style: "booktabs",
   baselineskip: auto,
   textwidth: auto,
   lines-per-page: auto,
@@ -141,6 +159,11 @@
 ) = {
   let js-authors = authors.map(_js-author).filter(a => a != none)
   let skip = if baselineskip == auto { 1.73 * fontsize } else { baselineskip }
+
+  assert(
+    table-style in TABLE-STYLES,
+    message: "table-style must be one of " + TABLE-STYLES.join(", "),
+  )
 
   set document(
     title: _to-str(title),
@@ -219,6 +242,14 @@
 
       show math.equation: set text(font: mathfont) if mathfont != none
       show raw: set text(font: codefont) if codefont != none
+
+      // Tables: `grid` keeps `js`'s thin full grid, the other two drop it and
+      // rely on the header rule Quarto emits. The column inset matches
+      // jsbook's `\tabcolsep` (6pt).
+      set table(inset: (x: 6pt, y: 4pt), stroke: none) if table-style == "booktabs"
+      set table.hline(stroke: 0.05em) if table-style == "booktabs"
+      set table(inset: 6pt, stroke: none) if table-style == "plain"
+      show table: it => _booktabs(it, table-style)
 
       show link: set text(fill: _color(linkcolor)) if linkcolor != none
       show ref: set text(fill: _color(citecolor)) if citecolor != none

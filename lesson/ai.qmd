@@ -112,7 +112,7 @@ template-research/
 
 これらのフォルダがどう連携するかを図にすると, @fig-research-workflow のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. `notes/` で固まった分析はパイプラインに昇格し, ルートの `CLAUDE.md` を読んだ AI がこのプロジェクト全体の作業を手伝います.
 
-![研究プロジェクトの構成とデータの流れ](../static/cetz/research-workflow.svg){#fig-research-workflow fig-align="center" width="92%"}
+![研究プロジェクトの構成とデータの流れ](../static/cetz/research-workflow.svg){#fig-research-workflow fig-align="center"}
 
 ### CLAUDE.md で AI にプロジェクトの規約を教える
 
@@ -148,7 +148,7 @@ R -e 'targets::tar_make()'  # run the pipeline
 
 研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです (@fig-research-cycle). 具体的な流れは [targets による再現性](targets.qmd) の章と同じですが, AI を使うと各段階が次のように楽になります.
 
-![AI と回す研究のサイクル](../static/cetz/research-cycle.svg){#fig-research-cycle fig-align="center" width="62%"}
+![AI と回す研究のサイクル](../static/cetz/research-cycle.svg){#fig-research-cycle fig-align="center"}
 
 - ノートでの試行錯誤: 「このデータで最低賃金の雇用効果を回帰して図にして」と頼めば, `notes/` の中にコードを書いてくれます.
 - パイプラインへの昇格: 固まった分析を `R/tar_*.R` に移す作業を任せます.

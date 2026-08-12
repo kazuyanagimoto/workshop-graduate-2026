@@ -322,6 +322,8 @@ format: typst
 
 本文は @fig-quarto-cite の例と同じです. コンパイルした結果が @fig-quarto-typst で, LaTeX 経由の出力 (@fig-quarto-cite) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは "Bibliography" になります).
 
+::::: {.content-visible when-format="html"}
+
 ## 演習問題 {.unnumbered}
 
 この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の `@` 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.
@@ -362,3 +364,5 @@ format: html
 レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. `link-citations: true` を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに `csl: econometrica.csl` のように CSL ファイルを渡します.
 :::
 ::::
+
+:::::

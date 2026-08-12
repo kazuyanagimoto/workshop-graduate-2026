@@ -3,6 +3,13 @@ author: Kazuharu Yanagimoto
 version: 0.1.0
 quarto-required: ">=1.9.17"
 contributes:
+  shortcodes:
+    - js-shortcodes.lua
+  # Also exposed as an extension filter so that other formats can opt in with
+  # `filters: [jsbook]` and get the HTML / plain-text fallbacks.
+  filters:
+    - path: js-macros.lua
+      at: post-quarto
   formats:
     typst:
       lang: ja
@@ -18,4 +25,6 @@ contributes:
         - page.typ
       filters:
         - path: jsbook.lua
+          at: post-quarto
+        - path: js-macros.lua
           at: post-quarto

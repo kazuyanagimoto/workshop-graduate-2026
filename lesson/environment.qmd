@@ -206,6 +206,8 @@ rv sync                         # 3. build the project library from rv.lock
 
 :::
 
+::::: {.content-visible when-format="html"}
+
 ## 演習問題 {.unnumbered}
 
 ::: {.quiz}
@@ -315,3 +317,5 @@ check_question(
 )
 ```
 :::
+
+:::::

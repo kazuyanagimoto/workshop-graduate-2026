@@ -118,6 +118,9 @@ $endif$
 $if(part-suffix)$
   part-suffix: "$part-suffix$",
 $endif$
+$if(table-style)$
+  table-style: "$table-style$",
+$endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$

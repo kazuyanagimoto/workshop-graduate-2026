@@ -35,7 +35,7 @@ quiz_button <- "答え合わせ"
 
 ### CPU
 
-![CPU (AMD Ryzen 5 2600)](../static/img/hardware/cpu.jpg){#fig-photo-cpu group="hardware" width="65%"}
+![CPU (AMD Ryzen 5 2600)](../static/img/hardware/cpu.jpg){#fig-photo-cpu group="hardware" width="40%"}
 
 CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です (@fig-photo-cpu). 性能を表す代表的な指標が2つあります.
 
@@ -46,27 +46,21 @@ CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの�
 
 ### メモリとストレージ
 
-![メモリ (DDR4 DIMM)](../static/img/hardware/ram.jpg){#fig-photo-ram group="hardware"}
+![メモリ (DDR4 DIMM)](../static/img/hardware/ram.jpg){#fig-photo-ram group="hardware" width="50%"}
 
 メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで (@fig-photo-ram), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).
 
-::: {#fig-photo-storage layout="[[65,35]]"}
+![SSD (NVMe M.2)](../static/img/hardware/ssd.jpg){#fig-photo-ssd group="hardware" width="50%"}
 
-![SSD (NVMe M.2)](../static/img/hardware/ssd.jpg){group="hardware"}
+![HDD (カバーを開けた内部)](../static/img/hardware/hdd.jpg){#fig-photo-hdd group="hardware" width="40%"}
 
-![HDD (カバーを開けた内部)](../static/img/hardware/hdd.jpg){group="hardware"}
-
-ストレージ
-
-:::
-
-ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります (@fig-photo-storage). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
+ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります (@fig-photo-ssd, @fig-photo-hdd). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
 
 「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります (@sec-computation-theory). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.
 
 ### GPU
 
-![GPU (GeForce RTX 5060 Ti)](../static/img/hardware/gpu.jpg){#fig-photo-gpu group="hardware" width="70%"}
+![GPU (GeForce RTX 5060 Ti)](../static/img/hardware/gpu.jpg){#fig-photo-gpu group="hardware" width="50%"}
 
 GPU (Graphics Processing Unit) は, もともと画面描画のための部品です (@fig-photo-gpu). 画面上の何百万というピクセルを同時に計算する必要があるため, @fig-computer-components に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.
 
@@ -223,6 +217,8 @@ Windows は Unix の系譜から外れているため, シェルもコマンド�
 - サーバー・クラウドの利用: リモート環境はほぼ Linux で, 多くは x86-64 です. 手元の Mac (macOS + ARM64) でビルドしたバイナリをコピーしても動きません. 環境ごとにインストールし直すか, コンテナを使います.^[Docker などのコンテナは OS (ディストリビューション) の差を吸収してくれますが, ISA の差は吸収しません. Apple Silicon 上で x86-64 用のイメージを動かすとエミュレーションになり, 大幅に遅くなります.]
 - AI への指示: 環境構築を AI に頼むときは, 「Apple Silicon の macOS」「WSL2 上の Ubuntu」のように OS とアーキテクチャを伝えると, 自分の環境に合った手順が返ってきやすくなります.
 
+::::: {.content-visible when-format="html"}
+
 ## 演習問題 {.unnumbered}
 
 この章の理解度を確認しましょう. 選択肢をクリックすると, その場で正誤が表示されます (複数選択の問題だけは, 選び終えてから「答え合わせ」を押してください).
@@ -366,3 +362,5 @@ check_question(
 )
 ```
 :::
+
+:::::

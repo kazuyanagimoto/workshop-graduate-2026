@@ -30,7 +30,7 @@ library(ggplot2)
 図においては次のデータインク比を最大化しなければならない:
 
 $$
-\text{データインク比} := \frac{\text{データインク}}{\text{図に使用されたインクの総量}}.
+\text{data-ink ratio} := \frac{\text{data-ink}}{\text{total ink used to print the graphic}}.
 $$
 
 :::
@@ -476,7 +476,7 @@ vector_plot
 ```{r}
 #| label: load-photo
 #| include: false
-photo <- image_read("../static/img/raster-photo.png")
+photo <- image_read(here::here("static/img/raster-photo.png"))
 info <- image_info(photo)
 ```
 
@@ -656,6 +656,8 @@ tibble::tibble(
 ```
 
 ラスター形式のファイルサイズは解像度に依存するので, 表には PNG のピクセル数を併記し, Web 表示には十分な 200 dpi と, 印刷にも耐える 600 dpi (このページに埋め込んだ図と同じ解像度) の2通りを載せています. SVG は約5.4万個の点を XML のテキストとして1つずつ記録するため, 高解像度の PNG と比べても1桁以上大きくなります. PDF は圧縮が効くため, ファイルサイズだけなら高解像度の PNG と同程度です. しかしベクター形式の問題はサイズだけではありません. ブラウザや PDF ビューアは表示のたびにすべての点を描画し直すので, 表示やスクロールが目に見えて遅くなります. 一方 PNG のファイルサイズと描画の重さは解像度だけで決まり, 点の数には依存しません. このように, データ点が非常に多い散布図では, ベクター形式ではなく高解像度の PNG を使う方が実用的です.
+
+::::: {.content-visible when-format="html"}
 
 ## 演習問題 {.unnumbered}
 
@@ -876,3 +878,5 @@ mpg |>
 これはあくまで一例です. 大事なのは, まず図の主張を決め, その主張が最短時間で伝わるかどうかを基準にデザインを判断することです.
 :::
 ::::
+
+:::::

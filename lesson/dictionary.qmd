@@ -40,7 +40,7 @@ which ls
 
 つまり, `ls` と打つのは, 実質的に `/bin/ls` というファイルを実行しているということです (@fig-path-search). `git` や `quarto`, `R` といったコマンドも同じで, `PATH` のどこかのディレクトリに置かれた実行ファイルが呼び出されています. コマンドは魔法で動いているのではなく, ディスク上の実行ファイルを名前で探して起動しているだけなのです.
 
-![シェルが PATH からコマンドを探す流れ](../static/cetz/path-search.svg){#fig-path-search fig-align="center" width="80%"}
+![シェルが PATH からコマンドを探す流れ](../static/cetz/path-search.svg){#fig-path-search fig-align="center"}
 
 リストの先頭から順に探すので, 同じ名前のコマンドが複数の場所にあると, `PATH` で前に並んでいるディレクトリのものが優先されます. また, コマンドを打って `command not found` と出るのは, 「そのプログラムが存在しない」とは限らず, 「`PATH` のどのディレクトリにも見つからない」だけのこともあります.
 

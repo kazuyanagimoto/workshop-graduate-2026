@@ -516,12 +516,12 @@ Table&nbsp;4.1: 観測数を変えたときのマッチングの計算時間と�
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">100</td>
-                  <td data-row="1" data-col="2">0.9</td>
+                  <td data-row="1" data-col="2">0.8</td>
                   <td data-row="1" data-col="3">2.1 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">1000</td>
-                  <td data-row="2" data-col="2">91.8</td>
+                  <td data-row="2" data-col="2">83</td>
                   <td data-row="2" data-col="3">19.7 KB</td>
                 </tr>
         </tbody>
@@ -674,17 +674,17 @@ Table&nbsp;4.2: match_nn の実装による実行時間とメモリ割り当て 
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">二重ループ</td>
-                  <td data-row="1" data-col="2">95.8</td>
+                  <td data-row="1" data-col="2">85.1</td>
                   <td data-row="1" data-col="3">54.9 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">内側ベクトル化 (purrr::map)</td>
-                  <td data-row="2" data-col="2">4.1</td>
+                  <td data-row="2" data-col="2">3.7</td>
                   <td data-row="2" data-col="3">8.4 MB</td>
                 </tr>
                 <tr>
                   <td data-row="3" data-col="1">完全ベクトル化</td>
-                  <td data-row="3" data-col="2">4.5</td>
+                  <td data-row="3" data-col="2">4.2</td>
                   <td data-row="3" data-col="3">30.6 MB</td>
                 </tr>
         </tbody>
@@ -826,16 +826,16 @@ Table&nbsp;4.3: R と Rcpp によるマッチングの計算時間と領域計�
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">100</td>
-                  <td data-row="1" data-col="2">0.9</td>
+                  <td data-row="1" data-col="2">0.84</td>
                   <td data-row="1" data-col="3">2.1 KB</td>
-                  <td data-row="1" data-col="4">0.0072</td>
+                  <td data-row="1" data-col="4">0.0067</td>
                   <td data-row="1" data-col="5">2.1 KB</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">1000</td>
-                  <td data-row="2" data-col="2">91.4</td>
+                  <td data-row="2" data-col="2">84.08</td>
                   <td data-row="2" data-col="3">19.7 KB</td>
-                  <td data-row="2" data-col="4">0.6265</td>
+                  <td data-row="2" data-col="4">0.6082</td>
                   <td data-row="2" data-col="5">19.7 KB</td>
                 </tr>
         </tbody>
@@ -847,7 +847,7 @@ Table&nbsp;4.3: R と Rcpp によるマッチングの計算時間と領域計�
 </figure>
 </div>
 </div>
-<p>同じ <span class="math inline">\(O(n^2)\)</span> のアルゴリズムでも, C++で書き直すことで <span class="math inline">\(n = 100\)</span> で約 125 倍, <span class="math inline">\(n = 1000\)</span> で約 146 倍高速になりました. 速度向上の倍率が <span class="math inline">\(n\)</span> によらずほぼ一定であることに注目してください. これは, Rcppが計算量のオーダー (<span class="math inline">\(O(n^2)\)</span>) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです. <a href="#sec-computation-theory" class="quarto-xref"><span>Section 4.1</span></a> のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです. オーダーが同じである以上, <span class="math inline">\(n\)</span> を10倍にすれば計算時間はやはり約100倍になります. アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.</p>
+<p>同じ <span class="math inline">\(O(n^2)\)</span> のアルゴリズムでも, C++で書き直すことで <span class="math inline">\(n = 100\)</span> で約 126 倍, <span class="math inline">\(n = 1000\)</span> で約 138 倍高速になりました. 速度向上の倍率が <span class="math inline">\(n\)</span> によらずほぼ一定であることに注目してください. これは, Rcppが計算量のオーダー (<span class="math inline">\(O(n^2)\)</span>) を変えているわけではなく, 1ステップあたりの定数項を小さくしているためです. <a href="#sec-computation-theory" class="quarto-xref"><span>Section 4.1</span></a> のベクトル化と同様に, Rが各演算のたびに行う型推定などのオーバーヘッドを取り除いているのです. オーダーが同じである以上, <span class="math inline">\(n\)</span> を10倍にすれば計算時間はやはり約100倍になります. アルゴリズム自体の計算量を下げられないボトルネックに対しては, このようにRcppで定数項を削るのが有効な高速化の手段になります.</p>
 <p>一方で領域計算量に注目すると, RでもRcppでも保存するのはマッチング結果と共変量だけなので <span class="math inline">\(O(n)\)</span> のまま変わりません. 完全ベクトル化が距離行列で <span class="math inline">\(O(n^2)\)</span> のメモリを消費したのとは対照的に, Rcppは自然な二重ループのまま, メモリを増やさずに速度だけを引き上げられるのです.</p>
 </section>
 </section>
@@ -964,14 +964,14 @@ Table&nbsp;4.4: 逐次処理と4コア並列処理の計算時間
                 <tr>
                   <td data-row="1" data-col="1">1000</td>
                   <td data-row="1" data-col="2">4</td>
-                  <td data-row="1" data-col="3">13</td>
+                  <td data-row="1" data-col="3">12</td>
                   <td data-row="1" data-col="4">0.31</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">30000</td>
-                  <td data-row="2" data-col="2">3543</td>
-                  <td data-row="2" data-col="3">909</td>
-                  <td data-row="2" data-col="4">3.9</td>
+                  <td data-row="2" data-col="2">3229</td>
+                  <td data-row="2" data-col="3">873</td>
+                  <td data-row="2" data-col="4">3.7</td>
                 </tr>
         </tbody>
       </table>
@@ -982,7 +982,7 @@ Table&nbsp;4.4: 逐次処理と4コア並列処理の計算時間
 </figure>
 </div>
 </div>
-<p><span class="math inline">\(n = 1000\)</span> では, 並列版の方がむしろ約 3 倍遅くなっています. 各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです. 一方 <span class="math inline">\(n = 30000\)</span> では, 並列版が約 3.9 倍速くなりました.</p>
+<p><span class="math inline">\(n = 1000\)</span> では, 並列版の方がむしろ約 3 倍遅くなっています. 各コアにデータとタスクを送り, 結果を集める通信のオーバーヘッドが, 計算そのものより大きいためです. 一方 <span class="math inline">\(n = 30000\)</span> では, 並列版が約 3.7 倍速くなりました.</p>
 <p>ここで重要なのは2点です. 第一に, 並列化はタダではありません. タスクの分配と結果の集約にオーバーヘッドがかかるため, 1つ1つの計算が軽い場合や問題が小さい場合には, かえって遅くなります. 第二に, 速度向上のおおよその目安はコア数 (ここでは4) で, データの分配や集約のオーバーヘッドのぶん前後します. それでも, 各反復が独立で計算が十分重い場合には, 並列化はコア数に近い高速化をもたらす有効な手段です.</p>
 </section>
 <section id="cコードの並列化" class="level3">
@@ -1118,13 +1118,13 @@ Table&nbsp;4.5: 逐次Rcppと4スレッド並列Rcppの計算時間
                   <td data-row="1" data-col="1">1000</td>
                   <td data-row="1" data-col="2">0.6</td>
                   <td data-row="1" data-col="3">0.2</td>
-                  <td data-row="1" data-col="4">3.2</td>
+                  <td data-row="1" data-col="4">3.1</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1">30000</td>
-                  <td data-row="2" data-col="2">551.7</td>
-                  <td data-row="2" data-col="3">123.6</td>
-                  <td data-row="2" data-col="4">4.5</td>
+                  <td data-row="2" data-col="2">543</td>
+                  <td data-row="2" data-col="3">123.2</td>
+                  <td data-row="2" data-col="4">4.4</td>
                 </tr>
         </tbody>
       </table>
@@ -1135,7 +1135,7 @@ Table&nbsp;4.5: 逐次Rcppと4スレッド並列Rcppの計算時間
 </figure>
 </div>
 </div>
-<p>同じ4コアでも, <code>furrr</code> が <span class="math inline">\(n = 1000\)</span> で逆に遅くなったのとは対照的に, <code>RcppParallel</code> は <span class="math inline">\(n = 1000\)</span> でも約 3.2 倍, <span class="math inline">\(n = 30000\)</span> で約 4.5 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは <span class="math inline">\(O(n^2)\)</span> のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.</p>
+<p>同じ4コアでも, <code>furrr</code> が <span class="math inline">\(n = 1000\)</span> で逆に遅くなったのとは対照的に, <code>RcppParallel</code> は <span class="math inline">\(n = 1000\)</span> でも約 3.1 倍, <span class="math inline">\(n = 30000\)</span> で約 4.4 倍速くなりました. スレッドは同じプロセス内でメモリを共有するため, プロセスの起動やデータのコピーがなく, オーバーヘッドがずっと小さいからです. このように, Rcppで定数項を削り (オーダーは <span class="math inline">\(O(n^2)\)</span> のまま), さらに並列化でコア数ぶん速くする, という2つの高速化を重ねがけできます.</p>
 <p>なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.</p>
 </section>
 </section>
@@ -1380,7 +1380,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"n = 100","2":"764.52707µs","3":"56.48438KB"},{"1":"n = 1000","2":"81.94617ms","3":"0B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"n = 100","2":"695.155µs","3":"56.48438KB"},{"1":"n = 1000","2":"71.1193ms","3":"0B"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1418,7 +1418,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"loop","2":"79.233074ms","3":"0B"},{"1":"vec","2":"2.258608ms","3":"7.686356MB"},{"1":"outer","2":"4.181672ms","3":"22.892181MB"},{"1":"sort","2":"30.996045µs","3":"23.625KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]},{"label":["mem_alloc"],"name":[3],"type":["bnch_byt"],"align":["right"]}],"data":[{"1":"loop","2":"73.546456ms","3":"0B"},{"1":"vec","2":"1.995593ms","3":"7.686356MB"},{"1":"outer","2":"3.750024ms","3":"22.892181MB"},{"1":"sort","2":"28.167153µs","3":"23.625KB"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1502,7 +1502,7 @@ G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \righ
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]}],"data":[{"1":"serial","2":"407.406ms"},{"1":"parallel","2":"346.7621ms"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["expression"],"name":[1],"type":["chr"],"align":["left"]},{"label":["median"],"name":[2],"type":["bench_tm"],"align":["right"]}],"data":[{"1":"serial","2":"361.4992ms"},{"1":"parallel","2":"326.119ms"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -2576,345 +2576,349 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb20-596"><a href="#cb20-596" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-597"><a href="#cb20-597" aria-hidden="true" tabindex="-1"></a>なお, すべての計算が並列化できるわけではありません. 例えば後ろ向き帰納法で解く動的計画問題のように, 次の反復が前の反復の結果に依存する計算は, その方向には並列化できません.</span>
 <span id="cb20-598"><a href="#cb20-598" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-599"><a href="#cb20-599" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb20-599"><a href="#cb20-599" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
 <span id="cb20-600"><a href="#cb20-600" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-603"><a href="#cb20-603" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-604"><a href="#cb20-604" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>
-<span id="cb20-605"><a href="#cb20-605" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb20-606"><a href="#cb20-606" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(checkdown)</span>
-<span id="cb20-607"><a href="#cb20-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-608"><a href="#cb20-608" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared helpers for the self-check quizzes. checkdown inserts the feedback</span></span>
-<span id="cb20-609"><a href="#cb20-609" aria-hidden="true" tabindex="-1"></a><span class="co"># via innerHTML inside a single-quoted JS string, so use double quotes in the</span></span>
-<span id="cb20-610"><a href="#cb20-610" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML and avoid single quotes in the message.</span></span>
-<span id="cb20-611"><a href="#cb20-611" aria-hidden="true" tabindex="-1"></a>quiz_right <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
-<span id="cb20-612"><a href="#cb20-612" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-right</span><span class="sc">\"</span><span class="st">&gt;&amp;#10003; 正解! &lt;/span&gt;"</span>, msg)</span>
-<span id="cb20-613"><a href="#cb20-613" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-614"><a href="#cb20-614" aria-hidden="true" tabindex="-1"></a>quiz_wrong <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
-<span id="cb20-615"><a href="#cb20-615" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
-<span id="cb20-616"><a href="#cb20-616" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-wrong</span><span class="sc">\"</span><span class="st">&gt;&amp;#10007; 残念, もう一度考えてみましょう. &lt;/span&gt;"</span>,</span>
-<span id="cb20-617"><a href="#cb20-617" aria-hidden="true" tabindex="-1"></a>    msg</span>
-<span id="cb20-618"><a href="#cb20-618" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-619"><a href="#cb20-619" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-620"><a href="#cb20-620" aria-hidden="true" tabindex="-1"></a>quiz_button <span class="ot">&lt;-</span> <span class="st">"答え合わせ"</span></span>
-<span id="cb20-621"><a href="#cb20-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-622"><a href="#cb20-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-623"><a href="#cb20-623" aria-hidden="true" tabindex="-1"></a>前半は計算量と高速化の考え方に関するクイズ, 後半は実際に測って確かめる演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</span>
+<span id="cb20-601"><a href="#cb20-601" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb20-602"><a href="#cb20-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-605"><a href="#cb20-605" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-606"><a href="#cb20-606" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-quiz</span></span>
+<span id="cb20-607"><a href="#cb20-607" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb20-608"><a href="#cb20-608" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(checkdown)</span>
+<span id="cb20-609"><a href="#cb20-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-610"><a href="#cb20-610" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared helpers for the self-check quizzes. checkdown inserts the feedback</span></span>
+<span id="cb20-611"><a href="#cb20-611" aria-hidden="true" tabindex="-1"></a><span class="co"># via innerHTML inside a single-quoted JS string, so use double quotes in the</span></span>
+<span id="cb20-612"><a href="#cb20-612" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML and avoid single quotes in the message.</span></span>
+<span id="cb20-613"><a href="#cb20-613" aria-hidden="true" tabindex="-1"></a>quiz_right <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
+<span id="cb20-614"><a href="#cb20-614" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-right</span><span class="sc">\"</span><span class="st">&gt;&amp;#10003; 正解! &lt;/span&gt;"</span>, msg)</span>
+<span id="cb20-615"><a href="#cb20-615" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-616"><a href="#cb20-616" aria-hidden="true" tabindex="-1"></a>quiz_wrong <span class="ot">&lt;-</span> <span class="cf">function</span>(msg) {</span>
+<span id="cb20-617"><a href="#cb20-617" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(</span>
+<span id="cb20-618"><a href="#cb20-618" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;span class=</span><span class="sc">\"</span><span class="st">quiz-wrong</span><span class="sc">\"</span><span class="st">&gt;&amp;#10007; 残念, もう一度考えてみましょう. &lt;/span&gt;"</span>,</span>
+<span id="cb20-619"><a href="#cb20-619" aria-hidden="true" tabindex="-1"></a>    msg</span>
+<span id="cb20-620"><a href="#cb20-620" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-621"><a href="#cb20-621" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-622"><a href="#cb20-622" aria-hidden="true" tabindex="-1"></a>quiz_button <span class="ot">&lt;-</span> <span class="st">"答え合わせ"</span></span>
+<span id="cb20-623"><a href="#cb20-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-624"><a href="#cb20-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-625"><a href="#cb20-625" aria-hidden="true" tabindex="-1"></a><span class="fu">### クイズ</span></span>
+<span id="cb20-625"><a href="#cb20-625" aria-hidden="true" tabindex="-1"></a>前半は計算量と高速化の考え方に関するクイズ, 後半は実際に測って確かめる演習です. クイズは選択肢をクリックすると, その場で正誤が表示されます.</span>
 <span id="cb20-626"><a href="#cb20-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-627"><a href="#cb20-627" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
-<span id="cb20-628"><a href="#cb20-628" aria-hidden="true" tabindex="-1"></a>時間計算量が $O(n^2)$, 領域計算量が $O(n)$ のアルゴリズムがあります. $n$ を10倍にすると, 計算時間とメモリ使用量はどうなるでしょうか.</span>
-<span id="cb20-629"><a href="#cb20-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-632"><a href="#cb20-632" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-633"><a href="#cb20-633" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-complexity</span></span>
-<span id="cb20-634"><a href="#cb20-634" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-635"><a href="#cb20-635" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
-<span id="cb20-636"><a href="#cb20-636" aria-hidden="true" tabindex="-1"></a>  <span class="st">"計算時間は約100倍, メモリは約10倍になる"</span>,</span>
-<span id="cb20-637"><a href="#cb20-637" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb20-638"><a href="#cb20-638" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間は約100倍, メモリは約10倍になる"</span>,</span>
-<span id="cb20-639"><a href="#cb20-639" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間もメモリも約10倍になる"</span>,</span>
-<span id="cb20-640"><a href="#cb20-640" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間は約10倍, メモリは約100倍になる"</span>,</span>
-<span id="cb20-641"><a href="#cb20-641" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間もメモリも約100倍になる"</span></span>
-<span id="cb20-642"><a href="#cb20-642" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-643"><a href="#cb20-643" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
-<span id="cb20-644"><a href="#cb20-644" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
-<span id="cb20-645"><a href="#cb20-645" aria-hidden="true" tabindex="-1"></a>    <span class="st">"時間計算量 O(n^2) なら10倍で10^2 = 100倍, 領域計算量 O(n) なら10倍です. オーダーが分かっていれば, 実測しなくても大きな n での挙動を見積もれます."</span></span>
-<span id="cb20-646"><a href="#cb20-646" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-647"><a href="#cb20-647" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
-<span id="cb20-648"><a href="#cb20-648" aria-hidden="true" tabindex="-1"></a>    <span class="st">"O(n^2) と O(n) のそれぞれで, n を10倍したときの増え方を考えましょう."</span></span>
-<span id="cb20-649"><a href="#cb20-649" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-650"><a href="#cb20-650" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
-<span id="cb20-651"><a href="#cb20-651" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-652"><a href="#cb20-652" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-653"><a href="#cb20-653" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-654"><a href="#cb20-654" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-655"><a href="#cb20-655" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-656"><a href="#cb20-656" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
-<span id="cb20-657"><a href="#cb20-657" aria-hidden="true" tabindex="-1"></a>メモリを速い順に並べたものはどれでしょうか.</span>
-<span id="cb20-658"><a href="#cb20-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-661"><a href="#cb20-661" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-662"><a href="#cb20-662" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-memory-hierarchy</span></span>
-<span id="cb20-663"><a href="#cb20-663" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-664"><a href="#cb20-664" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
-<span id="cb20-665"><a href="#cb20-665" aria-hidden="true" tabindex="-1"></a>  <span class="st">"レジスタ &gt; キャッシュ &gt; RAM &gt; SSD"</span>,</span>
-<span id="cb20-666"><a href="#cb20-666" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb20-667"><a href="#cb20-667" aria-hidden="true" tabindex="-1"></a>    <span class="st">"レジスタ &gt; キャッシュ &gt; RAM &gt; SSD"</span>,</span>
-<span id="cb20-668"><a href="#cb20-668" aria-hidden="true" tabindex="-1"></a>    <span class="st">"キャッシュ &gt; レジスタ &gt; RAM &gt; SSD"</span>,</span>
-<span id="cb20-669"><a href="#cb20-669" aria-hidden="true" tabindex="-1"></a>    <span class="st">"レジスタ &gt; RAM &gt; キャッシュ &gt; SSD"</span>,</span>
-<span id="cb20-670"><a href="#cb20-670" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RAM &gt; キャッシュ &gt; レジスタ &gt; SSD"</span></span>
-<span id="cb20-671"><a href="#cb20-671" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-672"><a href="#cb20-672" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
-<span id="cb20-673"><a href="#cb20-673" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
-<span id="cb20-674"><a href="#cb20-674" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CPU に近いほど高速で, 容量が小さいというピラミッド構造でした. 繰り返し使うデータがキャッシュに収まるかどうかで, 同じ計算回数でも実行時間は大きく変わります."</span></span>
-<span id="cb20-675"><a href="#cb20-675" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-676"><a href="#cb20-676" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
-<span id="cb20-677"><a href="#cb20-677" aria-hidden="true" tabindex="-1"></a>    <span class="st">"メモリのヒエラルキーの図を思い出しましょう. CPU に近いものほど高速です."</span></span>
-<span id="cb20-678"><a href="#cb20-678" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-679"><a href="#cb20-679" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
-<span id="cb20-680"><a href="#cb20-680" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-681"><a href="#cb20-681" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-682"><a href="#cb20-682" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-683"><a href="#cb20-683" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-684"><a href="#cb20-684" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-685"><a href="#cb20-685" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
-<span id="cb20-686"><a href="#cb20-686" aria-hidden="true" tabindex="-1"></a>R でベクトル化するとループより速くなるのはなぜでしょうか.</span>
-<span id="cb20-687"><a href="#cb20-687" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-690"><a href="#cb20-690" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-691"><a href="#cb20-691" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-vectorize</span></span>
-<span id="cb20-692"><a href="#cb20-692" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-693"><a href="#cb20-693" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
-<span id="cb20-694"><a href="#cb20-694" aria-hidden="true" tabindex="-1"></a>  <span class="st">"要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから"</span>,</span>
-<span id="cb20-695"><a href="#cb20-695" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb20-696"><a href="#cb20-696" aria-hidden="true" tabindex="-1"></a>    <span class="st">"要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから"</span>,</span>
-<span id="cb20-697"><a href="#cb20-697" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算回数 (ステップ数) が減るから"</span>,</span>
-<span id="cb20-698"><a href="#cb20-698" aria-hidden="true" tabindex="-1"></a>    <span class="st">"複数の CPU コアを同時に使うようになるから"</span>,</span>
-<span id="cb20-699"><a href="#cb20-699" aria-hidden="true" tabindex="-1"></a>    <span class="st">"メモリ使用量が減るから"</span></span>
-<span id="cb20-700"><a href="#cb20-700" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-701"><a href="#cb20-701" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
-<span id="cb20-702"><a href="#cb20-702" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
-<span id="cb20-703"><a href="#cb20-703" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ベクトル化は計算量のオーダーを変えません. 型の定まったベクトル同士の演算にまとめることで, 1ステップあたりの定数項を小さくしています. メモリはむしろ増えることがあります (outer の距離行列を思い出してください)."</span></span>
-<span id="cb20-704"><a href="#cb20-704" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-705"><a href="#cb20-705" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
-<span id="cb20-706"><a href="#cb20-706" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ベクトル化しても計算回数そのものは変わらないのでした. 何が削られているのかを考えましょう."</span></span>
-<span id="cb20-707"><a href="#cb20-707" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-708"><a href="#cb20-708" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
-<span id="cb20-709"><a href="#cb20-709" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-710"><a href="#cb20-710" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-711"><a href="#cb20-711" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-712"><a href="#cb20-712" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-713"><a href="#cb20-713" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-714"><a href="#cb20-714" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
-<span id="cb20-715"><a href="#cb20-715" aria-hidden="true" tabindex="-1"></a>$O(n^2)$ の関数を Rcpp で書き直したら30倍速くなりました. このとき $n$ を10倍にすると, Rcpp 版の実行時間はどうなるでしょうか.</span>
-<span id="cb20-716"><a href="#cb20-716" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-719"><a href="#cb20-719" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-720"><a href="#cb20-720" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-rcpp-order</span></span>
-<span id="cb20-721"><a href="#cb20-721" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-722"><a href="#cb20-722" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
-<span id="cb20-723"><a href="#cb20-723" aria-hidden="true" tabindex="-1"></a>  <span class="st">"約100倍になる"</span>,</span>
-<span id="cb20-724"><a href="#cb20-724" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb20-725"><a href="#cb20-725" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約100倍になる"</span>,</span>
-<span id="cb20-726"><a href="#cb20-726" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約10倍になる"</span>,</span>
-<span id="cb20-727"><a href="#cb20-727" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約30倍になる"</span>,</span>
-<span id="cb20-728"><a href="#cb20-728" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ほとんど変わらない"</span></span>
-<span id="cb20-729"><a href="#cb20-729" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-730"><a href="#cb20-730" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
-<span id="cb20-731"><a href="#cb20-731" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
-<span id="cb20-732"><a href="#cb20-732" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rcpp が削るのは1ステップあたりの定数項で, オーダーは O(n^2) のままです. だから n を10倍にすれば, R 版も Rcpp 版も約100倍になります. オーダー自体を下げたければ, アルゴリズムを変える必要があります (下の演習で確かめます)."</span></span>
-<span id="cb20-733"><a href="#cb20-733" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-734"><a href="#cb20-734" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
-<span id="cb20-735"><a href="#cb20-735" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rcpp は計算量のオーダーを変えるわけではありませんでした."</span></span>
-<span id="cb20-736"><a href="#cb20-736" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-737"><a href="#cb20-737" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
-<span id="cb20-738"><a href="#cb20-738" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-739"><a href="#cb20-739" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-740"><a href="#cb20-740" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-741"><a href="#cb20-741" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-742"><a href="#cb20-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-743"><a href="#cb20-743" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
-<span id="cb20-744"><a href="#cb20-744" aria-hidden="true" tabindex="-1"></a>次のうち, 並列化に最も向いている計算はどれでしょうか.</span>
-<span id="cb20-745"><a href="#cb20-745" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-748"><a href="#cb20-748" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-749"><a href="#cb20-749" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-parallel</span></span>
-<span id="cb20-750"><a href="#cb20-750" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb20-751"><a href="#cb20-751" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
-<span id="cb20-752"><a href="#cb20-752" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ブートストラップの各リサンプルでの推定"</span>,</span>
-<span id="cb20-753"><a href="#cb20-753" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb20-754"><a href="#cb20-754" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ブートストラップの各リサンプルでの推定"</span>,</span>
-<span id="cb20-755"><a href="#cb20-755" aria-hidden="true" tabindex="-1"></a>    <span class="st">"後ろ向き帰納法で解く動的計画問題の時間方向のループ"</span>,</span>
-<span id="cb20-756"><a href="#cb20-756" aria-hidden="true" tabindex="-1"></a>    <span class="st">"前の反復の結果を使う不動点反復"</span>,</span>
-<span id="cb20-757"><a href="#cb20-757" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1本の MCMC チェーンの逐次的な更新"</span></span>
-<span id="cb20-758"><a href="#cb20-758" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-759"><a href="#cb20-759" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
-<span id="cb20-760"><a href="#cb20-760" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
-<span id="cb20-761"><a href="#cb20-761" aria-hidden="true" tabindex="-1"></a>    <span class="st">"各反復が互いに独立な計算 (embarrassingly parallel) が並列化に向きます. 残りの3つはどれも前の反復の結果に依存するため, その方向には並列化できません. ただし並列化にはオーバーヘッドがあるので, 1反復が軽すぎるとかえって遅くなる点にも注意しましょう."</span></span>
-<span id="cb20-762"><a href="#cb20-762" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-763"><a href="#cb20-763" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
-<span id="cb20-764"><a href="#cb20-764" aria-hidden="true" tabindex="-1"></a>    <span class="st">"各反復が互いに独立かどうか, が判断基準でした."</span></span>
-<span id="cb20-765"><a href="#cb20-765" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-766"><a href="#cb20-766" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
-<span id="cb20-767"><a href="#cb20-767" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-768"><a href="#cb20-768" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-769"><a href="#cb20-769" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-770"><a href="#cb20-770" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-771"><a href="#cb20-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-772"><a href="#cb20-772" aria-hidden="true" tabindex="-1"></a><span class="fu">### ジニ係数で計算量を体感する</span></span>
+<span id="cb20-627"><a href="#cb20-627" aria-hidden="true" tabindex="-1"></a><span class="fu">### クイズ</span></span>
+<span id="cb20-628"><a href="#cb20-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-629"><a href="#cb20-629" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb20-630"><a href="#cb20-630" aria-hidden="true" tabindex="-1"></a>時間計算量が $O(n^2)$, 領域計算量が $O(n)$ のアルゴリズムがあります. $n$ を10倍にすると, 計算時間とメモリ使用量はどうなるでしょうか.</span>
+<span id="cb20-631"><a href="#cb20-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-634"><a href="#cb20-634" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-635"><a href="#cb20-635" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-complexity</span></span>
+<span id="cb20-636"><a href="#cb20-636" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb20-637"><a href="#cb20-637" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb20-638"><a href="#cb20-638" aria-hidden="true" tabindex="-1"></a>  <span class="st">"計算時間は約100倍, メモリは約10倍になる"</span>,</span>
+<span id="cb20-639"><a href="#cb20-639" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb20-640"><a href="#cb20-640" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間は約100倍, メモリは約10倍になる"</span>,</span>
+<span id="cb20-641"><a href="#cb20-641" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間もメモリも約10倍になる"</span>,</span>
+<span id="cb20-642"><a href="#cb20-642" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間は約10倍, メモリは約100倍になる"</span>,</span>
+<span id="cb20-643"><a href="#cb20-643" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算時間もメモリも約100倍になる"</span></span>
+<span id="cb20-644"><a href="#cb20-644" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-645"><a href="#cb20-645" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb20-646"><a href="#cb20-646" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb20-647"><a href="#cb20-647" aria-hidden="true" tabindex="-1"></a>    <span class="st">"時間計算量 O(n^2) なら10倍で10^2 = 100倍, 領域計算量 O(n) なら10倍です. オーダーが分かっていれば, 実測しなくても大きな n での挙動を見積もれます."</span></span>
+<span id="cb20-648"><a href="#cb20-648" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-649"><a href="#cb20-649" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb20-650"><a href="#cb20-650" aria-hidden="true" tabindex="-1"></a>    <span class="st">"O(n^2) と O(n) のそれぞれで, n を10倍したときの増え方を考えましょう."</span></span>
+<span id="cb20-651"><a href="#cb20-651" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-652"><a href="#cb20-652" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb20-653"><a href="#cb20-653" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-654"><a href="#cb20-654" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-655"><a href="#cb20-655" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-656"><a href="#cb20-656" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-657"><a href="#cb20-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-658"><a href="#cb20-658" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb20-659"><a href="#cb20-659" aria-hidden="true" tabindex="-1"></a>メモリを速い順に並べたものはどれでしょうか.</span>
+<span id="cb20-660"><a href="#cb20-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-663"><a href="#cb20-663" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-664"><a href="#cb20-664" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-memory-hierarchy</span></span>
+<span id="cb20-665"><a href="#cb20-665" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb20-666"><a href="#cb20-666" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb20-667"><a href="#cb20-667" aria-hidden="true" tabindex="-1"></a>  <span class="st">"レジスタ &gt; キャッシュ &gt; RAM &gt; SSD"</span>,</span>
+<span id="cb20-668"><a href="#cb20-668" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb20-669"><a href="#cb20-669" aria-hidden="true" tabindex="-1"></a>    <span class="st">"レジスタ &gt; キャッシュ &gt; RAM &gt; SSD"</span>,</span>
+<span id="cb20-670"><a href="#cb20-670" aria-hidden="true" tabindex="-1"></a>    <span class="st">"キャッシュ &gt; レジスタ &gt; RAM &gt; SSD"</span>,</span>
+<span id="cb20-671"><a href="#cb20-671" aria-hidden="true" tabindex="-1"></a>    <span class="st">"レジスタ &gt; RAM &gt; キャッシュ &gt; SSD"</span>,</span>
+<span id="cb20-672"><a href="#cb20-672" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RAM &gt; キャッシュ &gt; レジスタ &gt; SSD"</span></span>
+<span id="cb20-673"><a href="#cb20-673" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-674"><a href="#cb20-674" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb20-675"><a href="#cb20-675" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb20-676"><a href="#cb20-676" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CPU に近いほど高速で, 容量が小さいというピラミッド構造でした. 繰り返し使うデータがキャッシュに収まるかどうかで, 同じ計算回数でも実行時間は大きく変わります."</span></span>
+<span id="cb20-677"><a href="#cb20-677" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-678"><a href="#cb20-678" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb20-679"><a href="#cb20-679" aria-hidden="true" tabindex="-1"></a>    <span class="st">"メモリのヒエラルキーの図を思い出しましょう. CPU に近いものほど高速です."</span></span>
+<span id="cb20-680"><a href="#cb20-680" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-681"><a href="#cb20-681" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb20-682"><a href="#cb20-682" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-683"><a href="#cb20-683" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-684"><a href="#cb20-684" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-685"><a href="#cb20-685" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-686"><a href="#cb20-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-687"><a href="#cb20-687" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb20-688"><a href="#cb20-688" aria-hidden="true" tabindex="-1"></a>R でベクトル化するとループより速くなるのはなぜでしょうか.</span>
+<span id="cb20-689"><a href="#cb20-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-692"><a href="#cb20-692" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-693"><a href="#cb20-693" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-vectorize</span></span>
+<span id="cb20-694"><a href="#cb20-694" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb20-695"><a href="#cb20-695" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb20-696"><a href="#cb20-696" aria-hidden="true" tabindex="-1"></a>  <span class="st">"要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから"</span>,</span>
+<span id="cb20-697"><a href="#cb20-697" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb20-698"><a href="#cb20-698" aria-hidden="true" tabindex="-1"></a>    <span class="st">"要素ごとに繰り返していた型推定などのオーバーヘッドがなくなるから"</span>,</span>
+<span id="cb20-699"><a href="#cb20-699" aria-hidden="true" tabindex="-1"></a>    <span class="st">"計算回数 (ステップ数) が減るから"</span>,</span>
+<span id="cb20-700"><a href="#cb20-700" aria-hidden="true" tabindex="-1"></a>    <span class="st">"複数の CPU コアを同時に使うようになるから"</span>,</span>
+<span id="cb20-701"><a href="#cb20-701" aria-hidden="true" tabindex="-1"></a>    <span class="st">"メモリ使用量が減るから"</span></span>
+<span id="cb20-702"><a href="#cb20-702" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-703"><a href="#cb20-703" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb20-704"><a href="#cb20-704" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb20-705"><a href="#cb20-705" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ベクトル化は計算量のオーダーを変えません. 型の定まったベクトル同士の演算にまとめることで, 1ステップあたりの定数項を小さくしています. メモリはむしろ増えることがあります (outer の距離行列を思い出してください)."</span></span>
+<span id="cb20-706"><a href="#cb20-706" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-707"><a href="#cb20-707" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb20-708"><a href="#cb20-708" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ベクトル化しても計算回数そのものは変わらないのでした. 何が削られているのかを考えましょう."</span></span>
+<span id="cb20-709"><a href="#cb20-709" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-710"><a href="#cb20-710" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb20-711"><a href="#cb20-711" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-712"><a href="#cb20-712" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-713"><a href="#cb20-713" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-714"><a href="#cb20-714" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-715"><a href="#cb20-715" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-716"><a href="#cb20-716" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb20-717"><a href="#cb20-717" aria-hidden="true" tabindex="-1"></a>$O(n^2)$ の関数を Rcpp で書き直したら30倍速くなりました. このとき $n$ を10倍にすると, Rcpp 版の実行時間はどうなるでしょうか.</span>
+<span id="cb20-718"><a href="#cb20-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-721"><a href="#cb20-721" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-722"><a href="#cb20-722" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-rcpp-order</span></span>
+<span id="cb20-723"><a href="#cb20-723" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb20-724"><a href="#cb20-724" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb20-725"><a href="#cb20-725" aria-hidden="true" tabindex="-1"></a>  <span class="st">"約100倍になる"</span>,</span>
+<span id="cb20-726"><a href="#cb20-726" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb20-727"><a href="#cb20-727" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約100倍になる"</span>,</span>
+<span id="cb20-728"><a href="#cb20-728" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約10倍になる"</span>,</span>
+<span id="cb20-729"><a href="#cb20-729" aria-hidden="true" tabindex="-1"></a>    <span class="st">"約30倍になる"</span>,</span>
+<span id="cb20-730"><a href="#cb20-730" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ほとんど変わらない"</span></span>
+<span id="cb20-731"><a href="#cb20-731" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-732"><a href="#cb20-732" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb20-733"><a href="#cb20-733" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb20-734"><a href="#cb20-734" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rcpp が削るのは1ステップあたりの定数項で, オーダーは O(n^2) のままです. だから n を10倍にすれば, R 版も Rcpp 版も約100倍になります. オーダー自体を下げたければ, アルゴリズムを変える必要があります (下の演習で確かめます)."</span></span>
+<span id="cb20-735"><a href="#cb20-735" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-736"><a href="#cb20-736" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb20-737"><a href="#cb20-737" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rcpp は計算量のオーダーを変えるわけではありませんでした."</span></span>
+<span id="cb20-738"><a href="#cb20-738" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-739"><a href="#cb20-739" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb20-740"><a href="#cb20-740" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-741"><a href="#cb20-741" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-742"><a href="#cb20-742" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-743"><a href="#cb20-743" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-744"><a href="#cb20-744" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-745"><a href="#cb20-745" aria-hidden="true" tabindex="-1"></a>::: {.quiz}</span>
+<span id="cb20-746"><a href="#cb20-746" aria-hidden="true" tabindex="-1"></a>次のうち, 並列化に最も向いている計算はどれでしょうか.</span>
+<span id="cb20-747"><a href="#cb20-747" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-750"><a href="#cb20-750" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-751"><a href="#cb20-751" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: quiz-parallel</span></span>
+<span id="cb20-752"><a href="#cb20-752" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb20-753"><a href="#cb20-753" aria-hidden="true" tabindex="-1"></a><span class="fu">check_question</span>(</span>
+<span id="cb20-754"><a href="#cb20-754" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ブートストラップの各リサンプルでの推定"</span>,</span>
+<span id="cb20-755"><a href="#cb20-755" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb20-756"><a href="#cb20-756" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ブートストラップの各リサンプルでの推定"</span>,</span>
+<span id="cb20-757"><a href="#cb20-757" aria-hidden="true" tabindex="-1"></a>    <span class="st">"後ろ向き帰納法で解く動的計画問題の時間方向のループ"</span>,</span>
+<span id="cb20-758"><a href="#cb20-758" aria-hidden="true" tabindex="-1"></a>    <span class="st">"前の反復の結果を使う不動点反復"</span>,</span>
+<span id="cb20-759"><a href="#cb20-759" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1本の MCMC チェーンの逐次的な更新"</span></span>
+<span id="cb20-760"><a href="#cb20-760" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-761"><a href="#cb20-761" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"radio"</span>,</span>
+<span id="cb20-762"><a href="#cb20-762" aria-hidden="true" tabindex="-1"></a>  <span class="at">right =</span> <span class="fu">quiz_right</span>(</span>
+<span id="cb20-763"><a href="#cb20-763" aria-hidden="true" tabindex="-1"></a>    <span class="st">"各反復が互いに独立な計算 (embarrassingly parallel) が並列化に向きます. 残りの3つはどれも前の反復の結果に依存するため, その方向には並列化できません. ただし並列化にはオーバーヘッドがあるので, 1反復が軽すぎるとかえって遅くなる点にも注意しましょう."</span></span>
+<span id="cb20-764"><a href="#cb20-764" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-765"><a href="#cb20-765" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrong =</span> <span class="fu">quiz_wrong</span>(</span>
+<span id="cb20-766"><a href="#cb20-766" aria-hidden="true" tabindex="-1"></a>    <span class="st">"各反復が互いに独立かどうか, が判断基準でした."</span></span>
+<span id="cb20-767"><a href="#cb20-767" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-768"><a href="#cb20-768" aria-hidden="true" tabindex="-1"></a>  <span class="at">button_label =</span> quiz_button,</span>
+<span id="cb20-769"><a href="#cb20-769" aria-hidden="true" tabindex="-1"></a>  <span class="at">random_answer_order =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-770"><a href="#cb20-770" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-771"><a href="#cb20-771" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-772"><a href="#cb20-772" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb20-773"><a href="#cb20-773" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-774"><a href="#cb20-774" aria-hidden="true" tabindex="-1"></a>所得分布の不平等度を測るジニ係数は, 所得ベクトル $x$ の平均絶対差を使って次のように書けます.</span>
+<span id="cb20-774"><a href="#cb20-774" aria-hidden="true" tabindex="-1"></a><span class="fu">### ジニ係数で計算量を体感する</span></span>
 <span id="cb20-775"><a href="#cb20-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-776"><a href="#cb20-776" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-777"><a href="#cb20-777" aria-hidden="true" tabindex="-1"></a>G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \right|</span>
+<span id="cb20-776"><a href="#cb20-776" aria-hidden="true" tabindex="-1"></a>所得分布の不平等度を測るジニ係数は, 所得ベクトル $x$ の平均絶対差を使って次のように書けます.</span>
+<span id="cb20-777"><a href="#cb20-777" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-778"><a href="#cb20-778" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb20-779"><a href="#cb20-779" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-780"><a href="#cb20-780" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb20-781"><a href="#cb20-781" aria-hidden="true" tabindex="-1"></a>対数正規分布に従う所得データ <span class="in">`x &lt;- rlnorm(n)`</span> に対してジニ係数を計算します.</span>
-<span id="cb20-782"><a href="#cb20-782" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-783"><a href="#cb20-783" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>定義式のとおり二重ループで計算する <span class="in">`gini_loop`</span> を書いてください. この実装の時間計算量と領域計算量はいくつでしょうか.</span>
-<span id="cb20-784"><a href="#cb20-784" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`bench::mark()`</span> で $n = 100$ と $n = 1000$ の計算時間を測り, 倍率がオーダーの予測と合っているか確かめてください.</span>
-<span id="cb20-785"><a href="#cb20-785" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>内側のループをベクトル化した <span class="in">`gini_vec`</span> と, <span class="in">`outer()`</span> で全ペアの差を一度に計算する <span class="in">`gini_outer`</span> を書き, $n = 1000$ で3つの実装の速度とメモリ割り当てを比べてください.</span>
-<span id="cb20-786"><a href="#cb20-786" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>昇順に並べ替えた値 $x_{(1)} \le \dots \le x_{(n)}$ を使うと, ジニ係数は $G = \frac{2 \sum_{i=1}^{n} i \, x_{(i)}}{n^2 \bar{x}} - \frac{n+1}{n}$ とも書けます. この式で <span class="in">`gini_sort`</span> を書いて比較に加え, 結果を解釈してください.</span>
-<span id="cb20-787"><a href="#cb20-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-788"><a href="#cb20-788" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb20-789"><a href="#cb20-789" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb20-790"><a href="#cb20-790" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-791"><a href="#cb20-791" aria-hidden="true" tabindex="-1"></a>まず二重ループ版です. 二重ループなので時間計算量は $O(n^2)$, 保持するのは途中経過のスカラーだけなので追加の領域計算量は $O(1)$ です (入力を含めれば $O(n)$).</span>
+<span id="cb20-779"><a href="#cb20-779" aria-hidden="true" tabindex="-1"></a>G = \frac{1}{2 n^2 \bar{x}} \sum_{i=1}^{n} \sum_{j=1}^{n} \left| x_i - x_j \right|</span>
+<span id="cb20-780"><a href="#cb20-780" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-781"><a href="#cb20-781" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-782"><a href="#cb20-782" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb20-783"><a href="#cb20-783" aria-hidden="true" tabindex="-1"></a>対数正規分布に従う所得データ <span class="in">`x &lt;- rlnorm(n)`</span> に対してジニ係数を計算します.</span>
+<span id="cb20-784"><a href="#cb20-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-785"><a href="#cb20-785" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>定義式のとおり二重ループで計算する <span class="in">`gini_loop`</span> を書いてください. この実装の時間計算量と領域計算量はいくつでしょうか.</span>
+<span id="cb20-786"><a href="#cb20-786" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`bench::mark()`</span> で $n = 100$ と $n = 1000$ の計算時間を測り, 倍率がオーダーの予測と合っているか確かめてください.</span>
+<span id="cb20-787"><a href="#cb20-787" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>内側のループをベクトル化した <span class="in">`gini_vec`</span> と, <span class="in">`outer()`</span> で全ペアの差を一度に計算する <span class="in">`gini_outer`</span> を書き, $n = 1000$ で3つの実装の速度とメモリ割り当てを比べてください.</span>
+<span id="cb20-788"><a href="#cb20-788" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>昇順に並べ替えた値 $x_{(1)} \le \dots \le x_{(n)}$ を使うと, ジニ係数は $G = \frac{2 \sum_{i=1}^{n} i \, x_{(i)}}{n^2 \bar{x}} - \frac{n+1}{n}$ とも書けます. この式で <span class="in">`gini_sort`</span> を書いて比較に加え, 結果を解釈してください.</span>
+<span id="cb20-789"><a href="#cb20-789" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-790"><a href="#cb20-790" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb20-791"><a href="#cb20-791" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
 <span id="cb20-792"><a href="#cb20-792" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-795"><a href="#cb20-795" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-796"><a href="#cb20-796" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-gini-loop</span></span>
-<span id="cb20-797"><a href="#cb20-797" aria-hidden="true" tabindex="-1"></a>gini_loop <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb20-798"><a href="#cb20-798" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb20-799"><a href="#cb20-799" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb20-800"><a href="#cb20-800" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb20-801"><a href="#cb20-801" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb20-802"><a href="#cb20-802" aria-hidden="true" tabindex="-1"></a>      s <span class="ot">&lt;-</span> s <span class="sc">+</span> <span class="fu">abs</span>(x[i] <span class="sc">-</span> x[j])</span>
-<span id="cb20-803"><a href="#cb20-803" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb20-804"><a href="#cb20-804" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb20-805"><a href="#cb20-805" aria-hidden="true" tabindex="-1"></a>  s <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
-<span id="cb20-806"><a href="#cb20-806" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-807"><a href="#cb20-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-808"><a href="#cb20-808" aria-hidden="true" tabindex="-1"></a>x100 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb20-809"><a href="#cb20-809" aria-hidden="true" tabindex="-1"></a>x1000 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">1000</span>)</span>
-<span id="cb20-810"><a href="#cb20-810" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-811"><a href="#cb20-811" aria-hidden="true" tabindex="-1"></a>bm_gini <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
-<span id="cb20-812"><a href="#cb20-812" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 100"</span> <span class="ot">=</span> <span class="fu">gini_loop</span>(x100),</span>
-<span id="cb20-813"><a href="#cb20-813" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 1000"</span> <span class="ot">=</span> <span class="fu">gini_loop</span>(x1000),</span>
-<span id="cb20-814"><a href="#cb20-814" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb20-815"><a href="#cb20-815" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
-<span id="cb20-816"><a href="#cb20-816" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-817"><a href="#cb20-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-818"><a href="#cb20-818" aria-hidden="true" tabindex="-1"></a>bm_gini <span class="sc">|&gt;</span></span>
-<span id="cb20-819"><a href="#cb20-819" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
-<span id="cb20-820"><a href="#cb20-820" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median, mem_alloc)</span>
-<span id="cb20-821"><a href="#cb20-821" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-822"><a href="#cb20-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-823"><a href="#cb20-823" aria-hidden="true" tabindex="-1"></a>$n$ を10倍にすると計算時間はおよそ100倍になっており, $O(n^2)$ の予測と合っています.</span>
+<span id="cb20-793"><a href="#cb20-793" aria-hidden="true" tabindex="-1"></a>まず二重ループ版です. 二重ループなので時間計算量は $O(n^2)$, 保持するのは途中経過のスカラーだけなので追加の領域計算量は $O(1)$ です (入力を含めれば $O(n)$).</span>
+<span id="cb20-794"><a href="#cb20-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-797"><a href="#cb20-797" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-798"><a href="#cb20-798" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-gini-loop</span></span>
+<span id="cb20-799"><a href="#cb20-799" aria-hidden="true" tabindex="-1"></a>gini_loop <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb20-800"><a href="#cb20-800" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb20-801"><a href="#cb20-801" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-802"><a href="#cb20-802" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb20-803"><a href="#cb20-803" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb20-804"><a href="#cb20-804" aria-hidden="true" tabindex="-1"></a>      s <span class="ot">&lt;-</span> s <span class="sc">+</span> <span class="fu">abs</span>(x[i] <span class="sc">-</span> x[j])</span>
+<span id="cb20-805"><a href="#cb20-805" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-806"><a href="#cb20-806" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-807"><a href="#cb20-807" aria-hidden="true" tabindex="-1"></a>  s <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
+<span id="cb20-808"><a href="#cb20-808" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-809"><a href="#cb20-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-810"><a href="#cb20-810" aria-hidden="true" tabindex="-1"></a>x100 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb20-811"><a href="#cb20-811" aria-hidden="true" tabindex="-1"></a>x1000 <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb20-812"><a href="#cb20-812" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-813"><a href="#cb20-813" aria-hidden="true" tabindex="-1"></a>bm_gini <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb20-814"><a href="#cb20-814" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 100"</span> <span class="ot">=</span> <span class="fu">gini_loop</span>(x100),</span>
+<span id="cb20-815"><a href="#cb20-815" aria-hidden="true" tabindex="-1"></a>  <span class="st">"n = 1000"</span> <span class="ot">=</span> <span class="fu">gini_loop</span>(x1000),</span>
+<span id="cb20-816"><a href="#cb20-816" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-817"><a href="#cb20-817" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-818"><a href="#cb20-818" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-819"><a href="#cb20-819" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-820"><a href="#cb20-820" aria-hidden="true" tabindex="-1"></a>bm_gini <span class="sc">|&gt;</span></span>
+<span id="cb20-821"><a href="#cb20-821" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
+<span id="cb20-822"><a href="#cb20-822" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median, mem_alloc)</span>
+<span id="cb20-823"><a href="#cb20-823" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-824"><a href="#cb20-824" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-825"><a href="#cb20-825" aria-hidden="true" tabindex="-1"></a><span class="in">`mem_alloc`</span> の列が2行目で 0B になるのはバグではありません. <span class="in">`bench`</span> が測るのは R が新しく確保したヒープメモリで, スカラー1つを更新するだけの二重ループは, 関数が一度バイトコンパイルされた後は新しいメモリをほとんど確保しないのです (1行目の数十 KB は, 初回呼び出し時のコンパイルなどのオーバーヘッドです). 追加の領域計算量が $O(1)$ であることが, 測定にもそのまま表れています.</span>
+<span id="cb20-825"><a href="#cb20-825" aria-hidden="true" tabindex="-1"></a>$n$ を10倍にすると計算時間はおよそ100倍になっており, $O(n^2)$ の予測と合っています.</span>
 <span id="cb20-826"><a href="#cb20-826" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-827"><a href="#cb20-827" aria-hidden="true" tabindex="-1"></a>次に, ベクトル化した2つの実装と, ソートを使った実装です.</span>
+<span id="cb20-827"><a href="#cb20-827" aria-hidden="true" tabindex="-1"></a><span class="in">`mem_alloc`</span> の列が2行目で 0B になるのはバグではありません. <span class="in">`bench`</span> が測るのは R が新しく確保したヒープメモリで, スカラー1つを更新するだけの二重ループは, 関数が一度バイトコンパイルされた後は新しいメモリをほとんど確保しないのです (1行目の数十 KB は, 初回呼び出し時のコンパイルなどのオーバーヘッドです). 追加の領域計算量が $O(1)$ であることが, 測定にもそのまま表れています.</span>
 <span id="cb20-828"><a href="#cb20-828" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-831"><a href="#cb20-831" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-832"><a href="#cb20-832" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-gini-variants</span></span>
-<span id="cb20-833"><a href="#cb20-833" aria-hidden="true" tabindex="-1"></a>gini_vec <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb20-834"><a href="#cb20-834" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sum</span>(purrr<span class="sc">::</span><span class="fu">map_dbl</span>(x, \(xi) <span class="fu">sum</span>(<span class="fu">abs</span>(xi <span class="sc">-</span> x))))</span>
-<span id="cb20-835"><a href="#cb20-835" aria-hidden="true" tabindex="-1"></a>  s <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">length</span>(x)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
-<span id="cb20-836"><a href="#cb20-836" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-837"><a href="#cb20-837" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-838"><a href="#cb20-838" aria-hidden="true" tabindex="-1"></a>gini_outer <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb20-839"><a href="#cb20-839" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">outer</span>(x, x, <span class="st">"-"</span>))) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">length</span>(x)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
-<span id="cb20-840"><a href="#cb20-840" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-841"><a href="#cb20-841" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-842"><a href="#cb20-842" aria-hidden="true" tabindex="-1"></a>gini_sort <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb20-843"><a href="#cb20-843" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb20-844"><a href="#cb20-844" aria-hidden="true" tabindex="-1"></a>  xs <span class="ot">&lt;-</span> <span class="fu">sort</span>(x)</span>
-<span id="cb20-845"><a href="#cb20-845" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">seq_len</span>(n) <span class="sc">*</span> xs) <span class="sc">/</span> (n<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x)) <span class="sc">-</span> (n <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> n</span>
-<span id="cb20-846"><a href="#cb20-846" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-847"><a href="#cb20-847" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-848"><a href="#cb20-848" aria-hidden="true" tabindex="-1"></a>bm_gini2 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
-<span id="cb20-849"><a href="#cb20-849" aria-hidden="true" tabindex="-1"></a>  <span class="at">loop =</span> <span class="fu">gini_loop</span>(x1000),</span>
-<span id="cb20-850"><a href="#cb20-850" aria-hidden="true" tabindex="-1"></a>  <span class="at">vec =</span> <span class="fu">gini_vec</span>(x1000),</span>
-<span id="cb20-851"><a href="#cb20-851" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer =</span> <span class="fu">gini_outer</span>(x1000),</span>
-<span id="cb20-852"><a href="#cb20-852" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort =</span> <span class="fu">gini_sort</span>(x1000),</span>
-<span id="cb20-853"><a href="#cb20-853" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
-<span id="cb20-854"><a href="#cb20-854" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-855"><a href="#cb20-855" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-856"><a href="#cb20-856" aria-hidden="true" tabindex="-1"></a>bm_gini2 <span class="sc">|&gt;</span></span>
-<span id="cb20-857"><a href="#cb20-857" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
-<span id="cb20-858"><a href="#cb20-858" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median, mem_alloc)</span>
-<span id="cb20-859"><a href="#cb20-859" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-860"><a href="#cb20-860" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-861"><a href="#cb20-861" aria-hidden="true" tabindex="-1"></a><span class="in">`bench::mark()`</span> は既定で4つの返り値が一致することも確認してくれます. 結果は本文で見た構図の総復習になっています.</span>
+<span id="cb20-829"><a href="#cb20-829" aria-hidden="true" tabindex="-1"></a>次に, ベクトル化した2つの実装と, ソートを使った実装です.</span>
+<span id="cb20-830"><a href="#cb20-830" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-833"><a href="#cb20-833" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-834"><a href="#cb20-834" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-gini-variants</span></span>
+<span id="cb20-835"><a href="#cb20-835" aria-hidden="true" tabindex="-1"></a>gini_vec <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb20-836"><a href="#cb20-836" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sum</span>(purrr<span class="sc">::</span><span class="fu">map_dbl</span>(x, \(xi) <span class="fu">sum</span>(<span class="fu">abs</span>(xi <span class="sc">-</span> x))))</span>
+<span id="cb20-837"><a href="#cb20-837" aria-hidden="true" tabindex="-1"></a>  s <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">length</span>(x)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
+<span id="cb20-838"><a href="#cb20-838" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-839"><a href="#cb20-839" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-840"><a href="#cb20-840" aria-hidden="true" tabindex="-1"></a>gini_outer <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb20-841"><a href="#cb20-841" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">outer</span>(x, x, <span class="st">"-"</span>))) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">length</span>(x)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x))</span>
+<span id="cb20-842"><a href="#cb20-842" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-843"><a href="#cb20-843" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-844"><a href="#cb20-844" aria-hidden="true" tabindex="-1"></a>gini_sort <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb20-845"><a href="#cb20-845" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb20-846"><a href="#cb20-846" aria-hidden="true" tabindex="-1"></a>  xs <span class="ot">&lt;-</span> <span class="fu">sort</span>(x)</span>
+<span id="cb20-847"><a href="#cb20-847" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">seq_len</span>(n) <span class="sc">*</span> xs) <span class="sc">/</span> (n<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(x)) <span class="sc">-</span> (n <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> n</span>
+<span id="cb20-848"><a href="#cb20-848" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-849"><a href="#cb20-849" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-850"><a href="#cb20-850" aria-hidden="true" tabindex="-1"></a>bm_gini2 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb20-851"><a href="#cb20-851" aria-hidden="true" tabindex="-1"></a>  <span class="at">loop =</span> <span class="fu">gini_loop</span>(x1000),</span>
+<span id="cb20-852"><a href="#cb20-852" aria-hidden="true" tabindex="-1"></a>  <span class="at">vec =</span> <span class="fu">gini_vec</span>(x1000),</span>
+<span id="cb20-853"><a href="#cb20-853" aria-hidden="true" tabindex="-1"></a>  <span class="at">outer =</span> <span class="fu">gini_outer</span>(x1000),</span>
+<span id="cb20-854"><a href="#cb20-854" aria-hidden="true" tabindex="-1"></a>  <span class="at">sort =</span> <span class="fu">gini_sort</span>(x1000),</span>
+<span id="cb20-855"><a href="#cb20-855" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-856"><a href="#cb20-856" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-857"><a href="#cb20-857" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-858"><a href="#cb20-858" aria-hidden="true" tabindex="-1"></a>bm_gini2 <span class="sc">|&gt;</span></span>
+<span id="cb20-859"><a href="#cb20-859" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
+<span id="cb20-860"><a href="#cb20-860" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median, mem_alloc)</span>
+<span id="cb20-861"><a href="#cb20-861" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-862"><a href="#cb20-862" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-863"><a href="#cb20-863" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`vec`</span> は <span class="in">`loop`</span> の数十倍速くなりますが, これは型推定のオーバーヘッドを削っただけで, オーダーは $O(n^2)$ のままです.</span>
-<span id="cb20-864"><a href="#cb20-864" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`outer`</span> は <span class="in">`vec`</span> よりさらに速くなるわけではなく, $n \times n$ の行列を丸ごと確保するためメモリ割り当てが桁違いに大きくなります (領域計算量 $O(n^2)$).</span>
-<span id="cb20-865"><a href="#cb20-865" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sort`</span> は桁違いに速くなっています. ソートの時間計算量は $O(n \log n)$ なので, これはアルゴリズムそのものの改善であり, $n$ が大きくなるほど差は開きます.</span>
-<span id="cb20-866"><a href="#cb20-866" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-867"><a href="#cb20-867" aria-hidden="true" tabindex="-1"></a>ベクトル化や Rcpp が削れるのは定数項だけです. 最も強力な高速化は, このようにアルゴリズムを変えてオーダー自体を下げることです.</span>
-<span id="cb20-868"><a href="#cb20-868" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-869"><a href="#cb20-869" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb20-870"><a href="#cb20-870" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-871"><a href="#cb20-871" aria-hidden="true" tabindex="-1"></a><span class="fu">### ブートストラップを並列化する</span></span>
+<span id="cb20-863"><a href="#cb20-863" aria-hidden="true" tabindex="-1"></a><span class="in">`bench::mark()`</span> は既定で4つの返り値が一致することも確認してくれます. 結果は本文で見た構図の総復習になっています.</span>
+<span id="cb20-864"><a href="#cb20-864" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-865"><a href="#cb20-865" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`vec`</span> は <span class="in">`loop`</span> の数十倍速くなりますが, これは型推定のオーバーヘッドを削っただけで, オーダーは $O(n^2)$ のままです.</span>
+<span id="cb20-866"><a href="#cb20-866" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`outer`</span> は <span class="in">`vec`</span> よりさらに速くなるわけではなく, $n \times n$ の行列を丸ごと確保するためメモリ割り当てが桁違いに大きくなります (領域計算量 $O(n^2)$).</span>
+<span id="cb20-867"><a href="#cb20-867" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sort`</span> は桁違いに速くなっています. ソートの時間計算量は $O(n \log n)$ なので, これはアルゴリズムそのものの改善であり, $n$ が大きくなるほど差は開きます.</span>
+<span id="cb20-868"><a href="#cb20-868" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-869"><a href="#cb20-869" aria-hidden="true" tabindex="-1"></a>ベクトル化や Rcpp が削れるのは定数項だけです. 最も強力な高速化は, このようにアルゴリズムを変えてオーダー自体を下げることです.</span>
+<span id="cb20-870"><a href="#cb20-870" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-871"><a href="#cb20-871" aria-hidden="true" tabindex="-1"></a>::::</span>
 <span id="cb20-872"><a href="#cb20-872" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-873"><a href="#cb20-873" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb20-874"><a href="#cb20-874" aria-hidden="true" tabindex="-1"></a>OLS 係数のブートストラップ標準誤差を計算し, 並列化の効果を測ります. まず擬似データを作ります.</span>
-<span id="cb20-875"><a href="#cb20-875" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-878"><a href="#cb20-878" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-879"><a href="#cb20-879" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-data</span></span>
-<span id="cb20-880"><a href="#cb20-880" aria-hidden="true" tabindex="-1"></a>n_obs <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb20-881"><a href="#cb20-881" aria-hidden="true" tabindex="-1"></a>df_boot <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(n_obs)) <span class="sc">|&gt;</span></span>
-<span id="cb20-882"><a href="#cb20-882" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n_obs))</span>
-<span id="cb20-883"><a href="#cb20-883" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb20-884"><a href="#cb20-884" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-885"><a href="#cb20-885" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-886"><a href="#cb20-886" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>行を復元抽出して <span class="in">`lm(y ~ x)`</span> を推定し, <span class="in">`x`</span> の係数を返す, という操作を $B$ 回繰り返す <span class="in">`boot_ols`</span> を <span class="in">`purrr::map_dbl()`</span> で書いてください.</span>
-<span id="cb20-887"><a href="#cb20-887" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`furrr::future_map_dbl()`</span> に置き換えた並列版 <span class="in">`boot_ols_par`</span> を書いてください. 並列で乱数を使うために必要なオプションがあります.</span>
-<span id="cb20-888"><a href="#cb20-888" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`plan(multisession, workers = 4)`</span> のもとで, <span class="in">`bench::mark()`</span> で逐次版と並列版を比較してください (<span class="in">`check = FALSE`</span> が必要です. なぜでしょうか). 速度向上は4ワーカーに見合ったものになっているでしょうか.</span>
-<span id="cb20-889"><a href="#cb20-889" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ブートストラップ標準誤差 (係数の標準偏差) を, <span class="in">`lm()`</span> の解析的な標準誤差と比べてください.</span>
-<span id="cb20-890"><a href="#cb20-890" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-891"><a href="#cb20-891" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb20-892"><a href="#cb20-892" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb20-893"><a href="#cb20-893" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-896"><a href="#cb20-896" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-897"><a href="#cb20-897" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-funs</span></span>
-<span id="cb20-898"><a href="#cb20-898" aria-hidden="true" tabindex="-1"></a>boot_ols <span class="ot">&lt;-</span> <span class="cf">function</span>(df, B) {</span>
-<span id="cb20-899"><a href="#cb20-899" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>B, \(b) {</span>
-<span id="cb20-900"><a href="#cb20-900" aria-hidden="true" tabindex="-1"></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-901"><a href="#cb20-901" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df[idx, ]))[[<span class="st">"x"</span>]]</span>
-<span id="cb20-902"><a href="#cb20-902" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb20-903"><a href="#cb20-903" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-904"><a href="#cb20-904" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-905"><a href="#cb20-905" aria-hidden="true" tabindex="-1"></a>boot_ols_par <span class="ot">&lt;-</span> <span class="cf">function</span>(df, B) {</span>
-<span id="cb20-906"><a href="#cb20-906" aria-hidden="true" tabindex="-1"></a>  furrr<span class="sc">::</span><span class="fu">future_map_dbl</span>(</span>
-<span id="cb20-907"><a href="#cb20-907" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>B,</span>
-<span id="cb20-908"><a href="#cb20-908" aria-hidden="true" tabindex="-1"></a>    \(b) {</span>
-<span id="cb20-909"><a href="#cb20-909" aria-hidden="true" tabindex="-1"></a>      idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-910"><a href="#cb20-910" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df[idx, ]))[[<span class="st">"x"</span>]]</span>
-<span id="cb20-911"><a href="#cb20-911" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb20-912"><a href="#cb20-912" aria-hidden="true" tabindex="-1"></a>    <span class="at">.options =</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-913"><a href="#cb20-913" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-914"><a href="#cb20-914" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-915"><a href="#cb20-915" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-916"><a href="#cb20-916" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-917"><a href="#cb20-917" aria-hidden="true" tabindex="-1"></a><span class="in">`furrr_options(seed = TRUE)`</span> は, 並列でも統計的に健全で再現可能な乱数列 (L'Ecuyer-CMRG) を各ワーカーに配るためのオプションです. これを付けずに乱数を使うと furrr は警告を出します.</span>
+<span id="cb20-873"><a href="#cb20-873" aria-hidden="true" tabindex="-1"></a><span class="fu">### ブートストラップを並列化する</span></span>
+<span id="cb20-874"><a href="#cb20-874" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-875"><a href="#cb20-875" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb20-876"><a href="#cb20-876" aria-hidden="true" tabindex="-1"></a>OLS 係数のブートストラップ標準誤差を計算し, 並列化の効果を測ります. まず擬似データを作ります.</span>
+<span id="cb20-877"><a href="#cb20-877" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-880"><a href="#cb20-880" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-881"><a href="#cb20-881" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-data</span></span>
+<span id="cb20-882"><a href="#cb20-882" aria-hidden="true" tabindex="-1"></a>n_obs <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb20-883"><a href="#cb20-883" aria-hidden="true" tabindex="-1"></a>df_boot <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(n_obs)) <span class="sc">|&gt;</span></span>
+<span id="cb20-884"><a href="#cb20-884" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n_obs))</span>
+<span id="cb20-885"><a href="#cb20-885" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb20-886"><a href="#cb20-886" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-887"><a href="#cb20-887" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-888"><a href="#cb20-888" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>行を復元抽出して <span class="in">`lm(y ~ x)`</span> を推定し, <span class="in">`x`</span> の係数を返す, という操作を $B$ 回繰り返す <span class="in">`boot_ols`</span> を <span class="in">`purrr::map_dbl()`</span> で書いてください.</span>
+<span id="cb20-889"><a href="#cb20-889" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`furrr::future_map_dbl()`</span> に置き換えた並列版 <span class="in">`boot_ols_par`</span> を書いてください. 並列で乱数を使うために必要なオプションがあります.</span>
+<span id="cb20-890"><a href="#cb20-890" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`plan(multisession, workers = 4)`</span> のもとで, <span class="in">`bench::mark()`</span> で逐次版と並列版を比較してください (<span class="in">`check = FALSE`</span> が必要です. なぜでしょうか). 速度向上は4ワーカーに見合ったものになっているでしょうか.</span>
+<span id="cb20-891"><a href="#cb20-891" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>ブートストラップ標準誤差 (係数の標準偏差) を, <span class="in">`lm()`</span> の解析的な標準誤差と比べてください.</span>
+<span id="cb20-892"><a href="#cb20-892" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-893"><a href="#cb20-893" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb20-894"><a href="#cb20-894" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb20-895"><a href="#cb20-895" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-898"><a href="#cb20-898" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-899"><a href="#cb20-899" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-funs</span></span>
+<span id="cb20-900"><a href="#cb20-900" aria-hidden="true" tabindex="-1"></a>boot_ols <span class="ot">&lt;-</span> <span class="cf">function</span>(df, B) {</span>
+<span id="cb20-901"><a href="#cb20-901" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>B, \(b) {</span>
+<span id="cb20-902"><a href="#cb20-902" aria-hidden="true" tabindex="-1"></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-903"><a href="#cb20-903" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df[idx, ]))[[<span class="st">"x"</span>]]</span>
+<span id="cb20-904"><a href="#cb20-904" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb20-905"><a href="#cb20-905" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-906"><a href="#cb20-906" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-907"><a href="#cb20-907" aria-hidden="true" tabindex="-1"></a>boot_ols_par <span class="ot">&lt;-</span> <span class="cf">function</span>(df, B) {</span>
+<span id="cb20-908"><a href="#cb20-908" aria-hidden="true" tabindex="-1"></a>  furrr<span class="sc">::</span><span class="fu">future_map_dbl</span>(</span>
+<span id="cb20-909"><a href="#cb20-909" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>B,</span>
+<span id="cb20-910"><a href="#cb20-910" aria-hidden="true" tabindex="-1"></a>    \(b) {</span>
+<span id="cb20-911"><a href="#cb20-911" aria-hidden="true" tabindex="-1"></a>      idx <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-912"><a href="#cb20-912" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df[idx, ]))[[<span class="st">"x"</span>]]</span>
+<span id="cb20-913"><a href="#cb20-913" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb20-914"><a href="#cb20-914" aria-hidden="true" tabindex="-1"></a>    <span class="at">.options =</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-915"><a href="#cb20-915" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-916"><a href="#cb20-916" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-917"><a href="#cb20-917" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-918"><a href="#cb20-918" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-921"><a href="#cb20-921" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-922"><a href="#cb20-922" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-benchmark</span></span>
-<span id="cb20-923"><a href="#cb20-923" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="dv">4</span>)</span>
-<span id="cb20-924"><a href="#cb20-924" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-925"><a href="#cb20-925" aria-hidden="true" tabindex="-1"></a>bm_boot <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
-<span id="cb20-926"><a href="#cb20-926" aria-hidden="true" tabindex="-1"></a>  <span class="at">serial =</span> <span class="fu">boot_ols</span>(df_boot, B),</span>
-<span id="cb20-927"><a href="#cb20-927" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="fu">boot_ols_par</span>(df_boot, B),</span>
-<span id="cb20-928"><a href="#cb20-928" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb20-929"><a href="#cb20-929" aria-hidden="true" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">3</span>,</span>
-<span id="cb20-930"><a href="#cb20-930" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
-<span id="cb20-931"><a href="#cb20-931" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-932"><a href="#cb20-932" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-933"><a href="#cb20-933" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(sequential)</span>
+<span id="cb20-919"><a href="#cb20-919" aria-hidden="true" tabindex="-1"></a><span class="in">`furrr_options(seed = TRUE)`</span> は, 並列でも統計的に健全で再現可能な乱数列 (L'Ecuyer-CMRG) を各ワーカーに配るためのオプションです. これを付けずに乱数を使うと furrr は警告を出します.</span>
+<span id="cb20-920"><a href="#cb20-920" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-923"><a href="#cb20-923" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-924"><a href="#cb20-924" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-benchmark</span></span>
+<span id="cb20-925"><a href="#cb20-925" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="dv">4</span>)</span>
+<span id="cb20-926"><a href="#cb20-926" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-927"><a href="#cb20-927" aria-hidden="true" tabindex="-1"></a>bm_boot <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb20-928"><a href="#cb20-928" aria-hidden="true" tabindex="-1"></a>  <span class="at">serial =</span> <span class="fu">boot_ols</span>(df_boot, B),</span>
+<span id="cb20-929"><a href="#cb20-929" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="fu">boot_ols_par</span>(df_boot, B),</span>
+<span id="cb20-930"><a href="#cb20-930" aria-hidden="true" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-931"><a href="#cb20-931" aria-hidden="true" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">3</span>,</span>
+<span id="cb20-932"><a href="#cb20-932" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_gc =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-933"><a href="#cb20-933" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb20-934"><a href="#cb20-934" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-935"><a href="#cb20-935" aria-hidden="true" tabindex="-1"></a>bm_boot <span class="sc">|&gt;</span></span>
-<span id="cb20-936"><a href="#cb20-936" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
-<span id="cb20-937"><a href="#cb20-937" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median)</span>
-<span id="cb20-938"><a href="#cb20-938" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-939"><a href="#cb20-939" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-940"><a href="#cb20-940" aria-hidden="true" tabindex="-1"></a><span class="in">`check = FALSE`</span> が必要なのは, 逐次版と並列版で乱数の発生順序が異なり, リサンプルされる行が同じにならないためです. 返り値は一致しませんが, どちらも同じ分布からのブートストラップ標本なので, 標準誤差の推定値としてはどちらも正しいものです.</span>
+<span id="cb20-935"><a href="#cb20-935" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(sequential)</span>
+<span id="cb20-936"><a href="#cb20-936" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-937"><a href="#cb20-937" aria-hidden="true" tabindex="-1"></a>bm_boot <span class="sc">|&gt;</span></span>
+<span id="cb20-938"><a href="#cb20-938" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expression =</span> <span class="fu">as.character</span>(expression)) <span class="sc">|&gt;</span></span>
+<span id="cb20-939"><a href="#cb20-939" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(expression, median)</span>
+<span id="cb20-940"><a href="#cb20-940" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-941"><a href="#cb20-941" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-942"><a href="#cb20-942" aria-hidden="true" tabindex="-1"></a>各リサンプルの推定は互いに独立 (embarrassingly parallel) なので, ブートストラップは原理的には並列化に理想的な計算です. ところが結果を見ると, 並列版は多少速くなる程度で, コア数の4倍にはほど遠いはずです (環境やそのときの負荷によっては, 逆に遅くなることもあります). <span class="in">`lm()`</span> 1回は 1ms 程度と軽いため, 別プロセスにデータ・タスク・乱数シードを配って結果を回収する <span class="in">`multisession`</span> のオーバーヘッドが, 並列化の利得の大部分を食いつぶしてしまうのです. 本文の <span class="in">`match_nn`</span> ($n = 30000$) がコア数に近い速度向上を得られたのは, 計算全体が十分重かったからでした.</span>
+<span id="cb20-942"><a href="#cb20-942" aria-hidden="true" tabindex="-1"></a><span class="in">`check = FALSE`</span> が必要なのは, 逐次版と並列版で乱数の発生順序が異なり, リサンプルされる行が同じにならないためです. 返り値は一致しませんが, どちらも同じ分布からのブートストラップ標本なので, 標準誤差の推定値としてはどちらも正しいものです.</span>
 <span id="cb20-943"><a href="#cb20-943" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-944"><a href="#cb20-944" aria-hidden="true" tabindex="-1"></a>このオーバーヘッドを小さくするには, プロセスを新しく立てる代わりにメモリを共有する仕組みを使う方法があります. 本文の <span class="in">`RcppParallel`</span> (スレッド) がその一例でした. <span class="in">`future`</span> にも, プロセスをフォークしてメモリを共有する <span class="in">`plan(multicore)`</span> というバックエンドがあり (macOS / Linux で, RStudio 以外から実行する場合に使えます), この例でも <span class="in">`multisession`</span> よりはっきり速くなります. 「並列化はタダではない」という本文の教訓が, 実際の推定でも確認できました.</span>
+<span id="cb20-944"><a href="#cb20-944" aria-hidden="true" tabindex="-1"></a>各リサンプルの推定は互いに独立 (embarrassingly parallel) なので, ブートストラップは原理的には並列化に理想的な計算です. ところが結果を見ると, 並列版は多少速くなる程度で, コア数の4倍にはほど遠いはずです (環境やそのときの負荷によっては, 逆に遅くなることもあります). <span class="in">`lm()`</span> 1回は 1ms 程度と軽いため, 別プロセスにデータ・タスク・乱数シードを配って結果を回収する <span class="in">`multisession`</span> のオーバーヘッドが, 並列化の利得の大部分を食いつぶしてしまうのです. 本文の <span class="in">`match_nn`</span> ($n = 30000$) がコア数に近い速度向上を得られたのは, 計算全体が十分重かったからでした.</span>
 <span id="cb20-945"><a href="#cb20-945" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-948"><a href="#cb20-948" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-949"><a href="#cb20-949" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-se</span></span>
-<span id="cb20-950"><a href="#cb20-950" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fu">boot_ols</span>(df_boot, B)</span>
-<span id="cb20-951"><a href="#cb20-951" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df_boot)</span>
-<span id="cb20-952"><a href="#cb20-952" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-953"><a href="#cb20-953" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
-<span id="cb20-954"><a href="#cb20-954" aria-hidden="true" tabindex="-1"></a>  <span class="at">bootstrap =</span> <span class="fu">sd</span>(draws),</span>
-<span id="cb20-955"><a href="#cb20-955" aria-hidden="true" tabindex="-1"></a>  <span class="at">analytic =</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">"x"</span>, <span class="st">"Std. Error"</span>]</span>
-<span id="cb20-956"><a href="#cb20-956" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-957"><a href="#cb20-957" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-958"><a href="#cb20-958" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-959"><a href="#cb20-959" aria-hidden="true" tabindex="-1"></a>ブートストラップ標準誤差は解析的な標準誤差とほぼ一致します. この例では <span class="in">`lm()`</span> が正しい標準誤差を返すので比較のためのデモにすぎませんが, 解析的な標準誤差が手に入らない複雑な推定量でも, ブートストラップなら同じ手順で標準誤差を得られます.</span>
-<span id="cb20-960"><a href="#cb20-960" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-961"><a href="#cb20-961" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb20-946"><a href="#cb20-946" aria-hidden="true" tabindex="-1"></a>このオーバーヘッドを小さくするには, プロセスを新しく立てる代わりにメモリを共有する仕組みを使う方法があります. 本文の <span class="in">`RcppParallel`</span> (スレッド) がその一例でした. <span class="in">`future`</span> にも, プロセスをフォークしてメモリを共有する <span class="in">`plan(multicore)`</span> というバックエンドがあり (macOS / Linux で, RStudio 以外から実行する場合に使えます), この例でも <span class="in">`multisession`</span> よりはっきり速くなります. 「並列化はタダではない」という本文の教訓が, 実際の推定でも確認できました.</span>
+<span id="cb20-947"><a href="#cb20-947" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-950"><a href="#cb20-950" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-951"><a href="#cb20-951" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: exercise-boot-se</span></span>
+<span id="cb20-952"><a href="#cb20-952" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fu">boot_ols</span>(df_boot, B)</span>
+<span id="cb20-953"><a href="#cb20-953" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df_boot)</span>
+<span id="cb20-954"><a href="#cb20-954" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-955"><a href="#cb20-955" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb20-956"><a href="#cb20-956" aria-hidden="true" tabindex="-1"></a>  <span class="at">bootstrap =</span> <span class="fu">sd</span>(draws),</span>
+<span id="cb20-957"><a href="#cb20-957" aria-hidden="true" tabindex="-1"></a>  <span class="at">analytic =</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">"x"</span>, <span class="st">"Std. Error"</span>]</span>
+<span id="cb20-958"><a href="#cb20-958" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-959"><a href="#cb20-959" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-960"><a href="#cb20-960" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-961"><a href="#cb20-961" aria-hidden="true" tabindex="-1"></a>ブートストラップ標準誤差は解析的な標準誤差とほぼ一致します. この例では <span class="in">`lm()`</span> が正しい標準誤差を返すので比較のためのデモにすぎませんが, 解析的な標準誤差が手に入らない複雑な推定量でも, ブートストラップなら同じ手順で標準誤差を得られます.</span>
+<span id="cb20-962"><a href="#cb20-962" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-963"><a href="#cb20-963" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb20-964"><a href="#cb20-964" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-965"><a href="#cb20-965" aria-hidden="true" tabindex="-1"></a>:::::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

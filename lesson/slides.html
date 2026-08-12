@@ -354,6 +354,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>GitHub</span>
 <span class="github-card-lang-dot"></span>
 <span>Typst</span>
+<span>★</span>
+<span>1</span>
 </div>
 </div>
 </a>
@@ -1708,97 +1710,101 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a>Appendix のスライドが何十枚あっても「本編は25枚中25枚で終わり」と見えるので, 聞いている人に余計なプレッシャーを与えずに済みます.</span>
 <span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
 <span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a>この章の演習は, <span class="in">`quarto-touying-typst`</span> で実際に小さなスライドを組み立てます. 空のフォルダを1つ作り, そこを作業場所にしてください. Quarto と Typst が使える環境が必要です. 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a>テンプレートからスライドの雛形を作り, タイトルスライドを自分のものに差し替えます. サンプル付きのテンプレートを取得し, YAML でタイトル・サブタイトル・著者・テーマを設定して, PDF にレンダリングしてください.</span>
-<span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb21-366"><a href="#cb21-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a>作業フォルダで, サンプルスライド付きのテンプレートを取得します.</span>
+<span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a>この章の演習は, <span class="in">`quarto-touying-typst`</span> で実際に小さなスライドを組み立てます. 空のフォルダを1つ作り, そこを作業場所にしてください. Quarto と Typst が使える環境が必要です. 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a>テンプレートからスライドの雛形を作り, タイトルスライドを自分のものに差し替えます. サンプル付きのテンプレートを取得し, YAML でタイトル・サブタイトル・著者・テーマを設定して, PDF にレンダリングしてください.</span>
+<span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-366"><a href="#cb21-366" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
 <span id="cb21-368"><a href="#cb21-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-369"><a href="#cb21-369" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
-<span id="cb21-370"><a href="#cb21-370" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template kazuyanagimoto/quarto-touying-typst</span>
-<span id="cb21-371"><a href="#cb21-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-372"><a href="#cb21-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-373"><a href="#cb21-373" aria-hidden="true" tabindex="-1"></a>生成された <span class="in">`.qmd`</span> のフロントマターを, 次のように書き換えます.</span>
+<span id="cb21-369"><a href="#cb21-369" aria-hidden="true" tabindex="-1"></a>作業フォルダで, サンプルスライド付きのテンプレートを取得します.</span>
+<span id="cb21-370"><a href="#cb21-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-371"><a href="#cb21-371" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb21-372"><a href="#cb21-372" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template kazuyanagimoto/quarto-touying-typst</span>
+<span id="cb21-373"><a href="#cb21-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-374"><a href="#cb21-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-375"><a href="#cb21-375" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb21-376"><a href="#cb21-376" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> My First Touying Slides</span></span>
-<span id="cb21-378"><a href="#cb21-378" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> 研究の進捗報告</span></span>
-<span id="cb21-379"><a href="#cb21-379" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> touying-typst</span></span>
-<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> metropolis</span></span>
-<span id="cb21-381"><a href="#cb21-381" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 山田太郎</span></span>
-<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliations</span><span class="kw">:</span><span class="at"> 神戸大学</span></span>
-<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
-<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a><span class="in">`quarto render`</span> で PDF を作るか, <span class="in">`quarto preview`</span> で保存のたびに更新されるプレビューを開きます. タイトルスライドは YAML の <span class="in">`title`</span> などから自動で作られ, <span class="in">`theme:`</span> の一行を変えれば見た目が切り替わります.</span>
-<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-392"><a href="#cb21-392" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a>中身のスライドを追加します. セクションの区切りスライドを1枚, 箇条書きを1項目ずつ表示する通常スライドを1枚, 図の代わりに数式を右に置いた2段組みスライドを1枚, それぞれ作ってください.</span>
-<span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
-<span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a><span class="fu"># 背景</span></span>
-<span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a><span class="fu">## リサーチクエスチョン</span></span>
+<span id="cb21-375"><a href="#cb21-375" aria-hidden="true" tabindex="-1"></a>生成された <span class="in">`.qmd`</span> のフロントマターを, 次のように書き換えます.</span>
+<span id="cb21-376"><a href="#cb21-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb21-378"><a href="#cb21-378" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb21-379"><a href="#cb21-379" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> My First Touying Slides</span></span>
+<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> 研究の進捗報告</span></span>
+<span id="cb21-381"><a href="#cb21-381" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> touying-typst</span></span>
+<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> metropolis</span></span>
+<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 山田太郎</span></span>
+<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliations</span><span class="kw">:</span><span class="at"> 神戸大学</span></span>
+<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
+<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a><span class="in">`quarto render`</span> で PDF を作るか, <span class="in">`quarto preview`</span> で保存のたびに更新されるプレビューを開きます. タイトルスライドは YAML の <span class="in">`title`</span> などから自動で作られ, <span class="in">`theme:`</span> の一行を変えれば見た目が切り替わります.</span>
+<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-392"><a href="#cb21-392" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a>中身のスライドを追加します. セクションの区切りスライドを1枚, 箇条書きを1項目ずつ表示する通常スライドを1枚, 図の代わりに数式を右に置いた2段組みスライドを1枚, それぞれ作ってください.</span>
+<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a><span class="fu"># 背景</span></span>
 <span id="cb21-402"><a href="#cb21-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a>::: {.incremental}</span>
-<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>何を知りたいのか</span>
-<span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>なぜ重要なのか</span>
-<span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>どう答えるのか</span>
-<span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a><span class="fu">## 推定モデル</span></span>
+<span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## リサーチクエスチョン</span></span>
+<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a>::: {.incremental}</span>
+<span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>何を知りたいのか</span>
+<span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>なぜ重要なのか</span>
+<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>どう答えるのか</span>
+<span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb21-410"><a href="#cb21-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
-<span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a>::: {.column width="45%"}</span>
-<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a>記号の定義:</span>
-<span id="cb21-414"><a href="#cb21-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$x_i$: 処置</span>
-<span id="cb21-416"><a href="#cb21-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$y_i$: アウトカム</span>
-<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-418"><a href="#cb21-418" aria-hidden="true" tabindex="-1"></a>::: {.column width="55%"}</span>
-<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a>$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$</span>
-<span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a><span class="in">`#` はセクションの区切りスライド, `##` は通常のスライドになります. `.incremental` で囲むと箇条書きが1項目ずつ現れ, `.columns` と `.column` で2段組みになります.</span></span>
-<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
-<span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {.quiz}</span></span>
-<span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a><span class="in">最後に, R チャンクで作った図のスライドを足します. アンチパターンの節で見た文字サイズの問題を思い出し, スライドで読める大きさに調整してください.</span></span>
-<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip collapse="true"}</span></span>
-<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a><span class="in">## 解答例</span></span>
-<span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a><span class="in">````markdown</span></span>
-<span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width: 10</span></span>
-<span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 4.5</span></span>
-<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(penguins, aes(bill_len, bill_dep, color = species)) +</span></span>
-<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
-<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a><span class="in">  theme_minimal(base_size = 20)</span></span>
-<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a><span class="in">スライドでは R チャンクがそのまま実行され, ソースコードは既定で非表示になります. 重要なのは `theme_minimal(base_size = 20)` です. ggplot2 の既定の 11pt のままスライドに縮小して貼ると, 軸や凡例の文字がほとんど読めません. 図中の文字がスライドの本文と同じくらいに見えるよう `base_size` を大きくしておくと, 会場の後ろの席からも読めます. さらに, インラインコードで推定結果の数値を本文に埋め込んでおけば, 発表直前にデータが更新されても, レンダリングし直すだけで図も数値も追随します.</span></span>
-<span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a><span class="fu">## 推定モデル</span></span>
+<span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb21-414"><a href="#cb21-414" aria-hidden="true" tabindex="-1"></a>::: {.column width="45%"}</span>
+<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a>記号の定義:</span>
+<span id="cb21-416"><a href="#cb21-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$x_i$: 処置</span>
+<span id="cb21-418"><a href="#cb21-418" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$y_i$: アウトカム</span>
+<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a>::: {.column width="55%"}</span>
+<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a>$$y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$</span>
+<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a><span class="in">`#` はセクションの区切りスライド, `##` は通常のスライドになります. `.incremental` で囲むと箇条書きが1項目ずつ現れ, `.columns` と `.column` で2段組みになります.</span></span>
+<span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a><span class="in">:::: {.quiz}</span></span>
+<span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a><span class="in">最後に, R チャンクで作った図のスライドを足します. アンチパターンの節で見た文字サイズの問題を思い出し, スライドで読める大きさに調整してください.</span></span>
+<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip collapse="true"}</span></span>
+<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a><span class="in">## 解答例</span></span>
+<span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a><span class="in">````markdown</span></span>
+<span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width: 10</span></span>
+<span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-height: 4.5</span></span>
+<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(penguins, aes(bill_len, bill_dep, color = species)) +</span></span>
+<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
+<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a><span class="in">  theme_minimal(base_size = 20)</span></span>
+<span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a><span class="in">スライドでは R チャンクがそのまま実行され, ソースコードは既定で非表示になります. 重要なのは `theme_minimal(base_size = 20)` です. ggplot2 の既定の 11pt のままスライドに縮小して貼ると, 軸や凡例の文字がほとんど読めません. 図中の文字がスライドの本文と同じくらいに見えるよう `base_size` を大きくしておくと, 会場の後ろの席からも読めます. さらに, インラインコードで推定結果の数値を本文に埋め込んでおけば, 発表直前にデータが更新されても, レンダリングし直すだけで図も数値も追随します.</span></span>
+<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a><span class="in">::::</span></span>
+<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-451"><a href="#cb21-451" aria-hidden="true" tabindex="-1"></a><span class="in">:::::</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

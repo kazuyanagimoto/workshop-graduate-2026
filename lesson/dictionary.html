@@ -404,7 +404,7 @@ window.Quarto = {
 <div id="fig-path-search" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-path-search-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/path-search.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;C.1: シェルが PATH からコマンドを探す流れ"><img src="../static/cetz/path-search.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="../static/cetz/path-search.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;C.1: シェルが PATH からコマンドを探す流れ"><img src="../static/cetz/path-search.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-path-search-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;C.1: シェルが PATH からコマンドを探す流れ
@@ -1100,7 +1100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>つまり, <span class="in">`ls`</span> と打つのは, 実質的に <span class="in">`/bin/ls`</span> というファイルを実行しているということです (@fig-path-search). <span class="in">`git`</span> や <span class="in">`quarto`</span>, <span class="in">`R`</span> といったコマンドも同じで, <span class="in">`PATH`</span> のどこかのディレクトリに置かれた実行ファイルが呼び出されています. コマンドは魔法で動いているのではなく, ディスク上の実行ファイルを名前で探して起動しているだけなのです.</span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="al">![シェルが PATH からコマンドを探す流れ](../static/cetz/path-search.svg)</span>{#fig-path-search fig-align="center" width="80%"}</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="al">![シェルが PATH からコマンドを探す流れ](../static/cetz/path-search.svg)</span>{#fig-path-search fig-align="center"}</span>
 <span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>リストの先頭から順に探すので, 同じ名前のコマンドが複数の場所にあると, <span class="in">`PATH`</span> で前に並んでいるディレクトリのものが優先されます. また, コマンドを打って <span class="in">`command not found`</span> と出るのは, 「そのプログラムが存在しない」とは限らず, 「<span class="in">`PATH`</span> のどのディレクトリにも見つからない」だけのこともあります.</span>
 <span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>

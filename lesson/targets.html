@@ -338,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-pipeline-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pipeline-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../static/cetz/pipeline-overview.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;11.1: 論文を書き終えた頃にできあがっているパイプライン"><img src="../static/cetz/pipeline-overview.svg" class="img-fluid figure-img"></a>
+<a href="../static/cetz/pipeline-overview.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;11.1: 論文を書き終えた頃にできあがっているパイプライン"><img src="../static/cetz/pipeline-overview.svg" class="img-fluid figure-img" style="width:100.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipeline-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11.1: 論文を書き終えた頃にできあがっているパイプライン
@@ -1310,7 +1310,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.</span>
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="al">![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg)</span>{#fig-pipeline-overview}</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="al">![論文を書き終えた頃にできあがっているパイプライン](../static/cetz/pipeline-overview.svg)</span>{#fig-pipeline-overview width="100%"}</span>
 <span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>次節ではワークフローの各部分を解説していきますが, その前に <span class="in">`{targets}`</span> の基本的な使い方を解説します.</span>
 <span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
@@ -1675,92 +1675,96 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb19-392"><a href="#cb19-392" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb19-393"><a href="#cb19-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-394"><a href="#cb19-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-395"><a href="#cb19-395" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb19-395"><a href="#cb19-395" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
 <span id="cb19-396"><a href="#cb19-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-397"><a href="#cb19-397" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さなパイプラインを組んで, <span class="in">`{targets}`</span> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<span class="in">`{targets}`</span> と <span class="in">`{tarchetypes}`</span> が入っていなければ <span class="in">`install.packages(c("targets", "tarchetypes"))`</span> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb19-397"><a href="#cb19-397" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb19-398"><a href="#cb19-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-399"><a href="#cb19-399" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-400"><a href="#cb19-400" aria-hidden="true" tabindex="-1"></a>最小のパイプラインを作ります. 作業ディレクトリに <span class="in">`_targets.R`</span> を作り, <span class="in">`penguins`</span> データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. <span class="in">`tar_make()`</span> で実行し, <span class="in">`tar_visnetwork()`</span> で依存関係を可視化しましょう.</span>
-<span id="cb19-401"><a href="#cb19-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-402"><a href="#cb19-402" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-403"><a href="#cb19-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-404"><a href="#cb19-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-405"><a href="#cb19-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb19-407"><a href="#cb19-407" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
-<span id="cb19-408"><a href="#cb19-408" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb19-409"><a href="#cb19-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-410"><a href="#cb19-410" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb19-411"><a href="#cb19-411" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb19-412"><a href="#cb19-412" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.by =</span> species)</span>
-<span id="cb19-413"><a href="#cb19-413" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-414"><a href="#cb19-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-415"><a href="#cb19-415" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
-<span id="cb19-416"><a href="#cb19-416" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_raw =</span> penguins,</span>
-<span id="cb19-417"><a href="#cb19-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_summary =</span> <span class="fu">summarize_penguins</span>(penguins_raw)</span>
-<span id="cb19-418"><a href="#cb19-418" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-419"><a href="#cb19-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-420"><a href="#cb19-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-421"><a href="#cb19-421" aria-hidden="true" tabindex="-1"></a>R のコンソールから, 次を実行します.</span>
+<span id="cb19-399"><a href="#cb19-399" aria-hidden="true" tabindex="-1"></a>この章の演習は, 実際に小さなパイプラインを組んで, <span class="in">`{targets}`</span> の心臓部である「上流が変わると, それに依存する下流だけが再計算される」挙動を自分の目で確かめます. 空のディレクトリを1つ作り, そこを作業場所にしてください (<span class="in">`{targets}`</span> と <span class="in">`{tarchetypes}`</span> が入っていなければ <span class="in">`install.packages(c("targets", "tarchetypes"))`</span> で入れておきます). 解答例は畳んであるので, まず自分で書いてみましょう.</span>
+<span id="cb19-400"><a href="#cb19-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-401"><a href="#cb19-401" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-402"><a href="#cb19-402" aria-hidden="true" tabindex="-1"></a>最小のパイプラインを作ります. 作業ディレクトリに <span class="in">`_targets.R`</span> を作り, <span class="in">`penguins`</span> データを読み込むオブジェクトと, 種ごとの平均くちばし長を計算する関数を定義したパイプラインを書いてください. <span class="in">`tar_make()`</span> で実行し, <span class="in">`tar_visnetwork()`</span> で依存関係を可視化しましょう.</span>
+<span id="cb19-403"><a href="#cb19-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-404"><a href="#cb19-404" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-405"><a href="#cb19-405" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb19-406"><a href="#cb19-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-407"><a href="#cb19-407" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-408"><a href="#cb19-408" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb19-409"><a href="#cb19-409" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tarchetypes)</span>
+<span id="cb19-410"><a href="#cb19-410" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb19-411"><a href="#cb19-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-412"><a href="#cb19-412" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb19-413"><a href="#cb19-413" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb19-414"><a href="#cb19-414" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.by =</span> species)</span>
+<span id="cb19-415"><a href="#cb19-415" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-416"><a href="#cb19-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-417"><a href="#cb19-417" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_plan</span>(</span>
+<span id="cb19-418"><a href="#cb19-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_raw =</span> penguins,</span>
+<span id="cb19-419"><a href="#cb19-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">penguins_summary =</span> <span class="fu">summarize_penguins</span>(penguins_raw)</span>
+<span id="cb19-420"><a href="#cb19-420" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-421"><a href="#cb19-421" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-422"><a href="#cb19-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-423"><a href="#cb19-423" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-424"><a href="#cb19-424" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span>
-<span id="cb19-425"><a href="#cb19-425" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb19-426"><a href="#cb19-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-427"><a href="#cb19-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-428"><a href="#cb19-428" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins_raw`</span> (オブジェクト) から <span class="in">`summarize_penguins()`</span> (関数) を通って <span class="in">`penguins_summary`</span> (オブジェクト) へ, という依存関係が図に表れます. <span class="in">`tar_make()`</span> を実行済みなので, どのターゲットもグレーで表示されます.</span>
-<span id="cb19-429"><a href="#cb19-429" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-430"><a href="#cb19-430" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb19-431"><a href="#cb19-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-432"><a href="#cb19-432" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-433"><a href="#cb19-433" aria-hidden="true" tabindex="-1"></a>計算結果を取り出します. パイプラインが作った <span class="in">`penguins_summary`</span> の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.</span>
-<span id="cb19-434"><a href="#cb19-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-435"><a href="#cb19-435" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-436"><a href="#cb19-436" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-437"><a href="#cb19-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-438"><a href="#cb19-438" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-439"><a href="#cb19-439" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the value directly</span></span>
-<span id="cb19-440"><a href="#cb19-440" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(penguins_summary)</span>
-<span id="cb19-441"><a href="#cb19-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-442"><a href="#cb19-442" aria-hidden="true" tabindex="-1"></a><span class="co"># Load it into the environment under its own name</span></span>
-<span id="cb19-443"><a href="#cb19-443" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(penguins_summary)</span>
-<span id="cb19-444"><a href="#cb19-444" aria-hidden="true" tabindex="-1"></a>penguins_summary</span>
-<span id="cb19-445"><a href="#cb19-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-446"><a href="#cb19-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-447"><a href="#cb19-447" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_read()`</span> は値を返すので <span class="in">`x &lt;- tar_read(...)`</span> のように受け取れます. <span class="in">`tar_load()`</span> はターゲット名と同じ変数を環境に作ります. どちらも, 一度 <span class="in">`tar_make()`</span> で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.</span>
-<span id="cb19-448"><a href="#cb19-448" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-449"><a href="#cb19-449" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-451"><a href="#cb19-451" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb19-452"><a href="#cb19-452" aria-hidden="true" tabindex="-1"></a>いよいよ本題です. <span class="in">`summarize_penguins()`</span> に平均ひれ長 (<span class="in">`flipper_len`</span>) の計算を追加してから, <span class="in">`tar_make()`</span> を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.</span>
-<span id="cb19-453"><a href="#cb19-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-454"><a href="#cb19-454" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb19-455"><a href="#cb19-455" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb19-456"><a href="#cb19-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-457"><a href="#cb19-457" aria-hidden="true" tabindex="-1"></a>関数を次のように変更します.</span>
+<span id="cb19-423"><a href="#cb19-423" aria-hidden="true" tabindex="-1"></a>R のコンソールから, 次を実行します.</span>
+<span id="cb19-424"><a href="#cb19-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-425"><a href="#cb19-425" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-426"><a href="#cb19-426" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>()</span>
+<span id="cb19-427"><a href="#cb19-427" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb19-428"><a href="#cb19-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-429"><a href="#cb19-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-430"><a href="#cb19-430" aria-hidden="true" tabindex="-1"></a><span class="in">`penguins_raw`</span> (オブジェクト) から <span class="in">`summarize_penguins()`</span> (関数) を通って <span class="in">`penguins_summary`</span> (オブジェクト) へ, という依存関係が図に表れます. <span class="in">`tar_make()`</span> を実行済みなので, どのターゲットもグレーで表示されます.</span>
+<span id="cb19-431"><a href="#cb19-431" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-432"><a href="#cb19-432" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb19-433"><a href="#cb19-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-434"><a href="#cb19-434" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-435"><a href="#cb19-435" aria-hidden="true" tabindex="-1"></a>計算結果を取り出します. パイプラインが作った <span class="in">`penguins_summary`</span> の中身を確認してください. R のオブジェクトとして値を受け取る方法と, 名前で環境に読み込む方法の2通りを試しましょう.</span>
+<span id="cb19-436"><a href="#cb19-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-437"><a href="#cb19-437" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-438"><a href="#cb19-438" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb19-439"><a href="#cb19-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-440"><a href="#cb19-440" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-441"><a href="#cb19-441" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the value directly</span></span>
+<span id="cb19-442"><a href="#cb19-442" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(penguins_summary)</span>
+<span id="cb19-443"><a href="#cb19-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-444"><a href="#cb19-444" aria-hidden="true" tabindex="-1"></a><span class="co"># Load it into the environment under its own name</span></span>
+<span id="cb19-445"><a href="#cb19-445" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(penguins_summary)</span>
+<span id="cb19-446"><a href="#cb19-446" aria-hidden="true" tabindex="-1"></a>penguins_summary</span>
+<span id="cb19-447"><a href="#cb19-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb19-448"><a href="#cb19-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-449"><a href="#cb19-449" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_read()`</span> は値を返すので <span class="in">`x &lt;- tar_read(...)`</span> のように受け取れます. <span class="in">`tar_load()`</span> はターゲット名と同じ変数を環境に作ります. どちらも, 一度 <span class="in">`tar_make()`</span> で計算した結果をディスク上のストアから読み出しているだけなので, 再計算は走りません.</span>
+<span id="cb19-450"><a href="#cb19-450" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-451"><a href="#cb19-451" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb19-452"><a href="#cb19-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-453"><a href="#cb19-453" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb19-454"><a href="#cb19-454" aria-hidden="true" tabindex="-1"></a>いよいよ本題です. <span class="in">`summarize_penguins()`</span> に平均ひれ長 (<span class="in">`flipper_len`</span>) の計算を追加してから, <span class="in">`tar_make()`</span> を実行する前に, どのターゲットが再計算されるかを予想してください. そのうえで, 予想が当たっているかを確かめ, 実際に再計算しましょう.</span>
+<span id="cb19-455"><a href="#cb19-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-456"><a href="#cb19-456" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb19-457"><a href="#cb19-457" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
 <span id="cb19-458"><a href="#cb19-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-459"><a href="#cb19-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
-<span id="cb19-460"><a href="#cb19-460" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb19-461"><a href="#cb19-461" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb19-462"><a href="#cb19-462" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb19-463"><a href="#cb19-463" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb19-464"><a href="#cb19-464" aria-hidden="true" tabindex="-1"></a>      <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb19-465"><a href="#cb19-465" aria-hidden="true" tabindex="-1"></a>      <span class="at">.by =</span> species</span>
-<span id="cb19-466"><a href="#cb19-466" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-467"><a href="#cb19-467" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-468"><a href="#cb19-468" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-469"><a href="#cb19-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-470"><a href="#cb19-470" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_make()`</span> の前に, どのターゲットが古くなっているかを確認します.</span>
+<span id="cb19-459"><a href="#cb19-459" aria-hidden="true" tabindex="-1"></a>関数を次のように変更します.</span>
+<span id="cb19-460"><a href="#cb19-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-461"><a href="#cb19-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r filename="_targets.R"}</span></span>
+<span id="cb19-462"><a href="#cb19-462" aria-hidden="true" tabindex="-1"></a>summarize_penguins <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb19-463"><a href="#cb19-463" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb19-464"><a href="#cb19-464" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb19-465"><a href="#cb19-465" aria-hidden="true" tabindex="-1"></a>      <span class="at">bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-466"><a href="#cb19-466" aria-hidden="true" tabindex="-1"></a>      <span class="at">flipper_len =</span> <span class="fu">mean</span>(flipper_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-467"><a href="#cb19-467" aria-hidden="true" tabindex="-1"></a>      <span class="at">.by =</span> species</span>
+<span id="cb19-468"><a href="#cb19-468" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-469"><a href="#cb19-469" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-470"><a href="#cb19-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-471"><a href="#cb19-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-472"><a href="#cb19-472" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb19-473"><a href="#cb19-473" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>()</span>
-<span id="cb19-474"><a href="#cb19-474" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb19-475"><a href="#cb19-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-476"><a href="#cb19-476" aria-hidden="true" tabindex="-1"></a>返ってくるのは <span class="in">`penguins_summary`</span> だけです. <span class="in">`penguins_raw`</span> は変更した関数に依存していないので, 古くなりません. <span class="in">`tar_make()`</span> を実行すると, 実際に <span class="in">`penguins_summary`</span> だけが再計算され, <span class="in">`penguins_raw`</span> は前の結果がそのまま再利用されます (<span class="in">`tar_visnetwork()`</span> でも, <span class="in">`penguins_summary`</span> だけが未実行状態に戻っていることを確認できます).</span>
+<span id="cb19-472"><a href="#cb19-472" aria-hidden="true" tabindex="-1"></a><span class="in">`tar_make()`</span> の前に, どのターゲットが古くなっているかを確認します.</span>
+<span id="cb19-473"><a href="#cb19-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-474"><a href="#cb19-474" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb19-475"><a href="#cb19-475" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>()</span>
+<span id="cb19-476"><a href="#cb19-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb19-477"><a href="#cb19-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-478"><a href="#cb19-478" aria-hidden="true" tabindex="-1"></a>この「変更の影響を受けるところだけが再計算される」性質こそが <span class="in">`{targets}`</span> の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.</span>
-<span id="cb19-479"><a href="#cb19-479" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb19-480"><a href="#cb19-480" aria-hidden="true" tabindex="-1"></a>::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb19-478"><a href="#cb19-478" aria-hidden="true" tabindex="-1"></a>返ってくるのは <span class="in">`penguins_summary`</span> だけです. <span class="in">`penguins_raw`</span> は変更した関数に依存していないので, 古くなりません. <span class="in">`tar_make()`</span> を実行すると, 実際に <span class="in">`penguins_summary`</span> だけが再計算され, <span class="in">`penguins_raw`</span> は前の結果がそのまま再利用されます (<span class="in">`tar_visnetwork()`</span> でも, <span class="in">`penguins_summary`</span> だけが未実行状態に戻っていることを確認できます).</span>
+<span id="cb19-479"><a href="#cb19-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-480"><a href="#cb19-480" aria-hidden="true" tabindex="-1"></a>この「変更の影響を受けるところだけが再計算される」性質こそが <span class="in">`{targets}`</span> の核心です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードと整合していることが保証されます.</span>
+<span id="cb19-481"><a href="#cb19-481" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb19-482"><a href="#cb19-482" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb19-483"><a href="#cb19-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-484"><a href="#cb19-484" aria-hidden="true" tabindex="-1"></a>:::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

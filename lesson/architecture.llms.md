@@ -33,25 +33,23 @@ Figure 1.3: メモリ (DDR4 DIMM)
 
 メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで ([Figure fig-photo-ram](#fig-photo-ram)), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).
 
-[![](../static/img/hardware/ssd.jpg)](../static/img/hardware/ssd.jpg "SSD (NVMe M.2)")
+[![](../static/img/hardware/ssd.jpg)](../static/img/hardware/ssd.jpg "Figure 1.4: SSD (NVMe M.2)")
 
-SSD (NVMe M.2)
+Figure 1.4: SSD (NVMe M.2)
 
-[![](../static/img/hardware/hdd.jpg)](../static/img/hardware/hdd.jpg "HDD (カバーを開けた内部)")
+[![](../static/img/hardware/hdd.jpg)](../static/img/hardware/hdd.jpg "Figure 1.5: HDD (カバーを開けた内部)")
 
-HDD (カバーを開けた内部)
+Figure 1.5: HDD (カバーを開けた内部)
 
-Figure 1.4: ストレージ
-
-ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります ([Figure fig-photo-storage](#fig-photo-storage)). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
+ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります ([Figure fig-photo-ssd](#fig-photo-ssd), [Figure fig-photo-hdd](#fig-photo-hdd)). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
 
 「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります ([sec-computation-theory](#sec-computation-theory)). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.
 
 ### GPU
 
-[![](../static/img/hardware/gpu.jpg)](../static/img/hardware/gpu.jpg "Figure 1.5: GPU (GeForce RTX 5060 Ti)")
+[![](../static/img/hardware/gpu.jpg)](../static/img/hardware/gpu.jpg "Figure 1.6: GPU (GeForce RTX 5060 Ti)")
 
-Figure 1.5: GPU (GeForce RTX 5060 Ti)
+Figure 1.6: GPU (GeForce RTX 5060 Ti)
 
 GPU (Graphics Processing Unit) は, もともと画面描画のための部品です ([Figure fig-photo-gpu](#fig-photo-gpu)). 画面上の何百万というピクセルを同時に計算する必要があるため, [Figure fig-computer-components](#fig-computer-components) に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.
 
@@ -108,9 +106,9 @@ x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフト�
 
 アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです ([Figure fig-bit-width](#fig-bit-width)). 32-bit の CPU が区別できるメモリアドレスは \\2^{32}\\ 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が \\2^{64}\\ バイト (約1600万 TB) となり, 事実上無制限になりました.
 
-[![](../static/cetz/bit-width.svg)](../static/cetz/bit-width.svg "Figure 1.6: アドレス幅と扱えるメモリの上限")
+[![](../static/cetz/bit-width.svg)](../static/cetz/bit-width.svg "Figure 1.7: アドレス幅と扱えるメモリの上限")
 
-Figure 1.6: アドレス幅と扱えるメモリの上限
+Figure 1.7: アドレス幅と扱えるメモリの上限
 
 現在の PC とスマートフォンは, ほぼすべて 64-bit (x86-64 か ARM64) です. ただし名残はあちこちに残っていて, ダウンロードページの `i386` や `x86` は 32-bit 版を, `x86_64` や `x64` は 64-bit 版を指しています.
 
@@ -139,9 +137,9 @@ Figure 1.6: アドレス幅と扱えるメモリの上限
 
 オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです ([Figure fig-software-stack](#fig-software-stack)). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.
 
-[![](../static/cetz/software-stack.svg)](../static/cetz/software-stack.svg "Figure 1.7: ハードウェア, OS, アプリケーションの階層")
+[![](../static/cetz/software-stack.svg)](../static/cetz/software-stack.svg "Figure 1.8: ハードウェア, OS, アプリケーションの階層")
 
-Figure 1.7: ハードウェア, OS, アプリケーションの階層
+Figure 1.8: ハードウェア, OS, アプリケーションの階層
 
 アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは [Table tbl-os-arch](#tbl-os-arch) のとおりです.
 
@@ -166,9 +164,9 @@ Table 1.2: 身近な機種の OS とアーキテクチャ
 
 現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です ([Figure fig-os-family](#fig-os-family)).
 
-[![](../static/cetz/os-family.svg)](../static/cetz/os-family.svg "Figure 1.8: OS の系譜")
+[![](../static/cetz/os-family.svg)](../static/cetz/os-family.svg "Figure 1.9: OS の系譜")
 
-Figure 1.8: OS の系譜
+Figure 1.9: OS の系譜
 
 - **macOS**: Unix の直系の子孫である BSD を土台にしています. その中核部分の名前が Darwin で, 先ほど `Sys.info()` の `sysname` に表示されていたものです. iOS も同じ土台の上に作られています.
 - **Linux**: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.
@@ -195,30 +193,30 @@ Windows は Unix の系譜から外れているため, シェルもコマンド�
 
 R で大きなデータセットを読み込もうとしたら, `Error: cannot allocate vector of size 8.0 Gb` というエラーが出ました. 「足りない」と言われている部品はどれでしょうか.
 
-SSD\
 RAM\
+SSD\
 GPU\
 CPU\
 
 何年も前に書いた分析コードを最新の PC でそのまま実行しても, 昔の「PC を買い替えたらコードが劇的に速くなった」という体験は得にくくなっています. 主な理由はどれでしょうか.
 
-CPU が性能よりも省電力を優先するようになったから\
 CPU の進化がクロック周波数の向上からコア数の増加に移ったから\
-ストレージの読み書き速度が頭打ちになったから\
 OS が年々重くなり, 性能向上を打ち消しているから\
+ストレージの読み書き速度が頭打ちになったから\
+CPU が性能よりも省電力を優先するようになったから\
 
 32-bit のプログラムが1つのプロセスで扱えるメモリの上限はいくつでしょうか.
 
-2GB\
-積んだ RAM の分だけ\
 4GB\
+積んだ RAM の分だけ\
 16GB\
+2GB\
 
 Apple Silicon の Mac で作成した実行ファイル (バイナリ) を, 大学の計算サーバー (Linux, x86-64) にコピーして実行しました. どうなるでしょうか.
 
-問題なく動く\
 動かない\
 遅くなるが動く\
+問題なく動く\
 サーバーに Rosetta 2 を入れれば動く\
 
 次のうち, CPU が ARM64 のマシンをすべて選んでください.
@@ -233,10 +231,10 @@ Intel の Mac\
 
 次の OS のうち, Unix の系譜に属さないものはどれでしょうか.
 
-Windows\
 macOS\
-iOS\
 Ubuntu\
+Windows\
+iOS\
 
 [^1]: 1994年から2004年の10年でクロック周波数は約40倍になりましたが (Pentium の 100 MHz から Pentium 4 の 3.8 GHz), その後の20年では 6 GHz 前後までしか伸びていません. 最近の CPU が謳う 5-6 GHz という数字も, 1コア・短時間のブースト時のものです.
 

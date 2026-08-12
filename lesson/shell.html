@@ -2085,149 +2085,153 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb56-590"><a href="#cb56-590" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> alice ABC      <span class="co"># make alice the owner of ABC</span></span>
 <span id="cb56-591"><a href="#cb56-591" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-592"><a href="#cb56-592" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-593"><a href="#cb56-593" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb56-593"><a href="#cb56-593" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
 <span id="cb56-594"><a href="#cb56-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-595"><a href="#cb56-595" aria-hidden="true" tabindex="-1"></a>この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル ({{&lt; kbd Ctrl &gt;}} + {{&lt; kbd ` &gt;}}) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.</span>
+<span id="cb56-595"><a href="#cb56-595" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb56-596"><a href="#cb56-596" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-597"><a href="#cb56-597" aria-hidden="true" tabindex="-1"></a>まず, 練習用のデータをダウンロードします. 架空の売上データの CSV 6年分をこちらで用意してあるので, <span class="in">`wget`</span> で取得してホームディレクトリに展開してください.</span>
+<span id="cb56-597"><a href="#cb56-597" aria-hidden="true" tabindex="-1"></a>この章の演習は, クイズではなく実際にターミナルでコマンドを打ちながら進めます. VSCode の統合ターミナル ({{&lt; kbd Ctrl &gt;}} + {{&lt; kbd ` &gt;}}) を開いてください. Windows の人は, VSCode で WSL を開いた状態にしておけば, 同じショートカットで Bash のターミナルが開きます.</span>
 <span id="cb56-598"><a href="#cb56-598" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-599"><a href="#cb56-599" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-600"><a href="#cb56-600" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb56-601"><a href="#cb56-601" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://kazuyanagimoto.com/workshop-graduate-2026/static/data/shell-practice.tar.gz</span>
-<span id="cb56-602"><a href="#cb56-602" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> shell-practice.tar.gz    <span class="co"># x: extract, z: gzip, f: file</span></span>
-<span id="cb56-603"><a href="#cb56-603" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> shell-practice</span>
-<span id="cb56-604"><a href="#cb56-604" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-605"><a href="#cb56-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-606"><a href="#cb56-606" aria-hidden="true" tabindex="-1"></a><span class="in">`wget`</span> は URL からファイルをダウンロードするコマンドで, <span class="in">`tar`</span> はアーカイブをまとめたり展開したりするコマンドです. サーバーにデータを持っていくときにも頻出のコンビです. macOS には <span class="in">`wget`</span> が入っていないことがあるので, その場合は <span class="in">`wget`</span> の行を <span class="in">`curl -LO https://...`</span> (URL は同じ) に読み替えてください.</span>
+<span id="cb56-599"><a href="#cb56-599" aria-hidden="true" tabindex="-1"></a>まず, 練習用のデータをダウンロードします. 架空の売上データの CSV 6年分をこちらで用意してあるので, <span class="in">`wget`</span> で取得してホームディレクトリに展開してください.</span>
+<span id="cb56-600"><a href="#cb56-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-601"><a href="#cb56-601" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-602"><a href="#cb56-602" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb56-603"><a href="#cb56-603" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://kazuyanagimoto.com/workshop-graduate-2026/static/data/shell-practice.tar.gz</span>
+<span id="cb56-604"><a href="#cb56-604" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> shell-practice.tar.gz    <span class="co"># x: extract, z: gzip, f: file</span></span>
+<span id="cb56-605"><a href="#cb56-605" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> shell-practice</span>
+<span id="cb56-606"><a href="#cb56-606" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb56-607"><a href="#cb56-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-608"><a href="#cb56-608" aria-hidden="true" tabindex="-1"></a>各問題は前の問題の結果を前提にしているので, 上から順に取り組んでください. 解答例は畳んであるので, 開く前にまず自分で試しましょう.</span>
+<span id="cb56-608"><a href="#cb56-608" aria-hidden="true" tabindex="-1"></a><span class="in">`wget`</span> は URL からファイルをダウンロードするコマンドで, <span class="in">`tar`</span> はアーカイブをまとめたり展開したりするコマンドです. サーバーにデータを持っていくときにも頻出のコンビです. macOS には <span class="in">`wget`</span> が入っていないことがあるので, その場合は <span class="in">`wget`</span> の行を <span class="in">`curl -LO https://...`</span> (URL は同じ) に読み替えてください.</span>
 <span id="cb56-609"><a href="#cb56-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-610"><a href="#cb56-610" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-611"><a href="#cb56-611" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> ディレクトリの中身を, サイズやパーミッションが見える形で一覧表示してください. CSV ファイルは何個あり, あなたには書き込み権限があるでしょうか.</span>
-<span id="cb56-612"><a href="#cb56-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-613"><a href="#cb56-613" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-614"><a href="#cb56-614" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-615"><a href="#cb56-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-616"><a href="#cb56-616" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-617"><a href="#cb56-617" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data</span>
-<span id="cb56-618"><a href="#cb56-618" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-619"><a href="#cb56-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-620"><a href="#cb56-620" aria-hidden="true" tabindex="-1"></a>ファイルは6個です. 各行の先頭が <span class="in">`-rw-`</span> で始まっていれば, 所有者 (あなた) に読み取りと書き込みの権限があります.</span>
-<span id="cb56-621"><a href="#cb56-621" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-622"><a href="#cb56-622" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-623"><a href="#cb56-623" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-624"><a href="#cb56-624" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-625"><a href="#cb56-625" aria-hidden="true" tabindex="-1"></a>2020年代のファイル (<span class="in">`sales_2020.csv`</span> から <span class="in">`sales_2024.csv`</span>) だけを, ワイルドカードを使って一覧表示してください.</span>
-<span id="cb56-626"><a href="#cb56-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-627"><a href="#cb56-627" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-628"><a href="#cb56-628" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-629"><a href="#cb56-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-630"><a href="#cb56-630" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-631"><a href="#cb56-631" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/sales_202<span class="pp">?</span>.csv</span>
-<span id="cb56-632"><a href="#cb56-632" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-633"><a href="#cb56-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-634"><a href="#cb56-634" aria-hidden="true" tabindex="-1"></a><span class="in">`?`</span> は任意の1文字にマッチするので, 2020 から 2029 だけが対象になります. <span class="in">`ls data/sales_202*.csv`</span> でも同じ結果です.</span>
-<span id="cb56-635"><a href="#cb56-635" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-636"><a href="#cb56-636" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-637"><a href="#cb56-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-638"><a href="#cb56-638" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-639"><a href="#cb56-639" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> ディレクトリを中身ごと <span class="in">`backup`</span> という名前でコピーし, その中の <span class="in">`sales_2019.csv`</span> を <span class="in">`sales_old.csv`</span> にリネームしてください. 最後に <span class="in">`backup`</span> の中身を一覧表示して確認しましょう.</span>
-<span id="cb56-640"><a href="#cb56-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-641"><a href="#cb56-641" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-642"><a href="#cb56-642" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-643"><a href="#cb56-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-644"><a href="#cb56-644" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-645"><a href="#cb56-645" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> data backup</span>
-<span id="cb56-646"><a href="#cb56-646" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> backup/sales_2019.csv backup/sales_old.csv</span>
-<span id="cb56-647"><a href="#cb56-647" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> backup</span>
-<span id="cb56-648"><a href="#cb56-648" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-649"><a href="#cb56-649" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-650"><a href="#cb56-650" aria-hidden="true" tabindex="-1"></a>ディレクトリのコピーには <span class="in">`-r`</span> が必要でした. リネームは <span class="in">`mv`</span> で「同じ場所に別名で移動」します.</span>
-<span id="cb56-651"><a href="#cb56-651" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-652"><a href="#cb56-652" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-653"><a href="#cb56-653" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-654"><a href="#cb56-654" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-655"><a href="#cb56-655" aria-hidden="true" tabindex="-1"></a>durian という果物は, どの年のファイルに入っているでしょうか. ファイルを1つずつ開かずに, コマンドで探してください. 見つかったら, そのファイルの何行目にあるかも表示しましょう (<span class="in">`backup`</span> にもコピーが入ってしまったので, <span class="in">`data`</span> だけを対象にしてください).</span>
-<span id="cb56-656"><a href="#cb56-656" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-657"><a href="#cb56-657" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-658"><a href="#cb56-658" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-659"><a href="#cb56-659" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-660"><a href="#cb56-660" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-661"><a href="#cb56-661" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"durian"</span> data</span>
-<span id="cb56-662"><a href="#cb56-662" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"durian"</span> data/sales_2024.csv</span>
-<span id="cb56-663"><a href="#cb56-663" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-664"><a href="#cb56-664" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-665"><a href="#cb56-665" aria-hidden="true" tabindex="-1"></a>1つ目のコマンドで <span class="in">`data/sales_2024.csv`</span> だけが表示され, 2つ目で5行目にあることがわかります.</span>
-<span id="cb56-666"><a href="#cb56-666" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-667"><a href="#cb56-667" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-668"><a href="#cb56-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-669"><a href="#cb56-669" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-670"><a href="#cb56-670" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> の6ファイルすべてを連結し, 重複行を取り除くと何行になるでしょうか. 3つのコマンドをパイプでつないで, 1行で数えてください. 出てきた数字がなぜその値になるのかも考えてみましょう.</span>
-<span id="cb56-671"><a href="#cb56-671" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-672"><a href="#cb56-672" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-673"><a href="#cb56-673" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-674"><a href="#cb56-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-675"><a href="#cb56-675" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-676"><a href="#cb56-676" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/<span class="pp">*</span>.csv <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb56-677"><a href="#cb56-677" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-678"><a href="#cb56-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-679"><a href="#cb56-679" aria-hidden="true" tabindex="-1"></a>答えは5行です. 各年のファイルはヘッダーと3つの行がまったく同じで, 違いは2024年だけにある durian の行だからです (ヘッダー1 + 果物3 + durian 1). <span class="in">`wc -l`</span> を外して実行すると内訳が見えます.</span>
-<span id="cb56-680"><a href="#cb56-680" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-681"><a href="#cb56-681" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-682"><a href="#cb56-682" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-683"><a href="#cb56-683" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-684"><a href="#cb56-684" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> の6ファイルを, ヘッダーが先頭に1回だけ入るように <span class="in">`all_sales.csv`</span> に結合してください (本文の「複数の CSV を結合する」の例が参考になります). できたら行数を確認しましょう. ヘッダー1行 + データ19行で20行になれば成功です.</span>
-<span id="cb56-685"><a href="#cb56-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-686"><a href="#cb56-686" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-687"><a href="#cb56-687" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-688"><a href="#cb56-688" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-689"><a href="#cb56-689" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-690"><a href="#cb56-690" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> data/sales_2019.csv <span class="op">&gt;</span> all_sales.csv</span>
-<span id="cb56-691"><a href="#cb56-691" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/sales_<span class="pp">*</span>.csv</span>
-<span id="cb56-692"><a href="#cb56-692" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb56-693"><a href="#cb56-693" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> all_sales.csv</span>
-<span id="cb56-694"><a href="#cb56-694" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb56-695"><a href="#cb56-695" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> all_sales.csv</span>
-<span id="cb56-696"><a href="#cb56-696" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-697"><a href="#cb56-697" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-698"><a href="#cb56-698" aria-hidden="true" tabindex="-1"></a><span class="in">`grep -c "id,fruit,price" all_sales.csv`</span> の結果が 1 になっていれば, ヘッダーの重複もありません.</span>
-<span id="cb56-699"><a href="#cb56-699" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-700"><a href="#cb56-700" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-701"><a href="#cb56-701" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-702"><a href="#cb56-702" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-703"><a href="#cb56-703" aria-hidden="true" tabindex="-1"></a>「<span class="in">`data`</span> にある CSV ファイルの数を表示する」シェルスクリプト <span class="in">`report.sh`</span> を, エディタを使わずに <span class="in">`echo`</span> とリダイレクトだけで作って実行してください. さらに, 実行権限を与えて <span class="in">`./report.sh`</span> の形でも実行できることを確認しましょう.</span>
-<span id="cb56-704"><a href="#cb56-704" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-705"><a href="#cb56-705" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-706"><a href="#cb56-706" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-707"><a href="#cb56-707" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-708"><a href="#cb56-708" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-709"><a href="#cb56-709" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'#!/bin/sh'</span> <span class="op">&gt;</span> report.sh</span>
-<span id="cb56-710"><a href="#cb56-710" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'ls data/*.csv | wc -l'</span> <span class="op">&gt;&gt;</span> report.sh</span>
-<span id="cb56-711"><a href="#cb56-711" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> report.sh</span>
-<span id="cb56-712"><a href="#cb56-712" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x report.sh</span>
-<span id="cb56-713"><a href="#cb56-713" aria-hidden="true" tabindex="-1"></a><span class="ex">./report.sh</span></span>
-<span id="cb56-714"><a href="#cb56-714" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-715"><a href="#cb56-715" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-716"><a href="#cb56-716" aria-hidden="true" tabindex="-1"></a>どちらの実行方法でも 6 と表示されます. <span class="in">`chmod`</span> の前に <span class="in">`ls -lh report.sh`</span> と後で見比べると, 所有者の権限に <span class="in">`x`</span> が増えたことを確認できます.</span>
-<span id="cb56-717"><a href="#cb56-717" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-718"><a href="#cb56-718" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb56-719"><a href="#cb56-719" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-720"><a href="#cb56-720" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb56-721"><a href="#cb56-721" aria-hidden="true" tabindex="-1"></a>演習はここまでです. <span class="in">`shell-practice`</span> と, ダウンロードした <span class="in">`shell-practice.tar.gz`</span> を削除して片付けましょう. <span class="in">`rm -rf`</span> を使う前に, いま自分がどこにいて, 何を消そうとしているのかを必ず確認してください.</span>
-<span id="cb56-722"><a href="#cb56-722" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-723"><a href="#cb56-723" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb56-724"><a href="#cb56-724" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb56-725"><a href="#cb56-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-726"><a href="#cb56-726" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb56-727"><a href="#cb56-727" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb56-728"><a href="#cb56-728" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                     <span class="co"># make sure you are in your home directory</span></span>
-<span id="cb56-729"><a href="#cb56-729" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> shell-practice       <span class="co"># make sure this is the sandbox you want to delete</span></span>
-<span id="cb56-730"><a href="#cb56-730" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> shell-practice shell-practice.tar.gz</span>
-<span id="cb56-731"><a href="#cb56-731" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb56-732"><a href="#cb56-732" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-733"><a href="#cb56-733" aria-hidden="true" tabindex="-1"></a><span class="in">`rm -rf`</span> はゴミ箱を経由せず即座に消すのでした. 消す対象を先に <span class="in">`ls`</span> で見てから実行する癖をつけると安全です.</span>
-<span id="cb56-734"><a href="#cb56-734" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb56-735"><a href="#cb56-735" aria-hidden="true" tabindex="-1"></a>::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb56-610"><a href="#cb56-610" aria-hidden="true" tabindex="-1"></a>各問題は前の問題の結果を前提にしているので, 上から順に取り組んでください. 解答例は畳んであるので, 開く前にまず自分で試しましょう.</span>
+<span id="cb56-611"><a href="#cb56-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-612"><a href="#cb56-612" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-613"><a href="#cb56-613" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> ディレクトリの中身を, サイズやパーミッションが見える形で一覧表示してください. CSV ファイルは何個あり, あなたには書き込み権限があるでしょうか.</span>
+<span id="cb56-614"><a href="#cb56-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-615"><a href="#cb56-615" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-616"><a href="#cb56-616" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-617"><a href="#cb56-617" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-618"><a href="#cb56-618" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-619"><a href="#cb56-619" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> data</span>
+<span id="cb56-620"><a href="#cb56-620" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-621"><a href="#cb56-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-622"><a href="#cb56-622" aria-hidden="true" tabindex="-1"></a>ファイルは6個です. 各行の先頭が <span class="in">`-rw-`</span> で始まっていれば, 所有者 (あなた) に読み取りと書き込みの権限があります.</span>
+<span id="cb56-623"><a href="#cb56-623" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-624"><a href="#cb56-624" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-625"><a href="#cb56-625" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-626"><a href="#cb56-626" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-627"><a href="#cb56-627" aria-hidden="true" tabindex="-1"></a>2020年代のファイル (<span class="in">`sales_2020.csv`</span> から <span class="in">`sales_2024.csv`</span>) だけを, ワイルドカードを使って一覧表示してください.</span>
+<span id="cb56-628"><a href="#cb56-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-629"><a href="#cb56-629" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-630"><a href="#cb56-630" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-631"><a href="#cb56-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-632"><a href="#cb56-632" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-633"><a href="#cb56-633" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/sales_202<span class="pp">?</span>.csv</span>
+<span id="cb56-634"><a href="#cb56-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-635"><a href="#cb56-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-636"><a href="#cb56-636" aria-hidden="true" tabindex="-1"></a><span class="in">`?`</span> は任意の1文字にマッチするので, 2020 から 2029 だけが対象になります. <span class="in">`ls data/sales_202*.csv`</span> でも同じ結果です.</span>
+<span id="cb56-637"><a href="#cb56-637" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-638"><a href="#cb56-638" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-639"><a href="#cb56-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-640"><a href="#cb56-640" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-641"><a href="#cb56-641" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> ディレクトリを中身ごと <span class="in">`backup`</span> という名前でコピーし, その中の <span class="in">`sales_2019.csv`</span> を <span class="in">`sales_old.csv`</span> にリネームしてください. 最後に <span class="in">`backup`</span> の中身を一覧表示して確認しましょう.</span>
+<span id="cb56-642"><a href="#cb56-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-643"><a href="#cb56-643" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-644"><a href="#cb56-644" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-645"><a href="#cb56-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-646"><a href="#cb56-646" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-647"><a href="#cb56-647" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> data backup</span>
+<span id="cb56-648"><a href="#cb56-648" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> backup/sales_2019.csv backup/sales_old.csv</span>
+<span id="cb56-649"><a href="#cb56-649" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> backup</span>
+<span id="cb56-650"><a href="#cb56-650" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-651"><a href="#cb56-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-652"><a href="#cb56-652" aria-hidden="true" tabindex="-1"></a>ディレクトリのコピーには <span class="in">`-r`</span> が必要でした. リネームは <span class="in">`mv`</span> で「同じ場所に別名で移動」します.</span>
+<span id="cb56-653"><a href="#cb56-653" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-654"><a href="#cb56-654" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-655"><a href="#cb56-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-656"><a href="#cb56-656" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-657"><a href="#cb56-657" aria-hidden="true" tabindex="-1"></a>durian という果物は, どの年のファイルに入っているでしょうか. ファイルを1つずつ開かずに, コマンドで探してください. 見つかったら, そのファイルの何行目にあるかも表示しましょう (<span class="in">`backup`</span> にもコピーが入ってしまったので, <span class="in">`data`</span> だけを対象にしてください).</span>
+<span id="cb56-658"><a href="#cb56-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-659"><a href="#cb56-659" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-660"><a href="#cb56-660" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-661"><a href="#cb56-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-662"><a href="#cb56-662" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-663"><a href="#cb56-663" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-Rl</span> <span class="st">"durian"</span> data</span>
+<span id="cb56-664"><a href="#cb56-664" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"durian"</span> data/sales_2024.csv</span>
+<span id="cb56-665"><a href="#cb56-665" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-666"><a href="#cb56-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-667"><a href="#cb56-667" aria-hidden="true" tabindex="-1"></a>1つ目のコマンドで <span class="in">`data/sales_2024.csv`</span> だけが表示され, 2つ目で5行目にあることがわかります.</span>
+<span id="cb56-668"><a href="#cb56-668" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-669"><a href="#cb56-669" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-670"><a href="#cb56-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-671"><a href="#cb56-671" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-672"><a href="#cb56-672" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> の6ファイルすべてを連結し, 重複行を取り除くと何行になるでしょうか. 3つのコマンドをパイプでつないで, 1行で数えてください. 出てきた数字がなぜその値になるのかも考えてみましょう.</span>
+<span id="cb56-673"><a href="#cb56-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-674"><a href="#cb56-674" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-675"><a href="#cb56-675" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-676"><a href="#cb56-676" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-677"><a href="#cb56-677" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-678"><a href="#cb56-678" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/<span class="pp">*</span>.csv <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb56-679"><a href="#cb56-679" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-680"><a href="#cb56-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-681"><a href="#cb56-681" aria-hidden="true" tabindex="-1"></a>答えは5行です. 各年のファイルはヘッダーと3つの行がまったく同じで, 違いは2024年だけにある durian の行だからです (ヘッダー1 + 果物3 + durian 1). <span class="in">`wc -l`</span> を外して実行すると内訳が見えます.</span>
+<span id="cb56-682"><a href="#cb56-682" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-683"><a href="#cb56-683" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-684"><a href="#cb56-684" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-685"><a href="#cb56-685" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-686"><a href="#cb56-686" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> の6ファイルを, ヘッダーが先頭に1回だけ入るように <span class="in">`all_sales.csv`</span> に結合してください (本文の「複数の CSV を結合する」の例が参考になります). できたら行数を確認しましょう. ヘッダー1行 + データ19行で20行になれば成功です.</span>
+<span id="cb56-687"><a href="#cb56-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-688"><a href="#cb56-688" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-689"><a href="#cb56-689" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-690"><a href="#cb56-690" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-691"><a href="#cb56-691" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-692"><a href="#cb56-692" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-1</span> data/sales_2019.csv <span class="op">&gt;</span> all_sales.csv</span>
+<span id="cb56-693"><a href="#cb56-693" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> data/sales_<span class="pp">*</span>.csv</span>
+<span id="cb56-694"><a href="#cb56-694" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb56-695"><a href="#cb56-695" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="va">$i</span> <span class="op">&gt;&gt;</span> all_sales.csv</span>
+<span id="cb56-696"><a href="#cb56-696" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb56-697"><a href="#cb56-697" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> all_sales.csv</span>
+<span id="cb56-698"><a href="#cb56-698" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-699"><a href="#cb56-699" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-700"><a href="#cb56-700" aria-hidden="true" tabindex="-1"></a><span class="in">`grep -c "id,fruit,price" all_sales.csv`</span> の結果が 1 になっていれば, ヘッダーの重複もありません.</span>
+<span id="cb56-701"><a href="#cb56-701" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-702"><a href="#cb56-702" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-703"><a href="#cb56-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-704"><a href="#cb56-704" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-705"><a href="#cb56-705" aria-hidden="true" tabindex="-1"></a>「<span class="in">`data`</span> にある CSV ファイルの数を表示する」シェルスクリプト <span class="in">`report.sh`</span> を, エディタを使わずに <span class="in">`echo`</span> とリダイレクトだけで作って実行してください. さらに, 実行権限を与えて <span class="in">`./report.sh`</span> の形でも実行できることを確認しましょう.</span>
+<span id="cb56-706"><a href="#cb56-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-707"><a href="#cb56-707" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-708"><a href="#cb56-708" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-709"><a href="#cb56-709" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-710"><a href="#cb56-710" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-711"><a href="#cb56-711" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'#!/bin/sh'</span> <span class="op">&gt;</span> report.sh</span>
+<span id="cb56-712"><a href="#cb56-712" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'ls data/*.csv | wc -l'</span> <span class="op">&gt;&gt;</span> report.sh</span>
+<span id="cb56-713"><a href="#cb56-713" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> report.sh</span>
+<span id="cb56-714"><a href="#cb56-714" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x report.sh</span>
+<span id="cb56-715"><a href="#cb56-715" aria-hidden="true" tabindex="-1"></a><span class="ex">./report.sh</span></span>
+<span id="cb56-716"><a href="#cb56-716" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-717"><a href="#cb56-717" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-718"><a href="#cb56-718" aria-hidden="true" tabindex="-1"></a>どちらの実行方法でも 6 と表示されます. <span class="in">`chmod`</span> の前に <span class="in">`ls -lh report.sh`</span> と後で見比べると, 所有者の権限に <span class="in">`x`</span> が増えたことを確認できます.</span>
+<span id="cb56-719"><a href="#cb56-719" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-720"><a href="#cb56-720" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-721"><a href="#cb56-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-722"><a href="#cb56-722" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb56-723"><a href="#cb56-723" aria-hidden="true" tabindex="-1"></a>演習はここまでです. <span class="in">`shell-practice`</span> と, ダウンロードした <span class="in">`shell-practice.tar.gz`</span> を削除して片付けましょう. <span class="in">`rm -rf`</span> を使う前に, いま自分がどこにいて, 何を消そうとしているのかを必ず確認してください.</span>
+<span id="cb56-724"><a href="#cb56-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-725"><a href="#cb56-725" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb56-726"><a href="#cb56-726" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb56-727"><a href="#cb56-727" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-728"><a href="#cb56-728" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb56-729"><a href="#cb56-729" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb56-730"><a href="#cb56-730" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                     <span class="co"># make sure you are in your home directory</span></span>
+<span id="cb56-731"><a href="#cb56-731" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> shell-practice       <span class="co"># make sure this is the sandbox you want to delete</span></span>
+<span id="cb56-732"><a href="#cb56-732" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> shell-practice shell-practice.tar.gz</span>
+<span id="cb56-733"><a href="#cb56-733" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb56-734"><a href="#cb56-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-735"><a href="#cb56-735" aria-hidden="true" tabindex="-1"></a><span class="in">`rm -rf`</span> はゴミ箱を経由せず即座に消すのでした. 消す対象を先に <span class="in">`ls`</span> で見てから実行する癖をつけると安全です.</span>
+<span id="cb56-736"><a href="#cb56-736" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb56-737"><a href="#cb56-737" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb56-738"><a href="#cb56-738" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-739"><a href="#cb56-739" aria-hidden="true" tabindex="-1"></a>:::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

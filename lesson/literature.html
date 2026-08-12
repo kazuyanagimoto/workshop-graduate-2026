@@ -1541,46 +1541,50 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>本文は @fig-quarto-cite の例と同じです. コンパイルした結果が @fig-quarto-typst で, LaTeX 経由の出力 (@fig-quarto-cite) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは "Bibliography" になります).</span>
 <span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
 <span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a>この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の <span class="in">`@`</span> 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.</span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
 <span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a>Zotero を使って, 自分の研究に関係する論文を1本, 書誌情報つきで取り込んでみましょう.</span>
-<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero で練習用のコレクションを1つ作ります.</span>
-<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>論文を1本選び, その DOI から Zotero に取り込みます (ブラウザ拡張か, 「新規アイテムを DOI から追加」を使います).</span>
-<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>取り込んだ文献のメタデータ (著者名の表記, 年, 雑誌名など) を確認し, 誤りがあれば出版社や CrossRef の情報で修正します.</span>
-<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Better BibTeX が割り当てた citekey (例: <span class="in">`auth.lower + year`</span>) を確認します. これが Quarto で引用するときのキーになります.</span>
-<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを右クリックし, 「Better BibTeX」形式で <span class="in">`references.bib`</span> としてエクスポートします. 練習用の Quarto プロジェクトのルートに置き, 「Keep updated」も試してみましょう.</span>
-<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a>取り込んだ文献を, Quarto から引用します. ここでは確実に手順を追えるよう, この章の冒頭に載せた2件のエントリ (<span class="in">`acemoglu2012`</span> と <span class="in">`halljones1999`</span>) を使います. これらを含む <span class="in">`references.bib`</span> を用意し, 地の文に組み込む引用と括弧に入れる引用を1つずつ書いて, 文献リストつきでレンダリングしてください.</span>
-<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマターで, <span class="in">`references.bib`</span> を読み込むように指定します.</span>
+<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の <span class="in">`@`</span> 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.</span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>Zotero を使って, 自分の研究に関係する論文を1本, 書誌情報つきで取り込んでみましょう.</span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero で練習用のコレクションを1つ作ります.</span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>論文を1本選び, その DOI から Zotero に取り込みます (ブラウザ拡張か, 「新規アイテムを DOI から追加」を使います).</span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>取り込んだ文献のメタデータ (著者名の表記, 年, 雑誌名など) を確認し, 誤りがあれば出版社や CrossRef の情報で修正します.</span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Better BibTeX が割り当てた citekey (例: <span class="in">`auth.lower + year`</span>) を確認します. これが Quarto で引用するときのキーになります.</span>
+<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを右クリックし, 「Better BibTeX」形式で <span class="in">`references.bib`</span> としてエクスポートします. 練習用の Quarto プロジェクトのルートに置き, 「Keep updated」も試してみましょう.</span>
+<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>取り込んだ文献を, Quarto から引用します. ここでは確実に手順を追えるよう, この章の冒頭に載せた2件のエントリ (<span class="in">`acemoglu2012`</span> と <span class="in">`halljones1999`</span>) を使います. これらを含む <span class="in">`references.bib`</span> を用意し, 地の文に組み込む引用と括弧に入れる引用を1つずつ書いて, 文献リストつきでレンダリングしてください.</span>
+<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
 <span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
-<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a>本文では, <span class="in">`@key`</span> を地の文に, <span class="in">`[@key]`</span> を括弧に使います.</span>
+<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマターで, <span class="in">`references.bib`</span> を読み込むように指定します.</span>
+<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
-<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span>
-<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a>レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. <span class="in">`link-citations: true`</span> を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに <span class="in">`csl: econometrica.csl`</span> のように CSL ファイルを渡します.</span>
-<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a>本文では, <span class="in">`@key`</span> を地の文に, <span class="in">`[@key]`</span> を括弧に使います.</span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. <span class="in">`link-citations: true`</span> を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに <span class="in">`csl: econometrica.csl`</span> のように CSL ファイルを渡します.</span>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a>:::::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

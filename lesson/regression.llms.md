@@ -503,31 +503,31 @@ Figure 8.2: Event-study estimates around treatment (reference period = 5).
 
 `lm(y ~ x1 * x2, data = df)` の formula は, どのように展開されるでしょうか.
 
-x1:x2 (交互作用のみ)\
-x1 + x2 (主効果のみ)\
 x1 + x2 + x1:x2 (主効果と交互作用の両方)\
 I(x1 \* x2) と同じ (積を1つの変数として扱う)\
+x1:x2 (交互作用のみ)\
+x1 + x2 (主効果のみ)\
 
 `feols(body_mass ~ flipper_len | species + island, data = penguins)` が既定で返す標準誤差はどれでしょうか.
 
-species でクラスタリングした標準誤差\
-species と island の two-way クラスター標準誤差\
 不均一分散に頑健な標準誤差\
+species と island の two-way クラスター標準誤差\
 通常の (iid を仮定した) 標準誤差\
+species でクラスタリングした標準誤差\
 
 賃金 (wage) を経験年数 (exper) と教育年数 (educ) に回帰します. educ は内生なので距離 (dist) を操作変数とし, 地域固定効果 (region) を入れます. `fixest` での正しい書き方はどれでしょうか.
 
+feols(wage ~ exper \| educ ~ dist \| region, data = df)\
 feols(wage ~ exper \| region \| educ ~ dist, data = df)\
 feols(wage ~ exper + dist \| region, data = df)\
-feols(wage ~ exper \| educ ~ dist \| region, data = df)\
 feols(wage ~ exper + educ ~ dist \| region, data = df)\
 
 処置の開始時期が個体によって異なる (staggered) DiD では, `i()` を使った素朴な二元配置固定効果 (TWFE) のイベントスタディが誤った推定値を与えることがあります. 主な理由はどれでしょうか.
 
-クラスター標準誤差が正しく計算できなくなるから\
-固定効果の数が多すぎて自由度が足りなくなるから\
 処置効果が異質だと, すでに処置を受けた個体が実質的な比較対象に混ざってしまうから\
 処置群のサンプルサイズが時点ごとに変わるから\
+固定効果の数が多すぎて自由度が足りなくなるから\
+クラスター標準誤差が正しく計算できなくなるから\
 
 ### 回帰表の仕上げ
 

@@ -1,12 +1,10 @@
 # 7  可視化の技術
 
-Code
+コード
 
 この章では, データ可視化に関するいくつかのTipsを紹介します. しかし, これらのテクニックは次の一つの原則に基づいているに過ぎません.
 
-> **TIP:**
->
-> 図は主張をもち, その主張を最短時間で伝えられるようにデザインされなければならない.
+**原則 7.1 (可視化の原則)** 図は主張をもち, その主張を最短時間で伝えられるようにデザインされなければならない.
 
 これから紹介するテクニックは図の見た目を改善するためのものですが, それらは単に最短時間で図の主張を伝えるために手段であると言うことを忘れないでください.
 
@@ -17,19 +15,15 @@ library(ggplot2)
 
 ## 7.1 最少の要素
 
-最短時間で図を伝えるためには, 過剰な情報を削ぎ落とすことが重要です. これを表した Tufte ([2001](#ref-tufte2001)) の有名な原則があります.
+最短時間で図を伝えるためには, 過剰な情報を削ぎ落とすことが重要です. これを表した Tufte ([2001年](#ref-tufte2001)) の有名な原則があります.
 
-> **TIP:**
->
-> 図においては次のデータインク比を最大化しなければならない:
->
-> \\ \text{data-ink ratio} := \frac{\text{data-ink}}{\text{total ink used to print the graphic}}. \\
+**原則 7.2 (データインク比の原則)** 図においては次のデータインク比を最大化しなければならない:
+
+\\ \text{data-ink ratio} := \frac{\text{data-ink}}{\text{total ink used to print the graphic}}. \\
 
 ここでいうデータインクとは, 図の中でデータを表すために使われているインクの量のことであり, 基本的には図を構成するために最低限必要な要素のことを指します. ここから, 次のような規則も見出すことができます:
 
-> **TIP:**
->
-> 削除しても図の主張を損なわない要素は削除しなければならない.
+**系 7.1** 削除しても図の主張を損なわない要素は削除しなければならない.
 
 この原則を, R に標準で付属する `penguins` データセットで確かめてみましょう. ここではペンギンの種 (`species`) ごとに, 性別 (`sex`) 別の個体数を数えた棒グラフを描きます. まずは何の工夫もしていない, デフォルトのグラフです.
 
@@ -206,7 +200,7 @@ penguins_bar |>
 
 ### alpha の活用
 
-alpha は色の透明度 (opacity) を指定するパラメータで, 彩度とは別物です. それでも白い背景の上では, alpha を下げると色が淡くなるので, ひとつの色相の中に順序をつける道具として使えます. 具体的には, グループの違い (ここでは男女) を色相で, グループ内の順序 (正規 → 非正規 → 非就業) を alpha で表す, という二段構えです. こうすると各パネルは1色でまとまり, 凡例も中立的なグレーになります ([Figure fig-alpha-status](#fig-alpha-status)).
+alpha は色の透明度 (opacity) を指定するパラメータで, 彩度とは別物です. それでも白い背景の上では, alpha を下げると色が淡くなるので, ひとつの色相の中に順序をつける道具として使えます. 具体的には, グループの違い (ここでは男女) を色相で, グループ内の順序 (正規 → 非正規 → 非就業) を alpha で表す, という二段構えです. こうすると各パネルは1色でまとまり, 凡例も中立的なグレーになります ([図 fig-alpha-status](#fig-alpha-status)).
 
 ``` r
 emp <- targets::tar_read(employment_status, store = here::here("_targets")) |>
@@ -254,9 +248,9 @@ ggplot(emp, aes(x = age_group, y = n, fill = sex, alpha = status)) +
   )
 ```
 
-[![](visualization_files/figure-html/fig-alpha-status-1.svg)](visualization_files/figure-html/fig-alpha-status-1.svg "Figure 7.1: 男女・年齢別にみた就業状態の構成")
+[![](visualization_files/figure-html/fig-alpha-status-1.svg)](visualization_files/figure-html/fig-alpha-status-1.svg "図 7.1: 男女・年齢別にみた就業状態の構成")
 
-Figure 7.1: 男女・年齢別にみた就業状態の構成
+図 7.1: 男女・年齢別にみた就業状態の構成
 
 データは就業構造基本調査 (令和4年) の全国・総数で, 各年齢層の正規・非正規・非就業の構成比です (自営業主・会社役員などは除いています). 男性はほとんどが正規, 女性は年齢とともに非正規と非就業が増えるという違いが, 色相 (男女) と alpha (状態) の重ねがけで一目で読み取れます.
 
@@ -268,13 +262,13 @@ Figure 7.1: 男女・年齢別にみた就業状態の構成
 
 フォントには大きく分けて, セリフ体 (serif) とサンセリフ体 (sans-serif) の二種類があります. セリフ体は文字の端に装飾があるフォントで, サンセリフ体は装飾のないフォントです. 下の左の図で赤く示された, 文字の端の突起や飾りが「セリフ」です.
 
-[![](../static/img/visualization/serif.svg)](../static/img/visualization/serif.svg "Figure 7.2: セリフ体 (serif)")
+[![](../static/img/visualization/serif.svg)](../static/img/visualization/serif.svg "図 7.2: セリフ体 (serif)")
 
-Figure 7.2: セリフ体 (serif)
+図 7.2: セリフ体 (serif)
 
-[![](../static/img/visualization/sans-serif.svg)](../static/img/visualization/sans-serif.svg "Figure 7.3: サンセリフ体 (sans-serif)")
+[![](../static/img/visualization/sans-serif.svg)](../static/img/visualization/sans-serif.svg "図 7.3: サンセリフ体 (sans-serif)")
 
-Figure 7.3: サンセリフ体 (sans-serif)
+図 7.3: サンセリフ体 (sans-serif)
 
 日本語でも明朝体がセリフ体でゴシック体がサンセリフ体に相当します. 英語では, セリフ体は Times New Roman や Garamond などが有名で, サンセリフ体は Arial や Helvetica などが有名です.
 
@@ -350,15 +344,15 @@ penguins_bar |>
 
 同じ「1992」という文字を, ビットマップ (ラスター) とベクターのそれぞれで表してみましょう. 左はピクセルの格子, 右は輪郭を点とパスで定義したものです.
 
-[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "Figure 7.4 (a): Bitmap (raster)")
+[![](visualization_files/figure-html/fig-bitmap-vector-1.svg)](visualization_files/figure-html/fig-bitmap-vector-1.svg "図 7.4 (a): Bitmap (raster)")
 
 \(a\) Bitmap (raster)
 
-[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "Figure 7.4 (b): Vector")
+[![](visualization_files/figure-html/fig-bitmap-vector-2.svg)](visualization_files/figure-html/fig-bitmap-vector-2.svg "図 7.4 (b): Vector")
 
 \(b\) Vector
 
-Figure 7.4: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
+図 7.4: The number 1992 as a bitmap (pixels) versus a vector (points and paths).
 
 左のビットマップは, 拡大するとピクセルのギザギザ (ジャギー) が目立ちます. きれいに見せるにはピクセル数を増やすしかなく, その分ファイルサイズも大きくなります. 一方, 右のベクターは輪郭を点 (アンカーポイント) とパスで定義しているので, どれだけ拡大しても滑らかなままで, ファイルサイズも解像度に依存しません.
 
@@ -366,15 +360,15 @@ Figure 7.4: The number 1992 as a bitmap (pixels) versus a vector (points and pa
 
 写真は本質的にラスター形式です. そして, ラスター形式のファイル形式のうち, JPEG は非可逆圧縮 (lossy compression) を採用しています. ファイルサイズを大きく減らせる代わりに, 圧縮を強めると輪郭のまわりにノイズ (アーティファクト) が生じます. 1枚の写真[^2] を高品質 (quality 90) と低品質 (quality 5) の JPEG で保存して, 同じ場所を拡大して比べてみます.
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "Figure 7.5 (a): JPEG quality 90")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-1.png)](visualization_files/figure-html/fig-jpeg-artifacts-1.png "図 7.5 (a): JPEG quality 90")
 
 \(a\) JPEG quality 90
 
-[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "Figure 7.5 (b): JPEG quality 5")
+[![](visualization_files/figure-html/fig-jpeg-artifacts-2.png)](visualization_files/figure-html/fig-jpeg-artifacts-2.png "図 7.5 (b): JPEG quality 5")
 
 \(b\) JPEG quality 5
 
-Figure 7.5: The same photo saved as high- and low-quality JPEG, magnified.
+図 7.5: The same photo saved as high- and low-quality JPEG, magnified.
 
 低品質の JPEG では, 8x8 ピクセルのブロック状のムラや, 輪郭の周りのにじみがはっきり見えます. 一方で, ファイルサイズは大きく変わります. 同じ写真を PNG (可逆圧縮) と2種類の JPEG で保存し, サイズを比べてみましょう.
 
@@ -384,7 +378,7 @@ Figure 7.5: The same photo saved as high- and low-quality JPEG, magnified.
 | JPEG (quality 90) | 95        |
 | JPEG (quality 5)  | 5         |
 
-Table 7.1: 同じ写真を各形式で保存したときのファイルサイズ
+表 7.1: 同じ写真を各形式で保存したときのファイルサイズ
 
 JPEG は, 写真のように色がなめらかに変化する画像にはとても効果的です. しかし, 輪郭のはっきりしたグラフや文字, ロゴでは, 線の周りに同じノイズが乗ってしまいます. そのため, グラフをラスター形式で保存するなら JPEG ではなく PNG を使い, 可能ならベクター形式を選びます.
 
@@ -392,9 +386,9 @@ JPEG は, 写真のように色がなめらかに変化する画像にはとて�
 
 ベクター形式は図形を数式で記録するので, どれだけ拡大しても輪郭は滑らかなままで, ファイルサイズも解像度に依存しません. グラフは点・線・文字でできているので, ベクター形式と非常に相性が良いです. ggplot のグラフはベクター形式 (SVG や PDF) で出力できます.
 
-[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "Figure 7.6: A vector graphic stays sharp at any zoom level.")
+[![](visualization_files/figure-html/fig-vector-graph-1.svg)](visualization_files/figure-html/fig-vector-graph-1.svg "図 7.6: A vector graphic stays sharp at any zoom level.")
 
-Figure 7.6: A vector graphic stays sharp at any zoom level.
+図 7.6: A vector graphic stays sharp at any zoom level.
 
 この図は SVG (ベクター形式) で埋め込まれているので, ブラウザで拡大しても曲線も文字も滑らかなまま保たれます.
 
@@ -427,9 +421,9 @@ Figure 7.6: A vector graphic stays sharp at any zoom level.
 
 ただし, 例外もあります. ベクター形式は図形を1つずつ記録するので, 描く図形の数が増えるほどファイルが大きくなります. 例として, ggplot2 に付属する `diamonds` データセットで, 53,940個のダイヤモンドの重さ (carat) と価格の散布図を描いてみます.
 
-[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "Figure 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.")
+[![](visualization_files/figure-html/fig-too-many-points-1.png)](visualization_files/figure-html/fig-too-many-points-1.png "図 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.")
 
-Figure 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.
+図 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.
 
 この図を PNG, SVG, PDF のそれぞれで保存して, ファイルサイズを比べてみましょう.
 
@@ -440,7 +434,7 @@ Figure 7.7: A scatter plot of 53,940 diamonds, embedded as a PNG.
 | SVG           | \-          | 21.22     |
 | PDF           | \-          | 1.36      |
 
-Table 7.2: 点の多い散布図を各形式で保存したときのファイルサイズ
+表 7.2: 点の多い散布図を各形式で保存したときのファイルサイズ
 
 ラスター形式のファイルサイズは解像度に依存するので, 表には PNG のピクセル数を併記し, Web 表示には十分な 200 dpi と, 印刷にも耐える 600 dpi (このページに埋め込んだ図と同じ解像度) の2通りを載せています. SVG は約5.4万個の点を XML のテキストとして1つずつ記録するため, 高解像度の PNG と比べても1桁以上大きくなります. PDF は圧縮が効くため, ファイルサイズだけなら高解像度の PNG と同程度です. しかしベクター形式の問題はサイズだけではありません. ブラウザや PDF ビューアは表示のたびにすべての点を描画し直すので, 表示やスクロールが目に見えて遅くなります. 一方 PNG のファイルサイズと描画の重さは解像度だけで決まり, 点の数には依存しません. このように, データ点が非常に多い散布図では, ベクター形式ではなく高解像度の PNG を使う方が実用的です.
 
@@ -453,9 +447,9 @@ Table 7.2: 点の多い散布図を各形式で保存したときのファイ�
 ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
 
 ファイルサイズが大きいから\
-画像を図形の数式として記録しているから\
-可逆圧縮を使っているから\
 ピクセルの数が十分に多いから\
+可逆圧縮を使っているから\
+画像を図形の数式として記録しているから\
 
 次のうち, ベクター形式をすべて選んでください.
 
@@ -470,23 +464,23 @@ JPEG\
 LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
 
 PNG\
-JPEG\
 PDF\
 SVG\
+JPEG\
 
 共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
 
 フォントが埋め込まれていない\
-SVG の解像度が足りていない\
 グラフを PNG で保存したことによる圧縮の劣化\
 グラフを JPEG で保存したことによる非可逆圧縮のノイズ\
+SVG の解像度が足りていない\
 
 数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
 
-PDF に切り替える\
-JPEG (quality 5) で保存する\
-高解像度の PNG で保存する\
 SVG の解像度を下げる\
+PDF に切り替える\
+高解像度の PNG で保存する\
+JPEG (quality 5) で保存する\
 
 ### 見た目の悪いグラフの改善
 
@@ -557,7 +551,7 @@ mpg |>
 >
 > これはあくまで一例です. 大事なのは, まず図の主張を決め, その主張が最短時間で伝わるかどうかを基準にデザインを判断することです.
 
-Tufte, Edward R. 2001. *The Visual Display of Quantitative Information*. 2nd ed. Graphics Press.
+Tufte, Edward R. 2001年. *The Visual Display of Quantitative Information*. 2nd ed. Graphics Press.
 
 [^1]: 論文に適した図を作成する, 用途に応じて適切なグラフィックデバイスを選択する, といった観点では, `showtext` は厳密に言えば最適な解決策ではありません ([sec-graphics-device](#sec-graphics-device) 参照). しかし, フォントのインストールや埋め込みの手間を考えると, まずは `showtext` を使うのが最も簡単です.
 

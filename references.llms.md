@@ -1,14 +1,14 @@
 # 参考文献
 
-Code
+コード
 
 ## 図版クレジット
 
 本書で使用している部品写真と一部の図版は, いずれも Wikimedia Commons で公開されているものです.
 
-- [Figure fig-serif](#fig-serif), [Figure fig-sans-serif](#fig-sans-serif) (セリフ体・サンセリフ体): 作成 Stannered, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Serif_and_sans-serif_03.svg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
-- [Figure fig-photo-cpu](#fig-photo-cpu) (CPU): 撮影 Fritzchens Fritz, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AMD_Ryzen_5_2600_(39851733273).jpg), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
-- [Figure fig-photo-ram](#fig-photo-ram) (メモリ): 撮影 PantheraLeo1359531, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- [Figure fig-photo-ssd](#fig-photo-ssd): 撮影 D-Kuru, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- [Figure fig-photo-hdd](#fig-photo-hdd): 撮影 Mk2010, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hard_disk_drive_platter,_Western_Digital_Caviar_250Gb_WD2500AAKS.jpg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- [Figure fig-photo-gpu](#fig-photo-gpu) (GPU): 撮影 FreeMediaKid!, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nvidia_GeForce_RTX_5060_Ti_16GB,_PNY_Overclocked_Dual_Fan,_front.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- [図 fig-serif](#fig-serif), [図 fig-sans-serif](#fig-sans-serif) (セリフ体・サンセリフ体): 作成 Stannered, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Serif_and_sans-serif_03.svg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+- [図 fig-photo-cpu](#fig-photo-cpu) (CPU): 撮影 Fritzchens Fritz, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AMD_Ryzen_5_2600_(39851733273).jpg), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- [図 fig-photo-ram](#fig-photo-ram) (メモリ): 撮影 PantheraLeo1359531, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- [図 fig-photo-ssd](#fig-photo-ssd): 撮影 D-Kuru, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- [図 fig-photo-hdd](#fig-photo-hdd): 撮影 Mk2010, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hard_disk_drive_platter,_Western_Digital_Caviar_250Gb_WD2500AAKS.jpg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- [図 fig-photo-gpu](#fig-photo-gpu) (GPU): 撮影 FreeMediaKid!, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Nvidia_GeForce_RTX_5060_Ti_16GB,_PNY_Overclocked_Dual_Fan,_front.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

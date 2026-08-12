@@ -1,6 +1,6 @@
 # 10  文献と引用
 
-Code
+コード
 
 ## 10.1 Zoteroによる文献管理
 
@@ -156,11 +156,11 @@ of long-run growth. This view builds on earlier work
 \end{document}
 ```
 
-[![](../static/tex/main.svg)](../static/tex/main.svg "Figure 10.1: natbib + BibTeX による引用と文献リスト")
+[![](../static/tex/main.svg)](../static/tex/main.svg "図 10.1: natbib + BibTeX による引用と文献リスト")
 
-Figure 10.1: natbib + BibTeX による引用と文献リスト
+図 10.1: natbib + BibTeX による引用と文献リスト
 
-コンパイルした結果が [Figure fig-natbib-bibtex](#fig-natbib-bibtex) です. `\citet` が地の文の「Acemoglu and Robinson (2012)」に, `\citep` が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see …, chap. 2)」になっている点に注目してください.
+コンパイルした結果が [図 fig-natbib-bibtex](#fig-natbib-bibtex) です. `\citet` が地の文の「Acemoglu and Robinson (2012)」に, `\citep` が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see …, chap. 2)」になっている点に注目してください.
 
 ### `biblatex` + Biber
 
@@ -191,11 +191,11 @@ of long-run growth. This view builds on earlier work
 \end{document}
 ```
 
-[![](../static/tex/biblatex.svg)](../static/tex/biblatex.svg "Figure 10.2: biblatex + Biber による引用と文献リスト")
+[![](../static/tex/biblatex.svg)](../static/tex/biblatex.svg "図 10.2: biblatex + Biber による引用と文献リスト")
 
-Figure 10.2: biblatex + Biber による引用と文献リスト
+図 10.2: biblatex + Biber による引用と文献リスト
 
-コンパイルした結果が [Figure fig-biblatex-biber](#fig-biblatex-biber) です (スタイルは `biblatex-chicago` の author-date). `natbib` + `econ-aea` 版とほぼ同じ出力になっているのが分かります.
+コンパイルした結果が [図 fig-biblatex-biber](#fig-biblatex-biber) です (スタイルは `biblatex-chicago` の author-date). `natbib` + `econ-aea` 版とほぼ同じ出力になっているのが分かります.
 
 ### コマンドの対応
 
@@ -243,11 +243,11 @@ long-run growth. This view builds on earlier work [@halljones1999],
 and is developed in detail elsewhere [see @acemoglu2012, chap. 2].
 ```
 
-[![](../static/quarto/example.svg)](../static/quarto/example.svg "Figure 10.3: Quartoによる引用と文献リスト")
+[![](../static/quarto/example.svg)](../static/quarto/example.svg "図 10.3: Quartoによる引用と文献リスト")
 
-Figure 10.3: Quartoによる引用と文献リスト
+図 10.3: Quartoによる引用と文献リスト
 
-これをレンダリングした結果が [Figure fig-quarto-cite](#fig-quarto-cite) です. natbib + `econ-aea` や biblatex-chicago の例とほぼ同じ出力が得られます. `link-citations: true` を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.
+これをレンダリングした結果が [図 fig-quarto-cite](#fig-quarto-cite) です. natbib + `econ-aea` や biblatex-chicago の例とほぼ同じ出力が得られます. `link-citations: true` を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.
 
 > **NOTE:**
 >
@@ -289,11 +289,11 @@ format: typst
 ---
 ```
 
-[![](../static/quarto/example-typst.svg)](../static/quarto/example-typst.svg "Figure 10.4: Typst バックエンドでの引用と文献リスト")
+[![](../static/quarto/example-typst.svg)](../static/quarto/example-typst.svg "図 10.4: Typst バックエンドでの引用と文献リスト")
 
-Figure 10.4: Typst バックエンドでの引用と文献リスト
+図 10.4: Typst バックエンドでの引用と文献リスト
 
-本文は [Figure fig-quarto-cite](#fig-quarto-cite) の例と同じです. コンパイルした結果が [Figure fig-quarto-typst](#fig-quarto-typst) で, LaTeX 経由の出力 ([Figure fig-quarto-cite](#fig-quarto-cite)) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは “Bibliography” になります).
+本文は [図 fig-quarto-cite](#fig-quarto-cite) の例と同じです. コンパイルした結果が [図 fig-quarto-typst](#fig-quarto-typst) で, LaTeX 経由の出力 ([図 fig-quarto-cite](#fig-quarto-cite)) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは “Bibliography” になります).
 
 ## 演習問題
 

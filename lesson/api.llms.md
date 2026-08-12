@@ -1,14 +1,14 @@
 # 6  API
 
-Code
+コード
 
 ## 6.1 Client-Server Model
 
-私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています ([Figure fig-client-server](#fig-client-server)).
+私たちが普段見ている Web ページは, クライアントとサーバーのやり取りで成り立っています ([図 fig-client-server](#fig-client-server)).
 
-[![](../static/cetz/client-server.svg)](../static/cetz/client-server.svg "Figure 6.1: クライアントとサーバー")
+[![](../static/cetz/client-server.svg)](../static/cetz/client-server.svg "図 6.1: クライアントとサーバー")
 
-Figure 6.1: クライアントとサーバー
+図 6.1: クライアントとサーバー
 
 - **クライアント** (client) は Web ブラウザやスマホのアプリなど, ユーザーが直接操作する側のソフトウェアです
 - **サーバー** (server) は Web サイトを運営する側のコンピュータで, クライアントからのリクエストに応じてデータを返す役割を担います
@@ -118,7 +118,7 @@ gdp <- tibble(
 gdp |> arrange(country, year)
 ```
 
-これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます ([Figure fig-gdp-pc](#fig-gdp-pc)).
+これで, ブラウザもHTMLのパースも介さずに, 分析にそのまま使える整然データ (tidy data) が手に入りました. あとはいつものように可視化できます ([図 fig-gdp-pc](#fig-gdp-pc)).
 
 ``` r
 ggplot(gdp, aes(year, gdp_pc, color = country, linetype = country)) +
@@ -134,9 +134,9 @@ ggplot(gdp, aes(year, gdp_pc, color = country, linetype = country)) +
   )
 ```
 
-[![](api_files/figure-html/fig-gdp-pc-1.svg)](api_files/figure-html/fig-gdp-pc-1.svg "Figure 6.2: GDP per capita, 2000-2022 (World Bank)")
+[![](api_files/figure-html/fig-gdp-pc-1.svg)](api_files/figure-html/fig-gdp-pc-1.svg "図 6.2: GDP per capita, 2000-2022 (World Bank)")
 
-Figure 6.2: GDP per capita, 2000-2022 (World Bank)
+図 6.2: GDP per capita, 2000-2022 (World Bank)
 
 ### ラッパーパッケージ: WDI
 
@@ -219,7 +219,7 @@ income
 
 ### 可視化
 
-単位は千円です. 県名を英語ラベルに直して, 1人当たり県民所得の推移を描きます ([Figure fig-estat-income](#fig-estat-income)).
+単位は千円です. 県名を英語ラベルに直して, 1人当たり県民所得の推移を描きます ([図 fig-estat-income](#fig-estat-income)).
 
 ``` r
 income |>
@@ -245,9 +245,9 @@ income |>
   )
 ```
 
-[![](api_files/figure-html/fig-estat-income-1.svg)](api_files/figure-html/fig-estat-income-1.svg "Figure 6.3: 1人当たり県民所得の推移 (e-Stat)")
+[![](api_files/figure-html/fig-estat-income-1.svg)](api_files/figure-html/fig-estat-income-1.svg "図 6.3: 1人当たり県民所得の推移 (e-Stat)")
 
-Figure 6.3: 1人当たり県民所得の推移 (e-Stat)
+図 6.3: 1人当たり県民所得の推移 (e-Stat)
 
 > **WARNING:**
 >
@@ -351,9 +351,9 @@ resp_status() が 200 になるまで, 待ち時間なしで同じリクエス�
 >   )
 > ```
 >
-> [![](api_files/figure-html/fig-exercise-unemp-1.svg)](api_files/figure-html/fig-exercise-unemp-1.svg "Figure 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)")
+> [![](api_files/figure-html/fig-exercise-unemp-1.svg)](api_files/figure-html/fig-exercise-unemp-1.svg "図 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)")
 >
-> Figure 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)
+> 図 6.4: Unemployment rate, 2000-2022 (World Bank, ILO estimate)
 
 ### e-Stat で物価の地域差を調べる
 
@@ -422,9 +422,9 @@ resp_status() が 200 になるまで, 待ち時間なしで同じリクエス�
 >   )
 > ```
 >
-> [![](api_files/figure-html/fig-exercise-cpi-1.svg)](api_files/figure-html/fig-exercise-cpi-1.svg "Figure 6.5: Regional CPI level index, all items (national average = 100)")
+> [![](api_files/figure-html/fig-exercise-cpi-1.svg)](api_files/figure-html/fig-exercise-cpi-1.svg "図 6.5: Regional CPI level index, all items (national average = 100)")
 >
-> Figure 6.5: Regional CPI level index, all items (national average = 100)
+> 図 6.5: Regional CPI level index, all items (national average = 100)
 >
 > 図を読むときには注意が必要です. この指数は特定の基準年を 100 とするのではなく, 各年の全国平均を 100 とする空間方向の指数なので, 線の上下の動きはインフレ率ではありません. 例えば沖縄が2020年度以降 100 に近づいているのは, 物価が上がったことそのものではなく, 全国平均との相対的な物価差が縮まったことを意味します. 都道府県の間の物価水準の比較は各年ででき, 時間方向の物価上昇率を見たいときは通常の消費者物価指数を使います.
 

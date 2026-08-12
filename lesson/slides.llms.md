@@ -1,6 +1,6 @@
 # 9  スライド
 
-Code
+コード
 
 ## 9.1 技術要件
 
@@ -43,9 +43,9 @@ A drop-in Quarto extension for Touying slides with selectable built-in themes
 
 スライドからは聴衆の注意をそらす要素はできるだけ排除すべきです. しかし, Beamer のデフォルトの設定ではスライドの右下にナビゲーション記号を表示します. これをクリックしてスライドを操作する人はおらず, 不必要です.
 
-[![](../static/beamer/navigation-bad-1.svg)](../static/beamer/navigation-bad-1.svg "Figure 9.1: 不必要なナビゲーション")
+[![](../static/beamer/navigation-bad-1.svg)](../static/beamer/navigation-bad-1.svg "図 9.1: 不必要なナビゲーション")
 
-Figure 9.1: 不必要なナビゲーション
+図 9.1: 不必要なナビゲーション
 
 ナビゲーション記号は, プリアンブルに次の一行を加えれば消せます.
 
@@ -53,9 +53,9 @@ Figure 9.1: 不必要なナビゲーション
 \setbeamertemplate{navigation symbols}{}
 ```
 
-[![](../static/beamer/navigation-good-1.svg)](../static/beamer/navigation-good-1.svg "Figure 9.2: ナビゲーションを消したスライド")
+[![](../static/beamer/navigation-good-1.svg)](../static/beamer/navigation-good-1.svg "図 9.2: ナビゲーションを消したスライド")
 
-Figure 9.2: ナビゲーションを消したスライド
+図 9.2: ナビゲーションを消したスライド
 
 ### 4:3 vs. 16:9
 

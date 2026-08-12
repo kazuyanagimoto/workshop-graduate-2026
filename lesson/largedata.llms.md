@@ -1,6 +1,6 @@
 # 5  大規模データ
 
-Code
+コード
 
 ## 5.1 大規模データとメモリ
 
@@ -8,11 +8,11 @@ Code
 
 しかし, よく考えると, 分析のたびにデータ全体が必要になることはめったにありません. たいていのクエリは, 一部の列と一部の行しか使わないからです. そこで鍵になるのが, データ全体を RAM に載せるのではなく **必要な分だけ読む** という発想です. クエリに必要な列・行だけを読み込んで処理すれば, RAM を超えるデータも扱えます.
 
-これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが [Figure fig-data-stack](#fig-data-stack) です.
+これを実現するには, 役割の違う2つの道具を組み合わせます. データの **保存形式** と, それを処理する **エンジン** です. この関係を整理したのが [図 fig-data-stack](#fig-data-stack) です.
 
-[![](../static/cetz/data-stack.svg)](../static/cetz/data-stack.svg "Figure 5.1: Parquet・Polars・DuckDB の関係")
+[![](../static/cetz/data-stack.svg)](../static/cetz/data-stack.svg "図 5.1: Parquet・Polars・DuckDB の関係")
 
-Figure 5.1: Parquet・Polars・DuckDB の関係
+図 5.1: Parquet・Polars・DuckDB の関係
 
 - Parquet は保存形式. データをディスクにどう並べるかを決めるだけで, それ自体は計算しません.
 - Polars と DuckDB は処理エンジン. ディスク上のデータを読み込み, 絞り込みや集計を実行します. 役割はほぼ同じで, 互いに置き換えられる選択肢です. Polars は Rust 製のデータフレームライブラリ, DuckDB は分析に特化した組み込み型のデータベースです.
@@ -40,11 +40,11 @@ path_pq <- here::here("data", "yellow_tripdata_2024-01.parquet")
 
 大規模データを「必要な分だけ読む」ための鍵が, この **列指向フォーマット** です. CSV は **行指向** のテキストファイルで, 1行ずつ順に値がカンマ区切りで並びます. そのため, 一部の列だけが欲しいときでも, 結局すべての行・すべての列を読む必要があります.
 
-[Parquet](https://parquet.apache.org/) は **列指向** のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます ([Figure fig-row-vs-column](#fig-row-vs-column)).
+[Parquet](https://parquet.apache.org/) は **列指向** のバイナリフォーマットです. 同じテーブルでも, CSV が1行ぶんをまとめて並べるのに対し, Parquet は1列ぶんをまとめて並べます. この違いは, 一部の列だけを読むときに大きく効いてきます ([図 fig-row-vs-column](#fig-row-vs-column)).
 
-[![](../static/cetz/row-vs-column.svg)](../static/cetz/row-vs-column.svg "Figure 5.2: 行指向と列指向")
+[![](../static/cetz/row-vs-column.svg)](../static/cetz/row-vs-column.svg "図 5.2: 行指向と列指向")
 
-Figure 5.2: 行指向と列指向
+図 5.2: 行指向と列指向
 
 同じ列の値が連続して並ぶことから, 次のような利点が生まれます.
 
@@ -75,17 +75,17 @@ dbDisconnect(con)
 | CSV     | 285.4 MB       |
 | Parquet | 47.6 MB        |
 
-Table 5.1: CSV と Parquet のファイルサイズ
+表 5.1: CSV と Parquet のファイルサイズ
 
 Parquet は CSV のおよそ 6 分の1のサイズに収まっています. Rからだと [`nanoparquet`](https://nanoparquet.r-lib.org/) (軽量) や [`arrow`](https://arrow.apache.org/docs/r/) で Parquet を読み書きできます. 分析用のデータは, できるだけ Parquet で保存しておくのがよいでしょう.
 
 ### Arrow との関係
 
-Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です ([Figure fig-parquet-arrow](#fig-parquet-arrow)).
+Parquet とよく一緒に名前が挙がるArrowも列指向ですが, 担う層が違います. Parquet がディスク上の保存形式なのに対し, Arrow はメモリ (RAM) 上 の列指向フォーマットで, ディスクの Parquet を読み込むとメモリ上では Arrow の形になる, という対の関係です ([図 fig-parquet-arrow](#fig-parquet-arrow)).
 
-[![](../static/cetz/parquet-arrow.svg)](../static/cetz/parquet-arrow.svg "Figure 5.3: Parquet と Arrow")
+[![](../static/cetz/parquet-arrow.svg)](../static/cetz/parquet-arrow.svg "図 5.3: Parquet と Arrow")
 
-Figure 5.3: Parquet と Arrow
+図 5.3: Parquet と Arrow
 
 Arrowは標準的な形式になっているので, Arrow を使うツール同士 (Polars, DuckDB, さらに Python のツールなど) は, データをコピーせずに (zero-copy) 受け渡せます. 逆に, RのデータフレームはArrow形式ではないため, 変換のため `collect()` / `as_tibble()` などのステップが必要になります.[^3]
 
@@ -183,13 +183,13 @@ bm <- bench::mark(
 
 | 手法       | 中央値 (ms) | メモリ割り当て |
 |------------|-------------|----------------|
-| dplyr      | 396         | 1.3 GB         |
+| dplyr      | 404         | 1.3 GB         |
 | tidypolars | 42          | 421.1 KB       |
 | duckplyr   | 21          | 85.9 KB        |
 
-Table 5.2: 集計の計算時間とメモリ
+表 5.2: 集計の計算時間とメモリ
 
-集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 9 倍速いですが, より目を引くのは **R が確保するメモリ** の差です. [Table tbl-benchmark-data](#tbl-benchmark-data) のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
+集計そのものも `tidypolars` と `duckplyr` の方が `dplyr` より約 10 倍速いですが, より目を引くのは **R が確保するメモリ** の差です. [表 tbl-benchmark-data](#tbl-benchmark-data) のとおり, `dplyr` が数百 MB を確保するのに対し, `tidypolars` と `duckplyr` のそれは桁違いに小さくなっています.
 
 理由は2つあります. 第一に, 遅延評価と Parquet の組み合わせにより, 「必要なのは `payment_type`, `fare_amount`, `tip_amount` の列と `fare_amount > 0` の行だけ」と見抜いて, その分しか読み込みません ([sec-polars](#sec-polars) の `explain()` で見た列の刈り込みと述語の押し下げです). 第二に, Polars と DuckDB はデータを R のメモリではなく自前のメモリ (Rust や C++ 側) に持ち, R へは最終的な集計結果だけを渡します. そのため R のヒープにはほとんど何も積まれません. 一方 `dplyr` は, 19列すべてを R に読み込み, 中間結果まで含めて R オブジェクトとして抱えます.
 
@@ -214,10 +214,10 @@ Table 5.2: 集計の計算時間とメモリ
 
 19列のテーブルから3列だけを使って集計するとき, Parquet + Polars が CSV + dplyr より圧倒的に速い最大の理由はどれでしょうか.
 
-列指向なので, 必要な3列だけをディスクから読める\
-CSV は型情報を持たないから\
-Polars が R より新しい言語で書かれているから\
 Parquet はテキストではなくバイナリだから\
+Polars が R より新しい言語で書かれているから\
+CSV は型情報を持たないから\
+列指向なので, 必要な3列だけをディスクから読める\
 
 ``` r
 q <- scan_parquet_polars(path) |>
@@ -227,24 +227,24 @@ q <- scan_parquet_polars(path) |>
 
 を実行した直後, どういう状態になっているでしょうか.
 
-ファイル全体がメモリに読み込まれている\
-集計結果まですでに計算されている\
 データはまだ読まれておらず, 何をするかの計画だけができている\
 filter までは実行済みで, summarise だけが残っている\
+ファイル全体がメモリに読み込まれている\
+集計結果まですでに計算されている\
 
 Parquet と Arrow の関係として正しいものはどれでしょうか.
 
+Arrow がディスク上の保存形式で, Parquet はメモリ上の形式\
 Parquet はディスク上の保存形式で, Arrow はメモリ上の形式\
 Arrow は Parquet の新しいバージョン\
-Arrow がディスク上の保存形式で, Parquet はメモリ上の形式\
 どちらもディスク上の保存形式で, 圧縮率が違うだけ\
 
 RAM が 8GB のノート PC で, 20GB のデータを集計する必要があります. どうするのがよいでしょうか.
 
-乱数で 1% に間引いてから dplyr で集計する\
 RAM を超えるデータは, メモリを増設しない限り R では扱えない\
-Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する\
 データ全体をメモリに読み込んでから, 不要な列を落とす\
+乱数で 1% に間引いてから dplyr で集計する\
+Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリとして集計する\
 
 ### 時間帯別のチップ率と explain
 
@@ -281,7 +281,7 @@ Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリ�
 > ##             simple π 3/3 ["tpep_pickup_datetime", ... 2 other columns]
 > ##               Parquet SCAN [/Users/kazuharu/github/workshop-graduate-2026/data/yellow_tripdata_2024-01.parquet]
 > ##               PROJECT 4/19 COLUMNS
-> ##               SELECTION: [([(col("fare_amount")) > (0.0)]) & ([(col("payment_type").cast(Float64)) == (1.0)])]
+> ##               SELECTION: [([(col("payment_type").cast(Float64)) == (1.0)]) & ([(col("fare_amount")) > (0.0)])]
 > ##               ESTIMATED ROWS: 2964624
 > ```
 >
@@ -302,9 +302,9 @@ Parquet に変換し, duckplyr で必要な列・行だけ読む遅延クエリ�
 >   theme(panel.grid.minor = element_blank())
 > ```
 >
-> [![](largedata_files/figure-html/fig-exercise-tip-hour-1.svg)](largedata_files/figure-html/fig-exercise-tip-hour-1.svg "Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)")
+> [![](largedata_files/figure-html/fig-exercise-tip-hour-1.svg)](largedata_files/figure-html/fig-exercise-tip-hour-1.svg "図 5.4: Tip rate by pickup hour (credit-card trips, January 2024)")
 >
-> Figure 5.4: Tip rate by pickup hour (credit-card trips, January 2024)
+> 図 5.4: Tip rate by pickup hour (credit-card trips, January 2024)
 >
 > 300万行のデータですが, 遅延評価と列の刈り込みのおかげで, 集計は一瞬で終わります.
 

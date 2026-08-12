@@ -1,6 +1,6 @@
-# Appendix B — Quarto
+# 付録 B — Quarto
 
-Code
+コード
 
 ## B.1 Quarto とは
 
@@ -216,11 +216,11 @@ Quartoのドキュメントでは, 冒頭に `---` で囲まれたYAML形式の�
 
 ## Output
 
-[![](../static/img/quarto/hokusai_kanagawa.jpg)](../static/img/quarto/hokusai_kanagawa.jpg "Figure B.1: 神奈川沖浪裏")
+[![](../static/img/quarto/hokusai_kanagawa.jpg)](../static/img/quarto/hokusai_kanagawa.jpg "図 B.1: 神奈川沖浪裏")
 
-Figure B.1: 神奈川沖浪裏
+図 B.1: 神奈川沖浪裏
 
-[Figure fig-kanagawa](#fig-kanagawa) は葛飾北斎の有名な浮世絵である.
+[図 fig-kanagawa](#fig-kanagawa) は葛飾北斎の有名な浮世絵である.
 
 ## Input
 
@@ -242,9 +242,9 @@ Figure B.1: 神奈川沖浪裏
 | pear   | 1.37  |
 | orange | 3.09  |
 
-Table B.1: Fruit prices
+表 B.1: Fruit prices
 
-[Table tbl-fruit](#tbl-fruit) は果物の値段を表している.
+[表 tbl-fruit](#tbl-fruit) は果物の値段を表している.
 
 基本的には, 特別な prefix (`fig-`, `tbl-`, `sec-` など) をつけたラベルを `{#label}` という形式で指定し, 本文中では `@label` と書くことで, その要素の番号を自動で参照することができます. その他の要素 (式や命題など) も同様の方法で参照できるので [Quartoのドキュメント](https://quarto.org/docs/authoring/cross-references.html) を参照してください.
 
@@ -301,11 +301,11 @@ penguins |>
 ```
 ````
 
-[![](quarto_files/figure-html/fig-penguins-1.svg)](quarto_files/figure-html/fig-penguins-1.svg "Figure B.2: くちばしの長さとひれの長さの関係")
+[![](quarto_files/figure-html/fig-penguins-1.svg)](quarto_files/figure-html/fig-penguins-1.svg "図 B.2: くちばしの長さとひれの長さの関係")
 
-Figure B.2: くちばしの長さとひれの長さの関係
+図 B.2: くちばしの長さとひれの長さの関係
 
-本文で `@fig-penguins` と書くと [Figure fig-penguins](#fig-penguins) のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.
+本文で `@fig-penguins` と書くと [図 fig-penguins](#fig-penguins) のように参照できます. 図番号は出現順に自動で振られるので, 図を増やしたり順番を入れ替えたりしても番号がずれません.
 
 ### `tinytable` による表
 
@@ -331,9 +331,9 @@ penguins |>
 | Gentoo    | 47.50488 | 217.1870    |
 | Chinstrap | 48.83382 | 195.8235    |
 
-Table B.2: ペンギンの種類ごとの平均値
+表 B.2: ペンギンの種類ごとの平均値
 
-本文で `@tbl-penguins` と書くと [Table tbl-penguins](#tbl-penguins) のように参照できます.
+本文で `@tbl-penguins` と書くと [表 tbl-penguins](#tbl-penguins) のように参照できます.
 
 ## B.7 インラインコード
 

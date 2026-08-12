@@ -1,6 +1,6 @@
 # 12  AIと研究する
 
-Code
+コード
 
 ## 12.1 文献調査
 
@@ -107,11 +107,11 @@ template-research/
 
 パッケージは `install.packages()` ではなく `rv` で, R のバージョンは `rproject.toml` で固定し, コードの整形は `air` に任せます (この本のリポジトリも同じ構成です).
 
-これらのフォルダがどう連携するかを図にすると, [Figure fig-research-workflow](#fig-research-workflow) のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. `notes/` で固まった分析はパイプラインに昇格し, ルートの `CLAUDE.md` を読んだ AI がこのプロジェクト全体の作業を手伝います.
+これらのフォルダがどう連携するかを図にすると, [図 fig-research-workflow](#fig-research-workflow) のようになります. 生データがパイプラインを通ってデータオブジェクトになり, それを論文とスライドが受け取る, という流れです. `notes/` で固まった分析はパイプラインに昇格し, ルートの `CLAUDE.md` を読んだ AI がこのプロジェクト全体の作業を手伝います.
 
-[![](../static/cetz/research-workflow.svg)](../static/cetz/research-workflow.svg "Figure 12.1: 研究プロジェクトの構成とデータの流れ")
+[![](../static/cetz/research-workflow.svg)](../static/cetz/research-workflow.svg "図 12.1: 研究プロジェクトの構成とデータの流れ")
 
-Figure 12.1: 研究プロジェクトの構成とデータの流れ
+図 12.1: 研究プロジェクトの構成とデータの流れ
 
 ### CLAUDE.md で AI にプロジェクトの規約を教える
 
@@ -145,11 +145,11 @@ R -e 'targets::tar_make()'  # run the pipeline
 
 ### AI と進める
 
-研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです ([Figure fig-research-cycle](#fig-research-cycle)). 具体的な流れは [targets による再現性](../lesson/targets.llms.md) の章と同じですが, AI を使うと各段階が次のように楽になります.
+研究は, ノートで試し, 固まったものをパイプラインに移し, 論文にまとめる, というサイクルの繰り返しです ([図 fig-research-cycle](#fig-research-cycle)). 具体的な流れは [targets による再現性](../lesson/targets.llms.md) の章と同じですが, AI を使うと各段階が次のように楽になります.
 
-[![](../static/cetz/research-cycle.svg)](../static/cetz/research-cycle.svg "Figure 12.2: AI と回す研究のサイクル")
+[![](../static/cetz/research-cycle.svg)](../static/cetz/research-cycle.svg "図 12.2: AI と回す研究のサイクル")
 
-Figure 12.2: AI と回す研究のサイクル
+図 12.2: AI と回す研究のサイクル
 
 - ノートでの試行錯誤: 「このデータで最低賃金の雇用効果を回帰して図にして」と頼めば, `notes/` の中にコードを書いてくれます.
 - パイプラインへの昇格: 固まった分析を `R/tar_*.R` に移す作業を任せます.

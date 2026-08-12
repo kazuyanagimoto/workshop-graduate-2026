@@ -1,6 +1,6 @@
 # 11  パイプライン
 
-Code
+コード
 
 [`{targets}`](https://books.ropensci.org/targets/) は, 研究のワークフローを構築する R のパッケージです. 最大の特徴は, データ, 関数, 結果を R のオブジェクトとしてその依存関係を管理し, 上流のオブジェクトが変更されたときに, それに依存する下流のオブジェクトを自動的に再計算してくれることです. これにより, 再現性を保ち続けたまま研究を進めることができます.
 
@@ -20,9 +20,9 @@ Code
 
 論文を執筆しおわった頃には, 以下のようなパイプラインができあがっているはずです.
 
-[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "Figure 11.1: 論文を書き終えた頃にできあがっているパイプライン")
+[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "図 11.1: 論文を書き終えた頃にできあがっているパイプライン")
 
-Figure 11.1: 論文を書き終えた頃にできあがっているパイプライン
+図 11.1: 論文を書き終えた頃にできあがっているパイプライン
 
 次節ではワークフローの各部分を解説していきますが, その前に `{targets}` の基本的な使い方を解説します.
 
@@ -59,27 +59,27 @@ tar_plan(
 
 定義したパイプラインは, `targets::tar_visnetwork()` で可視化することができます.
 
-[![](../static/img/targets/tar-visnetwork-init.png)](../static/img/targets/tar-visnetwork-init.png "Figure 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト")
+[![](../static/img/targets/tar-visnetwork-init.png)](../static/img/targets/tar-visnetwork-init.png "図 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト")
 
-Figure 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
+図 11.2: パイプラインの可視化. 三角形が関数, 丸がファイルとオブジェクト
 
 ここでは三角形が関数, 丸がファイルとオブジェクトを表していることがわかります. また, パイプラインが実行されていない状態が水色で表されています. ここで, `targets::tar_make()` を実行すると,
 
-[![](../static/img/targets/tar-visnetwork-made.png)](../static/img/targets/tar-visnetwork-made.png "Figure 11.3: tar_make() で実行された部分はグレーに変わる")
+[![](../static/img/targets/tar-visnetwork-made.png)](../static/img/targets/tar-visnetwork-made.png "図 11.3: tar_make() で実行された部分はグレーに変わる")
 
-Figure 11.3: `tar_make()` で実行された部分はグレーに変わる
+図 11.3: `tar_make()` で実行された部分はグレーに変わる
 
 正常に実行されると, 実行された部分がグレーに変わります. ここで, `data1.csv` (`data1_raw_file`) の中身を変更すると,
 
-[![](../static/img/targets/tar-visnetwork-data-changed.png)](../static/img/targets/tar-visnetwork-data-changed.png "Figure 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る")
+[![](../static/img/targets/tar-visnetwork-data-changed.png)](../static/img/targets/tar-visnetwork-data-changed.png "図 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る")
 
-Figure 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
+図 11.4: ファイルの中身を変更すると依存部分が未実行状態に戻る
 
 依存関係のある部分が未実行状態に戻ります. もちろん, `targets::tar_make()` を実行すると, 依存関係のある部分が再計算されます. さらに, `clean_data1()` の中身を変更すると, 以下のようになります.
 
-[![](../static/img/targets/tar-visnetwork-fn-changed.png)](../static/img/targets/tar-visnetwork-fn-changed.png "Figure 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る")
+[![](../static/img/targets/tar-visnetwork-fn-changed.png)](../static/img/targets/tar-visnetwork-fn-changed.png "図 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る")
 
-Figure 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
+図 11.5: 関数の中身を変更しても, 依存部分だけが未実行状態に戻る
 
 このように, `tar_plan()` 上でパイプラインの定義をし, `tar_make()` で実行するという流れを繰り返していくのが `{targets}` の基本的な使い方です.
 

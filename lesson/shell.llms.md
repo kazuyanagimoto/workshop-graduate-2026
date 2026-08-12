@@ -1,6 +1,6 @@
-# Appendix A — Shell
+# 付録 A — Shell
 
-Code
+コード
 
 ## A.1 Shell とは
 

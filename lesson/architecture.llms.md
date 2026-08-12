@@ -1,24 +1,24 @@
 # 1  アーキテクチャ
 
-Code
+コード
 
 この章では, コンピュータがどのような部品からできていて, その上でソフトウェアがどのように動いているのかを学びます. 普段の分析ではあまり意識しない話題ですが, 研究生活では意外なほど頻繁に顔を出します. 新しい PC を買うとき, ソフトウェアのインストーラを選ぶとき, 大学の計算サーバーやクラウドを使うとき, そして AI に環境構築を指示するとき, この章の語彙が判断の基礎になります.
 
 ## 1.1 コンピュータの基本構成
 
-デスクトップ PC もノート PC も, そしてスマートフォンも, 基本的な構成は同じです. [Figure fig-computer-components](#fig-computer-components) のように, CPU, メモリ, ストレージ, GPU といった部品が, マザーボード (motherboard) と呼ばれる基板の上で, バス (bus) というデータの通り道によって結ばれています.
+デスクトップ PC もノート PC も, そしてスマートフォンも, 基本的な構成は同じです. [図 fig-computer-components](#fig-computer-components) のように, CPU, メモリ, ストレージ, GPU といった部品が, マザーボード (motherboard) と呼ばれる基板の上で, バス (bus) というデータの通り道によって結ばれています.
 
-[![](../static/cetz/computer-components.svg)](../static/cetz/computer-components.svg "Figure 1.1: コンピュータの基本構成")
+[![](../static/cetz/computer-components.svg)](../static/cetz/computer-components.svg "図 1.1: コンピュータの基本構成")
 
-Figure 1.1: コンピュータの基本構成
+図 1.1: コンピュータの基本構成
 
 ### CPU
 
-[![](../static/img/hardware/cpu.jpg)](../static/img/hardware/cpu.jpg "Figure 1.2: CPU (AMD Ryzen 5 2600)")
+[![](../static/img/hardware/cpu.jpg)](../static/img/hardware/cpu.jpg "図 1.2: CPU (AMD Ryzen 5 2600)")
 
-Figure 1.2: CPU (AMD Ryzen 5 2600)
+図 1.2: CPU (AMD Ryzen 5 2600)
 
-CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です ([Figure fig-photo-cpu](#fig-photo-cpu)). 性能を表す代表的な指標が2つあります.
+CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの命令を1つずつ実行するコンピュータの頭脳です ([図 fig-photo-cpu](#fig-photo-cpu)). 性能を表す代表的な指標が2つあります.
 
 - **クロック周波数** (clock speed): 1秒間に刻む動作の回数で, GHz (\\10^9\\ 回/秒) で表されます. おおまかには1コアあたりの処理の速さの目安です.
 - **コア数** (cores): 独立して命令を実行できる演算ユニットの数です. 近年の CPU は4から16程度のコアを持つのが一般的です.
@@ -27,31 +27,31 @@ CPU (Central Processing Unit, 中央演算処理装置) は, プログラムの�
 
 ### メモリとストレージ
 
-[![](../static/img/hardware/ram.jpg)](../static/img/hardware/ram.jpg "Figure 1.3: メモリ (DDR4 DIMM)")
+[![](../static/img/hardware/ram.jpg)](../static/img/hardware/ram.jpg "図 1.3: メモリ (DDR4 DIMM)")
 
-Figure 1.3: メモリ (DDR4 DIMM)
+図 1.3: メモリ (DDR4 DIMM)
 
-メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで ([Figure fig-photo-ram](#fig-photo-ram)), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).
+メモリ (RAM, Random Access Memory) は, 実行中のプログラムとデータを置いておく作業スペースで ([図 fig-photo-ram](#fig-photo-ram)), よく机の広さに例えられます. 机が広いほど多くの資料を同時に広げられるように, RAM が大きいほど大きなデータを一度に扱えます. 高速に読み書きできる一方で, 電源を切ると中身が消えます (揮発性, volatile).
 
-[![](../static/img/hardware/ssd.jpg)](../static/img/hardware/ssd.jpg "Figure 1.4: SSD (NVMe M.2)")
+[![](../static/img/hardware/ssd.jpg)](../static/img/hardware/ssd.jpg "図 1.4: SSD (NVMe M.2)")
 
-Figure 1.4: SSD (NVMe M.2)
+図 1.4: SSD (NVMe M.2)
 
-[![](../static/img/hardware/hdd.jpg)](../static/img/hardware/hdd.jpg "Figure 1.5: HDD (カバーを開けた内部)")
+[![](../static/img/hardware/hdd.jpg)](../static/img/hardware/hdd.jpg "図 1.5: HDD (カバーを開けた内部)")
 
-Figure 1.5: HDD (カバーを開けた内部)
+図 1.5: HDD (カバーを開けた内部)
 
-ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります ([Figure fig-photo-ssd](#fig-photo-ssd), [Figure fig-photo-hdd](#fig-photo-hdd)). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
+ストレージ (storage) は, ファイルを永続的に保存しておく場所で, SSD (Solid State Drive) や HDD (Hard Disk Drive) がこれにあたります ([図 fig-photo-ssd](#fig-photo-ssd), [図 fig-photo-hdd](#fig-photo-hdd)). こちらは本棚です. 容量は RAM の何十倍もありますが, 読み書きは桁違いに遅くなります.
 
 「速いが小さい記憶」と「遅いが大きい記憶」を階層的に組み合わせるこの設計はメモリのヒエラルキーと呼ばれ, 計算の高速化を考えるうえで重要になります ([sec-computation-theory](#sec-computation-theory)). なお, データ分析で「メモリが足りない」と言うときのメモリは RAM のことです. RAM に収まらないデータの扱い方は, データ処理の章で扱います.
 
 ### GPU
 
-[![](../static/img/hardware/gpu.jpg)](../static/img/hardware/gpu.jpg "Figure 1.6: GPU (GeForce RTX 5060 Ti)")
+[![](../static/img/hardware/gpu.jpg)](../static/img/hardware/gpu.jpg "図 1.6: GPU (GeForce RTX 5060 Ti)")
 
-Figure 1.6: GPU (GeForce RTX 5060 Ti)
+図 1.6: GPU (GeForce RTX 5060 Ti)
 
-GPU (Graphics Processing Unit) は, もともと画面描画のための部品です ([Figure fig-photo-gpu](#fig-photo-gpu)). 画面上の何百万というピクセルを同時に計算する必要があるため, [Figure fig-computer-components](#fig-computer-components) に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.
+GPU (Graphics Processing Unit) は, もともと画面描画のための部品です ([図 fig-photo-gpu](#fig-photo-gpu)). 画面上の何百万というピクセルを同時に計算する必要があるため, [図 fig-computer-components](#fig-computer-components) に描いたように, 単純な演算ユニットを数千個並べた構造をしています. 少数の強力なコアで複雑な処理を順にこなす CPU とは対照的な設計です.
 
 この「単純な計算の大規模並列」は行列演算と相性が良いため, GPU は深層学習をはじめとする機械学習の計算基盤になりました.[^2] 経済学でも, 深層学習や大規模なシミュレーションを使う研究では GPU が登場しますが, 回帰分析が中心であれば必須ではありません.
 
@@ -78,7 +78,7 @@ Sys.info()[c("sysname", "release", "machine")]
 
 CPU が直接理解できるのは, 機械語 (machine code) と呼ばれる 0 と 1 の列だけです. R のコードを実行するときも, R のインタープリタ (それ自体が機械語のプログラム) がコードを解釈し, 最終的にはすべて機械語の命令となって CPU に届いています.
 
-どのような機械語の命令が使えるかという「語彙」の仕様を, **命令セットアーキテクチャ** (ISA, Instruction Set Architecture) といいます. 現在の主流は [Table tbl-isa](#tbl-isa) の2系統です.
+どのような機械語の命令が使えるかという「語彙」の仕様を, **命令セットアーキテクチャ** (ISA, Instruction Set Architecture) といいます. 現在の主流は [表 tbl-isa](#tbl-isa) の2系統です.
 
 |  | x86-64 (AMD64) | ARM64 (AArch64) |
 |----|----|----|
@@ -86,7 +86,7 @@ CPU が直接理解できるのは, 機械語 (machine code) と呼ばれる 0 �
 | 採用例 | Windows PC の大半, Intel Mac, サーバー | スマートフォン, Apple Silicon Mac, AWS Graviton |
 | 特徴 | 高性能重視, 長い後方互換性 | 省電力重視 |
 
-Table 1.1: 主要な CPU アーキテクチャ
+表 1.1: 主要な CPU アーキテクチャ
 
 x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフトウェアとの互換性を保ちながら拡張されてきました.[^3] 一方 ARM は省電力を重視した設計で, スマートフォンのほぼすべてに採用されています.
 
@@ -104,11 +104,11 @@ x86 は1978年の Intel 8086 に始まる系譜で, 40年以上前のソフト�
 
 ### 32-bit と 64-bit
 
-アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです ([Figure fig-bit-width](#fig-bit-width)). 32-bit の CPU が区別できるメモリアドレスは \\2^{32}\\ 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が \\2^{64}\\ バイト (約1600万 TB) となり, 事実上無制限になりました.
+アーキテクチャ名に付いている「64」は, CPU が一度に扱う整数やメモリアドレスの幅が 64 ビットであることを意味します. この幅が重要なのは, 扱えるメモリの上限を決めるからです ([図 fig-bit-width](#fig-bit-width)). 32-bit の CPU が区別できるメモリアドレスは \\2^{32}\\ 通り, つまり 4GB 分しかありません. どれだけ RAM を積んでも, 1つのプログラムは 4GB までしか使えないのです. 64-bit ではこの上限が \\2^{64}\\ バイト (約1600万 TB) となり, 事実上無制限になりました.
 
-[![](../static/cetz/bit-width.svg)](../static/cetz/bit-width.svg "Figure 1.7: アドレス幅と扱えるメモリの上限")
+[![](../static/cetz/bit-width.svg)](../static/cetz/bit-width.svg "図 1.7: アドレス幅と扱えるメモリの上限")
 
-Figure 1.7: アドレス幅と扱えるメモリの上限
+図 1.7: アドレス幅と扱えるメモリの上限
 
 現在の PC とスマートフォンは, ほぼすべて 64-bit (x86-64 か ARM64) です. ただし名残はあちこちに残っていて, ダウンロードページの `i386` や `x86` は 32-bit 版を, `x86_64` や `x64` は 64-bit 版を指しています.
 
@@ -135,13 +135,13 @@ Figure 1.7: アドレス幅と扱えるメモリの上限
 
 ### OS の役割
 
-オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです ([Figure fig-software-stack](#fig-software-stack)). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.
+オペレーティングシステム (OS) は, ハードウェアとアプリケーションの間に立つ土台のソフトウェアです ([図 fig-software-stack](#fig-software-stack)). CPU 時間を各プログラムにどう割り振るか (プロセス管理), RAM をどう配分するか (メモリ管理), ストレージ上のデータをどうファイルとして見せるか (ファイルシステム), キーボードやネットワークとどうやり取りするか (デバイス管理) を一手に引き受けます.
 
-[![](../static/cetz/software-stack.svg)](../static/cetz/software-stack.svg "Figure 1.8: ハードウェア, OS, アプリケーションの階層")
+[![](../static/cetz/software-stack.svg)](../static/cetz/software-stack.svg "図 1.8: ハードウェア, OS, アプリケーションの階層")
 
-Figure 1.8: ハードウェア, OS, アプリケーションの階層
+図 1.8: ハードウェア, OS, アプリケーションの階層
 
-アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは [Table tbl-os-arch](#tbl-os-arch) のとおりです.
+アプリケーションはハードウェアを直接触らず, OS が用意した窓口 (システムコール) を通じて機能を利用します. この窓口の仕様が OS ごとに異なるため, バイナリは ISA だけでなく OS にも縛られます. つまり, 配布されるバイナリは「OS × アーキテクチャ」の組み合わせごとに作られます. 身近な機種での組み合わせは [表 tbl-os-arch](#tbl-os-arch) のとおりです.
 
 | 機種                             | OS            | アーキテクチャ          |
 |----------------------------------|---------------|-------------------------|
@@ -152,7 +152,7 @@ Figure 1.8: ハードウェア, OS, アプリケーションの階層
 | 計算サーバー・クラウド・スパコン | Linux         | x86-64 (ARM64 も増加中) |
 | iPhone / Android スマートフォン  | iOS / Android | ARM64                   |
 
-Table 1.2: 身近な機種の OS とアーキテクチャ
+表 1.2: 身近な機種の OS とアーキテクチャ
 
 > **WARNING:**
 >
@@ -162,11 +162,11 @@ Table 1.2: 身近な機種の OS とアーキテクチャ
 
 ### Unix の系譜
 
-現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です ([Figure fig-os-family](#fig-os-family)).
+現在の主要な OS は Windows, macOS, Linux の3つです. この3つの関係を理解する鍵が, 1969年にベル研究所で生まれた Unix という OS です ([図 fig-os-family](#fig-os-family)).
 
-[![](../static/cetz/os-family.svg)](../static/cetz/os-family.svg "Figure 1.9: OS の系譜")
+[![](../static/cetz/os-family.svg)](../static/cetz/os-family.svg "図 1.9: OS の系譜")
 
-Figure 1.9: OS の系譜
+図 1.9: OS の系譜
 
 - **macOS**: Unix の直系の子孫である BSD を土台にしています. その中核部分の名前が Darwin で, 先ほど `Sys.info()` の `sysname` に表示されていたものです. iOS も同じ土台の上に作られています.
 - **Linux**: 1991年に Linus Torvalds が Unix を手本にゼロから書いた互換 OS (Unix-like) で, オープンソースで開発されています. 厳密には Linux はカーネル (OS の中核) の名前で, 利用者には Ubuntu や Debian などのディストリビューションという形で配布されます. Android も Linux カーネルの上に作られています.

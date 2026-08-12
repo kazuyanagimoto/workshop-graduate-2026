@@ -1,6 +1,6 @@
-# Appendix C — 用語解説
+# 付録 C — 用語解説
 
-Code
+コード
 
 ## C.1 環境変数
 
@@ -38,11 +38,11 @@ which ls
 # /bin/ls
 ```
 
-つまり, `ls` と打つのは, 実質的に `/bin/ls` というファイルを実行しているということです ([Figure fig-path-search](#fig-path-search)). `git` や `quarto`, `R` といったコマンドも同じで, `PATH` のどこかのディレクトリに置かれた実行ファイルが呼び出されています. コマンドは魔法で動いているのではなく, ディスク上の実行ファイルを名前で探して起動しているだけなのです.
+つまり, `ls` と打つのは, 実質的に `/bin/ls` というファイルを実行しているということです ([図 fig-path-search](#fig-path-search)). `git` や `quarto`, `R` といったコマンドも同じで, `PATH` のどこかのディレクトリに置かれた実行ファイルが呼び出されています. コマンドは魔法で動いているのではなく, ディスク上の実行ファイルを名前で探して起動しているだけなのです.
 
-[![](../static/cetz/path-search.svg)](../static/cetz/path-search.svg "Figure C.1: シェルが PATH からコマンドを探す流れ")
+[![](../static/cetz/path-search.svg)](../static/cetz/path-search.svg "図 C.1: シェルが PATH からコマンドを探す流れ")
 
-Figure C.1: シェルが PATH からコマンドを探す流れ
+図 C.1: シェルが PATH からコマンドを探す流れ
 
 リストの先頭から順に探すので, 同じ名前のコマンドが複数の場所にあると, `PATH` で前に並んでいるディレクトリのものが優先されます. また, コマンドを打って `command not found` と出るのは, 「そのプログラムが存在しない」とは限らず, 「`PATH` のどのディレクトリにも見つからない」だけのこともあります.
 
@@ -189,10 +189,10 @@ MCP サーバーがホストに提供できるものは, 大きく3種類に分�
 
 ローカルの stdio 方式では, サーバーはユーザーの権限で PC 上で動きます. したがって, 信頼できるサーバーだけを追加することが大切です. 素性の分からない MCP サーバーを設定に加えると, PC 上のファイルや認証情報にアクセスされる恐れがあります. 導入するのは, ソースコードが公開され広く使われているサーバーに限るのが安全です. どのサーバーを許可するかはユーザーが設定で決められるので, AI にできることの範囲は自分でコントロールできます.
 
-Stevens, Marc, Elie Bursztein, Pierre Karpman, Ange Albertini, and Yarik Markov. 2017. “The First Collision for Full SHA-1.” In *Advances in Cryptology – CRYPTO 2017*, edited by Jonathan Katz and Hovav Shacham, vol. 10401. Springer International Publishing. <https://doi.org/10.1007/978-3-319-63688-7_19>.
+Stevens, Marc, Elie Bursztein, Pierre Karpman, Ange Albertini, と Yarik Markov. 2017年. 「The First Collision for Full SHA-1」. *Advances in Cryptology – CRYPTO 2017*, 編集者: Jonathan Katz と Hovav Shacham, vol. 10401. Springer International Publishing. <https://doi.org/10.1007/978-3-319-63688-7_19>.
 
-Wang, Xiaoyun, Dengguo Feng, Xuejia Lai, and Hongbo Yu. 2004. *Collisions for Hash Functions MD4, MD5, HAVAL-128 and RIPEMD*. 2004/199.
+Wang, Xiaoyun, Dengguo Feng, Xuejia Lai, と Hongbo Yu. 2004年. *Collisions for Hash Functions MD4, MD5, HAVAL-128 and RIPEMD*. 2004/199.
 
-Wang, Xiaoyun, Yiqun Lisa Yin, and Hongbo Yu. 2005. “Finding Collisions in the Full SHA-1.” In *Advances in Cryptology – CRYPTO 2005*, edited by David Hutchison, Takeo Kanade, Josef Kittler, et al., vol. 3621. Springer Berlin Heidelberg. <https://doi.org/10.1007/11535218_2>.
+Wang, Xiaoyun, Yiqun Lisa Yin, と Hongbo Yu. 2005年. 「Finding Collisions in the Full SHA-1」. *Advances in Cryptology – CRYPTO 2005*, 編集者: David Hutchison, Takeo Kanade, Josef Kittler, ほか, vol. 3621. Springer Berlin Heidelberg. <https://doi.org/10.1007/11535218_2>.
 
-[^1]: 王小云 (Wang Xiaoyun) のグループは, まず 2004 年に, SHA-1 より古い MD5 などについて, 実際に同じハッシュ値となる具体的な入力対 (数値例) を構成してみせました ([Wang et al. 2004](#ref-wang2004)). 続く 2005 年には, 同グループが SHA-1 についても, 衝突探索の計算量を総当たりの \\2^{80}\\ より小さい \\2^{69}\\ 程度まで下げられることを理論的に示します ([Wang et al. 2005](#ref-wang2005)) そして 2017 年, Google と CWI のグループが, 実際に同じ SHA-1 ハッシュをもつ2つの PDF を構成してみせ, 初めて現実の SHA-1 衝突を実証しました (SHAttered と呼ばれます) ([Stevens et al. 2017](#ref-stevens2017)).
+[^1]: 王小云 (Wang Xiaoyun) のグループは, まず 2004 年に, SHA-1 より古い MD5 などについて, 実際に同じハッシュ値となる具体的な入力対 (数値例) を構成してみせました ([Wang ほか 2004年](#ref-wang2004)). 続く 2005 年には, 同グループが SHA-1 についても, 衝突探索の計算量を総当たりの \\2^{80}\\ より小さい \\2^{69}\\ 程度まで下げられることを理論的に示します ([Wang ほか 2005年](#ref-wang2005)) そして 2017 年, Google と CWI のグループが, 実際に同じ SHA-1 ハッシュをもつ2つの PDF を構成してみせ, 初めて現実の SHA-1 衝突を実証しました (SHAttered と呼ばれます) ([Stevens ほか 2017年](#ref-stevens2017)).

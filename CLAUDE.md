@@ -22,6 +22,20 @@ Do NOT bold technical terms, concept names, tool/package names, or numbers just 
 
 This applies to all prose (`.qmd`, `.md`); it generalises the `quarto-r` skill's "bold sparingly" slide rule to the whole repository.
 
+## Callouts: one type per role, always titled
+
+Each callout type has exactly one job. Pick by what the box is doing for the reader, not by which colour looks nice:
+
+- `tip`: practical advice — how to choose something, how to use it, what the author recommends.
+- `note`: background or a deeper aside. The reader can skip it and still follow the argument.
+- `warning`: something that causes real damage if missed (data loss, a silently wrong result).
+
+Give every callout a title (`## …` on the line after the fence). An untitled callout falls back to the generic label ("警告") in the PDF, which reads differently from every other box in the book.
+
+`collapse="true"` is only for the model answers in the exercises, where hiding the content is the point. It has no effect in the PDF, so using it anywhere else makes the two editions disagree for no reason.
+
+A statement the surrounding text then relies on — a principle, a definition, a corollary — is not a callout. Use Quarto's crossref environments (`::: {#thm-… .theorem name="…"}`, `::: {#cor-… .corollary}`) so it is numbered and can be referenced.
+
 ## Code: write all comments in English
 
 Write every comment and docstring in code in English. This applies to all languages (R, Python, shell, and others), to code chunks in `.qmd` files, and to both new and existing code.

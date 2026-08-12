@@ -121,7 +121,7 @@ Arrowは標準的な形式になっているので, Arrow を使うツール同�
   ややこしいことにRには [`arrow`](https://arrow.apache.org/docs/r/) というパッケージもありますが, これもArrow形式を扱うため, Polars や DuckDB と同様に Parquet を遅延読み込みして集計するエンジンとしても使えます.
 ]
 
-::: {.callout-note collapse="true"}
+::: {.callout-note}
 
 ## 他の列指向フォーマット
 

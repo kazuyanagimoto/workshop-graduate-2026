@@ -69,7 +69,7 @@ Git でもっとも大切な概念がコミット (commit) です. コミット�
 ![コミット間の差分 (diff)](../static/cetz/commit-compare.svg){#fig-commit-compare fig-align="center"}
 
 
-::: {.callout-note collapse="true"}
+::: {.callout-note}
 
 ## コミットの実体
 

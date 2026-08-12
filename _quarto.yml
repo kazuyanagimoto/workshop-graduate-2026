@@ -56,6 +56,20 @@ book:
 website:
   llms-txt: true
 
+# The Typst format sets lang: ja on its own; declaring it here as well makes the
+# HTML edition agree, so both say 図 / セクション rather than one of them saying
+# Figure / Section.
+lang: ja
+
+# The visualization chapter states Tufte's principle and its corollary as
+# theorem environments. Quarto's Japanese labels for those are 定理 / 系, and
+# the prose calls the first one 原則, so relabel it.
+crossref:
+  thm-title: 原則
+  thm-prefix: 原則
+  cor-title: 系
+  cor-prefix: 系
+
 format:
   html:
     code-tools: true

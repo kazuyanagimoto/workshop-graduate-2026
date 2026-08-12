@@ -231,7 +231,7 @@ of long-run growth. This view builds on earlier work
 
 結論から言えば, 経済学では `natbib` + BibTeX を既定にしておくのが無難です. 多くのジャーナルが `natbib` 用の `.bst` を配布していること, そして投稿時にトラブルが起きにくいことが理由です. `biblatex` + Biber は Unicode 対応やスタイルの柔軟さで優れており, 凝った書式を組みたいときには魅力的ですが, その柔軟さが本当に必要になる場面は経済学の論文ではそう多くありません. 迷ったら `natbib` を選び, `biblatex` は明確な必要が出てから検討すれば十分です. いずれにせよ, 引用元の `references.bib` を Zotero で一元管理しておけば, あとからエンジンを乗り換えても問題は起きません.
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 
 ## arXiv 投稿と `.bbl`
 
@@ -274,7 +274,7 @@ and is developed in detail elsewhere [see @acemoglu2012, chap. 2].
 これをレンダリングした結果が @fig-quarto-cite です. natbib + `econ-aea` や biblatex-chicago の例とほぼ同じ出力が得られます. `link-citations: true` を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.
 
 
-::: {.callout-note collapse="true"}
+::: {.callout-note}
 
 ## Quartoのciteprocによる引用処理
 

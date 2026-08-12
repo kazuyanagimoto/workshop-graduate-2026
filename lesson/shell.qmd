@@ -219,6 +219,9 @@ rm -rf testing      # deletes it with its contents
 ```
 
 ::: {.callout-warning}
+
+## `rm -rf` は取り消せない
+
 `rm -rf` はゴミ箱を経由せず, 確認もなく即座に消します.
 パスを間違えると取り返しがつかないので, 実行前に必ずパスを見直してください.
 :::

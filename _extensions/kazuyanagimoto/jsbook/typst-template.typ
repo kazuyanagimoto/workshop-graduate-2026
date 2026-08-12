@@ -66,6 +66,20 @@
   }
 }
 
+// Quarto's `simple` theorem appearance (the default) wraps the whole statement
+// in `emph()`, following the latin convention of setting theorems in italics.
+// `js` renders emphasis in gothic, because Japanese emphasises with a change of
+// typeface rather than a slant, so the two together set the whole statement in
+// gothic. theorion — which Quarto's theorems are built on — emits every
+// environment as a `figure` whose `kind` is the environment name, which is
+// narrow enough to put the body font back there. These are the environments of
+// Quarto's `theorem_types`; the proof-like ones (proof, remark, solution) are
+// not theorion frames and only ever emphasise their label.
+#let _js-statement(body-font) = it => {
+  show emph: set text(font: body-font)
+  it
+}
+
 #let _js-author(author) = {
   let lines = ("name", "affiliation", "email")
     .map(k => author.at(k, default: none))
@@ -242,6 +256,20 @@
 
       show math.equation: set text(font: mathfont) if mathfont != none
       show raw: set text(font: codefont) if codefont != none
+
+      // Theorem statements: keep the CJK body font, leave the latin italics
+      // alone. One rule per environment rather than a blanket `show figure`,
+      // so that Quarto's own floats are not touched.
+      let statement = _js-statement(serif-list)
+      show figure.where(kind: "theorem"): statement
+      show figure.where(kind: "lemma"): statement
+      show figure.where(kind: "corollary"): statement
+      show figure.where(kind: "proposition"): statement
+      show figure.where(kind: "conjecture"): statement
+      show figure.where(kind: "definition"): statement
+      show figure.where(kind: "example"): statement
+      show figure.where(kind: "exercise"): statement
+      show figure.where(kind: "algorithm"): statement
 
       // Tables: `grid` keeps `js`'s thin full grid, the other two drop it and
       // rely on the header rule Quarto emits. The column inset matches

@@ -83,6 +83,10 @@ format:
     toc: true
     number-depth: 2
     lightbox: true
+    # Without an explicit theme, Quarto colours mermaid diagrams from the Bootstrap
+    # variables, and _brand.yml's near-black foreground turns the nodes dark.
+    mermaid:
+      theme: neutral
   # The PDF is typeset by Typst, not LaTeX: no TeX distribution is needed to
   # build the book, SVG figures are embedded directly (no rsvg-convert), and
   # long lines inside code blocks wrap on their own.

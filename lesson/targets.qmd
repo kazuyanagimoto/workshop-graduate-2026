@@ -16,165 +16,512 @@ title: パイプライン
 
 `{targets}` の哲学は, 研究のワークフローを三つの要素に分けて考えることです. それは, ファイル, 関数, オブジェクト です.
 
-- ファイル: `tar_file()` で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される
-- オブジェクト: 変数やデータフレームなどの R のオブジェクト
-- 関数: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる
+- **ファイル**: `tar_file()` で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される
+- **オブジェクト**: 変数やデータフレームなどの R のオブジェクト
+- **関数**: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる
 
 イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを使って関数を実行して新しいオブジェクトを作成するという流れです. 以下では, 実際に手を動かしてこの流れを作ってみます.
 
-### 準備: 生データを用意する
+### パイプライン
 
-空のディレクトリを1つ作り, そこを作業場所 (プロジェクトのルート) にしてください. `{targets}` と `{tarchetypes}` が入っていなければ, `install.packages(c("targets", "tarchetypes"))` で入れておきます.
+ここでは実際にパイプラインを作りながら `{targets}` の基本を確認します. まず次のようなファイル構成を作ります. ここではデータとして `penguins` データを使うため, `write.csv(penguins, "data/penguins.csv", row.names = FALSE)` を R のコンソールで一度だけ実行して, `data/penguins.csv` を作っておいてください.
 
-実際の研究では, 生データは調査データの配布サイトや統計機関のページなど, パイプラインの外からファイルとしてやってきます. その状況を再現するために, R に付属する `penguins` データ (R 4.5 以降) を CSV に書き出しておきます. これはパイプラインの中ではなく, R のコンソールから一度だけ実行します.
-
-```r
-# Run once in the console, outside the pipeline
-dir.create("data")
-readr::write_csv(penguins, "data/penguins.csv")
+```bash
+.
+├── _targets.R
+├── data/
+│   └── penguins.csv
+└── R/
+    └── functions.R
 ```
 
-以降は, この `data/penguins.csv` を「どこかから受け取った生データ」とみなします. パイプラインがこのファイルを書き換えることはありません.
-
-### パイプラインを定義する
-
-作業ディレクトリに `_targets.R` を作ります. まず, 生データを受け取ってクリーニング済みのデータを返す関数 `clean_penguins()` と, 種ごとの平均くちばし長を計算する関数 `summarize_penguins()` を定義し, それらを `tar_plan()` の中でつなぎます.
+次に, `_targets.R` にパイプラインを定義していきます.
 
 ```{.r filename="_targets.R"}
 library(targets)
 library(tarchetypes)
 suppressPackageStartupMessages(library(dplyr))
 
-clean_penguins <- function(penguins_raw) {
-  penguins_raw |>
-    filter(!is.na(bill_len))
-}
-
-summarize_penguins <- function(penguins_clean) {
-  penguins_clean |>
-    summarize(bill_len = mean(bill_len), .by = species)
-}
+tar_source() # Source all R files in R/ directory
 
 tar_plan(
-  tar_file(penguins_file, "data/penguins.csv"),
-  penguins_raw = readr::read_csv(penguins_file, show_col_types = FALSE),
-  penguins_clean = clean_penguins(penguins_raw),
-  penguins_summary = summarize_penguins(penguins_clean)
+  # Write pipeline here
 )
 ```
 
-`tar_plan()` の中の各行が1つのターゲットです. `name = expression` の形で書くと, 右辺を計算した結果が `name` という名前で保存されます. この例には, 基本の3つの要素が次のように並んでいます.
+- `targets`, `tarchetypes` はパイプラインを定義するためのパッケージです. `dplyr` はデータの操作に使います
+- `tar_source()` は, `R/` ディレクトリにある R ファイルをすべて読み込みます. ここでは `R/functions.R` に, パイプラインで使う関数を定義しておきます
+- `tar_plan()` の中に, パイプラインのターゲットを定義していきます. ここではまだ空です
 
-- ファイル: `penguins_file` (`tar_file()` で `data/penguins.csv` を登録している)
-- オブジェクト: `penguins_raw`, `penguins_clean`, `penguins_summary`
-- 関数: `clean_penguins()`, `summarize_penguins()`
+ここから, `tar_plan()` の中にパイプラインを定義していきます.
 
-`penguins_clean = clean_penguins(penguins_raw)` のように, 右辺に別のターゲットの名前や自分で定義した関数を書くと, それが依存関係になります. `{targets}` はこのコードを読んで, `penguins_file` → `penguins_raw` → `penguins_clean` → `penguins_summary` という計算の順番を自分で組み立てます. そのため, `tar_plan()` の中に書く順番は実行順と関係ありません. なお, `readr::read_csv()` のようなパッケージの関数は, 依存関係の追跡の対象にはなりません.
+**ファイルを定義する**
 
-### 実行して結果を取り出す
+`tar_file()` を使って, ファイルを定義します. これは, ファイルのパス名を持つオブジェクトです. 例えば, `data/penguins.csv` を定義するには次のようにします.
 
-R のコンソールから, 次を実行します.
+```{.r filename="_targets.R"}
+tar_plan(
+  tar_file(penguins_file, "data/penguins.csv")
+)
+```
 
-```r
+この時, `penguins_file` は, ファイルのパス名を持つオブジェクトです. さらに, このファイルを読み込んでオブジェクトを作るには, `readr::read_csv()` を使います.
+
+```{.r filename="_targets.R"}
+tar_plan(
+  tar_file(penguins_file, "data/penguins.csv"),
+  penguins = readr::read_csv(penguins_file, show_col_types = FALSE)
+)
+```
+
+今, パイプラインの状態を確認します. まだ計画を立てている段階なので, コードは実行されていません. Rコンソールで次のコマンドを実行すると, 依存関係の図がブラウザに表示されます. なお初めの1回は必要なパッケージのインストールの同意を求められる場合があります.
+
+```{.r}
 targets::tar_visnetwork()
+```
+
+![](../static/img/targets/tar-visnetwork-read.png){#fig-tar-visnetwork-read}
+
+水色のノードはまだ実行されていないファイルやオブジェクトを表しています. これを実行するには次のコマンドを実行します.
+
+```{.r}
 targets::tar_make()
 ```
 
-`tar_visnetwork()` は, 依存関係をブラウザ上に図示する関数です (`visNetwork` パッケージが必要です). 実行前は, すべてのターゲットが未実行の状態で表示されます. `tar_make()` を実行すると, 上流から順に計算が進みます.
-
-```default
+```text
 + penguins_file dispatched
-✔ penguins_file completed [0ms, 15.22 kB]
-+ penguins_raw dispatched
-✔ penguins_raw completed [91ms, 3.16 kB]
-+ penguins_clean dispatched
-✔ penguins_clean completed [3ms, 3.12 kB]
-+ penguins_summary dispatched
-✔ penguins_summary completed [3ms, 202 B]
-✔ ended pipeline [184ms, 4 completed, 0 skipped]
+✔ penguins_file completed [0ms, 17.28 kB]
++ penguins dispatched
+✔ penguins completed [76ms, 3.16 kB]
+✔ ended pipeline [138ms, 2 completed, 0 skipped]
 ```
 
-計算結果は, ディスク上のストア (`_targets/` ディレクトリ) に保存されています. 取り出し方は2通りあります.
+`dispatched` はそのターゲットの計算を始めたこと, `completed` は計算が終わって結果を保存したことを表します. 角括弧の中は, かかった時間と保存されたオブジェクトのサイズです. 最後の行はパイプライン全体の要約で, ここでは2つのターゲットを計算し, 飛ばしたものは1つも無かったことが分かります. 状態を確認します. 
 
-```r
-# Return the value directly
-targets::tar_read(penguins_summary)
-
-# Load it into the environment under its own name
-targets::tar_load(penguins_summary)
-penguins_summary
+```{.r}
+targets::tar_visnetwork()
 ```
 
-```default
-# A tibble: 3 × 2
-  species   bill_len
-  <chr>        <dbl>
-1 Adelie        38.8
-2 Gentoo        47.5
-3 Chinstrap     48.8
+![](../static/img/targets/tar-visnetwork-uptodate.png){#fig-tar-visnetwork-uptodate}
+
+なお, 実務的にはこの二つのパイプラインを統合する一つのコマンドにまとめます.
+
+```{.r filename="_targets.R"}
+tar_plan(
+  tar_file_read(
+    penguins,
+    "data/penguins.csv",
+    readr::read_csv(!!.x, show_col_types = FALSE)
+  )
+)
 ```
 
-`tar_read()` は値を返すので `x <- tar_read(...)` のように受け取れます. `tar_load()` はターゲット名と同じ変数を環境に作ります. どちらも, 一度 `tar_make()` で計算した結果をストアから読み出しているだけなので, 再計算は走りません. もう一度 `tar_make()` を実行しても, 何も変わっていないので, すべてのターゲットがスキップされます.
+```{.r}
+targets::tar_make()
+targets::tar_visnetwork()
+```
 
-### 変更したところだけを再計算する
+![](../static/img/targets/tar-visnetwork-fileread.png){#fig-tar-visnetwork-fileread}
 
-`{targets}` の核心は, 変更の影響を受けるターゲットだけが再計算されることです. 関数の変更とデータの変更の2つで確かめます. それぞれの変更でどのターゲットが古くなるかをまとめたのが @fig-targets-status です.
+`tar_file_read()` は, `tar_file()` と何らかの読み込み関数を組み合わせたものになります. 指定したオブジェクト名 (`penguins`) が読み込まれたオブジェクトになり, それに `_file` がついたものがファイルのターゲットになります.
 
-![変更によるターゲットの状態の変化](../static/cetz/targets-status.svg){#fig-targets-status width="100%"}
+**関数で処理をする**
 
-#### 関数を変更する
+`penguins` をクリーニングし, 種ごとの平均くちばし長を計算する関数を定義します. これらの関数は, `R/functions.R` に書きます.
+
+```{.r filename="R/functions.R"}
+clean_penguins <- function(penguins) {
+  penguins |>
+    filter(!is.na(bill_len))
+}
+
+summarize_penguins <- function(penguins_cleaned) {
+  penguins_cleaned |>
+    summarize(bill_len = mean(bill_len), .by = species)
+}
+```
+
+```{.r filename="_targets.R"}
+tar_plan(
+  tar_file_read(
+    penguins,
+    "data/penguins.csv",
+    readr::read_csv(!!.x, show_col_types = FALSE)
+  ),
+  penguins_cleaned = clean_penguins(penguins),
+  penguins_summary = summarize_penguins(penguins_cleaned)
+)
+```
+
+```{.r}
+targets::tar_make()
+targets::tar_visnetwork()
+```
+
+![](../static/img/targets/tar-visnetwork-functions.png){#fig-tar-visnetwork-functions}
+
+関数とオブジェクトの依存関係が図示されました. ここで, `penguins_cleaned` は `penguins` に依存し, `penguins_summary` は `penguins_cleaned` に依存しています. そのため, もし `penguins` が変更された場合は, それに依存する `penguins_cleaned` と `penguins_summary` が再計算されます.
+
+### 再計算
+
+パイプラインが力を発揮するのは, 関数やデータを変更した時です.
+
+**関数を変更**
 
 `clean_penguins()` に, 性別が欠損している個体を除く処理を追加します.
 
-```{.r filename="_targets.R"}
-clean_penguins <- function(penguins_raw) {
-  penguins_raw |>
+```{.r}
+clean_penguins <- function(penguins) {
+  penguins |>
     filter(!is.na(bill_len), !is.na(sex))
 }
 ```
 
-`tar_make()` を実行する前に, どのターゲットが古くなったかを `tar_outdated()` で確認します.
+この時の状態を確認すると, 変更の影響を受けるターゲットだけが古くなっていることが分かります.
 
-```r
-targets::tar_outdated()
+```{.r}
+targets::tar_visnetwork()
 ```
 
-```default
-[1] "penguins_summary" "penguins_clean"
+![](../static/img/targets/tar-visnetwork-fn-outdated.png){#fig-tar-visnetwork-fn-outdated}
+
+パイプラインを実行すると, 変更の影響を受けるターゲットだけが再計算されます.
+
+```{.r}
+targets::tar_make()
 ```
 
-返ってくるのは, 変更した関数を直接使う `penguins_clean` と, その下流の `penguins_summary` だけです (@fig-targets-status の (b)). `penguins_file` と `penguins_raw` は `clean_penguins()` に依存していないので, 古くなりません. `tar_make()` を実行すると, 実際にこの2つだけが再計算され, 残りの2つは前の結果がそのまま再利用されます.
-
-```default
-+ penguins_clean dispatched
-✔ penguins_clean completed [3ms, 3.03 kB]
+```text
++ penguins_cleaned dispatched
+✔ penguins_cleaned completed [2ms, 3.03 kB]
 + penguins_summary dispatched
 ✔ penguins_summary completed [3ms, 202 B]
-✔ ended pipeline [87ms, 2 completed, 2 skipped]
+✔ ended pipeline [69ms, 2 completed, 2 skipped]
 ```
 
-#### データを変更する
-
-次に, 生データが更新された場面を再現します. もう一度パイプラインの外で, 2008年以降の観測だけに絞ったデータで `data/penguins.csv` を上書きします.
-
-```r
-# Run in the console: simulate receiving an updated raw file
-readr::write_csv(dplyr::filter(penguins, year >= 2008), "data/penguins.csv")
+```{.r}
+targets::tar_visnetwork()
 ```
 
-ファイルのパスは同じですが, `tar_file()` はファイルの中身の変化も記録しているので, 変更が検知されます.
+![](../static/img/targets/tar-visnetwork-functions.png){#fig-tar-visnetwork-recomputed}
 
-```r
-targets::tar_outdated()
+**データを変更**
+
+生データが更新された状況を再現するために, 2008年以降の観測だけを残した CSV で上書きします. これもパイプラインの外, R のコンソールから実行します.
+
+```{.r}
+write.csv(subset(penguins, year >= 2008), "data/penguins.csv", row.names = FALSE)
 ```
 
-```default
-[1] "penguins_summary" "penguins_raw"     "penguins_clean"   "penguins_file"
+ファイルのパスは変わっていませんが, `tar_file()` はファイルの中身も記録しているので, 変更が検知されます.
+
+```{.r}
+targets::tar_visnetwork()
 ```
 
-今度は, `penguins_file` から下流のすべてのターゲットが古くなります (@fig-targets-status の (c)). 一方, 関数 `clean_penguins()` と `summarize_penguins()` は変わっていないので, 古くなりません. `tar_make()` を実行すると, 4つのターゲットが上流から順に再計算されます.
+![](../static/img/targets/tar-visnetwork-data-outdated.png){#fig-tar-visnetwork-data-outdated}
 
-このように, `tar_plan()` でパイプラインを定義し, `tar_make()` で実行する, という流れを繰り返していくのが `{targets}` の基本的な使い方です. データやクリーニング関数を試行錯誤しても, 無関係な重い計算をやり直さずに済み, かつ結果は常に最新のコードとデータに整合していることが保証されます.
+今度は `penguins_file` を起点に, その下流のターゲットがすべて古くなりました. 一方で `clean_penguins()` と `summarize_penguins()` は変更していないので, 関数のノードは水色のままです. 関数を変更した @fig-tar-visnetwork-fn-outdated とちょうど裏返しの関係になっています.
+
+```{.r}
+targets::tar_make()
+```
+
+```text
++ penguins_file dispatched
+✔ penguins_file completed [0ms, 11.78 kB]
++ penguins dispatched
+✔ penguins completed [75ms, 2.36 kB]
++ penguins_cleaned dispatched
+✔ penguins_cleaned completed [3ms, 2.31 kB]
++ penguins_summary dispatched
+✔ penguins_summary completed [3ms, 199 B]
+✔ ended pipeline [152ms, 4 completed, 0 skipped]
+```
+
+```{.r}
+targets::tar_visnetwork()
+```
+
+![](../static/img/targets/tar-visnetwork-functions.png){#fig-tar-visnetwork-data-recomputed}
+
+## LaTeX + `{targets}` のワークフロー
+
+次はより実践的な例を考えてみます. データのクリーニングから, 図表の作成, 論文のコンパイルまでを1本のパイプラインにまとめます. このようなパイプラインを組むことができたら, かなり再現性の高い Replication Package になりますし, パイプラインから分析の意図を読み取ることが可能になります.
+
+ここでは, `fixest` に同梱されている疑似パネルデータ `base_did` を使って, 記述統計とDiDの分析を載せた短い論文を執筆することにします. 以下では要所のコードだけを示しますが, 完成したパイプラインを1つのフォルダにまとめて配布しているので, 先にダウンロードして手元で動かしながら読み進めてください.
+
+- [targets-latex.zip](https://kazuyanagimoto.com/workshop-graduate-2026/static/data/targets-latex.zip)
+
+展開してできる `targets-latex/` を作業ディレクトリにして `targets::tar_make()` を実行すると, 生データから `manuscript/main.pdf` までが一度に作られます. 必要な R パッケージと動かし方は, フォルダの中の `README.md` にまとめてあります.
+
+### フォルダ構成
+
+```{.bash}
+.
+├── README.md
+├── _targets.R
+├── R/
+│   ├── utils.R
+│   ├── tar_data.R
+│   ├── tar_analysis.R
+│   └── tar_manuscript.R
+├── data/
+│   └── base_did.csv
+├── output/
+│   ├── img/
+│   └── table/
+└── manuscript/
+    ├── main.tex
+    └── references.bib
+```
+
+- `R/`: `tar_data`, `tar_analysis`, `tar_manuscript` の3つのサブプランを置き, データの準備, 図表の作成, 原稿のコンパイルに役割を分けます.
+- `data/`: 元データを格納するフォルダです. ここに格納されたデータは, パイプラインから読み込まれて処理されます. 基本的には Git の管理対象から外します.
+- `output/`: パイプラインが書き出す図表の置き場です
+
+`_targets.R` は3つのサブプランを並べるだけです.
+
+```{.r filename="_targets.R"}
+library(targets)
+library(tarchetypes)
+
+tar_option_set(
+  packages = c(
+    "dplyr", "ggplot2", "fixest", "modelsummary", "tinytable", "fs"
+  )
+)
+
+tar_source()
+
+tar_plan(
+  tar_data,
+  tar_analysis,
+  tar_manuscript
+)
+```
+
+### データクリーニング
+
+`R/tar_data.R` は基本の節と同じ形です. `base_did` を CSV として `data/` に置いてあるものとし, `tar_file_read()` で登録して読み込みます.
+
+```{.r filename="R/tar_data.R"}
+tar_data <- tar_plan(
+  tar_file_read(
+    did_raw,
+    here_rel("data", "base_did.csv"),
+    readr::read_csv(!!.x, show_col_types = FALSE)
+  ),
+  did = clean_did(did_raw)
+)
+
+clean_did <- function(did_raw) {
+  period_treated <- min(did_raw$period[did_raw$post == 1])
+
+  did_raw |>
+    mutate(
+      group = if_else(treat == 1, "Treated", "Control"),
+      rel_period = period - period_treated
+    )
+}
+```
+
+### 図表をファイルに書き出す
+
+`R/tar_analysis.R` が Quarto 版と一番違うところです. 図と表のターゲットが `tar_file()` になり, 関数は保存先のパスを返します.
+
+```{.r filename="R/tar_analysis.R"}
+tar_analysis <- tar_plan(
+  tab_balance = summarize_did(did),
+  tar_file(
+    tab_balance_file,
+    tabular_balance(
+      tab_balance,
+      here_rel("output", "table", "tab_balance.tex")
+    )
+  ),
+  tar_file(
+    fig_trends_file,
+    plot_trends(did, here_rel("output", "img", "fig_trends.pdf"))
+  ),
+  models_did = estimate_did(did),
+  tar_file(
+    tab_did_file,
+    tabular_did(models_did, here_rel("output", "table", "tab_did.tex"))
+  ),
+  model_event = estimate_event(did),
+  tar_file(
+    fig_event_file,
+    plot_event(model_event, here_rel("output", "img", "fig_event.pdf"))
+  )
+)
+```
+
+図を描く関数は, `ggsave()` で保存したあとにパスを返します. 返り値がパスであることが `tar_file()` の要件です.
+
+```{.r filename="R/tar_analysis.R"}
+plot_trends <- function(did, path) {
+  cutoff <- min(did$period[did$post == 1]) - 0.5
+
+  p <- did |>
+    summarize(mean_y = mean(y), .by = c(period, group)) |>
+    ggplot(aes(x = period, y = mean_y, color = group,
+               linetype = group, shape = group)) +
+    geom_vline(xintercept = cutoff, linetype = "dotted", color = "grey40") +
+    geom_line() +
+    geom_point(size = 2) +
+    scale_x_continuous(breaks = seq_len(max(did$period))) +
+    labs(x = "Period", y = "Mean outcome",
+         color = NULL, linetype = NULL, shape = NULL) +
+    theme_classic(base_size = 11) +
+    theme(legend.position = "inside",
+          legend.position.inside = c(0.15, 0.85))
+
+  ggsave(path, p, width = 6, height = 3.5)
+  path
+}
+```
+
+回帰表も同じ形です. `modelsummary()` の結果を `tinytable` のオブジェクトとして受け取り, LaTeX のファイルに書き出します.
+
+```{.r filename="R/tar_analysis.R"}
+tabular_did <- function(models_did, path) {
+  tab <- modelsummary(
+    models_did,
+    output = "tinytable",
+    escape = FALSE,
+    coef_map = c(
+      "post:treat" = "Post $\\times$ Treated",
+      "post::1:treat" = "Post $\\times$ Treated",
+      "post" = "Post",
+      "treat" = "Treated",
+      "x1" = "$x_1$"
+    ),
+    gof_map = c("nobs", "r.squared", "FE: id", "FE: period"),
+    stars = c("*" = 0.1, "**" = 0.05, "***" = 0.01)
+  )
+
+  tab |>
+    theme_latex(environment_table = FALSE) |>
+    save_tt(path, overwrite = TRUE)
+  path
+}
+```
+
+`theme_latex(environment_table = FALSE)` を付けて, 表を囲む `table` 環境を出さないのがポイントです. キャプション, ラベル, 配置は原稿の側が決めるべきものなので, パイプラインが書き出すのは表の中身だけにしておきます. 図と同じく, `save_tt()` で保存したあとにパスを返します.
+
+原稿では表を描画するために次のパッケージが必要です.
+
+```{.tex filename="manuscript/main.tex"}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{tabularray}
+```
+
+本文では, 表の置き場所を `table` 環境で用意して読み込みます.
+
+```{.tex filename="manuscript/main.tex"}
+\begin{table}[ht]
+\centering
+\caption{Difference-in-differences estimates}
+\label{tab:did}
+\input{../output/table/tab_did.tex}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/img/fig_event.pdf}
+\caption{Event-study estimates}
+\label{fig:event}
+\end{figure}
+```
+
+### 論文をコンパイルする
+
+`R/tar_manuscript.R` で `main.tex` と `references.bib` をファイルとして登録し, `tinytex` でコンパイルします.
+
+```{.r filename="R/tar_manuscript.R"}
+tar_manuscript <- tar_plan(
+  tar_file(main_tex_file, here_rel("manuscript", "main.tex")),
+  tar_file(bib_file, here_rel("manuscript", "references.bib")),
+  tar_file(
+    manuscript_pdf_file,
+    compile_manuscript(
+      main_tex_file,
+      bib_file,
+      tab_balance_file,
+      tab_did_file,
+      fig_trends_file,
+      fig_event_file
+    )
+  )
+)
+
+compile_manuscript <- function(main_tex_file, ...) {
+
+  withr::with_dir(
+    fs::path_dir(main_tex_file),
+    tinytex::pdflatex(fs::path_file(main_tex_file))
+  )
+  fs::path_ext_set(main_tex_file, "pdf")
+}
+```
+
+ポイントは2つあります. 一つは, 論文の中で参照している全てのファイルを, `compile_manuscript()` の引数として渡すことです. これのおかげで, 図表を修正した場合, パイプラインが自動で論文のコンパイルまでやってくれます. もう一つは, `withr::with_dir()` を使って作業ディレクトリを `main.tex` のあるディレクトリに移している点です. これを行わないと, `main.tex` からの相対パスが正しく解釈されず, コンパイルに失敗します.
+
+### パイプラインを実行する
+
+`tar_make()` を実行すると, データの読み込みから図表の書き出しを経て, PDF のコンパイルまでが一度に走ります.
+
+```{.r}
+targets::tar_make()
+```
+
+できあがった PDF が @fig-latex-manuscript です.
+
+![](../static/img/targets/latex-manuscript.png){#fig-latex-manuscript}
+
+パイプラインを図解すると @fig-latex-pipeline のようになります. 四角いノードが R のオブジェクトを持つターゲット, 角の丸いノードが `tar_file()` で定義したファイルのターゲットで, 3つのサブプランを囲みで示しています.
+
+```{mermaid}
+%%| label: fig-latex-pipeline
+%%| fig-cap: LaTeX パイプラインの依存関係
+%%| fig-width: 6.5
+%%| column: page-right
+%%{init: {"flowchart": {"diagramPadding": 40, "nodeSpacing": 20, "rankSpacing": 30, "padding": 6}}}%%
+graph LR
+  subgraph tar_data
+    did_raw_file(["did_raw_file"]):::filetarget --> did_raw["did_raw"]:::regular
+    did_raw --> did["did"]:::regular
+  end
+  subgraph tar_analysis
+    tab_balance["tab_balance"]:::regular --> tab_balance_file(["tab_balance_file"]):::filetarget
+    fig_trends_file(["fig_trends_file"]):::filetarget
+    models_did["models_did"]:::regular --> tab_did_file(["tab_did_file"]):::filetarget
+    model_event["model_event"]:::regular --> fig_event_file(["fig_event_file"]):::filetarget
+  end
+  subgraph tar_manuscript
+    main_tex_file(["main_tex_file"]):::filetarget
+    bib_file(["bib_file"]):::filetarget
+    manuscript_pdf_file(["manuscript_pdf_file"]):::filetarget
+  end
+  did --> tab_balance
+  did --> fig_trends_file
+  did --> models_did
+  did --> model_event
+  main_tex_file --> manuscript_pdf_file
+  bib_file --> manuscript_pdf_file
+  tab_balance_file --> manuscript_pdf_file
+  tab_did_file --> manuscript_pdf_file
+  fig_trends_file --> manuscript_pdf_file
+  fig_event_file --> manuscript_pdf_file
+  style tar_data fill:#FFFFFF00,stroke:#131516;
+  style tar_analysis fill:#FFFFFF00,stroke:#131516;
+  style tar_manuscript fill:#FFFFFF00,stroke:#131516;
+  classDef regular stroke:#107895,stroke-width:2px,color:#107895,fill:#ffffff;
+  classDef filetarget stroke:#9a2515,stroke-width:2px,color:#9a2515,fill:#ffffff;
+```
 
 ## Quarto + `{targets}` のワークフロー
 

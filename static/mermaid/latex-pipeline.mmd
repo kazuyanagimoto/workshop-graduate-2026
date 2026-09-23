@@ -1,0 +1,32 @@
+%%{init: {"theme": "neutral", "htmlLabels": false, "flowchart": {"htmlLabels": false, "diagramPadding": 40, "nodeSpacing": 20, "rankSpacing": 30, "padding": 6}}}%%
+graph LR
+  subgraph tar_data
+    did_raw_file(["did_raw_file"]):::filetarget --> did_raw["did_raw"]:::regular
+    did_raw --> did["did"]:::regular
+  end
+  subgraph tar_analysis
+    tab_balance["tab_balance"]:::regular --> tab_balance_file(["tab_balance_file"]):::filetarget
+    fig_trends_file(["fig_trends_file"]):::filetarget
+    models_did["models_did"]:::regular --> tab_did_file(["tab_did_file"]):::filetarget
+    model_event["model_event"]:::regular --> fig_event_file(["fig_event_file"]):::filetarget
+  end
+  subgraph tar_manuscript
+    main_tex_file(["main_tex_file"]):::filetarget
+    bib_file(["bib_file"]):::filetarget
+    manuscript_pdf_file(["manuscript_pdf_file"]):::filetarget
+  end
+  did --> tab_balance
+  did --> fig_trends_file
+  did --> models_did
+  did --> model_event
+  main_tex_file --> manuscript_pdf_file
+  bib_file --> manuscript_pdf_file
+  tab_balance_file --> manuscript_pdf_file
+  tab_did_file --> manuscript_pdf_file
+  fig_trends_file --> manuscript_pdf_file
+  fig_event_file --> manuscript_pdf_file
+  style tar_data fill:#FFFFFF00,stroke:#131516;
+  style tar_analysis fill:#FFFFFF00,stroke:#131516;
+  style tar_manuscript fill:#FFFFFF00,stroke:#131516;
+  classDef regular stroke:#107895,stroke-width:2px,color:#107895,fill:#ffffff;
+  classDef filetarget stroke:#9a2515,stroke-width:2px,color:#9a2515,fill:#ffffff;

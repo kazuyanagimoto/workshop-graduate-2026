@@ -249,9 +249,7 @@ targets::tar_visnetwork()
 
 次はより実践的な例を考えてみます. データのクリーニングから, 図表の作成, 論文のコンパイルまでを1本のパイプラインにまとめます. このようなパイプラインを組むことができたら, かなり再現性の高い Replication Package になりますし, パイプラインから分析の意図を読み取ることが可能になります.
 
-ここでは, `fixest` に同梱されている疑似パネルデータ `base_did` を使って, 記述統計とDiDの分析を載せた短い論文を執筆することにします. 以下では要所のコードだけを示しますが, 完成したパイプラインを1つのフォルダにまとめて配布しているので, 先にダウンロードして手元で動かしながら読み進めてください.
-
-- [targets-latex.zip](https://kazuyanagimoto.com/workshop-graduate-2026/static/data/targets-latex.zip)
+ここでは, `fixest` に同梱されている疑似パネルデータ `base_did` を使って, 記述統計とDiDの分析を載せた短い論文を執筆することにします. 以下では要所のコードだけを示しますが, 完成したパイプラインを1つのフォルダにまとめて配布しているので, 先にダウンロードして手元で動かしながら読み進めてください.  [targets-latex.zip](https://kazuyanagimoto.com/workshop-graduate-2026/static/data/targets-latex.zip)
 
 展開してできる `targets-latex/` を作業ディレクトリにして `targets::tar_make()` を実行すると, 生データから `manuscript/main.pdf` までが一度に作られます. 必要な R パッケージと動かし方は, フォルダの中の `README.md` にまとめてあります.
 
@@ -480,7 +478,7 @@ targets::tar_make()
 
 できあがった PDF が @fig-latex-manuscript です.
 
-![](../static/img/targets/latex-manuscript.png){#fig-latex-manuscript}
+![](../static/img/targets/latex-manuscript.svg){#fig-latex-manuscript}
 
 パイプラインを図解すると @fig-latex-pipeline のようになります. 四角いノードが R のオブジェクトを持つターゲット, 角の丸いノードが `tar_file()` で定義したファイルのターゲットで, 3つのサブプランを囲みで示しています.
 

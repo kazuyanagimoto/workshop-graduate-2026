@@ -114,7 +114,71 @@ Better BibTeXが設定されていると, 自動的にcitekeyが生成される�
 
 コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は “Better BibTeX” を選び, ファイル名は `references.bib` として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに `references.bib` が自動で更新されるようになります.
 
-## 10.2 LaTeX による引用
+## 10.2 Zotero MCP Server
+
+ここまでで作ったライブラリは, AI から直接参照させることもできます. Zotero を MCP (Model Context Protocol) 経由で Claude につなぐと, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼に, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては [sec-mcp](#sec-mcp) を参照してください.
+
+ここで使うのは, [`kujenga/zotero-mcp`](https://github.com/kujenga/zotero-mcp) というオープンソースの MCP サーバーです. このサーバーは, Claude に対して次の3つのツールを提供します.
+
+- `zotero_search_items`: ライブラリを検索する
+- `zotero_item_metadata`: 文献の書誌情報を取得する
+- `zotero_item_fulltext`: 文献の全文を取得する
+
+Claude は, ユーザーの依頼に応じてこれらのツールを自分で選んで呼び出します.
+
+### 事前準備
+
+このサーバーは, 手元で動いている Zotero に接続します (ローカル API). そのため次の2つを用意します.
+
+1.  Zotero 7 以降のデスクトップアプリをインストールし, 起動しておきます.
+2.  Zotero の「設定」→「詳細」で, 「この PC 上の他のアプリケーションが Zotero と通信することを許可する」にチェックを入れます (英語表記では Preferences → Advanced → “Allow other applications on this computer to communicate with Zotero”).
+
+サーバー自体は Python 製で, [`uv`](https://docs.astral.sh/uv/) の `uvx` コマンドで起動します. `uv` が入っていなければ, 先にインストールしておいてください (公式サイトの手順に従います). `uvx` はパッケージを自動でダウンロードして実行するので, `zotero-mcp` を手動でインストールする必要はありません.
+
+### Claude Desktop での設定
+
+Claude Desktop の設定ファイル `claude_desktop_config.json` に, サーバーを1つ追加します. このファイルの場所は, macOS では `~/Library/Application Support/Claude/`, Windows では `%APPDATA%\Claude\` です.
+
+``` json
+{
+  "mcpServers": {
+    "zotero": {
+      "command": "uvx",
+      "args": ["--upgrade", "zotero-mcp"],
+      "env": {
+        "ZOTERO_LOCAL": "true"
+      }
+    }
+  }
+}
+```
+
+`ZOTERO_LOCAL` を `true` にすると, 上で有効にしたローカル API 経由で手元の Zotero に接続します. 設定を保存して Claude Desktop を再起動すると, サーバーが読み込まれます.
+
+### Claude Code での設定
+
+ターミナルで動く Claude Code なら, 設定ファイルを直接編集せずに, `claude mcp add` コマンドで追加できます.
+
+``` sh
+claude mcp add zotero --env ZOTERO_LOCAL=true -- uvx --upgrade zotero-mcp
+```
+
+`--` (ダッシュ2つ) は, Claude Code 自身のオプションと, サーバーを起動するコマンドの境目を表します. `--` の後ろ (`uvx --upgrade zotero-mcp`) が, サーバーを起動するコマンドとしてそのまま実行されます.
+
+### 使ってみる
+
+設定できたら, Claude に自然な日本語で依頼するだけです. 例えば次のように頼むと, Claude は `zotero_search_items` でライブラリを検索し, 見つかった論文を一覧して答えます.
+
+> Zotero のライブラリから, 最低賃金の雇用効果に関する論文を探して, それぞれ一行で要約して.
+
+さらに特定の論文について「この論文の識別戦略を説明して」と頼めば, `zotero_item_fulltext` で全文を取得したうえで答えます. 手元のライブラリに基づいて答えるので, 存在しない論文をでっち上げる (ハルシネーション) 危険が減るのが利点です.
+
+### 注意点
+
+- Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.
+- 全文取得 (`zotero_item_fulltext`) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <https://www.zotero.org/settings/keys> で API キーとライブラリ ID を取得し, `ZOTERO_LOCAL` を `false` にして `ZOTERO_API_KEY` と `ZOTERO_LIBRARY_ID` を設定します. API キーはコードやリポジトリに直接書かず, [API](../lesson/api.llms.md) の章の e-Stat の例と同じように, 秘密情報として扱ってください.
+
+## 10.3 LaTeX による引用
 
 `references.bib` を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.
 
@@ -216,7 +280,7 @@ of long-run growth. This view builds on earlier work
 >
 > `natbib` を勧めるもう一つの理由が, [arXiv](https://arxiv.org) への投稿です. arXiv は投稿された `.tex` をコンパイルしますが, bibtex も biber も実行しません. 代わりに, 一緒にアップロードした `.bbl` ファイル (文献リストを組版した中間ファイル) をそのまま使います. ここで両者に差が出ます. BibTeX が生成する `.bbl` は素朴なテキストでバージョンに依存しないため, arXiv 上でもそのまま通ります. 一方 `biblatex` の `.bbl` は biblatex/biber のバージョンと強く結合しており, arXiv 側の biblatex が手元と違うバージョンだと読めずにエラーになることがあります. どちらも `.bbl` を同梱すれば投稿自体は可能ですが, この一点でも `natbib` + BibTeX のほうが安全です.
 
-## 10.3 Quartoによる引用
+## 10.4 Quartoによる引用
 
 Quarto では LaTeX のように `\citet` / `\citep` を使わず, Markdown の `@` 記法で引用します. `@key` が地の文に入る形 (`\citet` 相当), `[@key]` が括弧に入る形 (`\citep` 相当) で, ページや章は `[@key, chap. 2]` のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます[^1]. `link-citations: true` を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.
 

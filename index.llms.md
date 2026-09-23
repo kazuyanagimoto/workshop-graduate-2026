@@ -14,7 +14,7 @@
 
 公開
 
-2026年09月15日
+2026年09月23日
 
 # はじめに
 
@@ -122,7 +122,7 @@ sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 
 ## AI Coding Tools
 
-私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では [sec-ai-research](#sec-ai-research) 以外では必要ありません. また, [sec-ai-research](#sec-ai-research) で紹介するワークフローは, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.
+私は AI coding tools として, Claude Code を主に用いますが, この授業を学ぶ上では必須ではありません. また, ここで挙げるツールはどれも, Claude Code 以外の GitHub Copilot や Codex でも同じように使えます. AI coding tools を試す, という意味では無料で始められる GitHub Copilot から始めるのがいいでしょう. しかし, 研究で本格的に使うにはある程度お金を払う必要があります.
 
 ### GitHub Copilot
 

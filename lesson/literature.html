@@ -221,12 +221,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lesson/ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -283,14 +277,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#bibtexとは" id="toc-bibtexとは" class="nav-link" data-scroll-target="#bibtexとは">BibTeXとは</a></li>
   <li><a href="#zoteroによるbibtexファイルの作成" id="toc-zoteroによるbibtexファイルの作成" class="nav-link" data-scroll-target="#zoteroによるbibtexファイルの作成">ZoteroによるBibTeXファイルの作成</a></li>
   </ul></li>
-  <li><a href="#latex-による引用" id="toc-latex-による引用" class="nav-link" data-scroll-target="#latex-による引用"><span class="header-section-number">10.2</span> LaTeX による引用</a>
+  <li><a href="#zotero-mcp-server" id="toc-zotero-mcp-server" class="nav-link" data-scroll-target="#zotero-mcp-server"><span class="header-section-number">10.2</span> Zotero MCP Server</a>
+  <ul class="collapse">
+  <li><a href="#事前準備" id="toc-事前準備" class="nav-link" data-scroll-target="#事前準備">事前準備</a></li>
+  <li><a href="#claude-desktop-での設定" id="toc-claude-desktop-での設定" class="nav-link" data-scroll-target="#claude-desktop-での設定">Claude Desktop での設定</a></li>
+  <li><a href="#claude-code-での設定" id="toc-claude-code-での設定" class="nav-link" data-scroll-target="#claude-code-での設定">Claude Code での設定</a></li>
+  <li><a href="#使ってみる" id="toc-使ってみる" class="nav-link" data-scroll-target="#使ってみる">使ってみる</a></li>
+  <li><a href="#注意点" id="toc-注意点" class="nav-link" data-scroll-target="#注意点">注意点</a></li>
+  </ul></li>
+  <li><a href="#latex-による引用" id="toc-latex-による引用" class="nav-link" data-scroll-target="#latex-による引用"><span class="header-section-number">10.3</span> LaTeX による引用</a>
   <ul class="collapse">
   <li><a href="#natbib-bibtex" id="toc-natbib-bibtex" class="nav-link" data-scroll-target="#natbib-bibtex"><code>natbib</code> + BibTeX</a></li>
   <li><a href="#biblatex-biber" id="toc-biblatex-biber" class="nav-link" data-scroll-target="#biblatex-biber"><code>biblatex</code> + Biber</a></li>
   <li><a href="#コマンドの対応" id="toc-コマンドの対応" class="nav-link" data-scroll-target="#コマンドの対応">コマンドの対応</a></li>
   <li><a href="#どちらを使うべきか" id="toc-どちらを使うべきか" class="nav-link" data-scroll-target="#どちらを使うべきか">どちらを使うべきか</a></li>
   </ul></li>
-  <li><a href="#quartoによる引用" id="toc-quartoによる引用" class="nav-link" data-scroll-target="#quartoによる引用"><span class="header-section-number">10.3</span> Quartoによる引用</a>
+  <li><a href="#quartoによる引用" id="toc-quartoによる引用" class="nav-link" data-scroll-target="#quartoによる引用"><span class="header-section-number">10.4</span> Quartoによる引用</a>
   <ul class="collapse">
   <li><a href="#typst-バックエンド" id="toc-typst-バックエンド" class="nav-link" data-scroll-target="#typst-バックエンド">Typst バックエンド</a></li>
   </ul></li>
@@ -437,8 +439,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は “Better BibTeX” を選び, ファイル名は <code>references.bib</code> として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに <code>references.bib</code> が自動で更新されるようになります.</p>
 </section>
 </section>
-<section id="latex-による引用" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="latex-による引用"><span class="header-section-number">10.2</span> LaTeX による引用</h2>
+<section id="zotero-mcp-server" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="zotero-mcp-server"><span class="header-section-number">10.2</span> Zotero MCP Server</h2>
+<p>ここまでで作ったライブラリは, AI から直接参照させることもできます. Zotero を MCP (Model Context Protocol) 経由で Claude につなぐと, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼に, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては <a href="dictionary.html#sec-mcp" class="quarto-xref"><span>セクション C.5</span></a> を参照してください.</p>
+<p>ここで使うのは, <a href="https://github.com/kujenga/zotero-mcp"><code>kujenga/zotero-mcp</code></a> というオープンソースの MCP サーバーです. このサーバーは, Claude に対して次の3つのツールを提供します.</p>
+<ul>
+<li><code>zotero_search_items</code>: ライブラリを検索する</li>
+<li><code>zotero_item_metadata</code>: 文献の書誌情報を取得する</li>
+<li><code>zotero_item_fulltext</code>: 文献の全文を取得する</li>
+</ul>
+<p>Claude は, ユーザーの依頼に応じてこれらのツールを自分で選んで呼び出します.</p>
+<section id="事前準備" class="level3">
+<h3 class="anchored" data-anchor-id="事前準備">事前準備</h3>
+<p>このサーバーは, 手元で動いている Zotero に接続します (ローカル API). そのため次の2つを用意します.</p>
+<ol type="1">
+<li>Zotero 7 以降のデスクトップアプリをインストールし, 起動しておきます.</li>
+<li>Zotero の「設定」→「詳細」で, 「この PC 上の他のアプリケーションが Zotero と通信することを許可する」にチェックを入れます (英語表記では Preferences → Advanced → “Allow other applications on this computer to communicate with Zotero”).</li>
+</ol>
+<p>サーバー自体は Python 製で, <a href="https://docs.astral.sh/uv/"><code>uv</code></a> の <code>uvx</code> コマンドで起動します. <code>uv</code> が入っていなければ, 先にインストールしておいてください (公式サイトの手順に従います). <code>uvx</code> はパッケージを自動でダウンロードして実行するので, <code>zotero-mcp</code> を手動でインストールする必要はありません.</p>
+</section>
+<section id="claude-desktop-での設定" class="level3">
+<h3 class="anchored" data-anchor-id="claude-desktop-での設定">Claude Desktop での設定</h3>
+<p>Claude Desktop の設定ファイル <code>claude_desktop_config.json</code> に, サーバーを1つ追加します. このファイルの場所は, macOS では <code>~/Library/Application Support/Claude/</code>, Windows では <code>%APPDATA%\Claude\</code> です.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>claude_desktop_config.json</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="claude_desktop_config.json"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"zotero"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"uvx"</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"args"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"--upgrade"</span><span class="ot">,</span> <span class="st">"zotero-mcp"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"ZOTERO_LOCAL"</span><span class="fu">:</span> <span class="st">"true"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>ZOTERO_LOCAL</code> を <code>true</code> にすると, 上で有効にしたローカル API 経由で手元の Zotero に接続します. 設定を保存して Claude Desktop を再起動すると, サーバーが読み込まれます.</p>
+</section>
+<section id="claude-code-での設定" class="level3">
+<h3 class="anchored" data-anchor-id="claude-code-での設定">Claude Code での設定</h3>
+<p>ターミナルで動く Claude Code なら, 設定ファイルを直接編集せずに, <code>claude mcp add</code> コマンドで追加できます.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add zotero <span class="at">--env</span> ZOTERO_LOCAL=true <span class="at">--</span> uvx <span class="at">--upgrade</span> zotero-mcp</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>--</code> (ダッシュ2つ) は, Claude Code 自身のオプションと, サーバーを起動するコマンドの境目を表します. <code>--</code> の後ろ (<code>uvx --upgrade zotero-mcp</code>) が, サーバーを起動するコマンドとしてそのまま実行されます.</p>
+</section>
+<section id="使ってみる" class="level3">
+<h3 class="anchored" data-anchor-id="使ってみる">使ってみる</h3>
+<p>設定できたら, Claude に自然な日本語で依頼するだけです. 例えば次のように頼むと, Claude は <code>zotero_search_items</code> でライブラリを検索し, 見つかった論文を一覧して答えます.</p>
+<blockquote class="blockquote">
+<p>Zotero のライブラリから, 最低賃金の雇用効果に関する論文を探して, それぞれ一行で要約して.</p>
+</blockquote>
+<p>さらに特定の論文について「この論文の識別戦略を説明して」と頼めば, <code>zotero_item_fulltext</code> で全文を取得したうえで答えます. 手元のライブラリに基づいて答えるので, 存在しない論文をでっち上げる (ハルシネーション) 危険が減るのが利点です.</p>
+</section>
+<section id="注意点" class="level3">
+<h3 class="anchored" data-anchor-id="注意点">注意点</h3>
+<ul>
+<li>Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.</li>
+<li>全文取得 (<code>zotero_item_fulltext</code>) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <a href="https://www.zotero.org/settings/keys" class="uri">https://www.zotero.org/settings/keys</a> で API キーとライブラリ ID を取得し, <code>ZOTERO_LOCAL</code> を <code>false</code> にして <code>ZOTERO_API_KEY</code> と <code>ZOTERO_LIBRARY_ID</code> を設定します. API キーはコードやリポジトリに直接書かず, <a href="../lesson/api.html">API</a> の章の e-Stat の例と同じように, 秘密情報として扱ってください.</li>
+</ul>
+</section>
+</section>
+<section id="latex-による引用" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="latex-による引用"><span class="header-section-number">10.3</span> LaTeX による引用</h2>
 <p><code>references.bib</code> を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -463,24 +527,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="natbib-bibtex"><code>natbib</code> + BibTeX</h3>
 <p><code>natbib</code> は経済学で最も広く使われている方式です. 多くの学術誌が <code>natbib</code> 用のスタイルファイル (<code>.bst</code>) を配布しており (例: AEA の <code>aea.bst</code>, Econometrica の <code>ecta.bst</code>), 投稿規定もこれを前提にしていることが多いためです. 手元で AEA スタイルを試すだけなら, TeX Live に含まれる <code>econ-bst</code> パッケージの <code>econ-aea.bst</code> が手軽です (<code>tlmgr install econ-bst</code> で入ります).</p>
 <p><code>natbib</code> の引用コマンドは, 著者名を文の主語として地の文に組み込む <code>\citet</code> (textual) と, 文末などで括弧に入れる <code>\citep</code> (parenthetical) の使い分けが基本です. このほか, 著者名だけの <code>\citeauthor</code>, 年だけの <code>\citeyear</code>, 括弧なしの <code>\citealt</code> などがあります.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[round]{<span class="ex">natbib</span>}      <span class="co">% round -&gt; parentheses are ( )</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\citet</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliographystyle</span>{<span class="ex">econ-aea</span>}    <span class="co">% AEA style provided by econ-bst</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliography</span>{<span class="ex">references</span>}             <span class="co">% read references.bib</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[round]{<span class="ex">natbib</span>}      <span class="co">% round -&gt; parentheses are ( )</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\citet</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\citep</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliographystyle</span>{<span class="ex">econ-aea</span>}    <span class="co">% AEA style provided by econ-bst</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">\bibliography</span>{<span class="ex">references</span>}             <span class="co">% read references.bib</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-natbib-bibtex" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-natbib-bibtex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -498,24 +562,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>biblatex</code> は, 引用スタイルを LaTeX マクロとして柔軟に設定できる新しい仕組みで, Unicode (日本語やアクセント付き文字) をそのまま扱えるのが大きな利点です. バックエンドの Biber が <code>.bib</code> を解釈します. 著者・年方式は組み込みの <code>style=authoryear</code> でも出せますが, 経済学では Chicago の著者・年スタイルを実装した <code>biblatex-chicago</code> パッケージ (<code>tlmgr install biblatex-chicago</code>) を使うと, AEA に近い体裁になります.</p>
 <p>ここで一点注意があります. biblatex には, natbib の <code>econ-aea.bst</code> のような AEA 専用スタイルが存在しません. もっとも近いのが Chicago の <code>biblatex-chicago</code> で, AEA のハウススタイル自体が Chicago 著者・年方式をベースにしているため見た目はほぼ揃いますが, 厳密に AEA の体裁が要求される投稿では結局 natbib + <code>.bst</code> のほうが確実です.</p>
 <p>引用コマンドは biblatex 共通で, <code>\textcite</code> が <code>natbib</code> の <code>\citet</code> に, <code>\parencite</code> が <code>\citep</code> に対応します (どちらのパッケージでも <code>natbib=true</code> オプションを足せば <code>\citet</code> / <code>\citep</code> という慣れた名前も使えます). 著者名の最大表示数 (<code>maxcitenames</code>) や同一著者・同一年の区別 (2012a, 2012b) なども細かく制御できます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[authordate, backend=biber]{<span class="ex">biblatex-chicago</span>}</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\addbibresource</span>{references.bib} <span class="co">% include the extension</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\textcite</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\printbibliography</span>              <span class="co">% print the reference list</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>[11pt]{<span class="ex">article</span>}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{<span class="ex">geometry</span>}</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>[authordate, backend=biber]{<span class="ex">biblatex-chicago</span>}</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\addbibresource</span>{references.bib} <span class="co">% include the extension</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">\pagestyle</span>{empty}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength</span>{<span class="fu">\parindent</span>}{0pt}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\textcite</span>{<span class="ex">acemoglu2012</span>} argue that institutions are a fundamental cause</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>of long-run growth. This view builds on earlier work</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>{<span class="ex">halljones1999</span>}, and is developed in detail elsewhere</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">\parencite</span>[see][chap.~2]{<span class="ex">acemoglu2012</span>}.</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">\printbibliography</span>              <span class="co">% print the reference list</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-biblatex-biber" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-biblatex-biber-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -592,24 +656,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="quartoによる引用" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="quartoによる引用"><span class="header-section-number">10.3</span> Quartoによる引用</h2>
+<section id="quartoによる引用" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="quartoによる引用"><span class="header-section-number">10.4</span> Quartoによる引用</h2>
 <p>Quarto では LaTeX のように <code>\citet</code> / <code>\citep</code> を使わず, Markdown の <code>@</code> 記法で引用します. <code>@key</code> が地の文に入る形 (<code>\citet</code> 相当), <code>[@key]</code> が括弧に入る形 (<code>\citep</code> 相当) で, ページや章は <code>[@key, chap. 2]</code> のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. <code>link-citations: true</code> を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.</p>
 <p><code>example.qmd</code> のフロントマター (設定) は次の通りです.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-section-title</span><span class="kw">:</span><span class="at"> References</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> article</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pagestyle</span><span class="kw">:</span><span class="at"> empty</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">geometry</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">paperwidth=17cm</span><span class="kw">,</span><span class="at"> paperheight=8cm</span><span class="kw">,</span><span class="at"> margin=1cm</span><span class="kw">]</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-section-title</span><span class="kw">:</span><span class="at"> References</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> article</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pagestyle</span><span class="kw">:</span><span class="at"> empty</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">geometry</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">paperwidth=17cm</span><span class="kw">,</span><span class="at"> paperheight=8cm</span><span class="kw">,</span><span class="at"> margin=1cm</span><span class="kw">]</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p>続く本文では, <code>@</code> 記法で引用します.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 argue that institutions are a fundamental cause of</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>long-run growth. This view builds on earlier work <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>and is developed in detail elsewhere <span class="co">[</span><span class="ot">see @acemoglu2012, chap. 2</span><span class="co">]</span>.</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 argue that institutions are a fundamental cause of</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>long-run growth. This view builds on earlier work <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>and is developed in detail elsewhere <span class="co">[</span><span class="ot">see @acemoglu2012, chap. 2</span><span class="co">]</span>.</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-quarto-cite" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-cite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -632,36 +696,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <p>Quarto は引用の処理に <a href="https://citeproc-js.readthedocs.io/en/latest/">citeproc</a> を使っています. citeproc は, CSL (Citation Style Language) という XML 形式のスタイル定義を読み込み, 文献リストの整形や引用の組版を行う JavaScript ライブラリです. Quarto は citeproc を組み込んでおり, <code>.bib</code> ファイルを読み込んで引用を処理します. citeproc は LaTeX のように <code>.bbl</code> を生成するわけではなく, 文献リストも本文中の引用も, 組版済みの文字列として直接埋め込みます.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Acemoglu and Robinson (<span class="fu">\citeproc</span>{ref-acemoglu2012}{2012}) argue that</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>institutions are a fundamental cause of long-run growth. This view</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>builds on earlier work (<span class="fu">\citeproc</span>{ref-halljones1999}{Hall and Jones</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>1999}), and is developed in detail elsewhere (see</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\citeproc</span>{ref-acemoglu2012}{Acemoglu and Robinson 2012, chap. 2}).</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\section*</span>{References}<span class="kw">\label</span>{<span class="ex">bibliography</span>}</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">CSLReferences</span>}{1}{1}</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-acemoglu2012}</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>Acemoglu, Daron, and James A. Robinson. 2012. <span class="fu">\emph</span>{Why Nations Fail:</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>The Origins of Power, Prosperity, and Poverty}. Crown Publishers.</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-halljones1999}</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>Hall, Robert E., and Charles I. Jones. 1999. {``Why Do Some Countries</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>Produce so Much More Output Per Worker Than Others?''} <span class="fu">\emph</span>{The</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>Quarterly Journal of Economics} 114 (1): 83--116.</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">CSLReferences</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Acemoglu and Robinson (<span class="fu">\citeproc</span>{ref-acemoglu2012}{2012}) argue that</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>institutions are a fundamental cause of long-run growth. This view</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>builds on earlier work (<span class="fu">\citeproc</span>{ref-halljones1999}{Hall and Jones</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>1999}), and is developed in detail elsewhere (see</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\citeproc</span>{ref-acemoglu2012}{Acemoglu and Robinson 2012, chap. 2}).</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\section*</span>{References}<span class="kw">\label</span>{<span class="ex">bibliography</span>}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">CSLReferences</span>}{1}{1}</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-acemoglu2012}</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Acemoglu, Daron, and James A. Robinson. 2012. <span class="fu">\emph</span>{Why Nations Fail:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>The Origins of Power, Prosperity, and Poverty}. Crown Publishers.</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">\bibitem</span>[<span class="fu">\citeproctext</span>]{ref-halljones1999}</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Hall, Robert E., and Charles I. Jones. 1999. {``Why Do Some Countries</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>Produce so Much More Output Per Worker Than Others?''} <span class="fu">\emph</span>{The</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>Quarterly Journal of Economics} 114 (1): 83--116.</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">CSLReferences</span>}</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>\citet</code> や <code>\bibliography</code> といったコマンドは一切登場しません. 引用は <code>\citeproc{ref-acemoglu2012}{...}</code> の形で, 組版済みの文字列を埋め込みつつ, 対応する文献エントリ (<code>\bibitem[...]{ref-acemoglu2012}</code>) へのリンクを張っています (<code>link-citations: true</code> の効果です). 文献リストも citeproc が整形したテキストが並ぶだけです. したがって, <code>natbib</code> や <code>biblatex</code> が走る必要がなく, arXiv に投稿する際も <code>.bbl</code> を同包する必要はありません.</p>
 </div>
 </div>
 <section id="typst-バックエンド" class="level3">
 <h3 class="anchored" data-anchor-id="typst-バックエンド">Typst バックエンド</h3>
 <p>Quarto は PDF を LaTeX ではなく <a href="https://typst.app/">Typst</a> で組むこともできます (<code>format: typst</code>). その既定スタイルは IEEE の番号引用 ([1], [2] …) なので, 経済学の著者・年方式にするには, <code>bibliographystyle</code> に Typst 組み込みのスタイル名 <code>chicago-author-date</code> を渡します.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliographystyle</span><span class="kw">:</span><span class="at"> chicago-author-date</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliographystyle</span><span class="kw">:</span><span class="at"> chicago-author-date</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-quarto-typst" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-typst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -703,14 +767,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>example.qmd</code> のフロントマターで, <code>references.bib</code> を読み込むように指定します.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p>本文では, <code>@key</code> を地の文に, <code>[@key]</code> を括弧に使います.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p>レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. <code>link-citations: true</code> を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに <code>csl: econometrica.csl</code> のように CSL ファイルを渡します.</p>
 </div>
 </div>
@@ -1211,374 +1275,438 @@ document.addEventListener("DOMContentLoaded", function () {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">ソースコード</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 文献と引用</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zoteroによる文献管理</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>Zoteroを使うと, 文献情報 (著者, 年, タイトル, DOI など) を整理して, BibTeX形式として書き出せます.</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">### BibTeXとは</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>BibTeXは, 文献情報を管理するためのフォーマットの一つです. 文献ごとに <span class="in">`@article`</span> や <span class="in">`@book`</span> などのエントリータイプを指定し, キーと値のペアで書誌情報を記述します. 例えば, 本 1 冊 (<span class="in">`@book`</span>) と論文 1 本 (<span class="in">`@article`</span>) を BibTeX で表すと次のようになります. 以下ではこれを <span class="in">`references.bib`</span> というファイル名で保存したものとして扱います.</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{.bibtex filename="references.bib"}</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="in">@book{acemoglu2012,</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="in">  author    = {Acemoglu, Daron and Robinson, James A.},</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="in">  title     = {Why Nations Fail: The Origins of Power, Prosperity, and Poverty},</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="in">  year      = {2012},</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="in">  publisher = {Crown Publishers},</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="in">  address   = {New York}</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="in">@article{halljones1999,</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="in">  author  = {Hall, Robert E. and Jones, Charles I.},</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="in">  title   = {Why Do Some Countries Produce So Much More Output Per Worker Than Others?},</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="in">  journal = {The Quarterly Journal of Economics},</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="in">  year    = {1999},</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="in">  volume  = {114},</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="in">  number  = {1},</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="in">  pages   = {83--116}</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>エントリータイプによって必要なフィールドが異なる点に注目してください. <span class="in">`@book`</span> は <span class="in">`publisher`</span> を, <span class="in">`@article`</span> は <span class="in">`journal`</span> や <span class="in">`volume`</span> を持ちます. 元々はLaTeXで文献管理するためのフォーマットですが, Typst でもBibTeX形式のファイルを読み込んで引用に利用できます.</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### ZoteroによるBibTeXファイルの作成</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>ZoteroからBibTeXファイルを作る手順は次の通りです.</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zotero → BiBTeX</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを好きな名前で作る</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero に文献を入れる (ブラウザ拡張, ドラッグ&amp;ドロップ, DOIなど)</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>メタデータを確認・修正する (著者名の表記ゆれ, 年, 雑誌名など)</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`references.bib`</span> にエクスポートする (BibTeX形式)</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>なお, Zotero拡張の<span class="co">[</span><span class="ot">Better BibTeX</span><span class="co">](https://retorque.re/zotero-better-bibtex/)</span> を導入することで, BiBTeXファイルを自動で更新するなどの便利な機能が使えるようになります.</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>**Step 1. コレクションを作る**</span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/1_create_collection.gif)</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>Zoteroでは全ての文献は「ライブラリ」に属します. ライブラリには複数の「コレクション」を作ることができ, 基本的には文献を管理したいプロジェクト (レポート, 論文) ごとに作成します. コレクションはフォルダのようなもので, 同じ文献を複数のコレクションに入れることもできます.</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>**Step 2. Zoteroに文献を入れる**</span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## ブラウザ拡張</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_extension.gif)</span></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## ドラッグ &amp; ドロップ</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_drag.gif)</span></span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## DOI</span></span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_doi.gif)</span></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## メタデータの取得</span></span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>ZoteroはDOIやURLから自動で書誌情報 (メタデータ) を取得しますが, 全ての情報が正確に入るわけではありません. 基本的には DOI という論文ごとのユニークな識別子が発見できた場合, <span class="co">[</span><span class="ot">CrossRef</span><span class="co">](https://www.crossref.org)</span> などのデータベースから情報を取得しています. しかし, これでも間違いがあったり, DOIがない資料があったりするため, メタデータは必ず確認して修正する必要があります.</span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>**Step 3. メタデータを確認・修正する**</span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_meta_zotero.png)</span></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>ドラッグ &amp; ドロップで入れた "Beauty and Labor Market" は, タイトルと著者名は正しく入っていますが, その他の情報が空欄になっています. 書誌情報のところを見ると "Zotero" となっているので, これはZoteroがDOIなどの情報を自動で取得できなかったことを示しています.</span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_meta_doi.png)</span></span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>上の例は, CrossRefから取得したデータでも間違いがあったケースです. 著者名に "University of Maryland, USA" という著者の所属する機関名が入ってしまっています. ここでは, RISファイルによる修正方法と, Zotero上で直接修正する方法の両方を紹介します.</span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## RISファイル</span></span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_import_ris.gif)</span></span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>RISファイルとは, 文献情報を管理するためのファイル形式の一つです. 多くの出版社やデータベースが, 文献情報をRIS形式でエクスポートする機能を提供しています. 本来は</span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>RISファイルをダウンロード</span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zoteroにインポート</span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>という手順で書誌情報を取り込むのですが, Zoteroのブラウザ拡張では, RISのダウンロードの際に自動でZoteroにインポートする機能もあります. </span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## 手動</span></span>
-<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_fix_meta.gif)</span></span>
-<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>Zoteroの画面上で直接書誌情報を修正することもできます. しかし, 手入力はミスが起こりやすいので, 可能な限り出版社やデータベースから正しい書誌情報を取得し, 最終手段として手入力で修正するのが望ましいです.</span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>**Step 4. `references.bib` にエクスポートする**</span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_install_betterbibtex.gif)</span></span>
-<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>Better BibTeXは, Zoteroの拡張機能で, BiBTeX形式でのエクスポートを強化するものです. これを入れると, ZoteroのコレクションをBiBTeXファイルにエクスポートする際に, ファイルを自動で更新するなどの便利な機能が使えるようになります. インストールは, GitHubの<span class="co">[</span><span class="ot">リリースページ</span><span class="co">](https://github.com/retorquere/zotero-better-bibtex/releases/latest)</span>からダウンロードした <span class="in">`.xpi`</span> ファイルを, Zoteroの「ツール」→「プラグイン」→「Install Plugin from File」からインストールするだけです.</span>
-<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_citekey.png)</span></span>
-<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>Better BibTeXを入れると, Zoteroの文献ごとに "citekey" という識別子が自動で割り当てられます. これが, Quartoの <span class="in">`[@...]`</span> で引用するときのキーになります. 個人的には, <span class="in">`auth.lower + year`</span> 形式 (例: <span class="in">`knuth1984`</span>) が分かりやすいと思いますが, 好みに合わせて変更することもできます.</span>
-<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_regenerate_citekey.png)</span></span>
-<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>Better BibTeXが設定されていると, 自動的にcitekeyが生成されるようになりますが, 既に文献を入れてしまった後にBetter BibTeXを入れた場合は, Zoteroの「ツール」→「Better BibTeX」→「Regenerate BibTeX keys」で既存の文献にもcitekeyを割り当てることができます.</span>
-<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_export_bib.gif)</span></span>
-<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は "Better BibTeX" を選び, ファイル名は <span class="in">`references.bib`</span> として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに <span class="in">`references.bib`</span> が自動で更新されるようになります.</span>
-<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## LaTeX による引用</span></span>
-<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">`references.bib`</span> を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.</span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## 著者・年方式</span></span>
-<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>著者・年方式とは, 引用を番号 (<span class="co">[</span><span class="ot">1</span><span class="co">]</span>, <span class="co">[</span><span class="ot">2</span><span class="co">]</span> など) ではなく, 著者の姓と出版年で示す方式です. 使われ方は大きく 2 通りあります.</span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>「Acemoglu and Robinson (2012) は ...」</span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>「... が知られています (Acemoglu and Robinson 2012).」</span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>著者が 3 名以上のときは, 慣例として「Acemoglu et al. (2012)」のように筆頭著者と et al. に省略します.</span>
-<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>LaTeX で著者・年の引用を扱うには, 大きく 2 つの選択肢があります. 一つは古くから使われてきた <span class="in">`natbib`</span> パッケージ (バックエンドは BibTeX), もう一つはより新しい <span class="in">`biblatex`</span> パッケージ (バックエンドは Biber) です. どちらも <span class="in">`.bib`</span> ファイルをそのまま読めますが, 引用コマンドの書き方が異なります.</span>
-<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### `natbib` + BibTeX</span></span>
-<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> は経済学で最も広く使われている方式です. 多くの学術誌が <span class="in">`natbib`</span> 用のスタイルファイル (<span class="in">`.bst`</span>) を配布しており (例: AEA の <span class="in">`aea.bst`</span>, Econometrica の <span class="in">`ecta.bst`</span>), 投稿規定もこれを前提にしていることが多いためです. 手元で AEA スタイルを試すだけなら, TeX Live に含まれる <span class="in">`econ-bst`</span> パッケージの <span class="in">`econ-aea.bst`</span> が手軽です (<span class="in">`tlmgr install econ-bst`</span> で入ります).</span>
-<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> の引用コマンドは, 著者名を文の主語として地の文に組み込む <span class="in">`\citet`</span> (textual) と, 文末などで括弧に入れる <span class="in">`\citep`</span> (parenthetical) の使い分けが基本です. このほか, 著者名だけの <span class="in">`\citeauthor`</span>, 年だけの <span class="in">`\citeyear`</span>, 括弧なしの <span class="in">`\citealt`</span> などがあります.</span>
-<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
-<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass[11pt]{article}</span></span>
-<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a><span class="in">% The page is sized to the content so the figure needs no cropping.</span></span>
-<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}</span></span>
-<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[round]{natbib}      % round -&gt; parentheses are ( )</span></span>
-<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{empty}</span></span>
-<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="in">\setlength{\parindent}{0pt}</span></span>
-<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
-<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a><span class="in">\citet{acemoglu2012} argue that institutions are a fundamental cause</span></span>
-<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a><span class="in">of long-run growth. This view builds on earlier work</span></span>
-<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a><span class="in">\citep{halljones1999}, and is developed in detail elsewhere</span></span>
-<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a><span class="in">\citep[see][chap.~2]{acemoglu2012}.</span></span>
-<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a><span class="in">\bibliographystyle{econ-aea}    % AEA style provided by econ-bst</span></span>
-<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a><span class="in">\bibliography{references}             % read references.bib</span></span>
-<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
-<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="al">![natbib + BibTeX による引用と文献リスト](/static/tex/main.svg)</span>{#fig-natbib-bibtex}</span>
-<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>コンパイルした結果が @fig-natbib-bibtex です. <span class="in">`\citet`</span> が地の文の「Acemoglu and Robinson (2012)」に, <span class="in">`\citep`</span> が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see ..., chap. 2)」になっている点に注目してください.</span>
-<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### `biblatex` + Biber</span></span>
-<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="in">`biblatex`</span> は, 引用スタイルを LaTeX マクロとして柔軟に設定できる新しい仕組みで, Unicode (日本語やアクセント付き文字) をそのまま扱えるのが大きな利点です. バックエンドの Biber が <span class="in">`.bib`</span> を解釈します. 著者・年方式は組み込みの <span class="in">`style=authoryear`</span> でも出せますが, 経済学では Chicago の著者・年スタイルを実装した <span class="in">`biblatex-chicago`</span> パッケージ (<span class="in">`tlmgr install biblatex-chicago`</span>) を使うと, AEA に近い体裁になります.</span>
-<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>ここで一点注意があります. biblatex には, natbib の <span class="in">`econ-aea.bst`</span> のような AEA 専用スタイルが存在しません. もっとも近いのが Chicago の <span class="in">`biblatex-chicago`</span> で, AEA のハウススタイル自体が Chicago 著者・年方式をベースにしているため見た目はほぼ揃いますが, 厳密に AEA の体裁が要求される投稿では結局 natbib + <span class="in">`.bst`</span> のほうが確実です.</span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>引用コマンドは biblatex 共通で, <span class="in">`\textcite`</span> が <span class="in">`natbib`</span> の <span class="in">`\citet`</span> に, <span class="in">`\parencite`</span> が <span class="in">`\citep`</span> に対応します (どちらのパッケージでも <span class="in">`natbib=true`</span> オプションを足せば <span class="in">`\citet`</span> / <span class="in">`\citep`</span> という慣れた名前も使えます). 著者名の最大表示数 (<span class="in">`maxcitenames`</span>) や同一著者・同一年の区別 (2012a, 2012b) なども細かく制御できます.</span>
-<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
-<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass[11pt]{article}</span></span>
-<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a><span class="in">% The page is sized to the content so the figure needs no cropping.</span></span>
-<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}</span></span>
-<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[authordate, backend=biber]{biblatex-chicago}</span></span>
-<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a><span class="in">\addbibresource{references.bib} % include the extension</span></span>
-<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{empty}</span></span>
-<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a><span class="in">\setlength{\parindent}{0pt}</span></span>
-<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
-<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a><span class="in">\textcite{acemoglu2012} argue that institutions are a fundamental cause</span></span>
-<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a><span class="in">of long-run growth. This view builds on earlier work</span></span>
-<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a><span class="in">\parencite{halljones1999}, and is developed in detail elsewhere</span></span>
-<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a><span class="in">\parencite[see][chap.~2]{acemoglu2012}.</span></span>
-<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a><span class="in">\printbibliography              % print the reference list</span></span>
-<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
-<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="al">![biblatex + Biber による引用と文献リスト](/static/tex/biblatex.svg)</span>{#fig-biblatex-biber}</span>
-<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>コンパイルした結果が @fig-biblatex-biber です (スタイルは <span class="in">`biblatex-chicago`</span> の author-date). <span class="in">`natbib`</span> + <span class="in">`econ-aea`</span> 版とほぼ同じ出力になっているのが分かります.</span>
-<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### コマンドの対応</span></span>
-<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>両者の主な引用コマンドと出力の対応をまとめると次のようになります.</span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> やりたいこと <span class="pp">|</span> <span class="in">`natbib`</span> <span class="pp">|</span> <span class="in">`biblatex`</span> <span class="pp">|</span> 出力例 <span class="pp">|</span></span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 地の文に組み込む <span class="pp">|</span> <span class="in">`\citet`</span> <span class="pp">|</span> <span class="in">`\textcite`</span> <span class="pp">|</span> Acemoglu and Robinson (2012) <span class="pp">|</span></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 括弧に入れる <span class="pp">|</span> <span class="in">`\citep`</span> <span class="pp">|</span> <span class="in">`\parencite`</span> <span class="pp">|</span> (Acemoglu and Robinson 2012) <span class="pp">|</span></span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 著者名だけ <span class="pp">|</span> <span class="in">`\citeauthor`</span> <span class="pp">|</span> <span class="in">`\citeauthor`</span> <span class="pp">|</span> Acemoglu and Robinson <span class="pp">|</span></span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 年だけ <span class="pp">|</span> <span class="in">`\citeyear`</span> <span class="pp">|</span> <span class="in">`\citeyear`</span> <span class="pp">|</span> 2012 <span class="pp">|</span></span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a><span class="fu">### どちらを使うべきか</span></span>
-<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>結論から言えば, 経済学では <span class="in">`natbib`</span> + BibTeX を既定にしておくのが無難です. 多くのジャーナルが <span class="in">`natbib`</span> 用の <span class="in">`.bst`</span> を配布していること, そして投稿時にトラブルが起きにくいことが理由です. <span class="in">`biblatex`</span> + Biber は Unicode 対応やスタイルの柔軟さで優れており, 凝った書式を組みたいときには魅力的ですが, その柔軟さが本当に必要になる場面は経済学の論文ではそう多くありません. 迷ったら <span class="in">`natbib`</span> を選び, <span class="in">`biblatex`</span> は明確な必要が出てから検討すれば十分です. いずれにせよ, 引用元の <span class="in">`references.bib`</span> を Zotero で一元管理しておけば, あとからエンジンを乗り換えても問題は起きません.</span>
-<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## arXiv 投稿と `.bbl`</span></span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> を勧めるもう一つの理由が, <span class="co">[</span><span class="ot">arXiv</span><span class="co">](https://arxiv.org)</span> への投稿です. arXiv は投稿された <span class="in">`.tex`</span> をコンパイルしますが, bibtex も biber も実行しません. 代わりに, 一緒にアップロードした <span class="in">`.bbl`</span> ファイル (文献リストを組版した中間ファイル) をそのまま使います. ここで両者に差が出ます. BibTeX が生成する <span class="in">`.bbl`</span> は素朴なテキストでバージョンに依存しないため, arXiv 上でもそのまま通ります. 一方 <span class="in">`biblatex`</span> の <span class="in">`.bbl`</span> は biblatex/biber のバージョンと強く結合しており, arXiv 側の biblatex が手元と違うバージョンだと読めずにエラーになることがあります. どちらも <span class="in">`.bbl`</span> を同梱すれば投稿自体は可能ですが, この一点でも <span class="in">`natbib`</span> + BibTeX のほうが安全です.</span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quartoによる引用</span></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>Quarto では LaTeX のように <span class="in">`\citet`</span> / <span class="in">`\citep`</span> を使わず, Markdown の <span class="in">`@`</span> 記法で引用します. <span class="in">`@key`</span> が地の文に入る形 (<span class="in">`\citet`</span> 相当), <span class="in">`[@key]`</span> が括弧に入る形 (<span class="in">`\citep`</span> 相当) で, ページや章は <span class="in">`[@key, chap. 2]`</span> のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます<span class="ot">[^csl]</span>. <span class="in">`link-citations: true`</span> を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.</span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a><span class="ot">[^csl]: </span>別のスタイルにしたいときは <span class="in">`csl`</span> に CSL (Citation Style Language) ファイルを渡します (例: <span class="in">`econometrica.csl`</span>, <span class="in">`the-quarterly-journal-of-economics.csl`</span>; <span class="co">[</span><span class="ot">Zotero Style Repository</span><span class="co">](https://www.zotero.org/styles)</span> から入手できます). なお AEA/AER 専用の CSL は公式リポジトリには無く, AEA のハウススタイル自体が Chicago 著者・年方式ベースなので, 既定のままで実質 AEA に近い体裁になります. LaTeX の <span class="in">`bibliographystyle`</span> に当たる <span class="in">`bibliography-style`</span> のようなキーは citeproc では使われません.</span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマター (設定) は次の通りです.</span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-section-title</span><span class="kw">:</span><span class="at"> References</span></span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> article</span></span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pagestyle</span><span class="kw">:</span><span class="at"> empty</span></span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">geometry</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">paperwidth=17cm</span><span class="kw">,</span><span class="at"> paperheight=8cm</span><span class="kw">,</span><span class="at"> margin=1cm</span><span class="kw">]</span></span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>続く本文では, <span class="in">`@`</span> 記法で引用します.</span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 argue that institutions are a fundamental cause of</span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>long-run growth. This view builds on earlier work <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span>,</span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>and is developed in detail elsewhere <span class="co">[</span><span class="ot">see @acemoglu2012, chap. 2</span><span class="co">]</span>.</span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a><span class="al">![Quartoによる引用と文献リスト](/static/quarto/example.svg)</span>{#fig-quarto-cite}</span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>これをレンダリングした結果が @fig-quarto-cite です. natbib + <span class="in">`econ-aea`</span> や biblatex-chicago の例とほぼ同じ出力が得られます. <span class="in">`link-citations: true`</span> を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.</span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quartoのciteprocによる引用処理</span></span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>Quarto は引用の処理に <span class="co">[</span><span class="ot">citeproc</span><span class="co">](https://citeproc-js.readthedocs.io/en/latest/)</span> を使っています. citeproc は, CSL (Citation Style Language) という XML 形式のスタイル定義を読み込み, 文献リストの整形や引用の組版を行う JavaScript ライブラリです. Quarto は citeproc を組み込んでおり, <span class="in">`.bib`</span> ファイルを読み込んで引用を処理します. citeproc は LaTeX のように <span class="in">`.bbl`</span> を生成するわけではなく, 文献リストも本文中の引用も, 組版済みの文字列として直接埋め込みます.</span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a><span class="in">Acemoglu and Robinson (\citeproc{ref-acemoglu2012}{2012}) argue that</span></span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a><span class="in">institutions are a fundamental cause of long-run growth. This view</span></span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a><span class="in">builds on earlier work (\citeproc{ref-halljones1999}{Hall and Jones</span></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a><span class="in">1999}), and is developed in detail elsewhere (see</span></span>
-<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a><span class="in">\citeproc{ref-acemoglu2012}{Acemoglu and Robinson 2012, chap. 2}).</span></span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a><span class="in">\section*{References}\label{bibliography}</span></span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{CSLReferences}{1}{1}</span></span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a><span class="in">\bibitem[\citeproctext]{ref-acemoglu2012}</span></span>
-<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a><span class="in">Acemoglu, Daron, and James A. Robinson. 2012. \emph{Why Nations Fail:</span></span>
-<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a><span class="in">The Origins of Power, Prosperity, and Poverty}. Crown Publishers.</span></span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a><span class="in">\bibitem[\citeproctext]{ref-halljones1999}</span></span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a><span class="in">Hall, Robert E., and Charles I. Jones. 1999. {``Why Do Some Countries</span></span>
-<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a><span class="in">Produce so Much More Output Per Worker Than Others?''} \emph{The</span></span>
-<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a><span class="in">Quarterly Journal of Economics} 114 (1): 83--116.</span></span>
-<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a><span class="in">\end{CSLReferences}</span></span>
-<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a><span class="in">`\citet`</span> や <span class="in">`\bibliography`</span> といったコマンドは一切登場しません. 引用は <span class="in">`\citeproc{ref-acemoglu2012}{...}`</span> の形で, 組版済みの文字列を埋め込みつつ, 対応する文献エントリ (<span class="in">`\bibitem[...]{ref-acemoglu2012}`</span>) へのリンクを張っています (<span class="in">`link-citations: true`</span> の効果です). 文献リストも citeproc が整形したテキストが並ぶだけです. したがって, <span class="in">`natbib`</span> や <span class="in">`biblatex`</span> が走る必要がなく, arXiv に投稿する際も <span class="in">`.bbl`</span> を同包する必要はありません.</span>
-<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a><span class="fu">### Typst バックエンド</span></span>
-<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>Quarto は PDF を LaTeX ではなく <span class="co">[</span><span class="ot">Typst</span><span class="co">](https://typst.app/)</span> で組むこともできます (<span class="in">`format: typst`</span>). その既定スタイルは IEEE の番号引用 (<span class="co">[</span><span class="ot">1</span><span class="co">]</span>, <span class="co">[</span><span class="ot">2</span><span class="co">]</span> …) なので, 経済学の著者・年方式にするには, <span class="in">`bibliographystyle`</span> に Typst 組み込みのスタイル名 <span class="in">`chicago-author-date`</span> を渡します.</span>
-<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliographystyle</span><span class="kw">:</span><span class="at"> chicago-author-date</span></span>
-<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
-<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a><span class="al">![Typst バックエンドでの引用と文献リスト](/static/quarto/example-typst.svg)</span>{#fig-quarto-typst}</span>
-<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>本文は @fig-quarto-cite の例と同じです. コンパイルした結果が @fig-quarto-typst で, LaTeX 経由の出力 (@fig-quarto-cite) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは "Bibliography" になります).</span>
-<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
-<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
-<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の <span class="in">`@`</span> 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.</span>
-<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>Zotero を使って, 自分の研究に関係する論文を1本, 書誌情報つきで取り込んでみましょう.</span>
-<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero で練習用のコレクションを1つ作ります.</span>
-<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>論文を1本選び, その DOI から Zotero に取り込みます (ブラウザ拡張か, 「新規アイテムを DOI から追加」を使います).</span>
-<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>取り込んだ文献のメタデータ (著者名の表記, 年, 雑誌名など) を確認し, 誤りがあれば出版社や CrossRef の情報で修正します.</span>
-<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Better BibTeX が割り当てた citekey (例: <span class="in">`auth.lower + year`</span>) を確認します. これが Quarto で引用するときのキーになります.</span>
-<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを右クリックし, 「Better BibTeX」形式で <span class="in">`references.bib`</span> としてエクスポートします. 練習用の Quarto プロジェクトのルートに置き, 「Keep updated」も試してみましょう.</span>
-<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
-<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>取り込んだ文献を, Quarto から引用します. ここでは確実に手順を追えるよう, この章の冒頭に載せた2件のエントリ (<span class="in">`acemoglu2012`</span> と <span class="in">`halljones1999`</span>) を使います. これらを含む <span class="in">`references.bib`</span> を用意し, 地の文に組み込む引用と括弧に入れる引用を1つずつ書いて, 文献リストつきでレンダリングしてください.</span>
-<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
-<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマターで, <span class="in">`references.bib`</span> を読み込むように指定します.</span>
-<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
-<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
-<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
-<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a>本文では, <span class="in">`@key`</span> を地の文に, <span class="in">`[@key]`</span> を括弧に使います.</span>
-<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
-<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span>
-<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. <span class="in">`link-citations: true`</span> を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに <span class="in">`csl: econometrica.csl`</span> のように CSL ファイルを渡します.</span>
-<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a>:::::</span></code></pre></div><button title="コピー" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 文献と引用</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zoteroによる文献管理</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>Zoteroを使うと, 文献情報 (著者, 年, タイトル, DOI など) を整理して, BibTeX形式として書き出せます.</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">### BibTeXとは</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>BibTeXは, 文献情報を管理するためのフォーマットの一つです. 文献ごとに <span class="in">`@article`</span> や <span class="in">`@book`</span> などのエントリータイプを指定し, キーと値のペアで書誌情報を記述します. 例えば, 本 1 冊 (<span class="in">`@book`</span>) と論文 1 本 (<span class="in">`@article`</span>) を BibTeX で表すと次のようになります. 以下ではこれを <span class="in">`references.bib`</span> というファイル名で保存したものとして扱います.</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{.bibtex filename="references.bib"}</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="in">@book{acemoglu2012,</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="in">  author    = {Acemoglu, Daron and Robinson, James A.},</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="in">  title     = {Why Nations Fail: The Origins of Power, Prosperity, and Poverty},</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="in">  year      = {2012},</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="in">  publisher = {Crown Publishers},</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="in">  address   = {New York}</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">@article{halljones1999,</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="in">  author  = {Hall, Robert E. and Jones, Charles I.},</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="in">  title   = {Why Do Some Countries Produce So Much More Output Per Worker Than Others?},</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="in">  journal = {The Quarterly Journal of Economics},</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="in">  year    = {1999},</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="in">  volume  = {114},</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="in">  number  = {1},</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="in">  pages   = {83--116}</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>エントリータイプによって必要なフィールドが異なる点に注目してください. <span class="in">`@book`</span> は <span class="in">`publisher`</span> を, <span class="in">`@article`</span> は <span class="in">`journal`</span> や <span class="in">`volume`</span> を持ちます. 元々はLaTeXで文献管理するためのフォーマットですが, Typst でもBibTeX形式のファイルを読み込んで引用に利用できます.</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### ZoteroによるBibTeXファイルの作成</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>ZoteroからBibTeXファイルを作る手順は次の通りです.</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zotero → BiBTeX</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを好きな名前で作る</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero に文献を入れる (ブラウザ拡張, ドラッグ&amp;ドロップ, DOIなど)</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>メタデータを確認・修正する (著者名の表記ゆれ, 年, 雑誌名など)</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`references.bib`</span> にエクスポートする (BibTeX形式)</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>なお, Zotero拡張の<span class="co">[</span><span class="ot">Better BibTeX</span><span class="co">](https://retorque.re/zotero-better-bibtex/)</span> を導入することで, BiBTeXファイルを自動で更新するなどの便利な機能が使えるようになります.</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>**Step 1. コレクションを作る**</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/1_create_collection.gif)</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>Zoteroでは全ての文献は「ライブラリ」に属します. ライブラリには複数の「コレクション」を作ることができ, 基本的には文献を管理したいプロジェクト (レポート, 論文) ごとに作成します. コレクションはフォルダのようなもので, 同じ文献を複数のコレクションに入れることもできます.</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>**Step 2. Zoteroに文献を入れる**</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## ブラウザ拡張</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_extension.gif)</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## ドラッグ &amp; ドロップ</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_drag.gif)</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## DOI</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/2_import_doi.gif)</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## メタデータの取得</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>ZoteroはDOIやURLから自動で書誌情報 (メタデータ) を取得しますが, 全ての情報が正確に入るわけではありません. 基本的には DOI という論文ごとのユニークな識別子が発見できた場合, <span class="co">[</span><span class="ot">CrossRef</span><span class="co">](https://www.crossref.org)</span> などのデータベースから情報を取得しています. しかし, これでも間違いがあったり, DOIがない資料があったりするため, メタデータは必ず確認して修正する必要があります.</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>**Step 3. メタデータを確認・修正する**</span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_meta_zotero.png)</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>ドラッグ &amp; ドロップで入れた "Beauty and Labor Market" は, タイトルと著者名は正しく入っていますが, その他の情報が空欄になっています. 書誌情報のところを見ると "Zotero" となっているので, これはZoteroがDOIなどの情報を自動で取得できなかったことを示しています.</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_meta_doi.png)</span></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>上の例は, CrossRefから取得したデータでも間違いがあったケースです. 著者名に "University of Maryland, USA" という著者の所属する機関名が入ってしまっています. ここでは, RISファイルによる修正方法と, Zotero上で直接修正する方法の両方を紹介します.</span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## RISファイル</span></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_import_ris.gif)</span></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>RISファイルとは, 文献情報を管理するためのファイル形式の一つです. 多くの出版社やデータベースが, 文献情報をRIS形式でエクスポートする機能を提供しています. 本来は</span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>RISファイルをダウンロード</span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zoteroにインポート</span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>という手順で書誌情報を取り込むのですが, Zoteroのブラウザ拡張では, RISのダウンロードの際に自動でZoteroにインポートする機能もあります. </span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## 手動</span></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/3_fix_meta.gif)</span></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>Zoteroの画面上で直接書誌情報を修正することもできます. しかし, 手入力はミスが起こりやすいので, 可能な限り出版社やデータベースから正しい書誌情報を取得し, 最終手段として手入力で修正するのが望ましいです.</span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>**Step 4. `references.bib` にエクスポートする**</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_install_betterbibtex.gif)</span></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>Better BibTeXは, Zoteroの拡張機能で, BiBTeX形式でのエクスポートを強化するものです. これを入れると, ZoteroのコレクションをBiBTeXファイルにエクスポートする際に, ファイルを自動で更新するなどの便利な機能が使えるようになります. インストールは, GitHubの<span class="co">[</span><span class="ot">リリースページ</span><span class="co">](https://github.com/retorquere/zotero-better-bibtex/releases/latest)</span>からダウンロードした <span class="in">`.xpi`</span> ファイルを, Zoteroの「ツール」→「プラグイン」→「Install Plugin from File」からインストールするだけです.</span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_citekey.png)</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a>Better BibTeXを入れると, Zoteroの文献ごとに "citekey" という識別子が自動で割り当てられます. これが, Quartoの <span class="in">`[@...]`</span> で引用するときのキーになります. 個人的には, <span class="in">`auth.lower + year`</span> 形式 (例: <span class="in">`knuth1984`</span>) が分かりやすいと思いますが, 好みに合わせて変更することもできます.</span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_regenerate_citekey.png)</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>Better BibTeXが設定されていると, 自動的にcitekeyが生成されるようになりますが, 既に文献を入れてしまった後にBetter BibTeXを入れた場合は, Zoteroの「ツール」→「Better BibTeX」→「Regenerate BibTeX keys」で既存の文献にもcitekeyを割り当てることができます.</span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="al">![](/static/img/literature/4_export_bib.gif)</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>コレクション名を右クリックすることで, そのコレクションに入っている文献をBiBTeX形式でエクスポートできます. 出力形式は "Better BibTeX" を選び, ファイル名は <span class="in">`references.bib`</span> として, Quartoプロジェクトのルートディレクトリに保存してください. この時, 「Keep updated」をチェックしておくと, Zoteroのコレクションに文献を追加・削除したときに <span class="in">`references.bib`</span> が自動で更新されるようになります.</span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zotero MCP Server</span></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a>ここまでで作ったライブラリは, AI から直接参照させることもできます. Zotero を MCP (Model Context Protocol) 経由で Claude につなぐと, 「このテーマの論文をライブラリから探して」「この論文の要点をまとめて」といった依頼に, Claude が実際の Zotero ライブラリを検索しながら答えられるようになります. MCP の仕組みそのものについては @sec-mcp を参照してください.</span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>ここで使うのは, <span class="co">[</span><span class="ot">`kujenga/zotero-mcp`</span><span class="co">](https://github.com/kujenga/zotero-mcp)</span> というオープンソースの MCP サーバーです. このサーバーは, Claude に対して次の3つのツールを提供します.</span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_search_items`</span>: ライブラリを検索する</span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_metadata`</span>: 文献の書誌情報を取得する</span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`zotero_item_fulltext`</span>: 文献の全文を取得する</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>Claude は, ユーザーの依頼に応じてこれらのツールを自分で選んで呼び出します.</span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### 事前準備</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>このサーバーは, 手元で動いている Zotero に接続します (ローカル API). そのため次の2つを用意します.</span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero 7 以降のデスクトップアプリをインストールし, 起動しておきます.</span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero の「設定」→「詳細」で, 「この PC 上の他のアプリケーションが Zotero と通信することを許可する」にチェックを入れます (英語表記では Preferences → Advanced → "Allow other applications on this computer to communicate with Zotero").</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>サーバー自体は Python 製で, <span class="co">[</span><span class="ot">`uv`</span><span class="co">](https://docs.astral.sh/uv/)</span> の <span class="in">`uvx`</span> コマンドで起動します. <span class="in">`uv`</span> が入っていなければ, 先にインストールしておいてください (公式サイトの手順に従います). <span class="in">`uvx`</span> はパッケージを自動でダウンロードして実行するので, <span class="in">`zotero-mcp`</span> を手動でインストールする必要はありません.</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="fu">### Claude Desktop での設定</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>Claude Desktop の設定ファイル <span class="in">`claude_desktop_config.json`</span> に, サーバーを1つ追加します. このファイルの場所は, macOS では <span class="in">`~/Library/Application Support/Claude/`</span>, Windows では <span class="in">`%APPDATA%\Claude\`</span> です.</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{.json filename="claude_desktop_config.json"}</span></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mcpServers"</span><span class="op">:</span> {</span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>    <span class="st">"zotero"</span><span class="op">:</span> {</span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>      <span class="st">"command"</span><span class="op">:</span> <span class="st">"uvx"</span><span class="op">,</span></span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a>      <span class="st">"args"</span><span class="op">:</span> [<span class="st">"--upgrade"</span><span class="op">,</span> <span class="st">"zotero-mcp"</span>]<span class="op">,</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a>      <span class="st">"env"</span><span class="op">:</span> {</span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ZOTERO_LOCAL"</span><span class="op">:</span> <span class="st">"true"</span></span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a><span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`true`</span> にすると, 上で有効にしたローカル API 経由で手元の Zotero に接続します. 設定を保存して Claude Desktop を再起動すると, サーバーが読み込まれます.</span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="fu">### Claude Code での設定</span></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a>ターミナルで動く Claude Code なら, 設定ファイルを直接編集せずに, <span class="in">`claude mcp add`</span> コマンドで追加できます.</span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">```sh</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add zotero <span class="at">--env</span> ZOTERO_LOCAL=true <span class="at">--</span> uvx <span class="at">--upgrade</span> zotero-mcp</span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">`--`</span> (ダッシュ2つ) は, Claude Code 自身のオプションと, サーバーを起動するコマンドの境目を表します. <span class="in">`--`</span> の後ろ (<span class="in">`uvx --upgrade zotero-mcp`</span>) が, サーバーを起動するコマンドとしてそのまま実行されます.</span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="fu">### 使ってみる</span></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a>設定できたら, Claude に自然な日本語で依頼するだけです. 例えば次のように頼むと, Claude は <span class="in">`zotero_search_items`</span> でライブラリを検索し, 見つかった論文を一覧して答えます.</span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Zotero のライブラリから, 最低賃金の雇用効果に関する論文を探して, それぞれ一行で要約して.</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>さらに特定の論文について「この論文の識別戦略を説明して」と頼めば, <span class="in">`zotero_item_fulltext`</span> で全文を取得したうえで答えます. 手元のライブラリに基づいて答えるので, 存在しない論文をでっち上げる (ハルシネーション) 危険が減るのが利点です.</span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### 注意点</span></span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Zotero が起動していないと, ローカル API に接続できず, ツールが失敗します. 使うときは Zotero を開いたままにしておきます.</span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>全文取得 (<span class="in">`zotero_item_fulltext`</span>) はローカル API では新しめの Zotero でのみ対応しています. うまくいかない場合や, Zotero を起動せずに使いたい場合は, ローカル API の代わりに Zotero の Web API を使う方法もあります. その場合は <span class="ot">&lt;https://www.zotero.org/settings/keys&gt;</span> で API キーとライブラリ ID を取得し, <span class="in">`ZOTERO_LOCAL`</span> を <span class="in">`false`</span> にして <span class="in">`ZOTERO_API_KEY`</span> と <span class="in">`ZOTERO_LIBRARY_ID`</span> を設定します. API キーはコードやリポジトリに直接書かず, <span class="co">[</span><span class="ot">API</span><span class="co">](api.qmd)</span> の章の e-Stat の例と同じように, 秘密情報として扱ってください.</span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## LaTeX による引用</span></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a><span class="in">`references.bib`</span> を用いることで, LaTeX などの文書作成システムで引用が可能になります. 経済学の文献は, ほぼ例外なく著者・年方式 (author-year) です.</span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## 著者・年方式</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a>著者・年方式とは, 引用を番号 (<span class="co">[</span><span class="ot">1</span><span class="co">]</span>, <span class="co">[</span><span class="ot">2</span><span class="co">]</span> など) ではなく, 著者の姓と出版年で示す方式です. 使われ方は大きく 2 通りあります.</span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>「Acemoglu and Robinson (2012) は ...」</span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>「... が知られています (Acemoglu and Robinson 2012).」</span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>著者が 3 名以上のときは, 慣例として「Acemoglu et al. (2012)」のように筆頭著者と et al. に省略します.</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a>LaTeX で著者・年の引用を扱うには, 大きく 2 つの選択肢があります. 一つは古くから使われてきた <span class="in">`natbib`</span> パッケージ (バックエンドは BibTeX), もう一つはより新しい <span class="in">`biblatex`</span> パッケージ (バックエンドは Biber) です. どちらも <span class="in">`.bib`</span> ファイルをそのまま読めますが, 引用コマンドの書き方が異なります.</span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### `natbib` + BibTeX</span></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> は経済学で最も広く使われている方式です. 多くの学術誌が <span class="in">`natbib`</span> 用のスタイルファイル (<span class="in">`.bst`</span>) を配布しており (例: AEA の <span class="in">`aea.bst`</span>, Econometrica の <span class="in">`ecta.bst`</span>), 投稿規定もこれを前提にしていることが多いためです. 手元で AEA スタイルを試すだけなら, TeX Live に含まれる <span class="in">`econ-bst`</span> パッケージの <span class="in">`econ-aea.bst`</span> が手軽です (<span class="in">`tlmgr install econ-bst`</span> で入ります).</span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> の引用コマンドは, 著者名を文の主語として地の文に組み込む <span class="in">`\citet`</span> (textual) と, 文末などで括弧に入れる <span class="in">`\citep`</span> (parenthetical) の使い分けが基本です. このほか, 著者名だけの <span class="in">`\citeauthor`</span>, 年だけの <span class="in">`\citeyear`</span>, 括弧なしの <span class="in">`\citealt`</span> などがあります.</span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass[11pt]{article}</span></span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="in">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[round]{natbib}      % round -&gt; parentheses are ( )</span></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{empty}</span></span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a><span class="in">\setlength{\parindent}{0pt}</span></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a><span class="in">\citet{acemoglu2012} argue that institutions are a fundamental cause</span></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a><span class="in">of long-run growth. This view builds on earlier work</span></span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a><span class="in">\citep{halljones1999}, and is developed in detail elsewhere</span></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a><span class="in">\citep[see][chap.~2]{acemoglu2012}.</span></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a><span class="in">\bibliographystyle{econ-aea}    % AEA style provided by econ-bst</span></span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a><span class="in">\bibliography{references}             % read references.bib</span></span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a><span class="al">![natbib + BibTeX による引用と文献リスト](/static/tex/main.svg)</span>{#fig-natbib-bibtex}</span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a>コンパイルした結果が @fig-natbib-bibtex です. <span class="in">`\citet`</span> が地の文の「Acemoglu and Robinson (2012)」に, <span class="in">`\citep`</span> が括弧内の「(Hall and Jones, 1999)」に, 後置注が「(see ..., chap. 2)」になっている点に注目してください.</span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a><span class="fu">### `biblatex` + Biber</span></span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a><span class="in">`biblatex`</span> は, 引用スタイルを LaTeX マクロとして柔軟に設定できる新しい仕組みで, Unicode (日本語やアクセント付き文字) をそのまま扱えるのが大きな利点です. バックエンドの Biber が <span class="in">`.bib`</span> を解釈します. 著者・年方式は組み込みの <span class="in">`style=authoryear`</span> でも出せますが, 経済学では Chicago の著者・年スタイルを実装した <span class="in">`biblatex-chicago`</span> パッケージ (<span class="in">`tlmgr install biblatex-chicago`</span>) を使うと, AEA に近い体裁になります.</span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a>ここで一点注意があります. biblatex には, natbib の <span class="in">`econ-aea.bst`</span> のような AEA 専用スタイルが存在しません. もっとも近いのが Chicago の <span class="in">`biblatex-chicago`</span> で, AEA のハウススタイル自体が Chicago 著者・年方式をベースにしているため見た目はほぼ揃いますが, 厳密に AEA の体裁が要求される投稿では結局 natbib + <span class="in">`.bst`</span> のほうが確実です.</span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a>引用コマンドは biblatex 共通で, <span class="in">`\textcite`</span> が <span class="in">`natbib`</span> の <span class="in">`\citet`</span> に, <span class="in">`\parencite`</span> が <span class="in">`\citep`</span> に対応します (どちらのパッケージでも <span class="in">`natbib=true`</span> オプションを足せば <span class="in">`\citet`</span> / <span class="in">`\citep`</span> という慣れた名前も使えます). 著者名の最大表示数 (<span class="in">`maxcitenames`</span>) や同一著者・同一年の区別 (2012a, 2012b) なども細かく制御できます.</span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a><span class="in">\documentclass[11pt]{article}</span></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a><span class="in">% The page is sized to the content so the figure needs no cropping.</span></span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[paperwidth=17cm, paperheight=8.2cm, margin=1cm]{geometry}</span></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a><span class="in">\usepackage[authordate, backend=biber]{biblatex-chicago}</span></span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a><span class="in">\addbibresource{references.bib} % include the extension</span></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a><span class="in">\pagestyle{empty}</span></span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a><span class="in">\setlength{\parindent}{0pt}</span></span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{document}</span></span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a><span class="in">\textcite{acemoglu2012} argue that institutions are a fundamental cause</span></span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a><span class="in">of long-run growth. This view builds on earlier work</span></span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a><span class="in">\parencite{halljones1999}, and is developed in detail elsewhere</span></span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a><span class="in">\parencite[see][chap.~2]{acemoglu2012}.</span></span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a><span class="in">\printbibliography              % print the reference list</span></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a><span class="in">\end{document}</span></span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a><span class="al">![biblatex + Biber による引用と文献リスト](/static/tex/biblatex.svg)</span>{#fig-biblatex-biber}</span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a>コンパイルした結果が @fig-biblatex-biber です (スタイルは <span class="in">`biblatex-chicago`</span> の author-date). <span class="in">`natbib`</span> + <span class="in">`econ-aea`</span> 版とほぼ同じ出力になっているのが分かります.</span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a><span class="fu">### コマンドの対応</span></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a>両者の主な引用コマンドと出力の対応をまとめると次のようになります.</span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> やりたいこと <span class="pp">|</span> <span class="in">`natbib`</span> <span class="pp">|</span> <span class="in">`biblatex`</span> <span class="pp">|</span> 出力例 <span class="pp">|</span></span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 地の文に組み込む <span class="pp">|</span> <span class="in">`\citet`</span> <span class="pp">|</span> <span class="in">`\textcite`</span> <span class="pp">|</span> Acemoglu and Robinson (2012) <span class="pp">|</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 括弧に入れる <span class="pp">|</span> <span class="in">`\citep`</span> <span class="pp">|</span> <span class="in">`\parencite`</span> <span class="pp">|</span> (Acemoglu and Robinson 2012) <span class="pp">|</span></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 著者名だけ <span class="pp">|</span> <span class="in">`\citeauthor`</span> <span class="pp">|</span> <span class="in">`\citeauthor`</span> <span class="pp">|</span> Acemoglu and Robinson <span class="pp">|</span></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 年だけ <span class="pp">|</span> <span class="in">`\citeyear`</span> <span class="pp">|</span> <span class="in">`\citeyear`</span> <span class="pp">|</span> 2012 <span class="pp">|</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a><span class="fu">### どちらを使うべきか</span></span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a>結論から言えば, 経済学では <span class="in">`natbib`</span> + BibTeX を既定にしておくのが無難です. 多くのジャーナルが <span class="in">`natbib`</span> 用の <span class="in">`.bst`</span> を配布していること, そして投稿時にトラブルが起きにくいことが理由です. <span class="in">`biblatex`</span> + Biber は Unicode 対応やスタイルの柔軟さで優れており, 凝った書式を組みたいときには魅力的ですが, その柔軟さが本当に必要になる場面は経済学の論文ではそう多くありません. 迷ったら <span class="in">`natbib`</span> を選び, <span class="in">`biblatex`</span> は明確な必要が出てから検討すれば十分です. いずれにせよ, 引用元の <span class="in">`references.bib`</span> を Zotero で一元管理しておけば, あとからエンジンを乗り換えても問題は起きません.</span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## arXiv 投稿と `.bbl`</span></span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a><span class="in">`natbib`</span> を勧めるもう一つの理由が, <span class="co">[</span><span class="ot">arXiv</span><span class="co">](https://arxiv.org)</span> への投稿です. arXiv は投稿された <span class="in">`.tex`</span> をコンパイルしますが, bibtex も biber も実行しません. 代わりに, 一緒にアップロードした <span class="in">`.bbl`</span> ファイル (文献リストを組版した中間ファイル) をそのまま使います. ここで両者に差が出ます. BibTeX が生成する <span class="in">`.bbl`</span> は素朴なテキストでバージョンに依存しないため, arXiv 上でもそのまま通ります. 一方 <span class="in">`biblatex`</span> の <span class="in">`.bbl`</span> は biblatex/biber のバージョンと強く結合しており, arXiv 側の biblatex が手元と違うバージョンだと読めずにエラーになることがあります. どちらも <span class="in">`.bbl`</span> を同梱すれば投稿自体は可能ですが, この一点でも <span class="in">`natbib`</span> + BibTeX のほうが安全です.</span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quartoによる引用</span></span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a>Quarto では LaTeX のように <span class="in">`\citet`</span> / <span class="in">`\citep`</span> を使わず, Markdown の <span class="in">`@`</span> 記法で引用します. <span class="in">`@key`</span> が地の文に入る形 (<span class="in">`\citet`</span> 相当), <span class="in">`[@key]`</span> が括弧に入る形 (<span class="in">`\citep`</span> 相当) で, ページや章は <span class="in">`[@key, chap. 2]`</span> のように後置します. スタイルを指定しなければ citeproc の既定である Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます<span class="ot">[^csl]</span>. <span class="in">`link-citations: true`</span> を指定すると, 本文の引用から対応する文献リストの項目へのリンクが張られます.</span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a><span class="ot">[^csl]: </span>別のスタイルにしたいときは <span class="in">`csl`</span> に CSL (Citation Style Language) ファイルを渡します (例: <span class="in">`econometrica.csl`</span>, <span class="in">`the-quarterly-journal-of-economics.csl`</span>; <span class="co">[</span><span class="ot">Zotero Style Repository</span><span class="co">](https://www.zotero.org/styles)</span> から入手できます). なお AEA/AER 専用の CSL は公式リポジトリには無く, AEA のハウススタイル自体が Chicago 著者・年方式ベースなので, 既定のままで実質 AEA に近い体裁になります. LaTeX の <span class="in">`bibliographystyle`</span> に当たる <span class="in">`bibliography-style`</span> のようなキーは citeproc では使われません.</span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマター (設定) は次の通りです.</span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-section-title</span><span class="kw">:</span><span class="at"> References</span></span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> article</span></span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pagestyle</span><span class="kw">:</span><span class="at"> empty</span></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">geometry</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">paperwidth=17cm</span><span class="kw">,</span><span class="at"> paperheight=8cm</span><span class="kw">,</span><span class="at"> margin=1cm</span><span class="kw">]</span></span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a>続く本文では, <span class="in">`@`</span> 記法で引用します.</span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 argue that institutions are a fundamental cause of</span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a>long-run growth. This view builds on earlier work <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span>,</span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a>and is developed in detail elsewhere <span class="co">[</span><span class="ot">see @acemoglu2012, chap. 2</span><span class="co">]</span>.</span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a><span class="al">![Quartoによる引用と文献リスト](/static/quarto/example.svg)</span>{#fig-quarto-cite}</span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a>これをレンダリングした結果が @fig-quarto-cite です. natbib + <span class="in">`econ-aea`</span> や biblatex-chicago の例とほぼ同じ出力が得られます. <span class="in">`link-citations: true`</span> を入れたため, 本文の引用 (図中の色付き部分) が文献リストへのリンクになっています.</span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quartoのciteprocによる引用処理</span></span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a>Quarto は引用の処理に <span class="co">[</span><span class="ot">citeproc</span><span class="co">](https://citeproc-js.readthedocs.io/en/latest/)</span> を使っています. citeproc は, CSL (Citation Style Language) という XML 形式のスタイル定義を読み込み, 文献リストの整形や引用の組版を行う JavaScript ライブラリです. Quarto は citeproc を組み込んでおり, <span class="in">`.bib`</span> ファイルを読み込んで引用を処理します. citeproc は LaTeX のように <span class="in">`.bbl`</span> を生成するわけではなく, 文献リストも本文中の引用も, 組版済みの文字列として直接埋め込みます.</span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a><span class="in">```latex</span></span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a><span class="in">Acemoglu and Robinson (\citeproc{ref-acemoglu2012}{2012}) argue that</span></span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a><span class="in">institutions are a fundamental cause of long-run growth. This view</span></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a><span class="in">builds on earlier work (\citeproc{ref-halljones1999}{Hall and Jones</span></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a><span class="in">1999}), and is developed in detail elsewhere (see</span></span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a><span class="in">\citeproc{ref-acemoglu2012}{Acemoglu and Robinson 2012, chap. 2}).</span></span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a><span class="in">\section*{References}\label{bibliography}</span></span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{CSLReferences}{1}{1}</span></span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="in">\bibitem[\citeproctext]{ref-acemoglu2012}</span></span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="in">Acemoglu, Daron, and James A. Robinson. 2012. \emph{Why Nations Fail:</span></span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="in">The Origins of Power, Prosperity, and Poverty}. Crown Publishers.</span></span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a><span class="in">\bibitem[\citeproctext]{ref-halljones1999}</span></span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a><span class="in">Hall, Robert E., and Charles I. Jones. 1999. {``Why Do Some Countries</span></span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a><span class="in">Produce so Much More Output Per Worker Than Others?''} \emph{The</span></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a><span class="in">Quarterly Journal of Economics} 114 (1): 83--116.</span></span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a><span class="in">\end{CSLReferences}</span></span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a><span class="in">`\citet`</span> や <span class="in">`\bibliography`</span> といったコマンドは一切登場しません. 引用は <span class="in">`\citeproc{ref-acemoglu2012}{...}`</span> の形で, 組版済みの文字列を埋め込みつつ, 対応する文献エントリ (<span class="in">`\bibitem[...]{ref-acemoglu2012}`</span>) へのリンクを張っています (<span class="in">`link-citations: true`</span> の効果です). 文献リストも citeproc が整形したテキストが並ぶだけです. したがって, <span class="in">`natbib`</span> や <span class="in">`biblatex`</span> が走る必要がなく, arXiv に投稿する際も <span class="in">`.bbl`</span> を同包する必要はありません.</span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a><span class="fu">### Typst バックエンド</span></span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a>Quarto は PDF を LaTeX ではなく <span class="co">[</span><span class="ot">Typst</span><span class="co">](https://typst.app/)</span> で組むこともできます (<span class="in">`format: typst`</span>). その既定スタイルは IEEE の番号引用 (<span class="co">[</span><span class="ot">1</span><span class="co">]</span>, <span class="co">[</span><span class="ot">2</span><span class="co">]</span> …) なので, 経済学の著者・年方式にするには, <span class="in">`bibliographystyle`</span> に Typst 組み込みのスタイル名 <span class="in">`chicago-author-date`</span> を渡します.</span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliographystyle</span><span class="kw">:</span><span class="at"> chicago-author-date</span></span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> typst</span></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a><span class="al">![Typst バックエンドでの引用と文献リスト](/static/quarto/example-typst.svg)</span>{#fig-quarto-typst}</span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a>本文は @fig-quarto-cite の例と同じです. コンパイルした結果が @fig-quarto-typst で, LaTeX 経由の出力 (@fig-quarto-cite) とほぼ同じ著者・年方式になります (Typstの規定の参考文献のタイトルは "Bibliography" になります).</span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a>::::: {.content-visible when-format="html"}</span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a><span class="fu">## 演習問題 {.unnumbered}</span></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a>この章の演習は, 文献を Zotero で取り込んでから, それを Quarto の <span class="in">`@`</span> 記法で引用するところまでを, 実際に手を動かして通します. Zotero と Better BibTeX を導入していない場合は, まず本文の手順にそって用意してください.</span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a>Zotero を使って, 自分の研究に関係する論文を1本, 書誌情報つきで取り込んでみましょう.</span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Zotero で練習用のコレクションを1つ作ります.</span>
+<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>論文を1本選び, その DOI から Zotero に取り込みます (ブラウザ拡張か, 「新規アイテムを DOI から追加」を使います).</span>
+<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>取り込んだ文献のメタデータ (著者名の表記, 年, 雑誌名など) を確認し, 誤りがあれば出版社や CrossRef の情報で修正します.</span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Better BibTeX が割り当てた citekey (例: <span class="in">`auth.lower + year`</span>) を確認します. これが Quarto で引用するときのキーになります.</span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>コレクションを右クリックし, 「Better BibTeX」形式で <span class="in">`references.bib`</span> としてエクスポートします. 練習用の Quarto プロジェクトのルートに置き, 「Keep updated」も試してみましょう.</span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a>:::: {.quiz}</span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a>取り込んだ文献を, Quarto から引用します. ここでは確実に手順を追えるよう, この章の冒頭に載せた2件のエントリ (<span class="in">`acemoglu2012`</span> と <span class="in">`halljones1999`</span>) を使います. これらを含む <span class="in">`references.bib`</span> を用意し, 地の文に組み込む引用と括弧に入れる引用を1つずつ書いて, 文献リストつきでレンダリングしてください.</span>
+<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a><span class="fu">## 解答例</span></span>
+<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a><span class="in">`example.qmd`</span> のフロントマターで, <span class="in">`references.bib`</span> を読み込むように指定します.</span>
+<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> 引用の練習</span></span>
+<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> references.bib</span></span>
+<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a>本文では, <span class="in">`@key`</span> を地の文に, <span class="in">`[@key]`</span> を括弧に使います.</span>
+<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a>@acemoglu2012 は, 制度が長期的な成長の根本的な要因だと論じています. この見方は, 初期の研究 <span class="co">[</span><span class="ot">@halljones1999</span><span class="co">]</span> を踏まえたものです.</span>
+<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a>レンダリングすると, 地の文の引用は「Acemoglu and Robinson (2012)」, 括弧の引用は「(Hall and Jones 1999)」となり, 末尾に文献リストが自動で生成されます. スタイルを指定しなければ Chicago 著者・年方式になり, 経済学で標準的な体裁がそのまま得られます. <span class="in">`link-citations: true`</span> を入れたので, 本文の引用から文献リストの該当項目へリンクが張られます. 別のスタイルにしたいときは, フロントマターに <span class="in">`csl: econometrica.csl`</span> のように CSL ファイルを渡します.</span>
+<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a>:::::</span></code></pre></div><button title="コピー" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

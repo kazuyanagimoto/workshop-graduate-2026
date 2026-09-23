@@ -14,7 +14,6 @@
 - [[9]{.chapter-number}  [スライド]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/slides.llms.md)
 - [[10]{.chapter-number}  [文献と引用]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/literature.llms.md)
 - [[11]{.chapter-number}  [パイプライン]{.chapter-title}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/targets.llms.md)
-- [[[12]{.chapter-number}  [AIと研究する]{.chapter-title}]{#sec-ai-research .quarto-section-identifier}](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/ai.llms.md)
 - [付録 A — Shell](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/shell.llms.md)
 - [付録 B — Quarto](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/quarto.llms.md)
 - [付録 C — 用語解説](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/dictionary.llms.md)

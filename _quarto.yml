@@ -45,7 +45,6 @@ book:
     - lesson/slides.qmd
     - lesson/literature.qmd
     - lesson/targets.qmd
-    - lesson/ai.qmd
   appendices:
     - lesson/shell.qmd
     - lesson/quarto.qmd

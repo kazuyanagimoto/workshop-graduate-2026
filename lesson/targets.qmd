@@ -12,7 +12,7 @@ source(here::here("R/github-card.R"))
 
 さらに [Quarto](https://quarto.org/) と組み合わせることで, 試行錯誤のノート, 発表スライド, 論文の執筆まで, 研究のワークフロー全体を一つのプロジェクトの中で管理できます. この章では, まず小さなパイプラインを組んで `{targets}` の基本を確認し, その後に Quarto + `{targets}` を用いた研究のワークフローを解説します. 研究は直線的に進むものではなく, 試行錯誤を繰り返しながら道を見つけていくものです. そのため, このワークフローでは, 論文を書き始める前の試行錯誤の段階に, ある程度の自由度を持たせています.
 
-後半で説明するワークフローは, そのまま使えるテンプレート [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) にまとめてあります. GitHub の「Use this template」から自分のリポジトリを作り, 手元で動かしながら読むと理解しやすいはずです. このテンプレートを AI と一緒に使う方法は @sec-ai-research で扱います.
+後半で説明するワークフローは, そのまま使えるテンプレート [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) にまとめてあります. GitHub の「Use this template」から自分のリポジトリを作り, 手元で動かしながら読むと理解しやすいはずです.
 
 ## `{targets}` の基本
 

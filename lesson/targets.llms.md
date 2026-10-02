@@ -4,9 +4,9 @@
 
 [`{targets}`](https://books.ropensci.org/targets/) は, 研究のワークフローを構築する R のパッケージです. 最大の特徴は, データ, 関数, 結果を R のオブジェクトとしてその依存関係を管理し, 上流のオブジェクトが変更されたときに, それに依存する下流のオブジェクトを自動的に再計算してくれることです. これにより, 再現性を保ち続けたまま研究を進めることができます.
 
-さらに [Quarto](https://quarto.org/) と組み合わせることで, 試行錯誤のノート, 発表スライド, 論文の執筆まで, 研究のワークフロー全体を一つのプロジェクトの中で管理できます. この章では, まず小さなパイプラインを組んで `{targets}` の基本を確認し, その後に Quarto + `{targets}` を用いた研究のワークフローを解説します. 研究は直線的に進むものではなく, 試行錯誤を繰り返しながら道を見つけていくものです. そのため, このワークフローでは, 論文を書き始める前の試行錯誤の段階に, ある程度の自由度を持たせています.
+さらに [Quarto](https://quarto.org/) と組み合わせることで, 試行錯誤のノート, 発表スライド, 論文の執筆まで, 研究のワークフロー全体を一つのプロジェクトの中で管理できます. この章では, まず小さなパイプラインを組んで `{targets}` の基本を確認します. 次に, 短い論文を書くパイプラインを LaTeX と Quarto のそれぞれで組み, 最後にそれを試行錯誤のノートや発表スライドまで広げた研究のワークフローを解説します. 研究は直線的に進むものではなく, 試行錯誤を繰り返しながら道を見つけていくものです. そのため, このワークフローでは, 論文を書き始める前の試行錯誤の段階に, ある程度の自由度を持たせています.
 
-後半で説明するワークフローは, そのまま使えるテンプレート [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) にまとめてあります. GitHub の「Use this template」から自分のリポジトリを作り, 手元で動かしながら読むと理解しやすいはずです.
+最後に説明する研究のワークフローは, そのまま使えるテンプレート [`kazuyanagimoto/template-research`](https://github.com/kazuyanagimoto/template-research) にまとめてあります. GitHub の「Use this template」から自分のリポジトリを作り, 手元で動かしながら読むと理解しやすいはずです.
 
 ## 11.1 `{targets}` の基本
 
@@ -356,7 +356,7 @@ clean_did <- function(did_raw) {
 
 ### 図表をファイルに書き出す
 
-`R/tar_analysis.R` が Quarto 版と一番違うところです. 図と表のターゲットが `tar_file()` になり, 関数は保存先のパスを返します.
+`R/tar_analysis.R` が, 次の節の Quarto 版 ([sec-targets-quarto](#sec-targets-quarto)) と一番違うところです. 図と表のターゲットが `tar_file()` になり, 関数は保存先のパスを返します.
 
 ``` r
 tar_analysis <- tar_plan(
@@ -512,7 +512,7 @@ targets::tar_make()
 
 図 11.9
 
-パイプラインを図解すると [図 fig-latex-pipeline](#fig-latex-pipeline) のようになります. 四角いノードが R のオブジェクトを持つターゲット, 角の丸いノードが `tar_file()` で定義したファイルのターゲットで, 3つのサブプランを囲みで示しています.
+パイプラインを図解すると [図 fig-latex-pipeline](#fig-latex-pipeline) のようになります. 四角いノードが R のオブジェクトを持つターゲット, 角の丸いノードが `tar_file()` で定義したファイルのターゲット, 黒い旗形のノードが関数で, 3つのサブプランを囲みで示しています. 関数からの矢印は, その関数を使っているターゲットに向かいます. `R/utils.R` の `here_rel()` はどのサブプランにも属さないので, 囲みの外に置いています.
 
 [![](../static/img/targets/latex-pipeline.svg)](../static/img/targets/latex-pipeline.svg "図 11.10: LaTeX パイプラインの依存関係")
 
@@ -520,7 +520,183 @@ targets::tar_make()
 
 ## 11.3 Quarto + `{targets}` のワークフロー
 
-ここから, 私が実際に論文を書く際に使っているワークフローを紹介します. GitHubのテンプレートにもなっているので, そのまま使うこともできますし, 自分の研究に合わせてカスタマイズすることもできます.
+同じ論文を, 今度は Quarto で書きます. Quarto で書く利点は, 原稿がパイプラインの結果を直接読めることです. パイプラインは集計表や推定結果を R のオブジェクトとして作るところまでを受け持ち, 原稿がそれを `tar_load()` で読み込んで, 図表を自分で作ります. さらに `{tarchetypes}` の `tar_quarto()` を使うと, 原稿がどのオブジェクトを読み込んでいるかを `{targets}` が自分で調べて, 依存関係に加えてくれます. 完成したパイプラインを配布しているので, ダウンロードして手元で動かしながら読み進めてください. [targets-quarto.zip](https://kazuyanagimoto.com/workshop-graduate-2026/static/data/targets-quarto.zip)
+
+展開してできる `targets-quarto/` を作業ディレクトリにして `targets::tar_make()` を実行すると, 生データから `manuscript/main.pdf` までが一度に作られます. PDF は Quarto に同梱されている Typst で組むので, LaTeX のインストールは要りません. 必要な R パッケージと動かし方は, フォルダの中の `README.md` にまとめてあります.
+
+### フォルダ構成
+
+``` bash
+.
+├── README.md
+├── _targets.R
+├── R/
+│   ├── utils.R
+│   ├── tar_data.R
+│   ├── tar_analysis.R
+│   └── tar_manuscript.R
+├── data/
+│   └── base_did.csv
+└── manuscript/
+    ├── main.qmd
+    └── references.bib
+```
+
+図表のファイルを置くフォルダはありません. 図表は, 原稿をレンダリングするたびにその中で作られるからです. `R/utils.R` と `R/tar_data.R` は [sec-targets-latex](#sec-targets-latex) と同じなので, ここでは省略します.
+
+`_targets.R` は3つのサブプランを並べるだけです. パイプラインが読み込むパッケージは, データの処理と推定に使う `dplyr` と `fixest` だけで, 図表を作る `ggplot2`, `modelsummary`, `tinytable` は原稿の中で読み込みます.
+
+``` r
+library(targets)
+library(tarchetypes)
+
+tar_option_set(
+  packages = c("dplyr", "fixest")
+)
+
+tar_source()
+
+tar_plan(
+  tar_data,
+  tar_analysis,
+  tar_manuscript
+)
+```
+
+### パイプラインはオブジェクトで止める
+
+`R/tar_analysis.R` は, 原稿が使う4つのオブジェクトを作ります.
+
+``` r
+tar_analysis <- tar_plan(
+  tab_balance = summarize_did(did),
+  trends = summarize_trends(did),
+  models_did = estimate_did(did),
+  model_event = estimate_event(did)
+)
+
+summarize_trends <- function(did) {
+  did |>
+    summarize(mean_y = mean(y), .by = c(period, post, group))
+}
+```
+
+`summarize_did()` は群と処置の前後ごとの平均を, `estimate_did()` は差の差の回帰を4本, `estimate_event()` はイベントスタディを推定する関数です (中身は [sec-targets-latex](#sec-targets-latex) と同じです). どのターゲットも図表ではなく, データフレームや推定結果のオブジェクトです. たとえば `trends` は群と期間ごとの平均で, これを図にするのは原稿の仕事です. 計算はパイプラインに, 描画は原稿に分けておくと, 図の見た目を変えても計算はやり直されません.
+
+### 原稿の中で図表を作る
+
+`manuscript/main.qmd` の冒頭のチャンクで, パイプラインの結果を読み込みます.
+
+``` r
+library(dplyr)
+library(ggplot2)
+library(fixest)
+library(modelsummary)
+library(tinytable)
+
+targets::tar_load(
+  c(tab_balance, trends, models_did, model_event),
+  store = here::here("_targets")
+)
+
+theme_set(theme_classic(base_size = 11))
+```
+
+`tar_load()` は, 指定したターゲットをストアから取り出し, 同じ名前のオブジェクトとして読み込みます. 原稿のコードは, `tar_make()` から実行されるときはプロジェクトのルートで, 手でプレビューするときは `manuscript/` の中で実行されます. どちらでも同じストアを指せるように, `store` にはプロジェクトのルートにある `_targets/` を `here::here()` で指定しています. 推定結果は `fixest` のオブジェクトなので, それを扱うために `fixest` も読み込みます. 最後の `theme_set()` は, 原稿のすべての図に共通するテーマの指定です.
+
+図は, 読み込んだオブジェクトからチャンクの中で描きます.
+
+``` r
+#| label: fig-trends
+#| fig-cap: "Mean outcome by period"
+cutoff <- min(trends$period[trends$post == 1]) - 0.5
+
+ggplot(trends, aes(x = period, y = mean_y, color = group,
+                   linetype = group, shape = group)) +
+  geom_vline(xintercept = cutoff, linetype = "dotted", color = "grey40") +
+  geom_line() +
+  geom_point(size = 2) +
+  scale_x_continuous(breaks = seq_len(max(trends$period))) +
+  labs(x = "Period", y = "Mean outcome",
+       color = NULL, linetype = NULL, shape = NULL) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.15, 0.85))
+```
+
+キャプションとラベルはチャンクオプションの `fig-cap` と `label` で付け, 本文からは `@fig-trends` で参照します.
+
+回帰表も同じように, チャンクの中で `modelsummary()` を呼びます.
+
+``` r
+#| label: tbl-did
+#| tbl-cap: "Difference-in-differences estimates"
+modelsummary(
+  models_did,
+  output = "tinytable",
+  escape = FALSE,
+  coef_map = c(
+    "post:treat" = "Post $times$ Treated",
+    "post::1:treat" = "Post $times$ Treated",
+    "post" = "Post",
+    "treat" = "Treated",
+    "x1" = "$x_1$"
+  ),
+  gof_map = c("nobs", "r.squared", "FE: id", "FE: period"),
+  stars = c("*" = 0.1, "**" = 0.05, "***" = 0.01)
+) |>
+  format_tt(j = 2:5, escape = TRUE) |>
+  format_tt(i = "notes", escape = TRUE)
+```
+
+最後の2行はエスケープです. Typst では `*` が太字の記号なので, 星印をそのまま渡すと表が壊れます. かといって表全体をエスケープすると, 1列目の係数名に入れた数式まで文字として表示されてしまいます. そこで `escape = FALSE` としたうえで, 星印の入る列 (`j = 2:5`) と注 (`i = "notes"`) だけをエスケープしています. なお, セルの中の数式は出力形式の記法で書く必要があるので, ここでは Typst の記法 (`$times$`) を使っています ([回帰分析](../lesson/regression.llms.md) の章を参照).
+
+本文中の数値も, 読み込んだオブジェクトからインラインコードで埋め込めます. 配布した `main.qmd` では, 標本のユニット数と期間の数, (3) 列の推定値をこの方法で書いています. 推定をやり直せば, 本文の数値も一緒に更新されます.
+
+### 原稿をパイプラインに組み込む
+
+`R/tar_manuscript.R` では, `tar_quarto()` で原稿をパイプラインに組み込みます.
+
+``` r
+tar_manuscript <- tar_plan(
+  tar_quarto(
+    manuscript,
+    "manuscript/main.qmd",
+    extra_files = "manuscript/references.bib"
+  )
+)
+```
+
+`tar_quarto()` は, `main.qmd` のコードチャンクから `tar_load()` と `tar_read()` の呼び出しを探し, そこに書かれたターゲットを `manuscript` の依存関係に加えます. この例では `tab_balance`, `trends`, `models_did`, `model_event` の4つです. 原稿で新しいターゲットを `tar_load()` すれば, それも自動で依存関係に加わるので, パイプラインの側を書き換える必要はありません. `main.qmd` そのものも追跡されるので, 推定をやり直したときも, 原稿を書き換えたときも, `tar_make()` で PDF がレンダリングし直されます. 文献のファイルは自動では追跡されないので, `extra_files` で渡しています.
+
+> **WARNING:**
+>
+> `tar_quarto()` が読み取れるのは, `.qmd` のコードチャンクにターゲットの名前をそのまま書いた `tar_load()` と `tar_read()` だけです. `source()` で読み込んだ R ファイルの中の `tar_load()` や, `tar_load(starts_with("model"))` のような書き方は依存関係になりません. その場合, 上流が変わっても PDF は古い結果のまま残り, `tar_make()` もそれを教えてくれません. 原稿で使うターゲットは, `.qmd` の冒頭のチャンクに名前で並べておきます.
+
+### パイプラインを実行する
+
+`tar_make()` を実行すると, データの読み込みから集計と推定を経て, PDF のレンダリングまでが一度に走ります.
+
+``` r
+targets::tar_make()
+```
+
+できあがった PDF が [図 fig-quarto-manuscript](#fig-quarto-manuscript) です. 表も図も本文中の数値も, すべて `main.qmd` がパイプラインの結果から作っています.
+
+[![](../static/img/targets/quarto-manuscript.svg)](../static/img/targets/quarto-manuscript.svg "図 11.11: ")
+
+図 11.11
+
+パイプラインを図解すると [図 fig-quarto-pipeline](#fig-quarto-pipeline) のようになります. 四角いノードがオブジェクト, 角の丸いノードがファイルのターゲット, 黒い旗形のノードが関数です. `tar_analysis` の4つのオブジェクトが, そのまま原稿 (`manuscript`) につながっています. この4本の矢印は, `tar_quarto()` が `main.qmd` の `tar_load()` から引いたものです.
+
+[![](../static/img/targets/quarto-pipeline.svg)](../static/img/targets/quarto-pipeline.svg "図 11.12: Quarto パイプラインの依存関係")
+
+図 11.12: Quarto パイプラインの依存関係
+
+図表を原稿の中で作ると, 見た目を変えるときに触るのは `main.qmd` だけになり, 推定はやり直されません. 同じ推定結果から, 論文とスライドで大きさやフォントの違う図を作ることもできます. このパイプラインを, 試行錯誤のノートや発表スライドまで含めた研究全体に広げたのが, 次の節で紹介するワークフローです.
+
+## 11.4 研究のワークフロー
+
+ここから, 私が実際に論文を書く際に使っているワークフローを紹介します. [sec-targets-quarto](#sec-targets-quarto) のパイプラインに, 試行錯誤のノートと発表スライドを加えたものです. GitHubのテンプレートにもなっているので, そのまま使うこともできますし, 自分の研究に合わせてカスタマイズすることもできます.
 
 [![GitHub avatar of kazuyanagimoto](https://github.com/kazuyanagimoto.png?size=120)](https://github.com/kazuyanagimoto/template-research)
 
@@ -547,7 +723,7 @@ template-research/
 └── CLAUDE.md         # project conventions for the AI assistant
 ```
 
-中心にあるのは, `_targets.R` と `R/tar_*.R` で定義するパイプラインです. パイプラインは `data/` のデータを読み込み, クリーニングし, 推定値や集計表といったデータオブジェクトを作るところまでを受け持ちます.
+中心にあるのは, `_targets.R` と `R/tar_*.R` で定義するパイプラインです. [sec-targets-quarto](#sec-targets-quarto) と同じく, パイプラインは `data/` のデータを読み込み, クリーニングし, 推定値や集計表といったデータオブジェクトを作るところまでを受け持ちます.
 
 Quarto 文書は3種類あり, パイプラインとの付き合い方は2通りです.
 
@@ -573,9 +749,9 @@ Quarto 文書は3種類あり, パイプラインとの付き合い方は2通り
 
 論文を書き終えた頃には, [図 fig-pipeline-overview](#fig-pipeline-overview) のようなパイプラインができあがっているはずです. ノートとスライドはパイプラインの外にあるので, この図には現れません.
 
-[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "図 11.11: 論文を書き終えた頃にできあがっているパイプライン")
+[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "図 11.13: 論文を書き終えた頃にできあがっているパイプライン")
 
-図 11.11: 論文を書き終えた頃にできあがっているパイプライン
+図 11.13: 論文を書き終えた頃にできあがっているパイプライン
 
 以下では, このステップを順に解説します.
 
@@ -608,7 +784,7 @@ tar_plan(
 )
 ```
 
-`tar_source()` で `R/` を読み込み, サブプランの名前を `tar_plan()` に並べる形は [sec-targets-latex](#sec-targets-latex) と同じです. 増えているのは, 図の見た目をまとめる `tar_figure` (ステップ3) です.
+`tar_source()` で `R/` を読み込み, サブプランの名前を `tar_plan()` に並べる形は [sec-targets-quarto](#sec-targets-quarto) と同じです. 増えているのは, 図の見た目をまとめる `tar_figure` (ステップ3) です.
 
 新しいのは `tar_config_set()` です. `tar_make()` で計算した結果は, プロジェクトのルートにある `_targets/` ディレクトリ (ストア) に保存されます. この設定は, パイプラインの定義 (`_targets.R`) とストアの場所をルートに固定します. 論文は `manuscript/` の中でレンダリングされるので, どこから呼ばれても同じストアを参照できるようにしておきます.
 
@@ -731,7 +907,7 @@ fct_wage_gap <- function(data) {
 
 テンプレートでは, 分析の関数を `fct_*()`, その結果のターゲットを `analysis_*` と名付けています. 関数はクリーニング済みのデータを引数にとり, 計算結果を数値, データフレーム, あるいはそれらのリストとして返します.
 
-ここでも図は作りません. 論文の中で, `tar_load()` したデータから ggplot で描きます. 同じ結果でも, 論文とスライドではフォントやサイズを変えたいことが多く, 図をファイルに固めてしまうとその調整がしにくくなるためです. LaTeX で執筆する場合はこれができないので, [sec-targets-latex](#sec-targets-latex) のように図表をファイルに書き出すことになります.
+[sec-targets-quarto](#sec-targets-quarto) と同じく, ここでも図は作りません. 論文の中で, `tar_load()` したデータから ggplot で描きます. 同じ結果でも, 論文とスライドではフォントやサイズを変えたいことが多く, 図をファイルに固めてしまうとその調整がしにくくなるためです. LaTeX で執筆する場合はこれができないので, [sec-targets-latex](#sec-targets-latex) のように図表をファイルに書き出すことになります.
 
 #### Julia のコードをパイプラインに組み込む
 
@@ -813,7 +989,7 @@ invisible(list2env(targets::tar_read(fn_figure), .GlobalEnv))
 theme_set(theme_proj())
 ```
 
-`here::i_am()` は, このファイルがプロジェクトのどこにあるかを `here` に教え, プロジェクトのルートを確定させます. 続く `tar_config_set()` でストアの場所を指定しておくと, 以降は `store` を毎回書かずに `tar_load()` や `tar_read()` が使えます. `tar_load()` は, 指定したターゲットをその名前のまま環境に読み込みます. あとは, 読み込んだデータから ggplot で図を描き, `tinytable` で表を作ります. 本文中の数値も, 手で書き写すのではなく, 読み込んだ結果からインラインコードで埋め込みます.
+[sec-targets-quarto](#sec-targets-quarto) では `tar_load()` の `store` 引数でストアの場所を指定しましたが, ここでは `tar_config_set()` で指定しています. `here::i_am()` は, このファイルがプロジェクトのどこにあるかを `here` に教え, プロジェクトのルートを確定させます. 続く `tar_config_set()` でストアの場所を指定しておくと, 以降は `store` を毎回書かずに `tar_load()` や `tar_read()` が使えます. あとは [sec-targets-quarto](#sec-targets-quarto) と同じく, 読み込んだデータから ggplot で図を描き, `tinytable` で表を作ります. 本文中の数値も, 手で書き写すのではなく, 読み込んだ結果からインラインコードで埋め込みます.
 
 #### 論文もパイプラインに組み込む
 
@@ -846,7 +1022,7 @@ tar_manuscript <- tar_plan(
 
 `manuscript_src` は, `manuscript/` にある原稿ファイルをすべてファイルとして登録します. 原稿を書き換えると, これが変わったと判定されます.
 
-`manuscript_pdf` の中にある `list(fn_figure, survey, analysis_wage_gap)` は, 計算としては何もしていない行です. `{targets}` は, ターゲットを作るコードの中にどのターゲット名が現れるかを見て依存関係を判定します. `quarto_render()` の中で原稿がどのターゲットを読んでいるかまでは分からないので, 論文が使うターゲットの名前をここに並べて, 依存関係として登録しているのです. 論文で新しいターゲットを `tar_load()` したら, この行にも書き足します. [sec-targets-latex](#sec-targets-latex) で `compile_manuscript()` の引数に図表のターゲットを並べたのと, 同じ理由の書き方です.
+`manuscript_pdf` の中にある `list(fn_figure, survey, analysis_wage_gap)` は, 計算としては何もしていない行です. `{targets}` は, ターゲットを作るコードの中にどのターゲット名が現れるかを見て依存関係を判定します. `quarto_render()` の中で原稿がどのターゲットを読んでいるかまでは分からないので, 論文が使うターゲットの名前をここに並べて, 依存関係として登録しているのです. 論文で新しいターゲットを `tar_load()` したら, この行にも書き足します. [sec-targets-quarto](#sec-targets-quarto) の `tar_quarto()` が自動でやっていることを, 手で書いた形です.
 
 #### なぜ Quarto Book として執筆するのか
 

@@ -8,38 +8,22 @@ graph LR
   end
   subgraph tar_analysis
     summarize_did>"summarize_did"]:::fn --> tab_balance["tab_balance"]:::regular
-    tab_balance --> tab_balance_file(["tab_balance_file"]):::filetarget
-    tabular_balance>"tabular_balance"]:::fn --> tab_balance_file
-    plot_trends>"plot_trends"]:::fn --> fig_trends_file(["fig_trends_file"]):::filetarget
+    summarize_trends>"summarize_trends"]:::fn --> trends["trends"]:::regular
     estimate_did>"estimate_did"]:::fn --> models_did["models_did"]:::regular
-    models_did --> tab_did_file(["tab_did_file"]):::filetarget
-    tabular_did>"tabular_did"]:::fn --> tab_did_file
     estimate_event>"estimate_event"]:::fn --> model_event["model_event"]:::regular
-    model_event --> fig_event_file(["fig_event_file"]):::filetarget
-    plot_event>"plot_event"]:::fn --> fig_event_file
   end
   subgraph tar_manuscript
-    main_tex_file(["main_tex_file"]):::filetarget
-    bib_file(["bib_file"]):::filetarget
-    compile_manuscript>"compile_manuscript"]:::fn --> manuscript_pdf_file(["manuscript_pdf_file"]):::filetarget
+    manuscript(["manuscript"]):::filetarget
   end
   here_rel --> did_raw_file
-  here_rel --> tab_balance_file
-  here_rel --> fig_trends_file
-  here_rel --> tab_did_file
-  here_rel --> fig_event_file
-  here_rel --> main_tex_file
-  here_rel --> bib_file
   did --> tab_balance
-  did --> fig_trends_file
+  did --> trends
   did --> models_did
   did --> model_event
-  main_tex_file --> manuscript_pdf_file
-  bib_file --> manuscript_pdf_file
-  tab_balance_file --> manuscript_pdf_file
-  tab_did_file --> manuscript_pdf_file
-  fig_trends_file --> manuscript_pdf_file
-  fig_event_file --> manuscript_pdf_file
+  tab_balance --> manuscript
+  trends --> manuscript
+  models_did --> manuscript
+  model_event --> manuscript
   style tar_data fill:#FFFFFF00,stroke:#131516;
   style tar_analysis fill:#FFFFFF00,stroke:#131516;
   style tar_manuscript fill:#FFFFFF00,stroke:#131516;

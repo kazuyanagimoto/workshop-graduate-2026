@@ -1,6 +1,4 @@
----
-title: 回帰分析
----
+# 回帰分析 {#sec-regression}
 
 ```{r}
 #| label: setup

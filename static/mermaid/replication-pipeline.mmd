@@ -1,0 +1,56 @@
+%%{init: {"theme": "neutral", "htmlLabels": false, "markdownAutoWrap": false, "flowchart": {"htmlLabels": false, "wrappingWidth": 400, "diagramPadding": 40, "nodeSpacing": 20, "rankSpacing": 30, "padding": 6}}}%%
+graph LR
+  here_rel>"here_rel"]:::fn
+  subgraph tar_data
+    register_raw_file(["register_raw_file"]):::filetarget --> register_raw["register_raw"]:::regular
+    register_raw --> register["register"]:::regular
+    clean_register>"clean_register"]:::fn --> register
+  end
+  subgraph tar_analysis
+    fct_salary_1911>"fct_salary_1911"]:::fn --> analysis_salary_1911["analysis_salary_1911"]:::regular
+    fct_balance>"fct_balance"]:::fn --> analysis_balance["analysis_balance"]:::regular
+    matched_sample>"matched_sample"]:::fn --> fct_did>"fct_did"]:::fn
+    est>"est"]:::fn --> fct_did
+    matched_sample --> fct_mechanism>"fct_mechanism"]:::fn
+    est --> fct_mechanism
+    fct_did --> analysis_did["analysis_did"]:::regular
+    fct_event>"fct_event"]:::fn --> analysis_event["analysis_event"]:::regular
+    fct_event --> analysis_placebo["analysis_placebo"]:::regular
+    fct_mechanism --> analysis_mechanism["analysis_mechanism"]:::regular
+    fct_honestdid>"fct_honestdid"]:::fn --> analysis_honestdid["analysis_honestdid"]:::regular
+    analysis_event --> analysis_honestdid
+  end
+  subgraph tar_figure
+    theme_proj>"theme_proj"]:::fn --> fn_figure["fn_figure"]:::regular
+    theme_mitex>"theme_mitex"]:::fn --> fn_figure
+    notes_text>"notes_text"]:::fn --> fn_figure
+    scale_race>"scale_race"]:::fn --> fn_figure
+    scale_transition>"scale_transition"]:::fn --> fn_figure
+  end
+  subgraph tar_manuscript
+    manuscript_src_file(["manuscript_src_file"]):::filetarget --> manuscript_pdf(["manuscript_pdf"]):::filetarget
+  end
+  here_rel --> register_raw_file
+  here_rel --> manuscript_src_file
+  here_rel --> manuscript_pdf
+  register --> analysis_salary_1911
+  register --> analysis_balance
+  register --> analysis_did
+  register --> analysis_event
+  register --> analysis_placebo
+  register --> analysis_mechanism
+  analysis_salary_1911 --> manuscript_pdf
+  analysis_balance --> manuscript_pdf
+  analysis_did --> manuscript_pdf
+  analysis_event --> manuscript_pdf
+  analysis_placebo --> manuscript_pdf
+  analysis_mechanism --> manuscript_pdf
+  analysis_honestdid --> manuscript_pdf
+  fn_figure --> manuscript_pdf
+  style tar_data fill:#FFFFFF00,stroke:#131516;
+  style tar_analysis fill:#FFFFFF00,stroke:#131516;
+  style tar_figure fill:#FFFFFF00,stroke:#131516;
+  style tar_manuscript fill:#FFFFFF00,stroke:#131516;
+  classDef regular stroke:#107895,stroke-width:2px,color:#107895,fill:#ffffff;
+  classDef filetarget stroke:#9a2515,stroke-width:2px,color:#9a2515,fill:#ffffff;
+  classDef fn stroke:#131516,stroke-width:2px,color:#131516,fill:#ffffff;

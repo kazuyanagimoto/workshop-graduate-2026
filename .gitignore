@@ -9,6 +9,8 @@ _targets/
 refs/
 .DS_Store
 *.pdf
+# Figures cropped from published papers: the inputs of the tar_paper stage
+!static/paper/*.pdf
 .vscode/
 
 # Local R environment (machine-specific PATH, never commit)

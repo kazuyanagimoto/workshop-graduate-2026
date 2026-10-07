@@ -1,6 +1,4 @@
----
-title: 文献と引用
----
+# 文献と引用 {#sec-literature}
 
 ## Zoteroによる文献管理
 

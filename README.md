@@ -50,6 +50,6 @@ quarto render --execute
 
 ## Licenses
 
-All prose and images are licensed under [Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+All prose and images are licensed under [Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/), except the figures reproduced from published papers (`static/paper/`), which remain under the copyright of their publishers and are quoted with attribution.
 
 All code is licensed under the [MIT License](LICENSE.md).

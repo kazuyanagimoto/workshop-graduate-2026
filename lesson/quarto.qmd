@@ -1,6 +1,4 @@
----
-title: Quarto
----
+# Quarto {#sec-quarto}
 
 ```{r}
 #| label: setup

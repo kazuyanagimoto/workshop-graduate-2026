@@ -31,7 +31,7 @@ book:
     logo: static/img/logo/hex-logo.svg
   page-footer:
     left: |
-      © 2026 柳本和春. 文章・図は [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), コードは [MIT License](https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md) の下で公開されています.
+      © 2026 柳本和春. 文章・図 (論文から引用した図を除く) は [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), コードは [MIT License](https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md) の下で公開されています.
   chapters:
     - index.qmd
     - lesson/architecture.qmd
@@ -45,6 +45,7 @@ book:
     - lesson/slides.qmd
     - lesson/literature.qmd
     - lesson/targets.qmd
+    - lesson/ai.qmd
   appendices:
     - lesson/shell.qmd
     - lesson/quarto.qmd

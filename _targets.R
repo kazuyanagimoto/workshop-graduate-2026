@@ -9,6 +9,7 @@
 #   tar_beamer      Beamer decks       static/beamer/*.tex -> <stem>-<page>.svg
 #   tar_tex         LaTeX figures      static/tex/*.tex    -> <stem>.svg
 #   tar_figure_qmd  Quarto figures     static/quarto/_*.qmd -> <stem>.svg
+#   tar_paper       paper figures      static/paper/*.pdf  -> *.svg
 #   tar_book        the book itself, rendered with Quarto
 #
 # Each source is tracked as a file, so only out-of-date outputs rebuild.
@@ -29,5 +30,6 @@ list(
   tar_beamer,
   tar_tex,
   tar_figure_qmd,
+  tar_paper,
   tar_book
 )

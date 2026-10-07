@@ -1,6 +1,4 @@
----
-title: スライド
----
+# スライド {#sec-slides}
 
 ```{r}
 #| label: setup

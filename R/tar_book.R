@@ -6,7 +6,7 @@
 # images, so it cannot see them; without this, a rebuilt diagram would leave
 # the rendered book untouched.
 book_figures <- function() {
-  dirs <- file.path("static", c("cetz", "beamer", "tex", "quarto"))
+  dirs <- file.path("static", c("cetz", "beamer", "tex", "quarto", "paper"))
   sort(list.files(dirs, pattern = "\\.svg$", full.names = TRUE))
 }
 

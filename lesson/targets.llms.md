@@ -998,7 +998,7 @@ theme_set(theme_proj())
 ``` r
 tar_manuscript <- tar_plan(
   tar_file(
-    manuscript_src,
+    manuscript_src_file,
     list.files(
       here_rel("manuscript"),
       pattern = "\\.(qmd|yml|tex|typ|bib|lua)$",
@@ -1011,7 +1011,7 @@ tar_manuscript <- tar_plan(
     {
       # Bare references register upstream targets as dependencies so the PDF
       # rebuilds when sources or data change.
-      manuscript_src
+      manuscript_src_file
       list(fn_figure, survey, analysis_wage_gap)
       quarto::quarto_render(here_rel("manuscript", "manuscript.qmd"))
       here_rel("manuscript", "manuscript.pdf")
@@ -1020,7 +1020,7 @@ tar_manuscript <- tar_plan(
 )
 ```
 
-`manuscript_src` は, `manuscript/` にある原稿ファイルをすべてファイルとして登録します. 原稿を書き換えると, これが変わったと判定されます.
+`manuscript_src_file` は, `manuscript/` にある原稿ファイルをすべてファイルとして登録します. 原稿を書き換えると, これが変わったと判定されます.
 
 `manuscript_pdf` の中にある `list(fn_figure, survey, analysis_wage_gap)` は, 計算としては何もしていない行です. `{targets}` は, ターゲットを作るコードの中にどのターゲット名が現れるかを見て依存関係を判定します. `quarto_render()` の中で原稿がどのターゲットを読んでいるかまでは分からないので, 論文が使うターゲットの名前をここに並べて, 依存関係として登録しているのです. 論文で新しいターゲットを `tar_load()` したら, この行にも書き足します. [sec-targets-quarto](#sec-targets-quarto) の `tar_quarto()` が自動でやっていることを, 手で書いた形です.
 

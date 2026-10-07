@@ -14,7 +14,7 @@
 
 公開
 
-2026年10月02日
+2026年10月07日
 
 # はじめに
 
@@ -113,7 +113,7 @@ Quartoは, バージョン番号を変数に入れて .deb パッケージをダ
 
 ``` sh
 # Latest release as of this page's build; see https://quarto.org/docs/download/
-QUARTO_VERSION=1.10.18
+QUARTO_VERSION=1.10.19
 wget "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb"
 sudo dpkg -i "quarto-${QUARTO_VERSION}-linux-amd64.deb"
 ```

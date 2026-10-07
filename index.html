@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-16e5d9079585c28b088c2fef09a1076c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-ea2432bc35d1b96858aad645df82c412.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-16e5d9079585c28b088c2fef09a1076c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-437d4563aba01c3846c26ffffa2b996d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-969e60a84736464a94e3433c8c41fb48.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-437d4563aba01c3846c26ffffa2b996d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-b67bb75fa8280136c820f6aebf8f6d9b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -222,6 +222,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">パイプライン</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson/ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">AIと研究する</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -319,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">公開</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年10月02日</p>
+      <p class="date">2026年10月07日</p>
     </div>
   </div>
   
@@ -384,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rig</span> add release</span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Quartoは, バージョン番号を変数に入れて .deb パッケージをダウンロードし, インストールします.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Latest release as of this page's build; see https://quarto.org/docs/download/</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_VERSION</span><span class="op">=</span>1.10.18</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_VERSION</span><span class="op">=</span>1.10.19</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="st">"https://github.com/quarto-dev/quarto-cli/releases/download/v</span><span class="va">${QUARTO_VERSION}</span><span class="st">/quarto-</span><span class="va">${QUARTO_VERSION}</span><span class="st">-linux-amd64.deb"</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> <span class="st">"quarto-</span><span class="va">${QUARTO_VERSION}</span><span class="st">-linux-amd64.deb"</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <p>アップデートするときは, <code>QUARTO_VERSION</code> を新しいバージョン番号に変えて同じコマンドを再実行するだけです. Rのアップデートは Mac と同様で, <code>rig add release</code> を再実行します. apt で入れたソフトウェアは <code>sudo apt update &amp;&amp; sudo apt upgrade</code> で, Windows側のソフトウェアは <code>winget upgrade --all</code> でまとめて更新できます.</p>
@@ -1003,7 +1009,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2026 柳本和春. 文章・図は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
+<p>© 2026 柳本和春. 文章・図 (論文から引用した図を除く) は <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, コードは <a href="https://github.com/kazuyanagimoto/workshop-graduate-2026/blob/main/LICENSE.md">MIT License</a> の下で公開されています.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

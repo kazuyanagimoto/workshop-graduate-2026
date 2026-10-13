@@ -63,15 +63,15 @@
         w: 1.9,
         h: 2.4,
         lines: 4,
-        fill: if s == 4 { c-outdated.lighten(55%) } else { white },
-        stroke: if s == 4 { 1.6pt + c-outdated.darken(20%) } else { 1.2pt + c-jet },
-        line-col: if s == 4 { c-outdated } else { c-faint },
+        fill: if s == 3 { c-outdated.lighten(55%) } else { white },
+        stroke: if s == 3 { 1.6pt + c-outdated.darken(20%) } else { 1.2pt + c-jet },
+        line-col: if s == 3 { c-outdated } else { c-faint },
       )
       content((x, 3.55), mono(outputs.at(i)))
       if i < 2 {
         arrow((x + 1.25, 5.7), (xs.at(i + 1) - 3.1, 8.5), col: c-muted.lighten(25%), w: 1.6pt, head: 1.3)
       }
-      if s == 3 {
+      if s == 2 {
         circle((x + 1.25, 6.45), radius: 0.44, fill: c-accent2, stroke: none)
         content((x + 1.25, 6.45), text(size: 19pt, fill: white, weight: "bold", "?"))
       }
@@ -79,11 +79,14 @@
     if s >= 2 {
       chip((xs.at(0) + 3.2, 9.85), "edited", fill: c-accent2, anchor: "east")
     }
-    if s == 3 {
-      person-icon((5.0, 1.35), s: 1.25)
-      bubble((12.6, 1.5), 12.6, 1.5, "Which scripts do I have to rerun?", tail: none, size: 14pt)
+    if s == 2 {
+      person-icon((4.8, 1.35), s: 1.25)
+      ai-icon((6.4, 1.35), s: 1.25)
+      content((4.8, 0.45), lab("人間", size: 11pt))
+      content((6.4, 0.45), lab("AI", size: 11pt, fill: c-accent))
+      bubble((14.4, 1.5), 13.0, 1.5, "どのスクリプトを再実行すればいいか?", tail: none, size: 14pt)
     }
-    if s == 4 {
+    if s == 3 {
       content((13, 1.5), box(fill: c-jet, radius: 5pt, inset: (x: 12pt, y: 8pt), {
         mono("tar_outdated()", fill: white)
         h(0.6em)
@@ -93,85 +96,91 @@
   })
   stepcap(s, (
     [スクリプトを番号順に実行すれば, 出力はすべて最新になる],
-    [クリーニングのスクリプトを1行直した],
-    [古くなった出力は, ファイルだけでは分からず, 人の記憶に頼る],
+    [
+      古くなった出力は, ファイルだけでは分からない.
+      #linebreak()
+      人は記憶に, AI はコンテキスト内の情報に頼って判断する.
+    ],
     [依存関係をコードとして持てば, 古くなった範囲は機械的に判定できる],
-  ))
+  ), height: 3em)
 }
 
 // ---- 2. The three elements --------------------------------------------------
-#let anim-elements(s) = {
-  let card(x, title, fn, desc, shape, on) = {
+#let anim-elements() = {
+  let card(x, title, fn, desc, shape) = {
     import cetz.draw: *
-    if on {
-      rect((x - 4.05, 5.0), (x + 4.05, 10.2), radius: 7pt, fill: c-panel, stroke: none)
-      shape
-      content((x, 8.0), lab(title, size: 17pt, weight: "medium"))
-      content((x, 7.1), mono(fn, size: 12pt, fill: c-accent))
-      content((x, 5.95), box(width: 7.4cm, align(center, {
-        set par(leading: 0.45em)
-        lab(desc, size: 11.5pt, fill: c-muted)
-      })))
-    }
+    rect((x - 4.05, 5.0), (x + 4.05, 10.2), radius: 7pt, fill: c-panel, stroke: none)
+    shape
+    content((x, 8.0), lab(title, size: 17pt, weight: "medium"))
+    content((x, 7.1), mono(fn, size: 12pt, fill: c-accent))
+    content((x, 5.95), box(width: 7.4cm, align(center, {
+      set par(leading: 0.45em)
+      lab(desc, size: 11.5pt, fill: c-muted)
+    })))
   }
   stage(26, 10.4, {
     import cetz.draw: *
-    card(4.5, "File", "tar_file()", "a path, plus a fingerprint of the contents", {
+    card(4.5, "File", "tar_file()", [
+      パスと中身の指紋を記録
+      #linebreak()
+      中身が変われば検知できる
+    ], {
       doc-icon((4.5, 9.25), w: 1.05, h: 1.3, tag: "csv")
-    }, s >= 1)
-    card(13, "Object", "name = ...", "any R object: a data frame, a model, a list", {
+    })
+    card(13, "Object", "name = ...", [
+      データフレームやモデルなど
+      #linebreak()
+      任意の R オブジェクト
+    ], {
       circle((13, 9.25), radius: 0.5, fill: c-ok, stroke: none)
-    }, s >= 2)
-    card(21.5, "Function", "function(inputs) ...", "every input is an argument; returns an object or a path", {
+    })
+    card(21.5, "Function", "function(inputs) ...", [
+      すべての入力を引数にとり
+      #linebreak()
+      オブジェクトやパスを返す
+    ], {
       line((21.5 - 0.58, 8.85), (21.5 + 0.58, 8.85), (21.5, 9.8), close: true, fill: c-ok, stroke: none)
-    }, s >= 3)
-    if s >= 4 {
-      let y = 1.9
-      doc-icon((3.0, y + 0.1), w: 1.3, h: 1.6, tag: "csv")
-      arrow((3.8, y), (5.9, y), w: 1.6pt, head: 1.3)
-      tnode((6.6, y), "penguins_file", status: "outdated")
-      tedge((6.6, y), (12.6, y))
-      tnode((12.6, y), "penguins", status: "outdated")
-      tedge((12.6, y), (20.2, y))
-      tnode((20.2, y), "penguins_cleaned", status: "outdated")
-      tnode((16.4, y + 1.6), "clean_penguins()", status: "outdated", kind: "function", above: true)
-      tedge((16.4, y + 1.6), (20.2, y), ra: 0.58)
-    }
+    })
+    let y = 1.9
+    doc-icon((3.0, y + 0.1), w: 1.3, h: 1.6, tag: "csv")
+    arrow((3.8, y), (5.9, y), w: 1.6pt, head: 1.3)
+    tnode((6.6, y), "penguins_file", status: "outdated")
+    tedge((6.6, y), (12.6, y))
+    tnode((12.6, y), "penguins", status: "outdated")
+    tedge((12.6, y), (20.2, y))
+    tnode((20.2, y), "penguins_cleaned", status: "outdated")
+    tnode((16.4, y + 1.6), "clean_penguins()", status: "outdated", kind: "function", above: true)
+    tedge((16.4, y + 1.6), (20.2, y), ra: 0.58)
   })
-  stepcap(s, (
-    [ファイル: パスだけでなく中身も記録するので, 上書きされれば検知できる],
-    [オブジェクト: データフレームや推定結果など, R のオブジェクトなら何でもよい],
-    [関数: 依存するものをすべて引数にとる. だから依存関係がコードから読み取れる],
-    [ファイルを読んでオブジェクトを作り, 関数に通して次のオブジェクトを作る],
-  ))
 }
 
 // ---- 3. One line of _targets.R is one node ----------------------------------
 #let anim-build(s) = {
   set block(spacing: 0.4em)
   let lines = (
-    "tar_file(penguins_file, \"data/penguins.csv\"),",
-    "penguins = readr::read_csv(penguins_file),",
-    "penguins_cleaned = clean_penguins(penguins),",
-    "penguins_summary = summarize_penguins(penguins_cleaned)",
+    "tar_plan(",
+    "  tar_file(penguins_file, \"data/penguins.csv\"),",
+    "  penguins = readr::read_csv(penguins_file),",
+    "  penguins_cleaned = clean_penguins(penguins),",
+    "  penguins_summary = summarize_penguins(penguins_cleaned)",
+    ")",
   )
   let k = calc.min(s, 4)
   code-box(
     lines,
-    file: "_targets.R, inside tar_plan( ... )",
+    file: "_targets.R",
     size: 15pt,
-    hl: if s <= 4 { (k - 1,) } else { () },
-    dim: range(k, 4),
+    hl: if s <= 4 { (k,) } else { () },
   )
   let hidden = penguin-targets.slice(k)
   if k < 3 { hidden.push("clean_penguins") }
   if k < 4 { hidden.push("summarize_penguins") }
   let rings = (:)
   if s <= 4 { rings.insert(penguin-targets.at(k - 1), c-accent) }
-  stage(26, 6.4, {
+  stage(26, 5.0, {
     import cetz.draw: *
-    penguin-graph(2.2, default: "outdated", hidden: hidden, rings: rings)
-    if s == 5 { status-legend((0.4, 0.3), items: ("outdated",), shapes: true) }
+    penguin-graph(1.5, default: "outdated", hidden: hidden, rings: rings)
+    if s == 5 { status-legend((0.4, 4.2), items: ("outdated",), shapes: true, vertical: true) }
   })
   stepcap(s, (
     [`tar_file()` はファイルを登録する],
@@ -229,58 +238,7 @@
   ))
 }
 
-// ---- 5. tar_file_read() ------------------------------------------------------
-#let anim-file-read(s) = {
-  set block(spacing: 0.4em)
-  let right = code-box(
-    (
-      "tar_plan(",
-      "  tar_file_read(",
-      "    penguins,",
-      "    \"data/penguins.csv\",",
-      "    readr::read_csv(!!.x)",
-      "  )",
-      ")",
-    ),
-    file: "_targets.R, in one call",
-    size: 13pt,
-    hl: (1, 2, 3, 4, 5),
-  )
-  grid(
-    columns: (1.25fr, 1fr),
-    column-gutter: 1.2em,
-    code-box(
-      (
-        "tar_plan(",
-        "  tar_file(penguins_file, \"data/penguins.csv\"),",
-        "  penguins = readr::read_csv(penguins_file)",
-        ")",
-      ),
-      file: "_targets.R, in two steps",
-      size: 13pt,
-      hl: if s == 1 { (1, 2) } else { () },
-    ),
-    if s >= 2 { right } else { hide(right) },
-  )
-  stage(26, 3.6, {
-    import cetz.draw: *
-    let y = 2.3
-    doc-icon((6.4, y + 0.1), w: 1.3, h: 1.6, tag: "csv")
-    arrow((7.3, y), (9.6, y), w: 1.6pt, head: 1.3)
-    tnode((10.4, y), "penguins_file", status: "outdated")
-    tedge((10.4, y), (17.4, y))
-    tnode((17.4, y), "penguins", status: "outdated")
-    if s >= 2 {
-      content((19.3, y), anchor: "west", lab("the same two targets", fill: c-muted))
-    }
-  })
-  stepcap(s, (
-    [ファイルの登録と読み込みは, いつも対になる],
-    [`tar_file_read()` で1つにまとめる. 名前に `_file` が付いた方がファイルのターゲット],
-  ))
-}
-
-// ---- 6. A function changes: only its downstream is outdated ------------------
+// ---- 5. A function changes: only its downstream is outdated ------------------
 #let anim-fn-change(s) = {
   set block(spacing: 0.4em)
   let st = (:)
@@ -344,7 +302,7 @@
   ))
 }
 
-// ---- 7. The data change: everything downstream of the file -------------------
+// ---- 6. The data change: everything downstream of the file -------------------
 #let anim-data-change(s) = {
   set block(spacing: 0.4em)
   let st = (:)
@@ -382,11 +340,11 @@
     [生データが更新された. パスは同じで, 中身だけが変わる],
     [`tar_file()` は中身も記録しているので, 変更を検知する],
     [データを変えると下流はすべて古くなり, 関数は緑のまま残る],
-    [今度は4つとも計算し直される: 4 completed, 0 skipped],
+    [今度は4つとも計算し直される: 4 completed, 0 skipped #h(1.5em) #link(<sec-exr-2>)[#button[Back to main]]],
   ))
 }
 
-// ---- 8. Four commands --------------------------------------------------------
+// ---- 7. Four commands --------------------------------------------------------
 #let fig-commands() = stage(26, 11.2, {
   import cetz.draw: *
   let card(x, cmds, what, body) = {
@@ -396,7 +354,7 @@
     }
     content((x, 1.6), box(width: 5.6cm, align(center, {
       set par(leading: 0.45em)
-      lab(what, size: 12.5pt)
+      lab(what, size: 12pt)
     })))
     body
   }
@@ -408,19 +366,19 @@
       tnode(p, "", status: sts.at(i), r: 0.4)
     }
   }
-  card(3.2, ("tar_visnetwork()",), "See the graph and what is stale", {
+  card(3.2, ("tar_visnetwork()",), "グラフと更新状況", {
     mini(3.2, 5.9, ("ok", "outdated", "outdated"))
   })
-  card(9.73, ("tar_outdated()",), "List the stale targets by name", {
+  card(9.73, ("tar_outdated()",), "古いターゲットを列挙", {
     content((9.73, 6.3), mono("\"penguins_cleaned\"", size: 10pt))
     content((9.73, 5.5), mono("\"penguins_summary\"", size: 10pt))
   })
-  card(16.27, ("tar_make()",), "Build only what is stale, in order", {
+  card(16.27, ("tar_make()",), "古い対象を順に再計算", {
     mini(16.27, 6.9, ("ok", "run", "outdated"))
     arrow((16.27, 6.2), (16.27, 5.3), w: 1.6pt, head: 1.3)
     mini(16.27, 4.6, ("ok", "ok", "ok"))
   })
-  card(22.8, ("tar_read()", "tar_load()"), "Take a result out of the store", {
+  card(22.8, ("tar_read()", "tar_load()"), "保存した結果を取得", {
     tnode((21.4, 5.9), "", status: "ok", r: 0.4)
     arrow((22.0, 5.9), (23.0, 5.9), w: 1.6pt, head: 1.3)
     // A small table.

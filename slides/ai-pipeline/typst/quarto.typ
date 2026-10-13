@@ -99,34 +99,25 @@
 }
 
 // ---- 1. From raw data to the PDF in one pipeline ------------------------------
-#let anim-qpipe-overview(s, q) = {
+#let anim-qpipe-overview() = {
   let y0 = 4.75
-  let hidden = if s == 1 { q-analysis + ("manuscript",) } else if s == 2 { ("manuscript",) } else { () }
-  let frames = ("data", "analysis", "manuscript").slice(0, calc.min(s, 3))
   stage(26, 9.8, {
     import cetz.draw: *
-    qgraph(y0, default: if s == 4 { "ok" } else { "outdated" }, hidden: hidden, frames: frames)
-    if s == 4 { result-tag((5.7, 1.3), q.base.completed, q.base.skipped) }
+    qgraph(y0, default: "outdated")
   })
-  stepcap(s, (
-    [`tar_data`: 生データを登録し, クリーニングする],
-    [`tar_analysis`: 集計と推定. 結果は図表ではなく, R のオブジェクトのまま持つ],
-    [`tar_manuscript`: 原稿 `main.qmd` をレンダリングして PDF にする],
-    [`tar_make()` を1回実行すれば, 生データから PDF までが一度に作られる],
-  ))
 }
 
 // ---- 2. The pipeline computes, the manuscript draws ---------------------------
-#let anim-compute-render(s) = {
+#let anim-compute-render() = {
   stage(26, 10.2, {
     import cetz.draw: *
-    let band(y, x-split, pipe-only: false) = {
+    let band(y, x-split) = {
       rect((3.7, y - 1.75), (x-split - 0.1, y + 1.75), radius: 6pt, fill: c-tint, stroke: none)
       rect((x-split + 0.1, y - 1.75), (25.8, y + 1.75), radius: 6pt, fill: c-panel, stroke: none)
     }
     let band-labels(y, x-split) = {
-      content((3.95, y + 1.35), anchor: "west", lab("pipeline", size: 11pt, fill: c-accent.darken(10%)))
-      content((x-split + 0.35, y + 1.35), anchor: "west", lab("manuscript", size: 11pt, fill: c-muted))
+      content((3.95, y + 1.35), anchor: "west", mono("tar_analysis", size: 10.5pt, fill: c-accent.darken(10%)))
+      content((x-split + 0.35, y + 1.35), anchor: "west", mono("tar_manuscript", size: 10.5pt, fill: c-muted))
     }
     let sheet(x, y, name, fill: white) = {
       doc-icon((x, y + 0.05), w: 1.3, h: 1.6, lines: 3, fill: fill)
@@ -145,33 +136,22 @@
     sheet(18.7, ya, "main.tex")
     arrow((19.7, ya + 0.05), (22.6, ya + 0.05), w: 1.6pt, head: 1.3)
     sheet(23.7, ya, "main.pdf", fill: c-faint)
-    if s >= 2 {
-      // Quarto: the pipeline stops at the objects.
-      let yb = 3.4
-      content((0.2, yb), anchor: "west", lab("Quarto", size: 15pt, weight: "medium"))
-      band(yb, 7.9)
-      band-labels(yb, 7.9)
-      tnode((5.6, yb + 0.05), "models_did", size: 10.5pt, r: 0.45)
-      arrow((6.3, yb + 0.05), (12.6, yb + 0.05), w: 1.6pt, head: 1.3)
-      content((9.5, yb + 0.5), mono("tar_load()", size: 10pt, fill: c-muted))
-      sheet(13.9, yb, "main.qmd")
-      content((15.0, yb + 0.45), anchor: "west", box(width: 7.4cm, {
-        set par(leading: 0.45em)
-        lab("makes the tables and figures at render time", size: 10.5pt, fill: c-muted)
-      }))
-      arrow((14.9, yb - 0.5), (22.6, yb - 0.5), w: 1.6pt, head: 1.3)
-      sheet(23.7, yb, "main.pdf", fill: c-faint)
-      if s >= 3 {
-        line((8.0, yb - 2.05), (8.0, yb - 2.3), (25.8, yb - 2.3), (25.8, yb - 2.05), stroke: 1.4pt + c-accent2)
-        content((16.9, yb - 2.8), lab("changing the look of a figure reruns only this side", size: 11.5pt, fill: c-accent2, weight: "medium"))
-      }
-    }
+    // Quarto: the pipeline stops at the objects.
+    let yb = 3.4
+    content((0.2, yb), anchor: "west", lab("Quarto", size: 15pt, weight: "medium"))
+    band(yb, 7.9)
+    band-labels(yb, 7.9)
+    tnode((5.6, yb + 0.05), "models_did", size: 10.5pt, r: 0.45)
+    arrow((6.3, yb + 0.05), (12.6, yb + 0.05), w: 1.6pt, head: 1.3)
+    content((9.5, yb + 0.5), mono("tar_load()", size: 10pt, fill: c-muted))
+    sheet(13.9, yb, "main.qmd")
+    content((15.0, yb + 0.45), anchor: "west", box(width: 7.4cm, {
+      set par(leading: 0.45em)
+      lab("レンダリング時に図表を作る", size: 10.5pt, fill: c-muted)
+    }))
+    arrow((14.9, yb - 0.5), (22.6, yb - 0.5), w: 1.6pt, head: 1.3)
+    sheet(23.7, yb, "main.pdf", fill: c-faint)
   })
-  stepcap(s, (
-    [LaTeX: パイプラインが図表をファイルに書き出し, 原稿はそれを読み込む],
-    [Quarto: パイプラインはオブジェクトを保存し, 原稿が図表を作る],
-    [計算と描画を分けると, 図の見た目を変えても推定はやり直されない],
-  ))
 }
 
 // ---- 3. The manuscript reads the store and makes everything -------------------
@@ -239,32 +219,26 @@
 }
 
 // ---- 4. tar_quarto() reads the manuscript and draws the edges -----------------
-// The right-hand graph of the two tar_quarto slides: the four analysis targets
-// and the manuscript, with only the edges in `known`.
-#let tq-graph(known, st: (:), notes: (:), extra: none) = {
+// The four analysis targets and their dependencies on the manuscript.
+#let tq-graph() = {
   import cetz.draw: *
   let ys = (8.7, 6.6, 4.5, 2.4)
   for (i, n) in q-analysis.enumerate() {
     let pos = (0.7, ys.at(i))
-    if n in known {
-      arrow((5.6, ys.at(i)), (9.0, 5.55 + (1.5 - i) * 0.45), col: c-accent, w: 2pt, head: 1.4)
-    }
-    tnode(pos, n, status: st.at(n, default: "ok"), side: "right")
+    arrow((5.6, ys.at(i)), (9.0, 5.55 + (1.5 - i) * 0.45), col: c-accent, w: 2pt, head: 1.4)
+    tnode(pos, n, status: "ok", side: "right")
   }
-  doc-node((10.2, 5.55), "manuscript", status: st.at("manuscript", default: "ok"))
-  if "manuscript" in notes { content((10.2, 3.3), anchor: "north", notes.manuscript) }
-  extra
+  doc-node((10.2, 5.55), "manuscript", status: "ok")
 }
 
-#let anim-tar-quarto(s) = {
-  let k = calc.max(0, calc.min(s - 1, 4))
+#let anim-tar-quarto() = {
   grid(
     columns: (14.3cm, 1fr),
     column-gutter: 0.6em,
     align: horizon,
     {
       set block(spacing: 0.5em)
-      code-box(("tar_quarto(manuscript, \"manuscript/main.qmd\")",), file: "R/tar_manuscript.R", size: 13.5pt, hl: if s == 1 or s == 6 { (0,) } else { () })
+      code-box(("tar_quarto(manuscript, \"manuscript/main.qmd\")",), file: "R/tar_manuscript.R", size: 13.5pt, hl: (0,))
       code-box(
         (
           "targets::tar_load(c(",
@@ -276,95 +250,17 @@
         ),
         file: "manuscript/main.qmd, first chunk",
         size: 13.5pt,
-        hl: if s >= 2 and s <= 5 { (s - 1,) } else { () },
       )
     },
     cetz.canvas(length: 1cm, {
       import cetz.draw: *
       rect((0, 0), (12.2, 9.9), stroke: none)
-      tq-graph(q-analysis.slice(0, k))
+      tq-graph()
     }),
   )
-  stepcap(s, (
-    [`tar_quarto()` は, 原稿のコードチャンクから `tar_load()` と `tar_read()` を探す],
-    [見つけた名前から, 原稿への矢印を引く],
-    [`trends` からも],
-    [`models_did` からも],
-    [`model_event` からも. 矢印はどれも, パイプラインの側には書いていない],
-    [`main.qmd` の変更も, 新しく読むターゲットも自動で追跡される],
-  ))
 }
 
-// ---- 5. What tar_quarto() cannot see ------------------------------------------
-#let anim-tar-quarto-blind(s) = {
-  let bad = s == 2 or s == 3
-  let st = (:)
-  let notes = (:)
-  if s == 3 {
-    notes.insert("manuscript", box(width: 4.4cm, fill: c-accent2, radius: 4pt, inset: (x: 8pt, y: 6pt), lab(
-      "skipped: a stale PDF, and no warning",
-      size: 10pt,
-      fill: white,
-      weight: "medium",
-    )))
-  }
-  grid(
-    columns: (14.3cm, 1fr),
-    column-gutter: 0.6em,
-    align: horizon,
-    {
-      set block(spacing: 0.5em)
-      if bad {
-        code-box(
-          (
-            "targets::tar_load(c(tab_balance, trends))",
-            "targets::tar_load(starts_with(\"model\"))",
-          ),
-          file: "manuscript/main.qmd, first chunk",
-          size: 13.5pt,
-          hl: (1,),
-        )
-      } else {
-        code-box(
-          (
-            "targets::tar_load(c(",
-            "  tab_balance, trends,",
-            "  models_did, model_event",
-            "))",
-          ),
-          file: "manuscript/main.qmd, first chunk",
-          size: 13.5pt,
-          hl: if s == 4 { (1, 2) } else { () },
-        )
-      }
-      if s == 3 {
-        code-box(("estimate_event <- function(did) { ... }",), file: "R/tar_analysis.R, edited", size: 13.5pt, hl: (0,))
-      } else {
-        hide(code-box(("x",), file: "x", size: 13.5pt))
-      }
-    },
-    cetz.canvas(length: 1cm, {
-      import cetz.draw: *
-      rect((0, 0), (12.2, 9.9), stroke: none)
-      tq-graph(if bad { ("tab_balance", "trends") } else { q-analysis }, st: st, notes: notes, extra: {
-        if bad {
-          for y in (4.5, 2.4) {
-            line((5.6, y), (7.0, y + (5.55 - y) * 0.42), stroke: (paint: c-accent2, thickness: 1.7pt, dash: "dashed"))
-            cross-mark(7.5, y + (5.55 - y) * 0.56, s: 1.6, col: c-accent2, w: 2.6pt)
-          }
-        }
-      })
-    }),
-  )
-  stepcap(s, (
-    [名前をそのまま書いた `tar_load()` は, すべて依存関係になる],
-    [`starts_with()` のような書き方は読み取れない. 矢印が2本消える],
-    [推定を更新しても PDF は古いままで, `tar_make()` も警告しない],
-    [原稿で使うターゲットは, 冒頭のチャンクに名前で並べる],
-  ))
-}
-
-// ---- 6. What reruns after each change (debrief of the exercise) ---------------
+// ---- 5. What reruns after each change (debrief of the exercise) ---------------
 #let anim-what-reruns(s, q) = {
   let y0 = 4.75
   let k = calc.quo(s - 1, 2)
@@ -397,15 +293,15 @@
     [変更 B: `estimate_event()` の定式化を変えた. どこが古くなる?],
     [イベントスタディの推定と PDF だけ. ほかの3つの結果は飛ばされる],
     [変更 C: `clean_did()` に行を足した. どこが古くなる?],
-    [下流はすべて再計算され, 生データの登録と読み込みは飛ばされる],
+    [下流の6つを再計算し, 生データの登録と読み込みは飛ばす #h(1em) #link(<sec-exr-3>)[#button[Back to main]]],
   ))
 }
 
-// ---- 7. Inline code: the number in the text follows the result ----------------
+// ---- 6. Inline code: the number in the text follows the result ----------------
 #let anim-inline(s, q) = {
   stage(26, 10.2, {
     import cetz.draw: *
-    let after = s >= 3
+    let after = s == 2
     let lane(y, title, src, value, state) = {
       content((0.2, y + 0.9), anchor: "west", lab(title, size: 14pt, weight: "medium"))
       // Source.
@@ -437,7 +333,7 @@
       if after { q.clean.est } else { q.base.est },
       if after { "fresh" } else { "none" },
     )
-    if s >= 2 {
+    if after {
       content((0.2, 1.6), anchor: "west", box(fill: c-accent2, radius: 4pt, inset: (x: 8pt, y: 5pt), {
         mono("clean_did()", size: 11pt, fill: white)
         h(0.5em)
@@ -446,18 +342,12 @@
         mono("tar_make()", size: 11pt, fill: white)
       }))
     }
-    if s == 3 {
+    if after {
       content((25.8, 1.6), anchor: "east", lab([the table in the same PDF now says #q.clean.est], size: 12pt, fill: c-muted))
-    }
-    if s == 4 {
-      ai-icon((13.6, 1.75), s: 0.95)
-      content((14.5, 1.6), anchor: "west", lab("an AI drafting the text has no number to copy or invent", size: 12pt))
     }
   })
   stepcap(s, (
     [本文の数字の書き方は2通り. どちらも, PDF では同じに見える],
-    [上流のクリーニングを変えて, `tar_make()` を実行した],
     [手書きの数字は古いまま残るが, インラインコードなら更新される],
-    [AI に下書きを頼んでも, 数字を書き写したり作ったりする余地がない],
   ))
 }

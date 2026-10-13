@@ -112,79 +112,81 @@ jsonlite::write_json(
 )
 ```
 
-# AI時代の研究を支える道具
-
-## AI で下がったのは, 書くコストだけ
+## AIと研究コスト
 
 ```{=typst}
-#slide(repeat: 3, self => anim-cost(self.subslide))
+#anim-cost()
 ```
 
-## 道具は, 書く速さではなく確かめやすさで選ぶ
+- AI なら数百行のコードも数分で書けるが, 確かめるコストは変わらない.
+- AI が速く書くほど, 確かめる仕事の比重が増していく.
+
+## ツールと検証性
 
 ```{=typst}
-#slide(repeat: 5, self => anim-four-tools(self.subslide))
+#anim-four-tools()
 ```
+
+{{< v 0.5em >}}
+
+- AI時代は, 検証のしやすさをツールとワークフローで整備する必要がある
 
 # `{targets}` の基本
 
 ## スクリプトを順に実行するやり方は, 変更に弱い
 
 ```{=typst}
-#slide(repeat: 4, self => anim-scripts(self.subslide))
+#slide(repeat: 3, self => anim-scripts(self.subslide))
 ```
 
-## パイプラインは3つの部品でできている
+## パイプラインを構成する3つの要素
 
 ```{=typst}
-#slide(repeat: 4, self => anim-elements(self.subslide))
+#anim-elements()
 ```
 
-## `_targets.R` の1行が, グラフの1ノードになる
+- ファイルを読んでオブジェクトを作り, 関数に通して次のオブジェクトを作る.
+
+## パイプライン
 
 ```{=typst}
 #slide(repeat: 5, self => anim-build(self.subslide))
 ```
 
-## `tar_make()` は上流から順に計算し, 結果を保存する
+## パイプラインの実行
 
 ```{=typst}
 #slide(repeat: 6, self => anim-make(self.subslide))
 ```
 
-## 実務では `tar_file_read()` で1つにまとめる
-
-```{=typst}
-#slide(repeat: 2, self => anim-file-read(self.subslide))
-```
-
-## penguins のパイプラインを組む
+## 演習1: パイプラインを組む
 
 :::: {.exercise options="num: 1, time: 10"}
 
-[教科書 11.1 節](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/targets.html) のコードで, 種ごとの平均くちばし長を計算してください.
+[11.1 節](https://kazuyanagimoto.com/workshop-graduate-2026/lesson/targets.html) のコードで, 種ごとのくちばしの平均長を計算せよ.
+
+{{< v 0.5em >}}
+
 
 1. 空のフォルダに, R ファイル2つと生データの CSV を用意する.
 1. 実行前のグラフを見てから計算し, もう一度グラフを見る.
 1. `penguins_summary` を読み出し, 結果を確かめる.
 
-```r
-targets::tar_visnetwork()
-targets::tar_make()
-targets::tar_read(penguins_summary)
-```
-
-```{=typst}
-#exercise-note([余裕があれば], [もう一度実行すると, 計算はどうなるか.])
-```
+   ```r
+   targets::tar_visnetwork()
+   targets::tar_make()
+   targets::tar_read(penguins_summary)
+   ```
 
 ::::
 
-## 何が古くなるかを, 予想してから確かめる
+## 演習2: パイプラインと変更 {#sec-exr-2}
 
 :::: {.exercise options="num: 2, time: 10"}
 
-変更ごとに水色になるノードを予想し, グラフで確かめてから実行してください.
+次の変更を入れた時の各挙動を `tar_visnetwork()` や `tar_make()` で確かめよ.
+
+{{< v 0.5em >}}
 
 1. `clean_penguins()` で, 体重が欠損した個体も除く.
 
@@ -199,26 +201,12 @@ targets::tar_read(penguins_summary)
              "data/penguins.csv", row.names = FALSE)
    ```
 
-```{=typst}
-#exercise-note([確認する], [completed と skipped は, それぞれ何個だったか.])
-#exercise-note([余裕があれば], [`summarize_penguins()` だけを変えると, どうなるか.])
-```
+[[解説]{.button}](#sec-ans-2_1)
 
 ::::
 
-## 関数を変えると, その下流だけが古くなる
 
-```{=typst}
-#slide(repeat: 6, self => anim-fn-change(self.subslide))
-```
-
-## データを変えると, ファイルから下流がすべて古くなる
-
-```{=typst}
-#slide(repeat: 5, self => anim-data-change(self.subslide))
-```
-
-## 覚えておくコマンドは4つ
+## 覚えておくべき4つのコマンド
 
 ```{=typst}
 #fig-commands()
@@ -226,43 +214,52 @@ targets::tar_read(penguins_summary)
 
 # Quarto + `{targets}`
 
-## 生データから PDF までを, 1本のパイプラインにする
+## Quarto とパイプライン
 
 ```{=typst}
-#slide(repeat: 4, self => anim-qpipe-overview(self.subslide, q))
+#anim-qpipe-overview()
 ```
 
-## パイプラインはオブジェクトで止め, 図表は原稿が作る
+- `tar_data` でデータを整え, `tar_analysis` で集計・推定する.
+- `tar_manuscript` で原稿を PDF にし, `_targets.R` で3つを束ねる.
+
+## Quarto と図表
 
 ```{=typst}
-#slide(repeat: 3, self => anim-compute-render(self.subslide))
+#anim-compute-render()
 ```
 
-## 原稿は結果を読み込み, 図も表も数値も自分で作る
+- Quarto では, `tar_load()` で読み込んだオブジェクトから図や表を作ることを推奨
+
+## オブジェクトと読み込み
 
 ```{=typst}
 #slide(repeat: 4, self => anim-manuscript(self.subslide, q))
 ```
 
-## `tar_quarto()` は原稿を読んで, 矢印を自分で引く
+## `tar_quarto()` による依存関係の自動生成
 
 ```{=typst}
-#slide(repeat: 6, self => anim-tar-quarto(self.subslide))
+#anim-tar-quarto()
 ```
 
-## `tar_quarto()` に見えない書き方は, PDF を黙って古くする
+- `main.qmd` の変更も, 読み込んでいるオブジェクトの変更も自動で追跡される
+
+## インラインコード
 
 ```{=typst}
-#slide(repeat: 4, self => anim-tar-quarto-blind(self.subslide))
+#slide(repeat: 2, self => anim-inline(self.subslide, q))
 ```
 
-## 何を変えると, どこまでやり直されるか
+
+## 演習3: Quarto + `{targets}` で PDF を作る {#sec-exr-3}
 
 :::: {.exercise options="num: 3, time: 15"}
 
 [教材 ZIP](https://kazuyanagimoto.com/workshop-graduate-2026/static/data/targets-quarto.zip) を展開し, `targets::tar_make()` で PDF を作ってください.
-
 次を順に試し, 毎回, 再計算の個数を予想してから実行します.
+
+{{< v 0.5em >}}
 
 1. `manuscript/main.qmd` のテーマを `theme_minimal` にする.
 1. `R/tar_analysis.R` の `estimate_event()` の式から `x1` を外す.
@@ -272,23 +269,12 @@ targets::tar_read(penguins_summary)
    |> filter(abs(x1) < 8)
    ```
 
-```{=typst}
-#exercise-note([最後に確認], [本文の列 (3) の推定値は, どう変わったか.])
-```
+[[解説]{.button}](#sec-ans-3)
 
 ::::
 
-## 何を変えたかで, やり直される範囲が決まる
 
-```{=typst}
-#slide(repeat: 6, self => anim-what-reruns(self.subslide, q))
-```
 
-## 本文の数字は書き写さず, インラインコードで埋め込む
-
-```{=typst}
-#slide(repeat: 4, self => anim-inline(self.subslide, q))
-```
 
 # AIと文献を読む
 
@@ -598,7 +584,7 @@ save_frame(plot_honestdid(Inf), "honestdid-4")
 ## 4つの道具は, AI の出力を照らし合わせる基準になる
 
 ```{=typst}
-#anim-four-tools(5, final: true)
+#anim-four-tools(final: true)
 ```
 
 ## 今日の内容を, 自分の研究で使うには
@@ -611,6 +597,26 @@ save_frame(plot_honestdid(Inf), "honestdid-4")
 テンプレートは [kazuyanagimoto/template-research](https://github.com/kazuyanagimoto/template-research), 教科書は [Empiricist's Workflow](https://kazuyanagimoto.com/workshop-graduate-2026/) の「パイプライン」と「AIと研究する」の章です.
 
 {{< appendix >}}
+
+# Appendix
+
+## 2.1. 関数を変更した場合 {#sec-ans-2_1}
+
+```{=typst}
+#slide(repeat: 6, self => anim-fn-change(self.subslide))
+```
+
+## 2.2. データを変更した場合 {#sec-ans-2_2}
+
+```{=typst}
+#slide(repeat: 5, self => anim-data-change(self.subslide))
+```
+
+## 3. Quarto と `{targets}` {#sec-ans-3}
+
+```{=typst}
+#slide(repeat: 6, self => anim-what-reruns(self.subslide, q))
+```
 
 ## 参考文献
 

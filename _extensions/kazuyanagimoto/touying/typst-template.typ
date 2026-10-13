@@ -1,5 +1,9 @@
 #import "@preview/touying:0.7.3": *
 
+// Expose brand font families to themes imported through include-in-header.
+#let brand-font-body = $if(brand.typography.base.family)$$brand.typography.base.family$$else$none$endif$
+#let brand-font-heading = $if(brand.typography.headings.family)$$brand.typography.headings.family$$else$brand-font-body$endif$
+
 // Inline helpers (theme-independent) -----------------------------------------
 // `.fg` / `.bg` colour the text / its background.
 #let fg = (fill: rgb("e64173"), it) => text(fill: fill, it)

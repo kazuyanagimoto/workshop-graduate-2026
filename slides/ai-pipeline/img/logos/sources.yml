@@ -1,0 +1,17 @@
+# Official assets used by anim-four-tools. Keep the original artwork intact.
+git:
+  file: git.svg
+  source: https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg
+  author: Jason Long
+  license: CC BY 3.0
+  license-url: https://creativecommons.org/licenses/by/3.0/
+zotero:
+  file: zotero.png
+  source: https://www.zotero.org/support/_media/logo/zotero_512x512x32.png
+  brand-page: https://www.zotero.org/support/brand
+quarto:
+  file: quarto.svg
+  source: https://raw.githubusercontent.com/quarto-dev/quarto-web/main/quarto-icon.svg
+targets:
+  file: targets.png
+  source: https://raw.githubusercontent.com/ropensci/targets/main/man/figures/logo.png

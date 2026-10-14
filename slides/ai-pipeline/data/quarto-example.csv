@@ -1,0 +1,5 @@
+"scenario","change","n_targets","completed","skipped","outdated","estimate","nobs"
+"base","none",8,8,0,"did did_raw did_raw_file manuscript model_event models_did tab_balance trends",4.99339041389722,1080
+"theme","theme_set() in main.qmd",8,1,7,"manuscript",4.99339041389722,1080
+"event","estimate_event()",8,2,6,"manuscript model_event",4.99339041389722,1080
+"clean","clean_did()",8,6,2,"did manuscript model_event models_did tab_balance trends",5.07401155053731,1069

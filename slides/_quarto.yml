@@ -1,0 +1,26 @@
+project:
+  type: default
+  # Run each deck with its own folder as the working directory, so a deck
+  # refers to its files with simple relative paths (code/setup.R, data/...,
+  # output/...) and stays a self-contained unit.
+  execute-dir: file
+
+# slides/ is its own Quarto project, nested in the book. This makes slides/
+# the project root for the decks, so the book's settings (formats, filters,
+# freeze) do not apply to them, and slides/_extensions is found by every deck
+# subfolder. The book renders only its chapters, so it never picks these up.
+
+lang: ja
+
+bibliography: references.bib
+bibliographystyle: chicago-author-date
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+knitr:
+  opts_chunk:
+    fig.align: center
+    dev: svg

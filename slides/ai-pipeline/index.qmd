@@ -179,10 +179,10 @@ jsonlite::write_json(
 
 {{< v 0.5em >}}
 
-1. `clean_penguins()` で, 体重が欠損した個体も除く.
+1. `clean_penguins()` で, 性別が欠損した個体も除く.
 
    ```r
-   filter(!is.na(bill_len), !is.na(body_mass))
+   filter(!is.na(bill_len), !is.na(sex))
    ```
 
 1. R コンソールで, 2008 年以降の生データを CSV に上書きする.

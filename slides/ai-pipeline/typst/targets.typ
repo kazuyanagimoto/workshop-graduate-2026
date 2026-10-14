@@ -283,7 +283,7 @@
       (
         "clean_penguins <- function(penguins) {",
         "  penguins |>",
-        if s == 1 { "    filter(!is.na(bill_len))" } else { "    filter(!is.na(bill_len), !is.na(body_mass))" },
+        if s == 1 { "    filter(!is.na(bill_len))" } else { "    filter(!is.na(bill_len), !is.na(sex))" },
         "}",
       ),
       file: "R/functions.R",

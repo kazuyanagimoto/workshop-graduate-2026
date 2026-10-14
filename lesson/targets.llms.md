@@ -12,15 +12,29 @@
 
 `{targets}` の基本を学ぶには公式の[チュートリアル](https://books.ropensci.org/targets/)が良いですが, 実用上は `{targets}` を拡張した `{tarchetypes}` の文法を使うことが多いです. そのため, ここでは `{tarchetypes}` の文法に基づいて, 小さなパイプラインを実際に組みながら最低限の使い方を解説します. この `{targets}` から `{tarchetypes}` への移行に関しては, この[チュートリアル](https://carpentries-incubator.github.io/targets-workshop/index.html)が参考になりました.
 
+### なぜパイプラインを使うのか
+
+分析を `01_clean.R`, `02_estimate.R`, `03_figure.R` のようなスクリプトに分け, 番号順に実行するやり方はよく使われます. 順に実行し直せば出力はすべて最新になりますが, このやり方は変更に弱いです. 例えば `01_clean.R` を直すと, その下流の出力はすべて古くなります ([図 fig-targets-scripts](#fig-targets-scripts)). しかし, どの出力が古くなったかは, ファイルを見ても分かりません. 人は自分の記憶に, AI は会話の中に残っている情報に頼って, どのスクリプトを実行し直すかを判断するしかありません.
+
+[![](../static/cetz/targets-scripts.svg)](../static/cetz/targets-scripts.svg "図 11.1: スクリプトを番号順に実行するやり方")
+
+図 11.1: スクリプトを番号順に実行するやり方
+
+依存関係をコードとして書いておけば, 古くなった範囲は機械的に判定できます. それを引き受けるのが `{targets}` です. 例えば `tar_outdated()` は, 古くなったターゲットを一覧にします.
+
 ### 基本の3つの要素
 
-`{targets}` の哲学は, 研究のワークフローを三つの要素に分けて考えることです. それは, ファイル, 関数, オブジェクト です.
+`{targets}` の哲学は, 研究のワークフローを三つの要素に分けて考えることです. それは, ファイル, オブジェクト, 関数です ([図 fig-targets-elements](#fig-targets-elements)).
 
-- **ファイル**: `tar_file()` で定義される, ファイルのパス名を持つオブジェクト. ファイルのサイズやタイムスタンプも保存されているため, ファイルのパスが変更されていなくても, ファイルの中身が変更されていれば, 依存するパイプラインが再計算される
+- **ファイル**: `tar_file()` で定義される, ファイルのパス名を持つオブジェクト. パスに加えて, ファイルの中身の指紋 (ハッシュ) も記録しているため, パスが変わらなくても中身が変われば, 依存するターゲットが再計算される
 - **オブジェクト**: 変数やデータフレームなどの R のオブジェクト
 - **関数**: R の関数. ただし, インプットには依存する全てのオブジェクトを指定する必要があり, アウトプットがファイルまたはオブジェクトである必要がある. これにより, 依存関係を明示的にすることができる
 
-イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを使って関数を実行して新しいオブジェクトを作成するという流れです. 以下では, 実際に手を動かしてこの流れを作ってみます.
+イメージとしては, ファイルから始まり, それを読み込んでオブジェクトを作成し, そのオブジェクトを関数に通して新しいオブジェクトを作成するという流れです. 以下では, 実際に手を動かしてこの流れを作ってみます.
+
+[![](../static/cetz/targets-elements.svg)](../static/cetz/targets-elements.svg "図 11.2: パイプラインを構成する3つの要素")
+
+図 11.2: パイプラインを構成する3つの要素
 
 ### パイプライン
 
@@ -80,11 +94,11 @@ tar_plan(
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-read.png)](../static/img/targets/tar-visnetwork-read.png "図 11.1: ")
+[![](../static/img/targets/tar-visnetwork-read.png)](../static/img/targets/tar-visnetwork-read.png "図 11.3: ")
 
-図 11.1
+図 11.3
 
-水色のノードはまだ実行されていないファイルやオブジェクトを表しています. これを実行するには次のコマンドを実行します.
+ノードの色はターゲットの状態を表します. 水色 (Outdated) は, まだ実行されていないか, 上流が変わって古くなったターゲットです. ここでは2つとも水色です. これを実行するには次のコマンドを実行します.
 
 ``` r
 targets::tar_make()
@@ -98,15 +112,17 @@ targets::tar_make()
 ✔ ended pipeline [138ms, 2 completed, 0 skipped]
 ```
 
-`dispatched` はそのターゲットの計算を始めたこと, `completed` は計算が終わって結果を保存したことを表します. 角括弧の中は, かかった時間と保存されたオブジェクトのサイズです. 最後の行はパイプライン全体の要約で, ここでは2つのターゲットを計算し, 飛ばしたものは1つも無かったことが分かります. 状態を確認します.
+`dispatched` はそのターゲットの計算を始めたこと, `completed` は計算が終わって結果を保存したことを表します. 角括弧の中は, かかった時間と保存されたオブジェクトのサイズです. 最後の行はパイプライン全体の要約で, ここでは2つのターゲットを計算し, 飛ばしたものは1つも無かったことが分かります. 計算中に `tar_visnetwork()` を開くと, 計算を始めたターゲット (dispatched) はオレンジで表示されます.
+
+計算した結果は, プロジェクトのルートにできる `_targets/` というディレクトリ (ストア) に保存されます. 結果を取り出すときは, 計算し直すのではなく, ストアから `targets::tar_read(penguins)` で読み出します. 状態を確認すると, ノードが最新 (Up to date) を表す緑に変わっています.
 
 ``` r
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-uptodate.png)](../static/img/targets/tar-visnetwork-uptodate.png "図 11.2: ")
+[![](../static/img/targets/tar-visnetwork-uptodate.png)](../static/img/targets/tar-visnetwork-uptodate.png "図 11.4: ")
 
-図 11.2
+図 11.4
 
 なお, 実務的にはこの二つのパイプラインを統合する一つのコマンドにまとめます.
 
@@ -125,9 +141,9 @@ targets::tar_make()
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-fileread.png)](../static/img/targets/tar-visnetwork-fileread.png "図 11.3: ")
+[![](../static/img/targets/tar-visnetwork-fileread.png)](../static/img/targets/tar-visnetwork-fileread.png "図 11.5: ")
 
-図 11.3
+図 11.5
 
 `tar_file_read()` は, `tar_file()` と何らかの読み込み関数を組み合わせたものになります. 指定したオブジェクト名 (`penguins`) が読み込まれたオブジェクトになり, それに `_file` がついたものがファイルのターゲットになります.
 
@@ -164,11 +180,11 @@ targets::tar_make()
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.4: ")
+[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.6: ")
 
-図 11.4
+図 11.6
 
-関数とオブジェクトの依存関係が図示されました. ここで, `penguins_cleaned` は `penguins` に依存し, `penguins_summary` は `penguins_cleaned` に依存しています. そのため, もし `penguins` が変更された場合は, それに依存する `penguins_cleaned` と `penguins_summary` が再計算されます.
+関数とオブジェクトの依存関係が図示されました. ここで, `penguins_cleaned` は `penguins` に依存し, `penguins_summary` は `penguins_cleaned` に依存しています. この矢印は, 誰も手で書いていません. `{targets}` が, ターゲットを作るコードに現れる名前 (ここでは関数の引数) から, 依存関係を自動で読み取っています. そのため, もし `penguins` が変更された場合は, それに依存する `penguins_cleaned` と `penguins_summary` が再計算されます.
 
 ### 再計算
 
@@ -191,9 +207,19 @@ clean_penguins <- function(penguins) {
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-fn-outdated.png)](../static/img/targets/tar-visnetwork-fn-outdated.png "図 11.5: ")
+[![](../static/img/targets/tar-visnetwork-fn-outdated.png)](../static/img/targets/tar-visnetwork-fn-outdated.png "図 11.7: ")
 
-図 11.5
+図 11.7
+
+古くなったターゲットは, `tar_outdated()` で名前の一覧としても確かめられます.
+
+``` r
+targets::tar_outdated()
+```
+
+``` text
+[1] "penguins_cleaned" "penguins_summary"
+```
 
 パイプラインを実行すると, 変更の影響を受けるターゲットだけが再計算されます.
 
@@ -213,9 +239,9 @@ targets::tar_make()
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.6: ")
+[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.8: ")
 
-図 11.6
+図 11.8
 
 **データを変更**
 
@@ -231,11 +257,11 @@ write.csv(subset(penguins, year >= 2008), "data/penguins.csv", row.names = FALSE
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-data-outdated.png)](../static/img/targets/tar-visnetwork-data-outdated.png "図 11.7: ")
+[![](../static/img/targets/tar-visnetwork-data-outdated.png)](../static/img/targets/tar-visnetwork-data-outdated.png "図 11.9: ")
 
-図 11.7
+図 11.9
 
-今度は `penguins_file` を起点に, その下流のターゲットがすべて古くなりました. 一方で `clean_penguins()` と `summarize_penguins()` は変更していないので, 関数のノードは水色のままです. 関数を変更した [図 fig-tar-visnetwork-fn-outdated](#fig-tar-visnetwork-fn-outdated) とちょうど裏返しの関係になっています.
+今度は `penguins_file` を起点に, その下流のターゲットがすべて古くなりました. 一方で `clean_penguins()` と `summarize_penguins()` は変更していないので, 関数のノードは緑 (Up to date) のままです. 関数を変更した [図 fig-tar-visnetwork-fn-outdated](#fig-tar-visnetwork-fn-outdated) とちょうど裏返しの関係になっています.
 
 ``` r
 targets::tar_make()
@@ -257,9 +283,22 @@ targets::tar_make()
 targets::tar_visnetwork()
 ```
 
-[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.8: ")
+[![](../static/img/targets/tar-visnetwork-functions.png)](../static/img/targets/tar-visnetwork-functions.png "図 11.10: ")
 
-図 11.8
+図 11.10
+
+### 覚えておくべき4つのコマンド
+
+ここまでに使ったコマンドは, 次の4つにまとまります ([図 fig-targets-commands](#fig-targets-commands)).
+
+- `tar_visnetwork()`: 依存関係のグラフと, 各ターゲットの状態を見る
+- `tar_outdated()`: 古くなったターゲットを一覧にする
+- `tar_make()`: 古くなったターゲットだけを, 上流から順に計算し直す
+- `tar_read()` と `tar_load()`: ストアに保存した結果を取り出す
+
+[![](../static/cetz/targets-commands.svg)](../static/cetz/targets-commands.svg "図 11.11: 覚えておくべき4つのコマンド")
+
+図 11.11: 覚えておくべき4つのコマンド
 
 ## 11.2 LaTeX + `{targets}` のワークフロー
 
@@ -508,15 +547,15 @@ targets::tar_make()
 
 できあがった PDF が [図 fig-latex-manuscript](#fig-latex-manuscript) です.
 
-[![](../static/img/targets/latex-manuscript.svg)](../static/img/targets/latex-manuscript.svg "図 11.9: ")
+[![](../static/img/targets/latex-manuscript.svg)](../static/img/targets/latex-manuscript.svg "図 11.12: ")
 
-図 11.9
+図 11.12
 
 パイプラインを図解すると [図 fig-latex-pipeline](#fig-latex-pipeline) のようになります. 四角いノードが R のオブジェクトを持つターゲット, 角の丸いノードが `tar_file()` で定義したファイルのターゲット, 黒い旗形のノードが関数で, 3つのサブプランを囲みで示しています. 関数からの矢印は, その関数を使っているターゲットに向かいます. `R/utils.R` の `here_rel()` はどのサブプランにも属さないので, 囲みの外に置いています.
 
-[![](../static/img/targets/latex-pipeline.svg)](../static/img/targets/latex-pipeline.svg "図 11.10: LaTeX パイプラインの依存関係")
+[![](../static/img/targets/latex-pipeline.svg)](../static/img/targets/latex-pipeline.svg "図 11.13: LaTeX パイプラインの依存関係")
 
-図 11.10: LaTeX パイプラインの依存関係
+図 11.13: LaTeX パイプラインの依存関係
 
 ## 11.3 Quarto + `{targets}` のワークフロー
 
@@ -582,6 +621,12 @@ summarize_trends <- function(did) {
 ```
 
 `summarize_did()` は群と処置の前後ごとの平均を, `estimate_did()` は差の差の回帰を4本, `estimate_event()` はイベントスタディを推定する関数です (中身は [sec-targets-latex](#sec-targets-latex) と同じです). どのターゲットも図表ではなく, データフレームや推定結果のオブジェクトです. たとえば `trends` は群と期間ごとの平均で, これを図にするのは原稿の仕事です. 計算はパイプラインに, 描画は原稿に分けておくと, 図の見た目を変えても計算はやり直されません.
+
+[図 fig-targets-compute-render](#fig-targets-compute-render) は, LaTeX と Quarto で図表を作る場所の違いです. LaTeX の原稿は R のオブジェクトを読めないので, 図表をファイルに書き出すところまでがパイプラインの仕事でした ([sec-targets-latex](#sec-targets-latex)). Quarto ではパイプラインはオブジェクトで止まり, 図表は原稿をレンダリングするときに, その中で作られます.
+
+[![](../static/cetz/targets-compute-render.svg)](../static/cetz/targets-compute-render.svg "図 11.14: LaTeX と Quarto で図表を作る場所")
+
+図 11.14: LaTeX と Quarto で図表を作る場所
 
 ### 原稿の中で図表を作る
 
@@ -650,7 +695,11 @@ modelsummary(
 
 最後の2行はエスケープです. Typst では `*` が太字の記号なので, 星印をそのまま渡すと表が壊れます. かといって表全体をエスケープすると, 1列目の係数名に入れた数式まで文字として表示されてしまいます. そこで `escape = FALSE` としたうえで, 星印の入る列 (`j = 2:5`) と注 (`i = "notes"`) だけをエスケープしています. なお, セルの中の数式は出力形式の記法で書く必要があるので, ここでは Typst の記法 (`$times$`) を使っています ([回帰分析](../lesson/regression.llms.md) の章を参照).
 
-本文中の数値も, 読み込んだオブジェクトからインラインコードで埋め込めます. 配布した `main.qmd` では, 標本のユニット数と期間の数, (3) 列の推定値をこの方法で書いています. 推定をやり直せば, 本文の数値も一緒に更新されます.
+本文中の数値も, 読み込んだオブジェクトからインラインコードで埋め込めます. 例えば推定値 `est` を本文に書くときは, 数字を手で書き写す代わりに `` `r sprintf("%.2f", est)` `` と書きます. PDF の上ではどちらも同じに見えますが, 手で書いた数字は, 推定をやり直しても古いまま残ります. インラインコードなら, 推定をやり直すと本文の数値も一緒に更新されます ([図 fig-targets-inline](#fig-targets-inline)). 配布した `main.qmd` では, 標本のユニット数と期間の数, (3) 列の推定値をこの方法で書いています.
+
+[![](../static/cetz/targets-inline.svg)](../static/cetz/targets-inline.svg "図 11.15: 手で書いた数字とインラインコード")
+
+図 11.15: 手で書いた数字とインラインコード
 
 ### 原稿をパイプラインに組み込む
 
@@ -682,17 +731,31 @@ targets::tar_make()
 
 できあがった PDF が [図 fig-quarto-manuscript](#fig-quarto-manuscript) です. 表も図も本文中の数値も, すべて `main.qmd` がパイプラインの結果から作っています.
 
-[![](../static/img/targets/quarto-manuscript.svg)](../static/img/targets/quarto-manuscript.svg "図 11.11: ")
+[![](../static/img/targets/quarto-manuscript.svg)](../static/img/targets/quarto-manuscript.svg "図 11.16: ")
 
-図 11.11
+図 11.16
 
 パイプラインを図解すると [図 fig-quarto-pipeline](#fig-quarto-pipeline) のようになります. 四角いノードがオブジェクト, 角の丸いノードがファイルのターゲット, 黒い旗形のノードが関数です. `tar_analysis` の4つのオブジェクトが, そのまま原稿 (`manuscript`) につながっています. この4本の矢印は, `tar_quarto()` が `main.qmd` の `tar_load()` から引いたものです.
 
-[![](../static/img/targets/quarto-pipeline.svg)](../static/img/targets/quarto-pipeline.svg "図 11.12: Quarto パイプラインの依存関係")
+[![](../static/img/targets/quarto-pipeline.svg)](../static/img/targets/quarto-pipeline.svg "図 11.17: Quarto パイプラインの依存関係")
 
-図 11.12: Quarto パイプラインの依存関係
+図 11.17: Quarto パイプラインの依存関係
 
-図表を原稿の中で作ると, 見た目を変えるときに触るのは `main.qmd` だけになり, 推定はやり直されません. 同じ推定結果から, 論文とスライドで大きさやフォントの違う図を作ることもできます. このパイプラインを, 試行錯誤のノートや発表スライドまで含めた研究全体に広げたのが, 次の節で紹介するワークフローです.
+図表を原稿の中で作ると, 見た目を変えるときに触るのは `main.qmd` だけになり, 推定はやり直されません. 同じ推定結果から, 論文とスライドで大きさやフォントの違う図を作ることもできます.
+
+配布した `targets-quarto/` で, 次の3つの変更を順に試してみましょう. それぞれ, `tar_make()` で計算し直されるターゲットの数を予想してから実行します.
+
+1.  `manuscript/main.qmd` の `theme_set()` で, テーマを `theme_minimal()` にする
+2.  `R/tar_analysis.R` の `estimate_event()` の式から `x1` を外す
+3.  `R/tar_data.R` の `clean_did()` の末尾に, `filter(abs(x1) < 8)` を足す
+
+> **TIP:**
+>
+> 1.  計算し直されるのは原稿 (`manuscript`) だけです (1 completed, 7 skipped). 図の見た目は原稿の中で決まるので, 推定はやり直されません.
+> 2.  イベントスタディ (`model_event`) と原稿が計算し直されます (2 completed, 6 skipped). 差の差の推定や集計表は, `estimate_event()` を使っていないので飛ばされます.
+> 3.  クリーニング後のデータ (`did`) から下流が, すべて計算し直されます (6 completed, 2 skipped). 標本が変わるので, 本文にインラインコードで書いた推定値も変わります.
+
+このパイプラインを, 試行錯誤のノートや発表スライドまで含めた研究全体に広げたのが, 次の節で紹介するワークフローです.
 
 ## 11.4 研究のワークフロー
 
@@ -735,6 +798,12 @@ Quarto 文書は3種類あり, パイプラインとの付き合い方は2通り
 
 論文は常に最新の結果を反映すべきなのでパイプラインに組み込みます. 一方, ノートとスライドは「その時点で何を試したか」「その日に何を発表したか」の記録なので, パイプラインの外に置き, 必要なテーマ, データ, 結果を自分のフォルダの中に持ちます. 詳しい理由はステップ4で説明します.
 
+[図 fig-targets-workflow-folders](#fig-targets-workflow-folders) は, この切り分けを図にしたものです. 左の `notes/` と `slides/` は試行錯誤と共有の記録で, 右の `R/` と `manuscript/` が本番のパイプラインです. 2つをつなぐのは, 固まった分析を `notes/` から `R/` に移す一方向の矢印だけです (ステップ6).
+
+[![](../static/cetz/targets-workflow-folders.svg)](../static/cetz/targets-workflow-folders.svg "図 11.18: 試行錯誤と本番のパイプラインの切り分け")
+
+図 11.18: 試行錯誤と本番のパイプラインの切り分け
+
 ### 手順
 
 研究の進み具合に合わせて, 次の順にステップを進めます.
@@ -749,9 +818,9 @@ Quarto 文書は3種類あり, パイプラインとの付き合い方は2通り
 
 論文を書き終えた頃には, [図 fig-pipeline-overview](#fig-pipeline-overview) のようなパイプラインができあがっているはずです. ノートとスライドはパイプラインの外にあるので, この図には現れません.
 
-[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "図 11.13: 論文を書き終えた頃にできあがっているパイプライン")
+[![](../static/cetz/pipeline-overview.svg)](../static/cetz/pipeline-overview.svg "図 11.19: 論文を書き終えた頃にできあがっているパイプライン")
 
-図 11.13: 論文を書き終えた頃にできあがっているパイプライン
+図 11.19: 論文を書き終えた頃にできあがっているパイプライン
 
 以下では, このステップを順に解説します.
 
@@ -848,23 +917,25 @@ color_accent <- "#107895"
 
 ### 4. ノートで試行錯誤する
 
-データ分析やモデルの試行錯誤は, `notes/` の中で行います. 1つのフォルダが1ラウンドの試行錯誤にあたり, `notes/01-descriptive/`, `notes/02-event-study/` のように番号を付けて並べます. 各フォルダは次のような中身を持ちます.
+データ分析やモデルの試行錯誤は, `notes/` の中で行います. 1つのフォルダが1ラウンドの試行錯誤にあたり, `notes/01-descriptive/`, `notes/02-did/` のように番号を付けて並べます. 各フォルダは次のような中身を持ちます.
 
 ``` default
 notes/01-descriptive/
-├── index.qmd        # the note itself
-├── code/setup.R     # frozen theme, data, and results for this note
-├── output/          # cached results (gitignored)
+├── index.qmd        # the note itself; reads only the CSVs in output/
+├── code/            # setup.R and numbered scripts (01_*.R, ...)
+├── output/          # CSVs the scripts write (gitignored)
 └── data -> ../data  # symlink to notes/data/
 ```
 
-`data` は `notes/data/` へのシンボリックリンクで, ノートの段階でだけ使うデータセットをノート間で共有するための置き場所です.
+各ノートは, それだけで完結した小さなプロジェクトです. コードは他のノートと共有せず, データのクリーニングのコードすら, ノートごとに持ちます. 計算は `code/` の番号付きのスクリプトが行い, 結果を `output/` に CSV で書き出します. `index.qmd` はその CSV を読んで図表を作るだけで, 自分では計算しません. `output/` は `code/` からいつでも作り直せるので, Git の管理からは外しています.
 
-ノートはパイプラインを一切読みません. `tar_read()` や `tar_load()` を使わず, そのノートに必要なテーマ, データ, 結果を, すべて自分のフォルダの中に持ちます. 冒頭では, それらをまとめた `code/setup.R` を読み込みます.
+一方で, データはノート間で共有します. コードと違ってデータは大きく, ノートごとに複製するとコストが高いからです. `data` は `notes/data/` へのシンボリックリンクで, ノートの段階でだけ使うデータセットの置き場所になっています.
+
+ノートはパイプラインを一切読みません. `tar_read()` や `tar_load()` を使わず, そのノートに必要なテーマ, データ, 結果を, すべて自分のフォルダの中に持ちます. 冒頭では, それらをまとめた `code/setup.R` を読み込みます. どこからレンダリングしても同じファイルを指すように, パスは `here::here()` で書きます.
 
 ``` r
 # Self-contained: source this note's frozen setup, never tar_read() the pipeline
-source("code/setup.R")
+source(here::here("notes", "01-descriptive", "code", "setup.R"))
 theme_set(theme_note())
 ```
 
@@ -876,7 +947,7 @@ theme_set(theme_note())
 
 研究を進める中で, 途中結果を発表する機会はよくあります. 試行錯誤した中で, 重要な結果をスライドにまとめます. スライドは `slides/YYMMDD_venue/` のように, 日付と発表の場で名前を付けたフォルダに作り, 中身はノートと同じく `index.qmd`, `code/`, `output/`, `data` の構成にします. スライドの作り方そのものは [スライド](../lesson/slides.llms.md) の章を参照してください.
 
-パイプラインとの付き合い方もノートと同じです. スライドもパイプラインを読まず, その発表に必要なものを自分のフォルダの中に持ちます. 違うのはテーマだけで, スライドには投影用に文字を大きくしたテーマを使います.
+パイプラインとの付き合い方もノートと同じです. スライドもパイプラインを読まず, その発表に必要なものを自分のフォルダの中に持ちます. 使う結果は, ノートの `output/` からスライドの `output/` にコピーして, 発表した時点の内容に固定します. ノートと同じように, スライド専用の `code/` と `data/` を持たせて計算し直すのもよい方法です. 私は, SMM のように推定に長い時間がかかる結果を使うときは, コピーで済ませています. ノートとの違いはテーマだけで, スライドには投影用に文字を大きくしたテーマを使います.
 
 ``` r
 # Self-contained: source this deck's frozen setup, never tar_load() the pipeline
@@ -975,7 +1046,14 @@ Sys.setenv(
 {{< include 03-conclusion.qmd >}}
 ```
 
-各ファイルの冒頭では, パイプラインの結果を `tar_load()` で読み込みます.
+各ファイルの冒頭では, `manuscript/_setup.R` を読み込みます.
+
+``` r
+here::i_am("manuscript/_quarto.yml")
+source(here::here("manuscript", "_setup.R"))
+```
+
+パイプラインの結果を読み込むのは, この `_setup.R` だけです.
 
 ``` r
 here::i_am("manuscript/_quarto.yml")
@@ -989,7 +1067,9 @@ invisible(list2env(targets::tar_read(fn_figure), .GlobalEnv))
 theme_set(theme_proj())
 ```
 
-[sec-targets-quarto](#sec-targets-quarto) では `tar_load()` の `store` 引数でストアの場所を指定しましたが, ここでは `tar_config_set()` で指定しています. `here::i_am()` は, このファイルがプロジェクトのどこにあるかを `here` に教え, プロジェクトのルートを確定させます. 続く `tar_config_set()` でストアの場所を指定しておくと, 以降は `store` を毎回書かずに `tar_load()` や `tar_read()` が使えます. あとは [sec-targets-quarto](#sec-targets-quarto) と同じく, 読み込んだデータから ggplot で図を描き, `tinytable` で表を作ります. 本文中の数値も, 手で書き写すのではなく, 読み込んだ結果からインラインコードで埋め込みます.
+[sec-targets-quarto](#sec-targets-quarto) では `tar_load()` の `store` 引数でストアの場所を指定しましたが, ここでは `tar_config_set()` で指定しています. `here::i_am()` は, このファイルがプロジェクトのどこにあるかを `here` に教え, プロジェクトのルートを確定させます. 続く `tar_config_set()` でストアの場所を指定しておくと, 以降は `store` を毎回書かずに `tar_load()` や `tar_read()` が使えます. テンプレートの `_setup.R` には, ほかにパッケージの読み込みや, 本文の数値の桁を揃える関数もまとめてあります. あとは [sec-targets-quarto](#sec-targets-quarto) と同じく, 読み込んだデータから ggplot で図を描き, `tinytable` で表を作ります. 本文中の数値も, 手で書き写すのではなく, 読み込んだ結果からインラインコードで埋め込みます.
+
+`tar_load()` を書くのは `_setup.R` の1か所に限り, 節ごとのファイルには書きません. その理由は, 次に述べる依存関係の登録にあります.
 
 #### 論文もパイプラインに組み込む
 
@@ -998,31 +1078,37 @@ theme_set(theme_proj())
 ``` r
 tar_manuscript <- tar_plan(
   tar_file(
-    manuscript_src_file,
+    manuscript_src,
     list.files(
       here_rel("manuscript"),
-      pattern = "\\.(qmd|yml|tex|typ|bib|lua)$",
+      pattern = "\\.(qmd|yml|tex|typ|bib|lua|R)$",
       recursive = TRUE,
       full.names = TRUE
     )
   ),
-  tar_file(
-    manuscript_pdf,
-    {
-      # Bare references register upstream targets as dependencies so the PDF
-      # rebuilds when sources or data change.
-      manuscript_src_file
-      list(fn_figure, survey, analysis_wage_gap)
-      quarto::quarto_render(here_rel("manuscript", "manuscript.qmd"))
-      here_rel("manuscript", "manuscript.pdf")
-    }
+  tar_target_raw(
+    "manuscript_pdf",
+    command = bquote(
+      {
+        manuscript_src
+        list(..(lapply(manuscript_targets(), as.name)))
+        quarto::quarto_render(here_rel("manuscript", "manuscript.qmd"))
+        here_rel("manuscript", "manuscript.pdf")
+      },
+      splice = TRUE
+    ),
+    format = "file"
   )
 )
 ```
 
-`manuscript_src_file` は, `manuscript/` にある原稿ファイルをすべてファイルとして登録します. 原稿を書き換えると, これが変わったと判定されます.
+`manuscript_src` は, `manuscript/` にある原稿ファイルをすべてファイルとして登録します. `_setup.R` も含めるために, パターンに `R` が入っています. 原稿を書き換えると, これが変わったと判定されます.
 
-`manuscript_pdf` の中にある `list(fn_figure, survey, analysis_wage_gap)` は, 計算としては何もしていない行です. `{targets}` は, ターゲットを作るコードの中にどのターゲット名が現れるかを見て依存関係を判定します. `quarto_render()` の中で原稿がどのターゲットを読んでいるかまでは分からないので, 論文が使うターゲットの名前をここに並べて, 依存関係として登録しているのです. 論文で新しいターゲットを `tar_load()` したら, この行にも書き足します. [sec-targets-quarto](#sec-targets-quarto) の `tar_quarto()` が自動でやっていることを, 手で書いた形です.
+`manuscript_pdf` の中にある `list(...)` の行は, 計算としては何もしていません. `{targets}` は, ターゲットを作るコードの中にどのターゲット名が現れるかを見て依存関係を判定します. `quarto_render()` の中で原稿がどのターゲットを読んでいるかまでは分からないので, 論文が使うターゲットの名前をここに並べて, 依存関係として登録しているのです.
+
+ただし, その名前は手では書いていません. 同じファイルに定義した `manuscript_targets()` が `_setup.R` を読み, その中の `tar_load()` と `tar_read()` に現れるターゲット名を返します. それを `bquote()` でコードに差し込んでいます. `_setup.R` に新しいターゲットの `tar_load()` を書けば, それだけで依存関係にも加わります. [sec-targets-quarto](#sec-targets-quarto) の `tar_quarto()` が1つの `.qmd` に対してやっていることを, 節ごとに分かれた原稿に対して行っている形です.
+
+名前の一覧を手で書く形にすると, いずれ書き足し忘れが起きます. 論文が読んでいるターゲットを一覧に加え忘れると, そのターゲットが変わっても `tar_make()` は PDF を最新だと判断し, PDF には古い数値が残ります. `{targets}` から見れば何も古くなっていないので, `tar_outdated()` も警告しません. `tar_load()` を `_setup.R` の1か所に限っているのも, 節ごとのファイルに書いた `tar_load()` は, この読み取りから漏れるからです.
 
 #### なぜ Quarto Book として執筆するのか
 

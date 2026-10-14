@@ -62,16 +62,6 @@
   body
 }))
 
-// Marks a conceptual drawing so that it cannot be read as a data plot.
-#let illus-tag(x, y, anchor: "south-east") = {
-  d.content((x, y), anchor: anchor, text(
-    size: 12pt,
-    fill: c-muted,
-    style: "italic",
-    "Illustration, not data",
-  ))
-}
-
 // ---- Small shapes ----------------------------------------------------------
 #let check-mark(x, y, s: 1, col: white, w: 1.9pt) = {
   import cetz.draw: *
@@ -171,16 +161,16 @@
   arc((x + 0.42 * s, y - 0.36 * s), start: 0deg, stop: 180deg, radius: (0.42 * s, 0.52 * s), fill: col, stroke: none, mode: "CLOSE")
 }
 
-// A robot head, for the AI.
-#let ai-icon(pos, s: 1, col: c-accent) = {
+// A robot head, for the AI. `face` colours the eyes and the mouth.
+#let ai-icon(pos, s: 1, col: c-accent, face: white) = {
   import cetz.draw: *
   let (x, y) = pos
   line((x, y + 0.42 * s), (x, y + 0.62 * s), stroke: 1.6pt + col)
   circle((x, y + 0.66 * s), radius: 0.07 * s, fill: col, stroke: none)
   rect((x - 0.45 * s, y - 0.36 * s), (x + 0.45 * s, y + 0.42 * s), radius: 0.14 * s, fill: col, stroke: none)
-  circle((x - 0.17 * s, y + 0.1 * s), radius: 0.085 * s, fill: white, stroke: none)
-  circle((x + 0.17 * s, y + 0.1 * s), radius: 0.085 * s, fill: white, stroke: none)
-  line((x - 0.16 * s, y - 0.16 * s), (x + 0.16 * s, y - 0.16 * s), stroke: (paint: white, thickness: 1.5pt, cap: "round"))
+  circle((x - 0.17 * s, y + 0.1 * s), radius: 0.085 * s, fill: face, stroke: none)
+  circle((x + 0.17 * s, y + 0.1 * s), radius: 0.085 * s, fill: face, stroke: none)
+  line((x - 0.16 * s, y - 0.16 * s), (x + 0.16 * s, y - 0.16 * s), stroke: (paint: face, thickness: 1.5pt, cap: "round"))
 }
 
 // A speech bubble whose tail points down-left or down-right.

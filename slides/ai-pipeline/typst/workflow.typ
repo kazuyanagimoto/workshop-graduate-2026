@@ -5,122 +5,135 @@
 // ===========================================================================
 #import "lib.typ": *
 
-// ---- 1. Two rounds of trial and error, feedback in between --------------------
-#let anim-rounds(s) = {
-  let cols = (
-    (x: 3.3, w: 6.2, head: "Round 1", where: "notes/", fill: c-accent),
-    (x: 9.95, w: 6.2, head: "Feedback", where: "slides/", fill: c-pink),
-    (x: 16.6, w: 6.2, head: "Round 2", where: "notes/", fill: c-accent),
-    (x: 23.0, w: 5.6, head: "Writing", where: "", fill: c-jet),
+// ---- 1. Research proceeds through repeated feedback -------------------------
+#let fig-research-loop() = stage(26, 8.5, {
+  import cetz.draw: *
+  let steps = (
+    (name: "試行錯誤", col: c-accent),
+    (name: "プレゼン", col: c-pink),
+    (name: "試行錯誤", col: c-accent),
+    (name: "プレゼン", col: c-pink),
+    (name: "投稿", col: c-jet),
+    (name: "R&R", col: c-accent2),
+    (name: "試行錯誤", col: c-accent),
+    (name: "再投稿", col: c-jet),
   )
-  let cards = (
-    (
-      ("01-descriptive", "Who held which jobs?", "Figure I, Table I"),
-      ("02-did", "Did the gap widen after 1913?", "Table II, Figure II"),
-    ),
-    (("YYMMDD_seminar", "Report the results, take questions", none),),
-    (
-      ("03-placebo", "Would any transition do this?", "Figure III"),
-      ("04-mechanism", "Through which channel?", "Table III"),
-      ("05-honestdid", "Robust to trend violations?", "an extension"),
-    ),
-    (
-      ("manuscript/", "Write up what survived", none),
-      ("R/tar_analysis.R", "Promote it to the pipeline", none),
-    ),
-  )
-  stage(26, 10.6, {
-    import cetz.draw: *
-    for (k, col) in cols.enumerate() {
-      if s >= k + 1 {
-        chip((col.x - col.w / 2, 10.1), col.head, fill: col.fill, anchor: "west", size: 12pt)
-        content((col.x + col.w / 2, 10.1), anchor: "east", mono(col.where, size: 9.5pt, fill: c-muted))
-        for (i, (name, question, exhibit)) in cards.at(k).enumerate() {
-          let y = 8.05 - i * 2.8
-          let pipe = name == "R/tar_analysis.R"
-          rect((col.x - col.w / 2, y - 1.25), (col.x + col.w / 2, y + 1.25), radius: 6pt, fill: if pipe { c-tint } else { c-panel }, stroke: if pipe and s == 5 { 1.5pt + c-accent } else { none })
-          content((col.x - col.w / 2 + 0.3, y + 0.85), anchor: "west", mono(name, size: 10.5pt, fill: if pipe { c-accent.darken(15%) } else { c-jet }))
-          content((col.x - col.w / 2 + 0.3, y + 0.25), anchor: "north-west", box(width: (col.w - 0.6) * 1cm, {
-            set par(leading: 0.4em)
-            lab(question, size: 10pt)
-            if exhibit != none {
-              linebreak()
-              lab(exhibit, size: 9pt, fill: c-muted)
-            }
-          }))
-        }
-        if k > 0 {
-          let prev = cols.at(k - 1)
-          arrow((prev.x + prev.w / 2 + 0.05, 8.05), (col.x - col.w / 2 - 0.05, 8.05), col: c-jet, w: 1.8pt, head: 1.2)
-        }
-      }
-    }
-    if s == 5 {
-      line((0.2, 0.95), (0.2, 0.7), (19.7, 0.7), (19.7, 0.95), stroke: 1.3pt + c-muted)
-      content((9.95, 0.3), lab("outside the pipeline", size: 10.5pt, fill: c-muted))
-      line((20.2, 0.95), (20.2, 0.7), (25.8, 0.7), (25.8, 0.95), stroke: 1.3pt + c-accent)
-      content((23.0, 0.3), lab("the pipeline starts here", size: 10.5pt, fill: c-accent))
-    }
-  })
-  stepcap(s, (
-    [1周目: 記述統計と DID 推定で, 論文の中心となる結果にたどり着く],
-    [途中結果をセミナーで報告し, 質問を受ける],
-    [2周目: 受けた質問に, ノートを1つずつ作って答える],
-    [結果が固まってから, 論文を書く],
-    [論文に載せる分析だけをパイプラインに移し, 試行錯誤はノートに残す],
-  ))
-}
-
-// ---- 2. Notes and slides are frozen, the manuscript is live -------------------
-#let anim-frozen-live(s) = {
-  let xs = (8.6, 13.9, 19.2, 24.3)
-  let times = ("Round 1", "Seminar", "Writing", "Revision")
-  let vcol = (c-accent.lighten(45%), c-pink.lighten(45%), c-run.lighten(35%), c-accent2.lighten(45%))
-  let vdoc(x, y, v, frozen: false) = {
-    import cetz.draw: *
-    doc-icon((x, y), w: 1.25, h: 1.5, fill: vcol.at(v), stroke: (paint: c-jet, thickness: 1.1pt, dash: if frozen { "dashed" } else { none }))
-    content((x, y - 0.12), mono("v" + str(v + 1), size: 10.5pt))
+  let xs = (1.55, 4.82, 8.09, 11.36, 14.63, 17.90, 21.17, 24.44)
+  for i in range(7) {
+    arrow((xs.at(i) + 1.38, 5.05), (xs.at(i + 1) - 1.38, 5.05), col: c-muted, w: 1.8pt, head: 1.1)
   }
-  stage(26, 10.4, {
-    import cetz.draw: *
-    let rows = (
-      (y: 8.3, name: "the pipeline", note: "keeps changing"),
-      (y: 5.9, name: "notes/02-did/", note: "frozen snapshot"),
-      (y: 3.7, name: "slides/seminar/", note: "frozen snapshot"),
-      (y: 1.5, name: "manuscript/", note: "live: tar_load()"),
-    )
-    for r in rows {
-      content((0.2, r.y + 0.28), anchor: "west", mono(r.name, size: 10.5pt))
-      content((0.2, r.y - 0.38), anchor: "west", lab(r.note, size: 9.5pt, fill: c-muted))
-    }
-    for (t, x) in xs.enumerate() {
-      if s >= t + 1 {
-        content((x, 9.95), lab(times.at(t), size: 10.5pt, fill: c-muted))
-        // The pipeline at time t.
-        rect((x - 0.85, 7.75), (x + 0.85, 8.85), radius: 6pt, fill: vcol.at(t), stroke: 1.1pt + c-jet)
-        content((x, 8.3), mono("v" + str(t + 1), size: 11pt))
-        if t > 0 { arrow((xs.at(t - 1) + 1.0, 8.3), (x - 1.0, 8.3), col: c-jet, w: 1.7pt, head: 1.2) }
-        // The note was made in round 1 and never changes.
-        vdoc(x, 5.9, 0, frozen: t > 0)
-        // The deck was made for the seminar and never changes.
-        if t >= 1 { vdoc(x, 3.7, 1, frozen: t > 1) }
-        // The manuscript always reads the current pipeline.
-        if t >= 2 {
-          vdoc(x, 1.5, t)
-          arrow-path((x + 1.25, 7.75), (x + 1.25, 1.5), (x + 0.8, 1.5), col: c-accent, w: 1.6pt, head: 1.2)
-        }
-      }
-    }
-  })
-  stepcap(s, (
-    [1周目: ノートは, そのとき使ったデータと結果を自分のフォルダに持つ],
-    [ノートとスライドは, パイプラインが変わっても作成時の記録を保つ],
-    [パイプラインを読むのは論文だけ],
-    [論文は常に最新で, ノートとスライドは後日も同じ結果になる],
-  ))
-}
+  for (i, step) in steps.enumerate() {
+    bnode((xs.at(i), 5.05), 2.6, 1.5, step.name, fill: white,
+      stroke: 1.5pt + step.col, tc: step.col, size: 11.5pt)
+  }
+  for (i, label) in ((1, "質問"), (3, "コメント"), (5, "査読意見")) {
+    let x = xs.at(i)
+    line((x, 4.25), (x, 2.65), stroke: 1.3pt + c-faint)
+    circle((x, 2.5), radius: 0.11, fill: steps.at(i).col, stroke: none)
+    content((x, 1.85), lab(label, size: 10pt, fill: c-muted))
+  }
+})
 
-// ---- 3. Each note: read the intent, then write the prompt ---------------------
+// ---- 2. Separate exploratory records from the live pipeline -----------------
+#let fig-workflow-folders() = stage(26, 9.0, {
+  import cetz.draw: *
+  let folder(x0, y0, name, purpose, col) = {
+    rect((x0, y0), (x0 + 9.0, y0 + 2.0), radius: 5pt, fill: white, stroke: 1.1pt + c-faint)
+    rect((x0, y0), (x0 + 0.14, y0 + 2.0), fill: col, stroke: none)
+    content((x0 + 0.45, y0 + 1.37), anchor: "west", mono(name, size: 13pt, fill: col))
+    content((x0 + 0.45, y0 + 0.55), anchor: "west", lab(purpose, size: 10.5pt, fill: c-muted))
+  }
+  content((5.85, 8.25), lab("試行錯誤・共有", size: 13pt, fill: c-accent, weight: "medium"))
+  content((20.15, 8.25), lab("本番のパイプライン", size: 13pt, fill: c-jet, weight: "medium"))
+  line((1.35, 7.8), (10.35, 7.8), stroke: 1.7pt + c-accent)
+  line((15.65, 7.8), (24.65, 7.8), stroke: 1.7pt + c-jet)
+
+  folder(1.35, 5.3, "notes/", "試した過程と結果を残す", c-accent)
+  folder(1.35, 1.9, "slides/", "発表時点の結果を残す", c-pink)
+  folder(15.65, 5.3, "R/", "確かめた分析を関数化する", c-jet)
+  folder(15.65, 1.9, "manuscript/", "最新の結果で論文を更新する", c-jet)
+
+  arrow((5.85, 5.1), (5.85, 4.1), col: c-pink, w: 1.8pt, head: 1.2)
+  arrow((10.55, 6.3), (15.45, 6.3), col: c-accent, w: 2.1pt, head: 1.3)
+  content((13.0, 7.05), lab("固まった分析だけ移す", size: 9.5pt, fill: c-accent, weight: "medium"))
+  arrow((20.15, 5.1), (20.15, 4.1), col: c-jet, w: 1.8pt, head: 1.2)
+})
+
+// ---- 3. An exploratory note owns its code and links to shared note data -----
+#let fig-notes-folders() = stage(26, 9.5, {
+  import cetz.draw: *
+  content((0.8, 8.8), anchor: "west", mono("notes/", size: 16pt, fill: c-accent))
+  let entries = (
+    "data/",
+    "01-descriptive/",
+    "02-did/",
+    "03-placebo/",
+    "04-mechanism/",
+    "05-honestdid/",
+  )
+  line((1.1, 8.1), (1.1, 2.35), stroke: 1.1pt + c-faint)
+  for (i, name) in entries.enumerate() {
+    let y = 7.6 - i * 1.05
+    if i == 2 {
+      rect((1.5, y - 0.47), (11.3, y + 0.47), radius: 4pt, fill: c-tint, stroke: 1.2pt + c-accent)
+    }
+    line((1.1, y), (1.5, y), stroke: 1.1pt + c-faint)
+    content((1.85, y), anchor: "west", mono(name, size: 12pt, fill: if i == 2 { c-accent } else { c-jet }))
+    if i == 0 { content((10.9, y), anchor: "east", lab("共有データ", size: 9pt, fill: c-muted)) }
+  }
+
+  arrow((11.55, 5.5), (14.35, 5.5), col: c-accent, w: 2pt, head: 1.3)
+  rect((14.6, 1.4), (25.5, 8.5), radius: 5pt, fill: white, stroke: 1.1pt + c-faint)
+  content((15.1, 7.9), anchor: "west", mono("notes/02-did/", size: 13pt, fill: c-accent))
+  line((15.1, 7.4), (25.0, 7.4), stroke: 1.2pt + c-faint)
+  let contents = (
+    (name: "index.qmd", note: "ノート本体"),
+    (name: "code/", note: "このノート専用"),
+    (name: "output/", note: "実行結果"),
+    (name: "data → ../data", note: "シンボリックリンク"),
+  )
+  for (i, item) in contents.enumerate() {
+    let y = 6.65 - i * 1.35
+    content((15.1, y), anchor: "west", mono(item.name, size: 11pt, fill: if i == 3 { c-accent } else { c-jet }))
+    content((25.0, y), anchor: "east", lab(item.note, size: 9pt, fill: c-muted))
+    if i < 3 { line((15.1, y - 0.65), (25.0, y - 0.65), stroke: 0.7pt + c-faint) }
+  }
+})
+
+// ---- 4. One dated directory preserves each presentation ----------------------
+#let fig-slides-folders() = stage(26, 8.7, {
+  import cetz.draw: *
+  content((0.8, 8.0), anchor: "west", mono("slides/", size: 16pt, fill: c-pink))
+  let entries = ("YYMMDD_seminar/", "YYMMDD_workshop/", "...")
+  line((1.1, 7.4), (1.1, 3.8), stroke: 1.1pt + c-faint)
+  for (i, name) in entries.enumerate() {
+    let y = 6.6 - i * 1.4
+    if i == 0 {
+      rect((1.5, y - 0.48), (11.3, y + 0.48), radius: 4pt, fill: c-pink.lighten(92%), stroke: 1.2pt + c-pink)
+    }
+    line((1.1, y), (1.5, y), stroke: 1.1pt + c-faint)
+    content((1.85, y), anchor: "west", mono(name, size: 12pt, fill: if i == 0 { c-pink } else { c-jet }))
+  }
+
+  arrow((11.55, 6.6), (14.35, 6.6), col: c-pink, w: 2pt, head: 1.3)
+  rect((14.6, 1.2), (25.5, 8.2), radius: 5pt, fill: white, stroke: 1.1pt + c-faint)
+  content((15.1, 7.65), anchor: "west", mono("slides/YYMMDD_seminar/", size: 12pt, fill: c-pink))
+  line((15.1, 7.15), (25.0, 7.15), stroke: 1.2pt + c-faint)
+  let contents = (
+    (name: "index.qmd", note: "発表スライド"),
+    (name: "code/", note: "この発表用のコード"),
+    (name: "output/", note: "ノートからコピーした結果"),
+    (name: "data/", note: "発表で使う入力"),
+  )
+  for (i, item) in contents.enumerate() {
+    let y = 6.35 - i * 1.3
+    content((15.1, y), anchor: "west", mono(item.name, size: 11pt, fill: if i == 2 { c-pink } else { c-jet }))
+    content((25.0, y), anchor: "east", lab(item.note, size: 9pt, fill: c-muted))
+    if i < 3 { line((15.1, y - 0.63), (25.0, y - 0.63), stroke: 0.7pt + c-faint) }
+  }
+})
+
+// ---- 5. Each note: read the intent, then write the prompt ---------------------
 #let anim-intent-prompt(s) = {
   stage(26, 9.6, {
     import cetz.draw: *
@@ -160,36 +173,28 @@
   ))
 }
 
-// ---- 4. Three questions at the seminar become three notes ---------------------
-#let anim-feedback(s) = {
+// ---- 6. Three questions at the seminar become three notes ---------------------
+#let fig-feedback() = {
   let items = (
-    (q: "Any new president reshuffles staff. Would any transition do this?", note: "03-placebo", sub: "Figure III of the paper"),
-    (q: "Same job at lower pay, or a move to lower-paid jobs?", note: "04-mechanism", sub: "Table III of the paper"),
-    (q: "Flat pre-trends do not guarantee parallel trends afterwards.", note: "05-honestdid", sub: "not in the paper"),
+    (q: "ほかの政権交代でも, 賃金差は開くのでは？", note: "03-placebo", sub: "Figure III of the paper"),
+    (q: "同じ職で賃金が下がった？ 低賃金の職に移った？", note: "04-mechanism", sub: "Table III of the paper"),
+    (q: "事前が平坦でも, 事後の平行トレンドは保証できる？", note: "05-honestdid", sub: "not in the paper"),
   )
-  stage(26, 10.4, {
+  stage(26, 9.1, {
     import cetz.draw: *
     for (i, it) in items.enumerate() {
-      let y = 8.7 - i * 3.3
+      let y = 8.0 - i * 3.0
       bubble((7.4, y), 14.4, 2.1, it.q, tail: "left", size: 11.5pt)
-      if s >= i + 2 {
-        arrow((14.9, y), (17.0, y), col: c-accent, w: 2pt, head: 1.3)
-        let ext = i == 2
-        rect((17.2, y - 1.05), (25.8, y + 1.05), radius: 6pt, fill: if ext { c-accent } else { c-tint }, stroke: none)
-        content((17.6, y + 0.38), anchor: "west", mono("notes/" + it.note + "/", size: 10.5pt, fill: if ext { white } else { c-jet }))
-        content((17.6, y - 0.42), anchor: "west", lab(it.sub, size: 10pt, fill: if ext { white } else { c-muted }))
-      }
+      arrow((14.9, y), (17.0, y), col: c-accent, w: 2pt, head: 1.3)
+      let ext = i == 2
+      rect((17.2, y - 1.05), (25.8, y + 1.05), radius: 6pt, fill: if ext { c-accent } else { c-tint }, stroke: none)
+      content((17.6, y + 0.38), anchor: "west", mono("notes/" + it.note + "/", size: 10.5pt, fill: if ext { white } else { c-jet }))
+      content((17.6, y - 0.42), anchor: "west", lab(it.sub, size: 10pt, fill: if ext { white } else { c-muted }))
     }
   })
-  stepcap(s, (
-    [セミナーで, 3つの質問を受けた],
-    [1つ目: 人種分離のない政権交代に同じ分析を当てはめる],
-    [2つ目にはメカニズムの分析. 職名の固定効果で, 同じ職の中の変化だけを残す],
-    [3つ目は論文にない拡張. 何を確かめるかは, 質問から自分で定める],
-  ))
 }
 
-// ---- 5. Mechanism: same job at lower pay, or a lower-paid job -----------------
+// ---- 7. Mechanism: same job at lower pay, or a lower-paid job -----------------
 // A cartoon of the two channels; bar lengths stand for pay and carry no data.
 #let anim-mechanism(s, ax) = {
   stage(26, 10.4, {
@@ -235,7 +240,6 @@
       content((25.4, 2.5), anchor: "east", mono(ax.tab3_col2, size: 11.5pt, weight: "bold", fill: c-accent.darken(10%)))
       content((16.8, 1.3), anchor: "west", lab("Aneja and Xu (2022), Tables II and III", size: 8.5pt, fill: c-muted))
     }
-    illus-tag(0.2, 0.1, anchor: "south-west")
   })
   stepcap(s, (
     [
@@ -249,7 +253,7 @@
   ))
 }
 
-// ---- 6. Relative magnitudes: how far parallel trends may fail -----------------
+// ---- 8. Relative magnitudes: how far parallel trends may fail -----------------
 // A drawing of the restriction itself, with made-up deviations before the
 // reference period.
 #let anim-rm(s) = {
@@ -288,7 +292,6 @@
       content((xs.at(5), y0 + 2.3), box(fill: white.transparentize(15%), inset: 3pt, radius: 3pt, lab([$overline(M) = 2$], size: 11.5pt, fill: c-accent.darken(20%))))
     }
     content((25.8, 0.1), anchor: "south-east", lab("relative magnitudes, Rambachan and Roth (2023)", size: 9pt, fill: c-muted))
-    illus-tag(0.2, 0.1, anchor: "south-west")
   })
   stepcap(s, (
     [事前の期間で, 隣り合う時点の間のずれが最も大きいところを測る],
@@ -297,7 +300,7 @@
   ))
 }
 
-// ---- 7. HonestDiD results, revealed by Mbar -----------------------------------
+// ---- 9. HonestDiD results, revealed by Mbar -----------------------------------
 // The frames are drawn by R from data/honestdid.csv (see index.qmd).
 #let anim-honestdid(s, ax) = {
   align(center, image("../output/honestdid-" + str(s) + ".svg", height: 10cm))
@@ -313,7 +316,57 @@
   ))
 }
 
-// ---- 8. Promotion: from a note's script to a function and its targets ---------
+// ---- 10. The production folders and the point where analysis is promoted ----
+#let fig-production-folders() = stage(26, 9.1, {
+  import cetz.draw: *
+
+  rect((0.2, 3.5), (5.2, 5.1), radius: 5pt, fill: c-tint, stroke: 1.1pt + c-accent)
+  content((0.5, 4.55), anchor: "west", mono("notes/02-did/code/", size: 9pt, fill: c-accent))
+  content((0.5, 3.9), anchor: "west", lab("試行錯誤のコード", size: 9pt, fill: c-muted))
+
+  rect((6.0, 0.9), (15.2, 8.6), radius: 5pt, fill: white, stroke: 1.1pt + c-faint)
+  content((6.4, 8.0), anchor: "west", mono("R/", size: 15pt, fill: c-jet))
+  line((6.4, 7.5), (14.8, 7.5), stroke: 1.2pt + c-faint)
+  let pipeline = (
+    (name: "tar_data.R", role: "データの準備"),
+    (name: "tar_figure.R", role: "図の共通設定"),
+    (name: "tar_analysis.R", role: "固まった分析"),
+    (name: "tar_manuscript.R", role: "PDF の更新"),
+  )
+  for (i, item) in pipeline.enumerate() {
+    let y = 6.7 - i * 1.45
+    if i == 2 {
+      rect((6.25, y - 0.52), (14.95, y + 0.52), radius: 4pt, fill: c-tint, stroke: 1.1pt + c-accent)
+    }
+    content((6.5, y), anchor: "west", mono(item.name, size: 10.5pt, fill: if i == 2 { c-accent } else { c-jet }))
+    content((14.7, y), anchor: "east", lab(item.role, size: 9pt, fill: c-muted))
+  }
+
+  arrow((5.3, 3.8), (6.05, 3.8), col: c-accent, w: 2pt, head: 1.2)
+  content((5.65, 5.35), lab("昇格", size: 9pt, fill: c-accent, weight: "medium"))
+
+  rect((17.0, 0.9), (25.8, 8.6), radius: 5pt, fill: white, stroke: 1.1pt + c-faint)
+  content((17.4, 8.0), anchor: "west", mono("manuscript/", size: 15pt, fill: c-jet))
+  line((17.4, 7.5), (25.4, 7.5), stroke: 1.2pt + c-faint)
+  let paper = (
+    (name: "_quarto.yml", role: "執筆設定"),
+    (name: "01-intro.qmd", role: "序論"),
+    (name: "02-analysis.qmd", role: "分析・図表"),
+    (name: "03-conclusion.qmd", role: "結論"),
+    (name: "manuscript.qmd", role: "PDF 用に統合"),
+  )
+  for (i, item) in paper.enumerate() {
+    let y = 6.7 - i * 1.15
+    content((17.4, y), anchor: "west", mono(item.name, size: 10pt))
+    content((25.4, y), anchor: "east", lab(item.role, size: 8.5pt, fill: c-muted))
+  }
+  arrow((15.4, 3.8), (16.85, 4.4), col: c-accent, w: 1.8pt, head: 1.1)
+  content((16.15, 4.85), lab("結果", size: 9pt, fill: c-accent))
+  arrow((15.4, 2.35), (16.85, 2.35), col: c-jet, w: 1.8pt, head: 1.1)
+  content((16.1, 3.0), lab("PDF 化", size: 9pt, fill: c-muted))
+})
+
+// ---- 11. Promotion: from a note's script to a function and its targets ---------
 #let anim-promote(s) = {
   stage(26, 10.4, {
     import cetz.draw: *
@@ -354,7 +407,7 @@
   ))
 }
 
-// ---- 9. Do-files: the same estimation in two places ---------------------------
+// ---- 12. Do-files: the same estimation in two places ---------------------------
 #let anim-dofile(s) = {
   let files = ("table 1.do", "table 2.do", "figure 1.do", "figure 2.do", "figure 3.do")
   let outs = ("Table I", "Table II", "Figure I", "Figure II", "Figure III")
@@ -399,7 +452,7 @@
   ))
 }
 
-// ---- 10. The finished pipeline: one change, every dependent exhibit -----------
+// ---- 13. The finished pipeline: one change, every dependent exhibit -----------
 #let anim-ax-pipeline(s) = {
   let rows = (
     ("analysis_salary_1911", 9.7),
@@ -452,7 +505,7 @@
   ))
 }
 
-// ---- 11. The estimating equation, with its parts named ------------------------
+// ---- 14. The estimating equation, with its parts named ------------------------
 #let fig-did-eq() = align(center, text(size: 1.2em)[
   $ log(w_(i t)) = beta dot.op underbrace("Black"_i times "Wilson"_t, "treatment") + underbrace(theta_i, "person FE") + underbrace(tau_t, "year FE") + epsilon_(i t) $
 ])

@@ -130,6 +130,7 @@ jsonlite::write_json(
 {{< v 0.5em >}}
 
 - AI時代は, 検証のしやすさをツールとワークフローで整備する必要がある
+- Git, Zotero, Quarto については[レクチャーノート](https://kazuyanagimoto.com/workshop-graduate-2026/)を参照
 
 # `{targets}` の基本
 
@@ -273,207 +274,171 @@ jsonlite::write_json(
 
 ::::
 
+# AIと論文を読む
 
+## 人種分離は黒人公務員の賃金をどう変えたか [[@aneja2022]]{.small-cite}
 
+{{< v -0.5em >}}
 
-# AIと文献を読む
+![](img/aneja2022-fig2.svg){width="50%" fig-align="center"}
 
-## 題材: 人種分離は, 黒人公務員の賃金をどう変えたか
-
-:::: {.columns}
-::: {.column width="50%"}
-![](img/aneja2022-fig2.svg){width="100%"}
-
-[@aneja2022, Figure II]{.small-cite}
-:::
-::: {.column width="50%"}
 - 1913 年に発足した Wilson 政権が, 連邦政府の公務員を人種で分離した
-- 1907 年から 1921 年の職員名簿をデジタル化し, 1910 年のセンサスと接続して人種を特定
+- 1907-21 年の職員名簿をデジタル化し, 1910 年の国勢調査と接続して人種を特定
 - 黒人と白人の賃金差が, 政権交代の前後でどう変わったかを推定
-- Replication package が公開されていて (CC0), 主要な分析を手元で再現できる
-:::
-::::
 
-## Git: 頼む前にコミットすれば, 変更はすべて見える
+
+## AI + Zotero MCP
 
 ```{=typst}
-#slide(repeat: 5, self => anim-git(self.subslide))
+#anim-zotero()
 ```
 
-## 頼む作業の単位を, コミットの単位に揃える
+{{< v -1em >}}
 
-```{=typst}
-#slide(repeat: 3, self => anim-ask-size(self.subslide))
-```
+1. **検索**: DOIを出力させ, Zoteroに取り込みやすくする
+1. **精読**: 根拠のページを出力しながら要約させることで, 原文を確かめやすくする
 
-## Zotero: DOI の照合が, ハルシネーションの検査になる
-
-```{=typst}
-#slide(repeat: 6, self => anim-zotero(self.subslide))
-```
-
-## 文献を整理させる指示を書く
+## 演習4: Literature Review {#sec-exr-4}
 
 :::: {.exercise options="num: 4, time: 8"}
 
-研究への貢献を説明するために, AI への指示を2つ書いてください.
+Aneja と Xu となったつもりで, 文献レビューを AI に頼む指示を2つ書け.
 
-1. 文献の流れを整理させる. 対象の範囲と, 各論文で挙げる情報を指定する.
-1. Zotero の `wilson-segregation` の全文を使い, 整理を書き直させる.
+{{< v 0.5em >}}
 
-```{=typst}
-#exercise-note([書けたら], [隣の人と見せ合い, 自分の指示にない点を探す.])
-```
+1. **検索**: この研究が貢献しうる文献の流れを整理させる.
+    - 3つの流れを挙げ, 代表的な論文を5本ずつ DOI 付きで挙げさせる.
+    - 各流れで何が分かっていて, 何が分かっていないかをまとめさせる.
+1. **精読**: 各論文を全文で読ませ, 正確な要約を作らせる.
+    - Zotero にコレクションを一つ作り, 上であげた論文を全て入れる.
+    - Zotero MCPを使い, 各論文が何を問い, どのデータと識別戦略で, 何を示したかを2, 3文でまとめさせる. 根拠のページ番号も出力させる.
+
+[[プロンプト例]{.button}](#sec-ans-4)
 
 ::::
-
-## プロンプト例: 確かめる手順を, 指示の中に作っておく
-
-::: {.prompt}
-Wilson 政権による公務員の人種分離が, 黒人公務員の賃金に与えた影響を調べたい. この研究が貢献しうる経済学の文献の流れを3つ挙げて. それぞれについて代表的な論文を5本ずつ, [著者, 年, 雑誌, DOI 付き]{.alert} で挙げること. 対象は査読付き論文と, NBER などのワーキングペーパーに限る. 各流れで [何が分かっていて, 何が分かっていないか]{.alert} も, 1段落ずつまとめて.
-:::
-
-::: {.prompt}
-Zotero の `wilson-segregation` コレクションにある論文を [全文で読んで]{.alert}, さっきの3つの流れに分類して. 各論文が何を問い, どのデータと識別戦略で, 何を示したかを2, 3文でまとめ, [根拠のページ番号]{.alert} を付けて. 最初の整理と食い違う点があれば, [全文の方を正として]{.alert} 直すこと.
-:::
-
-DOI は次の照合で使います. 「まだ誰も答えていない」かどうかは, 手元のライブラリの範囲でしか言えません.
-
-## 精読: ページ番号と「記載なし」を答えさせる
-
-```{=typst}
-#slide(repeat: 3, self => anim-close-reading(self.subslide))
-```
-
-## Replication package で, AI の読みを検算する
-
-```{=typst}
-#slide(repeat: 4, self => anim-singleton(self.subslide, ax))
-```
 
 # 研究のワークフロー
 
-## 研究は, 2周の試行錯誤とフィードバックで進む
+## 試行錯誤とフィードバック
 
 ```{=typst}
-#slide(repeat: 5, self => anim-rounds(self.subslide))
+#fig-research-loop()
 ```
 
-## ノートとスライドは凍結し, 論文だけがパイプラインを読む
+- 研究は試行錯誤とフィードバックの繰り返しを通じて進む
+- 研究が進むにつれて, 研究の目的や手法が変わることもある
+
+## 試行錯誤と本番環境の切り分け
 
 ```{=typst}
-#slide(repeat: 4, self => anim-frozen-live(self.subslide))
+#fig-workflow-folders()
 ```
 
-## ノートは, 意図を読んでから指示を書いて作る
+{{< v -1em >}}
+
+- ノートと発表資料はその時点の記録として残し, 論文は最新の分析で更新する
+- `notes/` や `slides/` は論文環境に依存させないのがポイント
+- [kazuyanagimoto/template-research](https://github.com/kazuyanagimoto/template-research) としてテンプレートになっている
+
+## `notes/` の構成
 
 ```{=typst}
-#slide(repeat: 4, self => anim-intent-prompt(self.subslide))
+#fig-notes-folders()
 ```
 
-## `01-descriptive`: 分布が重ならないので, マッチングが要る
+{{< v -1em >}}
 
-:::: {.columns}
-::: {.column width="52%"}
-![](img/aneja2022-fig1.svg){width="100%"}
+各ノートは独立したプロジェクトで, コードやデータが独立している:
 
-[@aneja2022, Figure I]{.small-cite}
+- クリーニングのコードすらも他のノートと共有しない
+- データの重複はコストが高いので, シンボリックリンクで共有する
+
+## `01-descriptive`: 黒人と白人の賃金分布とマッチング
+
+{{< v -0.5em >}}
+
+::: {layout-ncol=2}
+
+![](img/aneja2022-fig1.svg)
+
+![](img/aneja2022-tab1.svg)
+
 :::
-::: {.column width="48%"}
-- 黒人の賃金は, 分布全体で低い
-- 多くの黒人と白人の賃金が重ならない
-- そこで, 1911 年の時点で性別, 部局, 契約の形態, 賃金, 年齢が近い黒人と白人を組にする (coarsened exact matching)
-:::
-::::
 
-## `02-did`: 推定式のほかにも, 決めることがある
+- 黒人の賃金は, 分布全体で低い. 多くの黒人と白人の賃金が重ならない
+- 性別, 部局, 契約の形態, 賃金, 年齢が近い黒人と白人をマッチング (CEM) する根拠
 
-```{=typst}
-#v(0.6em)
-#fig-did-eq()
-#v(0.8em)
-```
 
-- 主な推定値は, これに黒人 × 年齢階級の固定効果を加えたもの. 効果を小さめに見積もる, 保守的な定式化
-- イベントスタディは, $\text{Black}_i \times \text{Wilson}_t$ を名簿の年ごとの係数に置き換える
-- サンプル, ウェイト, 標準誤差, 基準年は, 式には現れない. AI に頼むには, これも決める必要がある
-
-## Table II と Figure II を推定する指示を書く
+## 演習 5: 記述統計
 
 :::: {.exercise options="num: 5, time: 10"}
 
-`notes/02-did/` で, 表の5列とイベントスタディを推定する指示を書いてください.
+`notes/01-descriptive/` で, @aneja2022 の Table I と Figure I を再現する指示を書いてください.
 
-```{=typst}
-#spec-table(highlight: true, size: 15.5pt, striped: false)
-#exercise-note([自分で決める], [基準年を選び, その年を指示に含める.])
-```
+{{< v 0.5em >}}
+
+- [kazuyanagimoto/template-research](https://github.com/kazuyanagimoto/template-research) を使いレポジトリを作成, クローンする
+- [Replication package](https://doi.org/10.7910/DVN/SNQLEI)
+- Zotero MCP を使い, Table I, Figure I のサンプルを確認する
+- データはすでにマッチング済みであることを踏まえて作成する
+- Replication package のコードは決して読まないこと
+    - 論文の中に書いてある記述だけで指示を書くこと
+    - これはあくまで, Aneja と Xu の立場でAIに分析させる練習です
 
 ::::
 
-## プロンプト例: 自分で決めたことを, 指示に書く
+## 演習 6: DID推定
 
-::: {.prompt}
-`notes/02-did/` で, Wilson 政権の発足の前後で, 黒人と白人の公務員の賃金差がどう変わったかを推定して. Taft から Wilson への交代の期間 (1907 年から 1921 年) で, CEM のウェイトが正の観測を使う. どの推定も CEM のウェイトを使い, 標準誤差は個人でクラスターする.
+:::: {.exercise options="num: 6, time: 10"}
 
-- 表: 黒人 × 1913 年以降のダミーの係数を, 5つの定式化で推定して1つの表に並べる. [5つの列はすべて同じ観測で推定する]{.alert}
-- 図: (3) の定式化で, 黒人 × 各年のダミーに置き換えたイベントスタディを推定し, 係数と 95% 信頼区間を描く. [基準年は 1911 年とする]{.alert}
+`notes/02-did/` で, Table II と Figure II を再現する指示を書いてください.
+
+::: {layout-ncol=2}
+
+![](img/aneja2022-tab2.svg){width="58%"}
+
+![](img/aneja2022-fig2.svg){width="40%"}
+
 :::
 
-- 基準年は論文に書かれていない. 1911 年は Wilson の就任前の最後の名簿
-- 列 (1) は個人固定効果を含まないので, そのままでは1年しか観測されない人が入り, 観測数が他の列と変わる
+- サンプル, ウェイト, 標準誤差, 基準年を確かめてから指示を書くこと
 
-## 再現した結果を, 論文の図と照らす
-
-:::: {.columns}
-::: {.column width="48%"}
-![](img/aneja2022-fig2.svg){width="92%"}
-
-[@aneja2022, Figure II]{.small-cite}
-:::
-::: {.column width="52%"}
-```{r}
-#| label: plot-event
-#| fig-width: 6.4
-#| fig-height: 4.4
-#| out-width: 92%
-plot_event()
-```
-
-[`notes/02-did/` での再現. 縦線は 95% 信頼区間]{.small-cite}
-:::
 ::::
 
-Table II の列 (3) の係数は, 公表値が `r fmt_num(did3$published_estimate)`, 再現した値が `r fmt_num(did3$estimate)` です.
-
-## セミナーの質問が, 2周目のノートになる
+## `slides/` の構成
 
 ```{=typst}
-#slide(repeat: 4, self => anim-feedback(self.subslide))
+#fig-slides-folders()
 ```
 
-## `03-placebo`: 政権交代一般の効果か, Wilson の政策の効果か
+- ノートの結果を `output/` にコピーし, 発表時の内容を固定する
+- `notes/` と同じように, 完全に独立した `code/` や `data/` を持つのもよい
+    - 私は SMM など長時間推定を含む場合は, `output/` のコピーで済ませる
 
-:::: {.columns}
-::: {.column width="52%"}
-![](img/aneja2022-fig3.svg){width="100%"}
+## 演習 7: 発表資料
 
-[@aneja2022, Figure III]{.small-cite}
-:::
-::: {.column width="48%"}
-- 比べる相手は, 人種分離の政策を伴わない McKinley から Roosevelt への政権交代
-- 同じイベントスタディを当てはめ, 交代からの年数を横軸に揃えて重ねる
-- こちらで賃金差が開かなければ, 1913 年以降の変化は Wilson の政策によるものと言える
-:::
+:::: {.exercise options="num: 7, time: 10"}
+
+`01-descriptive` と `02-did` の結果を使い, 発表資料のスライドを作る指示を書け
+
+{{< v 0.5em >}}
+
+- `slides/261015_seminar/` 以下にスライド用の環境を作る
+- Quartoでやる場合は, [`quarto-touying-typst`](https://github.com/kazuyanagimoto/quarto-touying-typst) がおすすめ
+- Beamer など慣れた方法でもよい
+
 ::::
 
-## `04-mechanism`: 賃金差の多くは, 職の移動で生じた
+## プレゼンのフィードバック {#sec-feedback}
 
 ```{=typst}
-#slide(repeat: 4, self => anim-mechanism(self.subslide, ax))
+#fig-feedback()
 ```
 
-## `05-honestdid`: 平行トレンドの崩れ方に, 上限を置く
+- `03-placebo`, `04-mechanism` は論文で回答している [[03-placebo]{.button}](#sec-placebo) [[04-mechanism]{.button}](#sec-mechanism)
+- `05-honestdid` は @rambachan2023 以降, 重要な指摘
+
+## `05-honestdid`: 平行トレンドの崩れ方に上限を置く
 
 ```{=typst}
 #slide(repeat: 3, self => anim-rm(self.subslide))
@@ -491,110 +456,106 @@ save_frame(plot_honestdid(bd_first$last_robust), "honestdid-3")
 save_frame(plot_honestdid(Inf), "honestdid-4")
 ```
 
-## 答えのない分析は, 満たすべき性質で確かめる
+## Honest DID [[@rambachan2023]]{.small-cite}
 
 ```{=typst}
 #slide(repeat: 4, self => anim-honestdid(self.subslide, ax))
 ```
 
-## 昇格: 固まった結果だけを, パイプラインに移す
+## `R/` と `manuscript/` の構成
 
 ```{=typst}
-#slide(repeat: 4, self => anim-promote(self.subslide))
+#fig-production-folders()
 ```
 
-## do-file では, 同じ推定が2か所にあると食い違う
+- ノートは記録として残し, 固まった分析だけを `R/tar_analysis.R` に移す
+- 原稿は結果を読み込み, `R/tar_manuscript.R` が PDF を更新する
 
-```{=typst}
-#slide(repeat: 3, self => anim-dofile(self.subslide))
-```
+## 演習 8: 論文を書く {#sec-exr-8}
 
-## パイプラインなら, 1か所を変えれば全部が作り直される
+:::: {.exercise options="num: 8, time: 30"}
 
-```{=typst}
-#slide(repeat: 4, self => anim-ax-pipeline(self.subslide))
-```
+`R/` でパイプラインを構成し, `manuscript/` で論文を作る指示を書け
 
-## 論文: 数値はインラインコード, 決めたことは本文に書く
+{{< v 0.5em >}}
 
-:::: {.columns}
-::: {.column width="36%"}
-![](img/replication-manuscript.svg){width="92%"}
-:::
-::: {.column width="64%"}
-- 表も図も本文の数値も, すべてパイプラインのターゲットから作る
-- 本文は AI に下書きさせてもよい. ただし, 数値は書き写させない
-- 自分で決めたこと (基準年, 1年しか観測されない人の扱い) は, 本文に明記する
-- 読者が論文だけから分析を再現できるかは, こうした細部で決まる
-:::
+1. `tar_analysis.R` に `notes/` のコードを移す
+1. `02-analysis.qmd` で, `tar_load()` したオブジェクトから図や表を作る
+1. 結果の解釈をインラインコードで埋め込み, 本文に書く
+1. `tar_make()` でPDFがコンパイルされることを確認する
+
+{{< v 0.5em >}}
+
+余力があれば:
+
+- `01-intro.qmd` に Literature Review を書く
+- `03-placebo`, `04-mechanism`, `05-honestdid` の結果を追加する
+
 ::::
 
-# クリーンルーム設計
+# AIで結果を検証する
 
-## ソフトウェアでは, 仕様だけを渡して独立に実装する
+## クリーンルーム設計
 
 ```{=typst}
-#slide(repeat: 4, self => anim-software-cleanroom(self.subslide))
+#slide(repeat: 3, self => anim-software-cleanroom(self.subslide))
 ```
 
-## 研究では, 論文を仕様書にして実装し直す
+## 再現性: 論文の記述とデータだけで結果を作れるか
 
 ```{=typst}
 #slide(repeat: 3, self => anim-repro(self.subslide))
 ```
 
-## クリーンルームは, 4つのステップで回す
+## クリーンルームワークフロー
 
 ```{=typst}
 #slide(repeat: 5, self => anim-cleanroom(self.subslide))
 ```
 
-## Step 1: 数値を ID に置き換え, 答えは渡さない
+## Step 1: 数値を ID に置き換える
 
 ```{=typst}
-#slide(repeat: 2, self => anim-mask(self.subslide, ax))
+#fig-mask(ax)
 ```
 
-## 答えを見せると, AI は数字を合わせにいく
+- 数値がすべてインラインコードなら, スクリプトで機械的に置き換えられる
+
+## Step 1: ダミーデータを作る
 
 ```{=typst}
-#slide(repeat: 3, self => anim-tuning(self.subslide))
+#fig-dummy-data()
 ```
 
-## Step 1: 元データも渡さず, ダミーデータを作る
+- 元データを見せると, 論文ではなくデータに合わせたコードを書くおそれがある
+- 列の名前と型だけを揃えて値は独立に生成し, コードが動くかを確かめる
+
+## Step 2: コードの実装
 
 ```{=typst}
-#slide(repeat: 3, self => anim-dummy-data(self.subslide))
+#slide(repeat: 2, self => anim-replicator(self.subslide))
 ```
 
-## Step 2: ダミーデータで実装し, 元データでは手元で動かす
+## Step 3: 不一致を仕分ける
 
 ```{=typst}
-#slide(repeat: 4, self => anim-replicator(self.subslide))
+#fig-triage()
 ```
 
-## Step 3: 不一致を, 3つの原因に仕分ける
+{{< v 0.5em >}}
 
-```{=typst}
-#slide(repeat: 4, self => anim-triage(self.subslide))
-```
+- 元のコードの誤りや論文の記述の不正確さを見つけることができる
+- 再現側に値やずれの方向を伝えると, 再現する側はその値に合わせにいく. あくまでも再現者自身でコードの誤りを見つけさせるのが重要
 
 # まとめ
 
-## 4つの道具は, AI の出力を照らし合わせる基準になる
+## AIによる研究パイプライン
 
 ```{=typst}
-#anim-four-tools(final: true)
+#fig-summary()
 ```
 
-## 今日の内容を, 自分の研究で使うには
-
-- AI に頼む前にコミットし, 頼む作業の単位をコミットの単位に揃える
-- 論文について聞くときは, PDF を Zotero に入れ, 根拠のページ番号を言わせる
-- 試行錯誤はノートで. 固まった結果だけをパイプラインに昇格させる
-- 論文の数値はインラインコードで埋め込み, 自分で決めたことは本文に書く
-
-テンプレートは [kazuyanagimoto/template-research](https://github.com/kazuyanagimoto/template-research), 教科書は [Empiricist's Workflow](https://kazuyanagimoto.com/workshop-graduate-2026/) の「パイプライン」と「AIと研究する」の章です.
+[テンプレート: [kazuyanagimoto/template-research](https://github.com/kazuyanagimoto/template-research). レクチャーノート: [Empiricist's Workflow](https://kazuyanagimoto.com/workshop-graduate-2026/).]{.small-cite}
 
 {{< appendix >}}
 
@@ -616,6 +577,35 @@ save_frame(plot_honestdid(Inf), "honestdid-4")
 
 ```{=typst}
 #slide(repeat: 6, self => anim-what-reruns(self.subslide, q))
+```
+
+## 4. Literature Review {#sec-ans-4}
+
+::: {.prompt}
+Wilson 政権による公務員の人種分離が, 黒人公務員の賃金に与えた影響を調べたい. この研究が貢献しうる経済学の文献の流れを3つ挙げて. それぞれについて代表的な論文を5本ずつ, [著者, 年, 雑誌, DOI 付き]{.alert} で挙げること. 対象は査読付き論文と, NBER などのワーキングペーパーに限る. 各流れで [何が分かっていて, 何が分かっていないか]{.alert} も, 1段落ずつまとめて.
+:::
+
+::: {.prompt}
+Zotero の `wilson-segregation` コレクションにある論文を [全文で読んで]{.alert}, さっきの3つの流れに分類して. 各論文が何を問い, どのデータと識別戦略で, 何を示したかを2, 3文でまとめ, [根拠のページ番号]{.alert} を付けて. 最初の整理と食い違う点があれば, [全文の方を正として]{.alert} 直すこと. 最後に, 3つの流れのどれもが答えていない問いのうち, この研究で答えられるものを挙げて.
+:::
+
+[[Back to main]{.button}](#sec-exr-4)
+
+## `03-placebo`: 政権交代一般の効果か, Wilson の政策の効果か {#sec-placebo}
+
+{{< v -0.5em >}}
+
+![](img/aneja2022-fig3.svg){width="50%" fig-align="center"}
+
+- 人種分離の政策を伴わない McKinley から Roosevelt への政権交代と比べる
+- 有意な賃金差が見えないので, 1913 年以降の変化は Wilson の政策と示唆
+
+[[Back to main]{.button}](#sec-feedback)
+
+## `04-mechanism`: 賃金差の多くは, 職の移動で生じた {#sec-mechanism}
+
+```{=typst}
+#slide(repeat: 4, self => anim-mechanism(self.subslide, ax))
 ```
 
 ## 参考文献

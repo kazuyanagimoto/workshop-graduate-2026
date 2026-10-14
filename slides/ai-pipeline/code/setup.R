@@ -70,10 +70,6 @@ bd_avg <- breakdown |> filter(target == "average")
 
 did3 <- table2 |> filter(column == 3)
 
-# Table III, column (2) of Aneja and Xu (2022), as printed in the paper. The
-# deck does not re-estimate it, so this is a quotation, not a computed value.
-published_tab3_col2 <- list(estimate = -0.008, std_error = 0.008)
-
 # ---- figures ----------------------------------------------------------------
 
 # Event study of the Black-white log salary gap, with 95% confidence intervals.

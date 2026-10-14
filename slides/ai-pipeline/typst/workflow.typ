@@ -196,62 +196,44 @@
 
 // ---- 7. Mechanism: same job at lower pay, or a lower-paid job -----------------
 // A cartoon of the two channels; bar lengths stand for pay and carry no data.
-#let anim-mechanism(s, ax) = {
-  stage(26, 10.4, {
-    import cetz.draw: *
-    let bands = ((y: 8.4, name: "Job title A", note: "higher pay"), (y: 5.4, name: "Job title B", note: ""), (y: 2.4, name: "Job title C", note: "lower pay"))
-    for b in bands {
-      rect((3.9, b.y - 1.2), (15.6, b.y + 1.2), radius: 6pt, fill: c-panel, stroke: none)
-      content((0.2, b.y + 0.25), anchor: "west", lab(b.name, size: 11pt))
-      content((0.2, b.y - 0.4), anchor: "west", lab(b.note, size: 9.5pt, fill: c-muted))
+// Rows are job titles, so job title fixed effects compare workers within a row.
+#let fig-mechanism() = stage(26, 8.9, {
+  import cetz.draw: *
+  let (high, low) = (6.3, 3.7)
+  let panels = (3.7, 15.0)
+  // A worker with a bar for pay. `was` outlines the pay before 1913; a ghost
+  // marks where the worker used to be.
+  let worker(x, y, col, who, pay, was: none, ghost: false) = {
+    person-icon((x, y + 0.05), s: 0.85, col: if ghost { col.lighten(70%) } else { col })
+    if who != none { content((x, y - 0.8), lab(who, size: 9.5pt, fill: col)) }
+    if was != none {
+      rect((x + 0.8, y - 0.22), (x + 0.8 + was, y + 0.22), radius: 2pt, stroke: (paint: col, thickness: 1pt, dash: "dashed"))
     }
-    // A worker with a bar for pay.
-    let worker(x, y, col, who, pay) = {
-      person-icon((x, y - 0.05), s: 0.85, col: col)
-      content((x, y - 0.85), lab(who, size: 9pt, fill: col))
+    if pay != none {
       rect((x + 0.8, y - 0.22), (x + 0.8 + pay, y + 0.22), radius: 2pt, fill: col.lighten(35%), stroke: none)
     }
-    // The matched white worker stays in job B at the same pay throughout.
-    worker(5.0, 5.55, c-muted, "White", 3.0)
-    if s <= 2 {
-      worker(10.4, 5.55, c-accent, "Black", if s == 1 { 3.0 } else { 1.9 })
-    } else {
-      worker(10.4, 2.55, c-accent, "Black", 1.9)
-      arrow((10.4, 4.5), (10.4, 3.5), col: c-accent, w: 2pt, head: 1.3)
+  }
+  content((0.2, high), anchor: "west", lab("元の職名", size: 10.5pt, weight: "medium"))
+  content((0.2, low), anchor: "west", lab("低賃金の職名", size: 10.5pt, weight: "medium"))
+  let titles = ("経路 1: 同じ職名で賃金が下がる", "経路 2: 低賃金の職名に移される")
+  let notes = ("職名の固定効果を入れても, 差は残る", "職名の固定効果を入れると, 差は消える")
+  for (i, x0) in panels.enumerate() {
+    content((x0 + 5.4, 8.4), lab(titles.at(i), size: 12pt, weight: "medium", fill: c-accent.darken(10%)))
+    for y in (high, low) {
+      rect((x0, y - 1.1), (x0 + 10.8, y + 1.1), radius: 6pt, fill: c-panel, stroke: none)
     }
-    // The reading of each frame.
-    let panel(title, body, col) = {
-      rect((16.4, 5.6), (25.8, 9.6), radius: 6pt, fill: col.lighten(88%), stroke: none)
-      content((16.8, 8.8), anchor: "west", lab(title, size: 11.5pt, weight: "medium", fill: col))
-      content((16.8, 7.1), anchor: "west", box(width: 8.6cm, {
-        set par(leading: 0.5em)
-        lab(body, size: 10.5pt)
-      }))
-    }
-    if s == 1 { panel("1911", "Matched on gender, department, contract, pay and age. Start them in the same job.", c-jet) }
-    if s == 2 { panel("Channel 1", "After 1913 the Black worker keeps the job, but is paid less.", c-accent) }
-    if s >= 3 { panel("Channel 2", "After 1913 the Black worker is moved to a lower-paid job.", c-accent) }
-    if s >= 4 {
-      rect((16.4, 0.6), (25.8, 5.0), radius: 6pt, fill: c-tint, stroke: none)
-      content((16.8, 4.3), anchor: "west", lab("Black × Wilson, log salary", size: 10pt, fill: c-muted))
-      content((16.8, 3.4), anchor: "west", lab("main specification", size: 10.5pt))
-      content((25.4, 3.4), anchor: "east", mono(ax.did3_pub, size: 11.5pt))
-      content((16.8, 2.5), anchor: "west", lab("+ job title fixed effects", size: 10.5pt))
-      content((25.4, 2.5), anchor: "east", mono(ax.tab3_col2, size: 11.5pt, weight: "bold", fill: c-accent.darken(10%)))
-      content((16.8, 1.3), anchor: "west", lab("Aneja and Xu (2022), Tables II and III", size: 8.5pt, fill: c-muted))
-    }
-  })
-  stepcap(s, (
-    [
-      1911年の属性が近い黒人と白人を組にする.
-      #linebreak()
-      照合するのは性別, 部局, 契約形態, 賃金, 年齢である.
-    ],
-    [賃金差が開く経路の1つ目: 同じ職のまま, 賃金が下がる],
-    [2つ目: 賃金の低い職に移される],
-    [職名の固定効果で差がほぼ消えるので, 主な経路は職の移動である],
-  ))
-}
+    // The matched white worker stays in the same job at the same pay.
+    worker(x0 + 1.2, high, c-muted, "白人", 3.0)
+    content((x0 + 5.4, 1.2), lab(notes.at(i), size: 11pt))
+  }
+  // Channel 1: the Black worker keeps the job title, at lower pay.
+  worker(panels.at(0) + 6.0, high, c-accent, "黒人", 1.9, was: 3.0)
+  // Channel 2: the Black worker is moved to a lower-paid job title.
+  let x = panels.at(1) + 6.0
+  worker(x, high, c-accent, none, none, was: 3.0, ghost: true)
+  arrow((x, high - 0.75), (x, low + 0.75), col: c-accent, w: 2pt, head: 1.3)
+  worker(x, low, c-accent, "黒人", 1.9)
+})
 
 // ---- 8. Relative magnitudes: how far parallel trends may fail -----------------
 // A drawing of the restriction itself, with made-up deviations before the

@@ -1,13 +1,6 @@
 ---
-# A three-hour workshop deck covering the textbook's sections 11.1 and 11.3
-# (lesson/targets.qmd) and chapter 12 (lesson/ai.qmd).
-#
-# Render with `quarto render index.qmd` from this folder. Almost every slide is
-# an animated diagram: a function in typst/*.typ that redraws the picture for
-# each subslide, called as `#slide(repeat: n, self => anim-x(self.subslide))`.
-# Add `handout: true` below for a PDF with one page per slide (the last frame).
-title: "AIによる研究パイプライン"
-subtitle: "{targets} と Quarto で, 確かめながら進める"
+title: AIと研究パイプライン
+subtitle: Git, Zotero, Quarto, `{targets}` によるワークフロー
 brand:
   typography:
     fonts:
@@ -55,7 +48,7 @@ author:
     orcid: 0009-0007-1967-8304
     email: yanagimoto@econ.kobe-u.ac.jp
     affiliations: 神戸大学
-date: today
+date: 2026-10-15
 date-format: long
 ---
 
@@ -95,9 +88,6 @@ values <- list(
     n_estimation = fmt_int(sample_sizes$n_estimation),
     did3 = fmt_num(did3$estimate),
     did3_se = fmt_num(did3$std_error),
-    did3_pub = fmt_num(did3$published_estimate),
-    tab3_col2 = fmt_num(published_tab3_col2$estimate),
-    tab3_col2_se = fmt_num(published_tab3_col2$std_error),
     bd_first_last = as.character(bd_first$last_robust),
     bd_first_zero = as.character(bd_first$first_zero),
     bd_avg_zero = as.character(bd_avg$first_zero)
@@ -298,7 +288,7 @@ jsonlite::write_json(
 1. **検索**: DOIを出力させ, Zoteroに取り込みやすくする
 1. **精読**: 根拠のページを出力しながら要約させることで, 原文を確かめやすくする
 
-## 演習4: Literature Review {#sec-exr-4}
+## 演習4: 文献調査 {#sec-exr-4}
 
 :::: {.exercise options="num: 4, time: 8"}
 
@@ -429,14 +419,45 @@ Aneja と Xu となったつもりで, 文献レビューを AI に頼む指示�
 
 ::::
 
-## プレゼンのフィードバック {#sec-feedback}
+## プレゼンのフィードバック
 
 ```{=typst}
 #fig-feedback()
 ```
 
-- `03-placebo`, `04-mechanism` は論文で回答している [[03-placebo]{.button}](#sec-placebo) [[04-mechanism]{.button}](#sec-mechanism)
+- `03-placebo`, `04-mechanism` は論文で回答している
 - `05-honestdid` は @rambachan2023 以降, 重要な指摘
+
+## `03-placebo`: 政権交代一般の効果か, Wilson の政策の効果か
+
+{{< v -0.5em >}}
+
+![](img/aneja2022-fig3.svg){width="50%" fig-align="center"}
+
+{{< v 0.5em >}}
+
+- 人種分離の政策を伴わない McKinley から Roosevelt への政権交代と比べる
+- 有意な賃金差が見えないので, 1913 年以降の変化は Wilson の政策と示唆
+
+## `04-mechanism`: 賃金差が開く2つの経路
+
+```{=typst}
+#fig-mechanism()
+```
+
+- 破線は, Wilson 政権より前の賃金
+- 職名の固定効果を入れると, 同じ職名の中だけで黒人と白人を比べることになる
+
+## `04-mechanism`: 賃金差の多くは, 職の移動で生じた
+
+{{< v -0.5em >}}
+
+![](img/aneja2022-tab3.svg){width="55%" fig-align="center"}
+
+{{< v 0.5em >}}
+
+- 列 (2) で職名の固定効果を入れると, 係数はほぼ 0 になり, 有意でなくなる
+- 賃金差の多くは, 低賃金の職名への移動 (経路 2) で生じた
 
 ## `05-honestdid`: 平行トレンドの崩れ方に上限を置く
 
@@ -559,7 +580,7 @@ save_frame(plot_honestdid(Inf), "honestdid-4")
 
 {{< appendix >}}
 
-# Appendix
+# 補足
 
 ## 2.1. 関数を変更した場合 {#sec-ans-2_1}
 
@@ -579,44 +600,43 @@ save_frame(plot_honestdid(Inf), "honestdid-4")
 #slide(repeat: 6, self => anim-what-reruns(self.subslide, q))
 ```
 
-## 4. Literature Review {#sec-ans-4}
+## 4.1. 文献調査: 検索 {#sec-ans-4}
 
 ::: {.prompt}
-Wilson 政権による公務員の人種分離が, 黒人公務員の賃金に与えた影響を調べたい. この研究が貢献しうる経済学の文献の流れを3つ挙げて. それぞれについて代表的な論文を5本ずつ, [著者, 年, 雑誌, DOI 付き]{.alert} で挙げること. 対象は査読付き論文と, NBER などのワーキングペーパーに限る. 各流れで [何が分かっていて, 何が分かっていないか]{.alert} も, 1段落ずつまとめて.
+次の研究の序論を書いている.
+
+- 問い: 1913 年に Wilson 政権が連邦政府の公務員を人種で分離したことの影響
+- データ: 1907-21 年の職員名簿をデジタル化し, 1910 年の国勢調査と接続した個人のパネル
+- 方法: 政権交代の前後で, 黒人と白人の賃金を比べる差の差
+- 結果: 賃金差が開き, 主な経路は低賃金の職への配置換えだった. 黒人公務員の持ち家率も下がり, 子の世代にも影響が及んだ
+
+この研究が貢献しうる経済学の文献の流れを3つ挙げ, それぞれ代表的な論文を5本ずつ [著者, 年, 雑誌, DOI 付き]{.alert} で挙げて. 対象は 2021 年までの査読付き論文と, NBER などのワーキングペーパー. [Web で検索して実在と DOI を確かめ]{.alert}, 確かめられないものは別に分けること. 各流れで何が分かっていて, 何が分かっていないかも1段落ずつまとめ, 最後に [DOI だけを1行に1つずつ]{.alert} 並べて.
 :::
 
+- 研究の問い・データ・方法・結果を書くと, AI は貢献先の流れを絞れる
+- 答え合わせ: @aneja2022 の序論 (pp. 915-17) と参考文献リスト
+
+## 4.2. 文献調査: 精読
+
 ::: {.prompt}
-Zotero の `wilson-segregation` コレクションにある論文を [全文で読んで]{.alert}, さっきの3つの流れに分類して. 各論文が何を問い, どのデータと識別戦略で, 何を示したかを2, 3文でまとめ, [根拠のページ番号]{.alert} を付けて. 最初の整理と食い違う点があれば, [全文の方を正として]{.alert} 直すこと. 最後に, 3つの流れのどれもが答えていない問いのうち, この研究で答えられるものを挙げて.
+Zotero の `wilson-segregation` コレクションにある論文を, [Zotero MCP で全文を読んで]{.alert} まとめて.
+
+- 各論文が何を問い, どのデータと識別戦略で, 何を示したかを2, 3文で書き, [根拠のページ番号]{.alert} (論文に印刷された番号) を付ける
+- [全文を読めない論文は, 記憶で補わず「全文なし」とだけ書く]{.alert}
+- さっきの3つの流れごとに分けて並べる
+
+最後に, 各流れで何が分かっていて, 何が分かっていないかを, 全文で読んだ内容だけを根拠に書き直し, 最初のまとめから変わった点を挙げて.
 :::
+
+- 前のプロンプトの DOI を「新規アイテムを DOI から追加」でまとめて取り込み, PDF を添付しておく
+- 同じ会話で続けて頼むと, 「さっきの3つの流れ」が通じる
 
 [[Back to main]{.button}](#sec-exr-4)
-
-## `03-placebo`: 政権交代一般の効果か, Wilson の政策の効果か {#sec-placebo}
-
-{{< v -0.5em >}}
-
-![](img/aneja2022-fig3.svg){width="50%" fig-align="center"}
-
-- 人種分離の政策を伴わない McKinley から Roosevelt への政権交代と比べる
-- 有意な賃金差が見えないので, 1913 年以降の変化は Wilson の政策と示唆
-
-[[Back to main]{.button}](#sec-feedback)
-
-## `04-mechanism`: 賃金差の多くは, 職の移動で生じた {#sec-mechanism}
-
-```{=typst}
-#slide(repeat: 4, self => anim-mechanism(self.subslide, ax))
-```
 
 ## 参考文献
 
 ```{=typst}
-// Rambachan and Roth (2023) is named only inside a diagram, so register it
-// with the bibliography here.
-#cite(<rambachan2023>, form: none)
+// Quarto appends the bibliography after the last line of the document, so the
+// logo credits are placed at the foot of the slide to stay below it.
+#place(bottom + left, small-cite[Git logo by Jason Long, #link("https://creativecommons.org/licenses/by/3.0/")[CC BY 3.0]. ロゴの出典: #link("https://git-scm.com/community/logos")[Git], #link("https://www.zotero.org/support/brand")[Zotero], #link("https://github.com/quarto-dev/quarto-web/blob/main/quarto-icon.svg")[Quarto], #link("https://github.com/ropensci/targets/blob/main/man/figures/logo.png")[targets].])
 ```
-
-::: {#refs}
-:::
-
-[Git logo by Jason Long, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). ロゴの出典: [Git](https://git-scm.com/community/logos), [Zotero](https://www.zotero.org/support/brand), [Quarto](https://github.com/quarto-dev/quarto-web/blob/main/quarto-icon.svg), [targets](https://github.com/ropensci/targets/blob/main/man/figures/logo.png).]{.small-cite}

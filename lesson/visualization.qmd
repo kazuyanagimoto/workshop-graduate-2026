@@ -109,9 +109,13 @@ penguins_bar |>
 
 ### R Color Brewer's Palettes
 
-現代的なカラーパレット集として有名な [Color Brewer](https://colorbrewer2.org/) のパッケージとして, RColorBrewerが提供されています.
+現代的なカラーパレット集として有名な [Color Brewer](https://colorbrewer2.org/) のパッケージとして, RColorBrewerが提供されています. 使えるパレットの一覧は, `display.brewer.all()` で表示できます.
 
-![](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png)
+```{r}
+#| label: plot-brewer-palettes
+#| fig-height: 8
+RColorBrewer::display.brewer.all()
+```
 
 ```{r}
 #| label: plot-color-brewer
@@ -177,7 +181,7 @@ library(MetBrewer)
 
 ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.
 
-![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)
+![](/static/img/visualization/metbrewer-egypt.png)
 
 ```{r}
 #| label: plot-metbrewer

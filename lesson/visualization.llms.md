@@ -102,9 +102,13 @@ penguins_bar |>
 
 ### R Color Brewer’s Palettes
 
-現代的なカラーパレット集として有名な [Color Brewer](https://colorbrewer2.org/) のパッケージとして, RColorBrewerが提供されています.
+現代的なカラーパレット集として有名な [Color Brewer](https://colorbrewer2.org/) のパッケージとして, RColorBrewerが提供されています. 使えるパレットの一覧は, `display.brewer.all()` で表示できます.
 
-[![](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png)](https://r-graph-gallery.com/38-rcolorbrewers-palettes_files/figure-html/thecode-1.png)
+``` r
+RColorBrewer::display.brewer.all()
+```
+
+[![](visualization_files/figure-html/plot-brewer-palettes-1.svg)](visualization_files/figure-html/plot-brewer-palettes-1.svg)
 
 ``` r
 penguins_bar |>
@@ -171,7 +175,7 @@ library(MetBrewer)
 
 ここでは, 赤・青・緑・橙がはっきり見分けられる Egypt のパレットを使ってみましょう.
 
-[![](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)](https://github.com/BlakeRMills/MetBrewer/blob/main/PaletteImages/Egypt.png?raw=true)
+[![](../static/img/visualization/metbrewer-egypt.png)](../static/img/visualization/metbrewer-egypt.png)
 
 ``` r
 penguins_bar |>
@@ -446,10 +450,10 @@ JPEG は, 写真のように色がなめらかに変化する画像にはとて�
 
 ベクター形式の画像は, どれだけ拡大しても輪郭が滑らかなままです. その理由はどれでしょうか.
 
-ファイルサイズが大きいから\
-ピクセルの数が十分に多いから\
 可逆圧縮を使っているから\
 画像を図形の数式として記録しているから\
+ファイルサイズが大きいから\
+ピクセルの数が十分に多いから\
 
 次のうち, ベクター形式をすべて選んでください.
 
@@ -464,23 +468,23 @@ JPEG\
 LaTeX で執筆している論文に統計グラフを載せます. 推奨される画像形式はどれでしょうか.
 
 PNG\
+JPEG\
 PDF\
 SVG\
-JPEG\
 
 共同研究者から送られてきたスライドで, グラフの文字や線のまわりにもやもやしたノイズが見えます. 最も可能性の高い原因はどれでしょうか.
 
+グラフを JPEG で保存したことによる非可逆圧縮のノイズ\
 フォントが埋め込まれていない\
 グラフを PNG で保存したことによる圧縮の劣化\
-グラフを JPEG で保存したことによる非可逆圧縮のノイズ\
 SVG の解像度が足りていない\
 
 数百万個のデータ点をもつ散布図を SVG で保存したら, ファイルが数十 MB になり表示も重くなりました. どうするのが実用的でしょうか.
 
-SVG の解像度を下げる\
-PDF に切り替える\
-高解像度の PNG で保存する\
 JPEG (quality 5) で保存する\
+高解像度の PNG で保存する\
+PDF に切り替える\
+SVG の解像度を下げる\
 
 ### 見た目の悪いグラフの改善
 
